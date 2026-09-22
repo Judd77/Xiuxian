@@ -30,7 +30,7 @@ namespace WenXinJie.Editor
             ConfigureAudio(AssetRoot + "Audio/BGM/AsianOriental2_Tozan.ogg", AudioClipLoadType.Streaming);
             ConfigureAudio(AssetRoot + "Audio/Ambience/Rain_Window_Ylmir.ogg", AudioClipLoadType.DecompressOnLoad);
 
-            FirstDayPrototype prototype = UnityEngine.Object.FindFirstObjectByType<FirstDayPrototype>();
+            FirstDayPrototype prototype = UnityEngine.Object.FindAnyObjectByType<FirstDayPrototype>();
             if (prototype == null)
             {
                 throw new InvalidOperationException("Prototype controller is missing.");
@@ -44,7 +44,7 @@ namespace WenXinJie.Editor
             Assign(serialized, "_rain", AssetRoot + "Audio/Ambience/Rain_Window_Ylmir.ogg");
             serialized.ApplyModifiedProperties();
 
-            if (UnityEngine.Object.FindFirstObjectByType<AudioListener>() == null)
+            if (UnityEngine.Object.FindAnyObjectByType<AudioListener>() == null)
             {
                 if (Camera.main == null)
                 {

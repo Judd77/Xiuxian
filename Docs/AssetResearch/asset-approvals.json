@@ -1,0 +1,53 @@
+{
+  "reviewed_on": "2026-09-22",
+  "policy": "Only project-generated output, CC0, OFL, or separately archived commercial licenses may ship.",
+  "active_assets": [
+    {
+      "path": "Assets/_WenXinJie/Art/Generated/CloudGate_Premium.png",
+      "basis": "project-generated output",
+      "status": "approved for prototype and commercial-use review"
+    },
+    {
+      "path": "Assets/_WenXinJie/Art/Generated/PineRidge_Premium.png",
+      "basis": "project-generated output",
+      "status": "approved for prototype and commercial-use review"
+    },
+    {
+      "path": "Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png",
+      "basis": "project-generated output",
+      "status": "approved for prototype and commercial-use review"
+    },
+    {
+      "path": "Assets/_WenXinJie/Art/UI/ImmortalGlassPanel.png",
+      "basis": "project-authored procedural texture",
+      "status": "approved"
+    },
+    {
+      "path": "Assets/_WenXinJie/Art/UI/ImmortalGlassChoice.png",
+      "basis": "project-authored procedural texture",
+      "status": "approved"
+    },
+    {
+      "path": "Assets/_WenXinJie/Audio/BGM/AsianOriental2_Tozan.ogg",
+      "basis": "CC0",
+      "status": "approved"
+    },
+    {
+      "path": "Assets/_WenXinJie/Audio/Ambience/Rain_Window_Ylmir.ogg",
+      "basis": "CC0",
+      "status": "approved"
+    },
+    {
+      "path": "Assets/_WenXinJie/Fonts/NotoSerifSC-Regular.ttf",
+      "basis": "SIL OFL 1.1",
+      "status": "approved"
+    }
+  ],
+  "blocked": [
+    "noncommercial-only",
+    "no-derivatives",
+    "unknown-source",
+    "game-rip",
+    "license-evidence-missing"
+  ]
+}

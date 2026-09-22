@@ -1,0 +1,52 @@
+[
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/CloudGate_Premium_1080.jpg",
+    "bytes": 744074,
+    "sha256": "72998210fecb860ea46438d6ab85d2b756b08e5c8e6cf75b866d65aaacbbf534"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/PineRidge_Premium_1080.jpg",
+    "bytes": 635454,
+    "sha256": "316746c3a5d5fcd3c422bf76459b8cbd11aaf7bb8e01c197f223802e098a01c9"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/PineRidge_Premium_Night_1080.jpg",
+    "bytes": 432329,
+    "sha256": "a4b01c4e861ef34210bc1727598f8da905d0c37a3c92f3a165b1d416cba29600"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png",
+    "bytes": 2295612,
+    "sha256": "ab3fdc92cbe7285f1ce1ce2b876baf479421dae813b9acd62a6f208787598d63"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/UI/ImmortalGlassPanel.png",
+    "bytes": 3627,
+    "sha256": "4b3f6f7ee125c53974ea29162e33368a05a2b4a1c85a1b574f0b3f14a4a60d18"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/UI/ImmortalGlassChoice.png",
+    "bytes": 1096,
+    "sha256": "9a0b013d5321de1593bd81f43ce442dd847c5a3543fa17821f3ca9836fca350c"
+  },
+  {
+    "path": "Assets/_WenXinJie/Audio/BGM/AsianOriental2_Tozan.ogg",
+    "bytes": 3601956,
+    "sha256": "ad7a04dca194d467b7f135b019b7e2b381b1e8cd2d21f38448df5bb2d145b211"
+  },
+  {
+    "path": "Assets/_WenXinJie/Audio/Ambience/Rain_Window_Ylmir.ogg",
+    "bytes": 550049,
+    "sha256": "4f659f68cf5219007d0bb0969a1862491ceee4057fda4c491c6001e8608fa2cb"
+  },
+  {
+    "path": "Assets/_WenXinJie/Fonts/NotoSerifSC-Regular.ttf",
+    "bytes": 14780348,
+    "sha256": "968be826d702638d29546002a5e24d8c55036ab441bbc09db9e22aee90d73606"
+  },
+  {
+    "path": "Assets/_WenXinJie/Fonts/OFL.txt",
+    "bytes": 4350,
+    "sha256": "5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6"
+  }
+]

@@ -1,0 +1,1 @@
+Campaign Play Mode checks PASS: actual choice click, portrait/background changes, first-night alliance route, isolated save/load, and 1920x1080 capture.

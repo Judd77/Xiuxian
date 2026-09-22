@@ -1,0 +1,1 @@
+https://openaccess-api.clevelandart.org/api/artworks/?q=Chinese%20lady&has_image=1&limit=8

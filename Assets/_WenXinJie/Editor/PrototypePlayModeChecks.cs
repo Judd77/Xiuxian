@@ -25,7 +25,7 @@ namespace WenXinJie.Editor
             Require(!IsRunning, "Checks are already running.");
             Require(EditorApplication.isPlaying, "Enter Play Mode first.");
             EditorApplication.ExecuteMenuItem("Window/General/Game");
-            FirstDayPrototype prototype = UnityEngine.Object.FindFirstObjectByType<FirstDayPrototype>();
+            FirstDayPrototype prototype = UnityEngine.Object.FindAnyObjectByType<FirstDayPrototype>();
             Require(prototype != null, "Prototype is missing.");
             var reader = prototype.GetComponent<DialogueReader>();
             string previousTestPath = prototype.testSaveDirectory;
@@ -237,7 +237,7 @@ namespace WenXinJie.Editor
 
         private static void VerifyAudioAssets()
         {
-            AudioSource[] sources = UnityEngine.Object.FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+            AudioSource[] sources = UnityEngine.Object.FindObjectsByType<AudioSource>();
             Require(sources.Length == 2, "Expected music and rain sources.");
             foreach (AudioSource source in sources)
             {
@@ -245,7 +245,7 @@ namespace WenXinJie.Editor
                     "Audio asset is missing or not configured to loop.");
             }
 
-            Require(UnityEngine.Object.FindObjectsByType<AudioListener>(FindObjectsSortMode.None).Length == 1,
+            Require(UnityEngine.Object.FindObjectsByType<AudioListener>().Length == 1,
                 "Expected exactly one audio listener.");
             var background = GameObject.Find("Landscape").GetComponent<RawImage>();
             Require(background.texture != null && background.texture.width == 1920,
@@ -254,7 +254,7 @@ namespace WenXinJie.Editor
 
         public static void VerifyVisibleButtonRaycasts()
         {
-            foreach (Button button in UnityEngine.Object.FindObjectsByType<Button>(FindObjectsSortMode.None))
+            foreach (Button button in UnityEngine.Object.FindObjectsByType<Button>())
             {
                 if (button.IsInteractable())
                 {
@@ -305,7 +305,7 @@ namespace WenXinJie.Editor
 
         private static bool ContainsVisibleText(string value)
         {
-            foreach (Text label in UnityEngine.Object.FindObjectsByType<Text>(FindObjectsSortMode.None))
+            foreach (Text label in UnityEngine.Object.FindObjectsByType<Text>())
             {
                 if (label.text.Contains(value))
                 {

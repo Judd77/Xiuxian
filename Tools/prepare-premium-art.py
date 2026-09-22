@@ -1,0 +1,131 @@
+"""Prepare project-ready derivatives from this project's generated xianxia artwork."""
+import hashlib
+import json
+from pathlib import Path
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
+
+ROOT = Path(__file__).resolve().parents[1]
+ART = ROOT / 'Assets/_WenXinJie/Art'
+GENERATED = ART / 'Generated'
+
+
+def fit(source, target):
+    image = Image.open(source).convert('RGB')
+    ratio = max(1920 / image.width, 1080 / image.height)
+    size = (round(image.width * ratio), round(image.height * ratio))
+    image = image.resize(size, Image.Resampling.LANCZOS)
+    left = (image.width - 1920) // 2
+    top = (image.height - 1080) // 2
+    image.crop((left, top, left + 1920, top + 1080)).save(target, quality=94)
+
+
+backgrounds = ART / 'Backgrounds'
+backgrounds.mkdir(parents=True, exist_ok=True)
+fit(GENERATED / 'CloudGate_Premium.png', backgrounds / 'CloudGate_Premium_1080.jpg')
+fit(GENERATED / 'PineRidge_Premium.png', backgrounds / 'PineRidge_Premium_1080.jpg')
+
+night = Image.open(backgrounds / 'PineRidge_Premium_1080.jpg').convert('RGB')
+night = ImageEnhance.Brightness(night).enhance(0.58)
+night = ImageEnhance.Contrast(night).enhance(1.12)
+blue = Image.new('RGB', night.size, '#162c43')
+night = Image.blend(night, blue, 0.28)
+vignette = Image.new('L', night.size, 0)
+vignette_draw = ImageDraw.Draw(vignette)
+vignette_draw.ellipse((-360, -260, 2280, 1500), fill=235)
+vignette = vignette.filter(ImageFilter.GaussianBlur(180))
+dark = Image.new('RGB', night.size, '#07131f')
+night = Image.composite(night, dark, vignette)
+night.save(backgrounds / 'PineRidge_Premium_Night_1080.jpg', quality=94)
+
+
+def panel(size, output, alpha_top, alpha_bottom, corners=True):
+    width, height = size
+    image = Image.new('RGBA', size)
+    pixels = image.load()
+    for y in range(height):
+        factor = y / max(1, height - 1)
+        color = (
+            round(21 + 15 * factor),
+            round(37 + 20 * factor),
+            round(48 + 19 * factor),
+            round(alpha_top + (alpha_bottom - alpha_top) * factor))
+        for x in range(width):
+            pixels[x, y] = color
+
+    draw = ImageDraw.Draw(image)
+    gold = (204, 177, 112, 235)
+    pale = (224, 232, 222, 90)
+    draw.rounded_rectangle((2, 2, width - 3, height - 3), radius=8, outline=gold, width=2)
+    draw.rounded_rectangle((10, 10, width - 11, height - 11), radius=5, outline=pale, width=1)
+    draw.line((34, 16, width - 34, 16), fill=(197, 218, 208, 75), width=1)
+    if corners:
+        for x in (18, width - 18):
+            for y in (18, height - 18):
+                draw.polygon(((x, y - 7), (x + 7, y), (x, y + 7), (x - 7, y)), outline=gold)
+    image.save(output)
+
+
+ui = ART / 'UI'
+ui.mkdir(parents=True, exist_ok=True)
+panel((1728, 260), ui / 'ImmortalGlassPanel.png', 226, 207)
+panel((760, 84), ui / 'ImmortalGlassChoice.png', 235, 216, corners=False)
+
+prompts = {
+    'generator': 'OpenAI built-in image generation tool',
+    'generated_on': '2026-09-22',
+    'style_boundary': 'Original contemporary xianxia direction; no existing characters, logos, UI, or copied composition.',
+    'assets': [
+        {
+            'path': 'Assets/_WenXinJie/Art/Generated/CloudGate_Premium.png',
+            'role': 'original mountain gate background source',
+            'prompt_summary': 'Rainy immortal-sect gate, white stone stairs, cloud sea, jade/cyan/ivory/gold palette.'
+        },
+        {
+            'path': 'Assets/_WenXinJie/Art/Generated/PineRidge_Premium.png',
+            'role': 'original pine ridge background source',
+            'prompt_summary': 'Blue-hour pine ridge, broken stele, rain shelter, distant sect lights.'
+        },
+        {
+            'path': 'Assets/_WenXinJie/Art/Generated/LinYue_Premium.png',
+            'role': 'original Lin Yue portrait source before background removal',
+            'prompt_summary': 'Young investigator cultivator, white/cyan/charcoal hanfu, jade token and folded umbrella.'
+        },
+        {
+            'path': 'Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png',
+            'role': 'original Lin Yue standing portrait with transparent alpha',
+            'prompt_summary': 'Background-removed derivative of the generated Lin Yue portrait source.'
+        }
+    ]
+}
+
+for record in prompts['assets']:
+    path = ROOT / record['path']
+    record['sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
+
+(ROOT / 'Docs/AssetResearch/generated-assets.json').write_text(
+    json.dumps(prompts, ensure_ascii=False, indent=2), encoding='utf8')
+
+campaign_asset_paths = [
+    'Assets/_WenXinJie/Art/Backgrounds/CloudGate_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/PineRidge_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/PineRidge_Premium_Night_1080.jpg',
+    'Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png',
+    'Assets/_WenXinJie/Art/UI/ImmortalGlassPanel.png',
+    'Assets/_WenXinJie/Art/UI/ImmortalGlassChoice.png',
+    'Assets/_WenXinJie/Audio/BGM/AsianOriental2_Tozan.ogg',
+    'Assets/_WenXinJie/Audio/Ambience/Rain_Window_Ylmir.ogg',
+    'Assets/_WenXinJie/Fonts/NotoSerifSC-Regular.ttf',
+    'Assets/_WenXinJie/Fonts/OFL.txt'
+]
+campaign_assets = []
+for relative_path in campaign_asset_paths:
+    path = ROOT / relative_path
+    campaign_assets.append({
+        'path': relative_path,
+        'bytes': path.stat().st_size,
+        'sha256': hashlib.sha256(path.read_bytes()).hexdigest()
+    })
+
+(ROOT / 'Docs/AssetResearch/campaign-assets.json').write_text(
+    json.dumps(campaign_assets, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+print('Prepared premium art, provenance, and the campaign asset checksum inventory.')

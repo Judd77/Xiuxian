@@ -1,0 +1,31 @@
+{
+  "generator": "OpenAI built-in image generation tool",
+  "generated_on": "2026-09-22",
+  "style_boundary": "Original contemporary xianxia direction; no existing characters, logos, UI, or copied composition.",
+  "assets": [
+    {
+      "path": "Assets/_WenXinJie/Art/Generated/CloudGate_Premium.png",
+      "role": "original mountain gate background source",
+      "prompt_summary": "Rainy immortal-sect gate, white stone stairs, cloud sea, jade/cyan/ivory/gold palette.",
+      "sha256": "9ad912a5d4e06e7e9dc87f287c71a762aab5ae1dad76bcdd0d9129cf086be57a"
+    },
+    {
+      "path": "Assets/_WenXinJie/Art/Generated/PineRidge_Premium.png",
+      "role": "original pine ridge background source",
+      "prompt_summary": "Blue-hour pine ridge, broken stele, rain shelter, distant sect lights.",
+      "sha256": "b9388fabeb8a8a2eecae3557eec0227ca54afbd92e919796db1b8f565989f521"
+    },
+    {
+      "path": "Assets/_WenXinJie/Art/Generated/LinYue_Premium.png",
+      "role": "original Lin Yue portrait source before background removal",
+      "prompt_summary": "Young investigator cultivator, white/cyan/charcoal hanfu, jade token and folded umbrella.",
+      "sha256": "43496bbd98c7a7967b1879a4ebd69ac7bd0b54db965f78601b0db71e08dd27ce"
+    },
+    {
+      "path": "Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png",
+      "role": "original Lin Yue standing portrait with transparent alpha",
+      "prompt_summary": "Background-removed derivative of the generated Lin Yue portrait source.",
+      "sha256": "ab3fdc92cbe7285f1ce1ce2b876baf479421dae813b9acd62a6f208787598d63"
+    }
+  ]
+}

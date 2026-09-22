@@ -1,5 +1,6 @@
 """Fetch public source pages and preserve evidence outside Unity's Assets tree."""
 import argparse
+import base64
 import hashlib
 import json
 import sys
@@ -35,12 +36,18 @@ class Page(HTMLParser):
 parser = argparse.ArgumentParser()
 parser.add_argument('url')
 parser.add_argument('--download', help='Project-relative destination for a verified asset')
+parser.add_argument('--github-content', action='store_true', help='Decode GitHub contents API base64 response')
 args = parser.parse_args()
 req = Request(args.url, headers={'User-Agent': 'WenXinJieAssetResearch/1.0'})
 with urlopen(req, timeout=35) as response:
     data = response.read()
     content_type = response.headers.get('Content-Type', '')
 if args.download:
+    if args.github_content:
+        payload = json.loads(data)
+        if payload.get('encoding') != 'base64':
+            raise ValueError('Expected GitHub base64 content')
+        data = base64.b64decode(payload['content'])
     target = (ROOT / args.download).resolve()
     if ROOT not in target.parents:
         raise ValueError('Destination must be inside the project')
