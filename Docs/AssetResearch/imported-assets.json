@@ -1,0 +1,17 @@
+[
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/Landscape_Cool_1080.jpg",
+    "bytes": 1020717,
+    "sha256": "97cbd9a158b952b4e5049f2f4444c07be49063886d788ca19908f5b43c736b48"
+  },
+  {
+    "path": "Assets/_WenXinJie/Audio/BGM/AsianOriental2_Tozan.ogg",
+    "bytes": 3601956,
+    "sha256": "ad7a04dca194d467b7f135b019b7e2b381b1e8cd2d21f38448df5bb2d145b211"
+  },
+  {
+    "path": "Assets/_WenXinJie/Audio/Ambience/Rain_Window_Ylmir.ogg",
+    "bytes": 550049,
+    "sha256": "4f659f68cf5219007d0bb0969a1862491ceee4057fda4c491c6001e8608fa2cb"
+  }
+]

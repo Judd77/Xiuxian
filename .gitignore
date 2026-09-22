@@ -1,0 +1,46 @@
+# Unity generated directories
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Bb]uild/
+/[Bb]uilds/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+
+# Local IDE and assistant settings (may contain private configuration)
+/.idea/
+/.vs/
+/.vscode/
+/.codex/
+*.csproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.unityproj
+*.opendb
+*.VC.db
+
+# OS files and crash dumps
+.DS_Store
+Thumbs.db
+Desktop.ini
+/sysinfo.txt
+*.stackdump
+
+# Local credentials; never commit secrets
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.pem
+*.key
+
+# Keep Assets and all .meta files, Packages, ProjectSettings and Docs.
+# Player saves reside outside this project and are not touched here.
