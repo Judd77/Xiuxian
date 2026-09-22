@@ -90,12 +90,10 @@ namespace WenXinJie.Presentation
             _ui.Button(_gameplay, "Save", "存档", 80f, 1012f, 146f, 46f, () => SaveRequested?.Invoke());
             _ui.Button(_gameplay, "Load", "读档", 242f, 1012f, 146f, 46f, () => LoadRequested?.Invoke());
             _ui.Button(_gameplay, "History", "前尘", 404f, 1012f, 146f, 46f, reader.OpenHistory);
-            _ui.Button(_gameplay, "Settings", "声音", 566f, 1012f, 146f, 46f, () => Open(_settings));
-            _ui.Button(_gameplay, "Credits", "鸣谢", 728f, 1012f, 146f, 46f, () => Open(_credits));
             _ui.Button(_gameplay, "MainMenuButton", "主界面", 1630f, 1012f, 210f, 46f,
                 () => MainMenuRequested?.Invoke());
-            _ui.Picture(_gameplay, "NoticePanel", media.Choice, 894f, 1012f, 716f, 54f);
-            _notice = _ui.Label(_gameplay, "Notice", string.Empty, 912f, 1014f, 680f, 50f, 19);
+            _ui.Picture(_gameplay, "NoticePanel", media.Choice, 566f, 1012f, 1044f, 54f);
+            _notice = _ui.Label(_gameplay, "Notice", string.Empty, 584f, 1014f, 1008f, 50f, 19);
             _mainMenu = new MainMenuView(frame, _ui, () => StartGameRequested?.Invoke(),
                 () => ContinueGameRequested?.Invoke(), () => MainMenuLoadRequested?.Invoke(),
                 () => Open(_settings), () => Open(_credits), () => QuitRequested?.Invoke());

@@ -37,6 +37,8 @@ namespace WenXinJie.Editor
                 await Capture("Docs/Validation/campaign-main-menu-1080.png");
                 await Click("StartGame");
                 Require(application.Session.Current.id == "c01.gate", "Campaign did not start at the gate.");
+                VerifyMissing("Settings");
+                VerifyMissing("Credits");
                 reader.Complete();
                 application.Advance();
                 Require(application.Session.Current.id == "c01.warning", "Opening advance failed.");
@@ -148,6 +150,11 @@ namespace WenXinJie.Editor
             Transform transform = FindIncludingInactive(name);
             Require(transform != null && transform.GetComponent<Button>().interactable == interactable,
                 "Button state is wrong: " + name);
+        }
+
+        private static void VerifyMissing(string name)
+        {
+            Require(FindIncludingInactive(name) == null, "Unexpected UI target exists: " + name);
         }
 
         private static void VerifyPicture(string name, string expectedTexture, bool active)
