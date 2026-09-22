@@ -32,6 +32,10 @@ namespace WenXinJie.Editor
 
             try
             {
+                Require(application.Session == null, "Campaign session should not start behind the main menu.");
+                VerifyActive("MainMenu", true);
+                await Capture("Docs/Validation/campaign-main-menu-1080.png");
+                await Click("StartGame");
                 Require(application.Session.Current.id == "c01.gate", "Campaign did not start at the gate.");
                 reader.Complete();
                 application.Advance();
@@ -72,16 +76,23 @@ namespace WenXinJie.Editor
 
                 application.Save();
                 Require(File.Exists(application.SavePath), "Play-mode save was not written.");
+                await Click("MainMenuButton");
+                VerifyActive("MainMenu", true);
+                VerifyButton("ContinueGame", true);
+                VerifyButton("LoadGame", true);
+                await Click("ContinueGame");
+                Require(application.Session.Current.id == "c01.shared", "Continue did not resume the active session.");
                 reader.Complete();
                 application.Advance();
                 Require(application.Session.GetValue("day") == 2, "Could not advance to day two.");
-                application.Load();
+                await Click("MainMenuButton");
+                await Click("LoadGame");
                 Require(application.Session.Current.id == "c01.shared", "Load did not restore story cursor.");
                 Require(application.Session.GetValue("route.alliance") == 1, "Load did not restore world state.");
                 reader.Complete();
                 await Capture("Docs/Validation/campaign-shared-secret-1080.png");
-                LastReport = "Campaign Play Mode checks PASS: actual choice click, portrait/background changes, "
-                             + "first-night alliance route, isolated save/load, and 1920x1080 capture.";
+                LastReport = "Campaign Play Mode checks PASS: main menu start/continue/load, actual choice click, "
+                             + "portrait/background changes, first-night alliance route, isolated save/load, and 1920x1080 capture.";
                 Debug.Log(LastReport);
             }
             catch (Exception exception)
@@ -124,6 +135,19 @@ namespace WenXinJie.Editor
             }
 
             Require(available == expectedAvailable, "Unexpected available choice count.");
+        }
+
+        private static void VerifyActive(string name, bool active)
+        {
+            Transform transform = FindIncludingInactive(name);
+            Require(transform != null && transform.gameObject.activeSelf == active, "Object state is wrong: " + name);
+        }
+
+        private static void VerifyButton(string name, bool interactable)
+        {
+            Transform transform = FindIncludingInactive(name);
+            Require(transform != null && transform.GetComponent<Button>().interactable == interactable,
+                "Button state is wrong: " + name);
         }
 
         private static void VerifyPicture(string name, string expectedTexture, bool active)

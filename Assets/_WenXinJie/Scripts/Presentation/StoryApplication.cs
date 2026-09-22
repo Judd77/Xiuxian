@@ -40,13 +40,12 @@ namespace WenXinJie.Presentation
             }
         }
 
-        private bool InputBlocked => _view.IsModalOpen || _reader.IsHistoryOpen;
+        private bool InputBlocked => _view.IsModalOpen || _view.IsMainMenuOpen || _reader.IsHistoryOpen;
 
         private void Awake()
         {
             _graph = new StoryGraph(JsonUtility.FromJson<StoryDefinition>(_campaign.text));
             _media.Validate(_graph);
-            _session = new StorySession(_graph);
             _reader = gameObject.AddComponent<DialogueReader>();
             _reader.advance = Advance;
             _audio = gameObject.AddComponent<GameAudio>();
@@ -57,13 +56,17 @@ namespace WenXinJie.Presentation
             _view.ChoiceRequested += Choose;
             _view.SaveRequested += Save;
             _view.LoadRequested += Load;
-            _view.RestartRequested += Restart;
-            Render();
+            _view.StartGameRequested += StartGame;
+            _view.ContinueGameRequested += ContinueGame;
+            _view.MainMenuLoadRequested += LoadFromMainMenu;
+            _view.MainMenuRequested += ReturnToMainMenu;
+            _view.QuitRequested += Quit;
+            ShowMainMenu(string.Empty);
         }
 
         public void Advance()
         {
-            if (InputBlocked)
+            if (InputBlocked || _session == null)
             {
                 return;
             }
@@ -82,7 +85,7 @@ namespace WenXinJie.Presentation
 
         public void Choose(string id)
         {
-            if (InputBlocked)
+            if (InputBlocked || _session == null)
             {
                 return;
             }
@@ -101,7 +104,7 @@ namespace WenXinJie.Presentation
 
         public void Save()
         {
-            if (InputBlocked)
+            if (InputBlocked || _session == null)
             {
                 return;
             }
@@ -120,30 +123,95 @@ namespace WenXinJie.Presentation
 
         public void Load()
         {
-            if (InputBlocked)
+            if (InputBlocked || _session == null)
             {
                 return;
             }
 
-            try
+            if (TryLoad(out bool recovered, out string message))
             {
-                StorySession restored = _saves.Load(SavePath, _graph, out bool recovered);
-                _session = restored;
                 _reader.ResetHistory();
                 Render();
                 _view.ShowNotice(recovered ? "已从备份恢复进度" : "进度已读取");
             }
-            catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException || exception is ArgumentException)
+            else
             {
-                _view.ShowNotice("未找到匹配当前剧情版本的有效存档，进度未改变");
+                _view.ShowNotice(message);
             }
         }
 
-        private void Restart()
+        private void StartGame()
         {
             _session = new StorySession(_graph);
             _reader.ResetHistory();
+            _view.HideMainMenu();
             Render();
+        }
+
+        private void ContinueGame()
+        {
+            if (_session != null)
+            {
+                _view.HideMainMenu();
+                Render();
+                return;
+            }
+
+            LoadFromMainMenu();
+        }
+
+        private void LoadFromMainMenu()
+        {
+            if (!TryLoad(out bool recovered, out string message))
+            {
+                _view.ShowMainMenuNotice(message);
+                return;
+            }
+
+            _reader.ResetHistory();
+            _view.HideMainMenu();
+            Render();
+            _view.ShowNotice(recovered ? "已从备份恢复进度" : "进度已读取");
+        }
+
+        private bool TryLoad(out bool recovered, out string message)
+        {
+            recovered = false;
+            message = string.Empty;
+            try
+            {
+                _session = _saves.Load(SavePath, _graph, out recovered);
+                return true;
+            }
+            catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
+                || exception is ArgumentException)
+            {
+                message = "未找到匹配当前剧情版本的有效存档";
+                return false;
+            }
+        }
+
+        private void ReturnToMainMenu()
+        {
+            _reader.Complete();
+            _reader.CloseHistory();
+            _audio.SetAmbienceActive(false);
+            ShowMainMenu(string.Empty);
+        }
+
+        private void ShowMainMenu(string notice)
+        {
+            bool hasSave = _saves.Exists(SavePath);
+            _view.ShowMainMenu(_media.Background("gate"), _session != null || hasSave, hasSave, notice);
+        }
+
+        private static void Quit()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
 
         private void Render()
@@ -185,7 +253,11 @@ namespace WenXinJie.Presentation
             _view.ChoiceRequested -= Choose;
             _view.SaveRequested -= Save;
             _view.LoadRequested -= Load;
-            _view.RestartRequested -= Restart;
+            _view.StartGameRequested -= StartGame;
+            _view.ContinueGameRequested -= ContinueGame;
+            _view.MainMenuLoadRequested -= LoadFromMainMenu;
+            _view.MainMenuRequested -= ReturnToMainMenu;
+            _view.QuitRequested -= Quit;
         }
     }
 }

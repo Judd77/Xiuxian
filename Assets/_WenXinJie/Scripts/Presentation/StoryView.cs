@@ -27,7 +27,8 @@ namespace WenXinJie.Presentation
         private Button _next;
         private GameObject _settings;
         private GameObject _credits;
-        private GameObject _restart;
+        private RectTransform _gameplay;
+        private MainMenuView _mainMenu;
         private Coroutine _transition;
         private Coroutine _portraitTransition;
 
@@ -35,27 +36,33 @@ namespace WenXinJie.Presentation
         public event Action<string> ChoiceRequested;
         public event Action SaveRequested;
         public event Action LoadRequested;
-        public event Action RestartRequested;
+        public event Action StartGameRequested;
+        public event Action ContinueGameRequested;
+        public event Action MainMenuLoadRequested;
+        public event Action MainMenuRequested;
+        public event Action QuitRequested;
 
-        public bool IsModalOpen => _settings.activeSelf || _credits.activeSelf || _restart.activeSelf;
+        public bool IsModalOpen => _settings.activeSelf || _credits.activeSelf;
+        public bool IsMainMenuOpen => _mainMenu.IsOpen;
 
         public void Initialize(StoryMediaCatalog media, DialogueReader reader, GameAudio audio)
         {
             _ui = new StoryUiFactory(media);
             _reader = reader;
             RectTransform frame = CreateCanvas();
-            _ui.Picture(frame, "HeaderPanel", media.Panel, 48f, 24f, 1824f, 116f);
-            Text gameTitle = _ui.Label(frame, "GameTitle", "问心劫", 86f, 32f, 280f, 74f, 42);
+            _gameplay = StoryUiFactory.Box(frame, "Gameplay", 0f, 0f, 1920f, 1080f);
+            _ui.Picture(_gameplay, "HeaderPanel", media.Panel, 48f, 24f, 1824f, 116f);
+            Text gameTitle = _ui.Label(_gameplay, "GameTitle", "问心劫", 86f, 32f, 280f, 74f, 42);
             gameTitle.color = new Color(0.93f, 0.80f, 0.50f);
-            Text subtitle = _ui.Label(frame, "Subtitle", "三十日登仙", 390f, 55f, 300f, 38f, 21);
+            Text subtitle = _ui.Label(_gameplay, "Subtitle", "三十日登仙", 390f, 55f, 300f, 38f, 21);
             subtitle.color = new Color(0.78f, 0.84f, 0.82f);
-            _chapter = _ui.Label(frame, "Chapter", string.Empty, 1110f, 43f, 710f, 46f, 27);
+            _chapter = _ui.Label(_gameplay, "Chapter", string.Empty, 1110f, 43f, 710f, 46f, 27);
             _chapter.alignment = TextAnchor.MiddleRight;
-            _status = _ui.Label(frame, "Status", string.Empty, 86f, 102f, 1734f, 30f, 19);
+            _status = _ui.Label(_gameplay, "Status", string.Empty, 86f, 102f, 1734f, 30f, 19);
             _status.color = new Color(0.84f, 0.88f, 0.85f);
-            _ui.Picture(frame, "LocationPanel", media.Choice, 80f, 166f, 620f, 74f);
-            _location = _ui.Label(frame, "Location", string.Empty, 110f, 178f, 560f, 50f, 28);
-            _portrait = _ui.Picture(frame, "Portrait", null, 0f, 0f, 1f, 1f);
+            _ui.Picture(_gameplay, "LocationPanel", media.Choice, 80f, 166f, 620f, 74f);
+            _location = _ui.Label(_gameplay, "Location", string.Empty, 110f, 178f, 560f, 50f, 28);
+            _portrait = _ui.Picture(_gameplay, "Portrait", null, 0f, 0f, 1f, 1f);
             _portraitGroup = _portrait.gameObject.AddComponent<CanvasGroup>();
             _portrait.transform.SetAsFirstSibling();
             _portrait.gameObject.SetActive(false);
@@ -63,34 +70,57 @@ namespace WenXinJie.Presentation
             for (int index = 0; index < _choices.Length; index++)
             {
                 int slot = index;
-                _choices[index] = _ui.Button(frame, "Choice" + index, string.Empty, 96f, 286f + index * 94f, 700f, 78f,
+                _choices[index] = _ui.Button(_gameplay, "Choice" + index, string.Empty, 96f, 286f + index * 94f, 700f, 78f,
                     () => ChoiceRequested?.Invoke(_choiceIds[slot]));
                 _choices[index].GetComponentInChildren<Text>().alignment = TextAnchor.MiddleLeft;
                 _choices[index].gameObject.AddComponent<ChoiceHint>();
             }
 
-            _ui.Picture(frame, "DialoguePanel", media.Panel, 80f, 748f, 1760f, 246f);
-            _ui.Picture(frame, "SpeakerPanel", media.Choice, 112f, 724f, 330f, 62f);
-            _speaker = _ui.Label(frame, "Speaker", string.Empty, 138f, 731f, 280f, 48f, 29);
+            _ui.Picture(_gameplay, "DialoguePanel", media.Panel, 80f, 748f, 1760f, 246f);
+            _ui.Picture(_gameplay, "SpeakerPanel", media.Choice, 112f, 724f, 330f, 62f);
+            _speaker = _ui.Label(_gameplay, "Speaker", string.Empty, 138f, 731f, 280f, 48f, 29);
             _speaker.color = new Color(0.92f, 0.78f, 0.48f);
-            _reader.target = _ui.Label(frame, "DialogueBody", string.Empty, 124f, 808f, 1490f, 164f, 28);
+            _reader.target = _ui.Label(_gameplay, "DialogueBody", string.Empty, 124f, 808f, 1490f, 164f, 28);
             _reader.target.raycastTarget = true;
             var dialogueButton = _reader.target.gameObject.AddComponent<Button>();
             dialogueButton.transition = Selectable.Transition.None;
             dialogueButton.navigation = new Navigation { mode = Navigation.Mode.None };
             dialogueButton.onClick.AddListener(() => AdvanceRequested?.Invoke());
-            _next = _ui.Button(frame, "Advance", "继续  ▷", 1632f, 906f, 172f, 56f, () => AdvanceRequested?.Invoke());
-            _ui.Button(frame, "Save", "存档", 80f, 1012f, 146f, 46f, () => SaveRequested?.Invoke());
-            _ui.Button(frame, "Load", "读档", 242f, 1012f, 146f, 46f, () => LoadRequested?.Invoke());
-            _ui.Button(frame, "History", "前尘", 404f, 1012f, 146f, 46f, reader.OpenHistory);
-            _ui.Button(frame, "Settings", "声音", 566f, 1012f, 146f, 46f, () => Open(_settings));
-            _ui.Button(frame, "Credits", "鸣谢", 728f, 1012f, 146f, 46f, () => Open(_credits));
-            _ui.Button(frame, "Restart", "重启此卷", 1630f, 1012f, 210f, 46f, () => Open(_restart));
-            _ui.Picture(frame, "NoticePanel", media.Choice, 894f, 1012f, 716f, 54f);
-            _notice = _ui.Label(frame, "Notice", string.Empty, 912f, 1014f, 680f, 50f, 19);
+            _next = _ui.Button(_gameplay, "Advance", "继续  ▷", 1632f, 906f, 172f, 56f, () => AdvanceRequested?.Invoke());
+            _ui.Button(_gameplay, "Save", "存档", 80f, 1012f, 146f, 46f, () => SaveRequested?.Invoke());
+            _ui.Button(_gameplay, "Load", "读档", 242f, 1012f, 146f, 46f, () => LoadRequested?.Invoke());
+            _ui.Button(_gameplay, "History", "前尘", 404f, 1012f, 146f, 46f, reader.OpenHistory);
+            _ui.Button(_gameplay, "Settings", "声音", 566f, 1012f, 146f, 46f, () => Open(_settings));
+            _ui.Button(_gameplay, "Credits", "鸣谢", 728f, 1012f, 146f, 46f, () => Open(_credits));
+            _ui.Button(_gameplay, "MainMenuButton", "主界面", 1630f, 1012f, 210f, 46f,
+                () => MainMenuRequested?.Invoke());
+            _ui.Picture(_gameplay, "NoticePanel", media.Choice, 894f, 1012f, 716f, 54f);
+            _notice = _ui.Label(_gameplay, "Notice", string.Empty, 912f, 1014f, 680f, 50f, 19);
+            _mainMenu = new MainMenuView(frame, _ui, () => StartGameRequested?.Invoke(),
+                () => ContinueGameRequested?.Invoke(), () => MainMenuLoadRequested?.Invoke(),
+                () => Open(_settings), () => Open(_credits), () => QuitRequested?.Invoke());
             BuildOverlays(frame, audio);
-            _reader.inputBlocked = () => IsModalOpen;
+            _reader.inputBlocked = () => IsModalOpen || IsMainMenuOpen;
             EnsureEventSystem();
+        }
+
+        public void ShowMainMenu(Texture2D background, bool canContinue, bool canLoad, string notice)
+        {
+            ChangeBackground(background);
+            ChangePortrait(null);
+            _gameplay.gameObject.SetActive(false);
+            _mainMenu.Show(canContinue, canLoad, notice);
+        }
+
+        public void HideMainMenu()
+        {
+            _mainMenu.Hide();
+            _gameplay.gameObject.SetActive(true);
+        }
+
+        public void ShowMainMenuNotice(string message)
+        {
+            _mainMenu.ShowNotice(message);
         }
 
         public void Render(StoryViewState state)
@@ -253,16 +283,6 @@ namespace WenXinJie.Presentation
             _ui.Button(credits, "CreditsClose", "返回", 1480f, 870f, 260f, 64f, CloseModals);
             _credits.SetActive(false);
 
-            RectTransform restart = Overlay(frame, "RestartConfirmation", "重启此卷？");
-            _restart = restart.gameObject;
-            _ui.Label(restart, "Confirmation", "尚未保存的进度将丢失。已有存档不会被删除。", 180f, 340f, 1500f, 100f, 32);
-            _ui.Button(restart, "RestartCancel", "继续当前旅程", 180f, 870f, 380f, 64f, CloseModals);
-            _ui.Button(restart, "RestartConfirm", "重新开始", 1360f, 870f, 380f, 64f, () =>
-            {
-                CloseModals();
-                RestartRequested?.Invoke();
-            });
-            _restart.SetActive(false);
         }
 
         private RectTransform Overlay(Transform parent, string name, string title)
@@ -284,7 +304,6 @@ namespace WenXinJie.Presentation
         {
             _settings.SetActive(false);
             _credits.SetActive(false);
-            _restart.SetActive(false);
             PlayerPrefs.Save();
         }
 

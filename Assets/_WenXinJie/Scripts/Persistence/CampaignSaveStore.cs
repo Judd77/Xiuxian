@@ -7,6 +7,11 @@ namespace WenXinJie.Persistence
 {
     public sealed class CampaignSaveStore
     {
+        public bool Exists(string path)
+        {
+            return File.Exists(path) || File.Exists(path + ".bak");
+        }
+
         public void Save(string path, StorySession session)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path));
