@@ -14,7 +14,7 @@ namespace WenXinJie.Presentation
         [SerializeField] private AudioClip _music;
         [SerializeField] private AudioClip _rain;
         [SerializeField] private MediaImage[] _backgrounds;
-        [SerializeField] private MediaImage[] _portraits;
+        [SerializeField] private PortraitMedia[] _portraits;
 
         public Font Font => _font;
         public Texture2D Panel => _panel;
@@ -27,9 +27,9 @@ namespace WenXinJie.Presentation
             return Find(_backgrounds, id);
         }
 
-        public Texture2D Portrait(string id)
+        public PortraitMedia Portrait(string id)
         {
-            return string.IsNullOrEmpty(id) ? null : Find(_portraits, id);
+            return string.IsNullOrEmpty(id) ? null : FindPortrait(id);
         }
 
         public void Validate(StoryGraph graph)
@@ -40,7 +40,7 @@ namespace WenXinJie.Presentation
             }
 
             ValidateImages(_backgrounds);
-            ValidateImages(_portraits);
+            ValidatePortraits();
             foreach (StoryNode node in graph.Nodes)
             {
                 Background(node.background);
@@ -77,6 +77,37 @@ namespace WenXinJie.Presentation
 
             throw new InvalidOperationException("Unregistered story image: " + id);
         }
+
+        private PortraitMedia FindPortrait(string id)
+        {
+            foreach (PortraitMedia portrait in _portraits)
+            {
+                if (portrait.Id == id && portrait.Texture != null)
+                {
+                    return portrait;
+                }
+            }
+
+            throw new InvalidOperationException("Unregistered story portrait: " + id);
+        }
+
+        private void ValidatePortraits()
+        {
+            if (_portraits == null)
+            {
+                throw new InvalidOperationException("Missing portrait entries.");
+            }
+
+            var ids = new HashSet<string>();
+            foreach (PortraitMedia portrait in _portraits)
+            {
+                if (portrait == null || string.IsNullOrWhiteSpace(portrait.Id) || !ids.Add(portrait.Id)
+                    || portrait.Texture == null || !portrait.HasValidFraming)
+                {
+                    throw new InvalidOperationException("Duplicate, missing, or invalid portrait entry.");
+                }
+            }
+        }
     }
 
     [Serializable]
@@ -84,5 +115,23 @@ namespace WenXinJie.Presentation
     {
         public string id;
         public Texture2D texture;
+    }
+
+    [Serializable]
+    public sealed class PortraitMedia
+    {
+        [SerializeField] private string _id;
+        [SerializeField] private Texture2D _texture;
+        [SerializeField] private float _width = 1050f;
+        [SerializeField] private float _top = 140f;
+        [SerializeField] private float _right = 30f;
+
+        public string Id => _id;
+        public Texture2D Texture => _texture;
+        public float Width => _width;
+        public float Top => _top;
+        public float Right => _right;
+
+        public bool HasValidFraming => _width > 0f && _top >= 0f && _right >= 0f;
     }
 }

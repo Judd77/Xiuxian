@@ -37,6 +37,7 @@ namespace WenXinJie.Editor
                 application.Advance();
                 Require(application.Session.Current.id == "c01.warning", "Opening advance failed.");
                 VerifyPicture("Portrait", "LinYue_Premium", true);
+                VerifyPortraitFraming();
                 reader.Complete();
                 await Capture("Docs/Validation/campaign-lin-yue-1080.png");
                 application.Advance();
@@ -134,6 +135,21 @@ namespace WenXinJie.Editor
                 RawImage image = transform.GetComponent<RawImage>();
                 Require(image.texture != null && image.texture.name.Contains(expectedTexture), "Wrong picture on " + name);
             }
+        }
+
+        private static void VerifyPortraitFraming()
+        {
+            Transform transform = FindIncludingInactive("Portrait");
+            var image = transform.GetComponent<RawImage>();
+            RectTransform rect = image.rectTransform;
+            Require(image.uvRect == new Rect(0f, 0f, 1f, 1f),
+                "Portrait should display the complete source image.");
+            Require(rect.sizeDelta.x >= 1000f && rect.sizeDelta.y >= 1500f,
+                "Portrait is too small for the dialogue composition.");
+            Require(Mathf.Abs(-rect.anchoredPosition.y - 140f) < 1f,
+                "Portrait head is not aligned below the header.");
+            Require(-rect.anchoredPosition.y + rect.sizeDelta.y > 1500f,
+                "Portrait should extend beyond the bottom edge for a half-body composition.");
         }
 
         private static Transform FindIncludingInactive(string name)

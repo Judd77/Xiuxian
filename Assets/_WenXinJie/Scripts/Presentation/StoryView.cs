@@ -55,8 +55,10 @@ namespace WenXinJie.Presentation
             _status.color = new Color(0.84f, 0.88f, 0.85f);
             _ui.Picture(frame, "LocationPanel", media.Choice, 80f, 166f, 620f, 74f);
             _location = _ui.Label(frame, "Location", string.Empty, 110f, 178f, 560f, 50f, 28);
-            _portrait = _ui.Picture(frame, "Portrait", null, 1280f, 132f, 520f, 780f);
+            _portrait = _ui.Picture(frame, "Portrait", null, 0f, 0f, 1f, 1f);
             _portraitGroup = _portrait.gameObject.AddComponent<CanvasGroup>();
+            _portrait.transform.SetAsFirstSibling();
+            _portrait.gameObject.SetActive(false);
 
             for (int index = 0; index < _choices.Length; index++)
             {
@@ -183,9 +185,10 @@ namespace WenXinJie.Presentation
             _transition = null;
         }
 
-        private void ChangePortrait(Texture2D texture)
+        private void ChangePortrait(PortraitMedia portrait)
         {
-            if (_portrait.texture == texture)
+            Texture2D texture = portrait?.Texture;
+            if (_portrait.texture == texture && _portrait.gameObject.activeSelf == (texture != null))
             {
                 return;
             }
@@ -196,16 +199,19 @@ namespace WenXinJie.Presentation
             }
 
             _portrait.texture = texture;
-            _portrait.gameObject.SetActive(texture != null);
             if (texture == null)
             {
+                _portrait.gameObject.SetActive(false);
                 _portraitTransition = null;
                 return;
             }
 
-            const float width = 520f;
-            float height = width * texture.height / texture.width;
-            _portrait.rectTransform.sizeDelta = new Vector2(width, height);
+            float height = portrait.Width * texture.height / texture.width;
+            float x = 1920f - portrait.Right - portrait.Width;
+            _portrait.rectTransform.anchoredPosition = new Vector2(x, -portrait.Top);
+            _portrait.rectTransform.sizeDelta = new Vector2(portrait.Width, height);
+            _portrait.uvRect = new Rect(0f, 0f, 1f, 1f);
+            _portrait.gameObject.SetActive(true);
             _portraitGroup.alpha = 0f;
             _portraitTransition = StartCoroutine(FadePortrait());
         }

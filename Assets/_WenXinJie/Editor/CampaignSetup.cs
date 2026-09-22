@@ -53,7 +53,8 @@ namespace WenXinJie.Editor
                     "Art/Backgrounds/CloudGate_Premium_1080.jpg", "Art/Backgrounds/PineRidge_Premium_1080.jpg",
                     "Art/Backgrounds/PineRidge_Premium_Night_1080.jpg"
                 });
-            Images(media.FindProperty("_portraits"), new[] { "linYue" }, new[] { "Art/Generated/LinYue_Premium_Cutout.png" });
+            Portraits(media.FindProperty("_portraits"), new[] { "linYue" },
+                new[] { "Art/Generated/LinYue_Premium_Cutout.png" });
             media.ApplyModifiedPropertiesWithoutUndo();
             AssetDatabase.SaveAssets();
             catalog = AssetDatabase.LoadAssetAtPath<StoryMediaCatalog>(catalogPath);
@@ -123,6 +124,21 @@ namespace WenXinJie.Editor
                 SerializedProperty entry = array.GetArrayElementAtIndex(index);
                 entry.FindPropertyRelative("id").stringValue = ids[index];
                 entry.FindPropertyRelative("texture").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Texture2D>(Root + paths[index]);
+            }
+        }
+
+        private static void Portraits(SerializedProperty array, string[] ids, string[] paths)
+        {
+            array.arraySize = ids.Length;
+            for (int index = 0; index < ids.Length; index++)
+            {
+                SerializedProperty entry = array.GetArrayElementAtIndex(index);
+                entry.FindPropertyRelative("_id").stringValue = ids[index];
+                entry.FindPropertyRelative("_texture").objectReferenceValue =
+                    AssetDatabase.LoadAssetAtPath<Texture2D>(Root + paths[index]);
+                entry.FindPropertyRelative("_width").floatValue = 1050f;
+                entry.FindPropertyRelative("_top").floatValue = 140f;
+                entry.FindPropertyRelative("_right").floatValue = 30f;
             }
         }
     }

@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace WenXinJie.Presentation
 {
@@ -13,7 +12,7 @@ namespace WenXinJie.Presentation
         public string NextLabel;
         public bool Terminal;
         public Texture2D Background;
-        public Texture2D Portrait;
+        public PortraitMedia Portrait;
         public ChoiceViewState[] Choices = Array.Empty<ChoiceViewState>();
     }
 
