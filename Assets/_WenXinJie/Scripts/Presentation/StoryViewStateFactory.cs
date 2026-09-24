@@ -21,7 +21,7 @@ namespace WenXinJie.Presentation
                 node.speaker,
                 node.text,
                 BuildStatus(session),
-                node.terminal ? "未完待续" : "继续  ▷",
+                node.terminal ? "未完待续" : "继续",
                 node.terminal,
                 _assets.GetBackground(node.background),
                 _assets.GetPortrait(node.portrait),

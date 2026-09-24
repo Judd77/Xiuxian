@@ -63,7 +63,7 @@ namespace WenXinJie.Presentation
             dialogueButton.onClick.AddListener(commands.AdvanceStory);
             reader.Initialize(dialogue, commands.AdvanceStory, inputBlocked);
 
-            _next = ui.Button(root, "Advance", "继续  ▷", 1632f, 906f, 172f, 56f, commands.AdvanceStory);
+            _next = ui.Button(root, "Advance", "继续", 1632f, 906f, 172f, 56f, commands.AdvanceStory);
             ui.Button(root, "Save", "存档", 80f, 1008f, 146f, 54f, commands.SaveGame);
             ui.Button(root, "Load", "读档", 242f, 1008f, 146f, 54f, commands.LoadGame);
             ui.Button(root, "History", "前尘", 404f, 1008f, 146f, 54f, reader.OpenHistory);
