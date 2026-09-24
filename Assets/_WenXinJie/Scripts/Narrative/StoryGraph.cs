@@ -38,6 +38,8 @@ namespace WenXinJie.Narrative
             {
                 ValidateNode(node);
             }
+
+            ValidateReachability();
         }
 
         public StoryNode GetNode(string id)
@@ -93,6 +95,37 @@ namespace WenXinJie.Narrative
                     Require(effect.value >= variable.minimum && effect.value <= variable.maximum, "Set effect outside bounds.");
                 }
             }
+        }
+
+        private void ValidateReachability()
+        {
+            var visited = new HashSet<string>();
+            var pending = new Stack<string>();
+            pending.Push(Definition.start);
+            while (pending.Count > 0)
+            {
+                var id = pending.Pop();
+                if (!visited.Add(id))
+                {
+                    continue;
+                }
+
+                var node = _nodes[id];
+                if (!string.IsNullOrEmpty(node.next))
+                {
+                    pending.Push(node.next);
+                }
+
+                foreach (var choice in node.choices)
+                {
+                    pending.Push(choice.target);
+                }
+            }
+
+            var unreachable = new List<string>(_nodes.Keys);
+            unreachable.RemoveAll(visited.Contains);
+
+            Require(unreachable.Count == 0, "Unreachable story nodes: " + string.Join(", ", unreachable));
         }
 
         internal static void Require(bool condition, string message)

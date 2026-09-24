@@ -43,15 +43,21 @@ namespace WenXinJie.Editor
 
             var media = new SerializedObject(catalog);
             Assign(media, "_font", "Fonts/NotoSerifSC-Regular.ttf");
+            Assign(media, "_titleFont", "Fonts/ZhiMangXing-Regular.ttf");
+            Assign(media, "_menuFont", "Fonts/ZCOOLXiaoWei-Regular.ttf");
             Assign(media, "_panel", "Art/UI/ImmortalGlassPanel.png");
             Assign(media, "_choice", "Art/UI/ImmortalGlassChoice.png");
             Assign(media, "_music", "Audio/BGM/AsianOriental2_Tozan.ogg");
             Assign(media, "_rain", "Audio/Ambience/Rain_Window_Ylmir.ogg");
-            Images(media.FindProperty("_backgrounds"), new[] { "gate", "ridge", "night" },
+            Images(media.FindProperty("_backgrounds"),
+                new[] { "gate", "ridge", "night", "stele", "quartersNight", "mountainHeart" },
                 new[]
                 {
                     "Art/Backgrounds/CloudGate_Premium_1080.jpg", "Art/Backgrounds/PineRidge_Premium_1080.jpg",
-                    "Art/Backgrounds/PineRidge_Premium_Night_1080.jpg"
+                    "Art/Backgrounds/PineRidge_Premium_Night_1080.jpg",
+                    "Art/Backgrounds/SteleCorridor_Premium_1080.jpg",
+                    "Art/Backgrounds/DiscipleQuartersNight_Premium_1080.jpg",
+                    "Art/Backgrounds/MountainHeartGate_Premium_1080.jpg"
                 });
             Portraits(media.FindProperty("_portraits"), new[] { "linYue" },
                 new[] { "Art/Generated/LinYue_Premium_Cutout.png" });

@@ -1,6 +1,40 @@
 # 开发状态
 
 > 最新状态见本文最后的 2026-09-22 记录；前文保留历史验证过程。
+
+## 2026-09-24：第一卷扩写与新增场景
+
+- 正式剧情从 15 节点扩为 41 节点。两次主要行动仍是核心限制，但调查、赴约、修炼各自增加内部方法选择，夜间四种结果扩为多段回收剧情。
+- 新增玉扣线索、山腹共鸣和宗门注意状态；顶栏显示线索总数与宗门是否被惊动。用户明确开发期不做旧存档兼容，剧情 revision 升为 2，旧开发存档直接失效。
+- `StoryGraph` 增加结构可达性校验，孤立节点会在加载时拒绝。编辑器测试新增不可达内容用例。
+- 新增原创旧碑廊、弟子居所夜景、山腹石门三张背景，母图位于 `AssetSources/Art/Generated/`，1080p 衍生图已接入 `stele`、`quartersNight`、`mountainHeart` 媒体 ID。
+- 图像由 Codex 内置 OpenAI 图像生成工具制作，提示摘要、源文件 SHA-256、衍生图 SHA-256 和准入记录已更新。没有使用现有游戏拆包或来源不明素材。
+
+### 验证
+
+- `Assembly-CSharp.csproj` 与 `Assembly-CSharp-Editor.csproj`：0 警告、0 错误。
+- JSON 数据模拟：41 节点全部可达；结盟、孤证、受护、共鸣四条路线均进入预期夜间结果并推进到第二日。
+- 6 个剧情背景 ID 均存在于媒体目录；17 项正式资产哈希一致；`Assets/_WenXinJie` 下 69 个 `.meta` GUID 无重复。
+- Unity 官方桥接返回 `Unity not detected`，因此本轮未执行 Play Mode 视觉回归。不能把上述静态验证视为 Unity 实机试玩通过。
+
+### 仍未完成
+
+- 当前单路线约 22 个阅读节点、1600–1700 字，尚未通过人工计时证明达到 15–20 分钟。
+- 新场景尚未在 Play Mode 中检查 UI 遮挡、淡入和色彩衔接。
+- 林月表情差分、第二与第三名主要角色、UI 音效和 Windows 构建仍待推进。
+
+## 2026-09-24：线索簿
+
+- 正式玩法底栏新增“线索”入口，复用现有水墨九宫格按钮与菜单字体。线索簿可切换查看外门名册抄页、青玉扣和山腹共鸣，未发现条目保留名称但隐藏说明。
+- 展示层新增 `ClueJournalView`、`ClueJournalState` 与 `ClueEntryViewState`。解锁状态由 `StoryApplication` 从剧情变量单向映射，View 不读取 `StorySession`，没有增加存档字段或旧档兼容代码。
+- 修复脚本热重载期间 `StoryView.IsModalOpen` 对尚未恢复引用的空访问；同步修正 Play Mode 测试，使结盟标记在 `c01.shared.vow` 实际结算后再断言和存档。
+
+### 验证
+
+- `Assembly-CSharp.csproj` 与 `Assembly-CSharp-Editor.csproj`：0 错误。
+- Rider 对本轮新增代码未报告新的 warning；仍保留项目既有的 Unity 目录命名空间与序列化字段命名规则冲突，不在本轮牵连改名。
+- `CampaignSmokeTests` 通过。
+- `CampaignPlayModeChecks` 通过：实际点击线索簿，验证初始 `0 / 3`、取得名册与玉扣后的 `2 / 3`、青玉扣标题和分类，并继续覆盖首页、人物/背景切换、结盟路线及隔离存读档。
 ## 已验证（本次开发前）
 Unity官方连接成功；能在编辑器编译执行C#。项目路径 D:/project/Xianxia；SampleScene 已保存、未运行。
 ## 本次写入

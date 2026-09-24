@@ -15,6 +15,21 @@
     "sha256": "a4b01c4e861ef34210bc1727598f8da905d0c37a3c92f3a165b1d416cba29600"
   },
   {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/SteleCorridor_Premium_1080.jpg",
+    "bytes": 766275,
+    "sha256": "f2e3ee90a6fa8b48ce50658e81e81c5b8cc1b088e1251178f371693bb13a777f"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/DiscipleQuartersNight_Premium_1080.jpg",
+    "bytes": 729777,
+    "sha256": "0fa1888f87f57470c2f630429af64512aae7e3bd9e56ea61c7f96cc40c1e29d2"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/MountainHeartGate_Premium_1080.jpg",
+    "bytes": 813885,
+    "sha256": "2416483503c88007ec23317409fbb5a29cff9b89e08dc5a1c32821bfd8ce9c0c"
+  },
+  {
     "path": "Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png",
     "bytes": 2295612,
     "sha256": "ab3fdc92cbe7285f1ce1ce2b876baf479421dae813b9acd62a6f208787598d63"
@@ -26,8 +41,8 @@
   },
   {
     "path": "Assets/_WenXinJie/Art/UI/ImmortalGlassChoice.png",
-    "bytes": 1096,
-    "sha256": "9a0b013d5321de1593bd81f43ce442dd847c5a3543fa17821f3ca9836fca350c"
+    "bytes": 1061,
+    "sha256": "6ac8a0c8689f871768f1206792bd1522016340243a87b57f50273d615bf08abc"
   },
   {
     "path": "Assets/_WenXinJie/Audio/BGM/AsianOriental2_Tozan.ogg",
@@ -48,5 +63,25 @@
     "path": "Assets/_WenXinJie/Fonts/OFL.txt",
     "bytes": 4350,
     "sha256": "5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6"
+  },
+  {
+    "path": "Assets/_WenXinJie/Fonts/ZhiMangXing-Regular.ttf",
+    "bytes": 4063532,
+    "sha256": "644e0cae9b40f0b10ab729a01bd32032e3973bac22be3dccae01bf6ae7fde969"
+  },
+  {
+    "path": "Assets/_WenXinJie/Fonts/ZhiMangXing-OFL.txt",
+    "bytes": 4397,
+    "sha256": "10947328199e369a3e6b4a67e8e5507ed99d5bbb264a1f156415aa9b665e4d15"
+  },
+  {
+    "path": "Assets/_WenXinJie/Fonts/ZCOOLXiaoWei-Regular.ttf",
+    "bytes": 6313808,
+    "sha256": "a42b620140f493db42f741351dfbf343c0936d58588ee8004b8b2a218d997ff1"
+  },
+  {
+    "path": "Assets/_WenXinJie/Fonts/ZCOOLXiaoWei-OFL.txt",
+    "bytes": 4400,
+    "sha256": "a094514ca57cf8f9c5e8d8d1adab5d8cd3a377297ff016f9df2c05b3ecd77f0a"
   }
 ]

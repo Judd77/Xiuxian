@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / 'Assets/_WenXinJie/Art'
-GENERATED = ART / 'Generated'
+GENERATED = ROOT / 'AssetSources/Art/Generated'
 
 
 def fit(source, target):
@@ -23,6 +23,9 @@ backgrounds = ART / 'Backgrounds'
 backgrounds.mkdir(parents=True, exist_ok=True)
 fit(GENERATED / 'CloudGate_Premium.png', backgrounds / 'CloudGate_Premium_1080.jpg')
 fit(GENERATED / 'PineRidge_Premium.png', backgrounds / 'PineRidge_Premium_1080.jpg')
+fit(GENERATED / 'SteleCorridor_Premium.png', backgrounds / 'SteleCorridor_Premium_1080.jpg')
+fit(GENERATED / 'DiscipleQuartersNight_Premium.png', backgrounds / 'DiscipleQuartersNight_Premium_1080.jpg')
+fit(GENERATED / 'MountainHeartGate_Premium.png', backgrounds / 'MountainHeartGate_Premium_1080.jpg')
 
 night = Image.open(backgrounds / 'PineRidge_Premium_1080.jpg').convert('RGB')
 night = ImageEnhance.Brightness(night).enhance(0.58)
@@ -57,8 +60,8 @@ def panel(size, output, alpha_top, alpha_bottom, corners=True):
     pale = (224, 232, 222, 90)
     draw.rounded_rectangle((2, 2, width - 3, height - 3), radius=8, outline=gold, width=2)
     draw.rounded_rectangle((10, 10, width - 11, height - 11), radius=5, outline=pale, width=1)
-    draw.line((34, 16, width - 34, 16), fill=(197, 218, 208, 75), width=1)
     if corners:
+        draw.line((34, 16, width - 34, 16), fill=(197, 218, 208, 75), width=1)
         for x in (18, width - 18):
             for y in (18, height - 18):
                 draw.polygon(((x, y - 7), (x + 7, y), (x, y + 7), (x - 7, y)), outline=gold)
@@ -72,21 +75,21 @@ panel((760, 84), ui / 'ImmortalGlassChoice.png', 235, 216, corners=False)
 
 prompts = {
     'generator': 'OpenAI built-in image generation tool',
-    'generated_on': '2026-09-22',
+    'generated_on': '2026-09-22 through 2026-09-24',
     'style_boundary': 'Original contemporary xianxia direction; no existing characters, logos, UI, or copied composition.',
     'assets': [
         {
-            'path': 'Assets/_WenXinJie/Art/Generated/CloudGate_Premium.png',
+            'path': 'AssetSources/Art/Generated/CloudGate_Premium.png',
             'role': 'original mountain gate background source',
             'prompt_summary': 'Rainy immortal-sect gate, white stone stairs, cloud sea, jade/cyan/ivory/gold palette.'
         },
         {
-            'path': 'Assets/_WenXinJie/Art/Generated/PineRidge_Premium.png',
+            'path': 'AssetSources/Art/Generated/PineRidge_Premium.png',
             'role': 'original pine ridge background source',
             'prompt_summary': 'Blue-hour pine ridge, broken stele, rain shelter, distant sect lights.'
         },
         {
-            'path': 'Assets/_WenXinJie/Art/Generated/LinYue_Premium.png',
+            'path': 'AssetSources/Art/Generated/LinYue_Premium.png',
             'role': 'original Lin Yue portrait source before background removal',
             'prompt_summary': 'Young investigator cultivator, white/cyan/charcoal hanfu, jade token and folded umbrella.'
         },
@@ -94,6 +97,21 @@ prompts = {
             'path': 'Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png',
             'role': 'original Lin Yue standing portrait with transparent alpha',
             'prompt_summary': 'Background-removed derivative of the generated Lin Yue portrait source.'
+        },
+        {
+            'path': 'AssetSources/Art/Generated/SteleCorridor_Premium.png',
+            'role': 'original old stele corridor background source',
+            'prompt_summary': 'Post-rain archive gallery, memorial steles, sealed casket, cloud mountains and restrained lantern light.'
+        },
+        {
+            'path': 'AssetSources/Art/Generated/DiscipleQuartersNight_Premium.png',
+            'role': 'original outer-disciple residence night background source',
+            'prompt_summary': 'Searched disciple room, moonlit covered walkway, distant patrol lanterns and wet mountain architecture.'
+        },
+        {
+            'path': 'AssetSources/Art/Generated/MountainHeartGate_Premium.png',
+            'role': 'original mountain-heart sealed gate background source',
+            'prompt_summary': 'Ancient seamless stone gate, jade-gold channels, mountain mist and restrained furnace glow.'
         }
     ]
 }
@@ -109,13 +127,20 @@ campaign_asset_paths = [
     'Assets/_WenXinJie/Art/Backgrounds/CloudGate_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Backgrounds/PineRidge_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Backgrounds/PineRidge_Premium_Night_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/SteleCorridor_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/DiscipleQuartersNight_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/MountainHeartGate_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png',
     'Assets/_WenXinJie/Art/UI/ImmortalGlassPanel.png',
     'Assets/_WenXinJie/Art/UI/ImmortalGlassChoice.png',
     'Assets/_WenXinJie/Audio/BGM/AsianOriental2_Tozan.ogg',
     'Assets/_WenXinJie/Audio/Ambience/Rain_Window_Ylmir.ogg',
     'Assets/_WenXinJie/Fonts/NotoSerifSC-Regular.ttf',
-    'Assets/_WenXinJie/Fonts/OFL.txt'
+    'Assets/_WenXinJie/Fonts/OFL.txt',
+    'Assets/_WenXinJie/Fonts/ZhiMangXing-Regular.ttf',
+    'Assets/_WenXinJie/Fonts/ZhiMangXing-OFL.txt',
+    'Assets/_WenXinJie/Fonts/ZCOOLXiaoWei-Regular.ttf',
+    'Assets/_WenXinJie/Fonts/ZCOOLXiaoWei-OFL.txt'
 ]
 campaign_assets = []
 for relative_path in campaign_asset_paths:

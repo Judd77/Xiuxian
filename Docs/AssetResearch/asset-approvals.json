@@ -1,16 +1,36 @@
 {
-  "reviewed_on": "2026-09-22",
+  "reviewed_on": "2026-09-24",
   "policy": "Only project-generated output, CC0, OFL, or separately archived commercial licenses may ship.",
   "active_assets": [
     {
-      "path": "Assets/_WenXinJie/Art/Generated/CloudGate_Premium.png",
-      "basis": "project-generated output",
-      "status": "approved for prototype and commercial-use review"
+      "path": "Assets/_WenXinJie/Art/Backgrounds/CloudGate_Premium_1080.jpg",
+      "basis": "project-generated output derivative",
+      "status": "approved for commercial-use review"
     },
     {
-      "path": "Assets/_WenXinJie/Art/Generated/PineRidge_Premium.png",
-      "basis": "project-generated output",
-      "status": "approved for prototype and commercial-use review"
+      "path": "Assets/_WenXinJie/Art/Backgrounds/PineRidge_Premium_1080.jpg",
+      "basis": "project-generated output derivative",
+      "status": "approved for commercial-use review"
+    },
+    {
+      "path": "Assets/_WenXinJie/Art/Backgrounds/PineRidge_Premium_Night_1080.jpg",
+      "basis": "project-generated output derivative",
+      "status": "approved for commercial-use review"
+    },
+    {
+      "path": "Assets/_WenXinJie/Art/Backgrounds/SteleCorridor_Premium_1080.jpg",
+      "basis": "project-generated output derivative",
+      "status": "approved for commercial-use review"
+    },
+    {
+      "path": "Assets/_WenXinJie/Art/Backgrounds/DiscipleQuartersNight_Premium_1080.jpg",
+      "basis": "project-generated output derivative",
+      "status": "approved for commercial-use review"
+    },
+    {
+      "path": "Assets/_WenXinJie/Art/Backgrounds/MountainHeartGate_Premium_1080.jpg",
+      "basis": "project-generated output derivative",
+      "status": "approved for commercial-use review"
     },
     {
       "path": "Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png",
@@ -39,6 +59,16 @@
     },
     {
       "path": "Assets/_WenXinJie/Fonts/NotoSerifSC-Regular.ttf",
+      "basis": "SIL OFL 1.1",
+      "status": "approved"
+    },
+    {
+      "path": "Assets/_WenXinJie/Fonts/ZhiMangXing-Regular.ttf",
+      "basis": "SIL OFL 1.1",
+      "status": "approved"
+    },
+    {
+      "path": "Assets/_WenXinJie/Fonts/ZCOOLXiaoWei-Regular.ttf",
       "basis": "SIL OFL 1.1",
       "status": "approved"
     }

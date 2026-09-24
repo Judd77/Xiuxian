@@ -1,112 +1,955 @@
 {
   "id": "wenxinjie",
-  "revision": 1,
+  "revision": 2,
   "start": "c01.gate",
   "variables": [
-    { "id": "day", "initial": 1, "minimum": 1, "maximum": 30 },
-    { "id": "actions", "initial": 2, "minimum": 0, "maximum": 2 },
-    { "id": "cultivation", "initial": 0, "minimum": 0, "maximum": 999 },
-    { "id": "trust.linYue", "initial": 0, "minimum": 0, "maximum": 100 },
-    { "id": "clue.register", "initial": 0, "minimum": 0, "maximum": 1 },
-    { "id": "visited.linYue", "initial": 0, "minimum": 0, "maximum": 1 },
-    { "id": "route.alliance", "initial": 0, "minimum": 0, "maximum": 1 }
+    {
+      "id": "day",
+      "initial": 1,
+      "minimum": 1,
+      "maximum": 30
+    },
+    {
+      "id": "actions",
+      "initial": 2,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "cultivation",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 999
+    },
+    {
+      "id": "trust.linYue",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 100
+    },
+    {
+      "id": "clue.register",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "clue.jade",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "mark.resonance",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "risk.attention",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 3
+    },
+    {
+      "id": "visited.linYue",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "route.alliance",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    }
   ],
   "nodes": [
     {
-      "id": "c01.gate", "chapter": "卷一 · 雨叩山门", "location": "青云山 · 山门",
-      "speaker": "旁白", "text": "山雨入衣，登仙帖上的朱印却仍像新鲜的血。\n三十日后，你的名字将被刻上登仙台。今日山门前，迎接你的只有林月。",
-      "background": "gate", "portrait": "linYue", "rain": true, "next": "c01.warning", "effects": [], "choices": []
+      "id": "c01.gate",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 山门",
+      "speaker": "旁白",
+      "text": "山雨入衣，登仙帖上的朱印却仍像新鲜的血。\n三十日后，你的名字将被刻上登仙台。今日山门前，迎接你的没有仙鹤与钟乐，只有一条被雨水洗得发白的长阶。",
+      "background": "gate",
+      "portrait": "",
+      "rain": true,
+      "next": "c01.arrival",
+      "effects": [],
+      "choices": []
     },
     {
-      "id": "c01.warning", "chapter": "卷一 · 雨叩山门", "location": "青云山 · 山门",
-      "speaker": "林月", "text": "“别急着谢恩。”\n她把你的登仙帖翻到背面。纸背有一道被刮去的旧名，与你的生辰一模一样。\n“日落后，我在松风岭等你。别让执事知道。”",
-      "background": "gate", "portrait": "linYue", "rain": true, "next": "c01.hub", "effects": [], "choices": []
+      "id": "c01.arrival",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 山门",
+      "speaker": "旁白",
+      "text": "守门弟子验过帖子，目光在你的生辰上停了一瞬，随后匆匆避开。\n檐下站着一名灰青衣衫的女子。她替你接过湿透的行囊，却没有说一句恭喜。",
+      "background": "gate",
+      "portrait": "linYue",
+      "rain": true,
+      "next": "c01.warning",
+      "effects": [],
+      "choices": []
     },
     {
-      "id": "c01.hub", "chapter": "卷一 · 雨叩山门", "location": "青云山 · 山道",
-      "speaker": "心念", "text": "名册将在夜里移交，林月也不能久留。\n你要在日落之前，决定把有限的时辰交给谁。",
-      "background": "gate", "portrait": "", "rain": false, "effects": [],
+      "id": "c01.warning",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 山门",
+      "speaker": "林月",
+      "text": "“我叫林月，暂领你入外门。”\n她把你的登仙帖翻到背面。纸背有一道被刀锋刮去的旧名，残留的墨痕与你的生辰恰好重叠。\n“十年前，也有人拿着这张帖子上山。他没有登仙。”",
+      "background": "gate",
+      "portrait": "linYue",
+      "rain": true,
+      "next": "c01.response",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.response",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 山门",
+      "speaker": "林月",
+      "text": "石阶上方传来巡钟。林月松开帖子，声音压得更低。\n“日落后，我在松风岭等你。旧名册也会在今夜移交。你只有两个时辰，先弄清什么，由你决定。”",
+      "background": "gate",
+      "portrait": "linYue",
+      "rain": true,
+      "effects": [],
       "choices": [
-        { "id": "investigate", "text": "查验旧名册", "target": "c01.register", "lockedReason": "需要时辰，且尚未取得名册", "conditions": [{ "variable": "actions", "minimum": 1, "maximum": 2 }, { "variable": "clue.register", "minimum": 0, "maximum": 0 }], "effects": [{ "variable": "actions", "operation": "add", "value": -1 }] },
-        { "id": "visit", "text": "赴松风之约", "target": "c01.meeting", "lockedReason": "需要时辰，且尚未赴约", "conditions": [{ "variable": "actions", "minimum": 1, "maximum": 2 }, { "variable": "visited.linYue", "minimum": 0, "maximum": 0 }], "effects": [{ "variable": "actions", "operation": "add", "value": -1 }] },
-        { "id": "cultivate", "text": "临崖调息", "target": "c01.training", "lockedReason": "今日已无余暇", "conditions": [{ "variable": "actions", "minimum": 1, "maximum": 2 }], "effects": [{ "variable": "actions", "operation": "add", "value": -1 }] },
-        { "id": "night", "text": "静候入夜", "target": "c01.night", "lockedReason": "尚有未用的时辰", "conditions": [{ "variable": "actions", "minimum": 0, "maximum": 0 }], "effects": [] }
+        {
+          "id": "ask",
+          "text": "追问被刮去的人是谁",
+          "target": "c01.response.ask",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "watch",
+          "text": "先收好帖子，记下她的反应",
+          "target": "c01.response.watch",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
       ]
     },
     {
-      "id": "c01.register", "chapter": "卷一 · 雨叩山门", "location": "青云山 · 旧碑廊外",
-      "speaker": "旁白", "text": "你在移交的经匣里找到一页旧名册。\n十年前的登仙者，生辰竟与你完全相同。他的姓名被朱砂圈起，旁边只写着两个字：\n“归炉。”",
-      "background": "gate", "portrait": "", "rain": false, "next": "c01.hub",
-      "effects": [{ "variable": "clue.register", "operation": "set", "value": 1 }], "choices": []
+      "id": "c01.response.ask",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 山门",
+      "speaker": "林月",
+      "text": "林月沉默良久，只说那是她的师兄。\n宗门宣称他已飞升天外，可十年来，他留在命灯殿里的灯火从未熄灭。她还想再说，巡山执事的影子已经越过牌楼。",
+      "background": "gate",
+      "portrait": "linYue",
+      "rain": true,
+      "next": "c01.hub",
+      "effects": [],
+      "choices": []
     },
     {
-      "id": "c01.meeting", "chapter": "卷一 · 雨叩山门", "location": "松风岭 · 断碑",
-      "speaker": "林月", "text": "“我师兄也是在登仙前，收到了这样的帖子。”\n林月把一枚裂开的玉扣放进你掌心。\n“后来，宗门说他去了天外。可他的命灯，从未熄灭。”",
-      "background": "ridge", "portrait": "linYue", "rain": false, "next": "c01.hub",
-      "effects": [{ "variable": "trust.linYue", "operation": "add", "value": 1 }, { "variable": "visited.linYue", "operation": "set", "value": 1 }], "choices": []
+      "id": "c01.response.watch",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 山门",
+      "speaker": "心念",
+      "text": "你没有立刻答应。林月指尖有常年握剑留下的薄茧，袖口却沾着新鲜炉灰。\n她像是刚从不该去的地方回来，也像是早已料到你会怀疑她。巡山执事出现前，她转身没入雨幕。",
+      "background": "gate",
+      "portrait": "linYue",
+      "rain": true,
+      "next": "c01.hub",
+      "effects": [],
+      "choices": []
     },
     {
-      "id": "c01.training", "chapter": "卷一 · 雨叩山门", "location": "松风岭 · 临风石",
-      "speaker": "心念", "text": "你循着山风运转周天。灵气入脉时，胸口却浮出一道陌生的灼痕。\n它并不痛，反倒像有什么东西，在山腹深处回应着你。",
-      "background": "ridge", "portrait": "", "rain": false, "next": "c01.hub",
-      "effects": [{ "variable": "cultivation", "operation": "add", "value": 1 }], "choices": []
-    },
-    {
-      "id": "c01.night", "chapter": "卷一 · 雨叩山门", "location": "松风岭 · 子夜",
-      "speaker": "旁白", "text": "最后一声晚钟沉入云海。山门闭合，巡夜灯火沿着石阶，一盏盏向你逼近。\n白日留下的因果，此刻终于有了回声。",
-      "background": "night", "portrait": "", "rain": true, "effects": [],
+      "id": "c01.hub",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 山道",
+      "speaker": "心念",
+      "text": "距离日落，只剩有限的两个时辰。\n旧名册能证明登仙帖并非第一次出现；林月知道失踪者留下了什么；而山中灵气正沿着你的经脉自行运转。你无法把每一条路都走完。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
       "choices": [
-        { "id": "shared", "text": "与林月共读名册", "target": "c01.shared", "lockedReason": "需要名册与林月的信任", "conditions": [{ "variable": "clue.register", "minimum": 1, "maximum": 1 }, { "variable": "trust.linYue", "minimum": 1, "maximum": 100 }], "effects": [] },
-        { "id": "alone", "text": "独自藏起名册", "target": "c01.alone", "lockedReason": "仅取得名册时可选", "conditions": [{ "variable": "clue.register", "minimum": 1, "maximum": 1 }, { "variable": "trust.linYue", "minimum": 0, "maximum": 0 }], "effects": [] },
-        { "id": "guarded", "text": "循玉扣寻找退路", "target": "c01.guarded", "lockedReason": "仅赴约而未取得名册时可选", "conditions": [{ "variable": "clue.register", "minimum": 0, "maximum": 0 }, { "variable": "trust.linYue", "minimum": 1, "maximum": 100 }], "effects": [] },
-        { "id": "uneasy", "text": "独听山腹回声", "target": "c01.uneasy", "lockedReason": "未取得名册，也未赴约时可选", "conditions": [{ "variable": "clue.register", "minimum": 0, "maximum": 0 }, { "variable": "trust.linYue", "minimum": 0, "maximum": 0 }], "effects": [] }
+        {
+          "id": "investigate",
+          "text": "查验旧名册",
+          "target": "c01.register",
+          "lockedReason": "需要一个时辰，且尚未取得名册线索",
+          "conditions": [
+            {
+              "variable": "actions",
+              "minimum": 1,
+              "maximum": 2
+            },
+            {
+              "variable": "clue.register",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "actions",
+              "operation": "add",
+              "value": -1
+            }
+          ]
+        },
+        {
+          "id": "visit",
+          "text": "赴松风之约",
+          "target": "c01.meeting",
+          "lockedReason": "需要一个时辰，且尚未赴约",
+          "conditions": [
+            {
+              "variable": "actions",
+              "minimum": 1,
+              "maximum": 2
+            },
+            {
+              "variable": "visited.linYue",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "actions",
+              "operation": "add",
+              "value": -1
+            }
+          ]
+        },
+        {
+          "id": "cultivate",
+          "text": "临崖调息",
+          "target": "c01.training",
+          "lockedReason": "今日已无余暇",
+          "conditions": [
+            {
+              "variable": "actions",
+              "minimum": 1,
+              "maximum": 2
+            }
+          ],
+          "effects": [
+            {
+              "variable": "actions",
+              "operation": "add",
+              "value": -1
+            }
+          ]
+        },
+        {
+          "id": "night",
+          "text": "静候入夜",
+          "target": "c01.night",
+          "lockedReason": "尚有未用的时辰",
+          "conditions": [
+            {
+              "variable": "actions",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": []
+        }
       ]
     },
     {
-      "id": "c01.shared", "chapter": "卷一 · 雨叩山门", "location": "松风岭 · 避雨处",
-      "speaker": "林月", "text": "“归炉，不是飞升。”\n林月指着名册上反复出现的生辰，声音很轻，却不再发抖。\n“明日去查药炉。你查名，我认人。这一次，我们一起把他们带回来。”",
-      "background": "night", "portrait": "linYue", "rain": true, "next": "c02.dawn",
-      "effects": [{ "variable": "route.alliance", "operation": "set", "value": 1 }], "choices": []
+      "id": "c01.register",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "旁白",
+      "text": "旧碑廊在山门西侧，记载历代飞升者的石碑沿雨檐排开。越靠近尽头，碑上的名字越少，最后三块甚至被人用新石灰整个抹平。\n负责移交名册的弟子已经离开，经匣却还压在供桌下。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "c01.register.trace",
+      "effects": [],
+      "choices": []
     },
     {
-      "id": "c01.alone", "chapter": "卷一 · 雨叩山门", "location": "松风岭 · 石隙",
-      "speaker": "心念", "text": "巡夜人搜过你的住处。幸而旧名册已经藏进石隙。\n你有了证据，却没有一个能替你作证的人。明日的药炉，你只能独自去查。",
-      "background": "night", "portrait": "", "rain": true, "next": "c02.dawn", "effects": [], "choices": []
+      "id": "c01.register.trace",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "心念",
+      "text": "经匣没有上锁，封条却不能完整揭下。你从边缝看见一页泛黄名册：十年前的登仙者按生辰排列，其中一人的生辰与你完全相同。\n他的姓名被朱砂圈起，旁边只有两个字：归炉。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "c01.register.method",
+      "effects": [],
+      "choices": []
     },
     {
-      "id": "c01.guarded", "chapter": "卷一 · 雨叩山门", "location": "松风岭 · 暗道",
-      "speaker": "林月", "text": "“今夜先活下来。”\n林月领你绕开巡夜人。你们尚不知道大典藏着什么，却已经知道，该把后背交给谁。",
-      "background": "night", "portrait": "linYue", "rain": true, "next": "c02.dawn", "effects": [], "choices": []
-    },
-    {
-      "id": "c01.uneasy", "chapter": "卷一 · 雨叩山门", "location": "松风岭 · 临风石",
-      "speaker": "心念", "text": "夜深时，灼痕第二次亮起。山腹里的声音，准确地念出了你的名字。\n你修为渐长，可这份力量，究竟是谁给的？",
-      "background": "night", "portrait": "", "rain": true, "next": "c02.dawn", "effects": [], "choices": []
-    },
-    {
-      "id": "c02.dawn", "chapter": "卷二 · 炉火未冷", "location": "青云山 · 次日清晨",
-      "speaker": "旁白", "text": "雨停了。药炉方向却升起一道黑烟。\n宗门贴出告示：昨夜一名守炉弟子走火入魔，任何人不得追问。\n你想起名册上的朱圈，和林月师兄那盏始终不灭的命灯。",
-      "background": "gate", "portrait": "", "rain": false, "next": "c02.decision",
-      "effects": [{ "variable": "day", "operation": "add", "value": 1 }, { "variable": "actions", "operation": "set", "value": 2 }], "choices": []
-    },
-    {
-      "id": "c02.decision", "chapter": "卷二 · 炉火未冷", "location": "青云山 · 岔路",
-      "speaker": "心念", "text": "昨日的选择，已经改变今日能走的路。\n你摸向袖中的登仙帖，终于不再把它当成一份恩赐。",
-      "background": "ridge", "portrait": "", "rain": false, "effects": [],
+      "id": "c01.register.method",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "心念",
+      "text": "巡钟只够你做一件事。抄下这一页不会留下明显痕迹，但细小笔画可能有误；直接取走原页证据最确凿，却会让宗门立刻知道有人动过经匣。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
       "choices": [
-        { "id": "alliance", "text": "与林月潜查药炉", "target": "c02.alliance", "lockedReason": "需要昨夜结盟", "conditions": [{ "variable": "route.alliance", "minimum": 1, "maximum": 1 }], "effects": [] },
-        { "id": "solo", "text": "先去打听守炉弟子", "target": "c02.solo", "lockedReason": "", "conditions": [], "effects": [] }
+        {
+          "id": "copyPage",
+          "text": "隔着缝隙抄录名册",
+          "target": "c01.register.copy",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "clue.register",
+              "operation": "set",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "takePage",
+          "text": "揭开封条取走原页",
+          "target": "c01.register.take",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "clue.register",
+              "operation": "set",
+              "value": 1
+            },
+            {
+              "variable": "risk.attention",
+              "operation": "add",
+              "value": 1
+            }
+          ]
+        }
       ]
     },
     {
-      "id": "c02.alliance", "chapter": "卷二 · 炉火未冷", "location": "松风岭 · 药炉小径",
-      "speaker": "林月", "text": "“他们换了守卫，却没有换炉灰。”\n林月递来一张沾灰的符纸，上面的笔迹，正是她失踪的师兄。\n\n本次已制作剧情到此。你的结盟与证据已保留在当前进度中。",
-      "background": "ridge", "portrait": "linYue", "rain": false, "terminal": true, "effects": [], "choices": []
+      "id": "c01.register.copy",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "旁白",
+      "text": "你用登仙帖垫在纸下，一笔笔拓下姓名、生辰与朱圈。最后一划落定时，廊外脚步已经逼近。\n你把抄页藏进袖底，经匣仍像从未被碰过，只有帖子背面的旧名与纸上笔迹严丝合缝。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "c01.hub",
+      "effects": [],
+      "choices": []
     },
     {
-      "id": "c02.solo", "chapter": "卷二 · 炉火未冷", "location": "青云山 · 山门外",
-      "speaker": "旁白", "text": "守炉弟子的铺盖已被收走。只有门前一碗药，仍旧温着。\n碗底压着一枚与登仙帖相同的朱印。\n\n本次已制作剧情到此。昨日的修为、信任与证据已保留在当前进度中。",
-      "background": "gate", "portrait": "", "rain": false, "terminal": true, "effects": [], "choices": []
+      "id": "c01.register.take",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "旁白",
+      "text": "封条离纸时发出轻微的裂响。你抽走原页，再把经匣推回阴影。\n名册入手的一刻，山道巡铃忽然改了节奏。有人发现了封条异常。你得到了不会被质疑的证据，也把自己放进了宗门的视线。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "c01.hub",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.meeting",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 断碑",
+      "speaker": "旁白",
+      "text": "松风岭背着主峰，废弃的断碑正好挡住山门视线。林月已经等在那里，脚边放着一只收好的行囊。\n她今夜本该奉命离山，却把最后一个时辰留给了你。",
+      "background": "ridge",
+      "portrait": "linYue",
+      "rain": false,
+      "next": "c01.meeting.memory",
+      "effects": [
+        {
+          "variable": "visited.linYue",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c01.meeting.memory",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 断碑",
+      "speaker": "林月",
+      "text": "“我师兄沈砚，也是登仙大典前一个月收到帖子。”\n林月摊开掌心，一枚裂开的青玉扣静静躺在雨水里。\n“宗门说他飞升了，可三个月前，这枚玉扣从药炉的运灰车上掉下来。上面还有他的血。”",
+      "background": "ridge",
+      "portrait": "linYue",
+      "rain": false,
+      "next": "c01.meeting.answer",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.meeting.answer",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 断碑",
+      "speaker": "林月",
+      "text": "“我可以把玉扣交给你，但我要知道，你查这件事是为了活命，还是为了登上去以后取代他们。”\n她没有逼近，手却始终按在剑柄上。这个答案不会改变玉扣上的血，却会决定她是否愿意把后背交给你。",
+      "background": "ridge",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "confide",
+          "text": "坦言自己也害怕成为祭品",
+          "target": "c01.meeting.open",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "trust.linYue",
+              "operation": "add",
+              "value": 2
+            },
+            {
+              "variable": "clue.jade",
+              "operation": "set",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "question",
+          "text": "先问她隐瞒了多少",
+          "target": "c01.meeting.cautious",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "trust.linYue",
+              "operation": "add",
+              "value": 1
+            },
+            {
+              "variable": "clue.jade",
+              "operation": "set",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c01.meeting.open",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 断碑",
+      "speaker": "林月",
+      "text": "你承认自己上山前也曾把登仙当成恩赐，直到看见被刮去的名字才第一次害怕。\n林月收起剑，把玉扣放进你掌心。“害怕不丢人。只要别拿别人的命替自己壮胆。”她答应今夜再来找你。",
+      "background": "ridge",
+      "portrait": "linYue",
+      "rain": false,
+      "next": "c01.hub",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.meeting.cautious",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 断碑",
+      "speaker": "林月",
+      "text": "林月没有因你的怀疑动怒。她承认自己去过药炉，也承认仍有一件事不能说。\n“你不必现在信我。”她把玉扣抛来，“先信证据。若你能活过今夜，明日自己去看炉灰。”她仍会帮你，但不会替你承担所有判断。",
+      "background": "ridge",
+      "portrait": "linYue",
+      "rain": false,
+      "next": "c01.hub",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.training",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 临风石",
+      "speaker": "心念",
+      "text": "你避开人群，在临风石上按外门心法运转第一个周天。山中灵气浓得近乎黏稠，根本不需要引导，便自行涌入经脉。\n这不是初入仙门该有的顺利。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "next": "c01.training.echo",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.training.echo",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 临风石",
+      "speaker": "旁白",
+      "text": "灵气经过心口时，一道陌生灼痕从皮肤下亮起。山腹深处随之传来沉闷回声，像巨大的炉盖正在缓缓开启。\n你若顺着回声继续吐纳，修为会增长得更快；若立刻收束经脉，便能避免与那东西建立更深联系。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "next": "c01.training.method",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.training.method",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 临风石",
+      "speaker": "心念",
+      "text": "力量来得太容易，往往意味着代价被藏在别处。可三十日后的大典不会因为你谨慎就推迟。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "followEcho",
+          "text": "顺着山腹回声继续吐纳",
+          "target": "c01.training.follow",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "cultivation",
+              "operation": "add",
+              "value": 2
+            },
+            {
+              "variable": "mark.resonance",
+              "operation": "set",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "steadyBreath",
+          "text": "封住灼痕，按心法收功",
+          "target": "c01.training.steady",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "cultivation",
+              "operation": "add",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c01.training.follow",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 临风石",
+      "speaker": "旁白",
+      "text": "你放开最后一道气门。灵气瞬间贯通经脉，抵得上寻常弟子数日苦修。\n与此同时，一个并不属于你的念头从山腹浮上来：回到炉中。灼痕随即暗去，仿佛那句话只是修行中的幻听。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "next": "c01.hub",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.training.steady",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 临风石",
+      "speaker": "旁白",
+      "text": "你逆转心法，将过量灵气一寸寸逼出经脉。修为只增长了少许，心口灼痕也逐渐平息。\n最后一缕灵气散去前，你听见山腹传来一次不甘的震动。那不是错觉，只是你暂时拒绝了它。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "next": "c01.hub",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.night",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 子夜",
+      "speaker": "旁白",
+      "text": "最后一声晚钟沉入云海。山门闭合，巡夜灯火沿石阶逐级亮起。\n白日留下的证据、承诺与犹疑，都将在今夜决定谁会敲响你的门。你已经没有时间再补走另一条路。",
+      "background": "night",
+      "portrait": "",
+      "rain": true,
+      "effects": [],
+      "choices": [
+        {
+          "id": "shared",
+          "text": "与林月核对名册和玉扣",
+          "target": "c01.shared",
+          "lockedReason": "需要名册线索与林月的信任",
+          "conditions": [
+            {
+              "variable": "clue.register",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "trust.linYue",
+              "minimum": 1,
+              "maximum": 100
+            }
+          ],
+          "effects": []
+        },
+        {
+          "id": "alone",
+          "text": "独自藏好名册线索",
+          "target": "c01.alone",
+          "lockedReason": "仅取得名册线索时可选",
+          "conditions": [
+            {
+              "variable": "clue.register",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "trust.linYue",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": []
+        },
+        {
+          "id": "guarded",
+          "text": "循玉扣寻找林月留下的退路",
+          "target": "c01.guarded",
+          "lockedReason": "仅赴约而未取得名册时可选",
+          "conditions": [
+            {
+              "variable": "clue.register",
+              "minimum": 0,
+              "maximum": 0
+            },
+            {
+              "variable": "trust.linYue",
+              "minimum": 1,
+              "maximum": 100
+            }
+          ],
+          "effects": []
+        },
+        {
+          "id": "uneasy",
+          "text": "独听山腹回声",
+          "target": "c01.uneasy",
+          "lockedReason": "未取得名册，也未赴约时可选",
+          "conditions": [
+            {
+              "variable": "clue.register",
+              "minimum": 0,
+              "maximum": 0
+            },
+            {
+              "variable": "trust.linYue",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c01.shared",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 避雨处",
+      "speaker": "林月",
+      "text": "林月借着遮雨灯逐字核对名册。玉扣内侧刻着“沈砚”二字，恰好对应朱圈中被抹去的姓名。\n“归炉，不是飞升。”她说出这句话时，山下巡夜灯忽然调转方向，朝你们藏身处而来。",
+      "background": "night",
+      "portrait": "linYue",
+      "rain": true,
+      "next": "c01.shared.search",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.shared.search",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 避雨处",
+      "speaker": "旁白",
+      "text": "林月熄灯，你们贴着石壁听巡夜人搜过岭口。若你取走了原页，经匣失窃已经惊动宗门；即使只是抄录，也有人在今夜提前封锁了旧碑廊。\n对方未必知道你拿到了什么，却显然知道有人开始追问。",
+      "background": "night",
+      "portrait": "linYue",
+      "rain": true,
+      "next": "c01.shared.vow",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.shared.vow",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 暗道口",
+      "speaker": "林月",
+      "text": "“明日去查药炉。你查名册上的人，我认师兄的笔迹。”\n林月把自己的外门令牌折成两半，半枚交给你作为联络凭证。你们并未因此更接近胜利，只是从这一刻起，任何一人的失手都会连累另一个。",
+      "background": "night",
+      "portrait": "linYue",
+      "rain": true,
+      "next": "c02.dawn",
+      "effects": [
+        {
+          "variable": "route.alliance",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c01.alone",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 石隙",
+      "speaker": "心念",
+      "text": "林月没有出现。也许她已奉命离山，也许你错过的那个时辰正是唯一能取得她信任的机会。\n巡夜人开始搜查新入门弟子的住处，你只能把名册原页或抄页塞进断碑后的石隙。",
+      "background": "night",
+      "portrait": "",
+      "rain": true,
+      "next": "c01.alone.search",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.alone.search",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "青云山 · 弟子居所",
+      "speaker": "旁白",
+      "text": "木门被推开时，你正坐在空桌前。巡夜人翻过床铺与行囊，最后在你的登仙帖上停了一瞬。\n他们没有找到证据，却记住了你的脸。门外脚步远去后，窗纸上多了一道细小朱印。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": true,
+      "next": "c01.alone.cost",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.alone.cost",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 石隙",
+      "speaker": "心念",
+      "text": "你有了能指向药炉的证据，却没有一个愿意替你作证的人。\n明日仍可继续追查，但从此每次展示名册，都可能先暴露自己。真相没有因为被藏好而更安全，它只是暂时只属于你。",
+      "background": "night",
+      "portrait": "",
+      "rain": true,
+      "next": "c02.dawn",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.guarded",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 暗道",
+      "speaker": "旁白",
+      "text": "青玉扣在靠近断碑时微微发热，指向一条被藤蔓遮住的旧路。林月没有现身，只在石缝中留下半张药炉轮值表。\n她料到巡夜人会来，也料到你可能空手赴约。",
+      "background": "night",
+      "portrait": "",
+      "rain": true,
+      "next": "c01.guarded.escape",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.guarded.escape",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 暗道",
+      "speaker": "林月",
+      "text": "“今夜先活下来。”\n林月从暗道另一端出现，领你绕过巡夜灯。她不问你为何没有去查名册，只告诉你轮值表上有三个名字已经连续值守十年，而外门从未有人见过他们。",
+      "background": "night",
+      "portrait": "linYue",
+      "rain": true,
+      "next": "c01.guarded.promise",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.guarded.promise",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 暗道出口",
+      "speaker": "林月",
+      "text": "“我们还没有证据，明日就只能从活人身上找。”\n她将行囊藏进暗道，决定暂缓离山。你们尚不知道大典究竟需要什么，却已经知道该把后背交给谁。这个选择换来了同伴，也失去了今夜验证名册的机会。",
+      "background": "night",
+      "portrait": "linYue",
+      "rain": true,
+      "next": "c02.dawn",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.uneasy",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 临风石",
+      "speaker": "心念",
+      "text": "你没有名册，也没有赴约。夜色降下后，白日修来的灵气仍在经脉中缓慢转动。\n山腹回声比黄昏更近，像隔着一层岩壁等待你回应。",
+      "background": "night",
+      "portrait": "",
+      "rain": true,
+      "next": "c01.uneasy.voice",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.uneasy.voice",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 临风石",
+      "speaker": "旁白",
+      "text": "子夜时，心口灼痕第二次亮起。一个苍老声音准确念出你的名字，又念出登仙帖上被刮去的旧名。\n两人的生辰、血脉与灵气在它口中没有区别。它称你们为同一炉的下一味药。",
+      "background": "night",
+      "portrait": "",
+      "rain": true,
+      "next": "c01.uneasy.mark",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c01.uneasy.mark",
+      "chapter": "卷一 · 雨叩山门",
+      "location": "松风岭 · 临风石",
+      "speaker": "心念",
+      "text": "声音消失后，灼痕仍像一只闭合的眼睛留在胸口。你没有得到可以示人的证据，却知道宗门选择你绝非偶然。\n明日若追查药炉，你要面对的也许不是某个恶人，而是整座山赖以运转的东西。",
+      "background": "night",
+      "portrait": "",
+      "rain": true,
+      "next": "c02.dawn",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c02.dawn",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 次日清晨",
+      "speaker": "旁白",
+      "text": "雨停了。药炉方向却升起一道黑烟。\n宗门贴出告示：昨夜一名守炉弟子走火入魔，任何人不得追问。告示下方新添了你的名字，命你三日后接受第一次登仙考校。留给你的时间，比想象中更少。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "next": "c02.decision",
+      "effects": [
+        {
+          "variable": "day",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c02.decision",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 岔路",
+      "speaker": "心念",
+      "text": "昨日的选择已经改变今日能走的路。盟友、名册、玉扣与山腹回声各自指向不同入口，而宗门不会允许你逐一验证。\n你摸向袖中的登仙帖，终于不再把它当成一份恩赐。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "alliance",
+          "text": "与林月潜查药炉",
+          "target": "c02.alliance",
+          "lockedReason": "需要昨夜与林月结盟",
+          "conditions": [
+            {
+              "variable": "route.alliance",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "id": "registerLead",
+          "text": "沿名册追查失踪弟子",
+          "target": "c02.register",
+          "lockedReason": "需要名册线索",
+          "conditions": [
+            {
+              "variable": "clue.register",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "id": "resonanceLead",
+          "text": "循山腹共鸣寻找炉心",
+          "target": "c02.resonance",
+          "lockedReason": "需要回应过山腹共鸣",
+          "conditions": [
+            {
+              "variable": "mark.resonance",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "id": "solo",
+          "text": "先打听守炉弟子",
+          "target": "c02.solo",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c02.alliance",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "松风岭 · 药炉小径",
+      "speaker": "林月",
+      "text": "“他们换了守卫，却没有换炉灰。”\n林月递来一张沾灰的符纸，上面的笔迹正是沈砚。符纸写着：炉中之人尚活，登仙台只是炉盖。\n\n第一卷纵向切片到此。你的结盟、证据与风险已保留。",
+      "background": "ridge",
+      "portrait": "linYue",
+      "rain": false,
+      "terminal": true,
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c02.register",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "旁白",
+      "text": "你按名册逐一寻找旧弟子的住处，发现他们的房间从未分给新人，门牌却每年都会换上新的名字。\n最新一块门牌还带着木屑，写的正是你。\n\n第一卷纵向切片到此。名册路线与宗门注意已保留。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "terminal": true,
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c02.resonance",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "心念",
+      "text": "你循着灼痕的跳动找到一扇没有门缝的石门。门后传来的灵气与昨夜完全相同，只是其中混入了许多人的呼吸。\n当你把手按上石壁，里面有人也按住了同一个位置。\n\n第一卷纵向切片到此。共鸣标记与修为已保留。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "terminal": true,
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c02.solo",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 山门外",
+      "speaker": "旁白",
+      "text": "守炉弟子的铺盖已被收走，只有门前一碗药仍旧温着。碗底压着一枚与登仙帖相同的朱印，背面刻着昨夜的日期。\n这场“走火入魔”在事发前就已写好。\n\n第一卷纵向切片到此。当前周目的选择与状态已保留。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "terminal": true,
+      "effects": [],
+      "choices": []
     }
   ]
 }

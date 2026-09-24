@@ -184,7 +184,7 @@ namespace WenXinJie.Presentation
                 return true;
             }
             catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
-                || exception is ArgumentException)
+                                                                       || exception is ArgumentException)
             {
                 message = "未找到匹配当前剧情版本的有效存档";
                 return false;
@@ -227,9 +227,8 @@ namespace WenXinJie.Presentation
                 Text = node.text,
                 Background = _media.Background(node.background),
                 Portrait = _media.Portrait(node.portrait),
-                Status = "第 " + _session.GetValue("day") + " 日    /    余暇 " + _session.GetValue("actions")
-                    + "    /    修为 " + _session.GetValue("cultivation") + "    /    林月信任 " + _session.GetValue("trust.linYue")
-                    + "    /    名册 " + (_session.GetValue("clue.register") == 1 ? "已得" : "未得"),
+                Status = BuildStatus(),
+                Journal = BuildJournal(),
                 NextLabel = node.terminal ? "未完待续" : "继续  ▷",
                 Terminal = node.terminal,
                 Choices = node.choices.Select(choice => new ChoiceViewState
@@ -240,6 +239,47 @@ namespace WenXinJie.Presentation
                     LockedReason = choice.lockedReason
                 }).ToArray()
             });
+        }
+
+        private string BuildStatus()
+        {
+            int clues = _session.GetValue("clue.register") + _session.GetValue("clue.jade");
+            string attention = _session.GetValue("risk.attention") > 0 ? "已惊动" : "未惊动";
+            return "第 " + _session.GetValue("day") + " 日    /    余暇 " + _session.GetValue("actions")
+                   + "    /    修为 " + _session.GetValue("cultivation")
+                   + "    /    林月信任 " + _session.GetValue("trust.linYue")
+                   + "    /    线索 " + clues + "/2    /    宗门 " + attention;
+        }
+
+        private ClueJournalState BuildJournal()
+        {
+            return new()
+            {
+                Entries = new[]
+                {
+                    new ClueEntryViewState
+                    {
+                        Title = "外门名册抄页",
+                        Category = "物证 · 旧碑廊",
+                        Description = "残页上的名字被朱笔圈过，部分人名又遭刻意刮除。页脚的归档记号指向药炉，而非外门执事堂。",
+                        Unlocked = _session.GetValue("clue.register") > 0
+                    },
+                    new ClueEntryViewState
+                    {
+                        Title = "青玉扣",
+                        Category = "物证 · 松风岭",
+                        Description = "玉扣内侧刻着“沈砚”二字，边缘残留暗褐血痕。它与名册中被抹去的姓名能够相互印证。",
+                        Unlocked = _session.GetValue("clue.jade") > 0
+                    },
+                    new ClueEntryViewState
+                    {
+                        Title = "山腹共鸣",
+                        Category = "异象 · 山腹石门",
+                        Description = "运转引气诀时，山腹深处会传来与经脉同频的回响。那并非自然灵脉，更像许多人的呼吸被困在石壁之后。",
+                        Unlocked = _session.GetValue("mark.resonance") > 0
+                    }
+                }
+            };
         }
 
         private void OnDestroy()

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 15ebf15ec3d2f8b47879101c523fab2e
+guid: 93b6f17e1a0b4938a3b48a03cf5b1b81
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4146295583022168009
-    second: LinYue_Premium_0
+      213: 4280646376391445548
+    second: SteleCorridor_Premium_1080_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -102,44 +102,44 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LinYue_Premium_0
+      name: SteleCorridor_Premium_1080_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 983
-        height: 1520
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9c7becf5dd99a8930800000000000000
-      internalID: 4146295583022168009
+      spriteID: c2c00e11339e76b30800000000000000
+      internalID: 4280646376391445548
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     outline: []
-    customData:
+    customData: 
     physicsShape: []
     bones: []
-    spriteID:
+    spriteID: 
     internalID: 0
     vertices: []
-    indices:
+    indices: 
     edges: []
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LinYue_Premium_0: 4146295583022168009
-  mipmapLimitGroupName:
+      SteleCorridor_Premium_1080_0: 4280646376391445548
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

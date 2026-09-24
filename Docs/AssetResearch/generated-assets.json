@@ -1,22 +1,22 @@
 {
   "generator": "OpenAI built-in image generation tool",
-  "generated_on": "2026-09-22",
+  "generated_on": "2026-09-22 through 2026-09-24",
   "style_boundary": "Original contemporary xianxia direction; no existing characters, logos, UI, or copied composition.",
   "assets": [
     {
-      "path": "Assets/_WenXinJie/Art/Generated/CloudGate_Premium.png",
+      "path": "AssetSources/Art/Generated/CloudGate_Premium.png",
       "role": "original mountain gate background source",
       "prompt_summary": "Rainy immortal-sect gate, white stone stairs, cloud sea, jade/cyan/ivory/gold palette.",
       "sha256": "9ad912a5d4e06e7e9dc87f287c71a762aab5ae1dad76bcdd0d9129cf086be57a"
     },
     {
-      "path": "Assets/_WenXinJie/Art/Generated/PineRidge_Premium.png",
+      "path": "AssetSources/Art/Generated/PineRidge_Premium.png",
       "role": "original pine ridge background source",
       "prompt_summary": "Blue-hour pine ridge, broken stele, rain shelter, distant sect lights.",
       "sha256": "b9388fabeb8a8a2eecae3557eec0227ca54afbd92e919796db1b8f565989f521"
     },
     {
-      "path": "Assets/_WenXinJie/Art/Generated/LinYue_Premium.png",
+      "path": "AssetSources/Art/Generated/LinYue_Premium.png",
       "role": "original Lin Yue portrait source before background removal",
       "prompt_summary": "Young investigator cultivator, white/cyan/charcoal hanfu, jade token and folded umbrella.",
       "sha256": "43496bbd98c7a7967b1879a4ebd69ac7bd0b54db965f78601b0db71e08dd27ce"
@@ -26,6 +26,24 @@
       "role": "original Lin Yue standing portrait with transparent alpha",
       "prompt_summary": "Background-removed derivative of the generated Lin Yue portrait source.",
       "sha256": "ab3fdc92cbe7285f1ce1ce2b876baf479421dae813b9acd62a6f208787598d63"
+    },
+    {
+      "path": "AssetSources/Art/Generated/SteleCorridor_Premium.png",
+      "role": "original old stele corridor background source",
+      "prompt_summary": "Post-rain archive gallery, memorial steles, sealed casket, cloud mountains and restrained lantern light.",
+      "sha256": "0f5bf1b0759624b65331544e6e26718d9daf1911b4f2bc331916a39361962fdb"
+    },
+    {
+      "path": "AssetSources/Art/Generated/DiscipleQuartersNight_Premium.png",
+      "role": "original outer-disciple residence night background source",
+      "prompt_summary": "Searched disciple room, moonlit covered walkway, distant patrol lanterns and wet mountain architecture.",
+      "sha256": "af8b567458a73d5aaa299b4165f79d7e3f7687abbe6a298c08bb6bffe960a210"
+    },
+    {
+      "path": "AssetSources/Art/Generated/MountainHeartGate_Premium.png",
+      "role": "original mountain-heart sealed gate background source",
+      "prompt_summary": "Ancient seamless stone gate, jade-gold channels, mountain mist and restrained furnace glow.",
+      "sha256": "43bc0bcf79caf6870c5455850a44569e5a47aa18b500590cab294d45f083b2ba"
     }
   ]
 }

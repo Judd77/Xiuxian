@@ -9,6 +9,8 @@ namespace WenXinJie.Presentation
     public sealed class StoryMediaCatalog : ScriptableObject
     {
         [SerializeField] private Font _font;
+        [SerializeField] private Font _titleFont;
+        [SerializeField] private Font _menuFont;
         [SerializeField] private Texture2D _panel;
         [SerializeField] private Texture2D _choice;
         [SerializeField] private AudioClip _music;
@@ -17,6 +19,8 @@ namespace WenXinJie.Presentation
         [SerializeField] private PortraitMedia[] _portraits;
 
         public Font Font => _font;
+        public Font TitleFont => _titleFont;
+        public Font MenuFont => _menuFont;
         public Texture2D Panel => _panel;
         public Texture2D Choice => _choice;
         public AudioClip Music => _music;
@@ -34,7 +38,8 @@ namespace WenXinJie.Presentation
 
         public void Validate(StoryGraph graph)
         {
-            if (_font == null || _panel == null || _choice == null || _music == null || _rain == null)
+            if (_font == null || _titleFont == null || _menuFont == null || _panel == null || _choice == null
+                || _music == null || _rain == null)
             {
                 throw new InvalidOperationException("The licensed media catalog is incomplete.");
             }

@@ -18,15 +18,15 @@ namespace WenXinJie.Editor
         public static void Run()
         {
             StoryGraph graph = LoadGraph();
-            Require(graph.Nodes.Count() == 15, "Unexpected node count.");
-            VerifyRoute(graph, "investigate", "visit", "shared", "c01.shared", true);
-            VerifyRoute(graph, "investigate", "cultivate", "alone", "c01.alone", false);
-            VerifyRoute(graph, "visit", "cultivate", "guarded", "c01.guarded", false);
-            VerifyRoute(graph, "cultivate", "cultivate", "uneasy", "c01.uneasy", false);
+            Require(graph.Nodes.Count() == 41, "Unexpected node count.");
+            VerifyRoute(graph, "investigate", "copyPage", "visit", "confide", "shared", "c01.shared", true);
+            VerifyRoute(graph, "investigate", "takePage", "cultivate", "steadyBreath", "alone", "c01.alone", false);
+            VerifyRoute(graph, "visit", "question", "cultivate", "steadyBreath", "guarded", "c01.guarded", false);
+            VerifyRoute(graph, "cultivate", "followEcho", "cultivate", "steadyBreath", "uneasy", "c01.uneasy", false);
             VerifySaveRoundTrip(graph);
             VerifyInvalidContentRejected();
             VerifyAssets(graph);
-            Debug.Log("Campaign smoke tests PASS: graph validation, four first-night outcomes, second-day state, save round-trip, media and licenses.");
+            Debug.Log("Campaign smoke tests PASS: 41-node graph, four first-night outcomes, second-day state, save round-trip, media and licenses.");
         }
 
         private static StoryGraph LoadGraph()
@@ -36,20 +36,18 @@ namespace WenXinJie.Editor
             return new StoryGraph(JsonUtility.FromJson<StoryDefinition>(asset.text));
         }
 
-        private static void VerifyRoute(StoryGraph graph, string first, string second, string night,
-            string expectedOutcome, bool alliance)
+        private static void VerifyRoute(StoryGraph graph, string firstAction, string firstResolution,
+            string secondAction, string secondResolution, string night, string expectedOutcome, bool alliance)
         {
             var session = new StorySession(graph);
-            Require(session.Advance() && session.Advance(), "Could not reach first-day hub.");
-            Require(session.Choose(first), "First action rejected: " + first);
-            Require(session.Advance(), "First action did not return to hub.");
-            Require(session.Choose(second), "Second action rejected: " + second);
-            Require(session.Advance(), "Second action did not return to hub.");
+            ReachFirstDayHub(session);
+            PerformAction(session, firstAction, firstResolution);
+            PerformAction(session, secondAction, secondResolution);
             Require(session.GetValue("actions") == 0, "Actions were not consumed.");
             Require(session.Choose("night"), "Night transition was unavailable.");
             Require(session.Choose(night), "Expected night outcome was unavailable: " + night);
             Require(session.Current.id == expectedOutcome, "Wrong first-night outcome.");
-            Require(session.Advance(), "Outcome did not advance to day two.");
+            Require(session.Advance() && session.Advance() && session.Advance(), "Outcome did not advance to day two.");
             Require(session.Current.id == "c02.dawn" && session.GetValue("day") == 2, "Day two state is incorrect.");
             Require(session.GetValue("route.alliance") == (alliance ? 1 : 0), "Alliance route flag is incorrect.");
             Require(session.Advance() && session.Current.id == "c02.decision", "Could not reach day-two decision.");
@@ -57,12 +55,26 @@ namespace WenXinJie.Editor
             Require(session.IsAvailable(allianceChoice) == alliance, "Day-two choice did not inherit first-day state.");
         }
 
+        private static void ReachFirstDayHub(StorySession session)
+        {
+            Require(session.Advance() && session.Advance() && session.Advance(), "Could not reach the opening response.");
+            Require(session.Choose("watch"), "Opening response was rejected.");
+            Require(session.Advance() && session.Current.id == "c01.hub", "Could not reach first-day hub.");
+        }
+
+        private static void PerformAction(StorySession session, string action, string resolution)
+        {
+            Require(session.Choose(action), "Action rejected: " + action);
+            Require(session.Advance() && session.Advance(), "Action did not reach its internal decision: " + action);
+            Require(session.Choose(resolution), "Action resolution rejected: " + resolution);
+            Require(session.Advance() && session.Current.id == "c01.hub", "Action did not return to hub: " + action);
+        }
+
         private static void VerifySaveRoundTrip(StoryGraph graph)
         {
             var session = new StorySession(graph);
-            session.Advance();
-            session.Advance();
-            session.Choose("investigate");
+            ReachFirstDayHub(session);
+            PerformAction(session, "investigate", "copyPage");
             Require(session.GetValue("clue.register") == 1, "Entry effect was not applied.");
             StorySnapshot snapshot = session.Snapshot();
             StorySession restored = StorySession.Restore(graph, snapshot);
@@ -86,7 +98,7 @@ namespace WenXinJie.Editor
             bool rejected = false;
             try
             {
-                new StoryGraph(new StoryDefinition
+                _ = new StoryGraph(new()
                 {
                     id = "bad",
                     revision = 1,
@@ -101,6 +113,40 @@ namespace WenXinJie.Editor
             }
 
             Require(rejected, "Graph accepted a missing start node.");
+
+            rejected = false;
+            try
+            {
+                new StoryGraph(new StoryDefinition
+                {
+                    id = "unreachable",
+                    revision = 1,
+                    start = "start",
+                    variables = Array.Empty<VariableDefinition>(),
+                    nodes = new[]
+                    {
+                        TerminalNode("start"),
+                        TerminalNode("orphan")
+                    }
+                });
+            }
+            catch (ArgumentException)
+            {
+                rejected = true;
+            }
+
+            Require(rejected, "Graph accepted an unreachable node.");
+        }
+
+        private static StoryNode TerminalNode(string id)
+        {
+            return new()
+            {
+                id = id,
+                text = id,
+                background = "gate",
+                terminal = true
+            };
         }
 
         private static void VerifyAssets(StoryGraph graph)
@@ -111,7 +157,7 @@ namespace WenXinJie.Editor
             Require(File.Exists("Assets/_WenXinJie/Fonts/OFL.txt"), "Font license is missing.");
             Require(File.Exists("Docs/AssetResearch/campaign-assets.json"), "Asset checksum inventory is missing.");
             Require(EditorBuildSettings.scenes.Length == 1
-                && EditorBuildSettings.scenes[0].path == "Assets/_WenXinJie/Scenes/Game.unity", "Game scene is not the build entry.");
+                    && EditorBuildSettings.scenes[0].path == "Assets/_WenXinJie/Scenes/Game.unity", "Game scene is not the build entry.");
         }
 
         private static void Require(bool condition, string message)

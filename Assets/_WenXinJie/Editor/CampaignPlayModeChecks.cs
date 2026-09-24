@@ -39,13 +39,26 @@ namespace WenXinJie.Editor
                 Require(application.Session.Current.id == "c01.gate", "Campaign did not start at the gate.");
                 VerifyMissing("Settings");
                 VerifyMissing("Credits");
+                await Click("ClueJournal");
+                VerifyActive("ClueJournalOverlay", true);
+                VerifyText("ClueJournalCount", "0 / 3");
+                await Click("ClueJournalClose");
                 reader.Complete();
                 application.Advance();
-                Require(application.Session.Current.id == "c01.warning", "Opening advance failed.");
+                Require(application.Session.Current.id == "c01.arrival", "Arrival advance failed.");
                 VerifyPicture("Portrait", "LinYue_Premium", true);
                 VerifyPortraitFraming();
                 reader.Complete();
                 await Capture("Docs/Validation/campaign-lin-yue-1080.png");
+                application.Advance();
+                Require(application.Session.Current.id == "c01.warning", "Warning advance failed.");
+                reader.Complete();
+                application.Advance();
+                Require(application.Session.Current.id == "c01.response", "Opening response was not reached.");
+                reader.Complete();
+                application.Choose("watch");
+                Require(application.Session.Current.id == "c01.response.watch", "Opening response choice failed.");
+                reader.Complete();
                 application.Advance();
                 Require(application.Session.Current.id == "c01.hub", "Could not reach action hub.");
                 VerifyChoiceAvailability(3);
@@ -54,9 +67,15 @@ namespace WenXinJie.Editor
 
                 await Click("Choice0");
                 Require(application.Session.Current.id == "c01.register", "Actual choice click did not enter register node.");
-                Require(application.Session.GetValue("clue.register") == 1, "Register effect was not applied.");
                 VerifyPicture("Portrait", string.Empty, false);
-
+                reader.Complete();
+                application.Advance();
+                reader.Complete();
+                application.Advance();
+                Require(application.Session.Current.id == "c01.register.method", "Register method choice was not reached.");
+                reader.Complete();
+                application.Choose("copyPage");
+                Require(application.Session.GetValue("clue.register") == 1, "Register clue was not applied.");
                 reader.Complete();
                 application.Advance();
                 reader.Complete();
@@ -64,7 +83,20 @@ namespace WenXinJie.Editor
                 Require(application.Session.Current.id == "c01.meeting", "Visit choice failed.");
                 VerifyPicture("Background", "PineRidge", true);
                 VerifyPicture("Portrait", "LinYue_Premium", true);
-
+                reader.Complete();
+                application.Advance();
+                reader.Complete();
+                application.Advance();
+                Require(application.Session.Current.id == "c01.meeting.answer", "Meeting answer choice was not reached.");
+                reader.Complete();
+                application.Choose("confide");
+                Require(application.Session.GetValue("clue.jade") == 1, "Jade clue was not applied.");
+                await Click("ClueJournal");
+                VerifyText("ClueJournalCount", "2 / 3");
+                await Click("ClueEntry1");
+                VerifyText("ClueDetailTitle", "青玉扣");
+                VerifyText("ClueDetailStatus", "物证 · 松风岭 · 已收录");
+                await Click("ClueJournalClose");
                 reader.Complete();
                 application.Advance();
                 reader.Complete();
@@ -74,6 +106,11 @@ namespace WenXinJie.Editor
                 reader.Complete();
                 application.Choose("shared");
                 Require(application.Session.Current.id == "c01.shared", "Shared-secret outcome failed.");
+                reader.Complete();
+                application.Advance();
+                reader.Complete();
+                application.Advance();
+                Require(application.Session.Current.id == "c01.shared.vow", "Alliance vow was not reached.");
                 Require(application.Session.GetValue("route.alliance") == 1, "Alliance flag was not set.");
 
                 application.Save();
@@ -83,13 +120,13 @@ namespace WenXinJie.Editor
                 VerifyButton("ContinueGame", true);
                 VerifyButton("LoadGame", true);
                 await Click("ContinueGame");
-                Require(application.Session.Current.id == "c01.shared", "Continue did not resume the active session.");
+                Require(application.Session.Current.id == "c01.shared.vow", "Continue did not resume the active session.");
                 reader.Complete();
                 application.Advance();
                 Require(application.Session.GetValue("day") == 2, "Could not advance to day two.");
                 await Click("MainMenuButton");
                 await Click("LoadGame");
-                Require(application.Session.Current.id == "c01.shared", "Load did not restore story cursor.");
+                Require(application.Session.Current.id == "c01.shared.vow", "Load did not restore story cursor.");
                 Require(application.Session.GetValue("route.alliance") == 1, "Load did not restore world state.");
                 reader.Complete();
                 await Capture("Docs/Validation/campaign-shared-secret-1080.png");
@@ -141,7 +178,7 @@ namespace WenXinJie.Editor
 
         private static void VerifyActive(string name, bool active)
         {
-            Transform transform = FindIncludingInactive(name);
+            var transform = FindIncludingInactive(name);
             Require(transform != null && transform.gameObject.activeSelf == active, "Object state is wrong: " + name);
         }
 
@@ -155,6 +192,13 @@ namespace WenXinJie.Editor
         private static void VerifyMissing(string name)
         {
             Require(FindIncludingInactive(name) == null, "Unexpected UI target exists: " + name);
+        }
+
+        private static void VerifyText(string name, string expected)
+        {
+            var transform = FindIncludingInactive(name);
+            Require(transform != null, "Text target is missing: " + name);
+            Require(transform.GetComponent<Text>().text == expected, "Unexpected text on " + name + ".");
         }
 
         private static void VerifyPicture(string name, string expectedTexture, bool active)

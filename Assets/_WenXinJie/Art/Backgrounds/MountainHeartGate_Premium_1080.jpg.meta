@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 457771e6839ce5449abfc5e15f3e9344
+guid: fab6b34ae06f4301a01a9b94769aed76
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1093519834682683435
-    second: CloudGate_Premium_0
+      213: 4280646376391445548
+    second: MountainHeartGate_Premium_1080_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -102,44 +102,44 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CloudGate_Premium_0
+      name: MountainHeartGate_Premium_1080_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1672
-        height: 941
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5df05ea018903d0f0800000000000000
-      internalID: -1093519834682683435
+      spriteID: c2c00e11339e76b30800000000000000
+      internalID: 4280646376391445548
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     outline: []
-    customData:
+    customData: 
     physicsShape: []
     bones: []
-    spriteID:
+    spriteID: 
     internalID: 0
     vertices: []
-    indices:
+    indices: 
     edges: []
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CloudGate_Premium_0: -1093519834682683435
-  mipmapLimitGroupName:
+      MountainHeartGate_Premium_1080_0: 4280646376391445548
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
