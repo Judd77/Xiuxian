@@ -26,6 +26,7 @@ resharper_braces_for_foreach = required
 resharper_braces_for_while = required
 resharper_csharp_keep_simple_embedded_statement_on_same_line = false
 resharper_csharp_keep_simple_blocks_on_single_line = never
+resharper_check_namespace_highlighting = none
 
 dotnet_naming_rule.private_fields.symbols = private_fields
 dotnet_naming_rule.private_fields.style = underscore_camel_case

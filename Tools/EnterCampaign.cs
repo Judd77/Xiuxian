@@ -1,9 +1,8 @@
 using System;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-internal class CommandScript : IRunCommand
+internal sealed class CommandScript : IRunCommand
 {
     public void Execute(ExecutionResult result)
     {

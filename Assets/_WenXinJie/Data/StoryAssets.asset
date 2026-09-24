@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb26c86377b66f34f84293995f1c9cf3, type: 3}
+  m_Name: StoryAssets
+  m_EditorClassIdentifier: Assembly-CSharp::WenXinJie.Presentation.StoryAssetCatalog
+  font: {fileID: 11400000, guid: ed6bcd9b369287d4ea9ef9917f960668, type: 2}
+  titleFont: {fileID: 11400000, guid: 9a0e998d4f82cb84db57436736426da4, type: 2}
+  menuFont: {fileID: 11400000, guid: 950be11a0a131684a88d3bcb2e1dc696, type: 2}
+  panel: {fileID: 2800000, guid: 75f01ced3d793a54c9d7174aa7fa5c71, type: 3}
+  choice: {fileID: 2800000, guid: 82e54733915248d4cbd3b8a8566f44b1, type: 3}
+  music: {fileID: 8300000, guid: c9dbc12dc9a8573478b270e9116b5709, type: 3}
+  rain: {fileID: 8300000, guid: 5d21ba26ecc2a1c41b47d0ec4aef2f99, type: 3}
+  backgrounds:
+  - id: gate
+    texture: {fileID: 2800000, guid: bd9a2fee2edd6e0409a65693200783a6, type: 3}
+  - id: ridge
+    texture: {fileID: 2800000, guid: ef2fd70772df7bc4db8f41de24c4b503, type: 3}
+  - id: night
+    texture: {fileID: 2800000, guid: b6bbdccc02581f14398d114a37c6c9fa, type: 3}
+  - id: stele
+    texture: {fileID: 2800000, guid: 93b6f17e1a0b4938a3b48a03cf5b1b81, type: 3}
+  - id: quartersNight
+    texture: {fileID: 2800000, guid: a6e87093e0194e5cbf8a519bcef42c6b, type: 3}
+  - id: mountainHeart
+    texture: {fileID: 2800000, guid: fab6b34ae06f4301a01a9b94769aed76, type: 3}
+  portraits:
+  - id: linYue
+    texture: {fileID: 2800000, guid: 3cec69eb081d5844285329280e8c5132, type: 3}
+    width: 1050
+    top: 140
+    right: 30

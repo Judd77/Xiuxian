@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using WenXinJie.Narrative;
 using WenXinJie.Persistence;
@@ -8,23 +8,24 @@ using WenXinJie.UI;
 
 namespace WenXinJie.Presentation
 {
-    public sealed class StoryApplication : MonoBehaviour
+    public sealed class StoryApplication : MonoBehaviour, IStoryCommands
     {
-        [SerializeField] private TextAsset _campaign;
-        [SerializeField] private StoryMediaCatalog _media;
+        [SerializeField] private TextAsset campaign;
+        [SerializeField] private StoryAssetCatalog storyAssets;
 
-        private readonly CampaignSaveStore _saves = new CampaignSaveStore();
-        private StoryGraph _graph;
-        private StorySession _session;
-        private StoryView _view;
-        private DialogueReader _reader;
-        private GameAudio _audio;
+        private readonly CampaignSaveStore _saves = new();
 
 #if UNITY_EDITOR
         [NonSerialized] public string TestSaveDirectory;
 #endif
+        private GameAudio _audio;
+        private DisplayModeService _displayModes;
+        private StoryGraph _graph;
+        private DialogueReader _reader;
+        private StoryView _view;
+        private StoryViewStateFactory _viewStateFactory;
 
-        public StorySession Session => _session;
+        public StorySession Session { get; private set; }
 
         public string SavePath
         {
@@ -40,33 +41,24 @@ namespace WenXinJie.Presentation
             }
         }
 
-        private bool InputBlocked => _view.IsModalOpen || _view.IsMainMenuOpen || _reader.IsHistoryOpen;
-
         private void Awake()
         {
-            _graph = new StoryGraph(JsonUtility.FromJson<StoryDefinition>(_campaign.text));
-            _media.Validate(_graph);
+            _graph = new(JsonUtility.FromJson<StoryDefinition>(campaign.text));
+            storyAssets.Validate(_graph);
             _reader = gameObject.AddComponent<DialogueReader>();
-            _reader.advance = Advance;
             _audio = gameObject.AddComponent<GameAudio>();
-            _audio.Initialize(_media.Music, _media.Rain);
+            _audio.Initialize(storyAssets.MusicClip, storyAssets.RainClip);
+            _displayModes = new();
+            _displayModes.Initialize();
+            _viewStateFactory = new(storyAssets);
             _view = gameObject.AddComponent<StoryView>();
-            _view.Initialize(_media, _reader, _audio);
-            _view.AdvanceRequested += Advance;
-            _view.ChoiceRequested += Choose;
-            _view.SaveRequested += Save;
-            _view.LoadRequested += Load;
-            _view.StartGameRequested += StartGame;
-            _view.ContinueGameRequested += ContinueGame;
-            _view.MainMenuLoadRequested += LoadFromMainMenu;
-            _view.MainMenuRequested += ReturnToMainMenu;
-            _view.QuitRequested += Quit;
+            _view.Initialize(storyAssets, _reader, _audio, _displayModes, this);
             ShowMainMenu(string.Empty);
         }
 
-        public void Advance()
+        public void AdvanceStory()
         {
-            if (InputBlocked || _session == null)
+            if (_view.IsInteractionBlocked || Session == null)
             {
                 return;
             }
@@ -77,15 +69,15 @@ namespace WenXinJie.Presentation
                 return;
             }
 
-            if (_session.Advance())
+            if (Session.Advance())
             {
                 Render();
             }
         }
 
-        public void Choose(string id)
+        public void SelectChoice(string choiceId)
         {
-            if (InputBlocked || _session == null)
+            if (_view.IsInteractionBlocked || Session == null)
             {
                 return;
             }
@@ -96,22 +88,22 @@ namespace WenXinJie.Presentation
                 return;
             }
 
-            if (_session.Choose(id))
+            if (Session.Choose(choiceId))
             {
                 Render();
             }
         }
 
-        public void Save()
+        public void SaveGame()
         {
-            if (InputBlocked || _session == null)
+            if (_view.IsInteractionBlocked || Session == null)
             {
                 return;
             }
 
             try
             {
-                _saves.Save(SavePath, _session);
+                _saves.Save(SavePath, Session);
                 _view.ShowNotice("进度已保存");
             }
             catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException)
@@ -121,14 +113,14 @@ namespace WenXinJie.Presentation
             }
         }
 
-        public void Load()
+        public void LoadGame()
         {
-            if (InputBlocked || _session == null)
+            if (_view.IsInteractionBlocked || Session == null)
             {
                 return;
             }
 
-            if (TryLoad(out bool recovered, out string message))
+            if (TryLoad(out var recovered, out var message))
             {
                 _reader.ResetHistory();
                 Render();
@@ -140,29 +132,29 @@ namespace WenXinJie.Presentation
             }
         }
 
-        private void StartGame()
+        public void StartNewGame()
         {
-            _session = new StorySession(_graph);
+            Session = new(_graph);
             _reader.ResetHistory();
             _view.HideMainMenu();
             Render();
         }
 
-        private void ContinueGame()
+        public void ContinueGame()
         {
-            if (_session != null)
+            if (Session != null)
             {
                 _view.HideMainMenu();
                 Render();
                 return;
             }
 
-            LoadFromMainMenu();
+            LoadGameFromMenu();
         }
 
-        private void LoadFromMainMenu()
+        public void LoadGameFromMenu()
         {
-            if (!TryLoad(out bool recovered, out string message))
+            if (!TryLoad(out var recovered, out var message))
             {
                 _view.ShowMainMenuNotice(message);
                 return;
@@ -174,13 +166,30 @@ namespace WenXinJie.Presentation
             _view.ShowNotice(recovered ? "已从备份恢复进度" : "进度已读取");
         }
 
+        public void ReturnToMainMenu()
+        {
+            _reader.Complete();
+            _reader.CloseHistory();
+            _audio.SetAmbienceActive(false);
+            ShowMainMenu(string.Empty);
+        }
+
+        public void QuitGame()
+        {
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
+
         private bool TryLoad(out bool recovered, out string message)
         {
             recovered = false;
             message = string.Empty;
             try
             {
-                _session = _saves.Load(SavePath, _graph, out recovered);
+                Session = _saves.Load(SavePath, _graph, out recovered);
                 return true;
             }
             catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
@@ -191,113 +200,17 @@ namespace WenXinJie.Presentation
             }
         }
 
-        private void ReturnToMainMenu()
-        {
-            _reader.Complete();
-            _reader.CloseHistory();
-            _audio.SetAmbienceActive(false);
-            ShowMainMenu(string.Empty);
-        }
-
         private void ShowMainMenu(string notice)
         {
-            bool hasSave = _saves.Exists(SavePath);
-            _view.ShowMainMenu(_media.Background("gate"), _session != null || hasSave, hasSave, notice);
-        }
-
-        private static void Quit()
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+            var hasSave = _saves.Exists(SavePath);
+            _view.ShowMainMenu(storyAssets.GetBackground("gate"), Session != null || hasSave, hasSave, notice);
         }
 
         private void Render()
         {
-            StoryNode node = _session.Current;
-            _audio.SetAmbienceActive(node.rain);
+            _audio.SetAmbienceActive(Session.Current.rain);
             _view.ShowNotice(string.Empty);
-            _view.Render(new StoryViewState
-            {
-                Chapter = node.chapter,
-                Location = node.location,
-                Speaker = node.speaker,
-                Text = node.text,
-                Background = _media.Background(node.background),
-                Portrait = _media.Portrait(node.portrait),
-                Status = BuildStatus(),
-                Journal = BuildJournal(),
-                NextLabel = node.terminal ? "未完待续" : "继续  ▷",
-                Terminal = node.terminal,
-                Choices = node.choices.Select(choice => new ChoiceViewState
-                {
-                    Id = choice.id,
-                    Label = choice.text,
-                    Available = _session.IsAvailable(choice),
-                    LockedReason = choice.lockedReason
-                }).ToArray()
-            });
-        }
-
-        private string BuildStatus()
-        {
-            int clues = _session.GetValue("clue.register") + _session.GetValue("clue.jade");
-            string attention = _session.GetValue("risk.attention") > 0 ? "已惊动" : "未惊动";
-            return "第 " + _session.GetValue("day") + " 日    /    余暇 " + _session.GetValue("actions")
-                   + "    /    修为 " + _session.GetValue("cultivation")
-                   + "    /    林月信任 " + _session.GetValue("trust.linYue")
-                   + "    /    线索 " + clues + "/2    /    宗门 " + attention;
-        }
-
-        private ClueJournalState BuildJournal()
-        {
-            return new()
-            {
-                Entries = new[]
-                {
-                    new ClueEntryViewState
-                    {
-                        Title = "外门名册抄页",
-                        Category = "物证 · 旧碑廊",
-                        Description = "残页上的名字被朱笔圈过，部分人名又遭刻意刮除。页脚的归档记号指向药炉，而非外门执事堂。",
-                        Unlocked = _session.GetValue("clue.register") > 0
-                    },
-                    new ClueEntryViewState
-                    {
-                        Title = "青玉扣",
-                        Category = "物证 · 松风岭",
-                        Description = "玉扣内侧刻着“沈砚”二字，边缘残留暗褐血痕。它与名册中被抹去的姓名能够相互印证。",
-                        Unlocked = _session.GetValue("clue.jade") > 0
-                    },
-                    new ClueEntryViewState
-                    {
-                        Title = "山腹共鸣",
-                        Category = "异象 · 山腹石门",
-                        Description = "运转引气诀时，山腹深处会传来与经脉同频的回响。那并非自然灵脉，更像许多人的呼吸被困在石壁之后。",
-                        Unlocked = _session.GetValue("mark.resonance") > 0
-                    }
-                }
-            };
-        }
-
-        private void OnDestroy()
-        {
-            if (_view == null)
-            {
-                return;
-            }
-
-            _view.AdvanceRequested -= Advance;
-            _view.ChoiceRequested -= Choose;
-            _view.SaveRequested -= Save;
-            _view.LoadRequested -= Load;
-            _view.StartGameRequested -= StartGame;
-            _view.ContinueGameRequested -= ContinueGame;
-            _view.MainMenuLoadRequested -= LoadFromMainMenu;
-            _view.MainMenuRequested -= ReturnToMainMenu;
-            _view.QuitRequested -= Quit;
+            _view.Render(_viewStateFactory.Create(Session));
         }
     }
 }

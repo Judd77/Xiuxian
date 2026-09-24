@@ -9,8 +9,6 @@ namespace WenXinJie.Narrative
         private readonly StoryGraph _graph;
         private Dictionary<string, int> _values;
 
-        public StoryNode Current { get; private set; }
-
         public StorySession(StoryGraph graph)
         {
             _graph = graph ?? throw new ArgumentNullException(nameof(graph));
@@ -24,6 +22,8 @@ namespace WenXinJie.Narrative
             _values = values;
             Current = node;
         }
+
+        public StoryNode Current { get; private set; }
 
         public int GetValue(string id)
         {
@@ -49,7 +49,7 @@ namespace WenXinJie.Narrative
 
         public bool Choose(string choiceId)
         {
-            StoryChoice choice = Current.choices.FirstOrDefault(item => item.id == choiceId);
+            var choice = Current.choices.FirstOrDefault(item => item.id == choiceId);
             if (choice == null || !IsAvailable(choice))
             {
                 return false;
@@ -61,7 +61,7 @@ namespace WenXinJie.Narrative
 
         public StorySnapshot Snapshot()
         {
-            return new StorySnapshot
+            return new()
             {
                 campaign = _graph.Definition.id,
                 revision = _graph.Definition.revision,
@@ -80,10 +80,10 @@ namespace WenXinJie.Narrative
             StoryGraph.Require(snapshot.campaign == graph.Definition.id && snapshot.revision == graph.Definition.revision, "Save needs a content migration.");
             StoryGraph.Require(snapshot.values != null, "Missing saved state.");
             var values = new Dictionary<string, int>();
-            foreach (VariableValue value in snapshot.values)
+            foreach (var value in snapshot.values)
             {
                 StoryGraph.Require(value != null, "Null saved variable.");
-                VariableDefinition definition = graph.GetVariable(value.id);
+                var definition = graph.GetVariable(value.id);
                 StoryGraph.Require(!values.ContainsKey(value.id), "Duplicate saved variable.");
                 StoryGraph.Require(value.value >= definition.minimum && value.value <= definition.maximum, "Saved variable outside bounds.");
                 values.Add(value.id, value.value);
@@ -91,17 +91,17 @@ namespace WenXinJie.Narrative
 
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
-            return new StorySession(graph, values, graph.GetNode(snapshot.node));
+            return new(graph, values, graph.GetNode(snapshot.node));
         }
 
         private void Enter(string nodeId, IEnumerable<StoryEffect> choiceEffects)
         {
-            StoryNode next = _graph.GetNode(nodeId);
+            var next = _graph.GetNode(nodeId);
             var values = new Dictionary<string, int>(_values);
-            foreach (StoryEffect effect in choiceEffects.Concat(next.effects))
+            foreach (var effect in choiceEffects.Concat(next.effects))
             {
-                VariableDefinition variable = _graph.GetVariable(effect.variable);
-                long value = effect.operation == "set" ? effect.value : (long)values[effect.variable] + effect.value;
+                var variable = _graph.GetVariable(effect.variable);
+                var value = effect.operation == "set" ? effect.value : (long)values[effect.variable] + effect.value;
                 values[effect.variable] = (int)Math.Max(variable.minimum, Math.Min(variable.maximum, value));
             }
 

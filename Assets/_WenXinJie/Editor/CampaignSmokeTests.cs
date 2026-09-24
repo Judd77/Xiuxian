@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -17,7 +16,7 @@ namespace WenXinJie.Editor
         [MenuItem("WenXinJie/Validation/Run Campaign Smoke Tests")]
         public static void Run()
         {
-            StoryGraph graph = LoadGraph();
+            var graph = LoadGraph();
             Require(graph.Nodes.Count() == 41, "Unexpected node count.");
             VerifyRoute(graph, "investigate", "copyPage", "visit", "confide", "shared", "c01.shared", true);
             VerifyRoute(graph, "investigate", "takePage", "cultivate", "steadyBreath", "alone", "c01.alone", false);
@@ -26,14 +25,14 @@ namespace WenXinJie.Editor
             VerifySaveRoundTrip(graph);
             VerifyInvalidContentRejected();
             VerifyAssets(graph);
-            Debug.Log("Campaign smoke tests PASS: 41-node graph, four first-night outcomes, second-day state, save round-trip, media and licenses.");
+            Debug.Log("Campaign smoke tests PASS: 41-node graph, four first-night outcomes, second-day state, save round-trip, assets and licenses.");
         }
 
         private static StoryGraph LoadGraph()
         {
-            TextAsset asset = AssetDatabase.LoadAssetAtPath<TextAsset>(CampaignPath);
+            var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(CampaignPath);
             Require(asset != null, "Campaign JSON is missing.");
-            return new StoryGraph(JsonUtility.FromJson<StoryDefinition>(asset.text));
+            return new(JsonUtility.FromJson<StoryDefinition>(asset.text));
         }
 
         private static void VerifyRoute(StoryGraph graph, string firstAction, string firstResolution,
@@ -51,7 +50,7 @@ namespace WenXinJie.Editor
             Require(session.Current.id == "c02.dawn" && session.GetValue("day") == 2, "Day two state is incorrect.");
             Require(session.GetValue("route.alliance") == (alliance ? 1 : 0), "Alliance route flag is incorrect.");
             Require(session.Advance() && session.Current.id == "c02.decision", "Could not reach day-two decision.");
-            StoryChoice allianceChoice = session.Current.choices.Single(choice => choice.id == "alliance");
+            var allianceChoice = session.Current.choices.Single(choice => choice.id == "alliance");
             Require(session.IsAvailable(allianceChoice) == alliance, "Day-two choice did not inherit first-day state.");
         }
 
@@ -76,26 +75,26 @@ namespace WenXinJie.Editor
             ReachFirstDayHub(session);
             PerformAction(session, "investigate", "copyPage");
             Require(session.GetValue("clue.register") == 1, "Entry effect was not applied.");
-            StorySnapshot snapshot = session.Snapshot();
-            StorySession restored = StorySession.Restore(graph, snapshot);
+            var snapshot = session.Snapshot();
+            var restored = StorySession.Restore(graph, snapshot);
             Require(restored.Current.id == session.Current.id, "Saved cursor was not restored.");
             Require(restored.GetValue("clue.register") == 1, "Restore lost state.");
 
-            string folder = Path.Combine(Application.temporaryCachePath, "WenXinJieCampaignTests", Guid.NewGuid().ToString("N"));
-            string path = Path.Combine(folder, "save.json");
+            var folder = Path.Combine(Application.temporaryCachePath, "WenXinJieCampaignTests", Guid.NewGuid().ToString("N"));
+            var path = Path.Combine(folder, "save.json");
             var store = new CampaignSaveStore();
             store.Save(path, session);
-            StorySession disk = store.Load(path, graph, out bool recovered);
+            var disk = store.Load(path, graph, out var recovered);
             Require(!recovered && disk.GetValue("clue.register") == 1, "Disk round-trip failed.");
             store.Save(path, session);
             File.WriteAllText(path, "corrupt");
-            StorySession backup = store.Load(path, graph, out recovered);
+            var backup = store.Load(path, graph, out recovered);
             Require(recovered && backup.Current.id == session.Current.id, "Backup recovery failed.");
         }
 
         private static void VerifyInvalidContentRejected()
         {
-            bool rejected = false;
+            var rejected = false;
             try
             {
                 _ = new StoryGraph(new()
@@ -117,7 +116,7 @@ namespace WenXinJie.Editor
             rejected = false;
             try
             {
-                new StoryGraph(new StoryDefinition
+                _ = new StoryGraph(new()
                 {
                     id = "unreachable",
                     revision = 1,
@@ -151,7 +150,8 @@ namespace WenXinJie.Editor
 
         private static void VerifyAssets(StoryGraph graph)
         {
-            StoryMediaCatalog catalog = AssetDatabase.LoadAssetAtPath<StoryMediaCatalog>("Assets/_WenXinJie/Data/StoryMedia.asset");
+            var catalog = AssetDatabase.LoadAssetAtPath<StoryAssetCatalog>(
+                "Assets/_WenXinJie/Data/StoryAssets.asset");
             Require(catalog != null, "Media catalog is missing.");
             catalog.Validate(graph);
             Require(File.Exists("Assets/_WenXinJie/Fonts/OFL.txt"), "Font license is missing.");

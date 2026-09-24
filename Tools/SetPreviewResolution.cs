@@ -1,6 +1,6 @@
 using UnityEditor;
 
-internal class CommandScript : IRunCommand
+internal sealed class CommandScript : IRunCommand
 {
     public void Execute(ExecutionResult result)
     {

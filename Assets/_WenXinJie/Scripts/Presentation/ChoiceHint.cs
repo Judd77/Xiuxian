@@ -1,19 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace WenXinJie.Presentation
 {
     public sealed class ChoiceHint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        private Text _target;
         private string _message;
-
-        public void Configure(Text target, string message)
-        {
-            _target = target;
-            _message = message;
-        }
+        private TMP_Text _target;
 
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -26,6 +20,12 @@ namespace WenXinJie.Presentation
             {
                 _target.text = string.Empty;
             }
+        }
+
+        public void Configure(TMP_Text target, string message)
+        {
+            _target = target;
+            _message = message;
         }
     }
 }

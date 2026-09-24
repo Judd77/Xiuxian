@@ -1,15 +1,27 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.LowLevel;
 using WenXinJie.Presentation;
+using Object = UnityEngine.Object;
 
 namespace WenXinJie.Editor
 {
     public static class CampaignSetup
     {
         private const string Root = "Assets/_WenXinJie/";
+
+        [InitializeOnLoadMethod]
+        private static void ScheduleGeneratedFontSetup()
+        {
+            EditorApplication.delayCall += EnsureGeneratedFonts;
+        }
 
         [MenuItem("WenXinJie/Setup/Create Campaign Scene")]
         public static void Run()
@@ -20,7 +32,7 @@ namespace WenXinJie.Editor
             }
 
             AssetDatabase.Refresh();
-            foreach (string guid in AssetDatabase.FindAssets("t:Texture2D", new[] { Root + "Art" }))
+            foreach (var guid in AssetDatabase.FindAssets("t:Texture2D", new[] { Root + "Art" }))
             {
                 var importer = (TextureImporter)AssetImporter.GetAtPath(AssetDatabase.GUIDToAssetPath(guid));
                 importer.textureType = TextureImporterType.Default;
@@ -33,23 +45,21 @@ namespace WenXinJie.Editor
                 importer.SaveAndReimport();
             }
 
-            const string catalogPath = Root + "Data/StoryMedia.asset";
-            StoryMediaCatalog catalog = AssetDatabase.LoadAssetAtPath<StoryMediaCatalog>(catalogPath);
+            const string catalogPath = Root + "Data/StoryAssets.asset";
+            var catalog = AssetDatabase.LoadAssetAtPath<StoryAssetCatalog>(catalogPath);
             if (catalog == null)
             {
-                catalog = ScriptableObject.CreateInstance<StoryMediaCatalog>();
+                catalog = ScriptableObject.CreateInstance<StoryAssetCatalog>();
                 AssetDatabase.CreateAsset(catalog, catalogPath);
             }
 
-            var media = new SerializedObject(catalog);
-            Assign(media, "_font", "Fonts/NotoSerifSC-Regular.ttf");
-            Assign(media, "_titleFont", "Fonts/ZhiMangXing-Regular.ttf");
-            Assign(media, "_menuFont", "Fonts/ZCOOLXiaoWei-Regular.ttf");
-            Assign(media, "_panel", "Art/UI/ImmortalGlassPanel.png");
-            Assign(media, "_choice", "Art/UI/ImmortalGlassChoice.png");
-            Assign(media, "_music", "Audio/BGM/AsianOriental2_Tozan.ogg");
-            Assign(media, "_rain", "Audio/Ambience/Rain_Window_Ylmir.ogg");
-            Images(media.FindProperty("_backgrounds"),
+            var assets = new SerializedObject(catalog);
+            AssignFonts(assets);
+            Assign(assets, "panel", "Art/UI/ImmortalGlassPanel.png");
+            Assign(assets, "choice", "Art/UI/ImmortalGlassChoice.png");
+            Assign(assets, "music", "Audio/BGM/AsianOriental2_Tozan.ogg");
+            Assign(assets, "rain", "Audio/Ambience/Rain_Window_Ylmir.ogg");
+            Images(assets.FindProperty("backgrounds"),
                 new[] { "gate", "ridge", "night", "stele", "quartersNight", "mountainHeart" },
                 new[]
                 {
@@ -59,21 +69,21 @@ namespace WenXinJie.Editor
                     "Art/Backgrounds/DiscipleQuartersNight_Premium_1080.jpg",
                     "Art/Backgrounds/MountainHeartGate_Premium_1080.jpg"
                 });
-            Portraits(media.FindProperty("_portraits"), new[] { "linYue" },
+            Portraits(assets.FindProperty("portraits"), new[] { "linYue" },
                 new[] { "Art/Generated/LinYue_Premium_Cutout.png" });
-            media.ApplyModifiedPropertiesWithoutUndo();
+            assets.ApplyModifiedPropertiesWithoutUndo();
             AssetDatabase.SaveAssets();
-            catalog = AssetDatabase.LoadAssetAtPath<StoryMediaCatalog>(catalogPath);
+            catalog = AssetDatabase.LoadAssetAtPath<StoryAssetCatalog>(catalogPath);
             if (catalog == null)
             {
-                throw new InvalidOperationException("Story media catalog failed to import.");
+                throw new InvalidOperationException("Story asset catalog failed to import.");
             }
 
             const string scenePath = Root + "Scenes/Game.unity";
             if (AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath) != null)
             {
                 EditorSceneManager.OpenScene(scenePath);
-                StoryApplication existing = UnityEngine.Object.FindAnyObjectByType<StoryApplication>();
+                var existing = Object.FindAnyObjectByType<StoryApplication>();
                 if (existing == null)
                 {
                     throw new InvalidOperationException("The existing Game scene has no StoryApplication.");
@@ -82,18 +92,18 @@ namespace WenXinJie.Editor
                 ConnectApplication(existing, catalog);
                 EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
                 EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(scenePath, true) };
-                Debug.Log("Campaign media and existing Game scene updated.");
+                Debug.Log("Campaign assets and existing Game scene updated.");
                 return;
             }
 
-            Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             var cameraObject = new GameObject("Main Camera", typeof(Camera), typeof(AudioListener));
             cameraObject.tag = "MainCamera";
             var camera = cameraObject.GetComponent<Camera>();
             camera.clearFlags = CameraClearFlags.SolidColor;
-            camera.backgroundColor = new Color(0.08f, 0.18f, 0.16f);
+            camera.backgroundColor = new(0.08f, 0.18f, 0.16f);
             camera.orthographic = true;
-            cameraObject.transform.position = new Vector3(0f, 0f, -10f);
+            cameraObject.transform.position = new(0f, 0f, -10f);
             var application = new GameObject("StoryApplication").AddComponent<StoryApplication>();
             ConnectApplication(application, catalog);
             EditorSceneManager.SaveScene(scene, scenePath);
@@ -101,19 +111,50 @@ namespace WenXinJie.Editor
             Debug.Log("Campaign scene created. Prototype is preserved and excluded from builds.");
         }
 
-        private static void ConnectApplication(StoryApplication application, StoryMediaCatalog catalog)
+        private static void ConnectApplication(StoryApplication application, StoryAssetCatalog catalog)
         {
             var serialized = new SerializedObject(application);
             serialized.Update();
-            Assign(serialized, "_campaign", "Data/Campaign.json");
-            serialized.FindProperty("_media").objectReferenceValue = catalog;
+            Assign(serialized, "campaign", "Data/Campaign.json");
+            serialized.FindProperty("storyAssets").objectReferenceValue = catalog;
             serialized.ApplyModifiedProperties();
             EditorUtility.SetDirty(application);
         }
 
+        private static void EnsureGeneratedFonts()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
+
+            const string catalogPath = Root + "Data/StoryAssets.asset";
+            var catalog = AssetDatabase.LoadAssetAtPath<StoryAssetCatalog>(catalogPath);
+            if (catalog == null)
+            {
+                return;
+            }
+
+            var assets = new SerializedObject(catalog);
+            AssignFonts(assets);
+            assets.ApplyModifiedPropertiesWithoutUndo();
+            AssetDatabase.SaveAssets();
+        }
+
+        private static void AssignFonts(SerializedObject assets)
+        {
+            var characters = CollectProjectCharacters();
+            AssignFont(assets, "font", "Fonts/NotoSerifSC-Regular.ttf",
+                "Fonts/TMP/NotoSerifSC-Regular SDF.asset", characters);
+            AssignFont(assets, "titleFont", "Fonts/ZhiMangXing-Regular.ttf",
+                "Fonts/TMP/ZhiMangXing-Regular SDF.asset", characters);
+            AssignFont(assets, "menuFont", "Fonts/ZCOOLXiaoWei-Regular.ttf",
+                "Fonts/TMP/ZCOOLXiaoWei-Regular SDF.asset", characters);
+        }
+
         private static void Assign(SerializedObject target, string property, string relativePath)
         {
-            UnityEngine.Object asset = AssetDatabase.LoadMainAssetAtPath(Root + relativePath);
+            var asset = AssetDatabase.LoadMainAssetAtPath(Root + relativePath);
             if (asset == null)
             {
                 throw new InvalidOperationException("Missing campaign asset: " + relativePath);
@@ -122,12 +163,105 @@ namespace WenXinJie.Editor
             target.FindProperty(property).objectReferenceValue = asset;
         }
 
+        private static void AssignFont(SerializedObject target, string property, string sourcePath,
+            string assetPath, string characters)
+        {
+            var fullAssetPath = Root + assetPath;
+            var fontAsset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(fullAssetPath);
+            if (fontAsset == null)
+            {
+                var source = AssetDatabase.LoadAssetAtPath<Font>(Root + sourcePath);
+                if (source == null)
+                {
+                    throw new InvalidOperationException("Missing campaign font: " + sourcePath);
+                }
+
+                EnsureFolder(Root + "Fonts/TMP");
+                fontAsset = TMP_FontAsset.CreateFontAsset(
+                    source,
+                    90,
+                    9,
+                    GlyphRenderMode.SDFAA,
+                    2048,
+                    2048);
+                if (fontAsset == null)
+                {
+                    throw new InvalidOperationException("Could not create TMP font asset from " + sourcePath);
+                }
+
+                fontAsset.name = Path.GetFileNameWithoutExtension(fullAssetPath);
+                fontAsset.TryAddCharacters(characters, out var missingCharacters, true);
+                AssetDatabase.CreateAsset(fontAsset, fullAssetPath);
+
+                if (!string.IsNullOrEmpty(missingCharacters))
+                {
+                    Debug.LogWarning(source.name + " does not contain some project characters: "
+                                                 + missingCharacters);
+                }
+            }
+
+            AddSubAsset(fontAsset.material, fontAsset);
+            foreach (var texture in fontAsset.atlasTextures)
+            {
+                AddSubAsset(texture, fontAsset);
+            }
+
+            target.FindProperty(property).objectReferenceValue = fontAsset;
+        }
+
+        private static void AddSubAsset(Object asset, TMP_FontAsset fontAsset)
+        {
+            if (asset != null && !AssetDatabase.Contains(asset))
+            {
+                AssetDatabase.AddObjectToAsset(asset, fontAsset);
+            }
+        }
+
+        private static string CollectProjectCharacters()
+        {
+            var characters = new HashSet<char>();
+            var extensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                ".cs",
+                ".json",
+                ".txt"
+            };
+            foreach (var path in Directory.EnumerateFiles(Root, "*.*", SearchOption.AllDirectories)
+                         .Where(path => extensions.Contains(Path.GetExtension(path))))
+            {
+                foreach (var character in File.ReadAllText(path))
+                {
+                    characters.Add(character);
+                }
+            }
+
+            return new(characters.OrderBy(character => character).ToArray());
+        }
+
+        private static void EnsureFolder(string path)
+        {
+            if (AssetDatabase.IsValidFolder(path))
+            {
+                return;
+            }
+
+            var parent = Path.GetDirectoryName(path)?.Replace('\\', '/');
+            var name = Path.GetFileName(path);
+            if (string.IsNullOrEmpty(parent) || string.IsNullOrEmpty(name))
+            {
+                throw new InvalidOperationException("Invalid asset folder: " + path);
+            }
+
+            EnsureFolder(parent);
+            AssetDatabase.CreateFolder(parent, name);
+        }
+
         private static void Images(SerializedProperty array, string[] ids, string[] paths)
         {
             array.arraySize = ids.Length;
-            for (int index = 0; index < ids.Length; index++)
+            for (var index = 0; index < ids.Length; index++)
             {
-                SerializedProperty entry = array.GetArrayElementAtIndex(index);
+                var entry = array.GetArrayElementAtIndex(index);
                 entry.FindPropertyRelative("id").stringValue = ids[index];
                 entry.FindPropertyRelative("texture").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Texture2D>(Root + paths[index]);
             }
@@ -136,15 +270,15 @@ namespace WenXinJie.Editor
         private static void Portraits(SerializedProperty array, string[] ids, string[] paths)
         {
             array.arraySize = ids.Length;
-            for (int index = 0; index < ids.Length; index++)
+            for (var index = 0; index < ids.Length; index++)
             {
-                SerializedProperty entry = array.GetArrayElementAtIndex(index);
-                entry.FindPropertyRelative("_id").stringValue = ids[index];
-                entry.FindPropertyRelative("_texture").objectReferenceValue =
+                var entry = array.GetArrayElementAtIndex(index);
+                entry.FindPropertyRelative("id").stringValue = ids[index];
+                entry.FindPropertyRelative("texture").objectReferenceValue =
                     AssetDatabase.LoadAssetAtPath<Texture2D>(Root + paths[index]);
-                entry.FindPropertyRelative("_width").floatValue = 1050f;
-                entry.FindPropertyRelative("_top").floatValue = 140f;
-                entry.FindPropertyRelative("_right").floatValue = 30f;
+                entry.FindPropertyRelative("width").floatValue = 1050f;
+                entry.FindPropertyRelative("top").floatValue = 140f;
+                entry.FindPropertyRelative("right").floatValue = 30f;
             }
         }
     }

@@ -15,7 +15,7 @@ namespace WenXinJie.Persistence
         public void Save(string path, StorySession session)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path));
-            string temporary = path + ".tmp";
+            var temporary = path + ".tmp";
             File.WriteAllText(temporary, JsonUtility.ToJson(session.Snapshot(), true));
             if (File.Exists(path))
             {
@@ -36,7 +36,7 @@ namespace WenXinJie.Persistence
             }
             catch (Exception exception) when (exception is IOException || exception is ArgumentException)
             {
-                StorySession backup = Read(path + ".bak", graph);
+                var backup = Read(path + ".bak", graph);
                 recovered = true;
                 return backup;
             }
@@ -50,7 +50,7 @@ namespace WenXinJie.Persistence
                 throw new InvalidDataException("Save is unexpectedly large.");
             }
 
-            StorySnapshot snapshot = JsonUtility.FromJson<StorySnapshot>(File.ReadAllText(path));
+            var snapshot = JsonUtility.FromJson<StorySnapshot>(File.ReadAllText(path));
             return StorySession.Restore(graph, snapshot);
         }
     }

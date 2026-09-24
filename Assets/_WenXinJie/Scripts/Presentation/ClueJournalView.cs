@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,17 +7,17 @@ namespace WenXinJie.Presentation
     internal sealed class ClueJournalView
     {
         private const int EntryCount = 3;
+        private readonly TMP_Text _category;
+        private readonly TMP_Text _count;
+        private readonly TMP_Text _description;
+        private readonly Button[] _entryButtons = new Button[EntryCount];
 
         private readonly GameObject _root;
-        private readonly Button[] _entryButtons = new Button[EntryCount];
-        private readonly Text _count;
-        private readonly Text _title;
-        private readonly Text _category;
-        private readonly Text _description;
-        private ClueJournalState _state = new();
+        private readonly TMP_Text _title;
         private int _selectedIndex;
+        private ClueJournalState _state = new();
 
-        public ClueJournalView(Transform parent, StoryUiFactory ui, Font font)
+        public ClueJournalView(Transform parent, StoryUiFactory ui, TMP_FontAsset font)
         {
             var root = StoryUiFactory.Box(parent, "ClueJournalOverlay", 0f, 0f, 1920f, 1080f);
             _root = root.gameObject;
@@ -27,7 +28,7 @@ namespace WenXinJie.Presentation
             heading.font = font;
             _count = ui.Label(root, "ClueJournalCount", "0 / 3", 1380f, 118f, 360f, 60f, 27);
             _count.font = font;
-            _count.alignment = TextAnchor.MiddleRight;
+            _count.alignment = TextAlignmentOptions.Right;
             _count.color = new(0.84f, 0.76f, 0.52f);
 
             for (var index = 0; index < _entryButtons.Length; index++)
@@ -35,8 +36,8 @@ namespace WenXinJie.Presentation
                 var entryIndex = index;
                 _entryButtons[index] = ui.Button(root, "ClueEntry" + index, string.Empty,
                     180f, 270f + index * 152f, 420f, 116f, () => Select(entryIndex));
-                var label = _entryButtons[index].GetComponentInChildren<Text>();
-                label.alignment = TextAnchor.MiddleLeft;
+                var label = _entryButtons[index].GetComponentInChildren<TMP_Text>();
+                label.alignment = TextAlignmentOptions.Left;
                 label.fontSize = 28;
             }
 
@@ -77,7 +78,7 @@ namespace WenXinJie.Presentation
                     unlocked++;
                 }
 
-                var label = _entryButtons[index].GetComponentInChildren<Text>();
+                var label = _entryButtons[index].GetComponentInChildren<TMP_Text>();
                 label.text = entry.Title + "\n" + (entry.Unlocked ? "已收录" : "未发现");
                 label.color = entry.Unlocked
                     ? new(0.96f, 0.94f, 0.82f)

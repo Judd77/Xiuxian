@@ -1,11 +1,10 @@
-using UnityEngine;
 using WenXinJie.Editor;
 
-internal class CommandScript : IRunCommand
+internal sealed class CommandScript : IRunCommand
 {
     public void Execute(ExecutionResult result)
     {
         CampaignSetup.Run();
-        result.Log("Campaign scene and media catalog ready.");
+        result.Log("Campaign scene and story asset catalog ready.");
     }
 }

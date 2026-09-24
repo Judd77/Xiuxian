@@ -1,36 +1,89 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 namespace WenXinJie.UI
 {
     // Session history is intentionally separate from persistent read/unlock data.
     public sealed class DialogueReader : MonoBehaviour
     {
-        public Text target;
-        public Action advance;
-        public Func<bool> inputBlocked;
-        public float charactersPerSecond = 32f;
+        private const int MaximumHistoryEntries = 200;
+        private const float DefaultCharactersPerSecond = 32f;
 
-        private readonly List<string> _history = new List<string>();
-        private string _fullText = string.Empty;
+        private readonly List<string> _history = new();
+        private Action _advanceStory;
         private int[] _boundaries = Array.Empty<int>();
         private float _elapsed;
-        private int _revealed;
-        private GameObject _panel;
-        private Text _historyText;
+        private TMP_Text _historyText;
+        private Func<bool> _inputBlocked;
         private int _page;
+        private GameObject _panel;
+        private int _revealed;
+        private TMP_Text _target;
 
         public bool IsRevealing => _revealed < _boundaries.Length;
         public bool IsHistoryOpen => _panel != null && _panel.activeSelf;
         public int HistoryCount => _history.Count;
-        public string FullText => _fullText;
+        public string FullText { get; private set; } = string.Empty;
 
-        public void ConfigureHistory(GameObject window, Text text)
+        private void Update()
+        {
+            if (_inputBlocked == null || _target == null)
+            {
+                return;
+            }
+
+            if (_inputBlocked())
+            {
+                return;
+            }
+
+            if (IsRevealing && !IsHistoryOpen)
+            {
+                _elapsed += Time.unscaledDeltaTime;
+                _revealed = Math.Min(_boundaries.Length, (int)(_elapsed * DefaultCharactersPerSecond));
+                _target.text = _revealed == _boundaries.Length
+                    ? FullText
+                    : FullText.Substring(0, _boundaries[_revealed]);
+            }
+
+            var keyboard = Keyboard.current;
+            if (keyboard == null)
+            {
+                return;
+            }
+
+            if (keyboard.escapeKey.wasPressedThisFrame && IsHistoryOpen)
+            {
+                CloseHistory();
+                return;
+            }
+
+            // Focused buttons submit through the UI module, preventing a double advance.
+            var events = EventSystem.current;
+            if (events != null && events.currentSelectedGameObject != null)
+            {
+                return;
+            }
+
+            if (!IsHistoryOpen && (keyboard.spaceKey.wasPressedThisFrame || keyboard.enterKey.wasPressedThisFrame))
+            {
+                _advanceStory();
+            }
+        }
+
+        public void Initialize(TMP_Text target, Action advanceStory, Func<bool> inputBlocked)
+        {
+            _target = target ?? throw new ArgumentNullException(nameof(target));
+            _advanceStory = advanceStory ?? throw new ArgumentNullException(nameof(advanceStory));
+            _inputBlocked = inputBlocked ?? throw new ArgumentNullException(nameof(inputBlocked));
+        }
+
+        public void ConfigureHistory(GameObject window, TMP_Text text)
         {
             _panel = window;
             _historyText = text;
@@ -39,34 +92,34 @@ namespace WenXinJie.UI
 
         public void Present(string text, bool animate)
         {
-            _fullText = text ?? string.Empty;
-            _boundaries = StringInfo.ParseCombiningCharacters(_fullText);
+            FullText = text ?? string.Empty;
+            _boundaries = StringInfo.ParseCombiningCharacters(FullText);
             _elapsed = 0f;
             _revealed = 0;
 
-            if (!animate || string.IsNullOrWhiteSpace(_fullText))
+            if (!animate || string.IsNullOrWhiteSpace(FullText))
             {
                 Complete();
                 return;
             }
 
-            if (_history.Count == 0 || _history[_history.Count - 1] != _fullText)
+            if (_history.Count == 0 || _history[_history.Count - 1] != FullText)
             {
-                _history.Add(_fullText);
+                _history.Add(FullText);
             }
 
-            if (_history.Count > 200)
+            if (_history.Count > MaximumHistoryEntries)
             {
                 _history.RemoveAt(0);
             }
 
-            target.text = string.Empty;
+            _target.text = string.Empty;
         }
 
         public void Complete()
         {
             _revealed = _boundaries.Length;
-            target.text = _fullText;
+            _target.text = FullText;
         }
 
         public void ResetHistory()
@@ -77,7 +130,7 @@ namespace WenXinJie.UI
 
         public void OpenHistory()
         {
-            if (inputBlocked?.Invoke() == true)
+            if (_inputBlocked())
             {
                 return;
             }
@@ -113,47 +166,6 @@ namespace WenXinJie.UI
             _historyText.text = _history.Count == 0
                 ? "尚无阅读记录。"
                 : "阅读记录 " + (_page + 1) + " / " + _history.Count + "\n\n" + _history[_page];
-        }
-
-        private void Update()
-        {
-            if (inputBlocked?.Invoke() == true)
-            {
-                return;
-            }
-
-            if (IsRevealing && !IsHistoryOpen)
-            {
-                _elapsed += Time.unscaledDeltaTime;
-                _revealed = Math.Min(_boundaries.Length, (int)(_elapsed * Math.Max(1f, charactersPerSecond)));
-                target.text = _revealed == _boundaries.Length
-                    ? _fullText
-                    : _fullText.Substring(0, _boundaries[_revealed]);
-            }
-
-            Keyboard keyboard = Keyboard.current;
-            if (keyboard == null)
-            {
-                return;
-            }
-
-            if (keyboard.escapeKey.wasPressedThisFrame && IsHistoryOpen)
-            {
-                CloseHistory();
-                return;
-            }
-
-            // Focused buttons submit through the UI module, preventing a double advance.
-            EventSystem events = EventSystem.current;
-            if (events != null && events.currentSelectedGameObject != null)
-            {
-                return;
-            }
-
-            if (!IsHistoryOpen && (keyboard.spaceKey.wasPressedThisFrame || keyboard.enterKey.wasPressedThisFrame))
-            {
-                advance?.Invoke();
-            }
         }
     }
 }

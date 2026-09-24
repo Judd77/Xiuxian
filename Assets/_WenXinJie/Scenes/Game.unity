@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e226619b6fe81d44a18eefe8c4cf8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WenXinJie.Presentation.StoryApplication
-  _campaign: {fileID: 4900000, guid: 6fdfabeb54bb55346867b5a3f063db0e, type: 3}
-  _media: {fileID: 11400000, guid: 515d3c1cf5acf734bb2b3801860bc14a, type: 2}
+  campaign: {fileID: 4900000, guid: 6fdfabeb54bb55346867b5a3f063db0e, type: 3}
+  storyAssets: {fileID: 11400000, guid: 515d3c1cf5acf734bb2b3801860bc14a, type: 2}
 --- !u!4 &1849476578
 Transform:
   m_ObjectHideFlags: 0

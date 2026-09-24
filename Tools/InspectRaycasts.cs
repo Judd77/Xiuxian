@@ -1,22 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-internal class CommandScript : IRunCommand
+internal sealed class CommandScript : IRunCommand
 {
     public void Execute(ExecutionResult result)
     {
         Canvas.ForceUpdateCanvases();
-        result.Log("Screen: " + Screen.width + "x" + Screen.height + "; event system: " + EventSystem.current);
-        foreach (var button in Object.FindObjectsByType<Button>(FindObjectsSortMode.None))
+        EventSystem eventSystem = EventSystem.current;
+        if (eventSystem == null)
+        {
+            throw new System.InvalidOperationException("No EventSystem is active.");
+        }
+
+        result.Log("Screen: " + Screen.width + "x" + Screen.height + "; event system: " + eventSystem);
+        foreach (Button button in Object.FindObjectsByType<Button>(FindObjectsSortMode.None))
         {
             var rect = (RectTransform)button.transform;
-            var canvas = button.GetComponentInParent<Canvas>();
-            var point = RectTransformUtility.WorldToScreenPoint(canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera, rect.TransformPoint(rect.rect.center));
+            Canvas canvas = button.GetComponentInParent<Canvas>();
+            Vector2 point = RectTransformUtility.WorldToScreenPoint(
+                canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera,
+                rect.TransformPoint(rect.rect.center));
             var hits = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current) { position = point }, hits);
-            result.Log(button.name + "; center=" + point + "; hits=" + hits.Count + "; first=" + (hits.Count > 0 ? hits[0].gameObject.name : "none"));
+            eventSystem.RaycastAll(new PointerEventData(eventSystem) { position = point }, hits);
+            result.Log(
+                button.name + "; center=" + point + "; hits=" + hits.Count
+                + "; first=" + (hits.Count > 0 ? hits[0].gameObject.name : "none"));
         }
     }
 }
