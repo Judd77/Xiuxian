@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_WenXinJie/Scenes/Game.unity
+    path: Assets/_WenXinJie/Scenes/GameFull.unity
     guid: b84aa2ac9b9087d4ea017812d7185ab6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

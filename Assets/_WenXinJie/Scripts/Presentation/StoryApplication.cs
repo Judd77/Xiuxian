@@ -1,7 +1,9 @@
 using System;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using WenXinJie.Narrative;
 using WenXinJie.Persistence;
 using WenXinJie.UI;
@@ -12,6 +14,7 @@ namespace WenXinJie.Presentation
     {
         [SerializeField] private TextAsset campaign;
         [SerializeField] private StoryAssetCatalog storyAssets;
+        [SerializeField] private bool isDemo;
 
         private readonly CampaignSaveStore _saves = new();
 
@@ -35,10 +38,11 @@ namespace WenXinJie.Presentation
 #if UNITY_EDITOR
                 if (!string.IsNullOrEmpty(TestSaveDirectory))
                 {
-                    return Path.Combine(TestSaveDirectory, "campaign-run.json");
+                    return Path.Combine(TestSaveDirectory, isDemo ? "campaign-demo-run.json" : "campaign-run.json");
                 }
 #endif
-                return Path.Combine(Application.persistentDataPath, "WenXinJie", "campaign-run.json");
+                return Path.Combine(Application.persistentDataPath, "WenXinJie",
+                    isDemo ? "campaign-demo-run.json" : "campaign-run.json");
             }
         }
 
@@ -53,7 +57,7 @@ namespace WenXinJie.Presentation
             _displayModes.Initialize();
             _viewStateFactory = new(storyAssets);
             _view = gameObject.AddComponent<StoryView>();
-            _view.Initialize(storyAssets, _reader, _audio, _displayModes, this);
+            _view.Initialize(storyAssets, _reader, _audio, _displayModes, this, isDemo);
             ShowMainMenu(string.Empty);
         }
 
@@ -125,7 +129,8 @@ namespace WenXinJie.Presentation
             {
                 _reader.ResetHistory();
                 Render();
-                _view.ShowNotice(recovered ? "已从备份恢复进度" : "进度已读取");
+                _view.ShowNotice(recovered ? "已从备份恢复进度" :
+                    string.IsNullOrEmpty(message) ? "进度已读取" : message);
             }
             else
             {
@@ -165,7 +170,8 @@ namespace WenXinJie.Presentation
             _reader.ResetHistory();
             _view.HideMainMenu();
             Render();
-            _view.ShowNotice(recovered ? "已从备份恢复进度" : "进度已读取");
+            _view.ShowNotice(recovered ? "已从备份恢复进度" :
+                string.IsNullOrEmpty(message) ? "进度已读取" : message);
         }
 
         public void ReturnToMainMenu()
@@ -191,8 +197,15 @@ namespace WenXinJie.Presentation
             message = string.Empty;
             try
             {
-                Session = _saves.Load(SavePath, _graph, out recovered);
+                var importDemo = !isDemo && !_saves.Exists(SavePath) && _saves.Exists(DemoSavePath);
+                Session = _saves.Load(importDemo ? DemoSavePath : SavePath, _graph, out recovered);
+                if (importDemo)
+                {
+                    _saves.Save(SavePath, Session);
+                }
+
                 _lastJournal = null;
+                message = importDemo ? "试玩进度已继承" : string.Empty;
                 return true;
             }
             catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
@@ -205,12 +218,26 @@ namespace WenXinJie.Presentation
 
         private void ShowMainMenu(string notice)
         {
-            var hasSave = _saves.Exists(SavePath);
+            var hasSave = _saves.Exists(SavePath) || !isDemo && _saves.Exists(DemoSavePath);
             _view.ShowMainMenu(storyAssets.GetBackground("gate"), Session != null || hasSave, hasSave, notice);
         }
 
+        private string DemoSavePath => Path.Combine(Path.GetDirectoryName(SavePath), "campaign-demo-run.json");
+
         private void Render()
         {
+            if (isDemo && Session.Current.id == "case.boundary")
+            {
+                try
+                {
+                    _saves.Save(SavePath, Session);
+                }
+                catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException)
+                {
+                    Debug.LogWarning("Could not save demo handoff: " + exception.Message);
+                }
+            }
+
             var state = _viewStateFactory.Create(Session);
             var newClue = FindNewClue(_lastJournal, state.Journal);
             _audio.SetAmbienceActive(Session.Current.rain);

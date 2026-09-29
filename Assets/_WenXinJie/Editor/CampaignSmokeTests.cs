@@ -12,6 +12,7 @@ namespace WenXinJie.Editor
     public static class CampaignSmokeTests
     {
         private const string CampaignPath = "Assets/_WenXinJie/Data/Campaign.json";
+        private const string DemoCampaignPath = "Assets/_WenXinJie/Data/DemoCampaign.json";
 
         [MenuItem("WenXinJie/Validation/Run Campaign Smoke Tests")]
         public static void Run()
@@ -19,6 +20,7 @@ namespace WenXinJie.Editor
             var graph = LoadGraph();
             Require(graph.Nodes.Count() == 252, "Unexpected node count.");
             VerifyCaseSlice(graph);
+            VerifyDemoHandoff(graph);
             VerifyNewStory(graph);
             VerifyRoute(graph, "investigate", "copyPage", "visit", "confide", "shared", "c01.shared", true);
             VerifyRoute(graph, "investigate", "takePage", "cultivate", "steadyBreath", "alone", "c01.alone", false);
@@ -30,7 +32,7 @@ namespace WenXinJie.Editor
             VerifyInvalidContentRejected();
             VerifyAssets(graph);
             Debug.Log(
-                "Campaign smoke tests PASS: 252-node graph, evidence-dependent openings, four investigation routes, seal audit, three-party hearing, endings, save round-trip and assets.");
+                "Campaign smoke tests PASS: 252-node full graph, demo handoff, four investigation routes, seal audit, three-party hearing, endings, save round-trip and assets.");
         }
 
         private static StoryGraph LoadGraph()
@@ -38,6 +40,35 @@ namespace WenXinJie.Editor
             var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(CampaignPath);
             Require(asset != null, "Campaign JSON is missing.");
             return new(JsonUtility.FromJson<StoryDefinition>(asset.text));
+        }
+
+        private static void VerifyDemoHandoff(StoryGraph fullGraph)
+        {
+            var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(DemoCampaignPath);
+            Require(asset != null, "Demo campaign JSON is missing.");
+            var demoGraph = new StoryGraph(JsonUtility.FromJson<StoryDefinition>(asset.text));
+            Require(demoGraph.Definition.id == fullGraph.Definition.id
+                    && demoGraph.Definition.revision == fullGraph.Definition.revision,
+                "Demo and full campaign identities must match for save handoff.");
+            Require(!demoGraph.Nodes.Any(node => node.id == "rift.opening")
+                    && demoGraph.GetNode("case.boundary").terminal,
+                "The demo includes content beyond its ending.");
+
+            var session = new StorySession(demoGraph, 123);
+            ReachCaseMeet(session, "roster", "borrowed", "ink", "sense", "sample");
+            Require(session.Choose("number") && session.Advance() && session.Choose("lin")
+                    && session.Advance() && session.Choose("cart") && session.Advance()
+                    && session.Choose("verify") && session.Advance() && session.Choose("window")
+                    && session.Choose("save") && session.Choose("clerk") && session.Advance()
+                    && session.Advance() && session.Current.id == "case.boundary",
+                "A demo route did not reach the handoff point.");
+
+            var restored = StorySession.Restore(fullGraph, session.Snapshot());
+            Require(restored.Current.id == "case.boundary" && restored.Choose("continue")
+                    && restored.Current.id == "rift.opening",
+                "The full game did not continue from the demo save.");
+            Require(restored.GetValue("case.ache") == session.GetValue("case.ache"),
+                "The demo handoff lost investigation state.");
         }
 
         private static void VerifyRoute(StoryGraph graph, string firstAction, string firstResolution,
@@ -520,7 +551,7 @@ namespace WenXinJie.Editor
             Require(File.Exists("Assets/_WenXinJie/Fonts/OFL.txt"), "Font license is missing.");
             Require(File.Exists("Docs/AssetResearch/campaign-assets.json"), "Asset checksum inventory is missing.");
             Require(EditorBuildSettings.scenes.Length == 1
-                    && EditorBuildSettings.scenes[0].path == "Assets/_WenXinJie/Scenes/Game.unity", "Game scene is not the build entry.");
+                    && EditorBuildSettings.scenes[0].path == "Assets/_WenXinJie/Scenes/GameFull.unity", "Full game scene is not the build entry.");
         }
 
         private static void Require(bool condition, string message)

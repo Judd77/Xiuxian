@@ -146,10 +146,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e226619b6fe81d44a18eefe8c4cf8f3, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::WenXinJie.Presentation.StoryApplication
-  campaign: {fileID: 4900000, guid: 6fdfabeb54bb55346867b5a3f063db0e, type: 3}
+  campaign: {fileID: 4900000, guid: b519f3265f98fff4bdfe2f27bd395b01, type: 3}
   storyAssets: {fileID: 11400000, guid: 515d3c1cf5acf734bb2b3801860bc14a, type: 2}
+  isDemo: 1
 --- !u!4 &1849476578
 Transform:
   m_ObjectHideFlags: 0
@@ -268,7 +269,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2

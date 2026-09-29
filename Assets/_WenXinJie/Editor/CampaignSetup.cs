@@ -79,14 +79,14 @@ namespace WenXinJie.Editor
                 throw new InvalidOperationException("Story asset catalog failed to import.");
             }
 
-            const string scenePath = Root + "Scenes/Game.unity";
+            const string scenePath = Root + "Scenes/GameFull.unity";
             if (AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath) != null)
             {
                 EditorSceneManager.OpenScene(scenePath);
                 var existing = Object.FindAnyObjectByType<StoryApplication>();
                 if (existing == null)
                 {
-                    throw new InvalidOperationException("The existing Game scene has no StoryApplication.");
+                    throw new InvalidOperationException("The existing full game scene has no StoryApplication.");
                 }
 
                 ConnectApplication(existing, catalog);

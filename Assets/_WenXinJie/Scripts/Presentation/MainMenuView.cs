@@ -13,7 +13,7 @@ namespace WenXinJie.Presentation
         private readonly GameObject _root;
 
         public MainMenuView(Transform parent, StoryUiFactory ui, TMP_FontAsset titleFont, TMP_FontAsset menuFont,
-            IStoryCommands commands, Action openSettings, Action openCredits)
+            IStoryCommands commands, Action openSettings, Action openCredits, bool isDemo)
         {
             var root = StoryUiFactory.Box(parent, "MainMenu", 0f, 0f, 1920f, 1080f);
             _root = root.gameObject;
@@ -29,7 +29,8 @@ namespace WenXinJie.Presentation
             titleShadow.effectColor = new(0.78f, 0.82f, 0.68f, 0.32f);
             titleShadow.effectDistance = new(2f, -2f);
 
-            var subtitle = ui.Label(root, "MainMenuSubtitle", "修仙悬疑 AVG", 154f, 242f, 520f, 54f, 32);
+            var subtitle = ui.Label(root, "MainMenuSubtitle", isDemo ? "修仙悬疑 AVG · 免费试玩" : "修仙悬疑 AVG",
+                154f, 242f, 620f, 54f, 32);
             subtitle.font = menuFont;
             subtitle.color = new(0.06f, 0.15f, 0.13f);
             var chapter = ui.Label(root, "MainMenuChapter", "旧号疑云", 154f, 310f, 420f, 42f, 23);

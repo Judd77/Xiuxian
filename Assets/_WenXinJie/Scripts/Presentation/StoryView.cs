@@ -31,7 +31,7 @@ namespace WenXinJie.Presentation
         }
 
         internal void Initialize(StoryAssetCatalog assets, DialogueReader reader, GameAudio audio,
-            DisplayModeService displayModes, IStoryCommands commands)
+            DisplayModeService displayModes, IStoryCommands commands, bool isDemo)
         {
             _reader = reader;
             var ui = new StoryUiFactory(assets);
@@ -55,7 +55,8 @@ namespace WenXinJie.Presentation
                 assets.MenuFont,
                 commands,
                 _overlays.OpenSettings,
-                _overlays.OpenCredits);
+                _overlays.OpenCredits,
+                isDemo);
 
             EnsureEventSystem();
         }
