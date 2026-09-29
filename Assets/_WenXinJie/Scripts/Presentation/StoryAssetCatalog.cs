@@ -16,6 +16,7 @@ namespace WenXinJie.Presentation
         [SerializeField] private Texture2D choice;
         [SerializeField] private AudioClip music;
         [SerializeField] private AudioClip rain;
+        [SerializeField] private Shader menuParticleShader;
         [SerializeField] private BackgroundAssetEntry[] backgrounds;
         [SerializeField] private PortraitAssetEntry[] portraits;
 
@@ -26,6 +27,7 @@ namespace WenXinJie.Presentation
         public Texture2D ChoiceFrameTexture => choice;
         public AudioClip MusicClip => music;
         public AudioClip RainClip => rain;
+        public Shader MenuParticleShader => menuParticleShader;
 
         public Texture2D GetBackground(string id)
         {
@@ -40,7 +42,7 @@ namespace WenXinJie.Presentation
         public void Validate(StoryGraph graph)
         {
             if (font == null || titleFont == null || menuFont == null || panel == null || choice == null
-                || music == null || rain == null)
+                || music == null || rain == null || menuParticleShader == null)
             {
                 throw new InvalidOperationException("The licensed story asset catalog is incomplete.");
             }

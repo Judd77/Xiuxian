@@ -59,6 +59,7 @@ namespace WenXinJie.Editor
             Assign(assets, "choice", "Art/UI/ImmortalGlassChoice.png");
             Assign(assets, "music", "Audio/BGM/AsianOriental2_Tozan.ogg");
             Assign(assets, "rain", "Audio/Ambience/Rain_Window_Ylmir.ogg");
+            Assign(assets, "menuParticleShader", "Art/UI/MenuParticles.shader");
             Images(assets.FindProperty("backgrounds"),
                 new[] { "gate", "ridge", "night", "stele", "quartersNight", "mountainHeart" },
                 new[]

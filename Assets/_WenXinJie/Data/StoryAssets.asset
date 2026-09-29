@@ -19,6 +19,7 @@ MonoBehaviour:
   choice: {fileID: 2800000, guid: 82e54733915248d4cbd3b8a8566f44b1, type: 3}
   music: {fileID: 8300000, guid: c9dbc12dc9a8573478b270e9116b5709, type: 3}
   rain: {fileID: 8300000, guid: 5d21ba26ecc2a1c41b47d0ec4aef2f99, type: 3}
+  menuParticleShader: {fileID: 4800000, guid: 04949aa714b33048d9373d898c35cbca, type: 3}
   backgrounds:
   - id: gate
     texture: {fileID: 2800000, guid: bd9a2fee2edd6e0409a65693200783a6, type: 3}

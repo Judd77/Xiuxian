@@ -8,16 +8,9 @@ namespace WenXinJie.Presentation
     {
         private const int ParticleLayer = 31;
         private const float RigPositionX = 1000f;
-        private const string TransparentSurfaceKeyword = "_SURFACE_TYPE_TRANSPARENT";
-        private static readonly int BaseMapId = Shader.PropertyToID("_BaseMap");
-        private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
-        private static readonly int SurfaceId = Shader.PropertyToID("_Surface");
-        private static readonly int BlendId = Shader.PropertyToID("_Blend");
+        private static readonly int MainTextureId = Shader.PropertyToID("_MainTex");
         private static readonly int SourceBlendId = Shader.PropertyToID("_SrcBlend");
         private static readonly int DestinationBlendId = Shader.PropertyToID("_DstBlend");
-        private static readonly int SourceBlendAlphaId = Shader.PropertyToID("_SrcBlendAlpha");
-        private static readonly int DestinationBlendAlphaId = Shader.PropertyToID("_DstBlendAlpha");
-        private static readonly int ZWriteId = Shader.PropertyToID("_ZWrite");
 
         private GameObject _rig;
         private RenderTexture _renderTexture;
@@ -25,13 +18,13 @@ namespace WenXinJie.Presentation
         private Material _mistMaterial;
         private Material _goldenLightMaterial;
 
-        public static void Create(Transform parent)
+        public static void Create(Transform parent, Shader shader)
         {
             RectTransform root = StoryUiFactory.Box(parent, "MainMenuAtmosphere", 0f, 0f, 1920f, 1080f);
             var image = root.gameObject.AddComponent<RawImage>();
             image.raycastTarget = false;
             var atmosphere = root.gameObject.AddComponent<MainMenuAtmosphere>();
-            atmosphere.Initialize(image, parent.GetComponentInParent<StoryApplication>().transform);
+            atmosphere.Initialize(image, parent.GetComponentInParent<StoryApplication>().transform, shader);
         }
 
         private void OnEnable()
@@ -79,7 +72,7 @@ namespace WenXinJie.Presentation
             }
         }
 
-        private void Initialize(RawImage target, Transform owner)
+        private void Initialize(RawImage target, Transform owner, Shader shader)
         {
             _renderTexture = new(960, 540, 24, RenderTextureFormat.ARGB32)
             {
@@ -91,8 +84,8 @@ namespace WenXinJie.Presentation
             target.texture = _renderTexture;
 
             _particleTexture = CreateParticleTexture();
-            _mistMaterial = CreateParticleMaterial(_particleTexture, false);
-            _goldenLightMaterial = CreateParticleMaterial(_particleTexture, true);
+            _mistMaterial = CreateParticleMaterial(shader, _particleTexture, false);
+            _goldenLightMaterial = CreateParticleMaterial(shader, _particleTexture, true);
             _rig = new GameObject("MainMenuParticleRig");
             _rig.transform.SetParent(owner, false);
             _rig.transform.position = new Vector3(RigPositionX, 0f, 0f);
@@ -227,30 +220,17 @@ namespace WenXinJie.Presentation
             color.color = gradient;
         }
 
-        private static Material CreateParticleMaterial(Texture texture, bool additive)
+        private static Material CreateParticleMaterial(Shader shader, Texture texture, bool additive)
         {
-            Shader shader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
-            if (shader == null)
-            {
-                shader = Shader.Find("Particles/Standard Unlit");
-            }
-
             Material material = new(shader)
             {
                 name = additive ? "MainMenuGoldenLightMaterial" : "MainMenuMistMaterial",
                 hideFlags = HideFlags.HideAndDontSave
             };
-            material.SetTexture(BaseMapId, texture);
-            material.SetColor(BaseColorId, Color.white);
-            material.SetFloat(SurfaceId, 1f);
-            material.SetFloat(BlendId, additive ? 2f : 0f);
+            material.SetTexture(MainTextureId, texture);
             material.SetFloat(SourceBlendId, (float)BlendMode.SrcAlpha);
             material.SetFloat(DestinationBlendId,
                 additive ? (float)BlendMode.One : (float)BlendMode.OneMinusSrcAlpha);
-            material.SetFloat(SourceBlendAlphaId, (float)BlendMode.One);
-            material.SetFloat(DestinationBlendAlphaId, (float)BlendMode.OneMinusSrcAlpha);
-            material.SetFloat(ZWriteId, 0f);
-            material.EnableKeyword(TransparentSurfaceKeyword);
             material.renderQueue = (int)RenderQueue.Transparent;
             return material;
         }

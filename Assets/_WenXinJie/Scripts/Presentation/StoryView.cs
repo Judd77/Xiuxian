@@ -56,7 +56,8 @@ namespace WenXinJie.Presentation
                 commands,
                 _overlays.OpenSettings,
                 _overlays.OpenCredits,
-                isDemo);
+                isDemo,
+                assets.MenuParticleShader);
 
             EnsureEventSystem();
         }

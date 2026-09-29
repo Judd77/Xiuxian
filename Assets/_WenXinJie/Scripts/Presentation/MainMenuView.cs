@@ -13,13 +13,13 @@ namespace WenXinJie.Presentation
         private readonly GameObject _root;
 
         public MainMenuView(Transform parent, StoryUiFactory ui, TMP_FontAsset titleFont, TMP_FontAsset menuFont,
-            IStoryCommands commands, Action openSettings, Action openCredits, bool isDemo)
+            IStoryCommands commands, Action openSettings, Action openCredits, bool isDemo, Shader menuParticleShader)
         {
             var root = StoryUiFactory.Box(parent, "MainMenu", 0f, 0f, 1920f, 1080f);
             _root = root.gameObject;
             var veil = _root.AddComponent<Image>();
             veil.color = new(0.025f, 0.075f, 0.08f, 0.30f);
-            MainMenuAtmosphere.Create(root);
+            MainMenuAtmosphere.Create(root, menuParticleShader);
 
             var title = ui.Label(root, "MainMenuTitle", "问心劫", 118f, 48f, 720f, 166f, 126);
             title.font = titleFont;
