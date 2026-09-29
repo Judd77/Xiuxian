@@ -17,7 +17,7 @@ namespace WenXinJie.Editor
         public static void Run()
         {
             var graph = LoadGraph();
-            Require(graph.Nodes.Count() == 204, "Unexpected node count.");
+            Require(graph.Nodes.Count() == 220, "Unexpected node count.");
             VerifyCaseSlice(graph);
             VerifyNewStory(graph);
             VerifyRoute(graph, "investigate", "copyPage", "visit", "confide", "shared", "c01.shared", true);
@@ -30,7 +30,7 @@ namespace WenXinJie.Editor
             VerifyInvalidContentRejected();
             VerifyAssets(graph);
             Debug.Log(
-                "Campaign smoke tests PASS: 204-node graph, evidence-dependent openings, four investigation routes, endings, save round-trip and assets.");
+                "Campaign smoke tests PASS: 220-node graph, evidence-dependent openings, four investigation routes, three-party hearing, endings, save round-trip and assets.");
         }
 
         private static StoryGraph LoadGraph()
@@ -121,7 +121,7 @@ namespace WenXinJie.Editor
                 "The rescue route did not enter the rift investigation.");
             Require(session.Choose("village") && session.Advance() && session.Choose("guardFurnace")
                     && session.Advance() && session.Choose("ache") && session.Advance()
-                    && session.Advance()
+                    && session.Advance() && session.Choose("proceed") && session.Choose("solo") && session.Advance()
                     && session.Choose("replace") && session.Choose("prepared") && session.Current.terminal,
                 "The replacement ending was not playable.");
             Require(session.GetValue("case.ache") == 1 && session.GetValue("case.arrayMeasured") == 1,
@@ -135,6 +135,7 @@ namespace WenXinJie.Editor
                     && drafts.Advance() && drafts.Advance() && drafts.Choose("continue")
                     && drafts.Choose("draft") && drafts.Advance() && drafts.Choose("guardVillage")
                     && drafts.Advance() && drafts.Choose("shenRecord") && drafts.Advance()
+                    && drafts.Choose("proceed") && drafts.Choose("solo") && drafts.Advance()
                     && drafts.Choose("hold") && drafts.Choose("open") && drafts.Current.terminal,
                 "Shen Yan's investigation did not reach its evidence-specific hearing and ending.");
             Require(drafts.GetValue("case.shenAccount") == 1 && drafts.GetValue("case.publicRecord") == 1,
@@ -149,10 +150,16 @@ namespace WenXinJie.Editor
                     && family.Choose("continue") && family.Choose("village") && family.Advance()
                     && family.Choose("guardFurnace") && family.Advance()
                     && family.Choose("records") && family.Advance() && family.Advance()
+                    && family.Choose("names") && family.Choose("matched")
+                    && family.Advance() && family.Choose("pressure") && family.Choose("consent")
+                    && family.Advance() && family.Choose("draft") && family.Choose("archive")
+                    && family.Advance() && family.Choose("proceed") && family.Choose("joint")
+                    && family.Advance()
                     && family.Choose("leave") && family.Choose("family") && family.Current.terminal,
                 "Family-verified rescue did not reach its distinct ending.");
-            Require(family.GetValue("case.sedative") == 1 && family.GetValue("case.familyConsent") == 1,
-                "The drug check or family consent was lost.");
+            Require(family.GetValue("case.sedative") == 1 && family.GetValue("case.familyConsent") == 1
+                    && family.GetValue("case.jointProtocol") == 1,
+                "The drug check, family consent or joint protocol was lost.");
 
             var measured = new StorySession(graph);
             ReachCaseMeet(measured, "post", "borrowed", "ink", "sense", "sample");
@@ -162,7 +169,8 @@ namespace WenXinJie.Editor
                     && measured.Choose("witness") && measured.Advance() && measured.Advance()
                     && measured.Choose("continue") && measured.Choose("draft") && measured.Advance()
                     && measured.Choose("guardVillage") && measured.Advance()
-                    && measured.Choose("shenRecord") && measured.Advance()
+                    && measured.Choose("records") && measured.Advance() && measured.Advance()
+                    && measured.Choose("proceed") && measured.Choose("solo") && measured.Advance()
                     && measured.Choose("replace") && measured.Choose("timed") && measured.Current.terminal,
                 "Two-sided return measurement did not affect replacement execution.");
             Require(measured.GetValue("case.returnMeasured") == 1 && measured.GetValue("case.publicRecord") == 1,

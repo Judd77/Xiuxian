@@ -165,7 +165,16 @@ namespace WenXinJie.Presentation
                     session.GetValue("case.charmLedger") > 0),
                 new ClueEntryViewState("双侧回流时差", "术证 · 废副脉",
                     "半息试验中村口试纸先黑，炉侧迟一息才热。两处风险有先后，仍需当事人知情并设叫停信号。",
-                    session.GetValue("case.returnMeasured") > 0)
+                    session.GetValue("case.returnMeasured") > 0),
+                new ClueEntryViewState("家属核名", "人证 · 山腹观测台",
+                    "许澄的家属以配扣和轮值确认姓名，并获知救援风险。旧号仍不能代替活人的姓名与同意。",
+                    session.GetValue("case.familyNotified") > 0),
+                new ClueEntryViewState("村民暂迁同意", "行动 · 山下村口",
+                    "低处住户看过护符余量与山路时程，自行同意暂迁，并保留叫停试验的权利。",
+                    session.GetValue("case.villageConsent") > 0),
+                new ClueEntryViewState("三方叫停约定", "记录 · 山腹观测台",
+                    "家属报炉侧呼吸，工匠报村口护符，沈砚按两侧读数调副脉；任何一方喊停，主角立即收息。",
+                    session.GetValue("case.jointProtocol") > 0)
             });
         }
 

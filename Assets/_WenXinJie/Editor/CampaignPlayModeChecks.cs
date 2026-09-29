@@ -188,7 +188,7 @@ namespace WenXinJie.Editor
             Require(application.Session.Current.id == "case.intro", "New game did not start at the case.");
             VerifyTextContains("Status", "辨气 未习得");
             await Click("ClueJournal");
-            VerifyText("ClueJournalCount", "2 / 21");
+            VerifyText("ClueJournalCount", "2 / 24");
             await Click("ClueJournalClose");
             Choose(application, reader, "post");
             Advance(application, reader);
@@ -208,7 +208,7 @@ namespace WenXinJie.Editor
             Require(application.Session.GetValue("case.verified") == 1,
                 "Spell did not verify living breath after the receipt was sealed.");
             await Click("ClueJournal");
-            VerifyText("ClueJournalCount", "7 / 21");
+            VerifyText("ClueJournalCount", "7 / 24");
             await Click("ClueEntry4");
             VerifyText("ClueDetailTitle", "炉灰内侧活息");
             await Click("ClueJournalClose");
