@@ -144,7 +144,28 @@ namespace WenXinJie.Presentation
                     session.GetValue("case.publicRecord") > 0),
                 new ClueEntryViewState("沈砚的初案签名", "物证 · 旧阵底稿",
                     "第一版阵图已有由沈砚签署的人息位。宗门后来提高承压上限，并不能抹去最初设计者的责任。",
-                    session.GetValue("case.shenAccount") > 0)
+                    session.GetValue("case.shenAccount") > 0),
+                new ClueEntryViewState("帖背刮痕拓片", "物证 · 登仙帖",
+                    "旧批帖纸被刮名后重新盖印。拓片和原纸可与旧图库纸纹核对，单凭它不能认定沈砚仍活着。",
+                    session.GetValue("case.postPreserved") > 0),
+                new ClueEntryViewState("交接人值守时辰", "记录 · 司籍房",
+                    "三处空白去向都落在陈闻值守时段。可私下向他查轮值，但他未必知道炉房真相。",
+                    session.GetValue("case.clerkLead") > 0),
+                new ClueEntryViewState("双灰对照样本", "术证 · 炉房交接台",
+                    "同批未入炉灰无活息，回执灰有今日从内侧带出的活息。排除灰料本身，仍不能辨认运灰者与息位中人的身份。",
+                    session.GetValue("case.controlSample") > 0),
+                new ClueEntryViewState("药碗残药", "物证 · 外门居所",
+                    "安神散在二更后才进了阿澈的碗。他可能记错先后与姓名；药物不能解释服药前留下的玉扣。",
+                    session.GetValue("case.sedative") > 0),
+                new ClueEntryViewState("家属参与侧门查验", "行动 · 炉房侧门",
+                    "许澄的姐姐知晓开门可能冲击山下护符，亲自见证炉内回声，同意在有人稳阵时再用钥匙救人。",
+                    session.GetValue("case.familyConsent") > 0),
+                new ClueEntryViewState("护符领料簿", "文书 · 护符工坊",
+                    "领灰增加后村口护符耗损减缓，但雨损护符与停炉无关。须剔除雨损，按现存护符余量重算撤离顺序。",
+                    session.GetValue("case.charmLedger") > 0),
+                new ClueEntryViewState("双侧回流时差", "术证 · 废副脉",
+                    "半息试验中村口试纸先黑，炉侧迟一息才热。两处风险有先后，仍需当事人知情并设叫停信号。",
+                    session.GetValue("case.returnMeasured") > 0)
             });
         }
 

@@ -17,7 +17,7 @@ namespace WenXinJie.Editor
         public static void Run()
         {
             var graph = LoadGraph();
-            Require(graph.Nodes.Count() == 175, "Unexpected node count.");
+            Require(graph.Nodes.Count() == 204, "Unexpected node count.");
             VerifyCaseSlice(graph);
             VerifyNewStory(graph);
             VerifyRoute(graph, "investigate", "copyPage", "visit", "confide", "shared", "c01.shared", true);
@@ -30,7 +30,7 @@ namespace WenXinJie.Editor
             VerifyInvalidContentRejected();
             VerifyAssets(graph);
             Debug.Log(
-                "Campaign smoke tests PASS: 175-node graph, four new investigation routes, preparation-sensitive endings, legacy routes, save round-trip, assets and licenses.");
+                "Campaign smoke tests PASS: 204-node graph, evidence-dependent openings, four investigation routes, endings, save round-trip and assets.");
         }
 
         private static StoryGraph LoadGraph()
@@ -69,12 +69,10 @@ namespace WenXinJie.Editor
 
         private static void ReachLegacyGate(StorySession session)
         {
-            Require(session.Current.id == "case.intro" && session.Advance(), "Case did not open at the records.");
-            Require(session.Choose("borrowed") && session.Advance() && session.Advance(), "Could not learn the spell.");
-            Require(session.GetValue("case.learned") == 1 && session.Choose("sense"), "Spell verification failed.");
-            Require(session.Advance() && session.Choose("number") && session.Advance(), "Could not confront Shen Yan.");
+            ReachCaseMeet(session, "roster", "borrowed", "ink", "sense", "proceed");
+            Require(session.Choose("number") && session.Advance(), "Could not reach the investigation choice.");
             Require(session.Choose("lin") && session.Advance()
-                    && session.Choose("cart") && session.Advance() && session.Choose("verify")
+                    && session.Choose("clerk") && session.Advance() && session.Choose("verify")
                     && session.Advance() && session.Choose("witness") && session.Advance(),
                 "Could not finish the Lin Yue investigation.");
             Require(session.Choose("legacy") && session.Current.id == "c01.gate", "Legacy material was not reachable.");
@@ -83,13 +81,11 @@ namespace WenXinJie.Editor
         private static void VerifyCaseSlice(StoryGraph graph)
         {
             var mistaken = new StorySession(graph);
-            Require(mistaken.Advance() && mistaken.Choose("person"), "Initial inference was unavailable.");
-            Require(mistaken.GetValue("case.guess") == 1 && mistaken.Advance() && mistaken.Advance(),
-                "Initial inference was not retained through the lesson.");
-            Require(mistaken.Choose("challenge") && mistaken.GetValue("case.sealLost") == 1,
-                "Early confrontation did not seal the receipt.");
-            Require(mistaken.Advance() && mistaken.Advance() && mistaken.GetValue("case.verified") == 1,
-                "Lost receipt blocked the alternate spell verification.");
+            ReachCaseMeet(mistaken, "post", "person", "ink", "challenge", "sample");
+            Require(mistaken.GetValue("case.guess") == 1 && mistaken.GetValue("case.learned") == 1
+                    && mistaken.GetValue("case.sealLost") == 1 && mistaken.GetValue("case.verified") == 1
+                    && mistaken.GetValue("case.controlSample") == 1,
+                "Opening evidence, training or early confrontation was not retained.");
             var restored = StorySession.Restore(graph, mistaken.Snapshot());
             Require(restored.Current.id == "case.meet" && restored.GetValue("case.sealLost") == 1,
                 "Case consequences were not saved.");
@@ -102,9 +98,9 @@ namespace WenXinJie.Editor
                 "Public disclosure lost its consequences.");
 
             var careful = new StorySession(graph);
-            Require(careful.Advance() && careful.Choose("error") && careful.Advance() && careful.Advance()
-                    && careful.Choose("sense") && careful.Advance() && careful.Choose("uncertain")
-                    && careful.Advance() && careful.Choose("gu") && careful.Advance()
+            ReachCaseMeet(careful, "roster", "error", "ink", "sense", "proceed");
+            Require(careful.Choose("uncertain") && careful.Advance() && careful.Choose("gu")
+                    && careful.Advance()
                     && careful.Choose("charm") && careful.Advance() && careful.Choose("prepare")
                     && careful.Advance() && careful.Advance() && careful.Choose("finish")
                     && careful.Current.terminal,
@@ -117,9 +113,8 @@ namespace WenXinJie.Editor
         private static void VerifyNewStory(StoryGraph graph)
         {
             var session = new StorySession(graph);
-            Require(session.Advance() && session.Choose("borrowed") && session.Advance()
-                    && session.Advance() && session.Choose("sense") && session.Advance()
-                    && session.Choose("number") && session.Advance() && session.Choose("lin")
+            ReachCaseMeet(session, "clerk", "borrowed", "ink", "sense", "sample");
+            Require(session.Choose("number") && session.Advance() && session.Choose("lin")
                     && session.Advance() && session.Choose("ache") && session.Advance()
                     && session.Choose("verify") && session.Advance() && session.Choose("witness")
                     && session.Advance() && session.Choose("continue"),
@@ -133,10 +128,9 @@ namespace WenXinJie.Editor
                 "Investigation evidence was not retained for the ending.");
 
             var drafts = new StorySession(graph);
-            Require(drafts.Advance() && drafts.Choose("borrowed") && drafts.Advance()
-                    && drafts.Advance() && drafts.Choose("sense") && drafts.Advance()
-                    && drafts.Choose("number") && drafts.Advance() && drafts.Choose("shen")
-                    && drafts.Advance() && drafts.Choose("rubbing") && drafts.Advance()
+            ReachCaseMeet(drafts, "post", "borrowed", "ink", "sense", "sample");
+            Require(drafts.Choose("number") && drafts.Advance() && drafts.Choose("shen")
+                    && drafts.Advance() && drafts.Choose("paper") && drafts.Advance()
                     && drafts.Choose("signature") && drafts.Advance() && drafts.Choose("village")
                     && drafts.Advance() && drafts.Advance() && drafts.Choose("continue")
                     && drafts.Choose("draft") && drafts.Advance() && drafts.Choose("guardVillage")
@@ -145,6 +139,51 @@ namespace WenXinJie.Editor
                 "Shen Yan's investigation did not reach its evidence-specific hearing and ending.");
             Require(drafts.GetValue("case.shenAccount") == 1 && drafts.GetValue("case.publicRecord") == 1,
                 "The signed draft did not survive to the ending.");
+
+            var family = new StorySession(graph);
+            ReachCaseMeet(family, "roster", "borrowed", "ink", "sense", "sample");
+            Require(family.Choose("number") && family.Advance() && family.Choose("lin")
+                    && family.Advance() && family.Choose("bowl") && family.Advance()
+                    && family.Choose("dose") && family.Advance() && family.Choose("family")
+                    && family.Choose("consent") && family.Advance() && family.Advance()
+                    && family.Choose("continue") && family.Choose("village") && family.Advance()
+                    && family.Choose("guardFurnace") && family.Advance()
+                    && family.Choose("records") && family.Advance() && family.Advance()
+                    && family.Choose("leave") && family.Choose("family") && family.Current.terminal,
+                "Family-verified rescue did not reach its distinct ending.");
+            Require(family.GetValue("case.sedative") == 1 && family.GetValue("case.familyConsent") == 1,
+                "The drug check or family consent was lost.");
+
+            var measured = new StorySession(graph);
+            ReachCaseMeet(measured, "post", "borrowed", "ink", "sense", "sample");
+            Require(measured.Choose("number") && measured.Advance() && measured.Choose("shen")
+                    && measured.Advance() && measured.Choose("paper") && measured.Advance()
+                    && measured.Choose("signature") && measured.Advance() && measured.Choose("pause")
+                    && measured.Choose("witness") && measured.Advance() && measured.Advance()
+                    && measured.Choose("continue") && measured.Choose("draft") && measured.Advance()
+                    && measured.Choose("guardVillage") && measured.Advance()
+                    && measured.Choose("shenRecord") && measured.Advance()
+                    && measured.Choose("replace") && measured.Choose("timed") && measured.Current.terminal,
+                "Two-sided return measurement did not affect replacement execution.");
+            Require(measured.GetValue("case.returnMeasured") == 1 && measured.GetValue("case.publicRecord") == 1,
+                "The witnessed measurement was lost.");
+        }
+
+        private static void ReachCaseMeet(StorySession session, string entry, string guess,
+            string practice, string method, string control)
+        {
+            Require(session.Current.id == "case.intro" && session.Choose(entry) && session.Advance()
+                    && session.Choose(guess) && session.Advance() && session.Choose(practice)
+                    && session.Advance() && session.Choose(method),
+                "Could not choose the opening evidence and learn辨气.");
+            if (method == "challenge")
+            {
+                Require(session.Advance(), "Early challenge did not lead to the ash sample.");
+            }
+
+            Require(session.Advance() && session.Current.id == "case.control"
+                    && session.Choose(control) && session.Advance() && session.Current.id == "case.meet",
+                "Could not verify the ash source and compare evidence.");
         }
 
         private static void PerformAction(StorySession session, string action, string resolution)

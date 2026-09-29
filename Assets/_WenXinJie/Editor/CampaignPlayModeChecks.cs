@@ -188,11 +188,13 @@ namespace WenXinJie.Editor
             Require(application.Session.Current.id == "case.intro", "New game did not start at the case.");
             VerifyTextContains("Status", "辨气 未习得");
             await Click("ClueJournal");
-            VerifyText("ClueJournalCount", "2 / 14");
+            VerifyText("ClueJournalCount", "2 / 21");
             await Click("ClueJournalClose");
+            Choose(application, reader, "post");
             Advance(application, reader);
             Choose(application, reader, "person");
             Advance(application, reader);
+            Choose(application, reader, "ink");
             Advance(application, reader);
             Require(application.Session.GetValue("case.learned") == 1, "The spell was not learned.");
             VerifyTextContains("Status", "辨气 已习得");
@@ -201,10 +203,12 @@ namespace WenXinJie.Editor
                 "Premature confrontation did not seal the receipt.");
             Advance(application, reader);
             Advance(application, reader);
+            Choose(application, reader, "sample");
+            Advance(application, reader);
             Require(application.Session.GetValue("case.verified") == 1,
                 "Spell did not verify living breath after the receipt was sealed.");
             await Click("ClueJournal");
-            VerifyText("ClueJournalCount", "5 / 14");
+            VerifyText("ClueJournalCount", "7 / 21");
             await Click("ClueEntry4");
             VerifyText("ClueDetailTitle", "炉灰内侧活息");
             await Click("ClueJournalClose");
@@ -345,17 +349,21 @@ namespace WenXinJie.Editor
         private static void ReachActionHub(StoryApplication application, DialogueReader reader)
         {
             application.StartNewGame();
+            Choose(application, reader, "roster");
             Advance(application, reader);
             Choose(application, reader, "borrowed");
             Advance(application, reader);
+            Choose(application, reader, "ink");
             Advance(application, reader);
             Choose(application, reader, "sense");
+            Advance(application, reader);
+            Choose(application, reader, "proceed");
             Advance(application, reader);
             Choose(application, reader, "number");
             Advance(application, reader);
             Choose(application, reader, "lin");
             Advance(application, reader);
-            Choose(application, reader, "cart");
+            Choose(application, reader, "clerk");
             Advance(application, reader);
             Choose(application, reader, "verify");
             Advance(application, reader);
