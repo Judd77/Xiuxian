@@ -174,7 +174,10 @@ namespace WenXinJie.Presentation
                     session.GetValue("case.villageConsent") > 0),
                 new ClueEntryViewState("三方叫停约定", "记录 · 山腹观测台",
                     "家属报炉侧呼吸，工匠报村口护符，沈砚按两侧读数调副脉；任何一方喊停，主角立即收息。",
-                    session.GetValue("case.jointProtocol") > 0)
+                    session.GetValue("case.jointProtocol") > 0),
+                new ClueEntryViewState("侧门符尾", "术证 · 炉房侧门",
+                    "半张遮息符在门缝先向炉内卷，再被村口副脉推回。它能帮助复测回流先后，不能隔阵辨认人名。",
+                    session.GetValue("case.sideDoorMeasured") > 0)
             });
         }
 

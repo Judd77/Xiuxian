@@ -17,7 +17,7 @@ namespace WenXinJie.Editor
         public static void Run()
         {
             var graph = LoadGraph();
-            Require(graph.Nodes.Count() == 220, "Unexpected node count.");
+            Require(graph.Nodes.Count() == 231, "Unexpected node count.");
             VerifyCaseSlice(graph);
             VerifyNewStory(graph);
             VerifyRoute(graph, "investigate", "copyPage", "visit", "confide", "shared", "c01.shared", true);
@@ -30,7 +30,7 @@ namespace WenXinJie.Editor
             VerifyInvalidContentRejected();
             VerifyAssets(graph);
             Debug.Log(
-                "Campaign smoke tests PASS: 220-node graph, evidence-dependent openings, four investigation routes, three-party hearing, endings, save round-trip and assets.");
+                "Campaign smoke tests PASS: 231-node graph, evidence-dependent openings, Lin Yue rescue window, three-party hearing, endings, save round-trip and assets.");
         }
 
         private static StoryGraph LoadGraph()
@@ -178,6 +178,32 @@ namespace WenXinJie.Editor
                 "Two-sided return measurement did not affect replacement execution.");
             Require(measured.GetValue("case.returnMeasured") == 1 && measured.GetValue("case.publicRecord") == 1,
                 "The witnessed measurement was lost.");
+
+            var lateRescue = new StorySession(graph);
+            ReachCaseMeet(lateRescue, "roster", "borrowed", "ink", "sense", "sample");
+            Require(lateRescue.Choose("number") && lateRescue.Advance() && lateRescue.Choose("lin")
+                    && lateRescue.Advance() && lateRescue.Choose("cart") && lateRescue.Advance()
+                    && lateRescue.Choose("verify") && lateRescue.Advance() && lateRescue.Choose("window")
+                    && lateRescue.Choose("save") && lateRescue.Choose("clerk") && lateRescue.Advance()
+                    && lateRescue.Advance() && lateRescue.Current.id == "case.boundary",
+                "A missed first rescue could not be recovered with Chen Wen's shift card.");
+            Require(lateRescue.GetValue("case.ache") == 1 && lateRescue.GetValue("case.witnessProtected") == 1
+                    && lateRescue.GetValue("case.ledgerCopy") == 1,
+                "The later rescue did not retain its witness and record consequences.");
+
+            var sideDoor = new StorySession(graph);
+            ReachCaseMeet(sideDoor, "post", "borrowed", "ink", "sense", "sample");
+            Require(sideDoor.Choose("number") && sideDoor.Advance() && sideDoor.Choose("lin")
+                    && sideDoor.Advance() && sideDoor.Choose("bowl") && sideDoor.Advance()
+                    && sideDoor.Choose("dose") && sideDoor.Advance() && sideDoor.Choose("window")
+                    && sideDoor.Choose("slit") && sideDoor.Advance() && sideDoor.Advance()
+                    && sideDoor.Choose("continue") && sideDoor.Choose("sideDoor")
+                    && sideDoor.Choose("measure") && sideDoor.Current.id == "rift.sideDoorMeasured",
+                "The saved door talisman did not open the rift recheck.");
+            Require(sideDoor.GetValue("case.sideDoorMeasured") == 1
+                    && sideDoor.GetValue("case.arrayMeasured") == 1
+                    && sideDoor.GetValue("case.villageReady") == 1,
+                "The cross-route talisman measurement did not affect preparation.");
         }
 
         private static void ReachCaseMeet(StorySession session, string entry, string guess,

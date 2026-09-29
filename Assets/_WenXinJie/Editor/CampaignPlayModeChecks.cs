@@ -188,7 +188,7 @@ namespace WenXinJie.Editor
             Require(application.Session.Current.id == "case.intro", "New game did not start at the case.");
             VerifyTextContains("Status", "辨气 未习得");
             await Click("ClueJournal");
-            VerifyText("ClueJournalCount", "2 / 24");
+            VerifyText("ClueJournalCount", "2 / 25");
             await Click("ClueJournalClose");
             Choose(application, reader, "post");
             Advance(application, reader);
@@ -208,7 +208,7 @@ namespace WenXinJie.Editor
             Require(application.Session.GetValue("case.verified") == 1,
                 "Spell did not verify living breath after the receipt was sealed.");
             await Click("ClueJournal");
-            VerifyText("ClueJournalCount", "7 / 24");
+            VerifyText("ClueJournalCount", "7 / 25");
             await Click("ClueEntry4");
             VerifyText("ClueDetailTitle", "炉灰内侧活息");
             await Click("ClueJournalClose");
@@ -228,10 +228,16 @@ namespace WenXinJie.Editor
             Advance(application, reader);
             Choose(application, reader, "verify");
             Advance(application, reader);
-            Choose(application, reader, "witness");
+            Choose(application, reader, "window");
+            VerifyChoiceAvailability(3);
+            reader.Complete();
+            await Capture("Docs/Validation/lin-rescue-window-1080.png");
+            Choose(application, reader, "slit");
+            Advance(application, reader);
             Advance(application, reader);
             Require(application.Session.Current.id == "case.boundary"
-                    && application.Session.GetValue("case.action") == 1,
+                    && application.Session.GetValue("case.action") == 1
+                    && application.Session.GetValue("case.sideDoorMeasured") == 1,
                 "Confrontation did not change the next action.");
             reader.Complete();
             await Capture("Docs/Validation/case-boundary-1080.png");

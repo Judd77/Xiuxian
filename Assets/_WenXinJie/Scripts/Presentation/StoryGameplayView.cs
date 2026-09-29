@@ -38,7 +38,7 @@ namespace WenXinJie.Presentation
             _chapter.font = assets.MenuFont;
             _chapter.alignment = TextAlignmentOptions.Right;
             _status = ui.Label(root, "Status", string.Empty, 86f, 102f, 1734f, 30f, 19);
-            _status.font = assets.MenuFont;
+            _status.font = assets.Font;
             _status.color = new(0.84f, 0.88f, 0.85f);
 
             ui.Frame(root, "LocationPanel", 80f, 166f, 620f, 74f);
@@ -46,7 +46,7 @@ namespace WenXinJie.Presentation
             _location.font = assets.MenuFont;
             _location.alignment = TextAlignmentOptions.Left;
 
-            CreateChoices(root, ui, commands);
+            CreateChoices(root, ui, commands, assets.Font);
 
             ui.Picture(root, "DialoguePanel", assets.PanelTexture, 80f, 748f, 1760f, 246f);
             ui.Frame(root, "SpeakerPanel", 112f, 724f, 330f, 62f);
@@ -108,14 +108,17 @@ namespace WenXinJie.Presentation
             }
         }
 
-        private void CreateChoices(Transform parent, StoryUiFactory ui, IStoryCommands commands)
+        private void CreateChoices(Transform parent, StoryUiFactory ui, IStoryCommands commands,
+            TMP_FontAsset choiceFont)
         {
             for (var index = 0; index < _choices.Length; index++)
             {
                 var slot = index;
                 _choices[index] = ui.Button(parent, "Choice" + index, string.Empty, 96f,
                     286f + index * 94f, 700f, 78f, () => commands.SelectChoice(_choiceIds[slot]));
-                _choices[index].GetComponentInChildren<TMP_Text>().alignment = TextAlignmentOptions.Left;
+                var label = _choices[index].GetComponentInChildren<TMP_Text>();
+                label.font = choiceFont;
+                label.alignment = TextAlignmentOptions.Left;
                 _choices[index].gameObject.AddComponent<ChoiceHint>();
             }
         }
