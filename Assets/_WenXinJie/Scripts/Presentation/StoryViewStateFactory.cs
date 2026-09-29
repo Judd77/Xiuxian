@@ -183,7 +183,16 @@ namespace WenXinJie.Presentation
                     session.GetValue("case.villageWitness") > 0),
                 new ClueEntryViewState("封炉改签底页", "文书 · 旧碑廊",
                     "封门后有人用执事专印改写旧号签收栏。它可与旧阵两版图分开核对责任，不能单独认出今日炉中人。",
-                    session.GetValue("case.archiveWitness") > 0)
+                    session.GetValue("case.archiveWitness") > 0),
+                new ClueEntryViewState("旧灾守钟原簿", "文书 · 山下村落",
+                    "原簿记亥初南沟三户先报符裂，子初东坡另有换符。它证明先后，尚须以留存护符排除雨损。",
+                    session.GetValue("case.bellRecords") > 0),
+                new ClueEntryViewState("旧灾护符对照", "术证 · 护符工坊",
+                    "以同批未用符校准并交换位置复测：南沟符有山腹回流，东坡符只有雨损。可修正撤离顺序，不能推算今日灵潮强度。",
+                    session.GetValue("case.bellVerified") > 0),
+                new ClueEntryViewState("村民掌钟约定", "行动 · 山下村口",
+                    "南沟三户看过原簿、复测符与炉中活人风险，愿先试走缓坡；是否暂迁与第三声叫停钟仍由他们决定。",
+                    session.GetValue("case.bellShared") > 0)
             });
         }
 

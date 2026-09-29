@@ -1,6 +1,6 @@
 {
     "id": "wenxinjie",
-    "revision": 13,
+    "revision": 14,
     "start": "case.intro",
     "variables": [
         {
@@ -311,6 +311,24 @@
         },
         {
             "id": "case.archiveWitness",
+            "initial": 0,
+            "minimum": 0,
+            "maximum": 1
+        },
+        {
+            "id": "case.bellRecords",
+            "initial": 0,
+            "minimum": 0,
+            "maximum": 1
+        },
+        {
+            "id": "case.bellVerified",
+            "initial": 0,
+            "minimum": 0,
+            "maximum": 1
+        },
+        {
+            "id": "case.bellShared",
             "initial": 0,
             "minimum": 0,
             "maximum": 1
@@ -2011,6 +2029,220 @@
             "choices": []
         },
         {
+            "id": "route.gu.bellArchive",
+            "chapter": "卷一 · 山下承压",
+            "location": "旧灾碑",
+            "speaker": "守钟人",
+            "text": "顾衡的呈报写着「停炉后全村护符同裂」。你翻出守钟人保留的原簿：亥初先报南沟三户符裂，子初东坡另有换符；炉房停炉印记在亥初之前。守钟人说东坡那夜下过雨，顾衡却坚持一声警钟救了整村。原簿只能证明先后，不能断定两处裂纹同因。",
+            "background": "stele",
+            "portrait": "",
+            "rain": false,
+            "next": "route.gu.bellTest",
+            "terminal": false,
+            "effects": [
+                {
+                    "variable": "case.bellRecords",
+                    "operation": "set",
+                    "value": 1
+                }
+            ],
+            "choices": []
+        },
+        {
+            "id": "route.gu.bellTest",
+            "chapter": "卷一 · 山下承压",
+            "location": "护符工坊",
+            "speaker": "工匠",
+            "text": "工匠取出旧灾留下的南沟符与东坡符，还拿来同批未用的新符。你可以选一枚作辨气底样，再把两枚旧符交换位置重测。若底样自身受过雨或阵压，所谓「两处同裂」便无从判断。先用哪枚？",
+            "background": "ridge",
+            "portrait": "",
+            "rain": false,
+            "next": "",
+            "terminal": false,
+            "effects": [],
+            "choices": [
+                {
+                    "id": "clean",
+                    "text": "以同批未用符作底样，再交换两枚旧符",
+                    "target": "route.gu.bellVerified",
+                    "lockedReason": "",
+                    "hidden": false,
+                    "conditions": [],
+                    "effects": [],
+                    "outcomes": []
+                },
+                {
+                    "id": "rain",
+                    "text": "以东坡雨损符作底样，再测南沟符",
+                    "target": "route.gu.bellWrong",
+                    "lockedReason": "",
+                    "hidden": false,
+                    "conditions": [],
+                    "effects": [],
+                    "outcomes": []
+                },
+                {
+                    "id": "report",
+                    "text": "沿用顾衡呈报的「全村同裂」，不再测符",
+                    "target": "route.gu.bellFiled",
+                    "lockedReason": "",
+                    "hidden": false,
+                    "conditions": [],
+                    "effects": [],
+                    "outcomes": []
+                }
+            ]
+        },
+        {
+            "id": "route.gu.bellWrong",
+            "chapter": "卷一 · 山下承压",
+            "location": "护符工坊",
+            "speaker": "工匠",
+            "text": "东坡符本身带水气。你以它作底，南沟符看起来反倒像「无异常」；工匠指出这等于拿坏秤称另一枚符。顾衡的随从已记下你的初次结论，你若重测，必须当众更正，耽误他安排的查炉时辰。",
+            "background": "ridge",
+            "portrait": "",
+            "rain": false,
+            "next": "",
+            "terminal": false,
+            "effects": [],
+            "choices": [
+                {
+                    "id": "redo",
+                    "text": "当众承认底样错误，改用未用符重测",
+                    "target": "route.gu.bellRedo",
+                    "lockedReason": "",
+                    "hidden": false,
+                    "conditions": [],
+                    "effects": [],
+                    "outcomes": []
+                },
+                {
+                    "id": "file",
+                    "text": "只保留钟簿，不公布未经确认的符纹",
+                    "target": "route.gu.bellFiled",
+                    "lockedReason": "",
+                    "hidden": false,
+                    "conditions": [],
+                    "effects": [],
+                    "outcomes": []
+                }
+            ]
+        },
+        {
+            "id": "route.gu.bellRedo",
+            "chapter": "卷一 · 山下承压",
+            "location": "护符工坊",
+            "speaker": "旁白",
+            "text": "你划掉自己先前的读数，封存用错的雨损符。顾衡的随从把更正也写进呈报，守卫因此提前盯上工坊；工匠仍把未用符交给你，让村民能亲眼看第二次结果。",
+            "background": "ridge",
+            "portrait": "",
+            "rain": false,
+            "next": "route.gu.bellVerified",
+            "terminal": false,
+            "effects": [
+                {
+                    "variable": "risk.attention",
+                    "operation": "add",
+                    "value": 1
+                }
+            ],
+            "choices": []
+        },
+        {
+            "id": "route.gu.bellVerified",
+            "chapter": "卷一 · 山下承压",
+            "location": "护符工坊",
+            "speaker": "旁白",
+            "text": "你以未用符校准辨气，再交换两枚旧符的位置。南沟符无论放哪边，裂纹都朝山腹回流；东坡符只余雨水浸开的横纹。旧灾的危险先落在南沟三户，东坡换符不能算作同一轮阵压。此法无法推算今日灵潮有多大，却足以纠正「全村同时受灾」的撤离顺序。",
+            "background": "ridge",
+            "portrait": "",
+            "rain": false,
+            "next": "route.gu.bellDispute",
+            "terminal": false,
+            "effects": [
+                {
+                    "variable": "case.bellVerified",
+                    "operation": "set",
+                    "value": 1
+                }
+            ],
+            "choices": []
+        },
+        {
+            "id": "route.gu.bellDispute",
+            "chapter": "卷一 · 山下承压",
+            "location": "山下村口",
+            "speaker": "南沟老妇",
+            "text": "守钟人说那夜先听见南沟三户敲门；顾衡说自己曾按「全村同裂」调人，才保住东坡。老妇反问：「我儿子背人走在最后，为什么你的呈报没有他的名字？」顾衡承认呈报合并了雨损与阵压，却辩称若公开炉房以活人续阵，村民可能立即拆符。你手中有原簿和复测符，决定谁先看到它们。",
+            "background": "ridge",
+            "portrait": "",
+            "rain": false,
+            "next": "",
+            "terminal": false,
+            "effects": [],
+            "choices": [
+                {
+                    "id": "share",
+                    "text": "让三户核对原簿和复测符，并说清炉中仍有人",
+                    "target": "route.gu.bellShared",
+                    "lockedReason": "",
+                    "hidden": false,
+                    "conditions": [],
+                    "effects": [],
+                    "outcomes": []
+                },
+                {
+                    "id": "seal",
+                    "text": "把更正交给顾衡，先保住官方查炉安排",
+                    "target": "route.gu.bellFiled",
+                    "lockedReason": "",
+                    "hidden": false,
+                    "conditions": [],
+                    "effects": [],
+                    "outcomes": []
+                }
+            ]
+        },
+        {
+            "id": "route.gu.bellShared",
+            "chapter": "卷一 · 山下承压",
+            "location": "山下村口",
+            "speaker": "南沟老妇",
+            "text": "老妇在原簿找到儿子的名字，让工匠把南沟三户标在撤离图最前。你告诉他们炉中仍有人承压，今日护符也只够挡一次小回流；三户愿意先试走缓坡，但保留看过实时读数后拒绝替阵的权利。顾衡交出观测台钥匙，守卫则封了你下一次私查炉房的通道。",
+            "background": "ridge",
+            "portrait": "",
+            "rain": false,
+            "next": "route.gu.measure",
+            "terminal": false,
+            "effects": [
+                {
+                    "variable": "case.bellShared",
+                    "operation": "set",
+                    "value": 1
+                },
+                {
+                    "variable": "case.publicRecord",
+                    "operation": "set",
+                    "value": 1
+                }
+            ],
+            "choices": []
+        },
+        {
+            "id": "route.gu.bellFiled",
+            "chapter": "卷一 · 山下承压",
+            "location": "观测台",
+            "speaker": "顾衡",
+            "text": "顾衡把钟簿更正压进公文，答应先通知南沟三户，却仍没解释炉中有人承压。老妇不肯把祖孙的撤离决定托给一份她看不到的表；工匠也不交备用符。你保住了官方查炉入口，但终章若要村民同意，必须再把风险交给他们亲自核对。",
+            "background": "mountainHeart",
+            "portrait": "",
+            "rain": false,
+            "next": "route.gu.measure",
+            "terminal": false,
+            "effects": [],
+            "choices": []
+        },
+        {
             "id": "route.gu.start",
             "chapter": "卷一 · 失踪者",
             "location": "山下村口",
@@ -2047,6 +2279,16 @@
                     "id": "workshop",
                     "text": "查工坊领料簿与雨损护符",
                     "target": "route.gu.workshop",
+                    "lockedReason": "",
+                    "hidden": false,
+                    "conditions": [],
+                    "effects": [],
+                    "outcomes": []
+                },
+                {
+                    "id": "bell",
+                    "text": "向守钟人与村民核对旧灾原始时刻",
+                    "target": "route.gu.bellArchive",
                     "lockedReason": "",
                     "hidden": false,
                     "conditions": [],

@@ -18,10 +18,11 @@ namespace WenXinJie.Editor
         public static void Run()
         {
             var graph = LoadGraph();
-            Require(graph.Nodes.Count() == 252, "Unexpected node count.");
+            Require(graph.Nodes.Count() == 264, "Unexpected node count.");
             VerifyCaseSlice(graph);
             VerifyDemoHandoff(graph);
             VerifyNewStory(graph);
+            VerifyGuBellRoute(graph);
             VerifyRoute(graph, "investigate", "copyPage", "visit", "confide", "shared", "c01.shared", true);
             VerifyRoute(graph, "investigate", "takePage", "cultivate", "steadyBreath", "alone", "c01.alone", false);
             VerifyRoute(graph, "visit", "question", "cultivate", "steadyBreath", "guarded", "c01.guarded", false);
@@ -32,7 +33,7 @@ namespace WenXinJie.Editor
             VerifyInvalidContentRejected();
             VerifyAssets(graph);
             Debug.Log(
-                "Campaign smoke tests PASS: 252-node full graph, demo handoff, four investigation routes, seal audit, three-party hearing, endings, save round-trip and assets.");
+                "Campaign smoke tests PASS: 264-node full graph, demo handoff, village bell investigation, four investigation routes, seal audit, three-party hearing, endings, save round-trip and assets.");
         }
 
         private static StoryGraph LoadGraph()
@@ -141,6 +142,47 @@ namespace WenXinJie.Editor
                 "Cautious route state was incorrect.");
         }
 
+        private static void VerifyGuBellRoute(StoryGraph graph)
+        {
+            var corrected = new StorySession(graph);
+            ReachCaseMeet(corrected, "roster", "borrowed", "ink", "sense", "sample");
+            Require(corrected.Choose("number") && corrected.Advance() && corrected.Choose("gu")
+                    && corrected.Advance() && corrected.Choose("bell") && corrected.Advance()
+                    && corrected.Choose("rain")
+                    && corrected.Choose("redo") && corrected.Advance()
+                    && corrected.Advance() && corrected.Choose("share") && corrected.Advance()
+                    && corrected.Choose("prepare") && corrected.Advance()
+                    && corrected.Advance() && corrected.Choose("continue"),
+                "The old-disaster talisman comparison did not reach the rift after a corrected reading.");
+            Require(corrected.GetValue("case.bellRecords") == 1
+                    && corrected.GetValue("case.bellVerified") == 1
+                    && corrected.GetValue("case.bellShared") == 1,
+                "The corrected bell record did not retain its evidence and disclosure.");
+            Require(corrected.Choose("village") && corrected.Advance()
+                    && corrected.Choose("guardFurnace") && corrected.Advance()
+                    && corrected.Choose("records") && corrected.Advance() && corrected.Advance()
+                    && corrected.Choose("pressure") && corrected.Choose("evidence")
+                    && corrected.Choose("bell")
+                    && corrected.Advance() && corrected.Choose("proceed")
+                    && corrected.Choose("solo") && corrected.Advance()
+                    && corrected.Choose("replace") && corrected.Choose("tactics")
+                    && corrected.Choose("bell")
+                    && corrected.Current.id == "ending.replaceBell" && corrected.Current.terminal,
+                "The villagers' bell signal did not change the final evacuation and replacement.");
+
+            var withheld = new StorySession(graph);
+            ReachCaseMeet(withheld, "roster", "borrowed", "ink", "sense", "sample");
+            Require(withheld.Choose("number") && withheld.Advance() && withheld.Choose("gu")
+                    && withheld.Advance() && withheld.Choose("bell") && withheld.Advance()
+                    && withheld.Choose("report") && withheld.Advance()
+                    && withheld.Choose("prepare") && withheld.Advance()
+                    && withheld.Advance() && withheld.Choose("continue"),
+                "The unverified official report did not reach the next act.");
+            Require(withheld.GetValue("case.bellVerified") == 0
+                    && withheld.GetValue("case.bellShared") == 0,
+                "An unverified and undisclosed report unlocked the village bell action.");
+        }
+
         private static void VerifyNewStory(StoryGraph graph)
         {
             var session = new StorySession(graph);
@@ -205,7 +247,8 @@ namespace WenXinJie.Editor
                     && measured.Choose("names") && measured.Choose("matched") && measured.Advance()
                     && measured.Choose("pressure") && measured.Choose("consent") && measured.Advance()
                     && measured.Choose("proceed") && measured.Choose("joint") && measured.Advance()
-                    && measured.Choose("replace") && measured.Choose("timed") && measured.Current.terminal,
+                    && measured.Choose("replace") && measured.Choose("tactics")
+                    && measured.Choose("timed") && measured.Current.terminal,
                 "Two-sided return measurement did not affect replacement execution.");
             Require(measured.GetValue("case.returnMeasured") == 1 && measured.GetValue("case.publicRecord") == 1,
                 "The witnessed measurement was lost.");
@@ -246,7 +289,8 @@ namespace WenXinJie.Editor
                     && supervised.Choose("furnace") && supervised.Advance()
                     && supervised.Choose("guardVillage") && supervised.Advance()
                     && supervised.Choose("records") && supervised.Advance() && supervised.Advance()
-                    && supervised.Choose("pressure") && supervised.Choose("witness")
+                    && supervised.Choose("pressure") && supervised.Choose("evidence")
+                    && supervised.Choose("witness")
                     && supervised.Advance() && supervised.Choose("proceed")
                     && supervised.Choose("solo") && supervised.Advance()
                     && supervised.Choose("replace") && supervised.Choose("prepared")
