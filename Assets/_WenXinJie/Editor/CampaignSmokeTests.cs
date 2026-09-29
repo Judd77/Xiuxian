@@ -17,7 +17,7 @@ namespace WenXinJie.Editor
         public static void Run()
         {
             var graph = LoadGraph();
-            Require(graph.Nodes.Count() == 240, "Unexpected node count.");
+            Require(graph.Nodes.Count() == 246, "Unexpected node count.");
             VerifyCaseSlice(graph);
             VerifyNewStory(graph);
             VerifyRoute(graph, "investigate", "copyPage", "visit", "confide", "shared", "c01.shared", true);
@@ -30,7 +30,7 @@ namespace WenXinJie.Editor
             VerifyInvalidContentRejected();
             VerifyAssets(graph);
             Debug.Log(
-                "Campaign smoke tests PASS: 240-node graph, evidence-dependent openings, Lin Yue rescue, Gu Heng inspection, three-party hearing, endings, save round-trip and assets.");
+                "Campaign smoke tests PASS: 246-node graph, evidence-dependent openings, Lin Yue rescue, Gu Heng inspection, Shen Yan survey, three-party hearing, endings, save round-trip and assets.");
         }
 
         private static StoryGraph LoadGraph()
@@ -225,6 +225,20 @@ namespace WenXinJie.Editor
                     && supervised.GetValue("case.villageWitness") == 1
                     && supervised.GetValue("case.villageConsent") == 1,
                 "The artisan's furnace witness did not affect village consent.");
+
+            var correctedSurvey = new StorySession(graph);
+            ReachCaseMeet(correctedSurvey, "post", "borrowed", "ink", "sense", "sample");
+            Require(correctedSurvey.Choose("number") && correctedSurvey.Advance()
+                    && correctedSurvey.Choose("shen") && correctedSurvey.Advance()
+                    && correctedSurvey.Choose("rubbing") && correctedSurvey.Advance()
+                    && correctedSurvey.Choose("signature") && correctedSurvey.Advance()
+                    && correctedSurvey.Choose("survey") && correctedSurvey.Choose("copy")
+                    && correctedSurvey.Choose("redo") && correctedSurvey.Advance()
+                    && correctedSurvey.Advance() && correctedSurvey.Current.id == "case.boundary",
+                "The wrong survey reference could not be corrected in the field.");
+            Require(correctedSurvey.GetValue("case.returnMeasured") == 1
+                    && correctedSurvey.GetValue("risk.attention") > 0,
+                "The corrected survey lost its measured result or cost.");
         }
 
         private static void ReachCaseMeet(StorySession session, string entry, string guess,

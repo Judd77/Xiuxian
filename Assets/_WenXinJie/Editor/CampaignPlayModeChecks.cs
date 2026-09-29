@@ -163,9 +163,10 @@ namespace WenXinJie.Editor
                 await Capture("Docs/Validation/campaign-shared-secret-1080.png");
                 await VerifyAdditionalRoutes(application, reader);
                 await VerifyGuInspection(application, reader);
+                await VerifyShenSurvey(application, reader);
                 LastReport = "Campaign Play Mode checks PASS: case inference, spell, premature confrontation, "
                              + "case save/load, main menu start/continue/load, actual choice click, "
-                             + "Gu Heng's supervised inspection, four first-night routes, day-seven continuation and new clues, background fades, "
+                             + "Gu Heng's supervised inspection, Shen Yan's field survey, four first-night routes, day-seven continuation and new clues, background fades, "
                              + "isolated save/load, and 1920x1080 capture.";
                 Debug.Log(LastReport);
             }
@@ -385,6 +386,39 @@ namespace WenXinJie.Editor
             Require(application.Session.GetValue("case.controlSample") == 1
                     && application.Session.GetValue("case.villageWitness") == 1,
                 "The supervised ash comparison did not leave a signed sample.");
+        }
+
+        private static async Task VerifyShenSurvey(StoryApplication application, DialogueReader reader)
+        {
+            application.StartNewGame();
+            Choose(application, reader, "post");
+            Advance(application, reader);
+            Choose(application, reader, "borrowed");
+            Advance(application, reader);
+            Choose(application, reader, "ink");
+            Advance(application, reader);
+            Choose(application, reader, "sense");
+            Advance(application, reader);
+            Choose(application, reader, "sample");
+            Advance(application, reader);
+            Choose(application, reader, "uncertain");
+            Advance(application, reader);
+            Choose(application, reader, "shen");
+            Advance(application, reader);
+            Choose(application, reader, "paper");
+            Advance(application, reader);
+            Choose(application, reader, "signature");
+            Advance(application, reader);
+            Require(application.Session.Current.id == "route.shen.trial",
+                "Shen Yan's field trial was not reached.");
+            VerifyChoiceAvailability(4);
+            Choose(application, reader, "survey");
+            reader.Complete();
+            await Capture("Docs/Validation/shen-field-survey-1080.png");
+            Choose(application, reader, "witness");
+            Require(application.Session.GetValue("case.returnMeasured") == 1
+                    && application.Session.GetValue("case.publicRecord") == 1,
+                "Witnessed field survey did not retain its measurement and public record.");
         }
 
         private static void ReachActionHub(StoryApplication application, DialogueReader reader)
