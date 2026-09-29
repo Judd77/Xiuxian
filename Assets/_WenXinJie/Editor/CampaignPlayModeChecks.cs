@@ -164,9 +164,10 @@ namespace WenXinJie.Editor
                 await VerifyAdditionalRoutes(application, reader);
                 await VerifyGuInspection(application, reader);
                 await VerifyShenSurvey(application, reader);
+                await VerifyPublicSealAudit(application, reader);
                 LastReport = "Campaign Play Mode checks PASS: case inference, spell, premature confrontation, "
                              + "case save/load, main menu start/continue/load, actual choice click, "
-                             + "Gu Heng's supervised inspection, Shen Yan's field survey, four first-night routes, day-seven continuation and new clues, background fades, "
+                             + "Gu Heng's supervised inspection, Shen Yan's field survey, public seal audit, four first-night routes, day-seven continuation and new clues, background fades, "
                              + "isolated save/load, and 1920x1080 capture.";
                 Debug.Log(LastReport);
             }
@@ -190,7 +191,7 @@ namespace WenXinJie.Editor
             Require(application.Session.Current.id == "case.intro", "New game did not start at the case.");
             VerifyTextContains("Status", "辨气 未习得");
             await Click("ClueJournal");
-            VerifyText("ClueJournalCount", "2 / 26");
+            VerifyText("ClueJournalCount", "2 / 27");
             await Click("ClueJournalClose");
             Choose(application, reader, "post");
             Advance(application, reader);
@@ -210,7 +211,7 @@ namespace WenXinJie.Editor
             Require(application.Session.GetValue("case.verified") == 1,
                 "Spell did not verify living breath after the receipt was sealed.");
             await Click("ClueJournal");
-            VerifyText("ClueJournalCount", "7 / 26");
+            VerifyText("ClueJournalCount", "7 / 27");
             await Click("ClueEntry4");
             VerifyText("ClueDetailTitle", "炉灰内侧活息");
             await Click("ClueJournalClose");
@@ -419,6 +420,36 @@ namespace WenXinJie.Editor
             Require(application.Session.GetValue("case.returnMeasured") == 1
                     && application.Session.GetValue("case.publicRecord") == 1,
                 "Witnessed field survey did not retain its measurement and public record.");
+        }
+
+        private static async Task VerifyPublicSealAudit(StoryApplication application, DialogueReader reader)
+        {
+            application.StartNewGame();
+            Choose(application, reader, "post");
+            Advance(application, reader);
+            Choose(application, reader, "borrowed");
+            Advance(application, reader);
+            Choose(application, reader, "ink");
+            Advance(application, reader);
+            Choose(application, reader, "sense");
+            Advance(application, reader);
+            Choose(application, reader, "sample");
+            Advance(application, reader);
+            Choose(application, reader, "uncertain");
+            Advance(application, reader);
+            Choose(application, reader, "public");
+            Advance(application, reader);
+            Choose(application, reader, "copy");
+            Advance(application, reader);
+            Choose(application, reader, "audit");
+            Require(application.Session.Current.id == "route.public.sealAudit",
+                "Public seal audit did not open.");
+            VerifyChoiceAvailability(3);
+            reader.Complete();
+            await Capture("Docs/Validation/public-seal-audit-1080.png");
+            Choose(application, reader, "form");
+            Require(application.Session.GetValue("case.archiveWitness") == 1,
+                "The original seal comparison did not retain the signed underleaf.");
         }
 
         private static void ReachActionHub(StoryApplication application, DialogueReader reader)

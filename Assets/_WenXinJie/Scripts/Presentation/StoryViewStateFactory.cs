@@ -180,7 +180,10 @@ namespace WenXinJie.Presentation
                     session.GetValue("case.sideDoorMeasured") > 0),
                 new ClueEntryViewState("工匠查炉签记", "见证 · 炉房外廊",
                     "村落工匠亲见炉门封条与今日活息，或签封双灰对照样本。他能证明查验范围，不能据旧号认出承压者。",
-                    session.GetValue("case.villageWitness") > 0)
+                    session.GetValue("case.villageWitness") > 0),
+                new ClueEntryViewState("封炉改签底页", "文书 · 旧碑廊",
+                    "封门后有人用执事专印改写旧号签收栏。它可与旧阵两版图分开核对责任，不能单独认出今日炉中人。",
+                    session.GetValue("case.archiveWitness") > 0)
             });
         }
 

@@ -17,7 +17,7 @@ namespace WenXinJie.Editor
         public static void Run()
         {
             var graph = LoadGraph();
-            Require(graph.Nodes.Count() == 246, "Unexpected node count.");
+            Require(graph.Nodes.Count() == 252, "Unexpected node count.");
             VerifyCaseSlice(graph);
             VerifyNewStory(graph);
             VerifyRoute(graph, "investigate", "copyPage", "visit", "confide", "shared", "c01.shared", true);
@@ -30,7 +30,7 @@ namespace WenXinJie.Editor
             VerifyInvalidContentRejected();
             VerifyAssets(graph);
             Debug.Log(
-                "Campaign smoke tests PASS: 246-node graph, evidence-dependent openings, Lin Yue rescue, Gu Heng inspection, Shen Yan survey, three-party hearing, endings, save round-trip and assets.");
+                "Campaign smoke tests PASS: 252-node graph, evidence-dependent openings, four investigation routes, seal audit, three-party hearing, endings, save round-trip and assets.");
         }
 
         private static StoryGraph LoadGraph()
@@ -239,6 +239,28 @@ namespace WenXinJie.Editor
             Require(correctedSurvey.GetValue("case.returnMeasured") == 1
                     && correctedSurvey.GetValue("risk.attention") > 0,
                 "The corrected survey lost its measured result or cost.");
+
+            var publicAudit = new StorySession(graph);
+            ReachCaseMeet(publicAudit, "post", "borrowed", "ink", "sense", "sample");
+            Require(publicAudit.Choose("uncertain") && publicAudit.Advance()
+                    && publicAudit.Choose("public") && publicAudit.Advance()
+                    && publicAudit.Choose("copy") && publicAudit.Advance()
+                    && publicAudit.Choose("audit") && publicAudit.Choose("form")
+                    && publicAudit.Advance() && publicAudit.Advance()
+                    && publicAudit.Choose("continue") && publicAudit.Choose("draft")
+                    && publicAudit.Advance() && publicAudit.Choose("guardVillage")
+                    && publicAudit.Advance() && publicAudit.Choose("records")
+                    && publicAudit.Advance() && publicAudit.Advance()
+                    && publicAudit.Choose("draft") && publicAudit.Choose("audit")
+                    && publicAudit.Advance() && publicAudit.Choose("proceed")
+                    && publicAudit.Choose("solo") && publicAudit.Advance()
+                    && publicAudit.Choose("hold") && publicAudit.Choose("open")
+                    && publicAudit.Current.terminal,
+                "The sealed order did not survive to the three-party responsibility hearing.");
+            Require(publicAudit.GetValue("case.archiveWitness") == 1
+                    && publicAudit.GetValue("case.shenAccount") == 1
+                    && publicAudit.GetValue("case.publicRecord") == 1,
+                "The signed seal audit did not separate the two responsibilities.");
         }
 
         private static void ReachCaseMeet(StorySession session, string entry, string guess,
