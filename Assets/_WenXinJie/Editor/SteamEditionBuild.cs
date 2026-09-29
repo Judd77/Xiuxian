@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEditor;
+using UnityEditor.Build.Profile;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 using WenXinJie.Narrative;
@@ -17,6 +18,23 @@ namespace WenXinJie.Editor
         private const string FullCampaign = "Assets/_WenXinJie/Data/Campaign.json";
         private const string DemoCampaign = "Assets/_WenXinJie/Data/DemoCampaign.json";
         private const string DemoBoundary = "case.boundary";
+
+        [MenuItem("WenXinJie/Build/Create Windows Build Profiles")]
+        public static void CreateWindowsBuildProfiles()
+        {
+            var platform = BuildProfile.GetInstalledPlatformModules().FirstOrDefault(info =>
+                info.displayName.IndexOf("Windows", StringComparison.OrdinalIgnoreCase) >= 0
+                && info.displayName.IndexOf("Server", StringComparison.OrdinalIgnoreCase) < 0);
+            if (string.IsNullOrEmpty(platform.displayName))
+            {
+                throw new InvalidOperationException("Windows Standalone build support is not installed.");
+            }
+
+            ConfigureProfile("WenXinJie Full Windows", FullScene, platform.platformGuid);
+            ConfigureProfile("WenXinJie Demo Windows", DemoScene, platform.platformGuid);
+            AssetDatabase.SaveAssets();
+            Debug.Log("Windows build profiles are ready: full game and demo.");
+        }
 
         [MenuItem("WenXinJie/Build/Windows Full Game")]
         public static void BuildFull()
@@ -170,6 +188,20 @@ namespace WenXinJie.Editor
         private static string AbsoluteProjectPath(string relativePath)
         {
             return Path.Combine(Directory.GetParent(Application.dataPath).FullName, relativePath);
+        }
+
+        private static void ConfigureProfile(string name, string scene, GUID platformGuid)
+        {
+            var profile = BuildProfile.GetAllBuildProfiles().FirstOrDefault(item => item.name == name)
+                          ?? BuildProfile.CreateBuildProfile(platformGuid, name, null);
+            if (profile == null)
+            {
+                throw new InvalidOperationException("Could not create build profile: " + name);
+            }
+
+            profile.overrideGlobalScenes = true;
+            profile.scenes = new[] { new EditorBuildSettingsScene(scene, true) };
+            EditorUtility.SetDirty(profile);
         }
     }
 }
