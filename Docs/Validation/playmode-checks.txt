@@ -1,1 +1,0 @@
-WenXinJie Play Mode checks PASS: 12 UI routes, JSON outcomes, reading history, isolated disk saves and backup recovery, modal blocking, audio assets, actual button-center raycasts. Pointer events and synthetic Input System mouse/keyboard passed; physical hardware input is not claimed.

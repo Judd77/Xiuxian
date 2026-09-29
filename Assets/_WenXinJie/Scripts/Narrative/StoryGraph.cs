@@ -71,8 +71,27 @@ namespace WenXinJie.Narrative
             foreach (StoryChoice choice in node.choices)
             {
                 Require(choice != null && !string.IsNullOrWhiteSpace(choice.id) && choiceIds.Add(choice.id), "Invalid choice ID: " + node.id);
-                Require(!string.IsNullOrWhiteSpace(choice.text) && choice.conditions != null && choice.effects != null, "Invalid choice: " + choice.id);
-                GetNode(choice.target);
+                Require(!string.IsNullOrWhiteSpace(choice.text), "Missing choice text: " + choice.id);
+                Require(choice.conditions != null && choice.effects != null && choice.outcomes != null,
+                    "Missing choice arrays: " + choice.id);
+                bool hasTarget = !string.IsNullOrEmpty(choice.target);
+                Require(hasTarget != (choice.outcomes.Length > 0), "Choice needs one destination mode: " + choice.id);
+                if (hasTarget)
+                {
+                    GetNode(choice.target);
+                }
+
+                long totalWeight = 0;
+                foreach (StoryOutcome outcome in choice.outcomes)
+                {
+                    Require(outcome != null && outcome.weight > 0 && outcome.effects != null,
+                        "Invalid random outcome: " + choice.id);
+                    GetNode(outcome.target);
+                    ValidateEffects(outcome.effects);
+                    totalWeight += outcome.weight;
+                }
+
+                Require(totalWeight <= int.MaxValue, "Random outcome weights overflow: " + choice.id);
                 ValidateEffects(choice.effects);
                 foreach (StoryCondition condition in choice.conditions)
                 {
@@ -118,7 +137,15 @@ namespace WenXinJie.Narrative
 
                 foreach (var choice in node.choices)
                 {
-                    pending.Push(choice.target);
+                    if (!string.IsNullOrEmpty(choice.target))
+                    {
+                        pending.Push(choice.target);
+                    }
+
+                    foreach (var outcome in choice.outcomes)
+                    {
+                        pending.Push(outcome.target);
+                    }
                 }
             }
 

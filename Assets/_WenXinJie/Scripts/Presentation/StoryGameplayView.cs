@@ -30,7 +30,7 @@ namespace WenXinJie.Presentation
             gameTitle.color = new(0.93f, 0.80f, 0.50f);
             gameTitle.alignment = TextAlignmentOptions.Left;
 
-            var subtitle = ui.Label(root, "Subtitle", "三十日登仙", 390f, 55f, 300f, 38f, 21);
+            var subtitle = ui.Label(root, "Subtitle", "修仙悬疑 AVG", 390f, 55f, 360f, 38f, 21);
             subtitle.font = assets.MenuFont;
             subtitle.color = new(0.78f, 0.84f, 0.82f);
 

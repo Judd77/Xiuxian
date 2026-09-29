@@ -1,6 +1,6 @@
 # 代码结构与 C# 约定
 
-更新：2026-09-24。按用户要求，项目必须兼顾 Rider 格式、职责划分和可读性。
+更新：2026-09-28。本文记录当前实现的职责与持续适用的约束；新谜案玩法尚未实现，设计见 `GAME_REDESIGN.md`。
 
 ## 格式
 
@@ -30,15 +30,16 @@ PascalCase。不要把方法体或多个语句压成一行。公开 JSON 字段�
 | `StoryViewState`                      | 从运行时到界面的不可持久、只读展示数据                                                 | 规则计算和资源查找策略                   |
 | `StoryAssetCatalog`                   | 稳定剧情资源 ID 到已授权 Unity 资产的映射与完整性校验                                  | 决定剧情分支                             |
 | `DialogueReader`                      | 逐字阅读、补全、会话历史、阅读快捷键                                                   | 日程和奖励                               |
-| `CampaignSaveStore`                   | 版本 2 JSON、临时文件替换、备份恢复                                                    | 修改 Session 和 UI                       |
+| `CampaignSaveStore`                   | 版本 3 JSON、临时文件替换、备份恢复                                                    | 修改 Session 和 UI                       |
 | `GameAudio`                           | BGM/环境声、音量与淡入淡出                                                             | 剧情判定、游戏存档                       |
 
 按钮通过 `IStoryCommands` 调用清晰命令，不再经过 `Action -> View 事件 -> Application` 的二次转发。`StoryApplication`
 持有会话生命周期：启动时仅显示首页，开始游戏创建新会话，继续游戏优先恢复内存会话，读取存档显式恢复磁盘快照。读取存档先完整验证，再提交到当前周目。设置可使用 PlayerPrefs，游戏进度不可使用
 PlayerPrefs。音乐和背景通过场景序列化引用接入，不在 Update 中查找或加载资源。
 
-旧 `FirstDay*` 原型、`Prototype.unity` 及对应测试工具已经移除，工程只保留正式 `Game.unity`、`Campaign.json` 和版本 2
-存档链路。新增章节只增加节点、变量、条件、效果和媒体目录项；只有出现新的通用规则语义时才扩展运行器。开发阶段不保留旧接口或旧存档兼容代码。
+旧 `FirstDay*` 原型、`Prototype.unity` 及对应测试工具已经移除，工程只保留正式 `Game.unity`、`Campaign.json` 和版本 3 存档链路。新谜案的证据、推断与术法规则应先由切片验证；真正需要通用规则语义时才扩展运行器，不把特殊案件逻辑堆在 UI。开发阶段不保留旧接口或旧存档兼容代码。
+
+`StorySession` 已有可存档复现的随机状态基础，但当前正式剧情尚未使用随机结果；不能把随机事件池描述成已接入或新设计的必做功能。
 
 线索簿的解锁判断在 `StoryViewStateFactory` 中从会话变量映射为 `ClueJournalState`。`ClueJournalView` 不持有 `StorySession`，线索的标题、分类和说明也不写入存档；存档仍只保存稳定剧情变量与当前节点。
 

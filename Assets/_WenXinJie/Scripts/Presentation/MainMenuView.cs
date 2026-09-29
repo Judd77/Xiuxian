@@ -29,10 +29,10 @@ namespace WenXinJie.Presentation
             titleShadow.effectColor = new(0.78f, 0.82f, 0.68f, 0.32f);
             titleShadow.effectDistance = new(2f, -2f);
 
-            var subtitle = ui.Label(root, "MainMenuSubtitle", "三十日登仙", 154f, 242f, 420f, 54f, 32);
+            var subtitle = ui.Label(root, "MainMenuSubtitle", "修仙悬疑 AVG", 154f, 242f, 520f, 54f, 32);
             subtitle.font = menuFont;
             subtitle.color = new(0.06f, 0.15f, 0.13f);
-            var chapter = ui.Label(root, "MainMenuChapter", "卷一 · 雨叩山门", 154f, 310f, 420f, 42f, 23);
+            var chapter = ui.Label(root, "MainMenuChapter", "旧号疑云", 154f, 310f, 420f, 42f, 23);
             chapter.font = menuFont;
             chapter.color = new(0.09f, 0.18f, 0.16f);
 

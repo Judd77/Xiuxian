@@ -63,10 +63,12 @@ namespace WenXinJie.Editor
                 await Capture("Docs/Validation/campaign-credits-modal-1080.png");
                 await Click("CreditsClose");
                 await Click("StartGame");
+                await VerifyCaseSlice(application, reader);
                 Require(application.Session.Current.id == "c01.gate", "Campaign did not start at the gate.");
+                VerifyTextContains("Status", "线索 0/6");
                 await Click("ClueJournal");
                 VerifyActive("ClueJournalOverlay", true);
-                VerifyText("ClueJournalCount", "0 / 3");
+                VerifyText("ClueJournalCount", "0 / 6");
                 await Click("ClueJournalClose");
                 reader.Complete();
                 application.AdvanceStory();
@@ -101,8 +103,10 @@ namespace WenXinJie.Editor
                 reader.Complete();
                 application.SelectChoice("copyPage");
                 Require(application.Session.GetValue("clue.register") == 1, "Register clue was not applied.");
+                VerifyText("Notice", "新线索已收录：外门名册抄页");
                 reader.Complete();
                 application.AdvanceStory();
+                VerifyText("Notice", string.Empty);
                 reader.Complete();
                 application.SelectChoice("visit");
                 Require(application.Session.Current.id == "c01.meeting", "Visit choice failed.");
@@ -116,8 +120,10 @@ namespace WenXinJie.Editor
                 reader.Complete();
                 application.SelectChoice("confide");
                 Require(application.Session.GetValue("clue.jade") == 1, "Jade clue was not applied.");
+                VerifyText("Notice", "新线索已收录：青玉扣");
                 await Click("ClueJournal");
-                VerifyText("ClueJournalCount", "2 / 3");
+                VerifyText("ClueJournalCount", "2 / 6");
+                VerifyTextContains("Status", "线索 2/6");
                 await Click("ClueEntry1");
                 VerifyText("ClueDetailTitle", "青玉扣");
                 VerifyText("ClueDetailStatus", "物证 · 松风岭 · 已收录");
@@ -155,8 +161,11 @@ namespace WenXinJie.Editor
                 Require(application.Session.GetValue("route.alliance") == 1, "Load did not restore world state.");
                 reader.Complete();
                 await Capture("Docs/Validation/campaign-shared-secret-1080.png");
-                LastReport = "Campaign Play Mode checks PASS: main menu start/continue/load, actual choice click, "
-                             + "portrait/background changes, first-night alliance route, isolated save/load, and 1920x1080 capture.";
+                await VerifyAdditionalRoutes(application, reader);
+                LastReport = "Campaign Play Mode checks PASS: case inference, spell, premature confrontation, "
+                             + "case save/load, main menu start/continue/load, actual choice click, "
+                             + "four first-night routes, day-seven continuation and new clues, background fades, "
+                             + "isolated save/load, and 1920x1080 capture.";
                 Debug.Log(LastReport);
             }
             catch (Exception exception)
@@ -174,6 +183,57 @@ namespace WenXinJie.Editor
             }
         }
 
+        private static async Task VerifyCaseSlice(StoryApplication application, DialogueReader reader)
+        {
+            Require(application.Session.Current.id == "case.intro", "New game did not start at the case.");
+            VerifyTextContains("Status", "辨气 未习得");
+            await Click("ClueJournal");
+            VerifyText("ClueJournalCount", "2 / 14");
+            await Click("ClueJournalClose");
+            Advance(application, reader);
+            Choose(application, reader, "person");
+            Advance(application, reader);
+            Advance(application, reader);
+            Require(application.Session.GetValue("case.learned") == 1, "The spell was not learned.");
+            VerifyTextContains("Status", "辨气 已习得");
+            Choose(application, reader, "challenge");
+            Require(application.Session.GetValue("case.sealLost") == 1,
+                "Premature confrontation did not seal the receipt.");
+            Advance(application, reader);
+            Advance(application, reader);
+            Require(application.Session.GetValue("case.verified") == 1,
+                "Spell did not verify living breath after the receipt was sealed.");
+            await Click("ClueJournal");
+            VerifyText("ClueJournalCount", "5 / 14");
+            await Click("ClueEntry4");
+            VerifyText("ClueDetailTitle", "炉灰内侧活息");
+            await Click("ClueJournalClose");
+            application.SaveGame();
+            Require(File.Exists(application.SavePath), "Case save was not written.");
+            await Click("MainMenuButton");
+            await Click("LoadGame");
+            Require(application.Session.Current.id == "case.meet"
+                    && application.Session.GetValue("case.sealLost") == 1
+                    && application.Session.GetValue("case.verified") == 1,
+                "Case save did not restore evidence and consequence.");
+            Choose(application, reader, "inside");
+            Advance(application, reader);
+            Choose(application, reader, "lin");
+            Advance(application, reader);
+            Choose(application, reader, "cart");
+            Advance(application, reader);
+            Choose(application, reader, "verify");
+            Advance(application, reader);
+            Choose(application, reader, "witness");
+            Advance(application, reader);
+            Require(application.Session.Current.id == "case.boundary"
+                    && application.Session.GetValue("case.action") == 1,
+                "Confrontation did not change the next action.");
+            reader.Complete();
+            await Capture("Docs/Validation/case-boundary-1080.png");
+            Choose(application, reader, "legacy");
+        }
+
         private static async Task Click(string name)
         {
             var target = GameObject.Find(name);
@@ -184,6 +244,173 @@ namespace WenXinJie.Editor
             };
             ExecuteEvents.Execute(target, pointer, ExecuteEvents.pointerClickHandler);
             await WaitForRender();
+        }
+
+        private static async Task VerifyAdditionalRoutes(StoryApplication application, DialogueReader reader)
+        {
+            ReachActionHub(application, reader);
+            Choose(application, reader, "investigate");
+            await VerifyBackgroundTransition(reader, "SteleCorridor", "Docs/Validation/campaign-stele-1080.png");
+            FinishAction(application, reader, "copyPage");
+            PerformAction(application, reader, "cultivate", "steadyBreath");
+            Choose(application, reader, "night");
+            Choose(application, reader, "alone");
+            Advance(application, reader);
+            Require(application.Session.Current.id == "c01.alone.search", "Alone route did not reach the quarters.");
+            await VerifyBackgroundTransition(reader, "DiscipleQuartersNight",
+                "Docs/Validation/campaign-quarters-night-1080.png");
+
+            ReachActionHub(application, reader);
+            PerformAction(application, reader, "visit", "question");
+            PerformAction(application, reader, "cultivate", "steadyBreath");
+            Choose(application, reader, "night");
+            Choose(application, reader, "guarded");
+            Require(application.Session.Current.id == "c01.guarded", "Guarded route was not reached.");
+            Advance(application, reader);
+            Require(application.Session.Current.id == "c01.guarded.escape", "Guarded route did not continue.");
+
+            ReachActionHub(application, reader);
+            Choose(application, reader, "cultivate");
+            Advance(application, reader);
+            Advance(application, reader);
+            Choose(application, reader, "followEcho");
+            VerifyText("Notice", "新线索已收录：山腹共鸣");
+            VerifyTextContains("Status", "线索 1/6");
+            await Click("ClueJournal");
+            VerifyText("ClueJournalCount", "1 / 6");
+            await Click("ClueEntry2");
+            VerifyText("ClueDetailTitle", "山腹共鸣");
+            await Click("ClueJournalClose");
+            Advance(application, reader);
+            Require(application.Session.Current.id == "c01.hub", "Training did not return to the hub.");
+            PerformAction(application, reader, "cultivate", "steadyBreath");
+            Choose(application, reader, "night");
+            Choose(application, reader, "uneasy");
+            Require(application.Session.Current.id == "c01.uneasy", "Uneasy route was not reached.");
+            Advance(application, reader);
+            Advance(application, reader);
+            Advance(application, reader);
+            Advance(application, reader);
+            Choose(application, reader, "resonanceLead");
+            Require(application.Session.Current.id == "c02.resonance", "Resonance lead was not reached.");
+            await VerifyBackgroundTransition(reader, "MountainHeartGate",
+                "Docs/Validation/campaign-mountain-heart-1080.png");
+            Advance(application, reader);
+            Require(application.Session.Current.id == "c02.evening", "Day-two evening was not reached.");
+            Choose(application, reader, "rescue");
+            Require(application.Session.GetValue("mark.rescued") == 1, "The witness was not rescued.");
+            Advance(application, reader);
+            Choose(application, reader, "conceal");
+            Advance(application, reader);
+            Choose(application, reader, "traceList");
+            VerifyText("Notice", "新线索已收录：药炉账册");
+            await Click("ClueJournal");
+            VerifyText("ClueJournalCount", "2 / 6");
+            await Click("ClueEntry3");
+            VerifyText("ClueDetailTitle", "药炉账册");
+            await Click("ClueJournalClose");
+            Advance(application, reader);
+            Choose(application, reader, "escort");
+            Advance(application, reader);
+            Choose(application, reader, "witness");
+            VerifyText("Notice", "新线索已收录：阿澈的证词");
+            Advance(application, reader);
+            Choose(application, reader, "shen");
+            Advance(application, reader);
+            Choose(application, reader, "protect");
+            Require(application.Session.Current.id == "c05.protect"
+                    && application.Session.GetValue("day") == 5
+                    && application.Session.GetValue("actions") == 0,
+                "The second act did not finish at the day-five chapter boundary.");
+            Advance(application, reader);
+            Advance(application, reader);
+            Require(application.Session.Current.id == "c06.dawn"
+                    && application.Session.GetValue("day") == 6,
+                "The third act did not start after day five.");
+            Choose(application, reader, "followGu");
+            Advance(application, reader);
+            Choose(application, reader, "steal");
+            VerifyText("Notice", "新线索已收录：替阵测绘");
+            await Click("ClueJournal");
+            VerifyText("ClueJournalCount", "4 / 6");
+            await Click("ClueEntry5");
+            VerifyText("ClueDetailTitle", "替阵测绘");
+            await Click("ClueJournalClose");
+            Advance(application, reader);
+            Require(application.Session.Current.id == "c07.dawn"
+                    && application.Session.GetValue("day") == 7,
+                "Day seven was not reached from the third-act opening.");
+        }
+
+        private static void ReachActionHub(StoryApplication application, DialogueReader reader)
+        {
+            application.StartNewGame();
+            Advance(application, reader);
+            Choose(application, reader, "borrowed");
+            Advance(application, reader);
+            Advance(application, reader);
+            Choose(application, reader, "sense");
+            Advance(application, reader);
+            Choose(application, reader, "number");
+            Advance(application, reader);
+            Choose(application, reader, "lin");
+            Advance(application, reader);
+            Choose(application, reader, "cart");
+            Advance(application, reader);
+            Choose(application, reader, "verify");
+            Advance(application, reader);
+            Choose(application, reader, "witness");
+            Advance(application, reader);
+            Choose(application, reader, "legacy");
+            Advance(application, reader);
+            Advance(application, reader);
+            Advance(application, reader);
+            Choose(application, reader, "watch");
+            Advance(application, reader);
+            Require(application.Session.Current.id == "c01.hub", "Could not reach the action hub.");
+            reader.Complete();
+        }
+
+        private static void PerformAction(StoryApplication application, DialogueReader reader, string action,
+            string resolution)
+        {
+            Choose(application, reader, action);
+            FinishAction(application, reader, resolution);
+        }
+
+        private static void FinishAction(StoryApplication application, DialogueReader reader, string resolution)
+        {
+            Advance(application, reader);
+            Advance(application, reader);
+            Choose(application, reader, resolution);
+            Advance(application, reader);
+            Require(application.Session.Current.id == "c01.hub", "Action did not return to the hub.");
+            reader.Complete();
+        }
+
+        private static void Advance(StoryApplication application, DialogueReader reader)
+        {
+            reader.Complete();
+            application.AdvanceStory();
+        }
+
+        private static void Choose(StoryApplication application, DialogueReader reader, string choiceId)
+        {
+            reader.Complete();
+            application.SelectChoice(choiceId);
+        }
+
+        private static async Task VerifyBackgroundTransition(DialogueReader reader, string textureName, string screenshot)
+        {
+            VerifyPicture("Background", textureName, true);
+            await WaitForRender();
+            var previous = FindIncludingInactive("PreviousBackground").GetComponent<RawImage>();
+            Require(previous.texture != null && previous.color.a > 0f,
+                "Background fade did not start for " + textureName);
+            await Awaitable.WaitForSecondsAsync(0.6f);
+            Require(previous.color.a < 0.01f, "Background fade did not finish for " + textureName);
+            reader.Complete();
+            await Capture(screenshot);
         }
 
         private static void VerifyChoiceAvailability(int expectedAvailable)

@@ -6,15 +6,18 @@ namespace WenXinJie.Presentation
 {
     internal sealed class ClueJournalView
     {
-        private const int EntryCount = 3;
+        private const int EntryCount = 6;
         private readonly TMP_Text _category;
         private readonly TMP_Text _count;
         private readonly TMP_Text _description;
         private readonly Button[] _entryButtons = new Button[EntryCount];
+        private readonly Button _previousPage;
+        private readonly Button _nextPage;
 
         private readonly GameObject _root;
         private readonly TMP_Text _title;
         private int _selectedIndex;
+        private int _page;
         private ClueJournalState _state = new();
 
         public ClueJournalView(Transform parent, StoryUiFactory ui, TMP_FontAsset font)
@@ -26,7 +29,7 @@ namespace WenXinJie.Presentation
 
             var heading = ui.Label(root, "ClueJournalHeading", "见闻 · 线索簿", 180f, 100f, 1100f, 90f, 44);
             heading.font = font;
-            _count = ui.Label(root, "ClueJournalCount", "0 / 3", 1380f, 118f, 360f, 60f, 27);
+            _count = ui.Label(root, "ClueJournalCount", "0 / 6", 1380f, 118f, 360f, 60f, 27);
             _count.font = font;
             _count.alignment = TextAlignmentOptions.Right;
             _count.color = new(0.84f, 0.76f, 0.52f);
@@ -35,11 +38,16 @@ namespace WenXinJie.Presentation
             {
                 var entryIndex = index;
                 _entryButtons[index] = ui.Button(root, "ClueEntry" + index, string.Empty,
-                    180f, 270f + index * 152f, 420f, 116f, () => Select(entryIndex));
+                    180f, 270f + index * 90f, 420f, 78f, () => Select(_page * EntryCount + entryIndex));
                 var label = _entryButtons[index].GetComponentInChildren<TMP_Text>();
                 label.alignment = TextAlignmentOptions.Left;
-                label.fontSize = 28;
+                label.fontSize = 24;
             }
+
+            _previousPage = ui.Button(root, "CluePreviousPage", "上一页", 180f, 830f, 185f, 58f,
+                () => SetPage(_page - 1));
+            _nextPage = ui.Button(root, "ClueNextPage", "下一页", 395f, 830f, 185f, 58f,
+                () => SetPage(_page + 1));
 
             var detailFrame = ui.Frame(root, "ClueDetailFrame", 660f, 250f, 1080f, 560f);
             detailFrame.color = new(0.82f, 0.88f, 0.82f);
@@ -63,26 +71,12 @@ namespace WenXinJie.Presentation
         {
             _state = state ?? new();
             var unlocked = 0;
-            for (var index = 0; index < _entryButtons.Length; index++)
+            foreach (var entry in _state.Entries)
             {
-                var visible = index < _state.Entries.Length;
-                _entryButtons[index].gameObject.SetActive(visible);
-                if (!visible)
-                {
-                    continue;
-                }
-
-                var entry = _state.Entries[index];
                 if (entry.Unlocked)
                 {
                     unlocked++;
                 }
-
-                var label = _entryButtons[index].GetComponentInChildren<TMP_Text>();
-                label.text = entry.Title + "\n" + (entry.Unlocked ? "已收录" : "未发现");
-                label.color = entry.Unlocked
-                    ? new(0.96f, 0.94f, 0.82f)
-                    : new(0.68f, 0.72f, 0.68f);
             }
 
             _count.text = unlocked + " / " + _state.Entries.Length;
@@ -93,6 +87,8 @@ namespace WenXinJie.Presentation
             }
 
             _selectedIndex = FindSelection();
+            _page = _selectedIndex / EntryCount;
+            RenderPage();
             Select(_selectedIndex);
         }
 
@@ -115,6 +111,11 @@ namespace WenXinJie.Presentation
             }
 
             _selectedIndex = index;
+            if (_page != index / EntryCount)
+            {
+                _page = index / EntryCount;
+                RenderPage();
+            }
             var entry = _state.Entries[index];
             _title.text = entry.Title;
             _category.text = entry.Unlocked ? entry.Category + " · 已收录" : "尚未收录";
@@ -139,6 +140,43 @@ namespace WenXinJie.Presentation
             }
 
             return 0;
+        }
+
+        private void SetPage(int page)
+        {
+            var pageCount = (_state.Entries.Length + EntryCount - 1) / EntryCount;
+            if (page < 0 || page >= pageCount)
+            {
+                return;
+            }
+
+            _page = page;
+            RenderPage();
+            Select(page * EntryCount);
+        }
+
+        private void RenderPage()
+        {
+            for (var slot = 0; slot < EntryCount; slot++)
+            {
+                var index = _page * EntryCount + slot;
+                var visible = index < _state.Entries.Length;
+                _entryButtons[slot].gameObject.SetActive(visible);
+                if (!visible)
+                {
+                    continue;
+                }
+
+                var entry = _state.Entries[index];
+                var label = _entryButtons[slot].GetComponentInChildren<TMP_Text>();
+                label.text = entry.Title + "\n" + (entry.Unlocked ? "已收录" : "未发现");
+                label.color = entry.Unlocked
+                    ? new(0.96f, 0.94f, 0.82f)
+                    : new(0.68f, 0.72f, 0.68f);
+            }
+
+            _previousPage.gameObject.SetActive(_page > 0);
+            _nextPage.gameObject.SetActive((_page + 1) * EntryCount < _state.Entries.Length);
         }
 
         private void ClearDetails()

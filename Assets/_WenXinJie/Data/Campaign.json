@@ -1,7 +1,7 @@
 {
   "id": "wenxinjie",
-  "revision": 2,
-  "start": "c01.gate",
+  "revision": 6,
+  "start": "case.intro",
   "variables": [
     {
       "id": "day",
@@ -62,9 +62,323 @@
       "initial": 0,
       "minimum": 0,
       "maximum": 1
-    }
+    },
+    {
+      "id": "clue.ledger",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "clue.witness",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "trust.shenYan",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 3
+    },
+    {
+      "id": "mark.rescued",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "trust.gu",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 3
+    },
+    {
+      "id": "clue.array",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "mark.public",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "mark.evacuated",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "mark.original",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "mark.village",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "mark.arrayKey",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.guess",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 3
+    },
+    {
+      "id": "case.learned",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.sealLost",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.verified",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.conclusion",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 3
+    },
+    {
+      "id": "case.action",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 4
+    },
+    {"id": "case.ache", "initial": 0, "minimum": 0, "maximum": 1},
+    {"id": "case.ledgerCopy", "initial": 0, "minimum": 0, "maximum": 1},
+    {"id": "case.cartTrace", "initial": 0, "minimum": 0, "maximum": 1},
+    {"id": "case.villageReady", "initial": 0, "minimum": 0, "maximum": 1},
+    {"id": "case.arrayMeasured", "initial": 0, "minimum": 0, "maximum": 1},
+    {"id": "case.witnessProtected", "initial": 0, "minimum": 0, "maximum": 1},
+    {"id": "case.publicRecord", "initial": 0, "minimum": 0, "maximum": 1},
+    {"id": "case.identityLead", "initial": 0, "minimum": 0, "maximum": 1},
+    {"id": "case.shenAccount", "initial": 0, "minimum": 0, "maximum": 1}
   ],
   "nodes": [
+    {
+      "id": "case.intro",
+      "chapter": "卷一 · 旧号疑云",
+      "location": "青云山 · 司籍房",
+      "speaker": "旁白",
+      "text": "你刚入外门，在司籍房誊录入门名册。登仙帖背面有一道被刮去的旧名：沈砚。你在十年前的注销抄页上找到了同一个名字，旁边写着“亡于阵故”。\n原册锁在执事房。你的职务只许核对抄页和送到司籍房的炉房回执。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "case.records",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "case.records",
+      "chapter": "卷一 · 旧号疑云",
+      "location": "青云山 · 司籍房",
+      "speaker": "旁白",
+      "text": "你把注销抄页和本旬炉房领灰回执并排放好：一边说沈砚十年前已死，一边仍以他的旧编号领走养息灰。回执不是原账，但盖着今天的炉印。\n同一名字，能证明是同一个人吗？你先记下自己的判断。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {"id": "person", "text": "沈砚没死，或许就藏在炉里", "target": "case.guessPerson", "effects": [{"variable": "case.guess", "operation": "set", "value": 1}]},
+        {"id": "borrowed", "text": "有人借死者的编号藏匿活人", "target": "case.guessBorrowed", "effects": [{"variable": "case.guess", "operation": "set", "value": 2}]},
+        {"id": "error", "text": "先按旧账误抄查，暂不认定有人", "target": "case.guessError", "effects": [{"variable": "case.guess", "operation": "set", "value": 3}]}
+      ]
+    },
+    {"id": "case.guessPerson", "chapter": "卷一 · 旧号疑云", "location": "青云山 · 司籍房", "speaker": "旁白", "text": "你在“沈砚”下面画线：若他活着，为何用死者的名字领灰？可回执只写编号，没有领灰人的手印。", "background": "stele", "portrait": "", "rain": false, "next": "case.lesson", "effects": [], "choices": []},
+    {"id": "case.guessBorrowed", "chapter": "卷一 · 旧号疑云", "location": "青云山 · 司籍房", "speaker": "旁白", "text": "你在旧编号旁做记号：名字或许只是遮掩。要证明炉中真有人，不能只靠账面猜测。", "background": "stele", "portrait": "", "rain": false, "next": "case.lesson", "effects": [], "choices": []},
+    {"id": "case.guessError", "chapter": "卷一 · 旧号疑云", "location": "青云山 · 司籍房", "speaker": "旁白", "text": "你暂记作误抄，却舍不得划掉“今日炉印”四字。若只是旧账，为何印泥还未干？", "background": "stele", "portrait": "", "rain": false, "next": "case.lesson", "effects": [], "choices": []},
+    {
+      "id": "case.lesson",
+      "chapter": "卷一 · 旧号疑云",
+      "location": "青云山 · 司籍房",
+      "speaker": "旁白",
+      "text": "司籍房留着一本沾灰的《辨气入门》。你已有炼气底子，照书上方法分别观察刚按的朱印与昨夜旧印：一道气线仍向纸里收，一道已经散向砚边。你试了三次，才分清新旧与流向。书末注明：残气不能辨出姓名，也不能隔着阵门数人。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "case.method",
+      "effects": [{"variable": "case.learned", "operation": "set", "value": 1}],
+      "choices": []
+    },
+    {
+      "id": "case.method",
+      "chapter": "卷一 · 旧号疑云",
+      "location": "青云山 · 炉房交接台",
+      "speaker": "旁白",
+      "text": "回执将被送回炉房归档。你现在可以用辨气检查盖印时夹入的灰，也可以先找管事质问账目。交接台在司籍核对范围内，炉门仍有禁制，不能闯入。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {"id": "sense", "text": "运用辨气，查回执灰的气息流向", "target": "case.ash"},
+        {"id": "challenge", "text": "先质问管事，为何死者仍在领灰", "target": "case.sealed", "effects": [{"variable": "case.sealLost", "operation": "set", "value": 1}, {"variable": "risk.attention", "operation": "add", "value": 1}]}
+      ]
+    },
+    {
+      "id": "case.sealed",
+      "chapter": "卷一 · 旧号疑云",
+      "location": "青云山 · 炉房交接台",
+      "speaker": "管事",
+      "text": "“旧号沿用，司籍不必问炉事。”管事收走完整回执，当场封了炉房原账。你失去核对全页的机会，巡守也记住了你。印被带走，交接台缝里却留下残灰。你刚学的辨气或许能从这处被忽略的地方取得新证据。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "next": "case.ash",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "case.ash",
+      "chapter": "卷一 · 旧号疑云",
+      "location": "青云山 · 炉房交接台",
+      "speaker": "旁白",
+      "text": "你运转辨气，交接台的灰中浮出一道新鲜活息，方向与昨日旧印相反，像是从炉门内侧随今日回执带出。它不是储存多年的死灰。\n这只能证明今天有活人的气息经过炉门内侧；气息可能属于运灰者，也可能属于息位中的人。你仍需核对轮值与物件，不能凭这道气认出姓名或人数。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "next": "case.meet",
+      "effects": [{"variable": "case.verified", "operation": "set", "value": 1}],
+      "choices": []
+    },
+    {
+      "id": "case.meet",
+      "chapter": "卷一 · 旧号疑云",
+      "location": "青云山 · 司籍房",
+      "speaker": "旁白",
+      "text": "你把注销抄页、当旬回执和刚记下的气息方向放在一起。编号今天被使用，灰里也有今日活息；但你还缺少把编号、持帖者和炉中人连起来的证据。管事已经注意你，下一步按哪种解释查，会影响你先接近谁。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {"id": "inside", "text": "先按沈砚仍在炉内追查", "target": "case.rebuttal", "effects": [{"variable": "case.conclusion", "operation": "set", "value": 1}]},
+        {"id": "number", "text": "追查是谁沿用旧号转运活人", "target": "case.admission", "effects": [{"variable": "case.conclusion", "operation": "set", "value": 2}]},
+        {"id": "uncertain", "text": "先核实活息来源，不急着认姓名", "target": "case.caution", "effects": [{"variable": "case.conclusion", "operation": "set", "value": 3}]}
+      ]
+    },
+    {"id": "case.rebuttal", "chapter": "卷一 · 旧号疑云", "location": "青云山 · 炉房外廊", "speaker": "管事", "text": "你按『沈砚仍在炉内』打听，管事拿死亡抄页堵住你的去路：『既认得字，就别问死者。』你没有能反驳的身份物证，轮值牌被他先一步收走。林月在外廊低声提醒：旧号与活息之间还缺一个人的身份；按名字闯炉，只会找错门。", "background": "mountainHeart", "portrait": "", "rain": false, "next": "case.decision", "effects": [{"variable": "risk.attention", "operation": "add", "value": 1}], "choices": []},
+    {"id": "case.admission", "chapter": "卷一 · 旧号疑云", "location": "青云山 · 司籍房", "speaker": "旁白", "text": "你把旧号和姓名分开抄写。管事无法解释今日领灰，林月手里又有一份失踪弟子的轮值传闻；两者还未相互证实。若先查转运，可能抢在换班前接近活人；若查村落，则能知道能否安全开炉。", "background": "stele", "portrait": "", "rain": false, "next": "case.decision", "effects": [], "choices": []},
+    {"id": "case.caution", "chapter": "卷一 · 旧号疑云", "location": "青云山 · 司籍房", "speaker": "旁白", "text": "你在记录上写下『今日活息，身份未明』，没有把术法看见的方向写成人名。运灰弟子因你没当众指认，愿给出换班时辰；林月也愿带你找失踪者家属。你仍须选择先保护证人、受监督查炉，还是公开已核实的部分。", "background": "stele", "portrait": "", "rain": false, "next": "case.decision", "effects": [], "choices": []},
+    {
+      "id": "case.decision",
+      "chapter": "卷一 · 旧号疑云",
+      "location": "青云山 · 松风岭",
+      "speaker": "旁白",
+      "text": "炉房的今日气息与旧号有关，却还不能证明炉中人的身份。贸然停炉可能让山下裂隙失控；完整原账若被封，秘密救援也缺可靠名单。你决定先从谁掌握的证据入手？",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {"id": "lin", "text": "交给林月，寻找活人和撤离路线", "target": "case.lin", "effects": [{"variable": "case.action", "operation": "set", "value": 1}]},
+        {"id": "gu", "text": "交给顾衡，争取受监督的炉房查验", "target": "case.gu", "effects": [{"variable": "case.action", "operation": "set", "value": 2}]},
+        {"id": "public", "text": "公开记录和辨气所得，让宗门无法掩盖", "target": "case.public", "effects": [{"variable": "case.action", "operation": "set", "value": 3}, {"variable": "risk.attention", "operation": "add", "value": 1}]},
+        {"id": "shen", "text": "追查旧阵测绘笔迹，核对沈砚的记录", "target": "case.shen", "effects": [{"variable": "case.action", "operation": "set", "value": 4}]}
+      ]
+    },
+    {"id": "case.lin", "chapter": "卷一 · 山中疑云", "location": "青云山 · 松风岭", "speaker": "林月", "text": "林月收下核对过的抄页，答应先找活人的姓名和退路。她提醒：自己不能独自救走炉中所有人，更不能在未知裂隙承压时掐灭炉火。你的证据换来了合作，也把风险带给她。", "background": "ridge", "portrait": "linYue", "rain": false, "next": "route.lin.start", "effects": [], "choices": []},
+    {"id": "case.gu", "chapter": "卷一 · 山中疑云", "location": "青云山 · 松风岭", "speaker": "旁白", "text": "顾衡接受抄页和辨气记录，允诺亲自监督一次炉房查验。他不准在替阵办法得到验证前停炉，也不让林月私自带走人。你得到查验机会，秘密撤人的窗口却缩小了。", "background": "ridge", "portrait": "", "rain": false, "next": "route.gu.start", "effects": [], "choices": []},
+    {"id": "case.public", "chapter": "卷一 · 山中疑云", "location": "青云山 · 旧碑廊", "speaker": "旁白", "text": "抄页在外门传开，炉门当夜加封。更多弟子知道旧号仍被使用，开始怀疑里面有活人；林月原先的隐秘路线也失效了。顾衡答应让见证者查验，但要求先测裂隙承压。公开换来了监督，也夺走了立即接人的机会。", "background": "stele", "portrait": "", "rain": false, "next": "route.public.start", "effects": [], "choices": []},
+    {"id": "case.shen", "chapter": "卷一 · 山中疑云", "location": "青云山 · 旧图库", "speaker": "旁白", "text": "抄页边缘有一种反复改正阵眼位置的笔法，和注销页上的『沈砚』签名相同。签名不能证明他还活着，却指向他当年画过的原图。你申请核对封存图库，管事只许看副本；原图被移进废测绘房。", "background": "stele", "portrait": "", "rain": false, "next": "route.shen.start", "effects": [], "choices": []},
+    {"id": "route.shen.start", "chapter": "卷一 · 旧阵底稿", "location": "废测绘房", "speaker": "旁白", "text": "封柜里有两版阵图：旧版已画人息位，承压上限很低；新版把上限加倍，封泥却写『照旧』。守柜人快回来了。带走原图能作证，也会惊动管事；只拓改动处，则要到现场补量缺失的尺寸。", "background": "stele", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "original", "text": "保全两版原图，承担追查风险", "target": "route.shen.original"}, {"id": "rubbing", "text": "只拓改动，留下原图待日后复核", "target": "route.shen.rubbing"}]},
+    {"id": "route.shen.original", "chapter": "卷一 · 旧阵底稿", "location": "废测绘房", "speaker": "旁白", "text": "你把两版图连封泥带走，初案签名仍在，不能说最初的人息位是宗门后来擅加的。守柜人发现空柜，管事派人追查。图纸可以上桌对质，也让你下一次入房变难。", "background": "stele", "portrait": "", "rain": false, "next": "route.shen.find", "effects": [{"variable": "risk.attention", "operation": "add", "value": 1}, {"variable": "case.arrayMeasured", "operation": "set", "value": 1}], "choices": []},
+    {"id": "route.shen.rubbing", "chapter": "卷一 · 旧阵底稿", "location": "废测绘房", "speaker": "旁白", "text": "你拓下被加高的上限，却漏了副脉的一个刻度。原图仍在柜中，旁人可以复核；若直接代入拓片，会低估村口回流。你在缺口旁留红点，提醒自己必须到现场量。", "background": "stele", "portrait": "", "rain": false, "next": "route.shen.find", "effects": [], "choices": []},
+    {"id": "route.shen.find", "chapter": "卷一 · 旧阵底稿", "location": "旧试阵台", "speaker": "沈砚", "text": "你循修正笔迹找到一个本该在十年前死亡的人。沈砚先指向新版的加高数字，说那是宗门的手笔，却把第一版推到桌角，不主动提自己的签名。你决定拿哪项证据问他。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "signature", "text": "拿初案签名追问第一批弟子是否知情", "target": "route.shen.admit"}, {"id": "limit", "text": "先问承压上限由谁加高", "target": "route.shen.excuse"}]},
+    {"id": "route.shen.admit", "chapter": "卷一 · 旧阵底稿", "location": "旧试阵台", "speaker": "沈砚", "text": "沈砚承认自己画过第一批人息位，称当时只答应让自愿者短时入阵；旧名册却没有自愿签记。他无法证明有人同意。你把初案签名抄入可供家属核对的记录。他愿继续算替阵，也知道家属可能拒绝他参与。", "background": "mountainHeart", "portrait": "", "rain": false, "next": "route.shen.trial", "effects": [{"variable": "case.publicRecord", "operation": "set", "value": 1}, {"variable": "case.shenAccount", "operation": "set", "value": 1}], "choices": []},
+    {"id": "route.shen.excuse", "chapter": "卷一 · 旧阵底稿", "location": "旧试阵台", "speaker": "沈砚", "text": "他指出宗门改高的笔迹，却回避第一版的人息位。你把十年前试阵灰与旧图对齐：加高前已有活人承压。沈砚沉默许久，承认自己也签过初案。他请求先试出新路再向家属坦白；你暂拿到技术帮助，却失去立即公开责任的时机。", "background": "mountainHeart", "portrait": "", "rain": false, "next": "route.shen.trial", "effects": [{"variable": "case.shenAccount", "operation": "set", "value": 1}], "choices": []},
+    {"id": "route.shen.trial", "chapter": "卷一 · 旧阵底稿", "location": "废副脉", "speaker": "旁白", "text": "你以辨气读旧试阵灰，再把一线灵气送进废脉。气息先向山腹退，随即从村口折回，旧图漏了一处回流点。沈砚要继续加压求精确数值，你选择先护住哪边。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [{"variable": "case.arrayMeasured", "operation": "set", "value": 1}], "choices": [{"id": "village", "text": "先稳村口，炉侧停止接人", "target": "route.shen.guardVillage"}, {"id": "furnace", "text": "先稳炉侧，催顾衡撤村口住户", "target": "route.shen.guardFurnace"}]},
+    {"id": "route.shen.guardVillage", "chapter": "卷一 · 旧阵底稿", "location": "废副脉", "speaker": "旁白", "text": "符箓守住村口，炉侧空息位却发出裂声。林月赶来阻止继续加压：若那里有人，试验已经伤人。你停下，把实测回流补进图里；沈砚第一次没再说『算上去就好』，而是问谁有权同意下一次试验。", "background": "mountainHeart", "portrait": "", "rain": false, "next": "route.shen.finish", "effects": [], "choices": []},
+    {"id": "route.shen.guardFurnace", "chapter": "卷一 · 旧阵底稿", "location": "废副脉", "speaker": "旁白", "text": "炉侧符纸完整，村口旧护符却裂了一角。顾衡带来那户人家的损耗账：保护弟子不能把伤害转给不知情的人。你停下，记住实测回流；沈砚的图从此须与村民护符记录放在同一张案上。", "background": "mountainHeart", "portrait": "", "rain": false, "next": "route.shen.finish", "effects": [], "choices": []},
+    {"id": "route.shen.finish", "chapter": "卷一 · 旧阵底稿", "location": "司籍房", "speaker": "旁白", "text": "你找到画阵者，也证明底稿不完整。沈砚愿给出分流线，但必须由炉中人家属和村民核对风险；你仍缺活人名单与撤村时间。下一次灵潮前，旧阵真实载荷须由三方数据一起决定。", "background": "stele", "portrait": "", "rain": false, "next": "case.boundary", "effects": [], "choices": []},
+    {
+      "id": "case.boundary",
+      "chapter": "卷一 · 山中疑云",
+      "location": "青云山 · 司籍房",
+      "speaker": "旁白",
+      "text": "你带回了不同来路的证据，也看见自己先前的选择改变了谁愿意开口、哪扇门仍能进入。至少一名活人仍在炉中；山下裂隙与旧阵的代价，还需要你继续查证。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {"id": "continue", "text": "查山下护符与炉房下一次领灰", "target": "rift.opening"},
+        {"id": "finish", "text": "结束本次调查切片", "target": "case.end", "hidden": true},
+        {"id": "legacy", "text": "查看旧版十日剧情素材（未接续本案）", "target": "c01.gate", "hidden": true}
+      ]
+    },
+    {"id": "route.lin.start", "chapter": "卷一 · 失踪者", "location": "外门居所", "speaker": "林月", "text": "阿澈的床铺尚温，药碗却被人倒空。门外运灰车的轮印通向炉房。林月说换班前只能争取一件事：先追车找交接痕迹，或先从侧门把阿澈带出来。原账会在换班时锁进内库。", "background": "quartersNight", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "cart", "text": "追运灰车，保留轮值与交接痕迹", "target": "route.lin.cart"}, {"id": "ache", "text": "趁换班救阿澈，先保住证人", "target": "route.lin.ache"}]},
+    {"id": "route.lin.cart", "chapter": "卷一 · 失踪者", "location": "运灰小径", "speaker": "旁白", "text": "你用辨气沿车辙检查三处落灰，发现第二次车辙比炉房登记晚了一刻。轮值牌写着『阿澈』，车上却有另一人的旧玉扣。你拓下印痕；守卫回身时，侧门已合。阿澈还在里面。", "background": "ridge", "portrait": "", "rain": false, "effects": [{"variable": "case.cartTrace", "operation": "set", "value": 1}, {"variable": "case.ledgerCopy", "operation": "set", "value": 1}], "choices": [], "next": "route.lin.compare"},
+    {"id": "route.lin.ache", "chapter": "卷一 · 失踪者", "location": "炉房侧门", "speaker": "旁白", "text": "你照林月教的笔法画短时遮息符，只遮住门缝一息。阿澈被扶出时神志不清，说看见『沈砚』在炉中换位；巡守发现空位，原账立刻封存。你救出了人，却不能把他的一个名字当成可靠名单。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [{"variable": "case.ache", "operation": "set", "value": 1}, {"variable": "risk.attention", "operation": "set", "value": 1}], "choices": [], "next": "route.lin.compare"},
+    {"id": "route.lin.compare", "chapter": "卷一 · 失踪者", "location": "外门居所", "speaker": "林月", "text": "林月把玉扣和轮值牌放在你面前：玉扣可能被转交，阿澈也可能把旧号听成姓名。你必须指出还需核对什么，才能把一个活人与一个编号对应起来。", "background": "quartersNight", "portrait": "linYue", "rain": false, "effects": [], "choices": [{"id": "verify", "text": "核对家属刻字、换班时辰与车辙", "target": "route.lin.identity"}, {"id": "guess", "text": "先按阿澈说的『沈砚』找人", "target": "route.lin.mistake"}]},
+    {"id": "route.lin.identity", "chapter": "卷一 · 失踪者", "location": "旧碑廊", "speaker": "旁白", "text": "家属出示半枚配扣，刻纹与车上玉扣吻合；你再核对换班时辰，确认被转入炉内的是外门弟子许澄。『沈砚』只是旧号，阿澈见过活人却记错了名字。家属愿意配合撤人，但要求别再用编号称呼她。", "background": "stele", "portrait": "", "rain": false, "effects": [{"variable": "case.identityLead", "operation": "set", "value": 1}], "choices": [], "next": "route.lin.conflict"},
+    {"id": "route.lin.mistake", "chapter": "卷一 · 失踪者", "location": "旧碑廊", "speaker": "许澄的姐姐", "text": "『沈砚？那是十年前的人。』她将另一半玉扣按在你拓下的纹路上，许澄的姓名才露出来。你追错了人，错过了她原本愿意交出的侧门钥匙；她仍肯告诉你妹妹最后一次换班的时辰。", "background": "stele", "portrait": "", "rain": false, "effects": [{"variable": "risk.attention", "operation": "set", "value": 1}, {"variable": "case.identityLead", "operation": "set", "value": 1}], "choices": [], "next": "route.lin.conflict"},
+    {"id": "route.lin.conflict", "chapter": "卷一 · 失踪者", "location": "松风岭", "speaker": "林月", "text": "林月承认早知道许澄可能被转走，却怕消息泄露使守卫换路，没有告知家属。她要你先守住救援路线；许澄的姐姐要求知道真实姓名与风险。你不能替任何一方抹去另一方的损失。", "background": "ridge", "portrait": "linYue", "rain": false, "effects": [], "choices": [{"id": "witness", "text": "先安置阿澈与家属，再让他们决定是否作证", "target": "route.lin.finish", "effects": [{"variable": "case.witnessProtected", "operation": "set", "value": 1}]}, {"id": "record", "text": "交出核实的许澄姓名，请家属公开要求查验", "target": "route.lin.finish", "effects": [{"variable": "case.publicRecord", "operation": "set", "value": 1}]}]},
+    {"id": "route.lin.finish", "chapter": "卷一 · 失踪者", "location": "司籍房", "speaker": "旁白", "text": "你掌握了一名仍在炉中的弟子身份。林月能安排侧门，却指出：若此时直接撤空息位，山下护符会接住未散的阵压。你把姓名与换班时辰留在案上，转去查谁会为救援承受下一击。", "background": "stele", "portrait": "", "rain": false, "effects": [], "choices": [], "next": "case.boundary"},
+    {"id": "route.gu.start", "chapter": "卷一 · 失踪者", "location": "山下村口", "speaker": "顾衡", "text": "顾衡带你看两户护符：一户裂而未伤，一户上次停炉后失了亲人。他说停炉会伤村，却拒绝告诉村民炉里是谁。你可以先测裂符，或去灾碑核对他所说的『上次』。", "background": "ridge", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "charm", "text": "以辨气查两家护符的裂纹", "target": "route.gu.charm"}, {"id": "stele", "text": "对照旧灾碑与炉房停炉记录", "target": "route.gu.stele"}]},
+    {"id": "route.gu.charm", "chapter": "卷一 · 失踪者", "location": "护符工坊", "speaker": "工匠", "text": "两枚符的裂纹方向相反：一次来自山腹阵压，一次只是雨水浸坏。工匠的换符账还显示，每回炉房领灰后，新裂纹便暂时减少。顾衡所说的危险存在，但不能把每处损坏都算成停炉所致。", "background": "ridge", "portrait": "", "rain": false, "effects": [{"variable": "case.arrayMeasured", "operation": "set", "value": 1}], "choices": [], "next": "route.gu.measure"},
+    {"id": "route.gu.stele", "chapter": "卷一 · 失踪者", "location": "旧灾碑", "speaker": "旁白", "text": "碑上同一天刻着村民与外门弟子的姓名，弟子名后来被凿去。你将日期与停炉记录对上：那次阵压确曾沿副脉冲向村口；顾衡隐去的是谁替村民挡住了下一次冲击。", "background": "stele", "portrait": "", "rain": false, "effects": [{"variable": "case.identityLead", "operation": "set", "value": 1}], "choices": [], "next": "route.gu.measure"},
+    {"id": "route.gu.measure", "chapter": "卷一 · 失踪者", "location": "观测台", "speaker": "顾衡", "text": "你把小幅阵压引到废弃测点，按《辨气入门》的流向法读出回流。顾衡给的伤亡数按最坏风向估算，实测低于他的数字，却足以危及来不及撤离的人。模型依赖护符余量；没有村民的真实准备，图纸不能保证安全。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "challenge", "text": "拿实测要求顾衡向村民交代代价", "target": "route.gu.challenge", "effects": [{"variable": "case.publicRecord", "operation": "set", "value": 1}]}, {"id": "prepare", "text": "先带村民试走撤离山道", "target": "route.gu.evacuate", "effects": [{"variable": "case.villageReady", "operation": "set", "value": 1}]}]},
+    {"id": "route.gu.challenge", "chapter": "卷一 · 失踪者", "location": "村口", "speaker": "顾衡", "text": "顾衡承认把最坏情形当成必然，是为了挡住贸然开炉的人。你当众说明真实测量与未知范围；一名村民问：『若有人替我们承压，我们凭什么最后才知道？』顾衡答应开放一次有见证者的炉房查验。林月的秘密侧门因此被封。", "background": "ridge", "portrait": "", "rain": false, "effects": [], "choices": [], "next": "route.gu.finish"},
+    {"id": "route.gu.evacuate", "chapter": "卷一 · 失踪者", "location": "下山古道", "speaker": "旁白", "text": "演练到半途，背老人下坡的两人落在最后。你将顾衡原定的撤村时间改长，并请工匠先把护符移到狭窄路口。村民愿意协助复测，但仍要求知道炉中人的姓名；你目前拿不出完整名单。", "background": "ridge", "portrait": "", "rain": false, "effects": [], "choices": [], "next": "route.gu.finish"},
+    {"id": "route.gu.finish", "chapter": "卷一 · 失踪者", "location": "司籍房", "speaker": "旁白", "text": "你已知道骤停的风险并非托词，也看到顾衡为了保护村民而遮掩了牺牲者。官方查炉仍可进行，守卫也有时间转移活人。要救两边，必须查明下一次阵压何时到来，以及副脉究竟能分走多少。", "background": "stele", "portrait": "", "rain": false, "effects": [], "choices": [], "next": "case.boundary"},
+    {"id": "route.public.start", "chapter": "卷一 · 失踪者", "location": "旧碑廊", "speaker": "外门弟子", "text": "消息传开后，家属聚到炉门，守卫贴出封炉令。一个运灰弟子愿意作证，却怕被认出。你先保护他，还是抢在封存前抄下交接单？两件事不能同时完成。", "background": "stele", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "protect", "text": "带运灰弟子离开人群，保住证人", "target": "route.public.protect"}, {"id": "copy", "text": "趁封存前抄交接单与封炉人名", "target": "route.public.copy"}]},
+    {"id": "route.public.protect", "chapter": "卷一 · 失踪者", "location": "弟子居所", "speaker": "运灰弟子", "text": "你把他安置到林月知道的空屋。他说今日车上抬过活人，但帘子遮住脸；他能核实的是时辰和车辙，不是姓名。原交接单已被执事收走。", "background": "quartersNight", "portrait": "", "rain": false, "effects": [{"variable": "case.witnessProtected", "operation": "set", "value": 1}, {"variable": "case.cartTrace", "operation": "set", "value": 1}], "choices": [], "next": "route.public.hearing"},
+    {"id": "route.public.copy", "chapter": "卷一 · 失踪者", "location": "炉房交接台", "speaker": "旁白", "text": "你抄到当旬旧号与今日的转运时辰，封炉签名正是管事。原件随即被夺回；运灰弟子见你被追问，避开了人群。抄页可供核验，却不能替失踪者说话。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [{"variable": "case.ledgerCopy", "operation": "set", "value": 1}], "choices": [], "next": "route.public.hearing"},
+    {"id": "route.public.hearing", "chapter": "卷一 · 失踪者", "location": "旧碑廊", "speaker": "旁白", "text": "家属要求你现在说出炉中人的名字。你只有旧号、活息与一个不完整的转运证据；把推测当名单会让守卫先找到相关家属，完全沉默则让封炉令成为唯一公开说法。", "background": "stele", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "scope", "text": "只公布已核实的时辰和活息，要求见证查炉", "target": "route.public.careful", "effects": [{"variable": "case.publicRecord", "operation": "set", "value": 1}]}, {"id": "name", "text": "按旧号公布沈砚姓名，逼宗门回应", "target": "route.public.hasty", "effects": [{"variable": "risk.attention", "operation": "set", "value": 1}]}]},
+    {"id": "route.public.careful", "chapter": "卷一 · 失踪者", "location": "旧碑廊", "speaker": "顾衡", "text": "顾衡同意让村民和弟子各出一名见证者，但坚持先测副脉。林月无法再用原先的暗道，愿带你核对失踪名单。公开得到监督，也放慢了救人的速度。", "background": "stele", "portrait": "", "rain": false, "effects": [], "choices": [], "next": "route.public.finish"},
+    {"id": "route.public.hasty", "chapter": "卷一 · 失踪者", "location": "旧碑廊", "speaker": "沈砚", "text": "沈砚本人走进人群，旧号与活人不是同一回事。家属从希望转为愤怒，守卫趁乱把炉中轮值牌换掉。你当众更正姓名，保住了『炉中仍有人』这条事实，却失去第一轮名单。", "background": "stele", "portrait": "", "rain": false, "effects": [], "choices": [], "next": "route.public.finish"},
+    {"id": "route.public.finish", "chapter": "卷一 · 失踪者", "location": "司籍房", "speaker": "旁白", "text": "公开使宗门再难说炉中无人，也令守卫提前封锁。你必须以可复核的记录和测量重新争取人手。村民与弟子第一次在同一张案上谈这件事，接下来要查他们共同承受的裂隙。", "background": "stele", "portrait": "", "rain": false, "effects": [], "choices": [], "next": "case.boundary"},
+    {"id": "rift.opening", "chapter": "卷二 · 裂隙", "location": "山腹石门", "speaker": "旁白", "text": "护符新裂、炉房加灰与阵眼的低鸣同时出现。旧测绘图显示下一次灵潮前必须补息位；顾衡要求看测量，林月要求先查炉中人数。你只能先核实一端，再带结果去做短时试验。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "village", "text": "到村口测护符余量与回流", "target": "rift.village"}, {"id": "furnace", "text": "查炉房封存单与旧号转运", "target": "rift.furnace"}, {"id": "draft", "text": "对照旧底稿和阵眼刻痕", "target": "rift.draft"}]},
+    {"id": "rift.village", "chapter": "卷二 · 裂隙", "location": "村口", "speaker": "旁白", "text": "你以辨气读裂纹新旧，再让工匠取出未用护符作对照：只够抵一次小幅回流。村民同意先撤老人和孩子；若用整村护符做替阵，必须再找承压者或让人暂时离村。", "background": "ridge", "portrait": "", "rain": false, "effects": [{"variable": "case.arrayMeasured", "operation": "set", "value": 1}, {"variable": "case.villageReady", "operation": "set", "value": 1}], "choices": [], "next": "rift.expiry"},
+    {"id": "rift.furnace", "chapter": "卷二 · 裂隙", "location": "炉房交接台", "speaker": "旁白", "text": "封存单把旧号、转运时辰和下一次领灰量写在同一行。你辨出灰印是今日重新盖的，证明续阵正在准备；它仍不给出活人姓名。林月提出按轮值牌和家属物件逐个核验，至少能先救最近一位。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [{"variable": "case.ledgerCopy", "operation": "set", "value": 1}], "choices": [], "next": "rift.expiry"},
+    {"id": "rift.draft", "chapter": "卷二 · 裂隙", "location": "废测绘房", "speaker": "旁白", "text": "你在废测绘房找到十年前的原底稿：人息位已画在第一版，后来有人把承压上限改高。图角留下沈砚的初案签名。你用阵眼刻痕复算，发现副脉会在灵潮前回流到村口；底稿分流线少了一处测点。签名和缺口都要当面问画图者。", "background": "stele", "portrait": "", "rain": false, "effects": [{"variable": "case.arrayMeasured", "operation": "set", "value": 1}], "choices": [], "next": "rift.expiry"},
+    {"id": "rift.expiry", "chapter": "卷二 · 裂隙", "location": "观测台", "speaker": "旁白", "text": "你把领灰量、护符余量与阵眼间隔并列。三处数字都在变：下一次灵潮到来前，旧阵需要新的承压位置。骤停会把未散阵压送往村口；照常续阵则有人继续进炉。旧底稿缺实测，不能凭承诺代替试验。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "guardVillage", "text": "小试验先护村口，测炉侧回流", "target": "rift.trialVillage"}, {"id": "guardFurnace", "text": "小试验先护炉门，测村侧回流", "target": "rift.trialFurnace"}]},
+    {"id": "rift.trialVillage", "chapter": "卷二 · 裂隙", "location": "观测台", "speaker": "旁白", "text": "你以短符稳住村口，把一线阵压引进废副脉。炉边的余压比沈砚底稿高，林月不得不停止接人；一名承压弟子多受了一次冲击。你记下偏差，不能再用原图直接开炉。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [{"variable": "case.arrayMeasured", "operation": "set", "value": 1}], "choices": [], "next": "rift.review"},
+    {"id": "rift.trialFurnace", "chapter": "卷二 · 裂隙", "location": "观测台", "speaker": "旁白", "text": "你把符箓贴在炉门，先稳住里面的呼吸。副脉回流使村口一枚旧护符碎裂，所幸顾衡带人及时撤开。试验留下回流的实际方向；村民要求下一步由他们决定是否离村。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [{"variable": "case.arrayMeasured", "operation": "set", "value": 1}], "choices": [], "next": "rift.review"},
+    {"id": "rift.review", "chapter": "卷二 · 裂隙", "location": "司籍房", "speaker": "旁白", "text": "试验没有无代价的胜利，却给了你旧阵真正的回流点。现在你必须让相关人知道足以决定自身风险的事实。手里若有证人与原账，可以逐个核名；若缺一项，也能按轮值和家属物件补证，但会错过下一轮秘密接人。", "background": "stele", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "ache", "text": "请已获救的阿澈与家属核名", "target": "rift.ache", "conditions": [{"variable": "case.ache", "minimum": 1, "maximum": 1}], "lockedReason": "尚缺这一步所需的证据"}, {"id": "villageVoice", "text": "请已演练撤离的村民核对护符", "target": "rift.villageVoice", "conditions": [{"variable": "case.villageReady", "minimum": 1, "maximum": 1}], "lockedReason": "尚缺这一步所需的证据"}, {"id": "shenRecord", "text": "拿沈砚初案签名请两方追问责任", "target": "rift.shenRecord", "conditions": [{"variable": "case.action", "minimum": 4, "maximum": 4}], "lockedReason": "尚未找到可核对的初案"}, {"id": "records", "text": "公开测量与轮值记录，补齐缺口", "target": "rift.records"}]},
+    {"id": "rift.ache", "chapter": "卷二 · 裂隙", "location": "弟子居所", "speaker": "阿澈", "text": "阿澈把记错的旧号划掉，凭许澄的玉扣认出她当时所在的息位。林月请家属确认后才写入撤人名单。阿澈愿作证，但不能替仍在炉里的人同意任何阵法试验。", "background": "quartersNight", "portrait": "", "rain": false, "effects": [{"variable": "case.identityLead", "operation": "set", "value": 1}], "choices": [], "next": "rift.account"},
+    {"id": "rift.villageVoice", "chapter": "卷二 · 裂隙", "location": "村口", "speaker": "村民代表", "text": "工匠把旧护符摆在桌上，村民自己读懂回流方向。他们同意暂离低处的几户，却拒绝在无人告知炉中名单时替宗门续阵。顾衡让出观测台钥匙，要求每一步有村民在场。", "background": "ridge", "portrait": "", "rain": false, "effects": [{"variable": "case.publicRecord", "operation": "set", "value": 1}], "choices": [], "next": "rift.account"},
+    {"id": "rift.records", "chapter": "卷二 · 裂隙", "location": "旧碑廊", "speaker": "旁白", "text": "你将轮值、领灰和试验测量贴出，明确标出未知姓名。家属补上物件与换班记录，找到最近一个息位；这耽误了隐秘接人的时机，但阻止了按旧号抓错人。顾衡与林月各派一人参与终局。", "background": "stele", "portrait": "", "rain": false, "effects": [{"variable": "case.identityLead", "operation": "set", "value": 1}, {"variable": "case.publicRecord", "operation": "set", "value": 1}], "choices": [], "next": "rift.account"},
+    {"id": "rift.shenRecord", "chapter": "卷二 · 裂隙", "location": "观测台", "speaker": "旁白", "text": "你先让家属和村民看两版阵图及沈砚初案签名，再请沈砚解释为何曾称『宗门后来才用人』。家属指出第一版就有人息位，顾衡则要求把改高上限的执事另列责任。沈砚不能再把两种罪合成一句后悔；他当众交出控制笔记，换取一次受监督的协助机会。", "background": "mountainHeart", "portrait": "", "rain": false, "next": "rift.plan", "effects": [{"variable": "case.publicRecord", "operation": "set", "value": 1}, {"variable": "case.shenAccount", "operation": "set", "value": 1}], "choices": []},
+    {"id": "rift.account", "chapter": "卷二 · 裂隙", "location": "观测台", "speaker": "沈砚", "text": "沈砚来到观测台，把有自己初案签名的底稿摊在三方证据旁：『人息位最初是我画的。宗门后来加高上限，我逃了，炉里的人却没法逃。』林月要求他听被伤者是否愿用新图，顾衡要求村民核对回流。沈砚答应交出控制笔记，不再以赎罪为理由代替别人同意。", "background": "mountainHeart", "portrait": "", "rain": false, "next": "rift.plan", "effects": [{"variable": "case.shenAccount", "operation": "set", "value": 1}], "choices": []},
+    {"id": "rift.plan", "chapter": "终章 · 问心", "location": "山腹石门", "speaker": "旁白", "text": "灵潮逼近。你已测出回流，也知道炉中仍有人、村口无法凭护符独自承压。四种行动的主要代价摆在眼前：改阵需主角亲自调节并暂迁村民；撤离救得一部分人却留下旧阵；夺炉会决定新的承压者；维持则让弟子继续受损。你选择要承担哪一种责任。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "replace", "text": "组织撤人撤村，亲自调息替阵", "target": "ending.replace"}, {"id": "leave", "text": "先救能救的人，带愿走的村民离山", "target": "ending.leave"}, {"id": "seize", "text": "夺取阵眼控制权，重定承压者", "target": "ending.seize"}, {"id": "hold", "text": "稳住旧阵并揭露其代价", "target": "ending.hold"}]},
+    {"id": "ending.replace", "chapter": "终章 · 问心", "location": "山腹石门", "speaker": "旁白", "text": "林月在炉门口再次核对轮值，顾衡要把低处村民带离。你用符箓钉住炉门，以阵理引首轮回流。若此前已演练村路，撤离会更从容；若没有，必须自己多扛一轮为慢行者争取时间。沈砚愿分担，但需要能作证、能叫停的公开监督。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "prepared", "text": "按已演练的村路撤离，自己守首轮阵压", "target": "ending.replacePrepared", "conditions": [{"variable": "case.villageReady", "minimum": 1, "maximum": 1}], "lockedReason": "尚未演练村落撤离"}, {"id": "self", "text": "临时撤村，自己多守一轮阵压", "target": "ending.replaceSelf"}, {"id": "shared", "text": "让沈砚在公开见证下分担阵压", "target": "ending.replaceShared", "conditions": [{"variable": "case.publicRecord", "minimum": 1, "maximum": 1}], "lockedReason": "尚未取得可公开的见证记录"}]},
+    {"id": "ending.replacePrepared", "chapter": "终章 · 问心", "location": "山腹石门", "speaker": "旁白", "text": "村民按演练过的古道先撤，工匠把护符移到狭口。你守住首轮阵压，修为受损却没有被迫连扛第二轮；炉中人按核过的息位逐次出门。许澄需要疗养，村民仍须暂迁。顾衡交出护符账，沈砚公开初案签名，新阵由两边共同监督；你所学的阵理救了人，却不能抹去旧罪。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [], "terminal": true},
+    {"id": "ending.replaceSelf", "chapter": "终章 · 问心", "location": "山腹石门", "speaker": "旁白", "text": "古道上有人落后，你不敢切走村口护符，只得独自多守一轮回流。炉门最终打开，许澄等人活着出来；你的经脉受创，顾衡带最后一户人离开低地。新阵勉强运转，村民仍须暂迁。你交出控制笔记供两边监督，林月记下获救者，也记下因准备不足而留下的伤。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [], "terminal": true},
+    {"id": "ending.replaceShared", "chapter": "终章 · 问心", "location": "山腹石门", "speaker": "旁白", "text": "沈砚在家属与村民见证下入调息位，你守副脉，发现他的气息将竭便主动停下转接，改由符箓缓冲。更多人活着出炉，村落仍须暂迁；沈砚失去大半修为，仍须面对旧案。你们救人的办法留下可复测的记录，也留下不能被成功抹去的责任。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [], "terminal": true},
+    {"id": "ending.leave", "chapter": "终章 · 问心", "location": "下山古道", "speaker": "林月", "text": "林月打开仅剩的侧门，你可以凭已核实的身份带人，也可以临时再核对轮值，或赶在守卫到来前只救眼前的人。村民是否同行，须在了解裂隙风险后自己决定；你不能替留在山上的人许诺安全。", "background": "ridge", "portrait": "linYue", "rain": false, "effects": [], "choices": [{"id": "tell", "text": "按核实名单带人，并告知村民风险", "target": "ending.leaveTold", "conditions": [{"variable": "case.identityLead", "minimum": 1, "maximum": 1}], "lockedReason": "尚缺可靠的活人身份线索"}, {"id": "recheck", "text": "花时间补核轮值，再让村民决定是否同行", "target": "ending.leaveRecheck"}, {"id": "hurry", "text": "趁守卫未到先带眼前的弟子离山", "target": "ending.leaveHurry"}]},
+    {"id": "ending.leaveRecheck", "chapter": "终章 · 问心", "location": "山外驿道", "speaker": "旁白", "text": "你与家属重新核对轮值，找对了最近一名承压者，也把停炉风险告诉村民；核名花去一刻，侧门关上时还有人没出来。愿走的村民跟着队伍离山，留下者继续面对旧阵。你带着确切姓名和缺失的一页账去找山外见证者，知道下一次救援不能再靠临时补证。", "background": "ridge", "portrait": "", "rain": false, "effects": [], "choices": [], "terminal": true},
+    {"id": "ending.leaveTold", "chapter": "终章 · 问心", "location": "山外驿道", "speaker": "旁白", "text": "愿走的村民与获救弟子一起离山，队伍因此慢了一程，还有人没赶上侧门。旧阵仍由宗门续上，留下的人继续承压。你将姓名、护符和测量交给山外见证者，带着未救出者的名单寻找回山之法；林月提醒你，承诺不是已经完成的救援。", "background": "ridge", "portrait": "", "rain": false, "effects": [], "choices": [], "terminal": true},
+    {"id": "ending.leaveHurry", "chapter": "终章 · 问心", "location": "山外驿道", "speaker": "旁白", "text": "你带出几名弟子，避过封山令。村里直到夜里才得知护符余量不足，部分人仓促逃离，仍有人留下。林月守着获救者，却拒绝把这称为全胜；你手里的测量能作证，也证明你当时选择了谁先活下来。", "background": "ridge", "portrait": "", "rain": false, "effects": [], "choices": [], "terminal": true},
+    {"id": "ending.seize", "chapter": "终章 · 问心", "location": "阵眼", "speaker": "沈砚", "text": "你以辨气辨认回流，以符箓封住旧控制印，夺下阵眼。阵压不会因控制权改变而消失：你现在必须决定让谁进新的调息位。沈砚愿意承担，却没有权替其他弟子同意。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "self", "text": "让阵压先落在自己身上，并公开控制图", "target": "ending.seizeSelf"}, {"id": "order", "text": "命宗门执事入位，自己掌阵监督", "target": "ending.seizeOrder"}]},
+    {"id": "ending.seizeSelf", "chapter": "终章 · 问心", "location": "阵眼", "speaker": "旁白", "text": "你夺炉后亲自承压，村落暂得平静，炉中人得以分批撤出。阵眼之力也开始改写你的经脉；林月坚持设置轮换与撤离权，顾衡要求村民看见每次载荷。你答应把控制图交给他们，才使夺来的权力不再只是换了一个主人。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [], "terminal": true},
+    {"id": "ending.seizeOrder", "chapter": "终章 · 问心", "location": "阵眼", "speaker": "旁白", "text": "执事被迫入位，旧日受害者看见了报应，也看见你亲手决定了另一个人的承压。村民暂安全，弟子陆续出炉；顾衡要求公开审理而非私刑，林月拒绝替新阵招募下一批人。你握住了力量，却必须回答谁能制止你再次用同一种办法。", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [], "terminal": true},
+    {"id": "ending.hold", "chapter": "终章 · 问心", "location": "炉房", "speaker": "顾衡", "text": "你按实测稳住旧阵，替村口换上护符，炉中人仍要继续承压。顾衡承认这是眼前最稳妥、也最难辩护的办法。名册与护符账都在你手里：要不要让受保护的人知道谁替他们付账？", "background": "mountainHeart", "portrait": "", "rain": false, "effects": [], "choices": [{"id": "open", "text": "公开姓名与损耗，要求限期寻找替阵", "target": "ending.holdOpen"}, {"id": "hide", "text": "暂封姓名，优先守住村落与续阵秩序", "target": "ending.holdHidden"}]},
+    {"id": "ending.holdOpen", "chapter": "终章 · 问心", "location": "旧碑廊", "speaker": "旁白", "text": "村民得知自己如何被保护，家属知道亲人仍在炉里。旧阵没有因公开而立刻停下，承压者依旧受损；但顾衡交出观测权，林月组织轮换救护，沈砚的底稿接受共同复核。你成了旧阵的知情维护者，也留下可追究、可改变它的记录。", "background": "stele", "portrait": "", "rain": false, "effects": [], "choices": [], "terminal": true},
+    {"id": "ending.holdHidden", "chapter": "终章 · 问心", "location": "司籍房", "speaker": "旁白", "text": "护符撑过灵潮，村口无人受伤。你在账上亲手写下下一位承压弟子的编号，姓名被封在抽屉里。林月不再与你谈撤人，顾衡仍守着村口，沈砚的图纸蒙尘。你知道平安由谁支付，也知道自己的沉默使这份账继续无人能查。", "background": "stele", "portrait": "", "rain": false, "effects": [], "choices": [], "terminal": true},
+    {"id": "case.end", "chapter": "卷一 · 旧号疑云", "location": "青云山 · 司籍房", "speaker": "旁白", "text": "调查暂告一段落。你学会辨气，查到炉内活息，也选定了下一步要承担的风险。后续案件与完整结局仍在制作。", "background": "stele", "portrait": "", "rain": false, "terminal": true, "effects": [], "choices": []},
     {
       "id": "c01.gate",
       "chapter": "卷一 · 雨叩山门",
@@ -904,12 +1218,18 @@
       "chapter": "卷二 · 炉火未冷",
       "location": "松风岭 · 药炉小径",
       "speaker": "林月",
-      "text": "“他们换了守卫，却没有换炉灰。”\n林月递来一张沾灰的符纸，上面的笔迹正是沈砚。符纸写着：炉中之人尚活，登仙台只是炉盖。\n\n第一卷纵向切片到此。你的结盟、证据与风险已保留。",
+      "text": "“他们换了守卫，却没有换炉灰。”\n林月递来一张沾灰的符纸，上面的笔迹正是沈砚。符纸写着：炉中之人尚活，登仙台只是炉盖。她守住小径，你得以带走符纸。",
       "background": "ridge",
       "portrait": "linYue",
       "rain": false,
-      "terminal": true,
-      "effects": [],
+      "next": "c02.evening",
+      "effects": [
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
       "choices": []
     },
     {
@@ -917,12 +1237,18 @@
       "chapter": "卷二 · 炉火未冷",
       "location": "青云山 · 旧碑廊",
       "speaker": "旁白",
-      "text": "你按名册逐一寻找旧弟子的住处，发现他们的房间从未分给新人，门牌却每年都会换上新的名字。\n最新一块门牌还带着木屑，写的正是你。\n\n第一卷纵向切片到此。名册路线与宗门注意已保留。",
+      "text": "你按名册逐一寻找旧弟子的住处，发现他们的房间从未分给新人，门牌却每年都会换上新的名字。最新一块门牌还带着木屑，写的正是你。门内有人轻敲三下，塞出一角药炉领用账。",
       "background": "stele",
       "portrait": "",
       "rain": false,
-      "terminal": true,
-      "effects": [],
+      "next": "c02.evening",
+      "effects": [
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
       "choices": []
     },
     {
@@ -930,12 +1256,18 @@
       "chapter": "卷二 · 炉火未冷",
       "location": "松风岭 · 山腹石门",
       "speaker": "心念",
-      "text": "你循着灼痕的跳动找到一扇没有门缝的石门。门后传来的灵气与昨夜完全相同，只是其中混入了许多人的呼吸。\n当你把手按上石壁，里面有人也按住了同一个位置。\n\n第一卷纵向切片到此。共鸣标记与修为已保留。",
+      "text": "你循着灼痕的跳动找到一扇没有门缝的石门。门后传来的灵气与昨夜完全相同，只是其中混入了许多人的呼吸。你按住石壁，里面有人用指节敲出三个字：别开炉。",
       "background": "mountainHeart",
       "portrait": "",
       "rain": false,
-      "terminal": true,
-      "effects": [],
+      "next": "c02.evening",
+      "effects": [
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
       "choices": []
     },
     {
@@ -943,12 +1275,1566 @@
       "chapter": "卷二 · 炉火未冷",
       "location": "青云山 · 山门外",
       "speaker": "旁白",
-      "text": "守炉弟子的铺盖已被收走，只有门前一碗药仍旧温着。碗底压着一枚与登仙帖相同的朱印，背面刻着昨夜的日期。\n这场“走火入魔”在事发前就已写好。\n\n第一卷纵向切片到此。当前周目的选择与状态已保留。",
+      "text": "守炉弟子的铺盖已被收走，只有门前一碗药仍旧温着。碗底压着一枚与登仙帖相同的朱印，背面刻着昨夜的日期。这场“走火入魔”在事发前就已写好。你听见屋后有人喘息。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "next": "c02.evening",
+      "effects": [
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c02.evening",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 守炉弟子居所",
+      "speaker": "旁白",
+      "text": "你找到被告示称作‘走火入魔’的守炉弟子。他被锁在空屋，尚有气息，手里攥着半页炉账。巡夜钟已响，只够做一件事：先带人走，或先取能让更多人相信你的证据。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "rescue",
+          "text": "先救守炉弟子",
+          "target": "c02.rescue",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "ledger",
+          "text": "抄下完整炉账",
+          "target": "c02.ledger",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c02.rescue",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 弟子居所",
+      "speaker": "旁白",
+      "text": "你背起人越过矮墙。他叫阿澈，喉咙灼伤，暂时说不出话。账页在逃跑中烧去大半，但他活着，日后也许能亲口作证。山门的搜捕令很快贴了出来。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "next": "c03.dawn",
+      "effects": [
+        {
+          "variable": "mark.rescued",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "risk.attention",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c02.ledger",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 弟子居所",
+      "speaker": "旁白",
+      "text": "你记下炉账上的日期、领药量与失踪弟子的名字。再抬头时，阿澈已被巡夜人带走。他看见你藏起纸页，没有呼救。那一眼比纸上的朱印更难忘。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "next": "c03.dawn",
+      "effects": [
+        {
+          "variable": "clue.ledger",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c03.dawn",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 考校台",
+      "speaker": "旁白",
+      "text": "第三日，第一次考校提前举行。台下弟子盼着入内门，台上长老只问一句：‘能承几炉灵气？’你认出考校石上与山腹同源的纹路。高分能让你接近炉心，也会让你的名字更早进入祭单。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "day",
+          "operation": "set",
+          "value": 3
+        },
+        {
+          "variable": "actions",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [
+        {
+          "id": "excel",
+          "text": "全力应考，争取炉心准入",
+          "target": "c03.excel",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "conceal",
+          "text": "压低修为，留在外门调查",
+          "target": "c03.conceal",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c03.excel",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 考校台",
+      "speaker": "旁白",
+      "text": "你引气入石，石面亮起第二道金纹。台上人不约而同停笔，一枚准入令落在你掌心。林月在人群里没有鼓掌，只轻轻摇头：他们现在认得你了。",
+      "background": "gate",
+      "portrait": "linYue",
+      "rain": false,
+      "next": "c03.after",
+      "effects": [
+        {
+          "variable": "cultivation",
+          "operation": "add",
+          "value": 2
+        },
+        {
+          "variable": "risk.attention",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c03.conceal",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 考校台",
+      "speaker": "心念",
+      "text": "你让灵气在掌心散去，只得了个中下评。无人留意你的名字，却也拿不到准入令。离台时，你看见另一名高分弟子被引向药炉，脚步轻得像根本不知道自己要去哪里。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "next": "c03.after",
+      "effects": [
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c03.after",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 暮色山道",
+      "speaker": "林月",
+      "text": "‘有人在替你遮掉搜捕令上的名字，’林月说，‘也有人催着把你的考校记录送进炉房。’她只能帮你挡住一边。另一边，你必须自己去查。",
+      "background": "ridge",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "findShen",
+          "text": "追查替你遮名的人",
+          "target": "c03.shen",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "traceList",
+          "text": "追查考校记录的去处",
+          "target": "c03.list",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c03.shen",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "松风岭 · 断碑",
+      "speaker": "沈砚",
+      "text": "断碑后站着沈砚，青玉扣的主人。他承认替你改了搜捕令，却不肯说谁把自己写成了‘死者’。‘我若站到日光下，炉里的人会先死。’他留下一个药炉换班时辰。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "next": "c04.dawn",
+      "effects": [
+        {
+          "variable": "trust.shenYan",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c03.list",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "旁白",
+      "text": "考校簿按灵气承载量排序，去年前十名无人留下出山记录。你抄下火候栏的暗码：那不是排名，而是每个人被抽取灵气的时辰。簿册尚未写到第三十日。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "c04.dawn",
+      "effects": [
+        {
+          "variable": "clue.ledger",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c04.dawn",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 药炉外",
+      "speaker": "旁白",
+      "text": "第四日，药炉换班。你在灰里找到阿澈写给家人的信，末尾只有四个字：‘别信升仙。’今日炉门会开一次；夜里，林月必须带队离山。你无法同时守住炉门和她。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "day",
+          "operation": "set",
+          "value": 4
+        },
+        {
+          "variable": "actions",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [
+        {
+          "id": "enter",
+          "text": "趁换班进入药炉",
+          "target": "c04.furnace",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "escort",
+          "text": "先送林月离开巡查线",
+          "target": "c04.linYue",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c04.furnace",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "心念",
+      "text": "炉门后的热浪裹着低低的人声。你从灰槽抽出半幅阵图：登仙台接在山脉伤口上，弟子的灵气被拿去填补裂隙。那声‘别开炉’并非劝你放弃救人，而是说骤然停炉会让整座山崩塌。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "next": "c04.dusk",
+      "effects": [
+        {
+          "variable": "clue.ledger",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        },
+        {
+          "variable": "risk.attention",
+          "operation": "add",
+          "value": 1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c04.linYue",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "松风岭 · 断碑",
+      "speaker": "林月",
+      "text": "你替她挡住盘问，她才说出离山调令的真正目的：运走尚未入炉的弟子。‘我不能凭一页纸救他们，’她说，‘给我一个活着的证人。’她交给你巡查符，许你夜里再查。",
+      "background": "ridge",
+      "portrait": "linYue",
+      "rain": false,
+      "next": "c04.dusk",
+      "effects": [
+        {
+          "variable": "trust.linYue",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c04.dusk",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 暮色山道",
+      "speaker": "心念",
+      "text": "一封未署名的短笺送到你手中：‘活人能作证，死人也能。你选哪一种？’背面写着阿澈藏身处和炉房账室的两个方向。天色只够你走一趟。",
+      "background": "night",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "witness",
+          "text": "去找阿澈，听他亲口说",
+          "target": "c04.witness",
+          "lockedReason": "需要先救出阿澈",
+          "conditions": [
+            {
+              "variable": "mark.rescued",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": []
+        },
+        {
+          "id": "records",
+          "text": "去账室封存原始记录",
+          "target": "c04.records",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c04.witness",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 弟子居所",
+      "speaker": "阿澈",
+      "text": "阿澈用沙哑的嗓音说，炉中有他的姐姐；她不是尸首，仍在替山脉承受裂隙。他愿意作证，但求你别把炉门一掌打碎。说完，他把自己的供词按了血印。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "next": "c05.dawn",
+      "effects": [
+        {
+          "variable": "clue.witness",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c04.records",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "旁白",
+      "text": "账室原本空空，只有地砖下藏着一册旧账。第一页写着‘山脉裂隙扩张，借入门弟子续阵’，末页预留了三十日后的空白。你封存账册时，门外已响起搜捕的脚步。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "c05.dawn",
+      "effects": [
+        {
+          "variable": "clue.ledger",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        },
+        {
+          "variable": "risk.attention",
+          "operation": "add",
+          "value": 1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c05.dawn",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 山门",
+      "speaker": "旁白",
+      "text": "第五日，宗门宣告阿澈已死，命所有弟子交出私藏文书。你手上的证据足够证明告示撒谎，却还不足以回答最难的问题：停炉之后，山里的人怎样活？沈砚约你在旧碑前见面。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "day",
+          "operation": "set",
+          "value": 5
+        },
+        {
+          "variable": "actions",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [
+        {
+          "id": "shen",
+          "text": "赴约，追问沈砚的方案",
+          "target": "c05.shen",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "linYue",
+          "text": "找林月商量护送证人",
+          "target": "c05.linYue",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c05.shen",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "沈砚",
+      "text": "沈砚承认自己参与画过阵图。当年山裂，他以为借一炉灵气便能救人，却没想到宗门把‘借’字写成了三十年的常例。如今他在寻找能分担阵压的旧灵脉，而非再找一个更强的祭品。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "c05.dusk",
+      "effects": [
+        {
+          "variable": "trust.shenYan",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c05.linYue",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "松风岭 · 断碑",
+      "speaker": "林月",
+      "text": "‘我带得走阿澈，带不走所有人。’林月将离山路线画在地上，指出巡逻最薄弱的一刻。她要你先查清炉里还有多少活人，不能让所谓的救援把他们一起埋了。",
+      "background": "ridge",
+      "portrait": "linYue",
+      "rain": false,
+      "next": "c05.dusk",
+      "effects": [
+        {
+          "variable": "trust.linYue",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c05.dusk",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "心念",
+      "text": "你把手按上石门，回声里不止一人的脉搏。若把掌握的证据公开，宗门会追杀证人；若只继续潜查，下一炉又将点火。今夜必须先定下方向。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "protect",
+          "text": "先藏好证人与账册",
+          "target": "c05.protect",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "signal",
+          "text": "向外门放出炉房疑点",
+          "target": "c05.signal",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c05.protect",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 弟子居所",
+      "speaker": "旁白",
+      "text": "你把证据分作两份，一份藏在旧碑，一份交给林月。第五夜平静得反常。天亮前，药炉里又亮起了火，你至少知道下一次必须赶在它之前。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "next": "c06.quiet",
+      "effects": [
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c05.signal",
+      "chapter": "卷二 · 炉火未冷",
+      "location": "青云山 · 山门",
+      "speaker": "旁白",
+      "text": "你在告示旁留下‘炉中有人’四字。清晨，字迹被洗去，山门前却多了数十个来问亲人下落的弟子。宗门终于不能只靠一纸走火入魔搪塞。沈砚说，裂隙今夜扩大了。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "next": "c06.public",
+      "effects": [
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        },
+        {
+          "variable": "risk.attention",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "mark.public",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c06.quiet",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 弟子居所",
+      "speaker": "旁白",
+      "text": "证据暂时安全，山门却依旧安静。第六日将至，药炉又添了一炉火。你和林月约定：下一次不能只把纸藏好。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "next": "c06.dawn",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c06.public",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 山门",
+      "speaker": "旁白",
+      "text": "疑问传遍外门。有人偷偷递来亲人的旧登仙帖，有人怕你引来封山，连夜搬出了居所。第六日尚未破晓，宗门已派人抹去告示上的字。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "next": "c06.dawn",
+      "effects": [],
+      "choices": []
+    },
+    {
+      "id": "c06.dawn",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 山门",
+      "speaker": "顾衡",
+      "text": "第六日，执阵长老顾衡主动见你。他不否认炉里有人，只指向石壁上新生的裂纹：‘我守的是山下三千户。你若有别的法子，我让路。’他给你一日查证真相，也给自己一日判断你。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "day",
+          "operation": "set",
+          "value": 6
+        },
+        {
+          "variable": "actions",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [
+        {
+          "id": "followGu",
+          "text": "随顾衡查看裂隙",
+          "target": "c06.crack",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "auditGu",
+          "text": "先查顾衡留下的旧档",
+          "target": "c06.archive",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c06.crack",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "顾衡",
+      "text": "石门后，裂隙像一条发光的河。顾衡让你摸阵柱：每当炉火弱下去，远处村落的护山符便接连熄灭。灾祸是真的，借它掩盖献祭的罪也是真的。你记住了裂隙的走向。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "next": "c06.dusk",
+      "effects": [
+        {
+          "variable": "trust.gu",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c06.archive",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "心念",
+      "text": "旧碑记录了二十年前的山崩。顾衡救过村民，却在次年签下第一份‘借灵’名册。碑拓夹层藏着历年领药账。他写过‘若替阵未成，我先入炉’，此后入炉的却全是弟子。明知他的苦衷，也不能替他免罪。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "c06.dusk",
+      "effects": [
+        {
+          "variable": "clue.ledger",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c06.dusk",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 断碑",
+      "speaker": "沈砚",
+      "text": "沈砚提出险路：旧灵脉尚存，重画分流阵便能逐个撤出炉中人。但新阵需要宗门图册，顾衡握着阵阁的钥匙。沈砚问你：先求他交，还是先偷？",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "negotiate",
+          "text": "带着证据与顾衡谈判",
+          "target": "c06.talk",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "steal",
+          "text": "趁夜潜入阵阁抄图",
+          "target": "c06.steal",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c06.talk",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 山门",
+      "speaker": "顾衡",
+      "text": "顾衡看过你带来的证据，画出一半阵眼。另一半，他要你证明旧灵脉真能承压：‘山下的人不能替你的善心下注。’你没拿到图册，却争得今夜不再添新祭品。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "next": "c07.dawn",
+      "effects": [
+        {
+          "variable": "trust.gu",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c06.steal",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "旁白",
+      "text": "你翻窗抄下图册，得到了全图，却没拿到顾衡手写的旧灵脉校验记号。天亮前，阵阁发现图册被动过；从此你每一次靠近阵眼，都得先避开巡查。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "c07.dawn",
+      "effects": [
+        {
+          "variable": "clue.array",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "mark.original",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "risk.attention",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c07.dawn",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 临风石",
+      "speaker": "旁白",
+      "text": "第七日，第一处旧灵脉显形，细得只容一人通过。沈砚需要测它能否承住阵压；林月则发现一批弟子将被提前送往炉房。你只能先赶往一处。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "day",
+          "operation": "set",
+          "value": 7
+        },
+        {
+          "variable": "actions",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [
+        {
+          "id": "measure",
+          "text": "测旧灵脉的承压极限",
+          "target": "c07.measure",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "intercept",
+          "text": "拦下提前送炉的弟子",
+          "target": "c07.intercept",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c07.measure",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "沈砚",
+      "text": "灵脉吞下一缕阵压，整条山脊都震了一下。沈砚立刻收手：它能分担，却不能独自替代炉中众人。你记下分流节律；另一头，送炉的队伍已越过山口。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "next": "c07.dusk",
+      "effects": [
+        {
+          "variable": "clue.array",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c07.intercept",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 山门",
+      "speaker": "林月",
+      "text": "林月挡住押送符车，你趁乱剪断车后的缚灵索。三个弟子逃了，一个留下来认出了你。林月低声问：‘人救下了，阵还在。下一批怎么办？’",
+      "background": "gate",
+      "portrait": "linYue",
+      "rain": false,
+      "next": "c07.dusk",
+      "effects": [
+        {
+          "variable": "mark.evacuated",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "trust.linYue",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "risk.attention",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c07.dusk",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "心念",
+      "text": "旧灵脉的节律与登仙帖背面的朱印相同。帖不是邀请函，而是开启分流节点的钥匙。你先研究自己的印记，还是找齐旧帖，比对谁曾活着离山？",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "studySeal",
+          "text": "研究自己的朱印",
+          "target": "c07.seal",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "compare",
+          "text": "比对历届登仙帖",
+          "target": "c07.compare",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c07.seal",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 临风石",
+      "speaker": "心念",
+      "text": "你引气触印，朱纹在掌心展开一瞬。它能开阵，也会让阵眼认定你为下一位承压者。你记住反转纹路的方法，代价是经脉灼痛，一夜无法安眠。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "next": "c08.dawn",
+      "effects": [
+        {
+          "variable": "cultivation",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c07.compare",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "旁白",
+      "text": "历届帖子每年少一枚。唯一未销毁的旧帖属于沈砚，朱印被人从内侧改过。他当年也曾是祭品，后来却成了画阵的人。你把旧帖收进袖中。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "c08.dawn",
+      "effects": [
+        {
+          "variable": "trust.shenYan",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c08.dawn",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 山门",
+      "speaker": "旁白",
+      "text": "第八日，顾衡公开山脉裂隙，称献祭是眼下唯一的活路。恐惧替宗门挡住了追问。你可以告诉外门替阵的初步可能，也可以趁他们争论时潜入炉房，核对里面的人数。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "day",
+          "operation": "set",
+          "value": 8
+        },
+        {
+          "variable": "actions",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [
+        {
+          "id": "counter",
+          "text": "公开分流灵脉的可能",
+          "target": "c08.counter",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "infiltrate",
+          "text": "潜进炉房清点活人",
+          "target": "c08.infiltrate",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c08.counter",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 山门",
+      "speaker": "旁白",
+      "text": "有人肯听你讲旧灵脉，有人问能否保证家人活着。你只能答还不能。几个弟子留下帮忙，更多人散去；但顾衡再不能声称无人提出过另一条路。长老会也记下了你的名字。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "next": "c08.dusk",
+      "effects": [
+        {
+          "variable": "mark.public",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "risk.attention",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c08.infiltrate",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "旁白",
+      "text": "你绕过争论的人群进入炉房。阿澈的姐姐仍在，她隔着阵柱认出那封家书。炉内的人轮流承压，并非全被抽空；若能暂停阵眼一炷香，便能分批撤出。你抄下轮班簿上的人数与时刻。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "next": "c08.dusk",
+      "effects": [
+        {
+          "variable": "clue.ledger",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c08.dusk",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "沈砚",
+      "text": "沈砚把半幅阵图按在石门上。新旧灵脉之间缺一处转接，他能算出方位，却必须有人测量。裂隙会吞噬进去的人；顾衡的观测阵则可远测，但须他同意开启。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "goIn",
+          "text": "亲自进入裂隙测量",
+          "target": "c08.goIn",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "askGu",
+          "text": "请顾衡开启观测阵",
+          "target": "c08.askGu",
+          "lockedReason": "需取得顾衡的信任",
+          "conditions": [
+            {
+              "variable": "trust.gu",
+              "minimum": 1,
+              "maximum": 3
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c08.goIn",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "心念",
+      "text": "裂隙里没有风，只有无数断续的人声。你把脉冲刻在袖口，几乎爬不回来。沈砚看过刻痕：转接点真实存在。这次至少不必再送一个弟子去试错。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "next": "c09.dawn",
+      "effects": [
+        {
+          "variable": "clue.array",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c08.askGu",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 山门",
+      "speaker": "顾衡",
+      "text": "顾衡开启观测阵，数值与你的推测吻合。他第一次没有称替阵为妄想。但令牌动用过的痕迹留在阵阁，长老会明日便会知道是他帮了你。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "next": "c09.dawn",
+      "effects": [
+        {
+          "variable": "clue.array",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "trust.gu",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "risk.attention",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c09.dawn",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 山门",
+      "speaker": "旁白",
+      "text": "第九日，长老会封锁山门，称替阵试验扰乱灵脉。顾衡交出令牌，林月的离山队被扣，沈砚的旧名重上通缉榜。三人分守三处，你能先帮的只有一人。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "day",
+          "operation": "set",
+          "value": 9
+        },
+        {
+          "variable": "actions",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [
+        {
+          "id": "freeLin",
+          "text": "帮林月送人出山",
+          "target": "c09.linYue",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "saveNotes",
+          "text": "帮沈砚转移阵图",
+          "target": "c09.shen",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "visitGu",
+          "text": "问顾衡是否仍愿合作",
+          "target": "c09.gu",
+          "lockedReason": "需先争取顾衡信任",
+          "conditions": [
+            {
+              "variable": "trust.gu",
+              "minimum": 1,
+              "maximum": 3
+            }
+          ],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c09.linYue",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 断碑",
+      "speaker": "林月",
+      "text": "你们借雨后涨水送走第一批弟子。林月把最后一人扶上舟，自己留在岸边：‘逃路有了。但我不想让留下的人永远烧在炉里。’她将一枚渡河令交给你。",
+      "background": "ridge",
+      "portrait": "linYue",
+      "rain": false,
+      "next": "c09.dusk",
+      "effects": [
+        {
+          "variable": "trust.linYue",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "mark.evacuated",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c09.shen",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "沈砚",
+      "text": "你替沈砚搬走旧阵笔记。他停在某页，承认第一次试阵死过人，那人的名字也被他从名册划去。你让他重新写上。赎罪不能替死者说话，但至少不该再删掉他们。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "next": "c09.dusk",
+      "effects": [
+        {
+          "variable": "trust.shenYan",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "mark.original",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c09.gu",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 山门",
+      "speaker": "顾衡",
+      "text": "顾衡交出被停职前藏下的阵眼令牌。他说不愿再替长老会圆谎；若新阵失败，他仍会亲手关炉挡住裂隙。你听明白了：他愿合作，也准备在最后一刻与你为敌。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "next": "c09.dusk",
+      "effects": [
+        {
+          "variable": "trust.gu",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "mark.arrayKey",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c09.dusk",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "心念",
+      "text": "第一次替阵试验定在明夜。你可以告诉外门，请他们分散守住各处护符；也可以独自多修一夜，将自己的经脉当作最后缓冲。两者都是准备，承受风险的人不同。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "warn",
+          "text": "告知众人试阵风险",
+          "target": "c09.warn",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "train",
+          "text": "独自修炼承担缓冲",
+          "target": "c09.train",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c09.warn",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 山门",
+      "speaker": "旁白",
+      "text": "你逐户解释试阵可能造成的震动，没有许诺零伤亡。有人骂你，有人取下自家的护符借给你。明夜若出事，至少他们不会毫无准备。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "next": "c10.dawn",
+      "effects": [
+        {
+          "variable": "mark.public",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c09.train",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 临风石",
+      "speaker": "心念",
+      "text": "你练到天亮，经脉里的朱纹终于能反向运转。代价是村里没人知道明夜会发生什么，也没人准备在你撑不住时接手。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "next": "c10.dawn",
+      "effects": [
+        {
+          "variable": "cultivation",
+          "operation": "add",
+          "value": 2
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c10.dawn",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "旁白",
+      "text": "第十日，替阵试验开始。旧灵脉点亮第一座分流柱，炉门后的呼吸第一次不再被火声盖住。第二座柱子却炸裂了，山下护符一齐黯淡。沈砚正在补阵，林月正在撤人；你只能先护一边。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "day",
+          "operation": "set",
+          "value": 10
+        },
+        {
+          "variable": "actions",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [
+        {
+          "id": "holdArray",
+          "text": "稳住分流柱，保护山下",
+          "target": "c10.array",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "openPath",
+          "text": "打开侧门，先救炉中人",
+          "target": "c10.people",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c10.array",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "顾衡",
+      "text": "你与顾衡按住崩裂的阵柱，山下护符重新亮起。炉中撤出的人少了一半。顾衡没有说‘看吧’，只记下你的手法：新阵不是妄想，但还远远不够。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "next": "c10.dusk",
+      "effects": [
+        {
+          "variable": "mark.village",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "trust.gu",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c10.people",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 山腹石门",
+      "speaker": "林月",
+      "text": "你劈开侧门，林月带人一批批逃出。山下传来护符碎裂的声音，她停了一瞬，你推她继续走。人活了，裂隙也深了一寸；这笔债不能留给不知情的村民。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "next": "c10.dusk",
+      "effects": [
+        {
+          "variable": "mark.evacuated",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "trust.linYue",
+          "operation": "add",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c10.dusk",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "松风岭 · 断碑",
+      "speaker": "沈砚",
+      "text": "沈砚带回断柱碎片：失败处不是旧灵脉太弱，而是原阵故意把山外灵脉排除在外。有人宁肯年年添祭品，也不肯放下独占灵气的权力。长老会正开始销毁原图，你还有一次行动。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "preserve",
+          "text": "抢救完整原阵图",
+          "target": "c10.preserve",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "id": "publish",
+          "text": "公开试验结果与伤亡",
+          "target": "c10.publish",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "c10.preserve",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 旧碑廊",
+      "speaker": "旁白",
+      "text": "你抢在焚卷前拓下原图。它写明当年的排除命令来自长老会，而非山脉本身。证据终于完整，却仍缺让每个人共同承担阵压的许可。长老会不会轻易给。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "terminal": true,
+      "effects": [
+        {
+          "variable": "mark.original",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "c10.publish",
+      "chapter": "卷三 · 山有裂痕",
+      "location": "青云山 · 山门",
+      "speaker": "旁白",
+      "text": "你把成功与伤亡一起写在告示上，没有涂掉不利于自己的部分。有人退缩，有人来问能做什么。顾衡站在人群后，没有撕下告示。山门第一次为同一件事争吵到天明。",
       "background": "gate",
       "portrait": "",
       "rain": false,
       "terminal": true,
-      "effects": [],
+      "effects": [
+        {
+          "variable": "mark.public",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "actions",
+          "operation": "add",
+          "value": -1
+        }
+      ],
       "choices": []
     }
   ]

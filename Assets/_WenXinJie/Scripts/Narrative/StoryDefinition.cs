@@ -46,7 +46,17 @@ namespace WenXinJie.Narrative
         public string text;
         public string target;
         public string lockedReason;
+        public bool hidden;
         public StoryCondition[] conditions = Array.Empty<StoryCondition>();
+        public StoryEffect[] effects = Array.Empty<StoryEffect>();
+        public StoryOutcome[] outcomes = Array.Empty<StoryOutcome>();
+    }
+
+    [Serializable]
+    public sealed class StoryOutcome
+    {
+        public string target;
+        public int weight;
         public StoryEffect[] effects = Array.Empty<StoryEffect>();
     }
 

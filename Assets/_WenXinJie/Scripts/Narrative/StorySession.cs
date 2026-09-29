@@ -7,18 +7,21 @@ namespace WenXinJie.Narrative
     public sealed class StorySession
     {
         private readonly StoryGraph _graph;
+        private readonly RunRandom _random;
         private Dictionary<string, int> _values;
 
-        public StorySession(StoryGraph graph)
+        public StorySession(StoryGraph graph, int? seed = null)
         {
             _graph = graph ?? throw new ArgumentNullException(nameof(graph));
+            _random = new(seed ?? Guid.NewGuid().GetHashCode());
             _values = graph.Variables.ToDictionary(variable => variable.id, variable => variable.initial);
             Enter(graph.Definition.start, Array.Empty<StoryEffect>());
         }
 
-        private StorySession(StoryGraph graph, Dictionary<string, int> values, StoryNode node)
+        private StorySession(StoryGraph graph, Dictionary<string, int> values, StoryNode node, int randomState)
         {
             _graph = graph;
+            _random = new(randomState);
             _values = values;
             Current = node;
         }
@@ -55,7 +58,27 @@ namespace WenXinJie.Narrative
                 return false;
             }
 
-            Enter(choice.target, choice.effects);
+            var target = choice.target;
+            IEnumerable<StoryEffect> effects = choice.effects;
+            if (choice.outcomes.Length > 0)
+            {
+                var totalWeight = choice.outcomes.Sum(outcome => outcome.weight);
+                var roll = _random.Next(totalWeight);
+                foreach (var outcome in choice.outcomes)
+                {
+                    roll -= outcome.weight;
+                    if (roll >= 0)
+                    {
+                        continue;
+                    }
+
+                    target = outcome.target;
+                    effects = choice.effects.Concat(outcome.effects);
+                    break;
+                }
+            }
+
+            Enter(target, effects);
             return true;
         }
 
@@ -66,6 +89,7 @@ namespace WenXinJie.Narrative
                 campaign = _graph.Definition.id,
                 revision = _graph.Definition.revision,
                 node = Current.id,
+                randomState = _random.State,
                 values = _values.OrderBy(pair => pair.Key).Select(pair => new VariableValue
                 {
                     id = pair.Key,
@@ -76,9 +100,9 @@ namespace WenXinJie.Narrative
 
         public static StorySession Restore(StoryGraph graph, StorySnapshot snapshot)
         {
-            StoryGraph.Require(snapshot != null && snapshot.version == 2, "Unsupported save schema.");
+            StoryGraph.Require(snapshot != null && snapshot.version == 3, "Unsupported save schema.");
             StoryGraph.Require(snapshot.campaign == graph.Definition.id && snapshot.revision == graph.Definition.revision, "Save needs a content migration.");
-            StoryGraph.Require(snapshot.values != null, "Missing saved state.");
+            StoryGraph.Require(snapshot.values != null && snapshot.randomState != 0, "Missing saved state.");
             var values = new Dictionary<string, int>();
             foreach (var value in snapshot.values)
             {
@@ -91,7 +115,7 @@ namespace WenXinJie.Narrative
 
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
-            return new(graph, values, graph.GetNode(snapshot.node));
+            return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
         }
 
         private void Enter(string nodeId, IEnumerable<StoryEffect> choiceEffects)

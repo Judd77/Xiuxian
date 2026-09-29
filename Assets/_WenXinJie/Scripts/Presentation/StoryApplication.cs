@@ -21,6 +21,7 @@ namespace WenXinJie.Presentation
         private GameAudio _audio;
         private DisplayModeService _displayModes;
         private StoryGraph _graph;
+        private ClueJournalState _lastJournal;
         private DialogueReader _reader;
         private StoryView _view;
         private StoryViewStateFactory _viewStateFactory;
@@ -34,10 +35,10 @@ namespace WenXinJie.Presentation
 #if UNITY_EDITOR
                 if (!string.IsNullOrEmpty(TestSaveDirectory))
                 {
-                    return Path.Combine(TestSaveDirectory, "campaign-v2.json");
+                    return Path.Combine(TestSaveDirectory, "campaign-run.json");
                 }
 #endif
-                return Path.Combine(Application.persistentDataPath, "WenXinJie", "campaign-v2.json");
+                return Path.Combine(Application.persistentDataPath, "WenXinJie", "campaign-run.json");
             }
         }
 
@@ -135,6 +136,7 @@ namespace WenXinJie.Presentation
         public void StartNewGame()
         {
             Session = new(_graph);
+            _lastJournal = null;
             _reader.ResetHistory();
             _view.HideMainMenu();
             Render();
@@ -190,6 +192,7 @@ namespace WenXinJie.Presentation
             try
             {
                 Session = _saves.Load(SavePath, _graph, out recovered);
+                _lastJournal = null;
                 return true;
             }
             catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
@@ -208,9 +211,31 @@ namespace WenXinJie.Presentation
 
         private void Render()
         {
+            var state = _viewStateFactory.Create(Session);
+            var newClue = FindNewClue(_lastJournal, state.Journal);
             _audio.SetAmbienceActive(Session.Current.rain);
-            _view.ShowNotice(string.Empty);
-            _view.Render(_viewStateFactory.Create(Session));
+            _view.Render(state);
+            _view.ShowNotice(string.IsNullOrEmpty(newClue) ? string.Empty : "新线索已收录：" + newClue);
+            _lastJournal = state.Journal;
+        }
+
+        private static string FindNewClue(ClueJournalState previous, ClueJournalState current)
+        {
+            if (previous == null)
+            {
+                return string.Empty;
+            }
+
+            for (var index = 0; index < current.Entries.Length; index++)
+            {
+                if (current.Entries[index].Unlocked
+                    && (index >= previous.Entries.Length || !previous.Entries[index].Unlocked))
+                {
+                    return current.Entries[index].Title;
+                }
+            }
+
+            return string.Empty;
         }
     }
 }
