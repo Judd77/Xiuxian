@@ -162,9 +162,10 @@ namespace WenXinJie.Editor
                 reader.Complete();
                 await Capture("Docs/Validation/campaign-shared-secret-1080.png");
                 await VerifyAdditionalRoutes(application, reader);
+                await VerifyGuInspection(application, reader);
                 LastReport = "Campaign Play Mode checks PASS: case inference, spell, premature confrontation, "
                              + "case save/load, main menu start/continue/load, actual choice click, "
-                             + "four first-night routes, day-seven continuation and new clues, background fades, "
+                             + "Gu Heng's supervised inspection, four first-night routes, day-seven continuation and new clues, background fades, "
                              + "isolated save/load, and 1920x1080 capture.";
                 Debug.Log(LastReport);
             }
@@ -188,7 +189,7 @@ namespace WenXinJie.Editor
             Require(application.Session.Current.id == "case.intro", "New game did not start at the case.");
             VerifyTextContains("Status", "辨气 未习得");
             await Click("ClueJournal");
-            VerifyText("ClueJournalCount", "2 / 25");
+            VerifyText("ClueJournalCount", "2 / 26");
             await Click("ClueJournalClose");
             Choose(application, reader, "post");
             Advance(application, reader);
@@ -208,7 +209,7 @@ namespace WenXinJie.Editor
             Require(application.Session.GetValue("case.verified") == 1,
                 "Spell did not verify living breath after the receipt was sealed.");
             await Click("ClueJournal");
-            VerifyText("ClueJournalCount", "7 / 25");
+            VerifyText("ClueJournalCount", "7 / 26");
             await Click("ClueEntry4");
             VerifyText("ClueDetailTitle", "炉灰内侧活息");
             await Click("ClueJournalClose");
@@ -350,6 +351,40 @@ namespace WenXinJie.Editor
             Require(application.Session.Current.id == "c07.dawn"
                     && application.Session.GetValue("day") == 7,
                 "Day seven was not reached from the third-act opening.");
+        }
+
+        private static async Task VerifyGuInspection(StoryApplication application, DialogueReader reader)
+        {
+            application.StartNewGame();
+            Choose(application, reader, "roster");
+            Advance(application, reader);
+            Choose(application, reader, "borrowed");
+            Advance(application, reader);
+            Choose(application, reader, "ink");
+            Advance(application, reader);
+            Choose(application, reader, "sense");
+            Advance(application, reader);
+            Choose(application, reader, "sample");
+            Advance(application, reader);
+            Choose(application, reader, "uncertain");
+            Advance(application, reader);
+            Choose(application, reader, "gu");
+            Advance(application, reader);
+            Choose(application, reader, "workshop");
+            Advance(application, reader);
+            Choose(application, reader, "inspect");
+            Require(application.Session.Current.id == "route.gu.inspectionBrief",
+                "Supervised furnace inspection did not open.");
+            VerifyActive("Choice0", true);
+            VerifyActive("Choice1", true);
+            VerifyActive("Choice2", true);
+            VerifyActive("Choice3", false);
+            reader.Complete();
+            await Capture("Docs/Validation/gu-supervised-inspection-1080.png");
+            Choose(application, reader, "ash");
+            Require(application.Session.GetValue("case.controlSample") == 1
+                    && application.Session.GetValue("case.villageWitness") == 1,
+                "The supervised ash comparison did not leave a signed sample.");
         }
 
         private static void ReachActionHub(StoryApplication application, DialogueReader reader)

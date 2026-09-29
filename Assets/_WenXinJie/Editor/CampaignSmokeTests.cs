@@ -17,7 +17,7 @@ namespace WenXinJie.Editor
         public static void Run()
         {
             var graph = LoadGraph();
-            Require(graph.Nodes.Count() == 231, "Unexpected node count.");
+            Require(graph.Nodes.Count() == 240, "Unexpected node count.");
             VerifyCaseSlice(graph);
             VerifyNewStory(graph);
             VerifyRoute(graph, "investigate", "copyPage", "visit", "confide", "shared", "c01.shared", true);
@@ -30,7 +30,7 @@ namespace WenXinJie.Editor
             VerifyInvalidContentRejected();
             VerifyAssets(graph);
             Debug.Log(
-                "Campaign smoke tests PASS: 231-node graph, evidence-dependent openings, Lin Yue rescue window, three-party hearing, endings, save round-trip and assets.");
+                "Campaign smoke tests PASS: 240-node graph, evidence-dependent openings, Lin Yue rescue, Gu Heng inspection, three-party hearing, endings, save round-trip and assets.");
         }
 
         private static StoryGraph LoadGraph()
@@ -204,6 +204,27 @@ namespace WenXinJie.Editor
                     && sideDoor.GetValue("case.arrayMeasured") == 1
                     && sideDoor.GetValue("case.villageReady") == 1,
                 "The cross-route talisman measurement did not affect preparation.");
+
+            var supervised = new StorySession(graph);
+            ReachCaseMeet(supervised, "roster", "borrowed", "ink", "sense", "sample");
+            Require(supervised.Choose("number") && supervised.Advance() && supervised.Choose("gu")
+                    && supervised.Advance() && supervised.Choose("workshop") && supervised.Advance()
+                    && supervised.Choose("inspect") && supervised.Choose("ash")
+                    && supervised.Advance() && supervised.Choose("scope") && supervised.Advance()
+                    && supervised.Advance() && supervised.Choose("continue")
+                    && supervised.Choose("furnace") && supervised.Advance()
+                    && supervised.Choose("guardVillage") && supervised.Advance()
+                    && supervised.Choose("records") && supervised.Advance() && supervised.Advance()
+                    && supervised.Choose("pressure") && supervised.Choose("witness")
+                    && supervised.Advance() && supervised.Choose("proceed")
+                    && supervised.Choose("solo") && supervised.Advance()
+                    && supervised.Choose("replace") && supervised.Choose("prepared")
+                    && supervised.Current.terminal,
+                "Supervised furnace evidence did not reach informed village evacuation and replacement.");
+            Require(supervised.GetValue("case.controlSample") == 1
+                    && supervised.GetValue("case.villageWitness") == 1
+                    && supervised.GetValue("case.villageConsent") == 1,
+                "The artisan's furnace witness did not affect village consent.");
         }
 
         private static void ReachCaseMeet(StorySession session, string entry, string guess,

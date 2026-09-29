@@ -177,7 +177,10 @@ namespace WenXinJie.Presentation
                     session.GetValue("case.jointProtocol") > 0),
                 new ClueEntryViewState("侧门符尾", "术证 · 炉房侧门",
                     "半张遮息符在门缝先向炉内卷，再被村口副脉推回。它能帮助复测回流先后，不能隔阵辨认人名。",
-                    session.GetValue("case.sideDoorMeasured") > 0)
+                    session.GetValue("case.sideDoorMeasured") > 0),
+                new ClueEntryViewState("工匠查炉签记", "见证 · 炉房外廊",
+                    "村落工匠亲见炉门封条与今日活息，或签封双灰对照样本。他能证明查验范围，不能据旧号认出承压者。",
+                    session.GetValue("case.villageWitness") > 0)
             });
         }
 
