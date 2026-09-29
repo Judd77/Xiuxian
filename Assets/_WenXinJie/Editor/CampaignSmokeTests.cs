@@ -121,6 +121,7 @@ namespace WenXinJie.Editor
                 "The rescue route did not enter the rift investigation.");
             Require(session.Choose("village") && session.Advance() && session.Choose("guardFurnace")
                     && session.Advance() && session.Choose("ache") && session.Advance()
+                    && session.Advance() && session.Choose("pressure") && session.Choose("consent")
                     && session.Advance() && session.Choose("proceed") && session.Choose("solo") && session.Advance()
                     && session.Choose("replace") && session.Choose("prepared") && session.Current.terminal,
                 "The replacement ending was not playable.");
@@ -167,10 +168,12 @@ namespace WenXinJie.Editor
                     && measured.Advance() && measured.Choose("paper") && measured.Advance()
                     && measured.Choose("signature") && measured.Advance() && measured.Choose("pause")
                     && measured.Choose("witness") && measured.Advance() && measured.Advance()
-                    && measured.Choose("continue") && measured.Choose("draft") && measured.Advance()
+                    && measured.Choose("continue") && measured.Choose("village") && measured.Advance()
                     && measured.Choose("guardVillage") && measured.Advance()
                     && measured.Choose("records") && measured.Advance() && measured.Advance()
-                    && measured.Choose("proceed") && measured.Choose("solo") && measured.Advance()
+                    && measured.Choose("names") && measured.Choose("matched") && measured.Advance()
+                    && measured.Choose("pressure") && measured.Choose("consent") && measured.Advance()
+                    && measured.Choose("proceed") && measured.Choose("joint") && measured.Advance()
                     && measured.Choose("replace") && measured.Choose("timed") && measured.Current.terminal,
                 "Two-sided return measurement did not affect replacement execution.");
             Require(measured.GetValue("case.returnMeasured") == 1 && measured.GetValue("case.publicRecord") == 1,
