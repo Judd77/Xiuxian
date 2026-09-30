@@ -26,6 +26,8 @@ namespace WenXinJie.Presentation
                 new(0.5f, 0.5f), 100f, 0, SpriteMeshType.FullRect, PanelBorder);
         }
 
+        public TMP_FontAsset Font => _assets.Font;
+
         public static RectTransform Box(Transform parent, string name, float x, float y, float width, float height)
         {
             var child = new GameObject(name, typeof(RectTransform));
@@ -61,6 +63,42 @@ namespace WenXinJie.Presentation
             image.sprite = _panelSprite;
             image.type = Image.Type.Sliced;
             image.raycastTarget = true;
+            return image;
+        }
+
+        public RectTransform ArchiveOverlay(Transform parent, string name, string title, string subtitle,
+            out RawImage backdrop)
+        {
+            var root = Box(parent, name, 0f, 0f, 1920f, 1080f);
+            backdrop = Picture(root, "ArchiveBackdrop", null, 0f, 0f, 1920f, 1080f);
+            var fitter = backdrop.gameObject.AddComponent<AspectRatioFitter>();
+            fitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
+            fitter.aspectRatio = 16f / 9f;
+            var veil = Box(root, "ArchiveVeil", 0f, 0f, 1920f, 1080f).gameObject.AddComponent<Image>();
+            veil.color = new(0.015f, 0.045f, 0.050f, 0.62f);
+            veil.raycastTarget = true;
+
+            Panel(root, "ArchiveFrame", 104f, 72f, 1712f, 936f);
+            var overline = Label(root, "ArchiveOverline", "问心劫  /  " + subtitle,
+                192f, 116f, 1040f, 42f, 23);
+            overline.font = _assets.MenuFont;
+            overline.color = new(0.72f, 0.82f, 0.78f);
+            var heading = Label(root, "ArchiveHeading", title, 190f, 160f, 900f, 86f, 52);
+            heading.font = _assets.TitleFont;
+            heading.color = new(0.96f, 0.86f, 0.60f);
+            Rule(root, "ArchiveHeaderRule", 192f, 262f, 1536f, 2f,
+                new(0.74f, 0.64f, 0.40f, 0.76f));
+            Rule(root, "ArchiveFooterRule", 192f, 858f, 1536f, 2f,
+                new(0.74f, 0.64f, 0.40f, 0.55f));
+            return root;
+        }
+
+        public static Image Rule(Transform parent, string name, float x, float y, float width,
+            float height, Color color)
+        {
+            var image = Box(parent, name, x, y, width, height).gameObject.AddComponent<Image>();
+            image.color = color;
+            image.raycastTarget = false;
             return image;
         }
 

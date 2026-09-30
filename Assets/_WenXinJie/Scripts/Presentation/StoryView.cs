@@ -84,6 +84,7 @@ namespace WenXinJie.Presentation
 
         internal void Render(StoryViewState state)
         {
+            _overlays.SetBackdrop(state.Background);
             _overlays.RenderJournal(state.Journal);
             _scene.ShowPortrait(state.Portrait);
             _scene.ShowBackground(state.Background);

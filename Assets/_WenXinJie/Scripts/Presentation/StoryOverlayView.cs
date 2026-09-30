@@ -22,6 +22,7 @@ namespace WenXinJie.Presentation
         private readonly ClueJournalView _journal;
         private readonly DialogueReader _reader;
         private readonly GameObject _settings;
+        private readonly RawImage _historyBackdrop;
 
         public StoryOverlayView(Transform parent, StoryUiFactory ui, TMP_FontAsset menuFont,
             DialogueReader reader,
@@ -30,12 +31,55 @@ namespace WenXinJie.Presentation
             _reader = reader;
             _journal = new(parent, ui, menuFont);
 
-            var history = CreateOverlay(parent, ui, menuFont, "HistoryOverlay", "前尘 · 已读记事");
-            var record = ui.Label(history, "HistoryText", string.Empty, 180f, 260f, 1560f, 520f, 32);
-            ui.Button(history, "HistoryPrevious", "上一条", 180f, 870f, 260f, 64f, reader.Previous);
-            ui.Button(history, "HistoryNext", "下一条", 470f, 870f, 260f, 64f, reader.Next);
-            ui.Button(history, "HistoryClose", "返回", 1480f, 870f, 260f, 64f, reader.CloseHistory);
-            reader.ConfigureHistory(history.gameObject, record);
+            var history = ui.ArchiveOverlay(parent, "HistoryOverlay", "前尘", "已读记事",
+                out _historyBackdrop);
+            var historyCount = ui.Label(history, "HistoryCount", string.Empty,
+                1360f, 178f, 350f, 52f, 28);
+            historyCount.font = menuFont;
+            historyCount.color = new(0.86f, 0.78f, 0.55f);
+            historyCount.alignment = TextAlignmentOptions.Right;
+            var historyList = ui.Frame(history, "HistoryListFrame", 192f, 290f, 500f, 532f);
+            historyList.color = new(0.86f, 0.94f, 0.89f);
+            var historyCard = ui.Frame(history, "HistoryPage", 724f, 290f, 1004f, 532f);
+            historyCard.color = new(0.91f, 0.96f, 0.92f);
+            var historyItems = new Button[5];
+            var historyMarks = new Image[5];
+            for (var index = 0; index < historyItems.Length; index++)
+            {
+                var slot = index;
+                historyItems[index] = ui.Button(history, "HistoryItem" + index, string.Empty,
+                    218f, 314f + index * 96f, 448f, 80f,
+                    () => reader.SelectVisibleHistory(slot));
+                var itemLabel = historyItems[index].GetComponentInChildren<TMP_Text>();
+                itemLabel.font = ui.Font;
+                itemLabel.fontSize = 22;
+                itemLabel.overflowMode = TextOverflowModes.Truncate;
+                itemLabel.alignment = TextAlignmentOptions.Left;
+                historyMarks[index] = StoryUiFactory.Rule(history, "HistorySelected" + index,
+                    228f, 328f + index * 96f, 4f, 50f,
+                    new(0.95f, 0.75f, 0.38f, 1f));
+            }
+
+            var pageLabel = ui.Label(history, "HistoryPageLabel", "本周目所见",
+                780f, 332f, 800f, 45f, 23);
+            pageLabel.font = menuFont;
+            pageLabel.color = new(0.69f, 0.80f, 0.74f);
+            StoryUiFactory.Rule(history, "HistoryPageRule", 780f, 392f, 888f, 2f,
+                new(0.72f, 0.63f, 0.43f, 0.63f));
+            var record = ui.Label(history, "HistoryText", string.Empty,
+                780f, 432f, 878f, 324f, 35);
+            record.font = ui.Font;
+            record.color = new(0.96f, 0.95f, 0.85f);
+            record.lineSpacing = 10f;
+            record.overflowMode = TextOverflowModes.Truncate;
+            var previous = ui.Button(history, "HistoryPrevious", "上一条", 192f, 880f, 206f, 64f,
+                reader.Previous);
+            var next = ui.Button(history, "HistoryNext", "下一条", 420f, 880f, 206f, 64f,
+                reader.Next);
+            ui.Button(history, "HistoryClose", "继续", 1518f, 880f, 210f, 64f,
+                reader.CloseHistory);
+            reader.ConfigureHistory(history.gameObject, record, historyCount, previous, next,
+                historyItems, historyMarks);
 
             var settingsHeight = displayModes.SupportsWindowMode ? 820f : 560f;
             var settings = CreateModal(parent, ui, menuFont, "SettingsModal", "设置", 1040f,
@@ -95,23 +139,18 @@ namespace WenXinJie.Presentation
             _journal.Render(state);
         }
 
+        public void SetBackdrop(Texture2D texture)
+        {
+            _historyBackdrop.texture = texture;
+            _journal.SetBackdrop(texture);
+        }
+
         public void CloseAll()
         {
             _settings.SetActive(false);
             _credits.SetActive(false);
             _journal.Hide();
             PlayerPrefs.Save();
-        }
-
-        private static RectTransform CreateOverlay(Transform parent, StoryUiFactory ui, TMP_FontAsset menuFont,
-            string objectName, string title)
-        {
-            var overlay = StoryUiFactory.Box(parent, objectName, 0f, 0f, 1920f, 1080f);
-            var image = overlay.gameObject.AddComponent<Image>();
-            image.color = new(0.055f, 0.14f, 0.13f, 1f);
-            var heading = ui.Label(overlay, "Heading", title, 180f, 100f, 1560f, 90f, 44);
-            heading.font = menuFont;
-            return overlay;
         }
 
         private static ModalWindow CreateModal(Transform parent, StoryUiFactory ui, TMP_FontAsset menuFont,
