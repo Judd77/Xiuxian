@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 20,
+  "revision": 21,
   "start": "case.intro",
   "variables": [
     {
@@ -419,6 +419,42 @@
     },
     {
       "id": "e.delay",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.seizeBell",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.seizeRecord",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.forceSymbol",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.publicCopies",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.hiddenName",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.extraInjury",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -2315,7 +2351,7 @@
         {
           "id": "seize",
           "text": "趁验阵夺台，先救近门人",
-          "target": "story.seize.00.0",
+          "target": "e20.start",
           "lockedReason": "",
           "conditions": [],
           "effects": [],
@@ -2324,7 +2360,7 @@
         {
           "id": "hold",
           "text": "公开初试真账，今晚守阵再筹迁路",
-          "target": "story.old.00.0",
+          "target": "e30.entry",
           "lockedReason": "",
           "conditions": [],
           "effects": [],
@@ -4207,57 +4243,6 @@
       "terminal": true
     },
     {
-      "id": "story.seize.00.0",
-      "chapter": "结局 · 夺下石台",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "你查到了沈砚的旧图，也学会短时遮住探气铃，却没有让村民和家属共同守钟。祁元肃验阵时，你压住护台铃，夺下石台钥匙。林月趁机开门，许澄等人脱离石榻。谷口三户尚在，改道会把灵潮引向他们。村口护符接连亮起，台下的人喊你别松手。",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [
-        {
-          "id": "self",
-          "text": "自己坐上石台，事后交出钥匙",
-          "target": "story.seize.01.0",
-          "effects": []
-        },
-        {
-          "id": "force",
-          "text": "让祁元肃承受今夜的阵压",
-          "target": "story.seize.02.0",
-          "effects": []
-        }
-      ]
-    },
-    {
-      "id": "story.seize.01.0",
-      "chapter": "结局 · 夺下石台",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "你坐进原先伤人的位置，按旧路撑过这一夜。林月把停铃放在你手边；若有人愿接替，她会先问姓名、告诉他能随时喊停。你救出了炉中人，村里也平安，可你的经脉一夜间伤得厉害。天亮，你把钥匙交给许澄姐姐与村民，要求公开轮换记录。之后仍需迁村、重测石柱，不能把“我愿意”变成下一代人的义务。",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "ending.seizeSelf"
-    },
-    {
-      "id": "story.seize.02.0",
-      "chapter": "结局 · 夺下石台",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "另一个选择是把祁元肃强按上榻。许澄看着你：“下一次你认定谁该受罚，谁能让你停？”祁元肃活过了这一夜，重伤得再握不稳钥匙。众人可以追究他多年的命令，但你私自决定今夜由谁受伤，也得交代。姐姐拒绝从你一人手里接钥匙，直到村民与出炉弟子看着你拆掉只听台上一人号令的符。炉门开了，村口也保住了，人与人之间的信任却得从头修。",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "ending.seizeForce"
-    },
-    {
       "id": "ending.seizeSelf",
       "chapter": "结局 · 夺下石台",
       "location": "山腹石台",
@@ -4282,63 +4267,6 @@
       "effects": [],
       "choices": [],
       "terminal": true
-    },
-    {
-      "id": "story.old.00.0",
-      "chapter": "结局 · 守住旧阵",
-      "location": "青云山 · 司籍房",
-      "speaker": "旁白",
-      "text": "谷口小试已证明旧图不可直接开闸；三户还未实走撤路，炉中人也未亲自答应下一次试验。你决定今晚封回旧闸。顾衡理解你怕村符再裂，祁元肃却想让你把真名册也一起锁起。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [
-        {
-          "id": "tell",
-          "text": "把真名册、旧图和伤情交给村民",
-          "target": "story.old.01.0",
-          "effects": [
-            {
-              "variable": "story.public",
-              "operation": "set",
-              "value": 1
-            }
-          ]
-        },
-        {
-          "id": "hide",
-          "text": "把纸锁回司籍房，继续替宗门誊册",
-          "target": "story.old.02.0",
-          "effects": []
-        }
-      ]
-    },
-    {
-      "id": "story.old.01.0",
-      "chapter": "结局 · 守住旧阵",
-      "location": "青云山 · 司籍房",
-      "speaker": "旁白",
-      "text": "你仍可以把真名册、旧图和伤情交给村民。老妇听完先把孙子的护符系紧，再去找许澄姐姐，约定下一次灵潮前迁哪三户。祁元肃再不能悄悄点人，林月能要求轮换与医治。这一夜没改路，下一夜还有机会。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "ending.oldPublic"
-    },
-    {
-      "id": "story.old.02.0",
-      "chapter": "结局 · 守住旧阵",
-      "location": "青云山 · 司籍房",
-      "speaker": "旁白",
-      "text": "你也可以把纸锁回司籍房，接受祁元肃给的新印。村庄平安，下一名选中的弟子被写作“离山”。管事递来名册，请你誊清。你知道每个字是什么意思，仍写了下去。阿澈在门外等你回答许澄的事，等到灯灭。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "ending.oldHidden"
     },
     {
       "id": "ending.oldPublic",
@@ -5391,6 +5319,496 @@
       "effects": [],
       "choices": [],
       "terminal": true
+    },
+    {
+      "id": "e20.start",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你有旧阵图，没量完三户撤路，也没取得村民同意。灵潮将至，祁元肃仍要验阵；你可借验阵夺台救近门人，却不能把冲击改送仍有人住的谷口。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e20.symbol"
+    },
+    {
+      "id": "e20.symbol",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "林月的遮铃符只能令护台的探气铃沉默七息，挡不住守卫的眼睛。七息后铃会响；你先把路线讲给她。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "side",
+          "text": "七息内夺钥匙，林月从已知侧门带人",
+          "target": "e20.side",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "front",
+          "text": "让林月穿过守卫看得见的正廊",
+          "target": "e20.front",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e20.front",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "林月指向正廊的两名守卫：“符遮铃，不遮他们的眼。”你改用已知侧门，让阿澈推空药车接应。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e20.side"
+    },
+    {
+      "id": "e20.side",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "第一息，符贴上；第三息，你拿到石台钥匙。林月打开侧门，许澄与近门人走向药车。第七息符角烧黑，村口护符接连亮起：人出来了，旧阵的力仍需有人承。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e20.choose"
+    },
+    {
+      "id": "e20.choose",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "谷口三户尚未撤，不可临时改道。你只能让一个人坐上石台，选择前能看见两个后果：自己愿坐会长期伤修行；强按祁元肃能救人，却由你剥夺他拒绝的权利。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "self",
+          "text": "自己坐台，并把停铃放在手边",
+          "target": "e20.self",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "force",
+          "text": "强令祁元肃坐台，事后交代决定",
+          "target": "e21.force",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e20.self",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你坐进原先伤人的位置。阵流像冷水逆着经脉冲上来，林月把铃放在你抬手可及处：“你愿意坐，不等于下一人也愿意。”陶叔在旁准备接支路。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e20.bell"
+    },
+    {
+      "id": "e20.bell",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "村口两声预警。你已撑过一轮，第三声停铃若响，必须让陶叔接旧支路；多撑会加重伤势，不能因此把“自愿”写成无限轮换。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "stop",
+          "text": "第三声按铃收息，交陶叔接支路",
+          "target": "e20.stopped",
+          "effects": [
+            {
+              "variable": "e.seizeBell",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "endure",
+          "text": "继续硬撑一息，待陶叔强行关闭",
+          "target": "e20.endure",
+          "effects": [
+            {
+              "variable": "e.extraInjury",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e20.endure",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "陶叔按事先说好的停令关闭支路。你的手还握在石台边，经脉比约定时更伤；林月把停铃重新放到你掌下，让你自己按下一次。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e20.stopped"
+    },
+    {
+      "id": "e20.stopped",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "村符稳住，许澄和近门人已出。你下台时双手发抖；林月先给阿澈换药，没有替你许诺明夜还能坐。谁愿轮换、何时能停，要公开写明。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.seizeBell",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "e20.record"
+    },
+    {
+      "id": "e20.record",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "天亮，姐姐和村民来取石台钥匙。你要交的不只是一把铜钥匙。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "public",
+          "text": "交钥匙与轮换真名，写下仍需迁村重测",
+          "target": "e20.public",
+          "effects": [
+            {
+              "variable": "e.seizeRecord",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "keep",
+          "text": "只交钥匙，把今夜伤情留在自己账里",
+          "target": "e20.revise",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e20.revise",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "姐姐不接：“下一位若不知道你伤成这样，他的‘愿意’怎么算知道代价？”你把伤情、可停时辰和未测的第三柱写到轮换纸上。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e20.public"
+    },
+    {
+      "id": "e20.public",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "家属、村民和出炉弟子各留一份轮换记录。你救出了近门的人，仍没有废掉旧阵；下一步是迁村、重测石柱与让每位接替者有说停的权利。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.seizeRecord",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "ending.seizeSelf"
+    },
+    {
+      "id": "e21.force",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "祁元肃不肯坐，你和守卫把他强按上榻。旧阵撑住这一夜，许澄等人得以离炉；祁元肃活着下来，手却抖得握不住钥匙。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e21.question"
+    },
+    {
+      "id": "e21.question",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "许澄问：“下一次你认定谁该受罚，谁能让你停？”你可以追究祁元肃改账与加压；今晚由谁受伤，是你私自决定的。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e21.key"
+    },
+    {
+      "id": "e21.key",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "姐姐拒绝从你一人手里接石台钥匙。台上的单令符仍只听执钥人；它既让祁元肃能强迫别人，也让你今晚能强迫他。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "dismantle",
+          "text": "当众拆单令符，交村民和出炉者共同守钥",
+          "target": "e21.dismantle",
+          "effects": [
+            {
+              "variable": "e.forceSymbol",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "insist",
+          "text": "要求众人因救援成功先信你一次",
+          "target": "e21.insist",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e21.insist",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "姐姐没松手：“你刚证明一个人握钥匙能做什么。先把只听台上一人的符拆掉。”你当着许澄和村人的面取下符钉。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e21.dismantle"
+    },
+    {
+      "id": "e21.dismantle",
+      "chapter": "结局 · 夺下石台",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "符钉卸下，石台不能再凭一把钥匙独断。姐姐与工匠共同收钥，真账公开；她仍不替许澄原谅你。炉门开了，村暂安，人与人之间的信任要从头修。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.forceSymbol",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "ending.seizeForce"
+    },
+    {
+      "id": "e30.entry",
+      "chapter": "结局 · 守住旧阵",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "谷口小试证明旧图不能直接开闸，三户还未实走撤路，炉中人也没答应下一次试验。你决定今晚封回旧闸。祁元肃想把真名册也锁起；封闸与封口是两件事。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e30.choice"
+    },
+    {
+      "id": "e30.choice",
+      "chapter": "结局 · 守住旧阵",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你手里有病人真名、旧阵图与今日伤情。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "tell",
+          "text": "分别交给家属与村民，公开今晚仍守旧阵",
+          "target": "e30.share",
+          "effects": [
+            {
+              "variable": "story.public",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "hide",
+          "text": "把纸锁起，继续誊写“离山”",
+          "target": "e31.book",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e30.share",
+      "chapter": "结局 · 守住旧阵",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你把获救、仍在炉内、未见到三栏分开抄，家属拿一份；村民拿旧图与谷口未测处，林月留今日伤情。谁都不能凭单份纸替别人宣布无事。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.publicCopies",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "e30.plan"
+    },
+    {
+      "id": "e30.plan",
+      "chapter": "结局 · 守住旧阵",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "老妇听完先给孙子系紧护符，再同许澄姐姐约下次灵潮前哪三户先迁。祁元肃再不能悄悄点人，林月能要求换药与轮换。今晚仍有人在榻上，下一次行动有公开的起点。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "ending.oldPublic"
+    },
+    {
+      "id": "e31.book",
+      "chapter": "结局 · 守住旧阵",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "祁元肃把新印放到你桌边，管事送来下一名坐榻弟子的去向栏，空格后预印着“离山”。你知道它会使家属以为人已走。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e31.choice"
+    },
+    {
+      "id": "e31.choice",
+      "chapter": "结局 · 守住旧阵",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "这页仍由你誊清。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "sign",
+          "text": "签下假去向，把真名册锁回柜里",
+          "target": "e31.sign",
+          "effects": [
+            {
+              "variable": "e.hiddenName",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "rethink",
+          "text": "停笔，公开记录，改走可追问的守阵路",
+          "target": "e30.share",
+          "effects": [
+            {
+              "variable": "story.public",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e31.sign",
+      "chapter": "结局 · 守住旧阵",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你把“离山”誊得端正，原簿锁上。山下今晚没再裂符，下一名弟子却仍在炉中；阿澈来问许澄怎样了，你没法拿出一页真账给他看。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "ending.oldHidden"
     }
   ]
 }

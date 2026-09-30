@@ -262,7 +262,16 @@ namespace WenXinJie.Presentation
                     && session.GetValue("h.house3") > 0),
                 new ClueEntryViewState("第三声后的执行", "行动 · 山腹石台",
                     "许澄够得到停铃，陶叔能接支路；按新测石柱辨流，第三声后两端撤力。药田受损，三户须暂迁，救出者仍需养伤。",
-                    session.GetValue("e.bellPlaced") > 0 && session.GetValue("e.flowMeasured") > 0)
+                    session.GetValue("e.bellPlaced") > 0 && session.GetValue("e.flowMeasured") > 0),
+                new ClueEntryViewState("夺台后的轮换真账", "本人伤情 · 山腹石台",
+                    "主角自愿坐台也受了长期伤，不能替下一人答应。停铃与伤情公开，钥匙交家属、村民与出炉弟子共同保管。",
+                    session.GetValue("e.seizeRecord") > 0),
+                new ClueEntryViewState("拆掉单令符", "行动 · 山腹石台",
+                    "强按祁元肃保住这一夜，也由主角剥夺他的拒绝权。台上只听一人的符已拆，家属仍未因此原谅主角。",
+                    session.GetValue("e.forceSymbol") > 0),
+                new ClueEntryViewState("公开的守阵真账", "三方留存 · 司籍房",
+                    "今晚仍守旧阵；家属持真名册，村民持旧图与未测处，医舍留今日伤情。下一次迁路可据此追问。",
+                    session.GetValue("e.publicCopies") > 0)
             });
         }
 

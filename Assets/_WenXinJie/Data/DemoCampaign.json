@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 20,
+  "revision": 21,
   "start": "case.intro",
   "variables": [
     {
@@ -419,6 +419,42 @@
     },
     {
       "id": "e.delay",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.seizeBell",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.seizeRecord",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.forceSymbol",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.publicCopies",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.hiddenName",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.extraInjury",
       "initial": 0,
       "minimum": 0,
       "maximum": 1

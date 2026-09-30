@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 20 && demo.Definition.revision == 20,
+            Require(full.Definition.revision == 21 && demo.Definition.revision == 21,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -172,9 +172,11 @@ namespace WenXinJie.Editor
             var run = new StorySession(full, 42);
             AdvanceTo(run, "case.boundary");
             Require(run.Choose("shen"), "Shen Yan route is unavailable.");
-            for (var step = 0; step < 150 && run.Current.id != "story.seize.00.0"; step++)
+            StorySnapshot hallSnapshot = null;
+            for (var step = 0; step < 200 && run.Current.id != "ending.seizeSelf"; step++)
             {
                 var id = run.Current.id;
+                if (id == "s.hall.choice") hallSnapshot = run.Snapshot();
                 var choiceId = id switch
                 {
                     "s02.first" => "left",
@@ -186,15 +188,28 @@ namespace WenXinJie.Editor
                     "s08.choice" => "split",
                     "s09.map" => "include",
                     "s.hall.choice" => "seize",
+                    "e20.symbol" => "side",
+                    "e20.choose" => "self",
+                    "e20.bell" => "stop",
+                    "e20.record" => "public",
                     _ => string.Empty
                 };
                 Require(string.IsNullOrEmpty(choiceId) ? run.Advance() : run.Choose(choiceId),
                     "Shen Yan route stopped at " + id);
             }
 
-            Require(run.Current.id == "story.seize.00.0" && run.GetValue("s.firstBed") == 1
-                    && run.GetValue("s.zhouWords") == 1 && run.GetValue("s.newMap") == 1,
-                "Shen Yan route did not carry its evidence to the council.");
+            Require(run.Current.id == "ending.seizeSelf" && run.GetValue("s.firstBed") == 1
+                    && run.GetValue("s.zhouWords") == 1 && run.GetValue("s.newMap") == 1
+                    && run.GetValue("e.seizeRecord") == 1,
+                "Shen Yan route did not carry its evidence through self-sacrifice.");
+            Require(hallSnapshot != null, "Shen Yan council snapshot is missing.");
+            var hiddenRun = StorySession.Restore(full, hallSnapshot);
+            Require(hiddenRun.Choose("hold") && hiddenRun.Advance()
+                    && hiddenRun.Choose("hide") && hiddenRun.Advance()
+                    && hiddenRun.Choose("sign") && hiddenRun.Advance()
+                    && hiddenRun.Current.id == "ending.oldHidden"
+                    && hiddenRun.GetValue("e.hiddenName") == 1,
+                "The concealment ending was not an explicit player action.");
         }
 
         private static void AdvanceTo(StorySession session, string target)
