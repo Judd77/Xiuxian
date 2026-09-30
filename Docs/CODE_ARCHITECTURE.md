@@ -1,6 +1,6 @@
 # 代码结构与 C# 约定
 
-更新：2026-09-28。本文记录当前实现的职责与持续适用的约束；新谜案玩法尚未实现，设计见 `GAME_REDESIGN.md`。
+更新：2026-09-30。本文记录当前实现的职责与持续适用的约束；正式剧情与交互见 `STORY.md`、`GAME_SCRIPT.md`，工程实况见 `DEVELOPMENT_STATUS.md`。
 
 ## 格式
 
@@ -37,7 +37,7 @@ PascalCase。不要把方法体或多个语句压成一行。公开 JSON 字段�
 持有会话生命周期：启动时仅显示首页，开始游戏创建新会话，继续游戏优先恢复内存会话，读取存档显式恢复磁盘快照。读取存档先完整验证，再提交到当前周目。设置可使用 PlayerPrefs，游戏进度不可使用
 PlayerPrefs。音乐和背景通过场景序列化引用接入，不在 Update 中查找或加载资源。
 
-旧 `FirstDay*` 原型、`Prototype.unity` 及对应测试工具已经移除。正式版使用 `GameFull.unity` 与 `Campaign.json`；试玩版使用 `GameDemo.unity` 与由完整剧情生成的 `DemoCampaign.json`。两个场景共用运行代码和资产目录，构建命令分别只打入对应场景。试玩与正式版使用独立存档文件，正式版可继承当前修订号的试玩进度。新谜案的证据、推断与术法规则应先由切片验证；真正需要通用规则语义时才扩展运行器，不把特殊案件逻辑堆在 UI。
+旧 `FirstDay*` 原型、`Prototype.unity` 及对应测试工具已经移除。正式版使用 `GameFull.unity` 与 `Campaign.json`；试玩版使用 `GameDemo.unity` 与 `DemoCampaign.json`。两个场景共用运行代码和资产目录，构建命令分别只打入对应场景。试玩与正式版使用独立存档文件，正式版可继承当前修订号的试玩进度。现有 JSON 仍是 revision 15 原型；按 `GAME_SCRIPT.md` 重制时，要以逐场内容明确条件、效果和存档版本，不再从小说段落自动切剧情节点。
 
 `StorySession` 已有可存档复现的随机状态基础，但当前正式剧情尚未使用随机结果；不能把随机事件池描述成已接入或新设计的必做功能。
 
@@ -46,9 +46,8 @@ PlayerPrefs。音乐和背景通过场景序列化引用接入，不在 Update �
 ## 验证入口
 
 - 正式剧情编辑模式：`WenXinJie/Validation/Run Campaign Smoke Tests`。
-- 正式剧情 Play Mode：`WenXinJie/Validation/Run Campaign Play Mode Checks`，使用隔离临时存档并输出截图。
+- 当前原型 Play Mode：`WenXinJie/Validation/Run Campaign Play Mode Checks`；重制正式剧本时须更新检查场景。
 - 正式场景创建/修复：`WenXinJie/Setup/Create Campaign Scene`，可重复执行，更新媒体目录和唯一构建场景。
 - MCP：`node Tools/unity-mcp.cjs Unity_RunCommand Tools/InspectUnity.cs`。脚本固定项目并筛选活跃 Unity 实例；域重载期间连接会短暂消失，等待编译完成再调用。
 
-UI 测试须等待渲染后再检查按钮实际中心的射线，不能仅按设计分辨率猜点击位置。按钮事件、合成 Input System 输入与实体鼠标操作须分别记录。真实结果见 `DEVELOPMENT_STATUS.md` 和
-`Docs/Validation/`。
+UI 测试须等待渲染后再检查按钮实际中心的射线，不能仅按设计分辨率猜点击位置。按钮事件、合成 Input System 输入与实体鼠标操作须分别记录。当前已验证与未验证的事实见 `DEVELOPMENT_STATUS.md`。
