@@ -245,7 +245,24 @@ namespace WenXinJie.Presentation
                     session.GetValue("story.survey") > 0),
                 new ClueEntryViewState("共同叫停约定", "行动 · 议事堂",
                     "炉门与村口都须有人守钟；家属和村民能叫停，伤亡与迁离按真名记录。",
-                    session.GetValue("story.contract") > 0)
+                    session.GetValue("story.contract") > 0),
+                new ClueEntryViewState("三处加快的记录", "时辰互证 · 山腹与村口",
+                    "炉符耗量、石柱闷响与无雨裂符按时辰先后加快。至迟明夜须准备，无法预言灵潮准确一刻。",
+                    session.GetValue("h.deadline") > 0),
+                new ClueEntryViewState("分开的三份责任", "公开对质 · 议事堂",
+                    "沈砚初案有人榻且未按周望求停；祁元肃加高承压并改去向；顾衡合写旧灾并写轻死者。不得以一人受罚抹去其余责任。",
+                    session.GetValue("h.shen") > 0 && session.GetValue("h.qi") > 0
+                    && session.GetValue("h.gu") > 0),
+                new ClueEntryViewState("可叫停的小试", "共同实测 · 谷口",
+                    "沈砚读图、陶叔执钥、家属与村人握钟。村口先亮，炉门后热；这次小试仅量局部先后，不保证下一股同样轻。",
+                    session.GetValue("h.test") > 0),
+                new ClueEntryViewState("三户分别同意暂迁", "本人决定 · 谷口",
+                    "老妇先过狭岔，父女带药与平车，木匠借屋并要求公开冬药账。谁也没有答应永久舍弃家与药田。",
+                    session.GetValue("h.house1") > 0 && session.GetValue("h.house2") > 0
+                    && session.GetValue("h.house3") > 0),
+                new ClueEntryViewState("第三声后的执行", "行动 · 山腹石台",
+                    "许澄够得到停铃，陶叔能接支路；按新测石柱辨流，第三声后两端撤力。药田受损，三户须暂迁，救出者仍需养伤。",
+                    session.GetValue("e.bellPlaced") > 0 && session.GetValue("e.flowMeasured") > 0)
             });
         }
 

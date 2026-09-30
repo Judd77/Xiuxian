@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 19 && demo.Definition.revision == 19,
+            Require(full.Definition.revision == 20 && demo.Definition.revision == 20,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -51,7 +51,7 @@ namespace WenXinJie.Editor
             foreach (var ending in new[]
                      {
                          "ending.leave", "ending.seizeSelf", "ending.seizeForce",
-                         "ending.oldPublic", "ending.oldHidden", "story.six.06.0"
+                         "ending.oldPublic", "ending.oldHidden", "ending.newRoad"
                      })
             {
                 Require(CanReach(full, ending), "Cannot reach story outcome: " + ending);
@@ -122,7 +122,7 @@ namespace WenXinJie.Editor
             var run = new StorySession(full, 42);
             AdvanceTo(run, "case.boundary");
             Require(run.Choose("village"), "Gu Heng route is unavailable.");
-            for (var step = 0; step < 150 && run.Current.id != "story.five.00.0"; step++)
+            for (var step = 0; step < 250 && run.Current.id != "ending.newRoad"; step++)
             {
                 var id = run.Current.id;
                 var choiceId = id switch
@@ -138,16 +138,33 @@ namespace WenXinJie.Editor
                     "g07.test" => "measure",
                     "g08.question" => "share",
                     "g09.record" => "separate",
+                    "h01.infer" => "three",
+                    "h02.choice" => "preserved",
+                    "h04.table" when run.GetValue("h.shen") == 0 => "shen",
+                    "h04.table" when run.GetValue("h.qi") == 0 => "qi",
+                    "h04.table" when run.GetValue("h.gu") == 0 => "gu",
+                    "h04.table" => "joint",
+                    "h05.assign" => "split",
+                    "h05.stop" => "stop",
+                    "h06.table" when run.GetValue("h.house1") == 0 => "elder",
+                    "h06.table" when run.GetValue("h.house2") == 0 => "father",
+                    "h06.table" when run.GetValue("h.house3") == 0 => "carpenter",
+                    "h06.table" => "proceed",
+                    "e01.order" => "slow",
+                    "e02.bell" => "place",
+                    "e03.choice" => "new",
+                    "e04.third" => "stop",
                     _ => string.Empty
                 };
                 Require(string.IsNullOrEmpty(choiceId) ? run.Advance() : run.Choose(choiceId),
                     "Gu Heng route stopped at " + id);
             }
 
-            Require(run.Current.id == "story.five.00.0" && run.GetValue("g.corrected") == 1
+            Require(run.Current.id == "ending.newRoad" && run.GetValue("g.corrected") == 1
                     && run.GetValue("g.walked") == 1 && run.GetValue("g.thirdPillar") == 1
-                    && run.GetValue("g.villageRecord") == 1,
-                "Gu Heng route did not carry its evidence to the council.");
+                    && run.GetValue("g.villageRecord") == 1 && run.GetValue("h.roles") == 1
+                    && run.GetValue("e.flowMeasured") == 1,
+                "Gu Heng route did not carry its evidence through the diversion.");
         }
 
         private static void VerifyShenRoute(StoryGraph full)

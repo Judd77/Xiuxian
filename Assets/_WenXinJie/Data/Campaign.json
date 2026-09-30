@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 19,
+  "revision": 20,
   "start": "case.intro",
   "variables": [
     {
@@ -329,6 +329,96 @@
     },
     {
       "id": "s.newMap",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "h.deadline",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "h.post",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "h.shen",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "h.qi",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "h.gu",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "h.roles",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "h.test",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "h.house1",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "h.house2",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "h.house3",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "h.migration",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.bellPlaced",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.flowMeasured",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.extraCharm",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.delay",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -3016,7 +3106,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.five.00.0"
+      "next": "h01.records"
     },
     {
       "id": "l01.intro",
@@ -4104,253 +4194,6 @@
       "next": "ending.oldPublic"
     },
     {
-      "id": "story.five.00.0",
-      "chapter": "卷四 · 谁有权说停",
-      "location": "山腹坡道",
-      "speaker": "旁白",
-      "text": "无雨的夜里，村符又裂了一张。炉中符料一天烧得比一天多，石柱的闷响从半夜一次变成每个时辰都有。陶叔把三处记录摆在一起，估计下一股大的灵潮至多两夜便来。这不是仙人给的预言，是他们刚刚量过的速度。",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.five.01.0"
-    },
-    {
-      "id": "story.five.01.0",
-      "chapter": "卷四 · 谁有权说停",
-      "location": "宗门议事堂",
-      "speaker": "旁白",
-      "text": "祁元肃赶在灵潮前重开考校，你的名字在新名单上。你拿着自己的登仙帖进议事堂，林月带来阿澈，顾衡带来旧灾原簿，许澄的姐姐带来玉扣，沈砚则带两份阵图。祁元肃看过阿澈的伤，没有说是假的；他问的是：“药田毁了，村里病人冬天吃什么？你们救出一屋人，能救南沟的孩子吗？”",
-      "background": "stele",
-      "portrait": "linYue",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.five.02.0"
-    },
-    {
-      "id": "story.five.02.0",
-      "chapter": "卷四 · 谁有权说停",
-      "location": "宗门议事堂",
-      "speaker": "旁白",
-      "text": "林月把医舍存药列出来，确实不够。顾衡请工匠估算迁去东坡后还能种多少，答案比原来少。祁元肃的担忧不假；他未经炉中人同意便用他们的身体补阵，也是真的。",
-      "background": "stele",
-      "portrait": "linYue",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.five.03.0"
-    },
-    {
-      "id": "story.five.03.0",
-      "chapter": "卷四 · 谁有权说停",
-      "location": "宗门议事堂",
-      "speaker": "旁白",
-      "text": "许澄姐姐问：“你让他们看过谷口这条路吗？”",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.five.04.0"
-    },
-    {
-      "id": "story.five.04.0",
-      "chapter": "卷四 · 谁有权说停",
-      "location": "宗门议事堂",
-      "speaker": "旁白",
-      "text": "祁元肃说山路太险。姐姐把玉扣放到桌上：“她连自己的名字都不在账上。你说她选了哪条路？”",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.five.05.0"
-    },
-    {
-      "id": "story.five.05.0",
-      "chapter": "卷四 · 谁有权说停",
-      "location": "宗门议事堂",
-      "speaker": "旁白",
-      "text": "阿澈当众讲了隔墙的敲门声。他说自己救出来后怕村符碎，不敢说想让许澄也出来。顾衡接过话：村里确有人死于停阵，但他把灾情写成“全村同时”误导了后来的人。沈砚承认第一次有人敲铃时他没有立刻停。每个人说出自己不愿说的一截，才使祁元肃不能再把所有反对都称作不懂阵的人在胡闹。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.five.06.0"
-    },
-    {
-      "id": "story.five.06.0",
-      "chapter": "卷四 · 谁有权说停",
-      "location": "宗门议事堂",
-      "speaker": "旁白",
-      "text": "祁元肃同意交出试验钥匙，条件是村符若连裂两张必须停。许澄姐姐说炉里的停铃若连响三下也必须停。顾衡要求村民自己敲钟。林月要求每次试验公开真名和伤情。众人把四项写在同一张纸上，祁元肃、沈砚、陶叔、家属与村民都签了名。纸不等于安全，至少下一次谁若违约，有人能拿它当面质问。",
-      "background": "stele",
-      "portrait": "linYue",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.five.07.0"
-    },
-    {
-      "id": "story.five.07.0",
-      "chapter": "卷四 · 谁有权说停",
-      "location": "谷口村路",
-      "speaker": "旁白",
-      "text": "谷口三户各自决定暂迁。最慢的老妇由孙子背，先走；另两家搬走粮和药，工匠在狭路补符。有人舍不得药田，有人怕今年冬天无药。林月将剩下的药按伤情排给炉房和村里，宗门少收一批新弟子，省下的口粮也入公开账。顾衡不替任何一户说“他们都愿意”，一家一家问过，才在撤离簿上写时辰。",
-      "background": "ridge",
-      "portrait": "linYue",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.five.08.0"
-    },
-    {
-      "id": "story.five.08.0",
-      "chapter": "卷四 · 谁有权说停",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "最后一次小试，村符比旧图预测的早亮。顾衡按铃，你立刻撤回灵力。试验没有成功，给了你们最后一条可靠消息：改道的最初一段，必须有人在石台上引住冲击，直至谷底的符逐张亮起。你能做，因为你练熟了辨气，能在两股相似的灵气里认出刚经石柱转来的那股；陶叔能接手，因为他看过整座阵。没有谁能单独扛过整场灵潮。",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.five.09.0"
-    },
-    {
-      "id": "story.five.09.0",
-      "chapter": "卷四 · 谁有权说停",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "沈砚私下说，若你多撑一息，谷底可能更早稳住。你问他：“如果许澄先敲第三下呢？”",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.five.10.0"
-    },
-    {
-      "id": "story.five.10.0",
-      "chapter": "卷四 · 谁有权说停",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "他沉默很久：“那就停。”",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.six.00.0"
-    },
-    {
-      "id": "story.six.00.0",
-      "chapter": "终卷 · 问心之夜",
-      "location": "谷口村路",
-      "speaker": "旁白",
-      "text": "第一声钟响，三户按重新量过的脚程出门。顾衡把钟槌交给工匠，自己守在最窄的坡道。第二声钟响，老妇在孙子背上过了岔口。她回头看着药田，说了一句“明年还种不种得成”，孙子没答，先把她背到安全的地方。",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.six.01.0"
-    },
-    {
-      "id": "story.six.01.0",
-      "chapter": "终卷 · 问心之夜",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "林月在炉门里按真名点人。叫到许澄时，门外的姐姐应了一声。许澄笑她：“又不是叫你。”姐姐说：“我怕他们听不见。”",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.six.02.0"
-    },
-    {
-      "id": "story.six.02.0",
-      "chapter": "终卷 · 问心之夜",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "陶叔打开旧闸。山谷的药苗被泥水冲倒，空谷的第一张符亮起。你站到石台前，按照试过的办法把灵力送到新接的石柱，不再靠图上那根已经移位的旧柱。平日修炼讲究慢进慢出，眼下这口气送出去，手臂立刻失了知觉。炉门与村口两张感应符先后亮起。所有人看见的都是同一股冲击，不再需要谁独自宣称“还撑得住”。",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.six.03.0"
-    },
-    {
-      "id": "story.six.03.0",
-      "chapter": "终卷 · 问心之夜",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "许澄敲了一下铃。她说过，一下表示她还能等；三下必须放她走。空谷第二张符亮了，第三张迟迟不亮。你想起沈砚当年的“一息”，也想起周望已经失去的修行。第二下铃响时，林月扶着其他人到了门口。第三下响了。",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.six.04.0"
-    },
-    {
-      "id": "story.six.04.0",
-      "chapter": "终卷 · 问心之夜",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "你松开石台。陶叔接上先前试过的支路，顾衡在村口回敲停钟。石柱震得整条坡道摇晃，余力冲向无人居住的谷底。最后一张符没亮完，药田却已经毁了；阵没有你们希望的那么稳，只够让这一夜的人活着下来。林月扶出许澄，姐姐先抓住她的手，又回头找你。你靠着石台坐下，许久才感觉到自己的指尖。",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.six.05.0"
-    },
-    {
-      "id": "story.six.05.0",
-      "chapter": "终卷 · 问心之夜",
-      "location": "青云山",
-      "speaker": "旁白",
-      "text": "天亮后，你的修为倒退，许澄仍要养伤，三户回不了家。宗门开放药账、伤簿与旧阵图，补偿迁居、重修谷口。祁元肃交出历次加重炉内承压的命令，沈砚把“周望求停，沈砚未停”写回初试簿。周望看过，把簿还给陶叔，没有说原谅。村民、家属和出炉弟子各持一份观测记录，停铃与石台钥匙分开保管。",
-      "background": "gate",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.six.05.1"
-    },
-    {
-      "id": "story.six.05.1",
-      "chapter": "终卷 · 问心之夜",
-      "location": "青云山",
-      "speaker": "旁白",
-      "text": "新路每逢灵潮仍需修护，谁想再试，就得先问路上住的人。",
-      "background": "gate",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.six.06.0"
-    },
-    {
-      "id": "story.six.06.0",
-      "chapter": "终卷 · 问心之夜",
-      "location": "司籍房",
-      "speaker": "旁白",
-      "text": "你回到司籍房，给阿澈和许澄补上真正的去向日期。轮到自己那张帖时，你没有再刮掉背面的“砚”字，另取新纸写上姓名。陈闻见你把旧帖留在桌上，问为什么。你说：“下次有人翻到它，得知道这张纸曾经给过谁。”",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "terminal": true
-    },
-    {
       "id": "ending.leave",
       "chapter": "结局 · 带人离山",
       "location": "山下村路",
@@ -4516,6 +4359,1032 @@
       "location": "青云山 · 司籍房",
       "speaker": "旁白",
       "text": "村庄平安过夜。你亲手写下了下一名弟子的假去向，阿澈始终没等到回答。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "terminal": true
+    },
+    {
+      "id": "h01.records",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "无雨夜里，村口又裂一张符。陶叔拿来石柱响声的时辰，林月拿来炉房符料领用量；两份都比昨日密。单看一份，仍可能是雨损或账房虚报。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h01.infer"
+    },
+    {
+      "id": "h01.infer",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你把三张记录按时辰排在桌上：炉符耗量先升，石柱闷响变密，村口无雨裂符随后出现。陶叔问你凭哪一项说灵潮正在逼近。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "one",
+          "text": "只凭村口这张裂符断定明夜必到",
+          "target": "h01.one",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "three",
+          "text": "三处互证，按最慢撤路准备至迟明夜",
+          "target": "h01.three",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "h.deadline",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h01.one",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "陶叔指出旧符也会自己开裂，领料也可能虚报。你把石柱、领料和无雨裂符重新按时辰并排，能说危险在加重，不能报出灵潮准确一刻。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h01.three"
+    },
+    {
+      "id": "h01.three",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "陶叔说：“我不能预言哪一刻来。三个数继续这样变，至迟明夜会有一股大的。”你记下判断与不确定处，安排先让走得最慢的人离谷。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.deadline",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h02.post"
+    },
+    {
+      "id": "h02.post",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "新考校名单上有你的名字，帖背那个“砚”字还在。陈闻把沈砚旧号的领单放到你旁边：宗门能把一个人的去向写成旧号，也能把下一人写成“离山”。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h02.choice"
+    },
+    {
+      "id": "h02.choice",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你要拿哪份可追溯的纸进堂？",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "preserved",
+          "text": "拿保全的登仙帖拓片与原纸",
+          "target": "h02.preserved",
+          "lockedReason": "当时未保全原帖",
+          "conditions": [
+            {
+              "variable": "case.post",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "ledger",
+          "text": "请陈闻拿旧号领单与更名册作证",
+          "target": "h02.ledger",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h02.preserved",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "原纸背面刮痕仍在，陈闻带来领单。两份纸能证明旧号被沿用，不能凭此认定今天谁坐在炉里；许澄和阿澈得自己报姓名。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.post",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h04.hall"
+    },
+    {
+      "id": "h02.ledger",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "原帖已被管事收起，陈闻仍带来旧号领单和改过的名册：“这两份我签过。我能说谁改栏，不能替炉里的人认名。”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.post",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h04.hall"
+    },
+    {
+      "id": "h04.hall",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "祁元肃摊冬药账，顾衡交更正的旧灾呈报，沈砚拿初试本进堂。许澄姐姐带真名册。每人手里都有一部分真事，也都曾让另一人承担看不见的代价。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.table"
+    },
+    {
+      "id": "h04.table",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "要请他们共同订试阵规则，先把三种责任分开说明。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "shen",
+          "text": "核沈砚初案的人榻与周望求停",
+          "target": "h04.shen",
+          "lockedReason": "已核沈砚一项",
+          "conditions": [
+            {
+              "variable": "h.shen",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "h.shen",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "qi",
+          "text": "核祁元肃加高承压与改写去向",
+          "target": "h04.qi",
+          "lockedReason": "已核祁元肃一项",
+          "conditions": [
+            {
+              "variable": "h.qi",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "h.qi",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "gu",
+          "text": "核顾衡合写灾情与死者记录",
+          "target": "h04.gu",
+          "lockedReason": "已核顾衡一项",
+          "conditions": [
+            {
+              "variable": "h.gu",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "h.gu",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "joint",
+          "text": "三项分清后，提出有人能停的小试",
+          "target": "h05.roles",
+          "lockedReason": "先分别核三项责任",
+          "conditions": [
+            {
+              "variable": "h.shen",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "h.qi",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "h.gu",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h04.shen",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "沈砚承认初案已有让人坐的榻，也承认周望敲停时自己等了那一息。祁元肃后来加重承压，不会让最初画榻的人无责。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.shen",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h04.table"
+    },
+    {
+      "id": "h04.qi",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "祁元肃承认把救急写成常例，提高榻上承压，还把有人求离写作“离山”。他拿出的冬药账是真的；真实难处不等于可替病人答应。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.qi",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h04.table"
+    },
+    {
+      "id": "h04.gu",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "顾衡把南沟、东坡错写成同刻，也把死者写轻。他当众在旧呈报旁更正；南沟的危险仍在，不能用他一句假话证明整村从未受过冲。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.gu",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h04.table"
+    },
+    {
+      "id": "h05.roles",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "祁元肃只借一次试验钥匙。许澄姐姐要守炉门铃，村民推工匠握村口钟，陶叔能关支路；沈砚懂图，却不能独握钥匙与停铃。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.assign"
+    },
+    {
+      "id": "h05.assign",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你分派读图、执钥、观测和叫停。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "shenAll",
+          "text": "沈砚读图、执钥、决定何时停",
+          "target": "h05.reject",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "split",
+          "text": "沈砚读图，陶叔执钥，两端当事人各握钟",
+          "target": "h05.split",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "h.roles",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h05.reject",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "姐姐把钥匙按住：“他当年也说再等一息。不是不让他讲图，是铃不能再只听他的。”你重新把读图与叫停分给不同的人。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.split"
+    },
+    {
+      "id": "h05.split",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "姐姐向许澄说清三声急敲即停；工匠在村口约定连裂两符即停；陶叔复述任一端停，两端同时撤力。许澄自己答应这一次小试，没答应无限次坐榻。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.roles",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "story.contract",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h05.test"
+    },
+    {
+      "id": "h05.test",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "小试开始，村口感应符先亮，炉门后热；第二张村符边缘也在变色。工匠敲钟，许澄从炉门回一声。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.stop"
+    },
+    {
+      "id": "h05.stop",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "按先前约定，你此刻应撤力；若多等，工匠与陶叔会替你停，村符还要多烧一张。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "stop",
+          "text": "按钟撤力，请陶叔关支路",
+          "target": "h05.stopped",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "h.test",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "wait",
+          "text": "再等一息看谷底",
+          "target": "h05.wait",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "e.extraCharm",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h05.wait",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "工匠第三下钟抢在你前面，陶叔关了支路。村符裂一张，林月给炉里轻伤者换药。你把这次迟疑记进试验记录，下一回不能由你独握停令。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.stopped"
+    },
+    {
+      "id": "h05.stopped",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "支路闭合，石柱接住余力。你们量到第三柱的现位与回冲先后，没证明新阵绝对安全；这些记录足够让三户决定是否暂迁。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.test",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h06.homes"
+    },
+    {
+      "id": "h06.homes",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "谷口三户看了实走时辰和小试记录。老妇要孙子先背她过岔口；父亲要女儿的药与平车；木匠肯借屋，却要求冬药账公开。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h06.table"
+    },
+    {
+      "id": "h06.table",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "分别问三户，才谈得上开闸。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "elder",
+          "text": "核老妇的先行时辰与背行人手",
+          "target": "h06.elder",
+          "lockedReason": "老妇一户已安排",
+          "conditions": [
+            {
+              "variable": "h.house1",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "h.house1",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "father",
+          "text": "核父女用药与平车位置",
+          "target": "h06.father",
+          "lockedReason": "父女一户已安排",
+          "conditions": [
+            {
+              "variable": "h.house2",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "h.house2",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "carpenter",
+          "text": "核木匠借屋与冬药账公开条件",
+          "target": "h06.carpenter",
+          "lockedReason": "木匠一户已安排",
+          "conditions": [
+            {
+              "variable": "h.house3",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "h.house3",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "proceed",
+          "text": "三户准备齐，开始撤路与改道",
+          "target": "e01.bell",
+          "lockedReason": "三户仍有人未答复",
+          "conditions": [
+            {
+              "variable": "h.house1",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "h.house2",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "h.house3",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h06.elder",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "孙子试过背行缓坡，肯在第一声钟就出发。老妇舍不得药田，仍同意先住高处；宗门将迁居木料与后续重种记进公开账。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.house1",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h06.table"
+    },
+    {
+      "id": "h06.father",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "父亲把女儿的药放到平车前侧，车上留给卧伤者的位置不占。林月清点还能分出的药，答应到高处临时医舍接应。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.house2",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h06.table"
+    },
+    {
+      "id": "h06.carpenter",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "木匠借出空屋与补符工具，但要知道冬药会少多少。祁元肃将药田可能被毁、宗门少收一批弟子可省下的粮药，逐条写入公开账。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.house3",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h06.table"
+    },
+    {
+      "id": "e01.bell",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "第一声钟响。老妇由孙子背着先往缓坡走，顾衡守狭岔，工匠握钟。药田还绿着；谁也没有许诺它明年一定能种。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e01.order"
+    },
+    {
+      "id": "e01.order",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "三户要过同一处狭岔。你按什么顺序放行？",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "slow",
+          "text": "最慢的老妇先过，再送药车与快者",
+          "target": "e01.slow",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "fast",
+          "text": "快者先过，老妇随后追上",
+          "target": "e01.fast",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "e.delay",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e01.fast",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "快者在岔口回头搬粮，堵了老妇。工匠敲预警钟，陶叔推迟开闸，多烧一批符料；你清路后让老妇先过。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e01.slow"
+    },
+    {
+      "id": "e01.slow",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "第二声钟响，老妇先过岔口，另外两户按实走时辰离谷。最后一个孩子踏上高处，工匠才向炉门回钟：路已清，准许开始那次有停铃的小试。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.migration",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "e02.names"
+    },
+    {
+      "id": "e02.names",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "林月在炉门按真名点人。叫到许澄，门外姐姐应了一声；许澄笑她：“又不是叫你。”段七也有名字，不再是一张随时可换的床号。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e02.bell"
+    },
+    {
+      "id": "e02.bell",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "许澄要你检查停铃是否在她伸手可及处，陶叔还要复述第三声之后如何关支路。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "place",
+          "text": "把铃放到许澄手边，请陶叔复述动作",
+          "target": "e02.ready",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "e.bellPlaced",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "skip",
+          "text": "人已点齐，直接开闸",
+          "target": "e02.remind",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e02.remind",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "许澄自己指向够不到的铃：“第三声若敲不到，纸上的权利给谁看？”你把铃移到她手边，陶叔再说一遍：一端停，两端撤力。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e02.ready"
+    },
+    {
+      "id": "e02.ready",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "许澄试敲一声，炉门外姐姐听得见；工匠的回钟也能到石台。她说自己愿坐到第三声前，没把之后的伤交给任何人替她答应。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.bellPlaced",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "e03.flow"
+    },
+    {
+      "id": "e03.flow",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "陶叔开旧闸，谷口药苗倒向一边。新测两根石柱一明一暗，村口与炉门感应符轮流亮。你要先辨哪股余息是刚从石柱转来的，才好把它引向无人谷底。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e03.choice"
+    },
+    {
+      "id": "e03.choice",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "旧图第三柱的位置仍印在纸上，但现场已量过新位置。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "new",
+          "text": "循新测石柱的余息，把灵力引向空谷",
+          "target": "e03.new",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "e.flowMeasured",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "old",
+          "text": "照十年前第三柱的刻度送力",
+          "target": "e03.old",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "e.extraCharm",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e03.old",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "村口符抢先亮，顾衡敲预警；你按约撤力，工匠补一张裂符，林月处理炉里轻伤。旧刻度果然错位，你照 H05 的新测点重新接线。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e03.new"
+    },
+    {
+      "id": "e03.new",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你辨出石柱转来的新息，送向谷底；药田被泥水压倒。炉门第一声铃轻响，许澄说她还能等。顾衡守着村口，没让沈砚替他报平安。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.flowMeasured",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "e04.second"
+    },
+    {
+      "id": "e04.second",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "第二声铃响。空谷前两张符已亮，第三张迟迟不亮。沈砚看着石台，说十年前自己就是在此时想“再等一息”；这回他退开，让你听炉门。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e04.third"
+    },
+    {
+      "id": "e04.third",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "第三声到了。先前的约定没有附“若看不清便继续”一行。你松开石台，陶叔接预先试过的支路。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "stop",
+          "text": "按约松手，回钟通知两端撤力",
+          "target": "e04.stop",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e04.stop",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "石柱震得坡道发抖，余力冲向已撤空的谷底。最后一张谷符终于亮起，没碰仍住人的南沟；许澄离榻，姐姐在门外扶住她。药田没保住，人都知道是谁敲停的。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.account"
+    },
+    {
+      "id": "e05.account",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "天亮，你修为倒退，许澄与段七都要养伤，三户一时回不了家，冬药也会少。祁元肃交出加重承压的令页，沈砚把周望求停一事写回原簿；周望收下纸，没说原谅。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.paper"
+    },
+    {
+      "id": "e05.paper",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "村民、家属、出炉弟子各保管一份观测记录，停铃与石台钥匙分开。你给获救者补真正去向，另取新纸写自己的名字；旧帖背的“砚”字仍留着，供下一人查。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "ending.newRoad"
+    },
+    {
+      "id": "ending.newRoad",
+      "chapter": "结局 · 改道",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "旧阵终于有了可走的替路。谷口与药田要重建，新的石柱每逢灵潮仍需检修；下一次试阵，先问路上住的人，也让炉门里的人握得住停铃。",
       "background": "stele",
       "portrait": "",
       "rain": false,
