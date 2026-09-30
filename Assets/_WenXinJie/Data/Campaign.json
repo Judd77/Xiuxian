@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 15,
+  "revision": 16,
   "start": "case.intro",
   "variables": [
     {
@@ -74,6 +74,84 @@
       "initial": 0,
       "minimum": 0,
       "maximum": 1
+    },
+    {
+      "id": "case.record",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.post",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.cart",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.guardAlert",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.ashCorrect",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.overclaim",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 3
+    },
+    {
+      "id": "case.deputy",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.chenJob",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.linTrust",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.secondTalisman",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.bedNumber",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.familyWindow",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.identityClaim",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
     }
   ],
   "nodes": [
@@ -82,131 +160,513 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "弟子居所",
       "speaker": "旁白",
-      "text": "阿澈的药还温着，人已经没了。",
+      "text": "阿澈的药还温着，人却不在屋里。你端碗站在门边，床底露着他那只开线的左脚鞋。昨夜他还说，病好了要拿它去司籍房换新的。",
       "background": "quartersNight",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.one.01.0"
+      "next": "c01.manager"
     },
     {
-      "id": "story.one.01.0",
+      "id": "c01.manager",
       "chapter": "卷一 · 没有下山的人",
       "location": "弟子居所",
       "speaker": "旁白",
-      "text": "你端着药碗站在弟子居所门口。昨夜他烧得厉害，连药都没喝完就睡下了。现在被褥叠成方块，窗闩扣得好好的，那只左脚鞋却还在床底。鞋底开了线，他平时去食堂都嫌硌脚，更不会穿另一只走几十里山路。",
+      "text": "管事把一张销名单拍在桌上：“家里有事，天亮前下山了。你明日还要考校，别把自己也耽误了。”他伸手要收走药碗，没碰那只鞋。",
       "background": "quartersNight",
       "portrait": "",
       "rain": false,
       "effects": [],
-      "choices": [],
-      "next": "story.one.02.0"
+      "choices": [
+        {
+          "id": "askSeal",
+          "text": "问：谁验了他的离山帖？",
+          "target": "c01.seal",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "askRoad",
+          "text": "问：病着走了哪条山路？",
+          "target": "c01.road",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
     },
     {
-      "id": "story.one.02.0",
+      "id": "c01.seal",
       "chapter": "卷一 · 没有下山的人",
       "location": "弟子居所",
       "speaker": "旁白",
-      "text": "“他下山了。”管事从你身后进来，把一张盖过印的单子拍在桌上，“有事回家，已经销了名。”",
+      "text": "“山门的事，去问守门人。”管事把销名单翻过去。你看见阿澈名字旁写着卯初，记下了时辰。他答的是谁管这件事，却没有答谁见过阿澈。",
       "background": "quartersNight",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.one.03.0"
+      "next": "c01.shoe"
     },
     {
-      "id": "story.one.03.0",
-      "chapter": "卷一 · 没有下山的人",
-      "location": "司籍房",
-      "speaker": "旁白",
-      "text": "你在司籍房抄了一个月的册子，知道弟子离山要过两道手续：管事销名，山门验帖。销名单上写着阿澈今晨离开，山门簿上却没有他的印。你指出来，管事只说守门人漏记。你再问阿澈病成这样怎么走，管事便把药碗推回你手里：“明天你也要考校。先顾自己。”",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.one.04.0"
-    },
-    {
-      "id": "story.one.04.0",
-      "chapter": "卷一 · 没有下山的人",
-      "location": "司籍房",
-      "speaker": "旁白",
-      "text": "山门的钟正敲午时。你见过守门人漏写姓名，从没见过漏盖印，因为印要用灵力按下，碰过门阵才会留下。阿澈若真从山门走出去，阵上应当有他的那一下。你想去查原阵，守门人说你只是誊册的，没有资格碰。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.one.05.0"
-    },
-    {
-      "id": "story.one.05.0",
-      "chapter": "卷一 · 没有下山的人",
-      "location": "司籍房",
-      "speaker": "旁白",
-      "text": "你回到司籍房，先在私纸上记下销名时辰，又把山门簿翻到同一页。两处写法都是自己亲眼见到的，至于阿澈在哪里，纸上没有答案。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.one.06.0"
-    },
-    {
-      "id": "story.one.06.0",
-      "chapter": "卷一 · 没有下山的人",
-      "location": "司籍房",
-      "speaker": "旁白",
-      "text": "案上还剩最后一张新弟子的登仙帖。你刚要誊自己的名字，发现帖背被刮薄了。迎着日光，旧墨露出一个“砚”字。十年前山灾簿上有个沈砚，记作失踪后推定身故。新帖用旧纸并不稀奇；死人用过的帖来到你手里，仍叫你不舒服。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.one.07.0"
-    },
-    {
-      "id": "story.one.07.0",
-      "chapter": "卷一 · 没有下山的人",
-      "location": "山腹坡道",
-      "speaker": "旁白",
-      "text": "傍晚，运药的车从医舍出来，车沿挂着半片包药纸。纸角有两道歪折，是你昨夜替阿澈包药时折的。他病得拿不稳东西，曾笑你把药包折得像只瘸鸟。你追到山腹坡道，守卫拦住了车，也拦住了你。包药纸可能只是被人收走的垃圾，你不能凭一角纸就说车里藏着人。",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.one.08.0"
-    },
-    {
-      "id": "story.one.08.0",
+      "id": "c01.road",
       "chapter": "卷一 · 没有下山的人",
       "location": "弟子居所",
       "speaker": "旁白",
-      "text": "当晚你翻出一本落灰的入门书，照书上练“辨气”。人用灵力施术，物件上会留一点余息；余息散得快，能分出新旧，却不能像名字那样认出是谁。你先拿两张自己写废的符练手，一张刚用过，一张三天前就废了。第一次，你把两张弄反；练到掌心发麻，才认出新符那点温热。",
+      "text": "“北道。”管事说得很快。北道陡，阿澈昨夜发烧，连去医舍都走不稳。你记下这条路；光凭一只鞋，还不能证明他没走。",
       "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c01.shoe"
+    },
+    {
+      "id": "c01.shoe",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "弟子居所",
+      "speaker": "旁白",
+      "text": "你把左鞋放回床边。鞋底开线，里面塞着半张擦药的纸。阿澈是忘了它，还是特意留下？先去查宗门说他离山时，本该留下的记录。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c02.register"
+    },
+    {
+      "id": "c02.register",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山门簿案",
+      "speaker": "旁白",
+      "text": "司籍房的销名册写“阿澈，卯初离山”。山门抄簿同一时辰却空着一格朱纹。离山弟子要先销名，再用灵力在门阵上验帖；朱纹是阵石留下的。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c02.compare"
+    },
+    {
+      "id": "c02.compare",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山门簿案",
+      "speaker": "旁白",
+      "text": "守门人不许你碰原阵，只肯让你看抄簿。昨日另有一人回家；他的名字后有朱纹，帖边还有门阵烫出的焦痕。你把两人的记录摆在一起。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "compare",
+          "text": "先比两份离山记录，再追问空印",
+          "target": "c02.sound",
+          "effects": [
+            {
+              "variable": "case.record",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "accuse",
+          "text": "只凭空格断言管事藏了阿澈",
+          "target": "c02.overreach",
+          "effects": [
+            {
+              "variable": "case.overclaim",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "medicine",
+          "text": "拿昨夜的药碗问守门人",
+          "target": "c02.medicine",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c02.overreach",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山门簿案",
+      "speaker": "旁白",
+      "text": "守门人把抄簿合上：“偏道也能下山。空一格，你就敢说谁藏人？”你说得太满，他不再让你看原页。昨日那人的完整朱纹，你已来得及抄下。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c02.sound"
+    },
+    {
+      "id": "c02.medicine",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山门簿案",
+      "speaker": "旁白",
+      "text": "守门人摇头：“我没见他喝药，也不能靠一只碗替他走山门。”他把簿子推回半寸，许你抄下昨日真正离山者的朱纹。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c02.sound"
+    },
+    {
+      "id": "c02.sound",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山门簿案",
+      "speaker": "旁白",
+      "text": "两份记录证明这一回少了验帖，不能证明阿澈如今在哪里。守门人在你的抄页上写下查阅时辰：“我没见他从正门出去，这句我肯认。”",
+      "background": "gate",
       "portrait": "",
       "rain": false,
       "effects": [
         {
-          "variable": "story.skill",
+          "variable": "case.record",
           "operation": "set",
           "value": 1
         }
       ],
       "choices": [],
-      "next": "story.one.09.0"
+      "next": "c03.post"
     },
     {
-      "id": "story.one.09.0",
+      "id": "c03.post",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你的登仙帖还在司籍房。举向灯，帖背被刮薄的地方露出一个“砚”字。十年前山灾册记着沈砚失踪，推定身故；旧帖再用不犯门规，刮名却另有缘故。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "rubbing",
+          "text": "先拓刮痕，保留原帖",
+          "target": "c03.rubbing",
+          "effects": [
+            {
+              "variable": "case.post",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "ask",
+          "text": "现在就拿帖问管事",
+          "target": "c03.ask",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c03.rubbing",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你用薄纸拓下残笔，原帖压进书页。拓片只能证明这张帖曾写过旧名；它还不能证明沈砚活着，更不能证明阿澈被谁带走。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c04.cart"
+    },
+    {
+      "id": "c03.ask",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "管事看了半眼：“旧帖省纸。你要查十年前的人，先把明日的符画好。”他收起帖，知道你在查旧名。陈闻后来仍能替你找一张旧号领单。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c04.cart"
+    },
+    {
+      "id": "c04.cart",
       "chapter": "卷一 · 没有下山的人",
       "location": "山腹坡道",
       "speaker": "旁白",
-      "text": "第二天你从运车旁刮下一点灰，又向仓房要了同批未送进山腹的灰。两份放在一起，运车的灰多了一层很新的、由修行者留下的灵气。它或许来自赶车的守卫。你没有写“阿澈在炉里”，只在纸上写：车曾接近一个刚用过灵力的人。",
+      "text": "傍晚，运药车从医舍出来。车沿挂一片包药纸，折角像只瘸鸟——昨夜阿澈笑过你这个手艺。坡道守卫拦住了你；纸可能只是医舍丢上车的。",
       "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "keep",
+          "text": "记车次，收起纸角",
+          "target": "c04.keep",
+          "effects": [
+            {
+              "variable": "case.cart",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "challenge",
+          "text": "当面逼问守卫车里是谁",
+          "target": "c04.challenge",
+          "effects": [
+            {
+              "variable": "case.guardAlert",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c04.keep",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹坡道",
+      "speaker": "旁白",
+      "text": "车帘放下了，你没看见里面。你只记下车辙和二更交接的牌号，把纸角夹进簿里。要知道车上有没有阿澈，还得找能核对车次的人。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c05.book"
+    },
+    {
+      "id": "c04.challenge",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹坡道",
+      "speaker": "旁白",
+      "text": "守卫掀开空车厢的一角给你看：“药送进去，空车出来。够了吗？”他记住了你的脸，今夜侧门会多一次巡查。你仍没看见车进山腹时装了什么。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c05.book"
+    },
+    {
+      "id": "c05.book",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "弟子居所",
+      "speaker": "旁白",
+      "text": "夜里你翻开入门书：施术后，物件会留一点灵气，像火盆撤走后石头的余温。辨气可分新旧，却读不出留下它的人名。你拿两张废符练手。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c05.test"
+    },
+    {
+      "id": "c05.test",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "弟子居所",
+      "speaker": "旁白",
+      "text": "左边一张是你刚画废的，右边那张搁了三日。书上要你先摸已知的新符，记住那点不稳的暖意，再摸旧符作对照。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "left",
+          "text": "先以刚画废的左符校准，再摸右符",
+          "target": "c05.learn",
+          "effects": [
+            {
+              "variable": "story.skill",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "right",
+          "text": "只摸右符，凭感觉猜它是新的",
+          "target": "c05.retry",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c05.retry",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "弟子居所",
+      "speaker": "旁白",
+      "text": "你把右符认成了新符。可它放了三日，你明明知道答案；指尖的麻不等于新息。你歇一会儿，按书上写的顺序重新比较。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c05.test"
+    },
+    {
+      "id": "c05.learn",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "弟子居所",
+      "speaker": "旁白",
+      "text": "左符的余息轻轻晃，右符几乎摸不到。你没有学会隔物认人，只学会把未知样本和已知样本放在一起。明日再试运车灰。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c06.ash"
+    },
+    {
+      "id": "c06.ash",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "仓房",
+      "speaker": "旁白",
+      "text": "仓房给你一撮未运走的灰。它和车沿刮下的灰同批，封签也相同。你逐份辨气：仓房灰安静，车灰多了今天新沾的一点余息。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c06.infer"
+    },
+    {
+      "id": "c06.infer",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "仓房",
+      "speaker": "旁白",
+      "text": "陈闻来收废符，看见你把两撮灰放在桌上：“你能写下什么？”他没有说车里装的是谁。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "person",
+          "text": "写“阿澈今天在车上”",
+          "target": "c06.person",
+          "effects": [
+            {
+              "variable": "case.overclaim",
+              "operation": "set",
+              "value": 2
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "near",
+          "text": "写“车接近过今天施术的人”",
+          "target": "c06.sound",
+          "effects": [
+            {
+              "variable": "case.ashCorrect",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "batch",
+          "text": "写“两份灰本来不是同批”",
+          "target": "c06.batch",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c06.person",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "仓房",
+      "speaker": "旁白",
+      "text": "陈闻把赶车守卫的手套放到灰旁：“他今日也用过灵力。你辨得出哪一道是他的？”你答不出，把“阿澈”划掉；活人的去向不能从一撮灰里读出来。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c06.revise"
+    },
+    {
+      "id": "c06.batch",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "仓房",
+      "speaker": "旁白",
+      "text": "你回仓房核封签，两份灰确是同一炉同一批。陈闻没有催你下结论；不同的是车灰后来接近过施术的人。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c06.revise"
+    },
+    {
+      "id": "c06.revise",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "仓房",
+      "speaker": "旁白",
+      "text": "你在纸上重写一句能站得住的话。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "correct",
+          "text": "车接近过今天施术的人；身份未明",
+          "target": "c06.sound",
+          "effects": [
+            {
+              "variable": "case.ashCorrect",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c06.sound",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "仓房",
+      "speaker": "旁白",
+      "text": "陈闻看了你写的“身份未明”，才肯把交接台的位置画给你。他说二更的车进去时总比出来时重；他见过车，没有见过被带走的人。",
+      "background": "stele",
       "portrait": "",
       "rain": false,
       "effects": [
@@ -217,177 +677,421 @@
         }
       ],
       "choices": [],
-      "next": "story.one.10.0"
+      "next": "c07.exam"
     },
     {
-      "id": "story.one.10.0",
+      "id": "c07.exam",
       "chapter": "卷一 · 没有下山的人",
-      "location": "考校场与司籍房",
+      "location": "考校台",
       "speaker": "旁白",
-      "text": "考校点名时，阿澈的名字竟在副册上。正册说他离山，副册还等他来比试。执事当众将那个名字划掉，称昨夜忘了同步。你照样上台画符，手却一直在抖。一笔画断，符纸在台上冒出青烟，引来身后一阵笑。你下台才发现阿澈的名字被划得太重，墨透到了下一页。",
-      "background": "stele",
+      "text": "考校点名，阿澈的名字仍在副册。正册说他已离山，副册却等他应试。执事当众把名字划掉，说抄手忘改。轮到你画符，第一笔就断了，符纸冒出青烟。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "copyTime",
+          "text": "退场后抄副册归档时辰",
+          "target": "c07.copy",
+          "effects": [
+            {
+              "variable": "case.deputy",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "question",
+          "text": "当众问是谁通知改名",
+          "target": "c07.question",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c07.copy",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "划名的墨透到了下一页，归档时辰仍清楚。你将它与山门抄页并放：同一天，一本册子说人走了，另一本还等他来。两边都该有人解释。",
+      "background": "gate",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.one.11.0"
+      "next": "c08.chen"
     },
     {
-      "id": "story.one.11.0",
+      "id": "c07.question",
       "chapter": "卷一 · 没有下山的人",
-      "location": "考校场与司籍房",
+      "location": "考校台",
       "speaker": "旁白",
-      "text": "交接人陈闻来收废符，见你还盯着副册，低声说：“二更。想知道车去哪儿，就别在白天问。”",
-      "background": "stele",
+      "text": "执事说“管事口头告知”，还记下你的名字。你没有拿到原册，但知道改名并非抄手自作主张；往后再查副册，会有人先看着你。",
+      "background": "gate",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.one.12.0"
+      "next": "c08.chen"
     },
     {
-      "id": "story.one.12.0",
+      "id": "c08.chen",
       "chapter": "卷一 · 没有下山的人",
-      "location": "考校场与司籍房",
+      "location": "交接台",
       "speaker": "旁白",
-      "text": "你问他是不是知道阿澈在车上。他答：“我只知道车进去时比出来时重。你要我说看见了人，我没看见。”他也怕。每一张进山腹的领料单，都有他的签名。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.one.13.0"
-    },
-    {
-      "id": "story.one.13.0",
-      "chapter": "卷一 · 没有下山的人",
-      "location": "考校场与司籍房",
-      "speaker": "旁白",
-      "text": "你把帖背的旧名与领料账并排看。山腹这十年一直用沈砚的旧编号领药。你忽然想：沈砚是不是根本没死，阿澈是不是被他带走了？这个猜测太顺了，顺到你险些把它写成事实。陈闻把账推回来：“编号谁都能写。你先找活人。”",
+      "text": "陈闻来收废符，领料单上签过许多次沈砚的旧编号。他说：“车进去时重，出来时轻。我只见过车。十年前的号，如今谁拿笔都能写。”",
       "background": "stele",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [
         {
-          "id": "suspect",
-          "text": "沈砚没死，先从他查起",
-          "target": "story.guess.suspect",
-          "effects": [
-            {
-              "variable": "story.guessPerson",
-              "operation": "set",
-              "value": 1
-            }
-          ]
+          "id": "alive",
+          "text": "先找阿澈，旧号身份另证",
+          "target": "c08.alive",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
         },
         {
-          "id": "number",
-          "text": "编号可能被人借用，先找阿澈",
-          "target": "story.guess.number",
-          "effects": []
+          "id": "oldNumber",
+          "text": "先问旧号是谁在用",
+          "target": "c08.number",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
         }
       ]
     },
     {
-      "id": "story.guess.suspect",
+      "id": "c08.alive",
       "chapter": "卷一 · 没有下山的人",
-      "location": "青云山 · 司籍房",
+      "location": "交接台",
       "speaker": "旁白",
-      "text": "你把沈砚的名字圈起来。陈闻没有替你下结论，只把阿澈没有盖印的那页推到圈旁：先找到人，再问旧名。",
+      "text": "陈闻把二更运车的岔口画给你：“这事我能说清。我签过的单子也在那儿。你若进去，先认人，再认账。”",
       "background": "stele",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.two.00.0"
+      "next": "c09.box"
     },
     {
-      "id": "story.guess.number",
+      "id": "c08.number",
       "chapter": "卷一 · 没有下山的人",
-      "location": "青云山 · 司籍房",
+      "location": "交接台",
       "speaker": "旁白",
-      "text": "你在旧编号旁写下“未证身份”。陈闻点头，把二更运车的岔口画给你。",
+      "text": "陈闻翻出同号的两张领单，笔迹不同：“你看，编号能借，签名却得有人写。”你留下笔迹线索，没有把沈砚圈成活人。",
       "background": "stele",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.two.00.0"
+      "next": "c09.box"
     },
     {
-      "id": "story.two.00.0",
-      "chapter": "卷一 · 门里有人",
+      "id": "c09.box",
+      "chapter": "卷一 · 没有下山的人",
       "location": "医舍",
       "speaker": "旁白",
-      "text": "林月在医舍里认出了那片药纸。“阿澈昨晚来领过药。”她说，“后来我又给山腹送了一箱同样的。”",
+      "text": "林月认出瘸鸟纸角：“昨夜阿澈领的药，我包过同样的。”她推来一只药箱，盖上有阿澈前几日搬箱时留下的旧血。",
       "background": "quartersNight",
       "portrait": "linYue",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.two.01.0"
+      "next": "c09.ask"
     },
     {
-      "id": "story.two.01.0",
-      "chapter": "卷一 · 门里有人",
+      "id": "c09.ask",
+      "chapter": "卷一 · 没有下山的人",
       "location": "医舍",
       "speaker": "旁白",
-      "text": "她把药箱放到你面前，让你闻箱盖。木头里有草药和旧血的味道。箱上的血是阿澈前些天帮忙搬运时留下的，不能证明今天他也碰过箱子。林月看着你收回手，第一次肯把话说长：“你要的是能找到他的东西，不是一个听着像答案的故事。”",
+      "text": "林月：“这滴血能证明他昨夜碰了箱吗？”她盯着你的笔，等你写日期。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "no",
+          "text": "不能；先查药箱领用单",
+          "target": "c09.trust",
+          "effects": [
+            {
+              "variable": "case.linTrust",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "yes",
+          "text": "能，写成昨夜留下的血",
+          "target": "c09.wrong",
+          "effects": [
+            {
+              "variable": "case.overclaim",
+              "operation": "set",
+              "value": 3
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c09.wrong",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月把领用单推到你面前：这只箱子前天就回了医舍。“旧血写成昨夜，往后谁肯信你写的时辰？”你当面划去日期，她才说出侧门换班的时刻。",
       "background": "quartersNight",
       "portrait": "linYue",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.two.02.0"
+      "next": "c09.plan"
     },
     {
-      "id": "story.two.02.0",
-      "chapter": "卷一 · 门里有人",
+      "id": "c09.trust",
+      "chapter": "卷一 · 没有下山的人",
       "location": "医舍",
       "speaker": "旁白",
-      "text": "她在山腹照料伤者，知道送药侧门每晚开一次。你若随她进门，司籍房多半留不住你；若白天拿账冲正门，管事有时间转移病人。你请她等你把副册抄好。她问要等多久。你说一刻钟。",
+      "text": "林月看着你在“昨夜”后留的空格，终于把侧门换班的时刻告诉你。她说：“我不需要你替我信，我需要你看见不确定处肯留白。”",
       "background": "quartersNight",
       "portrait": "linYue",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.two.03.0"
+      "next": "c09.plan"
     },
     {
-      "id": "story.two.03.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "山腹炉房",
+      "id": "c09.plan",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
       "speaker": "旁白",
-      "text": "二更，林月将一张遮铃符贴上侧门的探气铃。这符只让铃在七息内觉察不到你们的灵力，人的眼睛照样看得见。她推着药箱走在前，你跟在后面数心跳。到第六息时，守卫回头看了一眼，你们已经进了门。",
+      "text": "送药侧门每晚开一次。林月会画遮铃符，使探气铃七次呼吸间听不见灵力，却挡不住守卫的眼睛。白天走正门，管事有整夜转移病人。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c10.door"
+    },
+    {
+      "id": "c10.door",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "二更，守卫正沿正廊巡来。第一张遮铃符已经贴上；林月推着药箱，等你决定何时动。直接进门可能暴露车次，等守卫转身会耗掉第二张符。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "now",
+          "text": "趁第一张符进门；陈闻可能替车次担责",
+          "target": "c10.now",
+          "effects": [
+            {
+              "variable": "case.chenJob",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "wait",
+          "text": "等守卫转身；耗掉林月的备用符",
+          "target": "c10.wait",
+          "effects": [
+            {
+              "variable": "case.secondTalisman",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c10.now",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "第六息，钥匙转开。守卫回头看见车沿牌号。陈闻随后得报错车次，交接差事保不住了；你们此刻仍能进门。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c10.furnace"
+    },
+    {
+      "id": "c10.wait",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "守卫走过，第一张符卷黑。林月把备用符贴上，你们才推车进门。铃没响，可再遇探气铃，她手里已没有第二张。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c10.furnace"
+    },
+    {
+      "id": "c10.furnace",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外廊",
+      "speaker": "旁白",
+      "text": "炉里烧的是药和符纸。灰落进石槽，石槽连着一排窄榻。乱灵气先撞石柱，再沿槽压到榻上的人；石头能挡第一下，人被迫替它调余下的方向。",
       "background": "mountainHeart",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.two.04.0"
+      "next": "c11.ache"
     },
     {
-      "id": "story.two.04.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "山腹炉房",
+      "id": "c11.ache",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
       "speaker": "旁白",
-      "text": "山腹里没有焚人的火。炉中烧的是药和符纸，灰落入石槽，石槽通向一排窄榻。山里涌来的乱灵气先撞石柱，再沿石槽压向榻上。人能用自身灵力调整来势，石头不能；因此阵越撑越久，人越伤越重。林月从前只准在换药时进来，她见过伤，却没见过整座阵怎样转动。",
+      "text": "最外侧躺着阿澈，腕上符带勒出红痕。他认出你，第一句却问：“考校过了？”你说符纸烧了。他想笑，牵得肩伤发疼。",
       "background": "mountainHeart",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.two.05.0"
+      "next": "c11.flow"
     },
     {
-      "id": "story.two.05.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "山腹炉房",
+      "id": "c11.flow",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
       "speaker": "旁白",
-      "text": "最外侧那张榻上躺着阿澈。他的手腕被符带勒红，额头热得烫手，仍费力认出你：“你不是明天考校吗？”",
+      "text": "林月把手按在石槽边：“解开他，力会先落到旁边石柱，再挤向隔壁榻。先用辨气看哪边正有新息，别把手伸进最热的纹路。”",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "testStone",
+          "text": "辨气试石柱，再沿槽试隔壁榻",
+          "target": "c11.verified",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "pull",
+          "text": "不看流向，立刻去扯符带",
+          "target": "c11.pulled",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c11.pulled",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
+      "speaker": "旁白",
+      "text": "符带烫得你缩手。阿澈吸了一口冷气；林月按住你：“不是不救，是别把手也废在这里。”你改从石柱辨起，先看清冲击往哪儿去。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c11.verified"
+    },
+    {
+      "id": "c11.verified",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
+      "speaker": "旁白",
+      "text": "石柱纹路先亮，隔壁榻上的新息迟一瞬才动。你看清阿澈离榻后的去向，也看清隔壁有人要多受一分力。林月说：“现在可以选，别说没有代价。”",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "number",
+          "text": "先抄两张榻号，再带阿澈走；警铃更早响",
+          "target": "c11.number",
+          "effects": [
+            {
+              "variable": "case.bedNumber",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "rescue",
+          "text": "立刻解符带带他走；原账随后会封",
+          "target": "c11.rescue",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c11.number",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
+      "speaker": "旁白",
+      "text": "你记下阿澈和隔壁的榻号，林月解开符带。警铃比预计早响，守卫封住内廊；车仍赶在侧门落锁前出去。你们带走了人，也带走了两个可核的床位。",
       "background": "mountainHeart",
       "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c11.cost"
+    },
+    {
+      "id": "c11.rescue",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
+      "speaker": "旁白",
+      "text": "你扶住阿澈，林月解开符带。趁铃未响，你们把他藏进空药箱。守卫事后封了原账；你亲眼看见的隔壁病人，还没有名字可查。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c11.cost"
+    },
+    {
+      "id": "c11.cost",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "村口一张护符裂了，工匠连夜补上，今晚没人受伤。阿澈听见碎符声，问是不是自己害了山下人。林月替他换药：“那一下确实转过去了。该想办法，不该让你回去躺着。”",
+      "background": "quartersNight",
+      "portrait": "linYue",
       "rain": false,
       "effects": [
         {
@@ -397,93 +1101,89 @@
         }
       ],
       "choices": [],
-      "next": "story.two.06.0"
+      "next": "c12.shoe"
     },
     {
-      "id": "story.two.06.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "山腹炉房",
+      "id": "c12.shoe",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
       "speaker": "旁白",
-      "text": "“已经考过了。”你把他扶起来，“画得很难看。”",
-      "background": "mountainHeart",
+      "text": "阿澈说，前夜他已坐过榻，发烧后被暂送回住处，天没亮又被领走。床底的鞋是他自己踢进去的：“我怕你只看见离山单，看不见我在求你找。”",
+      "background": "quartersNight",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.two.07.0"
+      "next": "c12.name"
     },
     {
-      "id": "story.two.07.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "山腹炉房",
+      "id": "c12.name",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
       "speaker": "旁白",
-      "text": "他笑了一下，牵动肩上的伤，脸又白了。林月替他解符带，榻下的刻纹立刻暗了一段。她没有催你快走，先指给你看：另一根石柱亮起来，替空榻接走了那一段灵气；若下股灵潮此时来，石柱会先受冲，然后是隔壁的人。",
-      "background": "mountainHeart",
+      "text": "他还听见隔墙总有人敲两下。门上的旧漆像“沈砚”，服过安神药后又似乎听见一个“澄”字。他不敢保证听全。你要怎么记隔墙人的身份？",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "shen",
+          "text": "写“沈砚就在隔壁”",
+          "target": "c12.challenge",
+          "effects": [
+            {
+              "variable": "case.identityClaim",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "unknown",
+          "text": "写“隔墙有活人，身份未证”",
+          "target": "c12.unknown",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c12.challenge",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月拿来守卫刚摸过的空药箱，让你辨气。箱上新息与运车灰相近；守卫从没躺在那张榻上。你亲手划掉姓名，留下“隔墙有活人”。",
+      "background": "quartersNight",
       "portrait": "linYue",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.two.08.0"
+      "next": "c13.jade"
     },
     {
-      "id": "story.two.08.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "山腹炉房",
+      "id": "c12.unknown",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
       "speaker": "旁白",
-      "text": "你们还是把阿澈藏进药箱带走了。林月说：“我知道那边有人。今夜我只开得了这一扇门。”她把这句说给阿澈，也说给自己。",
-      "background": "mountainHeart",
+      "text": "林月点头：“辨气能告诉你有新息，不能替墙后的人报名。”陈闻听了阿澈的敲门声，想起一张领配绳的旧单，去找它。",
+      "background": "quartersNight",
       "portrait": "linYue",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.two.09.0"
+      "next": "c13.jade"
     },
     {
-      "id": "story.two.09.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "山腹坡道",
+      "id": "c13.jade",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
       "speaker": "旁白",
-      "text": "警钟在你们下坡时敲响。守卫封住原账，陈闻为遮掩车次丢了差事。村口一枚护符裂开，工匠连夜补上。阿澈听见后，抬起缠着布的手，问是不是自己走了才害村子。林月答：“符挡住了，村里没人因此受伤。但我们拿走了一份撑阵的力，这件事不能瞒。”",
+      "text": "阿澈从袖里拿出半枚云纹玉扣：隔墙人从缝里塞给他的。陈闻找到旧单，许澄曾领过同纹配绳。许家姐姐拿出另半枚，断口严丝合缝。",
       "background": "ridge",
-      "portrait": "linYue",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.two.10.0"
-    },
-    {
-      "id": "story.two.10.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "医舍与村路",
-      "speaker": "旁白",
-      "text": "阿澈说他并不是今晨第一次进山腹。前夜他被带去坐榻，发烧后暂送回来；天还黑着，管事又把他领走。他不敢告假，怕有人知道自己偷偷告诉过林月。隔墙一直有人，两下、两下地敲。旧漆上留着“沈砚”二字，他以为那是隔壁人的名字。后来隔壁说过一个“澄”字。那时他吃了安神药，不敢保证听得准。",
-      "background": "quartersNight",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.two.11.0"
-    },
-    {
-      "id": "story.two.11.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "医舍与村路",
-      "speaker": "旁白",
-      "text": "你差点把“沈砚在炉中”填进证词。林月拿来一只还未启用的药箱，让你用辨气试箱盖：守卫刚碰过它，留下的余息与运车的灰相近。辨气只能告诉你有修行者碰过，不能把人名从灵气里读出来。你划掉了那一句。",
-      "background": "quartersNight",
-      "portrait": "linYue",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.two.12.0"
-    },
-    {
-      "id": "story.two.12.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "医舍与村路",
-      "speaker": "旁白",
-      "text": "陈闻找出几个月前的货领单：一位叫许澄的弟子领过半枚云纹玉扣的配绳。阿澈手中正攥着一枚带云纹的半扣，是隔墙那人从缝里塞来的。林月陪你下山，见到许澄的姐姐。姐姐先不信账，拿出妹妹留下的另一半玉扣。两块缺口合上时，她没有问你们谁在撒谎，只问：“她还活着吗？”",
-      "background": "quartersNight",
       "portrait": "",
       "rain": false,
       "effects": [
@@ -494,55 +1194,77 @@
         }
       ],
       "choices": [],
-      "next": "story.two.13.0"
+      "next": "c13.answer"
     },
     {
-      "id": "story.two.13.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "医舍与村路",
+      "id": "c13.answer",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
       "speaker": "旁白",
-      "text": "你回答：“隔墙有人敲门。我们还没有亲眼见她。”",
-      "background": "quartersNight",
+      "text": "姐姐把两半扣分开放回袖里：“扣是她的，也可能被别人拿着。你亲眼看见我妹妹了吗？她还能自己说话吗？”",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "truth",
+          "text": "说“隔墙有人敲门，我们还没亲见她”",
+          "target": "c13.truth",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "promise",
+          "text": "说“我确定许澄就在门后”",
+          "target": "c13.promise",
+          "effects": [
+            {
+              "variable": "case.familyWindow",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c13.truth",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "姐姐沉默片刻：“下次开门，我要自己问她。”林月曾怕家属冲门害人被转走，瞒过她；姐姐仍带来备用钥匙，约好先听里面回应再动锁。",
+      "background": "ridge",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "story.two.14.0"
+      "next": "c13.door"
     },
     {
-      "id": "story.two.14.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "医舍与村路",
+      "id": "c13.promise",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
       "speaker": "旁白",
-      "text": "姐姐把扣收起来：“那下一次开门，我要在场。”林月原先怕家属冲门会害人被转走，一直瞒着她。姐姐也曾把侧门备用钥匙交给林月。如今她把钥匙要了回去，却没有断绝帮忙：“我妹若不能自己出来，至少该听见有人叫她的真名。”",
-      "background": "quartersNight",
-      "portrait": "linYue",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.two.15.0"
-    },
-    {
-      "id": "story.two.15.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "山腹侧门",
-      "speaker": "旁白",
-      "text": "夜里，你们来到侧门。里面果然传来两下敲击。林月刚把钥匙抵上锁，村口又有护符碎裂的声音。顾衡从山下奔来，袖里全是符灰：“开门可以。先告诉我，这一下冲到谁家去。”",
-      "background": "mountainHeart",
-      "portrait": "linYue",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.two.16.0"
-    },
-    {
-      "id": "story.two.16.0",
-      "chapter": "卷一 · 门里有人",
-      "location": "山腹侧门",
-      "speaker": "旁白",
-      "text": "他常年守村，知道哪里最先受灾。林月不肯再把许澄留在里面，顾衡不肯拿山下孩子赌。他们谁也没说错，你手里却没有能让两件事同时成立的办法。",
-      "background": "mountainHeart",
+      "text": "姐姐望着你：“你没看见，凭什么替她答？”她仍带钥匙来，却坚持先亲自听到妹妹回应，错过换班也不让你抢先开门。救援窗口会更窄。",
+      "background": "ridge",
       "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.door"
+    },
+    {
+      "id": "c13.door",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "夜里，侧门里传来两下敲击。林月握着钥匙；许家姐姐站在她身边。村口又有符裂，顾衡带一袖符灰赶到：“你们开门，下一股冲到谁家？”",
+      "background": "mountainHeart",
+      "portrait": "linYue",
       "rain": false,
       "effects": [],
       "choices": [],
@@ -551,23 +1273,17 @@
     {
       "id": "case.boundary",
       "chapter": "卷一 · 门里有人",
-      "location": "青云山 · 山腹石门",
+      "location": "山腹侧门",
       "speaker": "旁白",
-      "text": "侧门里有人敲了两下，村口同时传来碎符声。顾衡站在门前，等你们回答：开门之后，那股灵气会撞到谁家？",
+      "text": "门里又敲了两下。阿澈说：“我想知道里面是谁，也想知道她出来以后谁会受伤。”眼下只能先查一处；没走的路上，其他人也会自己行动。",
       "background": "mountainHeart",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [
         {
-          "id": "continue",
-          "text": "去村里核对护符和旧灾记录",
-          "target": "story.three.00.0",
-          "effects": []
-        },
-        {
           "id": "rescue",
-          "text": "先与林月、家属筹备救援",
+          "text": "跟林月核病人姓名，准备再进炉房",
           "target": "story.leave.00.0",
           "effects": [
             {
@@ -575,7 +1291,25 @@
               "operation": "set",
               "value": 1
             }
-          ]
+          ],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "village",
+          "text": "跟顾衡核村口旧灾与撤离路线",
+          "target": "story.three.00.0",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "shen",
+          "text": "沿沈砚的旧编号查初试阵图",
+          "target": "story.four.00.0",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
         }
       ]
     },
