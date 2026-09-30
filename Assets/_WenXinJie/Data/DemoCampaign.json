@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 18,
+  "revision": 19,
   "start": "case.intro",
   "variables": [
     {
@@ -269,6 +269,66 @@
     },
     {
       "id": "g.archiveHeld",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.firstBed",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.raisedLimit",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.bellDiagram",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.smallFlow",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.zhouWords",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.homes",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.thirdPillar",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.stopped",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.sharedKey",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.newMap",
       "initial": 0,
       "minimum": 0,
       "maximum": 1

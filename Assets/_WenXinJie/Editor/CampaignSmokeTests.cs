@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 18 && demo.Definition.revision == 18,
+            Require(full.Definition.revision == 19 && demo.Definition.revision == 19,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -34,6 +34,7 @@ namespace WenXinJie.Editor
             VerifyOpeningRecovery(full);
             VerifyLinRoute(full);
             VerifyGuRoute(full);
+            VerifyShenRoute(full);
             VerifyAssets(full);
             Debug.Log("Campaign smoke tests PASS: new story graph, endings, Demo handoff and assets.");
         }
@@ -147,6 +148,36 @@ namespace WenXinJie.Editor
                     && run.GetValue("g.walked") == 1 && run.GetValue("g.thirdPillar") == 1
                     && run.GetValue("g.villageRecord") == 1,
                 "Gu Heng route did not carry its evidence to the council.");
+        }
+
+        private static void VerifyShenRoute(StoryGraph full)
+        {
+            var run = new StorySession(full, 42);
+            AdvanceTo(run, "case.boundary");
+            Require(run.Choose("shen"), "Shen Yan route is unavailable.");
+            for (var step = 0; step < 150 && run.Current.id != "story.seize.00.0"; step++)
+            {
+                var id = run.Current.id;
+                var choiceId = id switch
+                {
+                    "s02.first" => "left",
+                    "s03.bells" => "fit",
+                    "s04.choice" => "small",
+                    "s05.reply" => "ask",
+                    "s06.map" => "homes",
+                    "s07.stop" => "now",
+                    "s08.choice" => "split",
+                    "s09.map" => "include",
+                    "s.hall.choice" => "seize",
+                    _ => string.Empty
+                };
+                Require(string.IsNullOrEmpty(choiceId) ? run.Advance() : run.Choose(choiceId),
+                    "Shen Yan route stopped at " + id);
+            }
+
+            Require(run.Current.id == "story.seize.00.0" && run.GetValue("s.firstBed") == 1
+                    && run.GetValue("s.zhouWords") == 1 && run.GetValue("s.newMap") == 1,
+                "Shen Yan route did not carry its evidence to the council.");
         }
 
         private static void AdvanceTo(StorySession session, string target)

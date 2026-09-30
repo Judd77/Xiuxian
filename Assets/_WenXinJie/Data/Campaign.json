@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 18,
+  "revision": 19,
   "start": "case.intro",
   "variables": [
     {
@@ -269,6 +269,66 @@
     },
     {
       "id": "g.archiveHeld",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.firstBed",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.raisedLimit",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.bellDiagram",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.smallFlow",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.zhouWords",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.homes",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.thirdPillar",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.stopped",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.sharedKey",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.newMap",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -1426,9 +1486,758 @@
         {
           "id": "shen",
           "text": "沿沈砚的旧编号查初试阵图",
-          "target": "story.four.00.0",
+          "target": "s01.oil",
           "effects": [],
           "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "s01.oil",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "陈闻把沈砚旧号十年的领单铺开：油、药和符纸一直有人领，没有持号人的手印。他指向废观测台的送油石阶：“我只签过车，没见那人把油交给谁。”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s01.meet"
+    },
+    {
+      "id": "s01.meet",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "台上的灯还亮着。桌边的男人看见你登仙帖背的刮痕，笔尖停住：“那张帖刮名的时候，我还在山上。”你说阿澈已出炉，墙后仍有人敲门。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s01.answer"
+    },
+    {
+      "id": "s01.answer",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "沈砚先问炉里还剩多少人。你只能报亲眼见过的外榻与隔墙回声。他让你进屋，摊开两版阵图：“第一版救急，祁元肃后来把它写成常例。”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s02.plans"
+    },
+    {
+      "id": "s02.plans",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "两张图纸纹相同。左图是十年前初案，右图多了宗门批改的承压上限。你要分别指出“人榻最早出现”与“上限后来加高”的位置。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s02.first"
+    },
+    {
+      "id": "s02.first",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "先看哪一张图已有供人坐的窄榻？",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "left",
+          "text": "左边初案已有人的榻位",
+          "target": "s02.left",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "s.firstBed",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "right",
+          "text": "直到右边改图才有人榻",
+          "target": "s02.right",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "s02.right",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "沈砚没有纠正你。陶叔送来的初案副页却画着同一排榻，页脚有沈砚签名。你重新并排看图，不能把最初那笔推给后来改图的人。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s02.left"
+    },
+    {
+      "id": "s02.left",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "初案的榻位由沈砚亲签；右图把原来一炷香的承压刻度加高，还添了连续值守的令印。两笔错出自不同人，也都压在炉中人身上。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "s.firstBed",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "s.raisedLimit",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "s03.book"
+    },
+    {
+      "id": "s03.book",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "陶叔旧物房",
+      "speaker": "旁白",
+      "text": "陶叔的初试本上，“有人求停”四字被浓墨盖住，旁边补了“更换符纸”。纸背仍透笔画。陶叔说他记得当夜挂的是完铃，但记得不等于能把铃声带回来。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s03.bells"
+    },
+    {
+      "id": "s03.bells",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "陶叔旧物房",
+      "speaker": "旁白",
+      "text": "桌上有破铃与完铃两只，原图画了试验支路的接口。你要核哪只铃当年能接上。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "fit",
+          "text": "比两只接口与原图接线",
+          "target": "s03.fit",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "inkOnly",
+          "text": "只凭墨痕断定沈砚听到了铃",
+          "target": "s03.ink",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "s03.ink",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "陶叔旧物房",
+      "speaker": "旁白",
+      "text": "陶叔把纸背迎光：“墨证明有人改字，不能证明铃当时接通。”你停下指责，拿两只铃的铜脚去对图上的接线孔。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s03.fit"
+    },
+    {
+      "id": "s03.fit",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "陶叔旧物房",
+      "speaker": "旁白",
+      "text": "破铃的铜脚根本接不上那条试验支路；完铃正好合孔。原图也可能后来画错，仍须陶叔证词和一次受控的小试互证。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "s.bellDiagram",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "story.bell",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "s04.platform"
+    },
+    {
+      "id": "s04.platform",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废石台",
+      "speaker": "旁白",
+      "text": "废石台仍接着一小截旧支路。陶叔先把停铃交给你，说明只送极小一缕灵力；大力重演会把村口也牵进来。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s04.choice"
+    },
+    {
+      "id": "s04.choice",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废石台",
+      "speaker": "旁白",
+      "text": "沈砚站在旁边，不握铃。你怎样试？",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "small",
+          "text": "按陶叔说的，送一缕并预备听铃撤力",
+          "target": "s04.small",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "large",
+          "text": "大力送入，试图重演十年前一整夜",
+          "target": "s04.large",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "s04.large",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废石台",
+      "speaker": "旁白",
+      "text": "村口试符骤亮，陶叔先断了支路。他要你先说谁握铃、响几下就停；你答不出时，试验不能继续。你把灵力收回，按小试的规矩重来。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s04.small"
+    },
+    {
+      "id": "s04.small",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废石台",
+      "speaker": "旁白",
+      "text": "一缕灵力经过接口，完铃轻响；你撤力，支路闭合，石柱接住余力。原接线确能叫停。它仍不能复现十年前每个人究竟听见多少，只能与本子、人证并排。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "s.smallFlow",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "s05.zhou"
+    },
+    {
+      "id": "s05.zhou",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "周望屋前",
+      "speaker": "旁白",
+      "text": "周望在屋前钉漏雨的木板。他如今引不起灵气。沈砚说当年想再等一息，看清阵流去向。周望没停手：“我敲的时候，不是问你看没看清。”",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s05.reply"
+    },
+    {
+      "id": "s05.reply",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "周望屋前",
+      "speaker": "旁白",
+      "text": "周望看着你，不等你替谁解释。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "apologise",
+          "text": "替沈砚道歉，请周望体谅",
+          "target": "s05.no",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "ask",
+          "text": "请周望自己说希望写进原簿的话",
+          "target": "s05.words",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "s05.no",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "周望屋前",
+      "speaker": "旁白",
+      "text": "周望把钉子敲到底：“你没在那张榻上，歉也不是你的。”你收住话，请他说自己希望宗门留下什么记录。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s05.words"
+    },
+    {
+      "id": "s05.words",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "周望屋前",
+      "speaker": "旁白",
+      "text": "周望说：“写‘周望求停，沈砚未停’。别写铃坏，别写我受不了。”沈砚当着他写回初试本。周望收下纸，没有说原谅。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "s.zhouWords",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "s06.valley"
+    },
+    {
+      "id": "s06.valley",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "沈砚带你去谷口旧泄流道。三户人家住在路边，药田供村里过冬；开闸第一下仍需人守台。祁元肃当年拒试，提过冬药与南沟死者。两件担忧并非空话。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s06.map"
+    },
+    {
+      "id": "s06.map",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "沈砚在新图上先画石道。你还要画什么，才能拿它去问住在路边的人？",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "homes",
+          "text": "添三户、药田与背老人过的弯路",
+          "target": "s06.homes",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "s.homes",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "flow",
+          "text": "只画灵力最顺的泄流线，先试再说",
+          "target": "s06.flow",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "s06.flow",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "老妇人走来，问：“图上有我家门吗？”你指不到。她把昨日裂符放到纸上：“下回试之前，来问。”你重画住户与药田，不能让她家只在图外承冲。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s06.homes"
+    },
+    {
+      "id": "s06.homes",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "沈砚总在十年前第三柱的位置落第一笔。你拿现存石柱与图并排，洪水把第三柱挪了半人高。图上的线能指路，落脚处必须重新量。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "s.homes",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "s07.test"
+    },
+    {
+      "id": "s07.test",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你与沈砚在村口、炉门贴感应符，陶叔守铃。只送一缕灵力，村口符先亮，炉门迟一瞬才热。顾衡隔坡喊：“停！”",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s07.stop"
+    },
+    {
+      "id": "s07.stop",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "旧图说再撑一息能看清深谷的流向；顾衡已喊停。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "now",
+          "text": "立刻撤力，让陶叔闭支路",
+          "target": "s07.now",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "s.stopped",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "wait",
+          "text": "再等一息，继续看谷底",
+          "target": "s07.wait",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "s07.wait",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "顾衡亲手敲停，工匠把裂符旁的孩子拉开。孩子没受伤，村人却不愿下一次仍由你独握停铃。你把这一息的代价写在图边。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s07.result"
+    },
+    {
+      "id": "s07.now",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "陶叔闭支路，试符没裂。顾衡说他看见你听钟，但仍要三户实走撤路，才肯让村人讨论改道。一次停得及时不能替整村答应。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s07.result"
+    },
+    {
+      "id": "s07.result",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "新位置与回冲先后已量到，十年前旧图不能直接开闸。你只取得小试的局部结果；山路脚程、村民同意和炉中人的停铃权仍空着。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "s.thirdPillar",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "story.survey",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "s08.key"
+    },
+    {
+      "id": "s08.key",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "许澄姐姐看过初试本，问沈砚为何还独握石台钥匙。沈砚愿自己坐台赔罪。姐姐说那是他的决定，妹妹若仍在里面，谁也不能替她答应继续坐榻。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s08.choice"
+    },
+    {
+      "id": "s08.choice",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "下一次试验，谁读图，谁握钥匙？",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "alone",
+          "text": "让沈砚因熟悉阵图而独握钥匙",
+          "target": "s08.refuse",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "split",
+          "text": "沈砚读图，陶叔执钥，家属与村民守钟",
+          "target": "s08.split",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "s.sharedKey",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "s08.refuse",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "姐姐把钥匙压在桌上：“他会读图，也曾听铃没停。两件都是真的。”沈砚自己把图交陶叔，愿只负责解读。你们分开读图、执钥与叫停。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s08.split"
+    },
+    {
+      "id": "s08.split",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "陶叔接钥匙，姐姐守炉门，村口钟仍待村人亲自选人。沈砚不能再用一张图替两端活人发话。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "s.sharedKey",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "s09.note"
+    },
+    {
+      "id": "s09.note",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "旧案边上有祁元肃批注：“仅作急用，三次后复议。”第三次之后的复议页被撕。沈砚说自己后来逃出山，是因宗门违约；你问他离山后谁还在榻上，他没有否认。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s09.map"
+    },
+    {
+      "id": "s09.map",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "你的新图还缺一项可交给议事堂核查的事实。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "include",
+          "text": "把三户、药田、移位石柱与未实走脚程全标出",
+          "target": "s09.full",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "s.newMap",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "promise",
+          "text": "写“改道已安全，可立即开闸”",
+          "target": "s09.correct",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "s09.correct",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "沈砚也没有说安全。他指着你写的“已”字：村人没试走，许澄没亲自同意，再好的新图也缺活人的回答。你划掉许诺，把未知处写上。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s09.full"
+    },
+    {
+      "id": "s09.full",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "新图同时画石柱、人家和缓坡；沈砚初案有人榻、祁元肃后来加高承压、沈砚听铃未停，三件事也分栏记清。你带图进堂，不把一人的罪抵另一人的伤。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "s.newMap",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "s.hall"
+    },
+    {
+      "id": "s.hall",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "祁元肃摊开冬药账与南沟死者名册，问路边谁肯迁。你有初试证据、新柱位置，却没有三户实走时辰，也未让许澄亲自同意小试。眼下不能照旧图改道。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s.hall.choice"
+    },
+    {
+      "id": "s.hall.choice",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你能先救近门人并承担夺台后果，或公开真账、今晚暂守旧阵，继续争取山下人的准备。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "seize",
+          "text": "趁验阵夺台，先救近门人",
+          "target": "story.seize.00.0",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "hold",
+          "text": "公开初试真账，今晚守阵再筹迁路",
+          "target": "story.old.00.0",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
           "outcomes": []
         }
       ]
@@ -3295,281 +4104,6 @@
       "next": "ending.oldPublic"
     },
     {
-      "id": "story.four.00.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "司籍房",
-      "speaker": "旁白",
-      "text": "沈砚的编号在十年间领过药材、符纸，还领过给炉中人治伤的药。编号被账房反复拿来掩盖不同的人，不能证明沈砚这十年都在领东西。十年前的山灾簿其实只写“失踪，推定身故”，没有尸身。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.01.0"
-    },
-    {
-      "id": "story.four.01.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "废观测台",
-      "speaker": "旁白",
-      "text": "陈闻记得每隔几个月有人送油到废弃的观测台，账上称作祭旧人。你顺着送油的石阶上去。灯下坐着个三十多岁的男人，袖边沾着画阵的朱砂，听见你报出“沈砚”，笔尖才停。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.02.0"
-    },
-    {
-      "id": "story.four.02.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "废观测台",
-      "speaker": "旁白",
-      "text": "他先认出了你帖背的刮痕，然后讲了一夜旧事。十年前突发灵潮，山上石柱撑不住，他画出第一版让修行者短暂坐榻的阵。祁元肃后来改高了允许承受的冲击，藏起山谷旧道；炉房如今的样子，不是他画图时想见的样子。他说自己曾找过另一条路，却被祁元肃逐出宗门。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.03.0"
-    },
-    {
-      "id": "story.four.03.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "废观测台",
-      "speaker": "旁白",
-      "text": "他的每一句都可能是真的，你仍问：“第一版阵图上，就已经有给人坐的榻，对吗？”",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.04.0"
-    },
-    {
-      "id": "story.four.04.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "废观测台",
-      "speaker": "旁白",
-      "text": "沈砚将笔放下。他承认有，称那是救急。受不了便敲停铃，石柱会重新接过冲击。初试时有弟子周望求停，铃却坏了。他没听见，事后一直以为周望恨他是误会。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.05.0"
-    },
-    {
-      "id": "story.four.05.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "废观测台",
-      "speaker": "旁白",
-      "text": "你没有立刻与他争。陶叔还留着初试记事本，“有人求停”四字被浓墨涂去，旁边补了“更换符纸”。你用灯照纸背，旧字的笔画从纤维里透出来。再到旧石台上，以极小的一缕灵力试两只铃：破铃接不上阵，完好的那只一响，试验支路便关闭。初试阵图画的是完好的接法，陶叔也记得那晚装的正是它。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [
-        {
-          "variable": "story.bell",
-          "operation": "set",
-          "value": 1
-        }
-      ],
-      "choices": [],
-      "next": "story.four.05.1"
-    },
-    {
-      "id": "story.four.05.1",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "废观测台",
-      "speaker": "旁白",
-      "text": "墨迹、阵路和证人指向同一件事：有人敲了铃，沈砚听得见。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.06.0"
-    },
-    {
-      "id": "story.four.06.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "废观测台",
-      "speaker": "旁白",
-      "text": "你把三样东西带回观测台。沈砚看了很久，说：“我当时已经看见另一股灵气要往山谷去。我想再等一息。”",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [
-        {
-          "variable": "story.shen",
-          "operation": "set",
-          "value": 1
-        }
-      ],
-      "choices": [],
-      "next": "story.four.07.0"
-    },
-    {
-      "id": "story.four.07.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "废观测台",
-      "speaker": "旁白",
-      "text": "“周望知道你在等吗？”",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.08.0"
-    },
-    {
-      "id": "story.four.08.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "废观测台",
-      "speaker": "旁白",
-      "text": "他没有答。他带你去见周望。周望如今引不起灵气，正在给漏雨的窗钉木板。他不问沈砚找到新阵没有，只说：“那天我敲了。你在簿上把这一句写回去。”沈砚答应，他又说：“写回去也不会让我重新修行。”",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.09.0"
-    },
-    {
-      "id": "story.four.09.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "废观测台",
-      "speaker": "旁白",
-      "text": "沈砚后来找到山谷旧道。那里有三户人家和一片供村里过冬的药田；改道时最初的冲击，仍需有人短暂站在石台承接。祁元肃见过停阵伤者，也舍不得药田，拒绝测试。沈砚没说服他，更不敢面对周望，便藏到了废台。祁元肃此后把救急变成常例，一次次提高榻上弟子必须承受的份量，考校选人，销去姓名。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.09.1"
-    },
-    {
-      "id": "story.four.09.1",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "废观测台",
-      "speaker": "旁白",
-      "text": "沈砚逃走没造成这些新命令，却让会读旧图的人少了一个。",
-      "background": "stele",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.10.0"
-    },
-    {
-      "id": "story.four.10.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "谷口",
-      "speaker": "旁白",
-      "text": "你拿到两版阵图，试图在谷口复原泄流方向。第一下试探便出了错：图上的第三根石柱早被洪水挪开，冲击先到村口，不到你预想的炉门。护符裂开，顾衡当即敲停钟。你收回灵力，村口的孩子被工匠拉开，没受伤。",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [
-        {
-          "variable": "story.survey",
-          "operation": "set",
-          "value": 1
-        }
-      ],
-      "choices": [],
-      "next": "story.four.11.0"
-    },
-    {
-      "id": "story.four.11.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "谷口",
-      "speaker": "旁白",
-      "text": "老妇人看你灰头土脸回来，问：“图上有我家门吗？”",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.12.0"
-    },
-    {
-      "id": "story.four.12.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "谷口",
-      "speaker": "旁白",
-      "text": "你说没有。她把裂符交到你手里：“下回试之前，来问。”",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [
-        {
-          "id": "joint",
-          "text": "让家属与村民共同守钟，继续小试",
-          "target": "story.four.13.0",
-          "effects": [
-            {
-              "variable": "story.contract",
-              "operation": "set",
-              "value": 1
-            }
-          ]
-        },
-        {
-          "id": "seize",
-          "text": "趁验阵夺下石台，强行放人",
-          "target": "story.seize.00.0",
-          "effects": [
-            {
-              "variable": "story.route",
-              "operation": "set",
-              "value": 1
-            }
-          ]
-        },
-        {
-          "id": "seal",
-          "text": "封回旧闸，今夜继续守住旧阵",
-          "target": "story.old.00.0",
-          "effects": [
-            {
-              "variable": "story.route",
-              "operation": "set",
-              "value": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "story.four.13.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "祁元肃只肯借出一回试验钥匙，还派守卫站在石台旁，要求钟一响就停。许澄的姐姐见过改过的初试本，不肯让沈砚独自握钥匙：他的愧疚是真的，他曾听见铃却不肯停也是真的。她请陶叔守台，让沈砚讲图，顾衡和村里工匠守钟；炉门这边由她和林月守。你在两头各贴一张感应符。符只会亮，不能告诉你该救谁，却能让两边的人同时看见冲击先后。",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.14.0"
-    },
-    {
-      "id": "story.four.14.0",
-      "chapter": "卷三 · 死人的阵图",
-      "location": "山腹石台",
-      "speaker": "旁白",
-      "text": "第二次小试按响铃即停的规矩做。村口先亮，炉门后亮；陶叔关了支路，石柱顶住余力。你们量出新位置，也看见守不住太久。许澄透过门缝说她愿意在下一次撤村时多坐一小会儿，条件是把停铃放到她伸手够得到的地方。姐姐把这句原样写下来，没有替她多答应半刻。",
-      "background": "mountainHeart",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.five.00.0"
-    },
-    {
       "id": "story.five.00.0",
       "chapter": "卷四 · 谁有权说停",
       "location": "山腹坡道",
@@ -3911,7 +4445,7 @@
       "chapter": "结局 · 守住旧阵",
       "location": "青云山 · 司籍房",
       "speaker": "旁白",
-      "text": "谷口第一次试验裂了村符之后，你决定封回旧闸，不再冒险。顾衡理解你的怕，祁元肃让你参与守阵，盼你这个亲眼见过裂符的人替旧办法说话。灵潮来时，山下家家关门，炉房的灯彻夜不灭。阿澈在医舍听铃，问许澄如今怎样。你不能拿“村里没人死”回答，因为她还在里面。",
+      "text": "谷口小试已证明旧图不可直接开闸；三户还未实走撤路，炉中人也未亲自答应下一次试验。你决定今晚封回旧闸。顾衡理解你怕村符再裂，祁元肃却想让你把真名册也一起锁起。",
       "background": "stele",
       "portrait": "",
       "rain": false,
