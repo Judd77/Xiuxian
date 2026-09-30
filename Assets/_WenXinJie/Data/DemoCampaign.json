@@ -1,3547 +1,565 @@
 {
-    "id": "wenxinjie",
-    "revision": 14,
-    "start": "case.intro",
-    "variables": [
+  "id": "wenxinjie",
+  "revision": 15,
+  "start": "case.intro",
+  "variables": [
+    {
+      "id": "story.guessPerson",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "story.skill",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "story.ash",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "story.ache",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "story.xucheng",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "story.village",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "story.shen",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "story.bell",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "story.survey",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "story.contract",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "story.route",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "story.public",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "case.intro",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "弟子居所",
+      "speaker": "旁白",
+      "text": "阿澈的药还温着，人已经没了。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.one.01.0"
+    },
+    {
+      "id": "story.one.01.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "弟子居所",
+      "speaker": "旁白",
+      "text": "你端着药碗站在弟子居所门口。昨夜他烧得厉害，连药都没喝完就睡下了。现在被褥叠成方块，窗闩扣得好好的，那只左脚鞋却还在床底。鞋底开了线，他平时去食堂都嫌硌脚，更不会穿另一只走几十里山路。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.one.02.0"
+    },
+    {
+      "id": "story.one.02.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "弟子居所",
+      "speaker": "旁白",
+      "text": "“他下山了。”管事从你身后进来，把一张盖过印的单子拍在桌上，“有事回家，已经销了名。”",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.one.03.0"
+    },
+    {
+      "id": "story.one.03.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你在司籍房抄了一个月的册子，知道弟子离山要过两道手续：管事销名，山门验帖。销名单上写着阿澈今晨离开，山门簿上却没有他的印。你指出来，管事只说守门人漏记。你再问阿澈病成这样怎么走，管事便把药碗推回你手里：“明天你也要考校。先顾自己。”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.one.04.0"
+    },
+    {
+      "id": "story.one.04.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "山门的钟正敲午时。你见过守门人漏写姓名，从没见过漏盖印，因为印要用灵力按下，碰过门阵才会留下。阿澈若真从山门走出去，阵上应当有他的那一下。你想去查原阵，守门人说你只是誊册的，没有资格碰。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.one.05.0"
+    },
+    {
+      "id": "story.one.05.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你回到司籍房，先在私纸上记下销名时辰，又把山门簿翻到同一页。两处写法都是自己亲眼见到的，至于阿澈在哪里，纸上没有答案。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.one.06.0"
+    },
+    {
+      "id": "story.one.06.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "案上还剩最后一张新弟子的登仙帖。你刚要誊自己的名字，发现帖背被刮薄了。迎着日光，旧墨露出一个“砚”字。十年前山灾簿上有个沈砚，记作失踪后推定身故。新帖用旧纸并不稀奇；死人用过的帖来到你手里，仍叫你不舒服。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.one.07.0"
+    },
+    {
+      "id": "story.one.07.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹坡道",
+      "speaker": "旁白",
+      "text": "傍晚，运药的车从医舍出来，车沿挂着半片包药纸。纸角有两道歪折，是你昨夜替阿澈包药时折的。他病得拿不稳东西，曾笑你把药包折得像只瘸鸟。你追到山腹坡道，守卫拦住了车，也拦住了你。包药纸可能只是被人收走的垃圾，你不能凭一角纸就说车里藏着人。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.one.08.0"
+    },
+    {
+      "id": "story.one.08.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "弟子居所",
+      "speaker": "旁白",
+      "text": "当晚你翻出一本落灰的入门书，照书上练“辨气”。人用灵力施术，物件上会留一点余息；余息散得快，能分出新旧，却不能像名字那样认出是谁。你先拿两张自己写废的符练手，一张刚用过，一张三天前就废了。第一次，你把两张弄反；练到掌心发麻，才认出新符那点温热。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [
         {
-            "id": "day",
-            "initial": 1,
-            "minimum": 1,
-            "maximum": 30
-        },
-        {
-            "id": "actions",
-            "initial": 2,
-            "minimum": 0,
-            "maximum": 2
-        },
-        {
-            "id": "cultivation",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 999
-        },
-        {
-            "id": "trust.linYue",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 100
-        },
-        {
-            "id": "clue.register",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "clue.jade",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "mark.resonance",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "risk.attention",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 3
-        },
-        {
-            "id": "visited.linYue",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "route.alliance",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "clue.ledger",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "clue.witness",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "trust.shenYan",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 3
-        },
-        {
-            "id": "mark.rescued",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "trust.gu",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 3
-        },
-        {
-            "id": "clue.array",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "mark.public",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "mark.evacuated",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "mark.original",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "mark.village",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "mark.arrayKey",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.guess",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 3
-        },
-        {
-            "id": "case.learned",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.sealLost",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.verified",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.conclusion",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 3
-        },
-        {
-            "id": "case.action",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 4
-        },
-        {
-            "id": "case.ache",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.ledgerCopy",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.cartTrace",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.villageReady",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.arrayMeasured",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.witnessProtected",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.publicRecord",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.identityLead",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.shenAccount",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.postPreserved",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.clerkLead",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.controlSample",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.sedative",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.familyConsent",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.charmLedger",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.returnMeasured",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.heardNames",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.heardPressure",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.heardDraft",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.familyNotified",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.villageConsent",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.jointProtocol",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.sideDoorMeasured",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.villageWitness",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.archiveWitness",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.bellRecords",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.bellVerified",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
-        },
-        {
-            "id": "case.bellShared",
-            "initial": 0,
-            "minimum": 0,
-            "maximum": 1
+          "variable": "story.skill",
+          "operation": "set",
+          "value": 1
         }
-    ],
-    "nodes": [
-        {
-            "id": "case.intro",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "你刚入外门，在司籍房誊录入门名册。自己的登仙帖背面有一道被刮去的旧名：沈砚；十年前的注销抄页写他『亡于阵故』。同批新弟子的去向栏还有三处空白。原册锁在执事房，你此刻只能做一件不惊动太多人的事。先保全哪条痕迹？",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "post",
-                    "text": "拓下帖背刮痕，保留原纸",
-                    "target": "case.entryPost",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "roster",
-                    "text": "抄下三处空白去向和归档时辰",
-                    "target": "case.entryRoster",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "clerk",
-                    "text": "问交接人为何又用了旧号",
-                    "target": "case.entryQuestion",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "case.entryPost",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "你用薄纸拓出刮痕，没再磨损原帖。朱印盖在刮名之后，纸背纤维却与十年前的旧批帖一致：这张凭证被重新发过。拓片还不能证明沈砚活着，却能在日后与封存旧图的纸纹核对。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.records",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.postPreserved",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "case.entryRoster",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "三处空白去向都在交接人陈闻值守的时辰留下。他平日替弟子寄家书，未必知道炉房真相，却可能见过谁被带走。你把他的名字留在私人笔记里，没有立刻告发。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.records",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.clerkLead",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "case.entryQuestion",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 交接台",
-            "speaker": "陈闻",
-            "text": "陈闻先说旧号只是账面沿用；你问到今日交接，他看了管事一眼，改口称记不清。你听见他低声提到二更运灰车，得了可追的时辰，也让管事知道你正在查这张帖。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "case.records",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.cartTrace",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "risk.attention",
-                    "operation": "add",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "case.records",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "你把注销抄页和本旬炉房领灰回执并排放好：一边说沈砚十年前已死，一边仍以他的旧编号领走养息灰。回执不是原账，但盖着今天的炉印。\n同一名字，能证明是同一个人吗？你先记下自己的判断。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "person",
-                    "text": "沈砚没死，或许就藏在炉里",
-                    "target": "case.guessPerson",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.guess",
-                            "operation": "set",
-                            "value": 1
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "borrowed",
-                    "text": "有人借死者的编号藏匿活人",
-                    "target": "case.guessBorrowed",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.guess",
-                            "operation": "set",
-                            "value": 2
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "error",
-                    "text": "先按旧账误抄查，暂不认定有人",
-                    "target": "case.guessError",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.guess",
-                            "operation": "set",
-                            "value": 3
-                        }
-                    ],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "case.guessPerson",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "你在“沈砚”下面画线：若他活着，为何用死者的名字领灰？可回执只写编号，没有领灰人的手印。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.lesson",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "case.guessBorrowed",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "你在旧编号旁做记号：名字或许只是遮掩。要证明炉中真有人，不能只靠账面猜测。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.lesson",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "case.guessError",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "你暂记作误抄，却舍不得划掉“今日炉印”四字。若只是旧账，为何印泥还未干？",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.lesson",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "case.lesson",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "司籍房留着一本沾灰的《辨气入门》。你已有炼气底子，书中教人读残气的新旧与流向，却警告不能据此认姓名或隔着阵门数人。炉房回执很快会被收回。你先用什么练手？",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "ink",
-                    "text": "用今日新印和昨日旧印校准气息",
-                    "target": "case.practiceGood",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "ash",
-                    "text": "直接在炉房回执灰上试法",
-                    "target": "case.practiceHasty",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "case.practiceGood",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "你先闭眼分辨两道朱印。新印的气线仍向纸里收，昨日旧印已散向砚边；你交换纸张再试，结果没有随摆放位置改变。你学会了辨气的边界：能辨时间和方向，不能从残气叫出人名。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.method",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.learned",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "case.practiceHasty",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 炉房外廊",
-            "speaker": "旁白",
-            "text": "你隔着回执灰猛送灵识，把旧印残气错看成今日活息。门边警符轻响，巡守朝这边望来。你退回司籍房，以新旧朱印重新校准，才分清气线方向。术法学会了，但你失去从容检查原回执的时机。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "case.method",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.learned",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "risk.attention",
-                    "operation": "add",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "case.method",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 炉房交接台",
-            "speaker": "旁白",
-            "text": "回执将被送回炉房归档。你现在可以用辨气检查盖印时夹入的灰，也可以先找管事质问账目。交接台在司籍核对范围内，炉门仍有禁制，不能闯入。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "sense",
-                    "text": "运用辨气，查回执灰的气息流向",
-                    "target": "case.ash",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "challenge",
-                    "text": "先质问管事，为何死者仍在领灰",
-                    "target": "case.sealed",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.sealLost",
-                            "operation": "set",
-                            "value": 1
-                        },
-                        {
-                            "variable": "risk.attention",
-                            "operation": "add",
-                            "value": 1
-                        }
-                    ],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "case.sealed",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 炉房交接台",
-            "speaker": "管事",
-            "text": "“旧号沿用，司籍不必问炉事。”管事收走完整回执，当场封了炉房原账。你失去核对全页的机会，巡守也记住了你。印被带走，交接台缝里却留下残灰。你刚学的辨气或许能从这处被忽略的地方取得新证据。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "case.ash",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "case.ash",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 炉房交接台",
-            "speaker": "旁白",
-            "text": "你运转辨气，交接台的灰中浮出一道新鲜活息，方向与昨日旧印相反，像是从炉门内侧随今日回执带出。它不是储存多年的死灰。\n这只能证明今天有活人的气息经过炉门内侧；气息可能属于运灰者，也可能属于息位中的人。你仍需核对轮值与物件，不能凭这道气认出姓名或人数。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "case.control",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.verified",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "case.control",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 炉房交接台",
-            "speaker": "旁白",
-            "text": "残灰有新鲜活息，但你不能确定那是炉中人、运灰弟子，还是灰本身带来的旧气。交接台还放着一包尚未入炉的同批养息灰，可作对照；取样会耽误回执归档前的质问时机。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "sample",
-                    "text": "取未入炉灰作对照，再写结论",
-                    "target": "case.controlChecked",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "proceed",
-                    "text": "先记下可疑方向，去找证人和轮值",
-                    "target": "case.controlOpen",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "case.controlChecked",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 炉房交接台",
-            "speaker": "旁白",
-            "text": "你把未入炉灰与回执灰并排辨气。同批原灰只有草木余温，活息只附在已从炉门内侧返出的那份。灰料本身的解释被排除；运灰者与息位中的人仍待身份核对。你封好两包样本，取得可给旁人复验的术证。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "case.meet",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.controlSample",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "case.controlOpen",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 炉房交接台",
-            "speaker": "旁白",
-            "text": "你没有等第二包灰。笔记上只写『今日有活息从内侧带出，来源未定』。你保住了继续追人的时机，也失去一份能当众复验的对照样本；往后若要公开这条术证，须先找其他来源补强。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "case.meet",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "case.meet",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "你把注销抄页、当旬回执和刚记下的气息方向放在一起。编号今天被使用，灰里也有今日活息；但你还缺少把编号、持帖者和炉中人连起来的证据。管事已经注意你，下一步按哪种解释查，会影响你先接近谁。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "inside",
-                    "text": "先按沈砚仍在炉内追查",
-                    "target": "case.rebuttal",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.conclusion",
-                            "operation": "set",
-                            "value": 1
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "number",
-                    "text": "追查是谁沿用旧号转运活人",
-                    "target": "case.admission",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.conclusion",
-                            "operation": "set",
-                            "value": 2
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "uncertain",
-                    "text": "先核实活息来源，不急着认姓名",
-                    "target": "case.caution",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.conclusion",
-                            "operation": "set",
-                            "value": 3
-                        }
-                    ],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "case.rebuttal",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 炉房外廊",
-            "speaker": "管事",
-            "text": "你按『沈砚仍在炉内』打听，管事拿死亡抄页堵住你的去路：『既认得字，就别问死者。』你没有能反驳的身份物证，轮值牌被他先一步收走。林月在外廊低声提醒：旧号与活息之间还缺一个人的身份；按名字闯炉，只会找错门。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "case.decision",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "risk.attention",
-                    "operation": "add",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "case.admission",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "你把旧号和姓名分开抄写。管事无法解释今日领灰，林月手里又有一份失踪弟子的轮值传闻；两者还未相互证实。若先查转运，可能抢在换班前接近活人；若查村落，则能知道能否安全开炉。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.decision",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "case.caution",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "你在记录上写下『今日活息，身份未明』，没有把术法看见的方向写成人名。运灰弟子因你没当众指认，愿给出换班时辰；林月也愿带你找失踪者家属。你仍须选择先保护证人、受监督查炉，还是公开已核实的部分。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.decision",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "case.decision",
-            "chapter": "卷一 · 旧号疑云",
-            "location": "青云山 · 松风岭",
-            "speaker": "旁白",
-            "text": "炉房的今日气息与旧号有关，却还不能证明炉中人的身份。贸然停炉可能让山下裂隙失控；完整原账若被封，秘密救援也缺可靠名单。你决定先从谁掌握的证据入手？",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "lin",
-                    "text": "交给林月，寻找活人和撤离路线",
-                    "target": "case.lin",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.action",
-                            "operation": "set",
-                            "value": 1
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "gu",
-                    "text": "交给顾衡，争取受监督的炉房查验",
-                    "target": "case.gu",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.action",
-                            "operation": "set",
-                            "value": 2
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "public",
-                    "text": "公开记录和辨气所得，让宗门无法掩盖",
-                    "target": "case.public",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.action",
-                            "operation": "set",
-                            "value": 3
-                        },
-                        {
-                            "variable": "risk.attention",
-                            "operation": "add",
-                            "value": 1
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "shen",
-                    "text": "追查旧阵测绘笔迹，核对沈砚的记录",
-                    "target": "case.shen",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.action",
-                            "operation": "set",
-                            "value": 4
-                        }
-                    ],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "case.lin",
-            "chapter": "卷一 · 山中疑云",
-            "location": "青云山 · 松风岭",
-            "speaker": "林月",
-            "text": "林月收下核对过的抄页，答应先找活人的姓名和退路。她提醒：自己不能独自救走炉中所有人，更不能在未知裂隙承压时掐灭炉火。你的证据换来了合作，也把风险带给她。",
-            "background": "ridge",
-            "portrait": "linYue",
-            "rain": false,
-            "next": "route.lin.start",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "case.gu",
-            "chapter": "卷一 · 山中疑云",
-            "location": "青云山 · 松风岭",
-            "speaker": "旁白",
-            "text": "顾衡接受抄页和辨气记录，允诺亲自监督一次炉房查验。他不准在替阵办法得到验证前停炉，也不让林月私自带走人。你得到查验机会，秘密撤人的窗口却缩小了。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.start",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "case.public",
-            "chapter": "卷一 · 山中疑云",
-            "location": "青云山 · 旧碑廊",
-            "speaker": "旁白",
-            "text": "抄页在外门传开，炉门当夜加封。更多弟子知道旧号仍被使用，开始怀疑里面有活人；林月原先的隐秘路线也失效了。顾衡答应让见证者查验，但要求先测裂隙承压。公开换来了监督，也夺走了立即接人的机会。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.start",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "case.shen",
-            "chapter": "卷一 · 山中疑云",
-            "location": "青云山 · 旧图库",
-            "speaker": "旁白",
-            "text": "抄页边缘有一种反复改正阵眼位置的笔法，和注销页上的『沈砚』签名相同。签名不能证明他还活着，却指向他当年画过的原图。你申请核对封存图库，管事只许看副本；原图被移进废测绘房。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.start",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.shen.start",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废测绘房",
-            "speaker": "旁白",
-            "text": "封柜里有两版阵图：旧版已画人息位，承压上限很低；新版把上限加倍，封泥却写『照旧』。守柜人快回来了。带走原图能作证，也会惊动管事；只拓改动处，则要到现场补量缺失的尺寸。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "original",
-                    "text": "保全两版原图，承担追查风险",
-                    "target": "route.shen.original",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "rubbing",
-                    "text": "只拓改动，留下原图待日后复核",
-                    "target": "route.shen.rubbing",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "paper",
-                    "text": "用先前保全的帖背纸纹核对原图",
-                    "target": "route.shen.paper",
-                    "lockedReason": "尚未保全登仙帖背面的原纸",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.postPreserved",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.shen.paper",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废测绘房",
-            "speaker": "旁白",
-            "text": "你把保全的帖背原纸贴近图角。两处旧批纸的水纹和刀刮方向一致，证明同一批息位凭证曾被回收再发；朱印却是今天才盖。你不必带走原图，就能让守柜人按纸纹确认它的来历。他给你留下复核签记，也悄悄指向沈砚改笔时常去的旧试阵台。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.find",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.shen.original",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废测绘房",
-            "speaker": "旁白",
-            "text": "你把两版图连封泥带走，初案签名仍在，不能说最初的人息位是宗门后来擅加的。守柜人发现空柜，管事派人追查。图纸可以上桌对质，也让你下一次入房变难。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.find",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "risk.attention",
-                    "operation": "add",
-                    "value": 1
-                },
-                {
-                    "variable": "case.arrayMeasured",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.shen.rubbing",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废测绘房",
-            "speaker": "旁白",
-            "text": "你拓下被加高的上限，却漏了副脉的一个刻度。原图仍在柜中，旁人可以复核；若直接代入拓片，会低估村口回流。你在缺口旁留红点，提醒自己必须到现场量。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.find",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.shen.find",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "旧试阵台",
-            "speaker": "沈砚",
-            "text": "你循修正笔迹找到一个本该在十年前死亡的人。沈砚先指向新版的加高数字，说那是宗门的手笔，却把第一版推到桌角，不主动提自己的签名。你决定拿哪项证据问他。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "signature",
-                    "text": "拿初案签名追问第一批弟子是否知情",
-                    "target": "route.shen.admit",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "limit",
-                    "text": "先问承压上限由谁加高",
-                    "target": "route.shen.excuse",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.shen.admit",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "旧试阵台",
-            "speaker": "沈砚",
-            "text": "沈砚承认自己画过第一批人息位，称当时只答应让自愿者短时入阵；旧名册却没有自愿签记。他无法证明有人同意。你把初案签名抄入可供家属核对的记录。他愿继续算替阵，也知道家属可能拒绝他参与。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.trial",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.shenAccount",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.shen.excuse",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "旧试阵台",
-            "speaker": "沈砚",
-            "text": "他指出宗门改高的笔迹，却回避第一版的人息位。你把十年前试阵灰与旧图对齐：加高前已有活人承压。沈砚沉默许久，承认自己也签过初案。他请求先试出新路再向家属坦白；你暂拿到技术帮助，却失去立即公开责任的时机。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.trial",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.shenAccount",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.shen.trial",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废副脉",
-            "speaker": "旁白",
-            "text": "你以辨气读旧试阵灰，再把一线灵气送进废脉。气息先向山腹退，随即从村口折回，旧图漏了一处回流点。沈砚要继续加压求精确数值，你选择先护住哪边。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.arrayMeasured",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": [
-                {
-                    "id": "village",
-                    "text": "先稳村口，炉侧停止接人",
-                    "target": "route.shen.guardVillage",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "furnace",
-                    "text": "先稳炉侧，催顾衡撤村口住户",
-                    "target": "route.shen.guardFurnace",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "pause",
-                    "text": "停下加压，用双侧试纸先测回流时差",
-                    "target": "route.shen.pause",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "survey",
-                    "text": "复测旧图缺失的半尺刻度",
-                    "target": "route.shen.survey",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.shen.guardVillage",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废副脉",
-            "speaker": "旁白",
-            "text": "符箓守住村口，炉侧空息位却发出裂声。林月赶来阻止继续加压：若那里有人，试验已经伤人。你停下，把实测回流补进图里；沈砚第一次没再说『算上去就好』，而是问谁有权同意下一次试验。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.finish",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.shen.guardFurnace",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废副脉",
-            "speaker": "旁白",
-            "text": "炉侧符纸完整，村口旧护符却裂了一角。顾衡带来那户人家的损耗账：保护弟子不能把伤害转给不知情的人。你停下，记住实测回流；沈砚的图从此须与村民护符记录放在同一张案上。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.finish",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.shen.finish",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "司籍房",
-            "speaker": "旁白",
-            "text": "你找到画阵者，也证明底稿不完整。沈砚愿给出分流线，但必须由炉中人家属和村民核对风险；你仍缺活人名单与撤村时间。下一次灵潮前，旧阵真实载荷须由三方数据一起决定。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.boundary",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.lin.bowl",
-            "chapter": "卷一 · 失踪者",
-            "location": "外门居所",
-            "speaker": "旁白",
-            "text": "你用辨气分别查碗底和药柜封泥。碗里的安神散是今晨添的，柜封却昨夜就已合上：药是有人从别处带来，不是阿澈照常领用。药性会混淆先后顺序，却不会让人凭空看见炉里活人。你封存残药，准备拿换班时辰核对他的说法。",
-            "background": "quartersNight",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.compare",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.sedative",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.dose",
-            "chapter": "卷一 · 失踪者",
-            "location": "旧碑廊",
-            "speaker": "许澄的姐姐",
-            "text": "你把碗底残药与换班牌并列：阿澈服药在二更之后，他说不清当晚先见谁，却确实在服药前把一枚玉扣塞进床缝。许澄的姐姐拿出配扣，刻纹合上。你可以确定许澄被转入炉内，却不能把阿澈口中的『沈砚』当作她的名字。姐姐愿意给下一次侧门查验作见证。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.conflict",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.identityLead",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.witnessProtected",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.family",
-            "chapter": "卷一 · 失踪者",
-            "location": "旧碑廊",
-            "speaker": "许澄的姐姐",
-            "text": "姐姐看过配扣和轮值牌，问林月：『你早知道她可能还活着，为什么让我在空床边等？』林月承认隐瞒转运路线。姐姐愿借侧门钥匙，却要求亲眼确认妹妹尚能回应；守卫下次巡门只隔一炷香。你要先取得她的同意，还是先守住秘密路线？",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "consent",
-                    "text": "告诉姐姐开侧门会冲击护符，请她决定是否同去",
-                    "target": "route.lin.consent",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "secret",
-                    "text": "暂不交钥匙，先用符纸从门缝查呼吸",
-                    "target": "route.lin.secret",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.lin.consent",
-            "chapter": "卷一 · 失踪者",
-            "location": "炉房侧门",
-            "speaker": "林月",
-            "text": "姐姐听完风险，仍决定站在门外。你用短符遮住门缝，姐姐呼出许澄乳名；炉内传来两下敲击，与她们幼时约定的回声相同。你没有打开整扇门，护符只抖了一次。姐姐把钥匙留给下一次有人手稳阵的救援，并要求林月以后直接告诉家属变动。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.familyConsent",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.witnessProtected",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.secret",
-            "chapter": "卷一 · 失踪者",
-            "location": "炉房侧门",
-            "speaker": "旁白",
-            "text": "你独自从门缝辨到两道呼吸，其中一道与玉扣残气同向。符纸将燃尽时，你没敢开门：没有人稳住空出的息位，村口会接住余压。姐姐知道你查过，却不知道结果；她收回钥匙，要你带可复核的测量再来。你保住了秘密入口，失去她此刻的协助。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.finish",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.gu.workshop",
-            "chapter": "卷一 · 山下承压",
-            "location": "护符工坊",
-            "speaker": "工匠",
-            "text": "工匠让你自己翻领料簿：炉房每多领一车养息灰，村口护符的耗损就慢一拍；但有一页记着大雨后换符，炉房并未停过。你用辨气检查那批旧符，水痕没有山腹阵压的流向。账能证明两处消耗相关，不能把每道裂纹都算成停炉所致。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.measure",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.charmLedger",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.numbers",
-            "chapter": "卷一 · 山下承压",
-            "location": "观测台",
-            "speaker": "旁白",
-            "text": "你让工匠按领料簿挑出雨损那页，再按今天护符的实际余量重算。顾衡所报的『全村一夜尽失』只在所有旧符同时失效时成立；当前阵压会先冲低处三户，慢行的祖孙来不及走原山道。风险没有消失，却能用先撤三户、再测副脉的顺序处理。你把计算交给村民核验。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "tell",
-                    "text": "请三户和工匠当面确认撤离顺序",
-                    "target": "route.gu.consented",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "hold",
-                    "text": "先把数字交顾衡，由他安排",
-                    "target": "route.gu.deferred",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.gu.consented",
-            "chapter": "卷一 · 山下承压",
-            "location": "村口",
-            "speaker": "工匠",
-            "text": "三户亲自选择走较缓的东坡。工匠把新符移到岔口，老人试走后比顾衡原定时刻晚了半炷香；你把替阵试验往后挪。顾衡同意让村民在观测台看读数，也必须向他们解释炉中由谁承压。撤离准备有了真实时程。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.villageReady",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.deferred",
-            "chapter": "卷一 · 山下承压",
-            "location": "村口",
-            "speaker": "顾衡",
-            "text": "顾衡照你的新数字派人敲门，却仍只说『山上要试阵』。三户肯先离开，工匠拒绝把全村护符交给一份没给他们看的计划。你争得了测量时间，没有取得替阵所需的村民同意；下一步仍得把炉房成本讲清。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.finish",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.shen.pause",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废副脉",
-            "speaker": "旁白",
-            "text": "你不照沈砚的图继续加压，而是在村口旧符和炉侧空位各贴一张试纸，只送入半息灵气。村口试纸先黑，炉侧晚一息才热；回流并非同时到两边。沈砚在原图缺口补上这个时差，承认第一版也没有替试阵者预留叫停办法。接下来谁来决定是否再试？",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "witness",
-                    "text": "请村民和家属先看两张试纸，再约下一次试验",
-                    "target": "route.shen.witness",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "alone",
-                    "text": "先留下测量与叫停符，不立即再加压",
-                    "target": "route.shen.stop",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.shen.witness",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "旧试阵台",
-            "speaker": "沈砚",
-            "text": "村民认出护符变黑的顺序，许澄的姐姐则指出空息位即使只迟一息也不能无人看守。沈砚把控制笔记交给两方各抄一份；下一次试验由他们定叫停信号。你获得经过双方核对的回流时差，沈砚的旧罪也进入公开记录。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.returnMeasured",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.shenAccount",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.shen.stop",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废副脉",
-            "speaker": "旁白",
-            "text": "你把两张试纸封存，写下半息流量、先后顺序和必须叫停的温度。沈砚还想多测一次，你拒绝用尚未获知风险的弟子与村民做刻度。测量可供以后核对，但在他们亲眼看见之前，不能算取得了共同试验的同意。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.returnMeasured",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.public.witness",
-            "chapter": "卷一 · 公开听证",
-            "location": "旧碑廊",
-            "speaker": "运灰弟子",
-            "text": "你让受保护的运灰弟子隔屏说话，并把他的二更车次与封炉单放在众人面前。他只肯确认帘后有呼吸，不肯认脸；管事质问他为何今日才说，你能用车辙时辰支撑他的哪一句话？",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "limited",
-                    "text": "只证明今日转运活人，留下姓名待家属核对",
-                    "target": "route.public.limited",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "name",
-                    "text": "要求他按旧号认出沈砚",
-                    "target": "route.public.forced",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.public.limited",
-            "chapter": "卷一 · 公开听证",
-            "location": "旧碑廊",
-            "speaker": "旁白",
-            "text": "车辙时辰与交接单能互证转运，灰样若在场还能排除旧气；没有一项能让帘后的人长出姓名。见证者把『活人、二更、身份未定』三栏分别封存。家属得到查炉的资格，运灰弟子不用为没看见的脸作伪证。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.public.forced",
-            "chapter": "卷一 · 公开听证",
-            "location": "旧碑廊",
-            "speaker": "运灰弟子",
-            "text": "他被逼着喊出旧号，沈砚却从人群后走来。管事立即拿这个错误否认整场听证；你当众撤回姓名，只保住『二更有活人转运』的记录。运灰弟子不愿再露面，家属改从随身物和轮值寻找真正的人。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "risk.attention",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "case.boundary",
-            "chapter": "卷一 · 山中疑云",
-            "location": "青云山 · 司籍房",
-            "speaker": "旁白",
-            "text": "你把此夜能核对的证据封成一册：旧号仍在领灰，炉内确有活息；而谁在使用旧阵、山下又为何依赖它，仍待查证。你选择的调查方式已经改变了谁愿意开门、谁被迫回应。封印刚落，山下护符传来碎响——救出炉中人，可能让另一群人承压。\n\n【试玩结束】完整版可继承本次调查进度。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": true,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.lin.start",
-            "chapter": "卷一 · 失踪者",
-            "location": "外门居所",
-            "speaker": "林月",
-            "text": "阿澈的床铺尚温，药碗却被人倒空。门外运灰车的轮印通向炉房。林月说换班前只能争取一件事：先追车找交接痕迹，或先从侧门把阿澈带出来。若你此前记下交接人，他或许肯冒险借出轮值牌。",
-            "background": "quartersNight",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "cart",
-                    "text": "追运灰车，保留轮值与交接痕迹",
-                    "target": "route.lin.cart",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "ache",
-                    "text": "趁换班救阿澈，先保住证人",
-                    "target": "route.lin.ache",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "clerk",
-                    "text": "私下找交接人借轮值牌",
-                    "target": "route.lin.clerk",
-                    "lockedReason": "尚未查出交接人的值守时辰",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.clerkLead",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "bowl",
-                    "text": "封存药碗，核对阿澈服药与换班时辰",
-                    "target": "route.lin.bowl",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.lin.clerk",
-            "chapter": "卷一 · 失踪者",
-            "location": "运灰小径",
-            "speaker": "陈闻",
-            "text": "你没有在管事面前点名，陈闻便借出半张轮值牌：阿澈原定二更换位，另一行姓名被撕走。他要求你别把牌交给林月以外的人。你留下拓本，保住他的退路；阿澈仍在炉边等下一次换班，救人窗口没有因此变长。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.compare",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.cartTrace",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.witnessProtected",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.cart",
-            "chapter": "卷一 · 失踪者",
-            "location": "运灰小径",
-            "speaker": "旁白",
-            "text": "你用辨气沿车辙检查三处落灰，发现第二次车辙比炉房登记晚了一刻。轮值牌写着『阿澈』，车上却有另一人的旧玉扣。你拓下印痕；守卫回身时，侧门已合。阿澈还在里面。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.compare",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.cartTrace",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.ledgerCopy",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.ache",
-            "chapter": "卷一 · 失踪者",
-            "location": "炉房侧门",
-            "speaker": "旁白",
-            "text": "你照林月教的笔法画短时遮息符，只遮住门缝一息。阿澈被扶出时神志不清，说看见『沈砚』在炉中换位；巡守发现空位，原账立刻封存。你救出了人，却不能把他的一个名字当成可靠名单。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.compare",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.ache",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "risk.attention",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.compare",
-            "chapter": "卷一 · 失踪者",
-            "location": "外门居所",
-            "speaker": "林月",
-            "text": "林月把玉扣和轮值牌放在你面前：玉扣可能被转交，阿澈也可能把旧号听成姓名。你必须指出还需核对什么，才能把一个活人与一个编号对应起来。",
-            "background": "quartersNight",
-            "portrait": "linYue",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "verify",
-                    "text": "核对家属刻字、换班时辰与车辙",
-                    "target": "route.lin.identity",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "guess",
-                    "text": "先按阿澈说的『沈砚』找人",
-                    "target": "route.lin.mistake",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "dose",
-                    "text": "用药碗与换班牌校正证词的先后",
-                    "target": "route.lin.dose",
-                    "lockedReason": "尚未取得对应证据",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.sedative",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.lin.identity",
-            "chapter": "卷一 · 失踪者",
-            "location": "旧碑廊",
-            "speaker": "旁白",
-            "text": "家属出示半枚配扣，刻纹与车上玉扣吻合；你再核对换班时辰，确认被转入炉内的是外门弟子许澄。『沈砚』只是旧号，阿澈见过活人却记错了名字。家属愿意配合撤人，但要求别再用编号称呼她。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.conflict",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.identityLead",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.mistake",
-            "chapter": "卷一 · 失踪者",
-            "location": "旧碑廊",
-            "speaker": "许澄的姐姐",
-            "text": "『沈砚？那是十年前的人。』她将另一半玉扣按在你拓下的纹路上，许澄的姓名才露出来。你追错了人，错过了她原本愿意交出的侧门钥匙；她仍肯告诉你妹妹最后一次换班的时辰。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.conflict",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "risk.attention",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.identityLead",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.conflict",
-            "chapter": "卷一 · 失踪者",
-            "location": "松风岭",
-            "speaker": "林月",
-            "text": "林月承认早知道许澄可能被转走，却怕消息泄露使守卫换路，没有告知家属。她要你先守住救援路线；许澄的姐姐要求知道真实姓名与风险。你不能替任何一方抹去另一方的损失。",
-            "background": "ridge",
-            "portrait": "linYue",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "witness",
-                    "text": "先安置阿澈与家属，再让他们决定是否作证",
-                    "target": "route.lin.finish",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.witnessProtected",
-                            "operation": "set",
-                            "value": 1
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "record",
-                    "text": "交出核实的许澄姓名，请家属公开要求查验",
-                    "target": "route.lin.finish",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.publicRecord",
-                            "operation": "set",
-                            "value": 1
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "family",
-                    "text": "请许澄姐姐当面决定是否参与侧门查验",
-                    "target": "route.lin.family",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "window",
-                    "text": "趁二更换班再查一次侧门",
-                    "target": "route.lin.window",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.lin.finish",
-            "chapter": "卷一 · 失踪者",
-            "location": "司籍房",
-            "speaker": "旁白",
-            "text": "你掌握了一名仍在炉中的弟子身份。林月能安排侧门，却指出：若此时直接撤空息位，山下护符会接住未散的阵压。你把姓名与换班时辰留在案上，转去查谁会为救援承受下一击。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.boundary",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.gu.bellArchive",
-            "chapter": "卷一 · 山下承压",
-            "location": "旧灾碑",
-            "speaker": "守钟人",
-            "text": "顾衡的呈报写着「停炉后全村护符同裂」。你翻出守钟人保留的原簿：亥初先报南沟三户符裂，子初东坡另有换符；炉房停炉印记在亥初之前。守钟人说东坡那夜下过雨，顾衡却坚持一声警钟救了整村。原簿只能证明先后，不能断定两处裂纹同因。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.bellTest",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.bellRecords",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.bellTest",
-            "chapter": "卷一 · 山下承压",
-            "location": "护符工坊",
-            "speaker": "工匠",
-            "text": "工匠取出旧灾留下的南沟符与东坡符，还拿来同批未用的新符。你可以选一枚作辨气底样，再把两枚旧符交换位置重测。若底样自身受过雨或阵压，所谓「两处同裂」便无从判断。先用哪枚？",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "clean",
-                    "text": "以同批未用符作底样，再交换两枚旧符",
-                    "target": "route.gu.bellVerified",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "rain",
-                    "text": "以东坡雨损符作底样，再测南沟符",
-                    "target": "route.gu.bellWrong",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "report",
-                    "text": "沿用顾衡呈报的「全村同裂」，不再测符",
-                    "target": "route.gu.bellFiled",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.gu.bellWrong",
-            "chapter": "卷一 · 山下承压",
-            "location": "护符工坊",
-            "speaker": "工匠",
-            "text": "东坡符本身带水气。你以它作底，南沟符看起来反倒像「无异常」；工匠指出这等于拿坏秤称另一枚符。顾衡的随从已记下你的初次结论，你若重测，必须当众更正，耽误他安排的查炉时辰。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "redo",
-                    "text": "当众承认底样错误，改用未用符重测",
-                    "target": "route.gu.bellRedo",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "file",
-                    "text": "只保留钟簿，不公布未经确认的符纹",
-                    "target": "route.gu.bellFiled",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.gu.bellRedo",
-            "chapter": "卷一 · 山下承压",
-            "location": "护符工坊",
-            "speaker": "旁白",
-            "text": "你划掉自己先前的读数，封存用错的雨损符。顾衡的随从把更正也写进呈报，守卫因此提前盯上工坊；工匠仍把未用符交给你，让村民能亲眼看第二次结果。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.bellVerified",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "risk.attention",
-                    "operation": "add",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.bellVerified",
-            "chapter": "卷一 · 山下承压",
-            "location": "护符工坊",
-            "speaker": "旁白",
-            "text": "你以未用符校准辨气，再交换两枚旧符的位置。南沟符无论放哪边，裂纹都朝山腹回流；东坡符只余雨水浸开的横纹。旧灾的危险先落在南沟三户，东坡换符不能算作同一轮阵压。此法无法推算今日灵潮有多大，却足以纠正「全村同时受灾」的撤离顺序。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.bellDispute",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.bellVerified",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.bellDispute",
-            "chapter": "卷一 · 山下承压",
-            "location": "山下村口",
-            "speaker": "南沟老妇",
-            "text": "守钟人说那夜先听见南沟三户敲门；顾衡说自己曾按「全村同裂」调人，才保住东坡。老妇反问：「我儿子背人走在最后，为什么你的呈报没有他的名字？」顾衡承认呈报合并了雨损与阵压，却辩称若公开炉房以活人续阵，村民可能立即拆符。你手中有原簿和复测符，决定谁先看到它们。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "share",
-                    "text": "让三户核对原簿和复测符，并说清炉中仍有人",
-                    "target": "route.gu.bellShared",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "seal",
-                    "text": "把更正交给顾衡，先保住官方查炉安排",
-                    "target": "route.gu.bellFiled",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.gu.bellShared",
-            "chapter": "卷一 · 山下承压",
-            "location": "山下村口",
-            "speaker": "南沟老妇",
-            "text": "老妇在原簿找到儿子的名字，让工匠把南沟三户标在撤离图最前。你告诉他们炉中仍有人承压，今日护符也只够挡一次小回流；三户愿意先试走缓坡，但保留看过实时读数后拒绝替阵的权利。顾衡交出观测台钥匙，守卫则封了你下一次私查炉房的通道。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.measure",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.bellShared",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.bellFiled",
-            "chapter": "卷一 · 山下承压",
-            "location": "观测台",
-            "speaker": "顾衡",
-            "text": "顾衡把钟簿更正压进公文，答应先通知南沟三户，却仍没解释炉中有人承压。老妇不肯把祖孙的撤离决定托给一份她看不到的表；工匠也不交备用符。你保住了官方查炉入口，但终章若要村民同意，必须再把风险交给他们亲自核对。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.measure",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.gu.start",
-            "chapter": "卷一 · 失踪者",
-            "location": "山下村口",
-            "speaker": "顾衡",
-            "text": "顾衡带你看两户护符：一户裂而未伤，一户上次停炉后失了亲人。他说停炉会伤村，却拒绝告诉村民炉里是谁。你可以先测裂符，或去灾碑核对他所说的『上次』。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "charm",
-                    "text": "以辨气查两家护符的裂纹",
-                    "target": "route.gu.charm",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "stele",
-                    "text": "对照旧灾碑与炉房停炉记录",
-                    "target": "route.gu.stele",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "workshop",
-                    "text": "查工坊领料簿与雨损护符",
-                    "target": "route.gu.workshop",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "bell",
-                    "text": "向守钟人与村民核对旧灾原始时刻",
-                    "target": "route.gu.bellArchive",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.gu.charm",
-            "chapter": "卷一 · 失踪者",
-            "location": "护符工坊",
-            "speaker": "工匠",
-            "text": "两枚符的裂纹方向相反：一次来自山腹阵压，一次只是雨水浸坏。工匠的换符账还显示，每回炉房领灰后，新裂纹便暂时减少。顾衡所说的危险存在，但不能把每处损坏都算成停炉所致。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.measure",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.arrayMeasured",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.stele",
-            "chapter": "卷一 · 失踪者",
-            "location": "旧灾碑",
-            "speaker": "旁白",
-            "text": "碑上同一天刻着村民与外门弟子的姓名，弟子名后来被凿去。你将日期与停炉记录对上：那次阵压确曾沿副脉冲向村口；顾衡隐去的是谁替村民挡住了下一次冲击。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.measure",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.identityLead",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.measure",
-            "chapter": "卷一 · 失踪者",
-            "location": "观测台",
-            "speaker": "顾衡",
-            "text": "你把小幅阵压引到废弃测点，按《辨气入门》的流向法读出回流。顾衡给的伤亡数按最坏风向估算，实测低于他的数字，却足以危及来不及撤离的人。模型依赖护符余量；没有村民的真实准备，图纸不能保证安全。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "challenge",
-                    "text": "拿实测要求顾衡向村民交代代价",
-                    "target": "route.gu.challenge",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.publicRecord",
-                            "operation": "set",
-                            "value": 1
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "prepare",
-                    "text": "先带村民试走撤离山道",
-                    "target": "route.gu.evacuate",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.villageReady",
-                            "operation": "set",
-                            "value": 1
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "numbers",
-                    "text": "剔除雨损记录，重算低处住户风险",
-                    "target": "route.gu.numbers",
-                    "lockedReason": "尚未取得对应证据",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.charmLedger",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "inspect",
-                    "text": "带工匠做一次受监督的炉房查验",
-                    "target": "route.gu.inspectionBrief",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.gu.challenge",
-            "chapter": "卷一 · 失踪者",
-            "location": "村口",
-            "speaker": "顾衡",
-            "text": "顾衡承认把最坏情形当成必然，是为了挡住贸然开炉的人。你当众说明真实测量与未知范围；一名村民问：『若有人替我们承压，我们凭什么最后才知道？』顾衡答应开放一次有见证者的炉房查验。林月的秘密侧门因此被封。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.finish",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.gu.evacuate",
-            "chapter": "卷一 · 失踪者",
-            "location": "下山古道",
-            "speaker": "旁白",
-            "text": "演练到半途，背老人下坡的两人落在最后。你将顾衡原定的撤村时间改长，并请工匠先把护符移到狭窄路口。村民愿意协助复测，但仍要求知道炉中人的姓名；你目前拿不出完整名单。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.finish",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.gu.finish",
-            "chapter": "卷一 · 失踪者",
-            "location": "司籍房",
-            "speaker": "旁白",
-            "text": "你已知道骤停的风险并非托词，也看到顾衡为了保护村民而遮掩了牺牲者。官方查炉仍可进行，守卫也有时间转移活人。要救两边，必须查明下一次阵压何时到来，以及副脉究竟能分走多少。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.boundary",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.public.start",
-            "chapter": "卷一 · 失踪者",
-            "location": "旧碑廊",
-            "speaker": "外门弟子",
-            "text": "消息传开后，家属聚到炉门，守卫贴出封炉令。一个运灰弟子愿意作证，却怕被认出。你先保护他，还是抢在封存前抄下交接单？若开局另有可复验的灰样或交接时辰，也可以先拿出来限制管事的说法。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "protect",
-                    "text": "带运灰弟子离开人群，保住证人",
-                    "target": "route.public.protect",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "copy",
-                    "text": "趁封存前抄交接单与封炉人名",
-                    "target": "route.public.copy",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "sample",
-                    "text": "展示两包灰样，请众人复验",
-                    "target": "route.public.sample",
-                    "lockedReason": "尚无未入炉灰样作为对照",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.controlSample",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "clerk",
-                    "text": "引交接人说出二更运灰时辰",
-                    "target": "route.public.clerk",
-                    "lockedReason": "尚未掌握交接人的时辰线索",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.cartTrace",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.public.sample",
-            "chapter": "卷一 · 失踪者",
-            "location": "旧碑廊",
-            "speaker": "旁白",
-            "text": "你请工匠当众用辨气复验两包同批灰。只有从炉门内侧返出的那包有今日活息，管事再不能说气息来自灰料本身。家属要求知道是谁，顾衡提醒：样本仍辨不出姓名。公开的术证赢来一次见证查验，也让林月失去暗门。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.hearing",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.public.clerk",
-            "chapter": "卷一 · 失踪者",
-            "location": "旧碑廊",
-            "speaker": "陈闻",
-            "text": "你拿二更时辰问陈闻，他终于承认车回炉房时帘后有呼吸，却不敢认那人是谁。管事否认车次，陈闻便指向你早记下的交接签记。众人要求保全这份记录；陈闻失去继续值守的差事，你答应为他找个安全住处。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.hearing",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.witnessProtected",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.public.protect",
-            "chapter": "卷一 · 失踪者",
-            "location": "弟子居所",
-            "speaker": "运灰弟子",
-            "text": "你把他安置到林月知道的空屋。他说今日车上抬过活人，但帘子遮住脸；他能核实的是时辰和车辙，不是姓名。原交接单已被执事收走。",
-            "background": "quartersNight",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.hearing",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.witnessProtected",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.cartTrace",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.public.copy",
-            "chapter": "卷一 · 失踪者",
-            "location": "炉房交接台",
-            "speaker": "旁白",
-            "text": "你抄到当旬旧号与今日的转运时辰，封炉签名正是管事。原件随即被夺回；运灰弟子见你被追问，避开了人群。抄页可供核验，却不能替失踪者说话。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.hearing",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.ledgerCopy",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.public.hearing",
-            "chapter": "卷一 · 失踪者",
-            "location": "旧碑廊",
-            "speaker": "旁白",
-            "text": "家属要求你现在说出炉中人的名字。你只有旧号、活息与一个不完整的转运证据；把推测当名单会让守卫先找到相关家属，完全沉默则让封炉令成为唯一公开说法。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "scope",
-                    "text": "只公布已核实的时辰和活息，要求见证查炉",
-                    "target": "route.public.careful",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "case.publicRecord",
-                            "operation": "set",
-                            "value": 1
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "name",
-                    "text": "按旧号公布沈砚姓名，逼宗门回应",
-                    "target": "route.public.hasty",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [
-                        {
-                            "variable": "risk.attention",
-                            "operation": "set",
-                            "value": 1
-                        }
-                    ],
-                    "outcomes": []
-                },
-                {
-                    "id": "witness",
-                    "text": "让已安置的运灰弟子隔屏作证",
-                    "target": "route.public.witness",
-                    "lockedReason": "尚未取得对应证据",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.witnessProtected",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "audit",
-                    "text": "先复核封炉令的改签来源",
-                    "target": "route.public.sealAudit",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.public.careful",
-            "chapter": "卷一 · 失踪者",
-            "location": "旧碑廊",
-            "speaker": "顾衡",
-            "text": "顾衡同意让村民和弟子各出一名见证者，但坚持先测副脉。林月无法再用原先的暗道，愿带你核对失踪名单。公开得到监督，也放慢了救人的速度。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.finish",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.public.hasty",
-            "chapter": "卷一 · 失踪者",
-            "location": "旧碑廊",
-            "speaker": "沈砚",
-            "text": "沈砚本人走进人群，旧号与活人不是同一回事。家属从希望转为愤怒，守卫趁乱把炉中轮值牌换掉。你当众更正姓名，保住了『炉中仍有人』这条事实，却失去第一轮名单。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.finish",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.public.finish",
-            "chapter": "卷一 · 失踪者",
-            "location": "司籍房",
-            "speaker": "旁白",
-            "text": "公开使宗门再难说炉中无人，也令守卫提前封锁。你必须以可复核的记录和测量重新争取人手。村民与弟子第一次在同一张案上谈这件事，接下来要查他们共同承受的裂隙。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "case.boundary",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.lin.window",
-            "chapter": "卷一 · 失踪者",
-            "location": "炉房外廊",
-            "speaker": "林月",
-            "text": "二更换位前还有一炷香。阿澈若仍在炉边，林月能指给你看运灰侧门，却没有稳住空息位的人手；若他已获救，他的记忆可再核对车次。你也能借这次换班查门缝回流，或保全夜间交接单。今晚只能冒险做一件。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "save",
-                    "text": "趁换位再救阿澈",
-                    "target": "route.lin.sneak",
-                    "lockedReason": "阿澈已经离开炉房",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.ache",
-                            "minimum": 0,
-                            "maximum": 0
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "ask",
-                    "text": "让获救的阿澈按车次复述所见",
-                    "target": "route.lin.interview",
-                    "lockedReason": "阿澈仍在炉房，无法安全问话",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.ache",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "slit",
-                    "text": "画半张符，测侧门回流后再决定救援",
-                    "target": "route.lin.slit",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "receipt",
-                    "text": "先保全夜间交接单，不碰炉门",
-                    "target": "route.lin.receipt",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.lin.sneak",
-            "chapter": "卷一 · 失踪者",
-            "location": "炉房侧门",
-            "speaker": "旁白",
-            "text": "侧门每次只在运灰车推入时开一息。林月能撑住门闩，不能替阿澈压住巡守阵眼。你学的遮息符可以短暂遮住门缝；若请陈闻以轮值牌交接，能把阿澈带出而不留空位的假象，但会把陈闻卷进来。强闯最快，警符也必响。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "talisman",
-                    "text": "用遮息符带阿澈出门，承受警符追查",
-                    "target": "route.lin.saveTalisman",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "clerk",
-                    "text": "请陈闻凭轮值牌交接并护送阿澈",
-                    "target": "route.lin.saveClerk",
-                    "lockedReason": "尚未查出陈闻值守时辰",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.clerkLead",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "force",
-                    "text": "抢在车前推开门，先把人抱出来",
-                    "target": "route.lin.saveForce",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.lin.saveTalisman",
-            "chapter": "卷一 · 失踪者",
-            "location": "炉房侧门",
-            "speaker": "旁白",
-            "text": "你照司籍房练过的收气法在符尾留一道出口。门缝只静了一息，足够林月扶出阿澈；巡守阵眼随后发现息位骤空，封存原账并记下你的灵气。阿澈获救，却暂不能当众作证。你亲手把符纸烧尽，记住再救下一人前必须有人守住阵压。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.ache",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "risk.attention",
-                    "operation": "add",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.saveClerk",
-            "chapter": "卷一 · 失踪者",
-            "location": "炉房交接台",
-            "speaker": "陈闻",
-            "text": "陈闻用自己的轮值牌把阿澈登记成『转往外廊复诊』，你与林月在车帘后接人。阿澈留下半张病签，日后可与交接单核对；陈闻失去继续值守的差事，需要林月安置。你保住了阿澈与交接痕迹，也清楚这份救援借了另一个人的前途。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.ache",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.witnessProtected",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.ledgerCopy",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.saveForce",
-            "chapter": "卷一 · 失踪者",
-            "location": "炉房侧门",
-            "speaker": "旁白",
-            "text": "你推门时警符先亮，林月立刻拉住你：门内不是阿澈的息位，轮值牌已被换到另一侧。巡守赶来封门，你没能救出他，却看见新牌背面的二更车次。你记下时辰撤开；若还想救人，须从家属物件或正式查验重新定位。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "risk.attention",
-                    "operation": "add",
-                    "value": 1
-                },
-                {
-                    "variable": "case.cartTrace",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.interview",
-            "chapter": "卷一 · 失踪者",
-            "location": "临时藏身处",
-            "speaker": "阿澈",
-            "text": "你没有问『炉里是不是沈砚』，只让阿澈按三次推车的铃声回忆。他确认自己被带出前有另一人敲了两下门，随后才听见二更车铃；药碗里今晨添的安神散只会扰乱他对姓名的记忆。你把可确认的先后写下，林月因此改查第二次车辙，不再拿一个旧号追人。",
-            "background": "quartersNight",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.cartTrace",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.witnessProtected",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.slit",
-            "chapter": "卷一 · 失踪者",
-            "location": "炉房侧门",
-            "speaker": "旁白",
-            "text": "你用《辨气入门》里的收气法画半张符，只把符尾探入门缝。符尾先向炉里卷，随即被一股来自村口副脉的反力推回；这不是守卫的气息。符纸边缘还温着，下一次到观测台可把它与村口护符同测，判断开门时两边承受阵压的先后。你封存符尾，没有冒险抽空息位。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.sideDoorMeasured",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.lin.receipt",
-            "chapter": "卷一 · 失踪者",
-            "location": "炉房交接台",
-            "speaker": "旁白",
-            "text": "你趁管事核灰抄下夜间交接单：旧号在二更被改写，签收人不是林月。原件随车锁入内库；阿澈若仍在里面，就还要再受一轮阵压。抄页能用于下一次受监督查炉，却不能替他熬过今晚。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.lin.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.ledgerCopy",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.inspectionBrief",
-            "chapter": "卷一 · 山下承压",
-            "location": "炉房外廊",
-            "speaker": "顾衡",
-            "text": "顾衡给你一枚限时查验牌，只许在外廊核对封炉单与回执，不许擅开息位。林月提醒：守卫可能趁查文书把人转走。工匠也来了，他带着村口旧符，第一次问炉灰为何总在护符裂后增加。你只能先盯住一处，另两处会失去从容检查的时间。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "witness",
-                    "text": "请工匠见证炉门内侧的活息与封条",
-                    "target": "route.gu.inspectionWitness",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "cart",
-                    "text": "让林月堵转运路，自己核对二更车次",
-                    "target": "route.gu.inspectionCart",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "ash",
-                    "text": "取未入炉灰与回执灰，请工匠复验",
-                    "target": "route.gu.inspectionAsh",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.gu.inspectionWitness",
-            "chapter": "卷一 · 山下承压",
-            "location": "炉房外廊",
-            "speaker": "工匠",
-            "text": "你让工匠先读封条时辰，再把手贴在未开过的门上。辨气显示今日有活息从内侧经过，封条却在昨夜重贴。工匠在封存单上签下自己亲见的范围：有今日活息、有人动过门，不能据此认出姓名。顾衡不得再对村民说『只是旧灰』；林月发现守卫已把车推向侧道。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.inspectionDispute",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.villageWitness",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.inspectionCart",
-            "chapter": "卷一 · 山下承压",
-            "location": "炉房转运路",
-            "speaker": "林月",
-            "text": "林月堵住空车，你用辨气比对二更车辙与封炉单：车在封条重贴后一刻又返回炉侧。帘后确有呼吸，守卫却抢先把人推入内门。你抄下改写的车次和签收人，没拿到可让村民亲见的炉门物证。顾衡必须解释为何官方查验前还有一次转运。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.inspectionDispute",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.cartTrace",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.ledgerCopy",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.inspectionAsh",
-            "chapter": "卷一 · 山下承压",
-            "location": "炉房交接台",
-            "speaker": "旁白",
-            "text": "你让工匠从封包里取未入炉的同批灰，自己拆开回执灰，两包交叉换位再辨气。活息始终只在回执灰上，和摆放位置无关；草木灰自身不会生出今日人的气息。工匠在样封上签名，顾衡承认村口护符的安稳依赖这座炉，却还不能据灰说出承压者是谁。守卫趁你复验时收走了原账。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.inspectionDispute",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.controlSample",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.villageWitness",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.inspectionDispute",
-            "chapter": "卷一 · 山下承压",
-            "location": "山下村口",
-            "speaker": "工匠",
-            "text": "工匠把查验所见讲给三户村民：炉边有今日活息，村口护符也确实会接住停炉的回流。顾衡要求先测阵压，不愿让未核实的旧号变成名单；一名失踪弟子的父亲要求公开他能核对的部分。你要怎样记录这次查验，才不会让任何一边的未知处被写成确定？",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "scope",
-                    "text": "分栏公布亲见事实、推断和未知姓名",
-                    "target": "route.gu.inspectionScope",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "name",
-                    "text": "按旧号公布沈砚姓名，逼顾衡回应",
-                    "target": "route.gu.inspectionName",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "private",
-                    "text": "只交顾衡一份密封记录，先保留查验入口",
-                    "target": "route.gu.inspectionPrivate",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.gu.inspectionScope",
-            "chapter": "卷一 · 山下承压",
-            "location": "山下村口",
-            "speaker": "旁白",
-            "text": "你把封条时辰、灰样或车次写入已核实栏，把『炉中有人』与『姓名未定』分开。村民第一次知道护符安稳与炉房有关；家属得到受监督复核的资格，顾衡也能拿这份记录要求先撤低处住户再试阵。公开没有替失踪者认名，却使下一次试验必须有村民在场。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.inspectionName",
-            "chapter": "卷一 · 山下承压",
-            "location": "山下村口",
-            "speaker": "沈砚",
-            "text": "人群刚喊出『沈砚在炉里』，沈砚本人便出现。旧号不是活人的姓名，村民开始怀疑整份查验。你当众划掉未经证实的名字，只保留封条、车次或灰样；守卫借混乱封了外廊。失踪者父亲仍愿拿亲属物件去查下一处息位，但不会再接受你替他认人。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "risk.attention",
-                    "operation": "add",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.gu.inspectionPrivate",
-            "chapter": "卷一 · 山下承压",
-            "location": "山下村口",
-            "speaker": "顾衡",
-            "text": "顾衡收下密封记录，答应让你继续查副脉，却没有告诉三户村民他们为何要撤。工匠若亲眼见过样本，会私下保存签记；没有见证时，这份文件只有顾衡的许可，村民可随时拒绝交出备用护符。你保住了官方入口，也把知情的债带进终章。",
-            "background": "ridge",
-            "portrait": "",
-            "rain": false,
-            "next": "route.gu.finish",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.shen.survey",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废副脉",
-            "speaker": "旁白",
-            "text": "沈砚的底稿以山腹阵眼为零点，十年前的泥封却移动了半尺。你要复测缺失刻度：村口护符与炉侧空位都能作参照，旧拓片只写了其中一边。沈砚催你先按原图代入；你也可以请家属和工匠看着两侧试纸，由他们决定什么时候叫停。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "double",
-                    "text": "在村口与炉侧同时立测点，亲手读时差",
-                    "target": "route.shen.surveyDouble",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "copy",
-                    "text": "先按旧拓片代入，看看缺口究竟差多少",
-                    "target": "route.shen.surveyCopy",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "witness",
-                    "text": "请家属与工匠看双侧试纸，再测半息",
-                    "target": "route.shen.surveyWitness",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.shen.surveyDouble",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废副脉",
-            "speaker": "旁白",
-            "text": "你在两侧各立一根刻针，只送半息灵气。村口刻针先偏，炉侧晚一息才热；把两处方位代回旧图，缺失刻度正是那半尺泥封造成的。沈砚原先只取炉侧读数，才以为余压会同时散去。你把真实时差补进图里，拒绝继续加压，等当事人核对试验风险。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.returnMeasured",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.shen.surveyCopy",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废副脉",
-            "speaker": "旁白",
-            "text": "你先按拓片的旧零点送入半息。炉侧读数看似正常，村口试纸却先变黑；若照这个数值开炉，低处住户会先受冲。你立即收息，一枚旧护符裂了细纹。沈砚说『误差可以折算』，你把两张不一致的试纸摆到他面前：先选择补测，还是把未经验证的图暂时封起？",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "redo",
-                    "text": "改以两侧实物作零点，当场补测",
-                    "target": "route.shen.surveyRedo",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "seal",
-                    "text": "封存错误拓片，先停止这轮试验",
-                    "target": "route.shen.surveySealed",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.shen.surveyRedo",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废副脉",
-            "speaker": "旁白",
-            "text": "你换掉受损旧符，把村口与炉侧刻针一起移到现今的泥封位置。第二次半息测量终于读出村口先、炉侧后的一息时差。补测耗掉了备用符，沈砚不得再独自拿旧图下令；他把修订前后的两组数都写给你，留待顾衡和家属复验。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.returnMeasured",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "risk.attention",
-                    "operation": "add",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.shen.surveySealed",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "废副脉",
-            "speaker": "沈砚",
-            "text": "你在拓片的错误零点旁写下『不可用于开炉』，连同两张试纸封好。沈砚还想凭经验折算，你要求下一次由村口和炉侧各有人看着再测。今天没有得到可执行的时差，至少阻止了一张看似完整的错图进入救援方案。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.finish",
-            "terminal": false,
-            "effects": [],
-            "choices": []
-        },
-        {
-            "id": "route.shen.surveyWitness",
-            "chapter": "卷一 · 旧阵底稿",
-            "location": "旧试阵台",
-            "speaker": "工匠",
-            "text": "工匠守村口，许澄的姐姐守炉侧；两人约好见试纸发黑就喊停。你送入半息灵气，村口先黑、炉侧晚一息，缺失刻度被各自的记录夹住。姐姐要求沈砚解释第一版为何没有叫停记号，他承认自己当年只让绘图者掌握控制笔记。你把两侧读数和初案签名一并交给他们，下一次试验不能绕开当事人的核对。",
-            "background": "mountainHeart",
-            "portrait": "",
-            "rain": false,
-            "next": "route.shen.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.returnMeasured",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.shenAccount",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.public.sealAudit",
-            "chapter": "卷一 · 公开查验",
-            "location": "旧碑廊",
-            "speaker": "旁白",
-            "text": "你没有把旧号喊成姓名，而是请众人看封炉令的底页。上面有昨夜重贴的封条号，签收栏却在今日二更被改过；究竟是例行重封，还是有人在查验前转人？你可用抄页、灰样或受保护证人限定管事的说法；缺少这些，也能正式申请保全底页。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "",
-            "terminal": false,
-            "effects": [],
-            "choices": [
-                {
-                    "id": "form",
-                    "text": "拿交接抄页对改签压痕和签收时辰",
-                    "target": "route.public.sealForm",
-                    "lockedReason": "此前尚未取得相应原始证据或证人",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.ledgerCopy",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "ash",
-                    "text": "让众人用双灰样本复验封炉理由",
-                    "target": "route.public.sealAsh",
-                    "lockedReason": "此前尚未取得相应原始证据或证人",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.controlSample",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "clerk",
-                    "text": "请受保护的运灰证人核对二更车次",
-                    "target": "route.public.sealWitness",
-                    "lockedReason": "此前尚未取得相应原始证据或证人",
-                    "hidden": false,
-                    "conditions": [
-                        {
-                            "variable": "case.witnessProtected",
-                            "minimum": 1,
-                            "maximum": 1
-                        }
-                    ],
-                    "effects": [],
-                    "outcomes": []
-                },
-                {
-                    "id": "petition",
-                    "text": "申请当众封存底页，不代替证据说人名",
-                    "target": "route.public.sealPetition",
-                    "lockedReason": "",
-                    "hidden": false,
-                    "conditions": [],
-                    "effects": [],
-                    "outcomes": []
-                }
-            ]
-        },
-        {
-            "id": "route.public.sealForm",
-            "chapter": "卷一 · 公开查验",
-            "location": "旧碑廊",
-            "speaker": "旁白",
-            "text": "你把交接抄页与封炉底页叠在灯前。二更改签的压痕穿过『旧号照用』四字，却没有压到昨夜的封泥；这页是封门后又被改的。改签人用了执事的专印，与十年前加高承压上限的印泥一致，但它不能证明今日炉里是谁。家属和村民各留一份拓片，执事须解释为何查验前改签。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.archiveWitness",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.public.sealAsh",
-            "chapter": "卷一 · 公开查验",
-            "location": "旧碑廊",
-            "speaker": "工匠",
-            "text": "你把未入炉灰和回执灰交给两名互不相识的弟子交换辨气。活息只随从炉门内侧返出的那包移动，管事的『草木余气』解释被排除。底页仍没有活人姓名，你请见证者把结论写成『今日有活息，来源待核』。家属得以要求查轮值，不能凭这包灰冲进息位。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.public.sealWitness",
-            "chapter": "卷一 · 公开查验",
-            "location": "旧碑廊",
-            "speaker": "运灰弟子",
-            "text": "你让运灰弟子在屏后按铃声报车次，再请管事宣读底页。证词中的二更返车恰好落在改签之后；他没看见帘后面容，拒绝按旧号认人。你把两人的话分别记录，先安置证人，封炉令从此不能只写『无人出入』。改签人的身份仍要靠原印核对。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "case.witnessProtected",
-                    "operation": "set",
-                    "value": 1
-                }
-            ],
-            "choices": []
-        },
-        {
-            "id": "route.public.sealPetition",
-            "chapter": "卷一 · 公开查验",
-            "location": "旧碑廊",
-            "speaker": "旁白",
-            "text": "你请家属与村民分别在申请上签名，只要求封存底页和查验原印，不写未经证实的姓名。管事当众拒绝交原件，却不得不在拒绝书上盖自己的印；你取得可供后续监督的程序记录，也让宗门知道是谁组织了见证。要查改签人，仍须进旧图库找另一份印证。",
-            "background": "stele",
-            "portrait": "",
-            "rain": false,
-            "next": "route.public.finish",
-            "terminal": false,
-            "effects": [
-                {
-                    "variable": "case.publicRecord",
-                    "operation": "set",
-                    "value": 1
-                },
-                {
-                    "variable": "risk.attention",
-                    "operation": "add",
-                    "value": 1
-                }
-            ],
-            "choices": []
+      ],
+      "choices": [],
+      "next": "story.one.09.0"
+    },
+    {
+      "id": "story.one.09.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹坡道",
+      "speaker": "旁白",
+      "text": "第二天你从运车旁刮下一点灰，又向仓房要了同批未送进山腹的灰。两份放在一起，运车的灰多了一层很新的、由修行者留下的灵气。它或许来自赶车的守卫。你没有写“阿澈在炉里”，只在纸上写：车曾接近一个刚用过灵力的人。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "story.ash",
+          "operation": "set",
+          "value": 1
         }
-    ]
+      ],
+      "choices": [],
+      "next": "story.one.10.0"
+    },
+    {
+      "id": "story.one.10.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校场与司籍房",
+      "speaker": "旁白",
+      "text": "考校点名时，阿澈的名字竟在副册上。正册说他离山，副册还等他来比试。执事当众将那个名字划掉，称昨夜忘了同步。你照样上台画符，手却一直在抖。一笔画断，符纸在台上冒出青烟，引来身后一阵笑。你下台才发现阿澈的名字被划得太重，墨透到了下一页。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.one.11.0"
+    },
+    {
+      "id": "story.one.11.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校场与司籍房",
+      "speaker": "旁白",
+      "text": "交接人陈闻来收废符，见你还盯着副册，低声说：“二更。想知道车去哪儿，就别在白天问。”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.one.12.0"
+    },
+    {
+      "id": "story.one.12.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校场与司籍房",
+      "speaker": "旁白",
+      "text": "你问他是不是知道阿澈在车上。他答：“我只知道车进去时比出来时重。你要我说看见了人，我没看见。”他也怕。每一张进山腹的领料单，都有他的签名。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.one.13.0"
+    },
+    {
+      "id": "story.one.13.0",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校场与司籍房",
+      "speaker": "旁白",
+      "text": "你把帖背的旧名与领料账并排看。山腹这十年一直用沈砚的旧编号领药。你忽然想：沈砚是不是根本没死，阿澈是不是被他带走了？这个猜测太顺了，顺到你险些把它写成事实。陈闻把账推回来：“编号谁都能写。你先找活人。”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "suspect",
+          "text": "沈砚没死，先从他查起",
+          "target": "story.guess.suspect",
+          "effects": [
+            {
+              "variable": "story.guessPerson",
+              "operation": "set",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "number",
+          "text": "编号可能被人借用，先找阿澈",
+          "target": "story.guess.number",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "story.guess.suspect",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "青云山 · 司籍房",
+      "speaker": "旁白",
+      "text": "你把沈砚的名字圈起来。陈闻没有替你下结论，只把阿澈没有盖印的那页推到圈旁：先找到人，再问旧名。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.00.0"
+    },
+    {
+      "id": "story.guess.number",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "青云山 · 司籍房",
+      "speaker": "旁白",
+      "text": "你在旧编号旁写下“未证身份”。陈闻点头，把二更运车的岔口画给你。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.00.0"
+    },
+    {
+      "id": "story.two.00.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月在医舍里认出了那片药纸。“阿澈昨晚来领过药。”她说，“后来我又给山腹送了一箱同样的。”",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.01.0"
+    },
+    {
+      "id": "story.two.01.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "她把药箱放到你面前，让你闻箱盖。木头里有草药和旧血的味道。箱上的血是阿澈前些天帮忙搬运时留下的，不能证明今天他也碰过箱子。林月看着你收回手，第一次肯把话说长：“你要的是能找到他的东西，不是一个听着像答案的故事。”",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.02.0"
+    },
+    {
+      "id": "story.two.02.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "她在山腹照料伤者，知道送药侧门每晚开一次。你若随她进门，司籍房多半留不住你；若白天拿账冲正门，管事有时间转移病人。你请她等你把副册抄好。她问要等多久。你说一刻钟。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.03.0"
+    },
+    {
+      "id": "story.two.03.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "山腹炉房",
+      "speaker": "旁白",
+      "text": "二更，林月将一张遮铃符贴上侧门的探气铃。这符只让铃在七息内觉察不到你们的灵力，人的眼睛照样看得见。她推着药箱走在前，你跟在后面数心跳。到第六息时，守卫回头看了一眼，你们已经进了门。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.04.0"
+    },
+    {
+      "id": "story.two.04.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "山腹炉房",
+      "speaker": "旁白",
+      "text": "山腹里没有焚人的火。炉中烧的是药和符纸，灰落入石槽，石槽通向一排窄榻。山里涌来的乱灵气先撞石柱，再沿石槽压向榻上。人能用自身灵力调整来势，石头不能；因此阵越撑越久，人越伤越重。林月从前只准在换药时进来，她见过伤，却没见过整座阵怎样转动。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.05.0"
+    },
+    {
+      "id": "story.two.05.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "山腹炉房",
+      "speaker": "旁白",
+      "text": "最外侧那张榻上躺着阿澈。他的手腕被符带勒红，额头热得烫手，仍费力认出你：“你不是明天考校吗？”",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "story.ache",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "story.two.06.0"
+    },
+    {
+      "id": "story.two.06.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "山腹炉房",
+      "speaker": "旁白",
+      "text": "“已经考过了。”你把他扶起来，“画得很难看。”",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.07.0"
+    },
+    {
+      "id": "story.two.07.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "山腹炉房",
+      "speaker": "旁白",
+      "text": "他笑了一下，牵动肩上的伤，脸又白了。林月替他解符带，榻下的刻纹立刻暗了一段。她没有催你快走，先指给你看：另一根石柱亮起来，替空榻接走了那一段灵气；若下股灵潮此时来，石柱会先受冲，然后是隔壁的人。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.08.0"
+    },
+    {
+      "id": "story.two.08.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "山腹炉房",
+      "speaker": "旁白",
+      "text": "你们还是把阿澈藏进药箱带走了。林月说：“我知道那边有人。今夜我只开得了这一扇门。”她把这句说给阿澈，也说给自己。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.09.0"
+    },
+    {
+      "id": "story.two.09.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "山腹坡道",
+      "speaker": "旁白",
+      "text": "警钟在你们下坡时敲响。守卫封住原账，陈闻为遮掩车次丢了差事。村口一枚护符裂开，工匠连夜补上。阿澈听见后，抬起缠着布的手，问是不是自己走了才害村子。林月答：“符挡住了，村里没人因此受伤。但我们拿走了一份撑阵的力，这件事不能瞒。”",
+      "background": "ridge",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.10.0"
+    },
+    {
+      "id": "story.two.10.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "医舍与村路",
+      "speaker": "旁白",
+      "text": "阿澈说他并不是今晨第一次进山腹。前夜他被带去坐榻，发烧后暂送回来；天还黑着，管事又把他领走。他不敢告假，怕有人知道自己偷偷告诉过林月。隔墙一直有人，两下、两下地敲。旧漆上留着“沈砚”二字，他以为那是隔壁人的名字。后来隔壁说过一个“澄”字。那时他吃了安神药，不敢保证听得准。",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.11.0"
+    },
+    {
+      "id": "story.two.11.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "医舍与村路",
+      "speaker": "旁白",
+      "text": "你差点把“沈砚在炉中”填进证词。林月拿来一只还未启用的药箱，让你用辨气试箱盖：守卫刚碰过它，留下的余息与运车的灰相近。辨气只能告诉你有修行者碰过，不能把人名从灵气里读出来。你划掉了那一句。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.12.0"
+    },
+    {
+      "id": "story.two.12.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "医舍与村路",
+      "speaker": "旁白",
+      "text": "陈闻找出几个月前的货领单：一位叫许澄的弟子领过半枚云纹玉扣的配绳。阿澈手中正攥着一枚带云纹的半扣，是隔墙那人从缝里塞来的。林月陪你下山，见到许澄的姐姐。姐姐先不信账，拿出妹妹留下的另一半玉扣。两块缺口合上时，她没有问你们谁在撒谎，只问：“她还活着吗？”",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "story.xucheng",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "story.two.13.0"
+    },
+    {
+      "id": "story.two.13.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "医舍与村路",
+      "speaker": "旁白",
+      "text": "你回答：“隔墙有人敲门。我们还没有亲眼见她。”",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.14.0"
+    },
+    {
+      "id": "story.two.14.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "医舍与村路",
+      "speaker": "旁白",
+      "text": "姐姐把扣收起来：“那下一次开门，我要在场。”林月原先怕家属冲门会害人被转走，一直瞒着她。姐姐也曾把侧门备用钥匙交给林月。如今她把钥匙要了回去，却没有断绝帮忙：“我妹若不能自己出来，至少该听见有人叫她的真名。”",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.15.0"
+    },
+    {
+      "id": "story.two.15.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "夜里，你们来到侧门。里面果然传来两下敲击。林月刚把钥匙抵上锁，村口又有护符碎裂的声音。顾衡从山下奔来，袖里全是符灰：“开门可以。先告诉我，这一下冲到谁家去。”",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.two.16.0"
+    },
+    {
+      "id": "story.two.16.0",
+      "chapter": "卷一 · 门里有人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "他常年守村，知道哪里最先受灾。林月不肯再把许澄留在里面，顾衡不肯拿山下孩子赌。他们谁也没说错，你手里却没有能让两件事同时成立的办法。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "case.boundary"
+    },
+    {
+      "id": "case.boundary",
+      "chapter": "卷一 · 门里有人",
+      "location": "青云山 · 山腹石门",
+      "speaker": "旁白",
+      "text": "侧门里有人敲了两下，村口同时传来碎符声。顾衡站在门前，等你们回答：开门之后，那股灵气会撞到谁家？\n\n【试玩结束】完整版可继承本次调查进度。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "terminal": true
+    }
+  ]
 }

@@ -27,6 +27,7 @@ namespace WenXinJie.Narrative
         }
 
         public StoryNode Current { get; private set; }
+        public int Revision => _graph.Definition.revision;
 
         public int GetValue(string id)
         {

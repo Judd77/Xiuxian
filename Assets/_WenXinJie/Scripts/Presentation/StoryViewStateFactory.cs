@@ -43,6 +43,12 @@ namespace WenXinJie.Presentation
         private static string BuildStatus(StorySession session, ClueJournalState journal)
         {
             var clues = journal.Entries.Count(entry => entry.Unlocked);
+            if (session.Revision >= 15)
+            {
+                var skill = session.GetValue("story.skill") > 0 ? "已习得" : "未习得";
+                return "问心劫    /    线索 " + clues + "/" + journal.Entries.Length
+                       + "    /    辨气 " + skill;
+            }
             if (IsNewStory(session.Current.id))
             {
                 var skill = session.GetValue("case.learned") > 0 ? "已习得" : "未习得";
@@ -60,6 +66,10 @@ namespace WenXinJie.Presentation
 
         private static ClueJournalState BuildJournal(StorySession session)
         {
+            if (session.Revision >= 15)
+            {
+                return BuildRewrittenJournal(session);
+            }
             if (IsNewStory(session.Current.id))
             {
                 return BuildCaseJournal(session);
@@ -97,6 +107,39 @@ namespace WenXinJie.Presentation
                     "阵图 · 山腹石门",
                     "旧灵脉能够分担炉中阵压，但不能独自承受。测得的转接点为逐批撤人提供了可能，完整原图仍需另行保全。",
                     session.GetValue("clue.array") > 0)
+            });
+        }
+
+        private static ClueJournalState BuildRewrittenJournal(StorySession session)
+        {
+            return new(new[]
+            {
+                new ClueEntryViewState("阿澈的去向", "文书 · 山门",
+                    "销名册称阿澈离山，山门却没有他验帖的印。两处记录互相矛盾，仍需找到本人。", true),
+                new ClueEntryViewState("辨气的边界", "术法 · 入门书",
+                    "物件上的余息能分新旧；不能直接读出人名。先用已知新旧的符做对照。",
+                    session.GetValue("story.skill") > 0),
+                new ClueEntryViewState("运车灰样", "术证 · 山腹坡道",
+                    "与仓房同批灰比较，运车灰上有新近的修行者余息；来源可能是守卫，不能直接认作阿澈。",
+                    session.GetValue("story.ash") > 0),
+                new ClueEntryViewState("阿澈的证词", "人证 · 山腹",
+                    "阿澈被带去坐榻，隔墙有人两下敲门。安神药使他无法确认对方姓名。",
+                    session.GetValue("story.ache") > 0),
+                new ClueEntryViewState("许澄的半枚玉扣", "互证 · 家属",
+                    "阿澈带出的半扣与许澄姐姐保存的另一半吻合；隔墙人的身份仍待亲见。",
+                    session.GetValue("story.xucheng") > 0),
+                new ClueEntryViewState("南沟旧灾原簿", "文书 · 村口",
+                    "南沟曾遇险，东坡并非同刻受冲；顾衡将两次损符写作全村同时遇险。",
+                    session.GetValue("story.village") > 0),
+                new ClueEntryViewState("初试停铃", "阵证 · 观测台",
+                    "初试本被涂去求停记录；旧阵接线与陶叔证词表明铃曾响，沈砚却没有立刻停。",
+                    session.GetValue("story.bell") > 0),
+                new ClueEntryViewState("谷口复测", "术证 · 山谷",
+                    "旧图第三根石柱已经移位。小试会先冲村口，不能照图直接开闸。",
+                    session.GetValue("story.survey") > 0),
+                new ClueEntryViewState("共同叫停约定", "行动 · 议事堂",
+                    "炉门、村口分别守钟，家属与村民掌握叫停权；谁受伤、谁搬迁必须记名。",
+                    session.GetValue("story.contract") > 0)
             });
         }
 

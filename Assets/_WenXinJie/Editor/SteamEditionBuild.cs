@@ -87,7 +87,7 @@ namespace WenXinJie.Editor
                 throw new InvalidOperationException("Demo boundary is missing.");
             }
 
-            boundary.text = "你把此夜能核对的证据封成一册：旧号仍在领灰，炉内确有活息；而谁在使用旧阵、山下又为何依赖它，仍待查证。你选择的调查方式已经改变了谁愿意开门、谁被迫回应。封印刚落，山下护符传来碎响——救出炉中人，可能让另一群人承压。\n\n【试玩结束】完整版可继承本次调查进度。";
+            boundary.text += "\n\n【试玩结束】完整版可继承本次调查进度。";
             boundary.next = string.Empty;
             boundary.terminal = true;
             boundary.choices = Array.Empty<StoryChoice>();

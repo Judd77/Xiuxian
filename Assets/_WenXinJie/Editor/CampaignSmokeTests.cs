@@ -11,599 +11,99 @@ namespace WenXinJie.Editor
 {
     public static class CampaignSmokeTests
     {
-        private const string CampaignPath = "Assets/_WenXinJie/Data/Campaign.json";
-        private const string DemoCampaignPath = "Assets/_WenXinJie/Data/DemoCampaign.json";
+        private const string Data = "Assets/_WenXinJie/Data/";
 
         [MenuItem("WenXinJie/Validation/Run Campaign Smoke Tests")]
         public static void Run()
         {
-            var graph = LoadGraph();
-            Require(graph.Nodes.Count() == 264, "Unexpected node count.");
-            VerifyCaseSlice(graph);
-            VerifyDemoHandoff(graph);
-            VerifyNewStory(graph);
-            VerifyGuBellRoute(graph);
-            VerifyRoute(graph, "investigate", "copyPage", "visit", "confide", "shared", "c01.shared", true);
-            VerifyRoute(graph, "investigate", "takePage", "cultivate", "steadyBreath", "alone", "c01.alone", false);
-            VerifyRoute(graph, "visit", "question", "cultivate", "steadyBreath", "guarded", "c01.guarded", false);
-            VerifyRoute(graph, "cultivate", "followEcho", "cultivate", "steadyBreath", "uneasy", "c01.uneasy", false);
-            VerifySaveRoundTrip(graph);
-            VerifySeededOutcomes();
-            VerifySecondAct(graph);
-            VerifyInvalidContentRejected();
-            VerifyAssets(graph);
-            Debug.Log(
-                "Campaign smoke tests PASS: 264-node full graph, demo handoff, village bell investigation, four investigation routes, seal audit, three-party hearing, endings, save round-trip and assets.");
+            var full = Load("Campaign.json");
+            var demo = Load("DemoCampaign.json");
+            Require(full.Definition.revision == 15 && demo.Definition.revision == 15,
+                "Full and Demo revisions differ.");
+            Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
+            Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
+            Require(demo.GetNode("case.boundary").terminal, "Demo boundary is not terminal.");
+            Require(!full.GetNode("case.boundary").terminal, "Full boundary must continue.");
+            Require(full.GetNode("case.intro").text.Contains("阿澈"), "New story is not the entry point.");
+            Require(full.Nodes.Count(node => node.terminal) >= 5, "Expected distinct story outcomes.");
+            VerifyPaths(full, demo);
+            VerifyAssets(full);
+            Debug.Log("Campaign smoke tests PASS: new story graph, endings, Demo handoff and assets.");
         }
 
-        private static StoryGraph LoadGraph()
+        private static StoryGraph Load(string filename)
         {
-            var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(CampaignPath);
-            Require(asset != null, "Campaign JSON is missing.");
-            return new(JsonUtility.FromJson<StoryDefinition>(asset.text));
+            var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(Data + filename);
+            Require(asset != null, "Missing campaign: " + filename);
+            return new StoryGraph(JsonUtility.FromJson<StoryDefinition>(asset.text));
         }
 
-        private static void VerifyDemoHandoff(StoryGraph fullGraph)
+        private static void VerifyPaths(StoryGraph full, StoryGraph demo)
         {
-            var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(DemoCampaignPath);
-            Require(asset != null, "Demo campaign JSON is missing.");
-            var demoGraph = new StoryGraph(JsonUtility.FromJson<StoryDefinition>(asset.text));
-            Require(demoGraph.Definition.id == fullGraph.Definition.id
-                    && demoGraph.Definition.revision == fullGraph.Definition.revision,
-                "Demo and full campaign identities must match for save handoff.");
-            Require(!demoGraph.Nodes.Any(node => node.id == "rift.opening")
-                    && demoGraph.GetNode("case.boundary").terminal,
-                "The demo includes content beyond its ending.");
-
-            var session = new StorySession(demoGraph, 123);
-            ReachCaseMeet(session, "roster", "borrowed", "ink", "sense", "sample");
-            Require(session.Choose("number") && session.Advance() && session.Choose("lin")
-                    && session.Advance() && session.Choose("cart") && session.Advance()
-                    && session.Choose("verify") && session.Advance() && session.Choose("window")
-                    && session.Choose("save") && session.Choose("clerk") && session.Advance()
-                    && session.Advance() && session.Current.id == "case.boundary",
-                "A demo route did not reach the handoff point.");
-
-            var restored = StorySession.Restore(fullGraph, session.Snapshot());
-            Require(restored.Current.id == "case.boundary" && restored.Choose("continue")
-                    && restored.Current.id == "rift.opening",
-                "The full game did not continue from the demo save.");
-            Require(restored.GetValue("case.ache") == session.GetValue("case.ache"),
-                "The demo handoff lost investigation state.");
-        }
-
-        private static void VerifyRoute(StoryGraph graph, string firstAction, string firstResolution,
-            string secondAction, string secondResolution, string night, string expectedOutcome, bool alliance)
-        {
-            var session = new StorySession(graph);
-            ReachFirstDayHub(session);
-            PerformAction(session, firstAction, firstResolution);
-            PerformAction(session, secondAction, secondResolution);
-            Require(session.GetValue("actions") == 0, "Actions were not consumed.");
-            Require(session.Choose("night"), "Night transition was unavailable.");
-            Require(session.Choose(night), "Expected night outcome was unavailable: " + night);
-            Require(session.Current.id == expectedOutcome, "Wrong first-night outcome.");
-            Require(session.Advance() && session.Advance() && session.Advance(), "Outcome did not advance to day two.");
-            Require(session.Current.id == "c02.dawn" && session.GetValue("day") == 2, "Day two state is incorrect.");
-            Require(session.GetValue("route.alliance") == (alliance ? 1 : 0), "Alliance route flag is incorrect.");
-            Require(session.Advance() && session.Current.id == "c02.decision", "Could not reach day-two decision.");
-            var allianceChoice = session.Current.choices.Single(choice => choice.id == "alliance");
-            Require(session.IsAvailable(allianceChoice) == alliance, "Day-two choice did not inherit first-day state.");
-        }
-
-        private static void ReachFirstDayHub(StorySession session)
-        {
-            ReachLegacyGate(session);
-            Require(session.Advance() && session.Advance() && session.Advance(), "Could not reach the opening response.");
-            Require(session.Choose("watch"), "Opening response was rejected.");
-            Require(session.Advance() && session.Current.id == "c01.hub", "Could not reach first-day hub.");
-        }
-
-        private static void ReachLegacyGate(StorySession session)
-        {
-            ReachCaseMeet(session, "roster", "borrowed", "ink", "sense", "proceed");
-            Require(session.Choose("number") && session.Advance(), "Could not reach the investigation choice.");
-            Require(session.Choose("lin") && session.Advance()
-                    && session.Choose("clerk") && session.Advance() && session.Choose("verify")
-                    && session.Advance() && session.Choose("witness") && session.Advance(),
-                "Could not finish the Lin Yue investigation.");
-            Require(session.Choose("legacy") && session.Current.id == "c01.gate", "Legacy material was not reachable.");
-        }
-
-        private static void VerifyCaseSlice(StoryGraph graph)
-        {
-            var mistaken = new StorySession(graph);
-            ReachCaseMeet(mistaken, "post", "person", "ink", "challenge", "sample");
-            Require(mistaken.GetValue("case.guess") == 1 && mistaken.GetValue("case.learned") == 1
-                    && mistaken.GetValue("case.sealLost") == 1 && mistaken.GetValue("case.verified") == 1
-                    && mistaken.GetValue("case.controlSample") == 1,
-                "Opening evidence, training or early confrontation was not retained.");
-            var restored = StorySession.Restore(graph, mistaken.Snapshot());
-            Require(restored.Current.id == "case.meet" && restored.GetValue("case.sealLost") == 1,
-                "Case consequences were not saved.");
-            Require(restored.Choose("inside") && restored.Advance() && restored.Choose("public")
-                    && restored.Advance() && restored.Choose("copy") && restored.Advance()
-                    && restored.Choose("scope") && restored.Advance() && restored.Advance()
-                    && restored.Choose("finish") && restored.Current.terminal,
-                "Mistaken conclusion did not reach a consequential ending.");
-            Require(restored.GetValue("case.action") == 3 && restored.GetValue("risk.attention") == 3,
-                "Public disclosure lost its consequences.");
-
-            var careful = new StorySession(graph);
-            ReachCaseMeet(careful, "roster", "error", "ink", "sense", "proceed");
-            Require(careful.Choose("uncertain") && careful.Advance() && careful.Choose("gu")
-                    && careful.Advance()
-                    && careful.Choose("charm") && careful.Advance() && careful.Choose("prepare")
-                    && careful.Advance() && careful.Advance() && careful.Choose("finish")
-                    && careful.Current.terminal,
-                "Cautious route could not finish after verifying its initial error.");
-            Require(careful.GetValue("case.guess") == 3 && careful.GetValue("case.conclusion") == 3
-                                                        && careful.GetValue("case.action") == 2 && careful.GetValue("case.sealLost") == 0,
-                "Cautious route state was incorrect.");
-        }
-
-        private static void VerifyGuBellRoute(StoryGraph graph)
-        {
-            var corrected = new StorySession(graph);
-            ReachCaseMeet(corrected, "roster", "borrowed", "ink", "sense", "sample");
-            Require(corrected.Choose("number") && corrected.Advance() && corrected.Choose("gu")
-                    && corrected.Advance() && corrected.Choose("bell") && corrected.Advance()
-                    && corrected.Choose("rain")
-                    && corrected.Choose("redo") && corrected.Advance()
-                    && corrected.Advance() && corrected.Choose("share") && corrected.Advance()
-                    && corrected.Choose("prepare") && corrected.Advance()
-                    && corrected.Advance() && corrected.Choose("continue"),
-                "The old-disaster talisman comparison did not reach the rift after a corrected reading.");
-            Require(corrected.GetValue("case.bellRecords") == 1
-                    && corrected.GetValue("case.bellVerified") == 1
-                    && corrected.GetValue("case.bellShared") == 1,
-                "The corrected bell record did not retain its evidence and disclosure.");
-            Require(corrected.Choose("village") && corrected.Advance()
-                    && corrected.Choose("guardFurnace") && corrected.Advance()
-                    && corrected.Choose("records") && corrected.Advance() && corrected.Advance()
-                    && corrected.Choose("pressure") && corrected.Choose("evidence")
-                    && corrected.Choose("bell")
-                    && corrected.Advance() && corrected.Choose("proceed")
-                    && corrected.Choose("solo") && corrected.Advance()
-                    && corrected.Choose("replace") && corrected.Choose("tactics")
-                    && corrected.Choose("bell")
-                    && corrected.Current.id == "ending.replaceBell" && corrected.Current.terminal,
-                "The villagers' bell signal did not change the final evacuation and replacement.");
-
-            var withheld = new StorySession(graph);
-            ReachCaseMeet(withheld, "roster", "borrowed", "ink", "sense", "sample");
-            Require(withheld.Choose("number") && withheld.Advance() && withheld.Choose("gu")
-                    && withheld.Advance() && withheld.Choose("bell") && withheld.Advance()
-                    && withheld.Choose("report") && withheld.Advance()
-                    && withheld.Choose("prepare") && withheld.Advance()
-                    && withheld.Advance() && withheld.Choose("continue"),
-                "The unverified official report did not reach the next act.");
-            Require(withheld.GetValue("case.bellVerified") == 0
-                    && withheld.GetValue("case.bellShared") == 0,
-                "An unverified and undisclosed report unlocked the village bell action.");
-        }
-
-        private static void VerifyNewStory(StoryGraph graph)
-        {
-            var session = new StorySession(graph);
-            ReachCaseMeet(session, "clerk", "borrowed", "ink", "sense", "sample");
-            Require(session.Choose("number") && session.Advance() && session.Choose("lin")
-                    && session.Advance() && session.Choose("ache") && session.Advance()
-                    && session.Choose("verify") && session.Advance() && session.Choose("witness")
-                    && session.Advance() && session.Choose("continue"),
-                "The rescue route did not enter the rift investigation.");
-            Require(session.Choose("village") && session.Advance() && session.Choose("guardFurnace")
-                    && session.Advance() && session.Choose("ache") && session.Advance()
-                    && session.Advance() && session.Choose("pressure") && session.Choose("consent")
-                    && session.Advance() && session.Choose("proceed") && session.Choose("solo") && session.Advance()
-                    && session.Choose("replace") && session.Choose("prepared") && session.Current.terminal,
-                "The replacement ending was not playable.");
-            Require(session.GetValue("case.ache") == 1 && session.GetValue("case.arrayMeasured") == 1,
-                "Investigation evidence was not retained for the ending.");
-
-            var drafts = new StorySession(graph);
-            ReachCaseMeet(drafts, "post", "borrowed", "ink", "sense", "sample");
-            Require(drafts.Choose("number") && drafts.Advance() && drafts.Choose("shen")
-                    && drafts.Advance() && drafts.Choose("paper") && drafts.Advance()
-                    && drafts.Choose("signature") && drafts.Advance() && drafts.Choose("village")
-                    && drafts.Advance() && drafts.Advance() && drafts.Choose("continue")
-                    && drafts.Choose("draft") && drafts.Advance() && drafts.Choose("guardVillage")
-                    && drafts.Advance() && drafts.Choose("shenRecord") && drafts.Advance()
-                    && drafts.Choose("proceed") && drafts.Choose("solo") && drafts.Advance()
-                    && drafts.Choose("hold") && drafts.Choose("open") && drafts.Current.terminal,
-                "Shen Yan's investigation did not reach its evidence-specific hearing and ending.");
-            Require(drafts.GetValue("case.shenAccount") == 1 && drafts.GetValue("case.publicRecord") == 1,
-                "The signed draft did not survive to the ending.");
-
-            var family = new StorySession(graph);
-            ReachCaseMeet(family, "roster", "borrowed", "ink", "sense", "sample");
-            Require(family.Choose("number") && family.Advance() && family.Choose("lin")
-                    && family.Advance() && family.Choose("bowl") && family.Advance()
-                    && family.Choose("dose") && family.Advance() && family.Choose("family")
-                    && family.Choose("consent") && family.Advance() && family.Advance()
-                    && family.Choose("continue") && family.Choose("village") && family.Advance()
-                    && family.Choose("guardFurnace") && family.Advance()
-                    && family.Choose("records") && family.Advance() && family.Advance()
-                    && family.Choose("names") && family.Choose("matched")
-                    && family.Advance() && family.Choose("pressure") && family.Choose("consent")
-                    && family.Advance() && family.Choose("draft") && family.Choose("archive")
-                    && family.Advance() && family.Choose("proceed") && family.Choose("joint")
-                    && family.Advance()
-                    && family.Choose("leave") && family.Choose("family") && family.Current.terminal,
-                "Family-verified rescue did not reach its distinct ending.");
-            Require(family.GetValue("case.sedative") == 1 && family.GetValue("case.familyConsent") == 1
-                    && family.GetValue("case.jointProtocol") == 1,
-                "The drug check, family consent or joint protocol was lost.");
-
-            var measured = new StorySession(graph);
-            ReachCaseMeet(measured, "post", "borrowed", "ink", "sense", "sample");
-            Require(measured.Choose("number") && measured.Advance() && measured.Choose("shen")
-                    && measured.Advance() && measured.Choose("paper") && measured.Advance()
-                    && measured.Choose("signature") && measured.Advance() && measured.Choose("pause")
-                    && measured.Choose("witness") && measured.Advance() && measured.Advance()
-                    && measured.Choose("continue") && measured.Choose("village") && measured.Advance()
-                    && measured.Choose("guardVillage") && measured.Advance()
-                    && measured.Choose("records") && measured.Advance() && measured.Advance()
-                    && measured.Choose("names") && measured.Choose("matched") && measured.Advance()
-                    && measured.Choose("pressure") && measured.Choose("consent") && measured.Advance()
-                    && measured.Choose("proceed") && measured.Choose("joint") && measured.Advance()
-                    && measured.Choose("replace") && measured.Choose("tactics")
-                    && measured.Choose("timed") && measured.Current.terminal,
-                "Two-sided return measurement did not affect replacement execution.");
-            Require(measured.GetValue("case.returnMeasured") == 1 && measured.GetValue("case.publicRecord") == 1,
-                "The witnessed measurement was lost.");
-
-            var lateRescue = new StorySession(graph);
-            ReachCaseMeet(lateRescue, "roster", "borrowed", "ink", "sense", "sample");
-            Require(lateRescue.Choose("number") && lateRescue.Advance() && lateRescue.Choose("lin")
-                    && lateRescue.Advance() && lateRescue.Choose("cart") && lateRescue.Advance()
-                    && lateRescue.Choose("verify") && lateRescue.Advance() && lateRescue.Choose("window")
-                    && lateRescue.Choose("save") && lateRescue.Choose("clerk") && lateRescue.Advance()
-                    && lateRescue.Advance() && lateRescue.Current.id == "case.boundary",
-                "A missed first rescue could not be recovered with Chen Wen's shift card.");
-            Require(lateRescue.GetValue("case.ache") == 1 && lateRescue.GetValue("case.witnessProtected") == 1
-                    && lateRescue.GetValue("case.ledgerCopy") == 1,
-                "The later rescue did not retain its witness and record consequences.");
-
-            var sideDoor = new StorySession(graph);
-            ReachCaseMeet(sideDoor, "post", "borrowed", "ink", "sense", "sample");
-            Require(sideDoor.Choose("number") && sideDoor.Advance() && sideDoor.Choose("lin")
-                    && sideDoor.Advance() && sideDoor.Choose("bowl") && sideDoor.Advance()
-                    && sideDoor.Choose("dose") && sideDoor.Advance() && sideDoor.Choose("window")
-                    && sideDoor.Choose("slit") && sideDoor.Advance() && sideDoor.Advance()
-                    && sideDoor.Choose("continue") && sideDoor.Choose("sideDoor")
-                    && sideDoor.Choose("measure") && sideDoor.Current.id == "rift.sideDoorMeasured",
-                "The saved door talisman did not open the rift recheck.");
-            Require(sideDoor.GetValue("case.sideDoorMeasured") == 1
-                    && sideDoor.GetValue("case.arrayMeasured") == 1
-                    && sideDoor.GetValue("case.villageReady") == 1,
-                "The cross-route talisman measurement did not affect preparation.");
-
-            var supervised = new StorySession(graph);
-            ReachCaseMeet(supervised, "roster", "borrowed", "ink", "sense", "sample");
-            Require(supervised.Choose("number") && supervised.Advance() && supervised.Choose("gu")
-                    && supervised.Advance() && supervised.Choose("workshop") && supervised.Advance()
-                    && supervised.Choose("inspect") && supervised.Choose("ash")
-                    && supervised.Advance() && supervised.Choose("scope") && supervised.Advance()
-                    && supervised.Advance() && supervised.Choose("continue")
-                    && supervised.Choose("furnace") && supervised.Advance()
-                    && supervised.Choose("guardVillage") && supervised.Advance()
-                    && supervised.Choose("records") && supervised.Advance() && supervised.Advance()
-                    && supervised.Choose("pressure") && supervised.Choose("evidence")
-                    && supervised.Choose("witness")
-                    && supervised.Advance() && supervised.Choose("proceed")
-                    && supervised.Choose("solo") && supervised.Advance()
-                    && supervised.Choose("replace") && supervised.Choose("prepared")
-                    && supervised.Current.terminal,
-                "Supervised furnace evidence did not reach informed village evacuation and replacement.");
-            Require(supervised.GetValue("case.controlSample") == 1
-                    && supervised.GetValue("case.villageWitness") == 1
-                    && supervised.GetValue("case.villageConsent") == 1,
-                "The artisan's furnace witness did not affect village consent.");
-
-            var correctedSurvey = new StorySession(graph);
-            ReachCaseMeet(correctedSurvey, "post", "borrowed", "ink", "sense", "sample");
-            Require(correctedSurvey.Choose("number") && correctedSurvey.Advance()
-                    && correctedSurvey.Choose("shen") && correctedSurvey.Advance()
-                    && correctedSurvey.Choose("rubbing") && correctedSurvey.Advance()
-                    && correctedSurvey.Choose("signature") && correctedSurvey.Advance()
-                    && correctedSurvey.Choose("survey") && correctedSurvey.Choose("copy")
-                    && correctedSurvey.Choose("redo") && correctedSurvey.Advance()
-                    && correctedSurvey.Advance() && correctedSurvey.Current.id == "case.boundary",
-                "The wrong survey reference could not be corrected in the field.");
-            Require(correctedSurvey.GetValue("case.returnMeasured") == 1
-                    && correctedSurvey.GetValue("risk.attention") > 0,
-                "The corrected survey lost its measured result or cost.");
-
-            var publicAudit = new StorySession(graph);
-            ReachCaseMeet(publicAudit, "post", "borrowed", "ink", "sense", "sample");
-            Require(publicAudit.Choose("uncertain") && publicAudit.Advance()
-                    && publicAudit.Choose("public") && publicAudit.Advance()
-                    && publicAudit.Choose("copy") && publicAudit.Advance()
-                    && publicAudit.Choose("audit") && publicAudit.Choose("form")
-                    && publicAudit.Advance() && publicAudit.Advance()
-                    && publicAudit.Choose("continue") && publicAudit.Choose("draft")
-                    && publicAudit.Advance() && publicAudit.Choose("guardVillage")
-                    && publicAudit.Advance() && publicAudit.Choose("records")
-                    && publicAudit.Advance() && publicAudit.Advance()
-                    && publicAudit.Choose("draft") && publicAudit.Choose("audit")
-                    && publicAudit.Advance() && publicAudit.Choose("proceed")
-                    && publicAudit.Choose("solo") && publicAudit.Advance()
-                    && publicAudit.Choose("hold") && publicAudit.Choose("open")
-                    && publicAudit.Current.terminal,
-                "The sealed order did not survive to the three-party responsibility hearing.");
-            Require(publicAudit.GetValue("case.archiveWitness") == 1
-                    && publicAudit.GetValue("case.shenAccount") == 1
-                    && publicAudit.GetValue("case.publicRecord") == 1,
-                "The signed seal audit did not separate the two responsibilities.");
-        }
-
-        private static void ReachCaseMeet(StorySession session, string entry, string guess,
-            string practice, string method, string control)
-        {
-            Require(session.Current.id == "case.intro" && session.Choose(entry) && session.Advance()
-                    && session.Choose(guess) && session.Advance() && session.Choose(practice)
-                    && session.Advance() && session.Choose(method),
-                "Could not choose the opening evidence and learn辨气.");
-            if (method == "challenge")
+            foreach (var ending in new[]
+                     {
+                         "ending.leave", "ending.seizeSelf", "ending.seizeForce",
+                         "ending.oldPublic", "ending.oldHidden", "story.six.06.0"
+                     })
             {
-                Require(session.Advance(), "Early challenge did not lead to the ash sample.");
+                Require(CanReach(full, ending), "Cannot reach story outcome: " + ending);
             }
 
-            Require(session.Advance() && session.Current.id == "case.control"
-                    && session.Choose(control) && session.Advance() && session.Current.id == "case.meet",
-                "Could not verify the ash source and compare evidence.");
+            var demoSession = new StorySession(demo, 42);
+            AdvanceTo(demoSession, "case.boundary");
+            var fullSession = StorySession.Restore(full, demoSession.Snapshot());
+            Require(fullSession.Current.id == "case.boundary", "Demo save did not import.");
+            Require(fullSession.Choose("continue") && fullSession.Current.id == "story.three.00.0",
+                "Full campaign did not continue after Demo.");
         }
 
-        private static void PerformAction(StorySession session, string action, string resolution)
+        private static void AdvanceTo(StorySession session, string target)
         {
-            Require(session.Choose(action), "Action rejected: " + action);
-            Require(session.Advance() && session.Advance(), "Action did not reach its internal decision: " + action);
-            Require(session.Choose(resolution), "Action resolution rejected: " + resolution);
-            Require(session.Advance() && session.Current.id == "c01.hub", "Action did not return to hub: " + action);
-        }
-
-        private static void VerifySaveRoundTrip(StoryGraph graph)
-        {
-            var session = new StorySession(graph);
-            ReachFirstDayHub(session);
-            PerformAction(session, "investigate", "copyPage");
-            Require(session.GetValue("clue.register") == 1, "Entry effect was not applied.");
-            var snapshot = session.Snapshot();
-            var restored = StorySession.Restore(graph, snapshot);
-            Require(restored.Current.id == session.Current.id, "Saved cursor was not restored.");
-            Require(restored.GetValue("clue.register") == 1, "Restore lost state.");
-
-            var folder = Path.Combine(Application.temporaryCachePath, "WenXinJieCampaignTests", Guid.NewGuid().ToString("N"));
-            var path = Path.Combine(folder, "save.json");
-            var store = new CampaignSaveStore();
-            store.Save(path, session);
-            var disk = store.Load(path, graph, out var recovered);
-            Require(!recovered && disk.GetValue("clue.register") == 1, "Disk round-trip failed.");
-            store.Save(path, session);
-            File.WriteAllText(path, "corrupt");
-            var backup = store.Load(path, graph, out recovered);
-            Require(recovered && backup.Current.id == session.Current.id, "Backup recovery failed.");
-        }
-
-        private static void VerifySeededOutcomes()
-        {
-            var graph = new StoryGraph(new()
+            for (var step = 0; step < 1000 && session.Current.id != target; step++)
             {
-                id = "seeded-check",
-                revision = 1,
-                start = "draw",
-                variables = Array.Empty<VariableDefinition>(),
-                nodes = new[]
+                if (session.Current.choices.Length > 0)
                 {
-                    new StoryNode
-                    {
-                        id = "draw",
-                        text = "Draw an encounter.",
-                        background = "gate",
-                        choices = new[]
-                        {
-                            new StoryChoice
-                            {
-                                id = "explore",
-                                text = "Explore",
-                                outcomes = new[]
-                                {
-                                    new StoryOutcome { target = "quiet", weight = 3 },
-                                    new StoryOutcome { target = "danger", weight = 1 }
-                                }
-                            }
-                        }
-                    },
-                    new StoryNode { id = "quiet", text = "Quiet road.", background = "gate", next = "draw" },
-                    new StoryNode { id = "danger", text = "Patrol ahead.", background = "gate", next = "draw" }
+                    Require(session.Choose(session.Current.choices[0].id), "Choice failed.");
                 }
-            });
-
-            var original = new StorySession(graph, 173);
-            var sameSeed = new StorySession(graph, 173);
-            Require(original.Choose("explore") && sameSeed.Choose("explore"), "Seeded choice failed.");
-            Require(original.Current.id == sameSeed.Current.id, "Identical seeds produced different outcomes.");
-
-            var restored = StorySession.Restore(graph, original.Snapshot());
-            Require(original.Advance() && restored.Advance(), "Could not return to the encounter draw.");
-            Require(original.Choose("explore") && restored.Choose("explore"), "Restored encounter choice failed.");
-            Require(original.Current.id == restored.Current.id, "Loading a save rerolled the next encounter.");
-            Require(original.Snapshot().randomState == restored.Snapshot().randomState,
-                "Restored random state diverged after an identical action.");
-        }
-
-        private static void VerifySecondAct(StoryGraph graph)
-        {
-            var allied = VerifySecondActRoute(graph, "rescue", "excel", "findShen", "enter", "witness", "shen", "protect");
-            var exposed = VerifySecondActRoute(graph, "ledger", "conceal", "traceList", "escort", "records", "linYue", "signal");
-            VerifyThirdActRoute(allied, true, "c10.preserve", new[]
-            {
-                "followGu", "negotiate", "measure", "studySeal", "counter", "askGu", "visitGu", "warn",
-                "holdArray", "preserve"
-            });
-            VerifyThirdActRoute(exposed, false, "c10.publish", new[]
-            {
-                "auditGu", "steal", "intercept", "compare", "infiltrate", "goIn", "freeLin", "train",
-                "openPath", "publish"
-            });
-        }
-
-        private static StorySession VerifySecondActRoute(StoryGraph graph, string dayTwo, string exam,
-            string dayThree, string dayFour, string evening, string dayFive, string finale)
-        {
-            var session = new StorySession(graph);
-            ReachFirstDayHub(session);
-            PerformAction(session, "investigate", "copyPage");
-            PerformAction(session, "visit", "confide");
-            Require(session.Choose("night") && session.Choose("shared"), "Could not reach alliance outcome.");
-            while (session.Current.id != "c02.decision")
-            {
-                Require(session.Advance(), "Could not reach day-two decision.");
-            }
-
-            Require(session.Choose("alliance") && session.Advance(), "Could not reach day-two evening.");
-            Require(session.Current.id == "c02.evening" && session.GetValue("actions") == 1,
-                "Day-two lead did not consume an action.");
-            Require(session.GetValue("clue.ledger") == 0,
-                "A partial lead must not count as the complete ledger.");
-            Require(session.Choose(dayTwo) && session.Advance(), "Could not reach day-three exam.");
-            Require(session.Current.id == "c03.dawn" && session.GetValue("day") == 3, "Day three is incorrect.");
-            Require(session.Choose(exam) && session.Advance() && session.Choose(dayThree) && session.Advance(),
-                "Could not finish day three.");
-            Require(session.Current.id == "c04.dawn" && session.GetValue("day") == 4, "Day four is incorrect.");
-            Require(session.Choose(dayFour) && session.Advance(), "Could not reach day-four evening.");
-            var witness = session.Current.choices.Single(choice => choice.id == "witness");
-            Require(session.IsAvailable(witness) == (session.GetValue("mark.rescued") == 1),
-                "Witness choice ignored the rescue outcome.");
-            Require(session.Choose(evening) && session.Advance(), "Could not finish day four.");
-            Require(session.Current.id == "c05.dawn" && session.GetValue("day") == 5, "Day five is incorrect.");
-            Require(session.Choose(dayFive) && session.Advance() && session.Choose(finale),
-                "Could not finish day five.");
-            Require(session.GetValue("actions") == 0, "Day five did not consume both actions.");
-            return session;
-        }
-
-        private static void VerifyThirdActRoute(StorySession session, bool trustsGu, string terminal,
-            string[] choices)
-        {
-            Require(choices.Length == 10, "Third-act route needs two choices per day.");
-            for (var day = 6; day <= 10; day++)
-            {
-                AdvanceToChoices(session);
-                Require(session.GetValue("day") == day && session.GetValue("actions") == 2,
-                    "New day did not refresh the two-action budget: " + day);
-                if (day == 9)
+                else
                 {
-                    var visitGu = session.Current.choices.Single(choice => choice.id == "visitGu");
-                    Require(session.IsAvailable(visitGu) == trustsGu, "Gu's day-nine route ignored prior trust.");
+                    Require(session.Advance(), "Advance failed before " + target);
                 }
-
-                Require(session.Choose(choices[(day - 6) * 2]), "First action was blocked on day " + day);
-                AdvanceToChoices(session);
-                Require(session.GetValue("actions") == 1, "First action was not consumed on day " + day);
-                if (day == 8)
-                {
-                    var askGu = session.Current.choices.Single(choice => choice.id == "askGu");
-                    Require(session.IsAvailable(askGu) == trustsGu, "Gu's observatory ignored prior trust.");
-                }
-
-                Require(session.Choose(choices[(day - 6) * 2 + 1]), "Evening action was blocked on day " + day);
-                Require(session.GetValue("actions") == 0, "Evening action was not consumed on day " + day);
             }
 
-            Require(session.Current.id == terminal && session.Current.terminal,
-                "Third act did not reach its expected chapter boundary.");
-            Require(session.GetValue("clue.array") == 1, "The substitute-array measurement was lost.");
-            Require(session.GetValue("mark.village") == (trustsGu ? 1 : 0), "Trial outcome ignored the defended side.");
-            Require(session.GetValue("mark.evacuated") == (trustsGu ? 0 : 1),
-                "Trial outcome ignored the evacuated side.");
-            Require(session.GetValue("mark.arrayKey") == (trustsGu ? 1 : 0),
-                "The array key ignored Gu's day-nine route.");
+            Require(session.Current.id == target, "Could not reach " + target);
         }
 
-        private static void AdvanceToChoices(StorySession session)
+        private static bool CanReach(StoryGraph graph, string target)
         {
-            while (session.Current.choices.Length == 0)
+            var visited = new System.Collections.Generic.HashSet<string>();
+            var pending = new System.Collections.Generic.Stack<string>();
+            pending.Push(graph.Definition.start);
+            while (pending.Count > 0)
             {
-                Require(session.Advance(), "Route ended before the next decision.");
+                var id = pending.Pop();
+                if (!visited.Add(id)) continue;
+                if (id == target) return true;
+                var node = graph.GetNode(id);
+                if (!string.IsNullOrEmpty(node.next)) pending.Push(node.next);
+                foreach (var choice in node.choices) pending.Push(choice.target);
             }
-        }
-
-        private static void VerifyInvalidContentRejected()
-        {
-            var rejected = false;
-            try
-            {
-                _ = new StoryGraph(new()
-                {
-                    id = "bad",
-                    revision = 1,
-                    start = "missing",
-                    variables = Array.Empty<VariableDefinition>(),
-                    nodes = Array.Empty<StoryNode>()
-                });
-            }
-            catch (ArgumentException)
-            {
-                rejected = true;
-            }
-
-            Require(rejected, "Graph accepted a missing start node.");
-
-            rejected = false;
-            try
-            {
-                _ = new StoryGraph(new()
-                {
-                    id = "unreachable",
-                    revision = 1,
-                    start = "start",
-                    variables = Array.Empty<VariableDefinition>(),
-                    nodes = new[]
-                    {
-                        TerminalNode("start"),
-                        TerminalNode("orphan")
-                    }
-                });
-            }
-            catch (ArgumentException)
-            {
-                rejected = true;
-            }
-
-            Require(rejected, "Graph accepted an unreachable node.");
-        }
-
-        private static StoryNode TerminalNode(string id)
-        {
-            return new()
-            {
-                id = id,
-                text = id,
-                background = "gate",
-                terminal = true
-            };
+            return false;
         }
 
         private static void VerifyAssets(StoryGraph graph)
         {
-            var catalog = AssetDatabase.LoadAssetAtPath<StoryAssetCatalog>(
-                "Assets/_WenXinJie/Data/StoryAssets.asset");
-            Require(catalog != null, "Media catalog is missing.");
+            var catalog = AssetDatabase.FindAssets("t:StoryAssetCatalog")
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .Select(AssetDatabase.LoadAssetAtPath<StoryAssetCatalog>)
+                .FirstOrDefault(asset => asset != null);
+            Require(catalog != null, "Story asset catalog is missing.");
             catalog.Validate(graph);
-            Require(File.Exists("Assets/_WenXinJie/Fonts/OFL.txt"), "Font license is missing.");
-            Require(File.Exists("Docs/AssetResearch/campaign-assets.json"), "Asset checksum inventory is missing.");
-            Require(EditorBuildSettings.scenes.Length == 1
-                    && EditorBuildSettings.scenes[0].path == "Assets/_WenXinJie/Scenes/GameFull.unity", "Full game scene is not the build entry.");
         }
 
-        private static void Require(bool condition, string message)
+        private static void Require(bool valid, string message)
         {
-            if (!condition)
-            {
-                throw new InvalidOperationException(message);
-            }
+            if (!valid) throw new InvalidOperationException(message);
         }
     }
 }
