@@ -149,8 +149,8 @@ namespace WenXinJie.Editor
                 "Fonts/TMP/NotoSerifSC-Regular SDF.asset", characters);
             AssignFont(assets, "titleFont", "Fonts/ZhiMangXing-Regular.ttf",
                 "Fonts/TMP/ZhiMangXing-Regular SDF.asset", characters);
-            AssignFont(assets, "menuFont", "Fonts/ZCOOLXiaoWei-Regular.ttf",
-                "Fonts/TMP/ZCOOLXiaoWei-Regular SDF.asset", characters);
+            AssignFont(assets, "menuFont", "Fonts/WenXinJieXiaoWei-Regular.ttf",
+                "Fonts/TMP/WenXinJieXiaoWei-Regular SDF.asset", characters);
         }
 
         private static void Assign(SerializedObject target, string property, string relativePath)

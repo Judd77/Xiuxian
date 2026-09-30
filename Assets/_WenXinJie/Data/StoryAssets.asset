@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WenXinJie.Presentation.StoryAssetCatalog
   font: {fileID: 11400000, guid: ed6bcd9b369287d4ea9ef9917f960668, type: 2}
   titleFont: {fileID: 11400000, guid: 9a0e998d4f82cb84db57436736426da4, type: 2}
-  menuFont: {fileID: 11400000, guid: 950be11a0a131684a88d3bcb2e1dc696, type: 2}
+  menuFont: {fileID: 11400000, guid: 684783cf146f48c479054c4343c754bd, type: 2}
   panel: {fileID: 2800000, guid: 75f01ced3d793a54c9d7174aa7fa5c71, type: 3}
   choice: {fileID: 2800000, guid: 82e54733915248d4cbd3b8a8566f44b1, type: 3}
   music: {fileID: 8300000, guid: c9dbc12dc9a8573478b270e9116b5709, type: 3}
