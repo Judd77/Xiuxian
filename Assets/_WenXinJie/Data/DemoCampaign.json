@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 22,
+  "revision": 23,
   "start": "case.intro",
   "variables": [
     {
@@ -455,6 +455,12 @@
     },
     {
       "id": "e.extraInjury",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.repairOwed",
       "initial": 0,
       "minimum": 0,
       "maximum": 1

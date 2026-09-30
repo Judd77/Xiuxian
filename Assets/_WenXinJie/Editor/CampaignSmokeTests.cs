@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 22 && demo.Definition.revision == 22,
+            Require(full.Definition.revision == 23 && demo.Definition.revision == 23,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -156,9 +156,13 @@ namespace WenXinJie.Editor
             var run = new StorySession(full, 42);
             AdvanceTo(run, "case.boundary");
             Require(run.Choose("village"), "Gu Heng route is unavailable.");
+            StorySnapshot beforeArchive = null;
+            StorySnapshot beforeTest = null;
             for (var step = 0; step < 250 && run.Current.id != "ending.newRoad"; step++)
             {
                 var id = run.Current.id;
+                if (id == "g03.keep") beforeArchive = run.Snapshot();
+                if (id == "g07.test") beforeTest = run.Snapshot();
                 var choiceId = id switch
                 {
                     "g01.table" when run.GetValue("g.oldCharm") == 0 => "charm",
@@ -199,6 +203,31 @@ namespace WenXinJie.Editor
                     && run.GetValue("g.villageRecord") == 1 && run.GetValue("h.roles") == 1
                     && run.GetValue("e.flowMeasured") == 1,
                 "Gu Heng route did not carry its evidence through the diversion.");
+            Require(beforeArchive != null && beforeTest != null, "Gu Heng branch snapshots are missing.");
+
+            var custody = StorySession.Restore(full, beforeArchive);
+            Require(custody.Choose("take"), "Taking the original book was unavailable.");
+            AdvanceTo(custody, "g04.ask");
+            Require(!custody.IsAvailable(custody.Current.choices.First(choice => choice.id == "time"))
+                    && custody.Choose("return") && custody.Advance()
+                    && custody.GetValue("g.archiveHeld") == 1
+                    && custody.Choose("time"),
+                "Taking the book did not require returning it to the family before questioning.");
+
+            var oldMap = StorySession.Restore(full, beforeTest);
+            Require(oldMap.Choose("old"), "Testing the old map was unavailable.");
+            AdvanceTo(oldMap, "g08.question");
+            Require(oldMap.GetValue("g.repairOwed") == 1
+                    && !oldMap.IsAvailable(oldMap.Current.choices.First(choice => choice.id == "share")),
+                "Cracking the village charm did not delay another test.");
+            var publicHold = StorySession.Restore(full, oldMap.Snapshot());
+            Require(publicHold.Choose("hold") && publicHold.Advance()
+                    && publicHold.Current.id == "ending.oldPublic",
+                "The village could not decline another test and keep the old array public.");
+            Require(oldMap.Choose("repair") && oldMap.CurrentText.Contains("小试裂开的村符")
+                    && oldMap.Advance() && oldMap.GetValue("g.repairOwed") == 0
+                    && oldMap.IsAvailable(oldMap.Current.choices.First(choice => choice.id == "share")),
+                "Repairing the charm did not reopen the village decision.");
         }
 
         private static void VerifyShenRoute(StoryGraph full)
@@ -252,7 +281,7 @@ namespace WenXinJie.Editor
             {
                 if (session.Current.choices.Length > 0)
                 {
-                    Require(session.Choose(session.Current.choices[0].id), "Choice failed.");
+                    Require(session.Choose(session.Current.choices.First(session.IsAvailable).id), "Choice failed.");
                 }
                 else
                 {

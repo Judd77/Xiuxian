@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 22,
+  "revision": 23,
   "start": "case.intro",
   "variables": [
     {
@@ -455,6 +455,12 @@
     },
     {
       "id": "e.extraInjury",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.repairOwed",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -2511,11 +2517,17 @@
       "chapter": "卷二 · 山下那份账",
       "location": "工匠家",
       "speaker": "旁白",
-      "text": "工匠把旧符收回：“十年了。你的手没听见，不等于他们那晚没受惊。”他让你看边缘霉斑与中心裂纹，再借原簿查时辰。",
+      "text": "工匠把旧符收回：“十年了。你的手没听见，不等于他们那晚没受惊。”他仍让你比霉斑与裂纹，却不肯立刻把钟槌交给你；想请他守下一次小试，你得先帮他补一张村符。",
       "background": "ridge",
       "portrait": "",
       "rain": false,
-      "effects": [],
+      "effects": [
+        {
+          "variable": "g.repairOwed",
+          "operation": "set",
+          "value": 1
+        }
+      ],
       "choices": [],
       "next": "g02.sound"
     },
@@ -2637,6 +2649,47 @@
       "rain": false,
       "effects": [],
       "choices": [],
+      "next": "g04.ask",
+      "variants": [
+        {
+          "text": "村议上，老妇亲手带来守钟原簿。你把两处符的裂口与抄下的时辰摆在一旁，先请她指出儿子的名字；顾衡不得只答你一人。",
+          "conditions": [
+            {
+              "variable": "g.archiveHeld",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "村议上，守钟人带来了原簿，却还记着你擅拿的事。老妇站在门边，没有把质问儿子死因的权利交给你。你有抄页与符，却得先把原件交回她手里。",
+          "conditions": [
+            {
+              "variable": "g.archiveHeld",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g04.return",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你当众向守钟人说明自己擅拿原簿，把抄页放在桌上，请他将原件交给老妇。她没有替你遮掩，翻到儿子名字那页：“这回我自己问，你把两处时辰念清。”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.archiveHeld",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
       "next": "g04.ask"
     },
     {
@@ -2654,8 +2707,14 @@
           "id": "time",
           "text": "问：南沟与东坡真的同时坏符吗？",
           "target": "g04.time",
-          "lockedReason": "",
-          "conditions": [],
+          "lockedReason": "原簿还没有交回守钟人与家属手中",
+          "conditions": [
+            {
+              "variable": "g.archiveHeld",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
           "effects": [],
           "outcomes": []
         },
@@ -2667,6 +2726,34 @@
           "conditions": [],
           "effects": [],
           "outcomes": []
+        },
+        {
+          "id": "return",
+          "text": "先承认擅拿原簿，请老妇持原件质问",
+          "target": "g04.return",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "g.archiveHeld",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        }
+      ],
+      "variants": [
+        {
+          "text": "守钟人仍握着原簿。你若要逐项问顾衡，先向他说明擅拿原件，再请老妇亲手持簿；空喊“骗子”不能替任何人核死因。",
+          "conditions": [
+            {
+              "variable": "g.archiveHeld",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
         }
       ]
     },
@@ -2681,7 +2768,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "g04.time"
+      "next": "g04.ask"
     },
     {
       "id": "g04.time",
@@ -2902,6 +2989,11 @@
               "variable": "g.extraCharm",
               "operation": "set",
               "value": 1
+            },
+            {
+              "variable": "g.repairOwed",
+              "operation": "set",
+              "value": 1
             }
           ],
           "outcomes": []
@@ -2972,7 +3064,7 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村议",
       "speaker": "旁白",
-      "text": "村议上，顾衡把更正的呈报交给守钟人，工匠接过钟槌。老妇指着新图问：“这回图上有我家门没有？”你把三户、药田和那道缓坡标给她看。",
+      "text": "村议上，顾衡把更正的呈报交给守钟人，工匠把钟槌放在桌上，还没答应再试。老妇指着新图问：“这回图上有我家门没有？”你把三户、药田和缓坡标给她看。",
       "background": "stele",
       "portrait": "",
       "rain": false,
@@ -2995,8 +3087,14 @@
           "id": "share",
           "text": "说明未知处，请村民自己决定是否参加小试",
           "target": "g08.share",
-          "lockedReason": "",
-          "conditions": [],
+          "lockedReason": "先履行向工匠和村民欠下的补符约定",
+          "conditions": [
+            {
+              "variable": "g.repairOwed",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
           "effects": [
             {
               "variable": "g.hammer",
@@ -3004,7 +3102,8 @@
               "value": 1
             }
           ],
-          "outcomes": []
+          "outcomes": [],
+          "hidden": true
         },
         {
           "id": "declare",
@@ -3014,6 +3113,50 @@
           "conditions": [],
           "effects": [],
           "outcomes": []
+        },
+        {
+          "id": "repair",
+          "text": "帮工匠补符并交代试错，再请村民决定",
+          "target": "g08.repair",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "g.repairOwed",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        },
+        {
+          "id": "hold",
+          "text": "今晚不再试阵，公开旧阵与村庄风险",
+          "target": "g08.publicHold",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "g.repairOwed",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        }
+      ],
+      "variants": [
+        {
+          "text": "炉房内图还不完整，村符也有一笔欠账。工匠还没接钟槌：你若要请村民参加可叫停的小试，须先把旧符误判或刚裂的符交代清楚并补好；也可今晚暂守旧阵，公开这次没有试成的缘由。",
+          "conditions": [
+            {
+              "variable": "g.repairOwed",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
         }
       ]
     },
@@ -3028,7 +3171,51 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "g08.share"
+      "next": "g08.question"
+    },
+    {
+      "id": "g08.repair",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你去帮工匠补村符，亲手递符纸、按住边角，等他把裂口补牢。你承认辨气不能隔十年替东坡作证，也不再把别人住的地方当图上的空白。工匠这才拿起钟槌：“再试一次，我来喊停。”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.repairOwed",
+          "operation": "set",
+          "value": 0
+        }
+      ],
+      "choices": [],
+      "next": "g08.question",
+      "variants": [
+        {
+          "text": "你把小试裂开的村符拿给工匠，当着村人说自己照旧图送灵力时没先量石柱。你递符纸、按住边角，和他补好裂口；耽搁的符料与时辰都记进村账。他拿起钟槌：“再试一次，我来喊停。”",
+          "conditions": [
+            {
+              "variable": "g.extraCharm",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g08.publicHold",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你没有再请村民冒险小试。顾衡把更正的旧呈报交给守钟人，许澄姐姐把炉里仍待核名的人列给家属。工匠收起未交出的钟槌，答应今晚继续看村符；你在村议上说明旧阵还要撑一夜，迁路和停铃都留待逐户谈。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "ending.oldPublic"
     },
     {
       "id": "g08.share",
