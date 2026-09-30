@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 16,
+  "revision": 17,
   "start": "case.intro",
   "variables": [
     {
@@ -149,6 +149,66 @@
     },
     {
       "id": "case.identityClaim",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.medical",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.shift",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.hear",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.letter",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.sisterExposed",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.danqi",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.names",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.testimony",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.protocol",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.familyAsked",
       "initial": 0,
       "minimum": 0,
       "maximum": 1

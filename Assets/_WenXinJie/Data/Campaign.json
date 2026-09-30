@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 16,
+  "revision": 17,
   "start": "case.intro",
   "variables": [
     {
@@ -149,6 +149,66 @@
     },
     {
       "id": "case.identityClaim",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.medical",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.shift",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.hear",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.letter",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.sisterExposed",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.danqi",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.names",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.testimony",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.protocol",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.familyAsked",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -1284,7 +1344,7 @@
         {
           "id": "rescue",
           "text": "跟林月核病人姓名，准备再进炉房",
-          "target": "story.leave.00.0",
+          "target": "l01.intro",
           "effects": [
             {
               "variable": "story.route",
@@ -1312,6 +1372,1091 @@
           "outcomes": []
         }
       ]
+    },
+    {
+      "id": "l01.intro",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月把八张伤签摊开，每张只写甲三、乙七这类床号。她换过这些人的药；第二天换了人，床号不变，账上仿佛永远只有八个病人。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l01.table"
+    },
+    {
+      "id": "l01.table",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "要再进里门，须知道谁在榻上，也须知道车和守卫何时交接。你把伤签和交接单分放桌子两侧。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "medicine",
+          "text": "核伤签的用药与病人更换",
+          "target": "l01.medicine",
+          "lockedReason": "伤签已核过",
+          "conditions": [
+            {
+              "variable": "l.medical",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "l.medical",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "shift",
+          "text": "核药车和里门换班时辰",
+          "target": "l01.shift",
+          "lockedReason": "车次已核过",
+          "conditions": [
+            {
+              "variable": "l.shift",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "l.shift",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "ready",
+          "text": "两份记录齐了，安排入门",
+          "target": "l02.intro",
+          "lockedReason": "先核伤签与换班车次",
+          "conditions": [
+            {
+              "variable": "l.medical",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "l.shift",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l01.medicine",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "乙七连三日用退热药，阿澈被带出那夜，药量在二更后少了一份。这个床号不是姓名；用药变动至少告诉你，二更前后有人换过榻。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "l.medical",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "l01.table"
+    },
+    {
+      "id": "l01.shift",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "陈闻拿来车次：二更进门，三更出药；正门添守卫时，侧门反而空一小段。里门不是整夜不开，只是钥匙一直在执事手中。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "l.shift",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "l01.table"
+    },
+    {
+      "id": "l02.intro",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月让你用一线灵力贴住自己腕骨。你听见两种节奏：自己的心跳近，屋檐落雨远。薄墙后的呼吸能听见，厚石和阵气会把多人搅在一起。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l02.test"
+    },
+    {
+      "id": "l02.test",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈在隔壁床上，空房也隔一堵薄墙。林月先让你试已知有人与无人的两处，免得把雨声当成病人的呼吸。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "ache",
+          "text": "先按阿澈腕骨，记住活人的脉",
+          "target": "l02.ache",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "rain",
+          "text": "直接把檐雨当作隔壁的人声",
+          "target": "l02.rain",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l02.rain",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "雨滴落得整齐，你差点跟着它数。林月合上窗，节奏立刻不见；人没有凭一扇窗消失。你回到阿澈床边，从已知活人学起。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l02.ache"
+    },
+    {
+      "id": "l02.ache",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈笑你贴了半天还把他的脉当自己的。你退开手再贴上，终于听出他呼吸停顿时，另一道近处的心跳仍在——那是你自己。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l02.empty"
+    },
+    {
+      "id": "l02.empty",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你按同样的力道试空房，墙后没有与呼吸同起落的回声。林月让你再试阿澈一次；差别仍在。听脉可说“有人”，不能说“是谁”。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "l.hear",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "l03.letters"
+    },
+    {
+      "id": "l03.letters",
+      "chapter": "卷二 · 一张张真名",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "许家姐姐带来三封信。许澄说母亲的花开了，桂花糕没吃到，出山后想看海；她还认真问过海水能不能入药。姐姐把信铺在伤签旁：“乙七会想这些吗？”",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l03.plan"
+    },
+    {
+      "id": "l03.plan",
+      "chapter": "卷二 · 一张张真名",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "里门可能听得见熟悉的声音。姐姐愿意去，却不让你替妹妹答应离榻。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "borrow",
+          "text": "借第一封信，到门边读给许澄听",
+          "target": "l03.borrow",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "l.letter",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "nickname",
+          "text": "信留给姐姐，请她亲口叫乳名",
+          "target": "l03.nickname",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l03.borrow",
+      "chapter": "卷二 · 一张张真名",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "姐姐把信折进你袖里：“她若回应，你还得让我亲自问一句。信能叫人想起家，不能替我认人。”你答应把信原样还她。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l04.chen"
+    },
+    {
+      "id": "l03.nickname",
+      "chapter": "卷二 · 一张张真名",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "姐姐收好信，教你许澄小时候叫她的乳名，却说那句要由她亲自问。她会靠近里门，守卫也更容易看见她。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l04.chen"
+    },
+    {
+      "id": "l04.chen",
+      "chapter": "卷二 · 一张张真名",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "陈闻把领料单背面翻给你看，画出正门和侧门换班交错的一刻。“我能推空车到门边；谁从里门出来，我不能替你们保证。”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l04.select"
+    },
+    {
+      "id": "l04.select",
+      "chapter": "卷二 · 一张张真名",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "上次山腹坡道的处置，决定守卫是否已经认得你们的车。你要拿哪份真记录进门？",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "signed",
+          "text": "用保留的车次与药箱原签进门",
+          "target": "l04.signed",
+          "lockedReason": "守卫已因上次质问加巡",
+          "conditions": [
+            {
+              "variable": "case.guardAlert",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "misreport",
+          "text": "请陈闻报错车次替你们挡巡查",
+          "target": "l04.misreport",
+          "lockedReason": "现有车次原签足以进门",
+          "conditions": [
+            {
+              "variable": "case.guardAlert",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l04.signed",
+      "chapter": "卷二 · 一张张真名",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "陈闻把原签交给姐姐保管。车可照实进门；事后他会以自己的签名公开作证，不能再装作不知炉房从哪里领药。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l05.cart"
+    },
+    {
+      "id": "l04.misreport",
+      "chapter": "卷二 · 一张张真名",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "陈闻看一眼守卫新添的巡牌，自己在交接簿上改了车次：“这行我签名。查起来，差事由我丢。”姐姐请他把真时辰另写一份，免得救人后只剩假账。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.chenJob",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "l05.cart"
+    },
+    {
+      "id": "l05.cart",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "空车推到侧门，门里没有回应。姐姐站到门边，念出信里第一句，里侧却传来两下。有人听见了；两下仍可能是守卫学来的。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l05.choice"
+    },
+    {
+      "id": "l05.choice",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "姐姐要亲自确认。若你先前向她夸大过身份，她不肯再等你试听脉；否则你可以先辨门后是否有活人，再让她问乳名。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "pulse",
+          "text": "先贴薄门听脉，再让姐姐问",
+          "target": "l05.pulse",
+          "lockedReason": "先前夸大身份，姐姐不肯再等术法试探",
+          "conditions": [
+            {
+              "variable": "case.familyWindow",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "sister",
+          "text": "请姐姐先靠门叫乳名",
+          "target": "l05.sister",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "l.sisterExposed",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l05.pulse",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "你贴门听见一人的呼吸，又被阵气压断。能确定门后有活人，不能判他是哪一个。符角开始发黑，姐姐接过位置，叫出乳名。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l06.reply"
+    },
+    {
+      "id": "l05.sister",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "姐姐靠近门缝。守卫从正廊看见她的衣角，你把药车横到两人之间；他的脚步停了一息。姐姐仍把乳名叫了出来。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l06.reply"
+    },
+    {
+      "id": "l06.reply",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山腹里门",
+      "speaker": "旁白",
+      "text": "门里的人没答乳名，却叫出姐姐小时候常用的另一个称呼。姐姐手一颤：“是她的声音。”你所听的是活人的脉，姐姐认的是妹妹的回应；两件事不能互相替代。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "l.familyAsked",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "l06.open"
+    },
+    {
+      "id": "l06.open",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山腹里门",
+      "speaker": "旁白",
+      "text": "第二道锁开了。许澄先把一个赤脚少年推向林月：“外榻这个先走。”林月给他药箱抱着。里榻还有段七，伤重走不了；警钟的铜舌已经在动。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l07.warning"
+    },
+    {
+      "id": "l07.warning",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "你看得见里榻到侧门的距离，也看见遮铃符烧黑。原约是听到三声急敲就带已出门的人先走。现在里榻恰好敲了三下。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "retreat",
+          "text": "守约撤离，先保许澄和外榻少年",
+          "target": "l07.retreat",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "return",
+          "text": "回去扶段七；阿澈和陈闻都可能替你挡守卫",
+          "target": "l07.return",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "l.danqi",
+              "operation": "set",
+              "value": 1
+            },
+            {
+              "variable": "case.chenJob",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l07.retreat",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "你拉林月上车。她甩开你一下，看见许澄和少年已经坐稳，又闭口推车。段七仍在内榻；守卫封门，你们不把“没见到”写成“已死”。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l08.road"
+    },
+    {
+      "id": "l07.return",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "你回到里榻扶起段七，符已烧尽。阿澈在外面故意推倒药架，引开一名守卫，旧伤当即裂开；陈闻报错车次挡住另一轮盘问。你把段七拖出门，村口又裂一符。",
+      "background": "mountainHeart",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l08.road"
+    },
+    {
+      "id": "l08.road",
+      "chapter": "卷二 · 一张张真名",
+      "location": "下山路",
+      "speaker": "旁白",
+      "text": "下山路上，顾衡带村民往高处走。许澄扶着车沿，第一句话问：“段七呢？”姐姐把纸铺在她面前：“先把你们最后听见的名字写上，没见到的就留空。”",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l08.answer"
+    },
+    {
+      "id": "l08.answer",
+      "chapter": "卷二 · 一张张真名",
+      "location": "下山路",
+      "speaker": "旁白",
+      "text": "你得先回答她，不许把不同的救援结果揉成一句安慰话。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "rescued",
+          "text": "告诉她段七已经出门，阿澈旧伤复发",
+          "target": "l08.rescued",
+          "lockedReason": "段七仍在里榻",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "inside",
+          "text": "告诉她段七留在里榻，暂未见到",
+          "target": "l08.inside",
+          "lockedReason": "段七已救出",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l08.rescued",
+      "chapter": "卷二 · 一张张真名",
+      "location": "下山路",
+      "speaker": "旁白",
+      "text": "许澄先去看段七，再去看阿澈新裂的伤。她没有说你做得全对，只问林月药够不够；林月让她把自己听见的内榻姓名写下。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l08.names"
+    },
+    {
+      "id": "l08.inside",
+      "chapter": "卷二 · 一张张真名",
+      "location": "下山路",
+      "speaker": "旁白",
+      "text": "许澄点头，写下“段七，最后见于内榻”，没有写死讯。林月看着那个空格，说明天还要想办法问守卫他被移去哪里。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l08.names"
+    },
+    {
+      "id": "l08.names",
+      "chapter": "卷二 · 一张张真名",
+      "location": "下山路",
+      "speaker": "旁白",
+      "text": "姐姐要你核对阿澈隔壁那一榻的名字。若此前抄过榻号，可直接与伤签并列；没有抄号，就请许澄和少年分开说，得到范围较小但诚实的名单。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "bed",
+          "text": "用现场抄的榻号核伤签",
+          "target": "l08.bed",
+          "lockedReason": "此前没有抄到榻号",
+          "conditions": [
+            {
+              "variable": "case.bedNumber",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "witness",
+          "text": "分别问许澄和外榻少年",
+          "target": "l08.witness",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l08.bed",
+      "chapter": "卷二 · 一张张真名",
+      "location": "下山路",
+      "speaker": "旁白",
+      "text": "两张榻号在医舍伤签上分别对应阿澈与一名仍待核名的人。你把“床位”和“已亲见的人”分栏，姐姐补上许澄刚才亲口确认的姓名。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "l.names",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "l09.testimony"
+    },
+    {
+      "id": "l08.witness",
+      "chapter": "卷二 · 一张张真名",
+      "location": "下山路",
+      "speaker": "旁白",
+      "text": "许澄与少年分别说出外榻两人的长相与换药时辰，有一处时辰不同。你保留这个不同，没替他们猜成同一人；名单少两格，足够先护送活人。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "l.names",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "l09.testimony"
+    },
+    {
+      "id": "l09.testimony",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "许澄在临时医舍说，她第一夜答应坐榻，因为宗门许诺给病中的母亲取药。第二夜她说要走，册上却早已写她“离山”。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l09.record"
+    },
+    {
+      "id": "l09.record",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "许澄：“我说过一次愿意，没说过从此不许问我。”你要把哪一句写进给议事堂看的证词？",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "simple",
+          "text": "只写“许澄从头到尾被强迫”",
+          "target": "l09.correct",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "full",
+          "text": "写她曾同意一夜，此后被剥夺叫停权",
+          "target": "l09.full",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "l.testimony",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l09.correct",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "许澄按住你的笔：“第一夜是我答应的。你把它抹掉，下一次别人也能把我的话抹掉。”你把那句划去，请她自己讲完整。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l09.full"
+    },
+    {
+      "id": "l09.full",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你照她的话重写：第一夜同意，第二夜要求离开却被拒，去向还被提前改成“离山”。许澄看过后亲手署名：“到堂上，也让我自己说。”",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "l.testimony",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "l10.confession"
+    },
+    {
+      "id": "l10.confession",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月说两年前她曾把炉里有人告诉一户家属。那家敲正门，病人次日被移走，她整月再听不到回音。从此她总替家属决定“再等安全一点”。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l10.reply"
+    },
+    {
+      "id": "l10.reply",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "姐姐说：“你怕她被移走，我怕她以为没人找。我不是来与你争谁更疼她的。”下一次行动，由谁定入门时机与停手条件？",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "linOnly",
+          "text": "仍请林月一人决定，家属只带钥匙",
+          "target": "l10.refuse",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "joint",
+          "text": "请姐姐与获救者一起定退路和叫停条件",
+          "target": "l10.agree",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "l.protocol",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l10.refuse",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "姐姐把钥匙收回袖里：“我会帮忙，不会把妹妹的下一次交给旁人独自决定。”林月没有反驳。你们坐下来，逐项写谁看门、谁看伤、听到几声就退。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l10.agree"
+    },
+    {
+      "id": "l10.agree",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月写炉门与退路，姐姐记病人能说停的条件，许澄补自己够得到的铃位。三个人没有突然和好；纸上每一项都有人可当场核查。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "l.protocol",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "l.hall"
+    },
+    {
+      "id": "l.hall",
+      "chapter": "卷二 · 一张张真名",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "祁元肃听完救援和村符记录，没有否认有人受伤：“你们抽走几张榻，南沟昨夜裂了两张符。下一股来时，谁替你们守？”你手里有真名和救援代价，却没有三户迁路实走的时辰。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.hall.ask"
+    },
+    {
+      "id": "l.hall.ask",
+      "chapter": "卷二 · 一张张真名",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "许澄在堂外等。她是获救者，不是你拿来驳倒祁元肃的证物。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "ask",
+          "text": "先问许澄愿否进堂自己作证",
+          "target": "l.hall.witness",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "l.familyAsked",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "speakFor",
+          "text": "直接代她宣称“所有人都同意开炉”",
+          "target": "l.hall.correction",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l.hall.correction",
+      "chapter": "卷二 · 一张张真名",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "姐姐把门推开：“她没说过替所有人答应。让她自己决定来不来。”祁元肃也不肯凭你的话改阵令。你退到堂外，先问许澄。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.hall.witness"
+    },
+    {
+      "id": "l.hall.witness",
+      "chapter": "卷二 · 一张张真名",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "许澄愿意进堂，把第一夜与第二夜分开说。姐姐不代答。祁元肃问旧道是否走过、村民是否愿迁；你只能承认这条路线还没量到。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.hall.choice"
+    },
+    {
+      "id": "l.hall.choice",
+      "chapter": "卷二 · 一张张真名",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "眼下能执行的是护送伤者离山，或暂守旧阵、公开真名并争取下一次迁村。没有三户脚程与村民同意，不能现在改道。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "leave",
+          "text": "先护送获救者离山，留待救名单",
+          "target": "l.depart",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "hold",
+          "text": "今晚协助守阵，公开真名与伤情",
+          "target": "l.hold",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l.depart",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山门",
+      "speaker": "旁白",
+      "text": "山门前只有一辆药车。重伤者得平躺，能走的人互扶；林月带药，姐姐带真名册，陈闻肯核车次。你先安排谁占车位。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.depart.choice"
+    },
+    {
+      "id": "l.depart.choice",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山门",
+      "speaker": "旁白",
+      "text": "路窄，车上的位置够两名卧伤者。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "injured",
+          "text": "先让卧伤者上车，再安排能走者互扶",
+          "target": "l.depart.good",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "firstCome",
+          "text": "先让离车最近的人上，路上再换",
+          "target": "l.depart.correct",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l.depart.correct",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山门",
+      "speaker": "旁白",
+      "text": "许澄扶住车辕：“段七和阿澈都走不快。”林月把轻伤者请下车，留位给卧伤者；已经浪费一段开门时辰，你们只能沿旧山路慢行。",
+      "background": "gate",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.depart.good"
+    },
+    {
+      "id": "l.depart.good",
+      "chapter": "卷二 · 一张张真名",
+      "location": "山道",
+      "speaker": "旁白",
+      "text": "林月按伤势分药，姐姐把获救、仍在炉内和未见到的人列成三栏。你们离开时，顾衡带愿走的村人撤向高处；宗门用剩下的石柱和人榻撑过这一夜。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "ending.leave"
+    },
+    {
+      "id": "l.hold",
+      "chapter": "卷二 · 一张张真名",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你把真名册、药账与昨夜裂符摆在堂上，说明今晚仍用旧阵，也说明这不是所有人的同意。祁元肃答应暂不改写新病人的去向；许澄要求把停铃放回伸手可及处。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.hold.ending"
+    },
+    {
+      "id": "l.hold.ending",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "姐姐留一份真账给村民，林月留一份在医舍。段七若仍在里榻，名字清楚写在待救栏；若已出门，他的新伤和阿澈的复伤都记在药账。下一次行动仍需量山路、问村人。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "ending.oldPublic"
     },
     {
       "id": "story.three.00.0",
@@ -1957,64 +3102,6 @@
       "effects": [],
       "choices": [],
       "terminal": true
-    },
-    {
-      "id": "story.leave.00.0",
-      "chapter": "结局 · 带人离山",
-      "location": "青云山道",
-      "speaker": "旁白",
-      "text": "你和林月先去确认炉中人的姓名、床位、侧门换班，许澄姐姐带来家属保存的旧书信，一封封对着点名。村里那头，你没有与顾衡重走南沟；撤村簿仍写着错误的“半炷香”，你也不知道谷口旧道如今能否通行。你不敢让灵潮在村民还在坡上时改道，祁元肃又拒绝放走坐榻的人。林月决定趁宗门搬运新符料开侧门，你帮她重新画遮铃符。",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [
-        {
-          "variable": "story.xucheng",
-          "operation": "set",
-          "value": 1
-        }
-      ],
-      "choices": [],
-      "next": "story.leave.00.1"
-    },
-    {
-      "id": "story.leave.00.1",
-      "chapter": "结局 · 带人离山",
-      "location": "青云山道",
-      "speaker": "旁白",
-      "text": "这回你清楚它只能遮七息，便让阿澈在门外接应，不去碰守卫看得见的正廊。",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.leave.01.0"
-    },
-    {
-      "id": "story.leave.01.0",
-      "chapter": "结局 · 带人离山",
-      "location": "青云山道",
-      "speaker": "旁白",
-      "text": "你们按核准的床位带出许澄和近门几人。许澄姐姐在山道上把半枚玉扣放进妹妹手里，阿澈听见她咳了两声，才知道隔墙的人不是沈砚。炉房深处仍传来敲门声；遮铃符已经烧尽，谁都不能装作没听见。顾衡带愿走的村民先撤，另一些人不愿舍屋，留在旧阵保护下。祁元肃以剩下的弟子撑过此夜。你们救出了眼前的人，也留下另一批人继续受伤。",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.leave.02.0"
-    },
-    {
-      "id": "story.leave.02.0",
-      "chapter": "结局 · 带人离山",
-      "location": "青云山道",
-      "speaker": "旁白",
-      "text": "下山后，林月先想把名单折起来。许澄姐姐摊开纸，让每个获救者说出最后听见的名字。你写明谁出来了、谁还在、哪条回山的路尚能走。阿澈要跟你们回去，许澄说他先把烧退了。你们没有在此夜解决旧阵，接下来会带着活人的证词再进山。",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "ending.leave"
     },
     {
       "id": "ending.leave",

@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 16 && demo.Definition.revision == 16,
+            Require(full.Definition.revision == 17 && demo.Definition.revision == 17,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -32,6 +32,7 @@ namespace WenXinJie.Editor
             Require(full.Nodes.Count(node => node.terminal) >= 5, "Expected distinct story outcomes.");
             VerifyPaths(full, demo);
             VerifyOpeningRecovery(full);
+            VerifyLinRoute(full);
             VerifyAssets(full);
             Debug.Log("Campaign smoke tests PASS: new story graph, endings, Demo handoff and assets.");
         }
@@ -76,6 +77,42 @@ namespace WenXinJie.Editor
             AdvanceTo(run, "c06.revise");
             Require(run.Choose("correct") && run.GetValue("case.ashCorrect") == 1,
                 "The player could not correct an overstated inference.");
+        }
+
+        private static void VerifyLinRoute(StoryGraph full)
+        {
+            var run = new StorySession(full, 42);
+            AdvanceTo(run, "case.boundary");
+            Require(run.Choose("rescue"), "Lin Yue route is unavailable.");
+            for (var step = 0; step < 150 && run.Current.id != "ending.leave"; step++)
+            {
+                var id = run.Current.id;
+                var choiceId = id switch
+                {
+                    "l01.table" when run.GetValue("l.medical") == 0 => "medicine",
+                    "l01.table" when run.GetValue("l.shift") == 0 => "shift",
+                    "l01.table" => "ready",
+                    "l02.test" => "ache",
+                    "l03.plan" => "borrow",
+                    "l04.select" => "signed",
+                    "l05.choice" => "pulse",
+                    "l07.warning" => "return",
+                    "l08.answer" => "rescued",
+                    "l08.names" => "bed",
+                    "l09.record" => "full",
+                    "l10.reply" => "joint",
+                    "l.hall.ask" => "ask",
+                    "l.hall.choice" => "leave",
+                    "l.depart.choice" => "injured",
+                    _ => string.Empty
+                };
+                Require(string.IsNullOrEmpty(choiceId) ? run.Advance() : run.Choose(choiceId),
+                    "Lin Yue route stopped at " + id);
+            }
+
+            Require(run.Current.id == "ending.leave" && run.GetValue("l.danqi") == 1
+                    && run.GetValue("l.protocol") == 1,
+                "Lin Yue rescue did not carry its outcomes to the ending.");
         }
 
         private static void AdvanceTo(StorySession session, string target)
