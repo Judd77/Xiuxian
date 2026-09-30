@@ -58,6 +58,19 @@ namespace WenXinJie.Narrative
         {
             Require(!string.IsNullOrWhiteSpace(node.text) && !string.IsNullOrWhiteSpace(node.background), "Missing presentation: " + node.id);
             Require(node.effects != null && node.choices != null, "Missing node arrays: " + node.id);
+            foreach (var variant in node.variants ?? Array.Empty<StoryTextVariant>())
+            {
+                Require(variant != null && !string.IsNullOrWhiteSpace(variant.text)
+                                        && variant.conditions != null && variant.conditions.Length > 0,
+                    "Invalid text variant: " + node.id);
+                foreach (var condition in variant.conditions)
+                {
+                    Require(condition != null, "Null text variant condition: " + node.id);
+                    GetVariable(condition.variable);
+                    Require(condition.minimum <= condition.maximum, "Invalid text variant bounds: " + node.id);
+                }
+            }
+
             Require(node.choices.Length <= 4, "At most four choices per node: " + node.id);
             int exits = (node.terminal ? 1 : 0) + (!string.IsNullOrEmpty(node.next) ? 1 : 0) + (node.choices.Length > 0 ? 1 : 0);
             Require(exits == 1, "Node must have exactly one exit mode: " + node.id);

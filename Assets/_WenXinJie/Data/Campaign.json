@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 21,
+  "revision": 22,
   "start": "case.intro",
   "variables": [
     {
@@ -3528,12 +3528,34 @@
       "chapter": "卷二 · 一张张真名",
       "location": "山腹侧门",
       "speaker": "旁白",
-      "text": "空车推到侧门，门里没有回应。姐姐站到门边，念出信里第一句，里侧却传来两下。有人听见了；两下仍可能是守卫学来的。",
+      "text": "空车推到山腹侧门，门里没有回应。林月看着将要烧黑的遮铃符，示意你们按在许家约好的办法试探；两下敲门还不能当作身份凭据。",
       "background": "mountainHeart",
       "portrait": "linYue",
       "rain": false,
       "effects": [],
       "choices": [],
+      "variants": [
+        {
+          "text": "空车推到山腹侧门，门里没有回应。你从袖中取出第一封信，念许澄写桂花糕的那一行。门里传来两下敲击。姐姐仍在车后，手伸出来要回信，却没有急着认人：“她听见了，不一定就是她敲的。”",
+          "conditions": [
+            {
+              "variable": "l.letter",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "空车推到山腹侧门，门里没有回应。信还在姐姐怀里。她走到门边，叫出许澄小时候的乳名。门里传来两下敲击。她攥着信没有开锁：“回应我的，也可能只是听过这个名字的人。”",
+          "conditions": [
+            {
+              "variable": "l.letter",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
+        }
+      ],
       "next": "l05.choice"
     },
     {
@@ -3541,7 +3563,7 @@
       "chapter": "卷二 · 一张张真名",
       "location": "山腹侧门",
       "speaker": "旁白",
-      "text": "姐姐要亲自确认。若你先前向她夸大过身份，她不肯再等你试听脉；否则你可以先辨门后是否有活人，再让她问乳名。",
+      "text": "两下敲击只能证明门里有人听见。姐姐要再问一件只有她和许澄知道的旧事；你可先用听脉确认薄门后有活人，但辨不出姓名。",
       "background": "mountainHeart",
       "portrait": "linYue",
       "rain": false,
@@ -3584,7 +3606,7 @@
       "chapter": "卷二 · 一张张真名",
       "location": "山腹侧门",
       "speaker": "旁白",
-      "text": "你贴门听见一人的呼吸，又被阵气压断。能确定门后有活人，不能判他是哪一个。符角开始发黑，姐姐接过位置，叫出乳名。",
+      "text": "你贴门听见一人的呼吸，又被阵气压断。门后有活人，仍不知是谁。姐姐隔着药车问起幼时院里那棵树；遮铃符的角已开始发黑。",
       "background": "mountainHeart",
       "portrait": "linYue",
       "rain": false,
@@ -3597,7 +3619,7 @@
       "chapter": "卷二 · 一张张真名",
       "location": "山腹侧门",
       "speaker": "旁白",
-      "text": "姐姐靠近门缝。守卫从正廊看见她的衣角，你把药车横到两人之间；他的脚步停了一息。姐姐仍把乳名叫了出来。",
+      "text": "姐姐走近门缝，问起幼时院里那棵树。守卫从正廊看清她的脸；你把药车横到两人之间，他的脚步停了一息。她知道自己已被看见，仍等门里回答。",
       "background": "mountainHeart",
       "portrait": "linYue",
       "rain": false,
@@ -3610,7 +3632,7 @@
       "chapter": "卷二 · 一张张真名",
       "location": "山腹里门",
       "speaker": "旁白",
-      "text": "门里的人没答乳名，却叫出姐姐小时候常用的另一个称呼。姐姐手一颤：“是她的声音。”你所听的是活人的脉，姐姐认的是妹妹的回应；两件事不能互相替代。",
+      "text": "门里传来许澄的声音，说树早被母亲砍了，还问姐姐手上的伤好了没有。姐姐认出妹妹的声音与家事；你若听过脉，也只由术法确认这里有活人。她问许澄愿不愿现在走，门里答：“先带外榻那个小的。”",
       "background": "mountainHeart",
       "portrait": "linYue",
       "rain": false,
@@ -3716,7 +3738,29 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "l08.answer"
+      "next": "l08.answer",
+      "variants": [
+        {
+          "text": "下山路上，顾衡带村民往高处走。正廊守卫认出了姐姐，盘问的人已往许家去了；母亲病着走不快，她托陈闻先送药和口信，自己仍陪许澄下山。许澄扶着车沿问：“段七呢？”姐姐把名单纸铺开。",
+          "conditions": [
+            {
+              "variable": "l.sisterExposed",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "下山路上，顾衡带村民往高处走。守卫没认出姐姐，她还能带许澄回家取药。许澄扶着车沿，第一句话问：“段七呢？”姐姐把名单纸铺开，等你先回答。",
+          "conditions": [
+            {
+              "variable": "l.sisterExposed",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "l08.answer",
@@ -3923,7 +3967,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "l09.full"
+      "next": "l10.confession"
     },
     {
       "id": "l09.full",
@@ -3999,13 +4043,13 @@
       "chapter": "卷二 · 一张张真名",
       "location": "医舍",
       "speaker": "旁白",
-      "text": "姐姐把钥匙收回袖里：“我会帮忙，不会把妹妹的下一次交给旁人独自决定。”林月没有反驳。你们坐下来，逐项写谁看门、谁看伤、听到几声就退。",
+      "text": "姐姐把钥匙收回袖里：“我会帮忙，不会把妹妹的下一次交给旁人独自决定。”林月没有反驳。院里雨声压过了钟，你们尚未定出谁握停铃、谁能叫停；若今晚还要守阵，只能在众人面前重新谈。",
       "background": "quartersNight",
       "portrait": "linYue",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "l10.agree"
+      "next": "l.hall"
     },
     {
       "id": "l10.agree",
@@ -4044,7 +4088,7 @@
       "chapter": "卷二 · 一张张真名",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "许澄在堂外等。她是获救者，不是你拿来驳倒祁元肃的证物。",
+      "text": "许澄在堂外等。她是获救者，不是你拿来驳倒祁元肃的证物。若她已核过并签下证词，你可以征得同意后照原话读；否则请她自己陈述。",
       "background": "stele",
       "portrait": "",
       "rain": false,
@@ -4064,6 +4108,22 @@
             }
           ],
           "outcomes": []
+        },
+        {
+          "id": "read",
+          "text": "经许澄同意，读她亲笔核过的证词",
+          "target": "l.hall.read",
+          "lockedReason": "只有许澄核过并签名的证词才能代读",
+          "conditions": [
+            {
+              "variable": "l.testimony",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": false
         },
         {
           "id": "speakFor",
@@ -4094,7 +4154,20 @@
       "chapter": "卷二 · 一张张真名",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "许澄愿意进堂，把第一夜与第二夜分开说。姐姐不代答。祁元肃问旧道是否走过、村民是否愿迁；你只能承认这条路线还没量到。",
+      "text": "你请许澄进堂。她亲口把第一夜的同意和第二夜的拒绝分开说，又指着“离山”二字问是谁替她写的。祁元肃问旧道是否走过、村民是否愿迁；这条路线还没量到，你照实承认。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.hall.choice"
+    },
+    {
+      "id": "l.hall.read",
+      "chapter": "卷二 · 一张张真名",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "许澄点头，你照她签过的纸念：第一夜她答应坐榻，第二夜要走却被拒，去向还被提前写成“离山”。她进堂确认每一句，祁元肃不能用“她自愿过”盖掉后半段。问到旧道与迁村时，你仍承认未实走、未征得村民同意。",
       "background": "stele",
       "portrait": "",
       "rain": false,
@@ -4126,10 +4199,45 @@
           "id": "hold",
           "text": "今晚协助守阵，公开真名与伤情",
           "target": "l.hold",
-          "lockedReason": "",
-          "conditions": [],
+          "lockedReason": "还未与家属和获救者定下停铃安排",
+          "conditions": [
+            {
+              "variable": "l.protocol",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
           "effects": [],
-          "outcomes": []
+          "outcomes": [],
+          "hidden": true
+        },
+        {
+          "id": "holdLate",
+          "text": "先在堂上定停铃与退路，再协助守阵",
+          "target": "l.hold.plan",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "l.protocol",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        }
+      ],
+      "variants": [
+        {
+          "text": "眼下能执行的是护送伤者离山，或暂守旧阵、公开真名。但你们尚未定出谁握停铃，若要守，须先在堂上同家属和获救者谈妥，移车窗口会更紧。没有三户脚程与村民同意，不能现在改道。",
+          "conditions": [
+            {
+              "variable": "l.protocol",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
         }
       ]
     },
@@ -4202,6 +4310,25 @@
       "effects": [],
       "choices": [],
       "next": "ending.leave"
+    },
+    {
+      "id": "l.hold.plan",
+      "chapter": "卷二 · 一张张真名",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "姐姐当着祁元肃说钥匙还在她手里。许澄要停铃放回自己够得到的地方，林月逐项写谁看门、谁看伤、几声急敲就退。你在众人面前答应，宗门此后不能悄悄撤掉这条约定。争论耽搁了移车时辰，陈闻只得再等一轮守卫换班。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "l.protocol",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "l.hold"
     },
     {
       "id": "l.hold",

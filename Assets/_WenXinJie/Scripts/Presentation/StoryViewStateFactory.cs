@@ -20,14 +20,14 @@ namespace WenXinJie.Presentation
                 node.chapter,
                 node.location,
                 node.speaker,
-                node.text,
+                session.CurrentText,
                 BuildStatus(session, journal),
                 node.terminal ? (node.id.StartsWith("ending.") ? "本周目终" : "未完待续") : "继续",
                 node.terminal,
                 _assets.GetBackground(node.background),
                 _assets.GetPortrait(node.portrait),
                 journal,
-                node.choices.Where(choice => !choice.hidden)
+                node.choices.Where(choice => !choice.hidden || session.IsAvailable(choice))
                     .Select(choice => CreateChoice(session, choice)).ToArray());
         }
 

@@ -27,6 +27,19 @@ namespace WenXinJie.Narrative
         }
 
         public StoryNode Current { get; private set; }
+
+        public string CurrentText
+        {
+            get
+            {
+                var variant = (Current.variants ?? Array.Empty<StoryTextVariant>())
+                    .FirstOrDefault(item => item.conditions.All(condition =>
+                        _values[condition.variable] >= condition.minimum
+                        && _values[condition.variable] <= condition.maximum));
+                return variant?.text ?? Current.text;
+            }
+        }
+
         public int Revision => _graph.Definition.revision;
 
         public int GetValue(string id)

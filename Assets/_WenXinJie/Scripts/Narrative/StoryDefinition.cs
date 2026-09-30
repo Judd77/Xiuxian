@@ -30,6 +30,7 @@ namespace WenXinJie.Narrative
         public string location;
         public string speaker;
         public string text;
+        public StoryTextVariant[] variants = Array.Empty<StoryTextVariant>();
         public string background;
         public string portrait;
         public bool rain;
@@ -37,6 +38,13 @@ namespace WenXinJie.Narrative
         public bool terminal;
         public StoryEffect[] effects = Array.Empty<StoryEffect>();
         public StoryChoice[] choices = Array.Empty<StoryChoice>();
+    }
+
+    [Serializable]
+    public sealed class StoryTextVariant
+    {
+        public string text;
+        public StoryCondition[] conditions = Array.Empty<StoryCondition>();
     }
 
     [Serializable]

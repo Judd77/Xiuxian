@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 21 && demo.Definition.revision == 21,
+            Require(full.Definition.revision == 22 && demo.Definition.revision == 22,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -86,9 +86,17 @@ namespace WenXinJie.Editor
             var run = new StorySession(full, 42);
             AdvanceTo(run, "case.boundary");
             Require(run.Choose("rescue"), "Lin Yue route is unavailable.");
+            StorySnapshot beforeLetters = null;
+            StorySnapshot beforeTestimony = null;
             for (var step = 0; step < 150 && run.Current.id != "ending.leave"; step++)
             {
                 var id = run.Current.id;
+                if (id == "l03.plan") beforeLetters = run.Snapshot();
+                if (id == "l09.record") beforeTestimony = run.Snapshot();
+                if (id == "l05.cart")
+                    Require(run.CurrentText.Contains("桂花糕"), "Borrowed letter was not used at the door.");
+                if (id == "l08.road")
+                    Require(run.CurrentText.Contains("守卫没认出姐姐"), "Covered approach did not carry forward.");
                 var choiceId = id switch
                 {
                     "l01.table" when run.GetValue("l.medical") == 0 => "medicine",
@@ -103,7 +111,7 @@ namespace WenXinJie.Editor
                     "l08.names" => "bed",
                     "l09.record" => "full",
                     "l10.reply" => "joint",
-                    "l.hall.ask" => "ask",
+                    "l.hall.ask" => "read",
                     "l.hall.choice" => "leave",
                     "l.depart.choice" => "injured",
                     _ => string.Empty
@@ -115,6 +123,32 @@ namespace WenXinJie.Editor
             Require(run.Current.id == "ending.leave" && run.GetValue("l.danqi") == 1
                     && run.GetValue("l.protocol") == 1,
                 "Lin Yue rescue did not carry its outcomes to the ending.");
+            Require(beforeLetters != null && beforeTestimony != null,
+                "Lin Yue branch snapshots were not reached.");
+
+            var otherApproach = StorySession.Restore(full, beforeLetters);
+            Require(otherApproach.Choose("nickname"), "The family could not keep its letter.");
+            AdvanceTo(otherApproach, "l05.cart");
+            Require(otherApproach.CurrentText.Contains("信还在姐姐怀里"),
+                "Keeping the letter did not change the door scene.");
+            Require(otherApproach.Advance() && otherApproach.Choose("sister"),
+                "The sister could not question the person behind the door.");
+            AdvanceTo(otherApproach, "l08.road");
+            Require(otherApproach.CurrentText.Contains("盘问的人已往许家"),
+                "The guard seeing the sister had no follow-up.");
+
+            var correctedTestimony = StorySession.Restore(full, beforeTestimony);
+            Require(correctedTestimony.Choose("simple"), "The short testimony was unavailable.");
+            AdvanceTo(correctedTestimony, "l.hall.ask");
+            Require(correctedTestimony.GetValue("l.testimony") == 0
+                    && correctedTestimony.GetValue("l.protocol") == 0
+                    && !correctedTestimony.IsAvailable(correctedTestimony.Current.choices.First(choice => choice.id == "read")),
+                "A corrected draft must not become permission to speak for Xu Cheng.");
+            Require(correctedTestimony.Choose("ask") && correctedTestimony.Advance(),
+                "Xu Cheng could not testify in her own words.");
+            Require(correctedTestimony.Choose("holdLate") && correctedTestimony.Current.id == "l.hold.plan"
+                    && correctedTestimony.Advance() && correctedTestimony.GetValue("l.protocol") == 1,
+                "Late public agreement did not repair the missing stop protocol.");
         }
 
         private static void VerifyGuRoute(StoryGraph full)
