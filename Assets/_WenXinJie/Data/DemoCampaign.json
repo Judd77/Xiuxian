@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 17,
+  "revision": 18,
   "start": "case.intro",
   "variables": [
     {
@@ -209,6 +209,66 @@
     },
     {
       "id": "l.familyAsked",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.oldCharm",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.bellBook",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.corrected",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.fatherHeard",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.walked",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.thirdPillar",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.hammer",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.villageRecord",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.extraCharm",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.archiveHeld",
       "initial": 0,
       "minimum": 0,
       "maximum": 1

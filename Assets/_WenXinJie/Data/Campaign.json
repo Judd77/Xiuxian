@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 17,
+  "revision": 18,
   "start": "case.intro",
   "variables": [
     {
@@ -209,6 +209,66 @@
     },
     {
       "id": "l.familyAsked",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.oldCharm",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.bellBook",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.corrected",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.fatherHeard",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.walked",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.thirdPillar",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.hammer",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.villageRecord",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.extraCharm",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.archiveHeld",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -1358,7 +1418,7 @@
         {
           "id": "village",
           "text": "跟顾衡核村口旧灾与撤离路线",
-          "target": "story.three.00.0",
+          "target": "g01.intro",
           "effects": [],
           "conditions": [],
           "outcomes": []
@@ -1372,6 +1432,782 @@
           "outcomes": []
         }
       ]
+    },
+    {
+      "id": "g01.intro",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村",
+      "speaker": "旁白",
+      "text": "顾衡领你走过南沟。最靠山的老妇人说，十年前阵停，她儿子背她逃，倒在第一道坡上，再没起来。东坡工匠却说那晚自家只遭一场雨。呈报写“全村同时遇险”。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "story.village",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g01.table"
+    },
+    {
+      "id": "g01.table",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村",
+      "speaker": "旁白",
+      "text": "你能先听人、先看符，或先借原簿。三个入口不会替你定整村的真相；要顾衡当众改记，至少要让两种独立来源碰到一起。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "charm",
+          "text": "先看南沟、东坡留存的两张旧符",
+          "target": "g02.old",
+          "lockedReason": "旧符已查看",
+          "conditions": [
+            {
+              "variable": "g.oldCharm",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "g.oldCharm",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "book",
+          "text": "去旧钟楼借守钟原簿",
+          "target": "g03.book",
+          "lockedReason": "原簿已查看",
+          "conditions": [
+            {
+              "variable": "g.bellBook",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [
+            {
+              "variable": "g.bellBook",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "compare",
+          "text": "两份来源齐了，找顾衡核呈报",
+          "target": "g04.council",
+          "lockedReason": "先取旧符与原簿",
+          "conditions": [
+            {
+              "variable": "g.oldCharm",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "g.bellBook",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g02.old",
+      "chapter": "卷二 · 山下那份账",
+      "location": "工匠家",
+      "speaker": "旁白",
+      "text": "工匠把十年前的东坡符放到你面前，又拿出昨天南沟裂开的符。你想试辨气，可十年的余息早散尽了；术法沉默，不等于那夜没有灵潮。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g02.marks"
+    },
+    {
+      "id": "g02.marks",
+      "chapter": "卷二 · 山下那份账",
+      "location": "工匠家",
+      "speaker": "旁白",
+      "text": "东坡符从纸边往里烂，南沟符由中心崩开。工匠说雨先浸边，阵流从中间冲；你得把裂口并排看，不能用一张旧符让术法报十年前的名字。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "compare",
+          "text": "并排比裂口，记损坏方式不同",
+          "target": "g02.sound",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "force",
+          "text": "坚持用辨气判定东坡绝无阵流",
+          "target": "g02.force",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g02.force",
+      "chapter": "卷二 · 山下那份账",
+      "location": "工匠家",
+      "speaker": "旁白",
+      "text": "工匠把旧符收回：“十年了。你的手没听见，不等于他们那晚没受惊。”他让你看边缘霉斑与中心裂纹，再借原簿查时辰。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g02.sound"
+    },
+    {
+      "id": "g02.sound",
+      "chapter": "卷二 · 山下那份账",
+      "location": "工匠家",
+      "speaker": "旁白",
+      "text": "两符坏法不同。你写下“东坡所存符有雨损，南沟这张受阵流冲开”；东坡当夜究竟何时换符，还得靠原簿。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.oldCharm",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g01.table"
+    },
+    {
+      "id": "g03.book",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "旧钟楼原簿记亥初南沟三户先报符裂，近半个时辰后东坡才换符。老妇在背页找到儿子的名字，呈报却把死因写成山路跌伤。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g03.keep"
+    },
+    {
+      "id": "g03.keep",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "守钟人问原簿由谁保管。老妇就在门边；她说：“他死在哪一夜，连那一夜也不准写？”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "give",
+          "text": "请老妇带原簿去村议，自己只抄时辰",
+          "target": "g03.give",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "g.archiveHeld",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "take",
+          "text": "先拿原簿去逼顾衡承认",
+          "target": "g03.take",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g03.give",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "老妇把原簿包进布里：“他若想改，就当着村里人改。”原件由守钟人与家属带去，你抄下可核的两处时辰。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.bellBook",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g01.table"
+    },
+    {
+      "id": "g03.take",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "守钟人追到门口，要回原件：“你要质问，拿抄页去。原簿由我们自己带。”你将抄页留在手里，村议仍能对时辰，却得先解释为何擅拿。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.bellBook",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g01.table"
+    },
+    {
+      "id": "g04.council",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "村议上，你把符的裂口和守钟时辰摆给顾衡。老妇站在原簿旁，不许任何人把儿子的名字略过去。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g04.ask"
+    },
+    {
+      "id": "g04.ask",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "顾衡的呈报将两处写成同刻。要他改记，先问哪一处与原簿直接冲突。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "time",
+          "text": "问：南沟与东坡真的同时坏符吗？",
+          "target": "g04.time",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "liar",
+          "text": "只说：你骗了整村人",
+          "target": "g04.liar",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g04.liar",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "顾衡没有躲开：“我写错了。但你若只喊我说谎，他们仍不知道先裂的是哪家。”老妇把原簿推到你前面，让你按时辰问。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g04.time"
+    },
+    {
+      "id": "g04.time",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "顾衡读出原簿，终于承认南沟先险、东坡后换。他说怕宗门看见东坡没受冲，就撤掉南沟的护符：“我写重了危险，写轻了他。”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g04.death"
+    },
+    {
+      "id": "g04.death",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "老妇不让他把儿子只写成“跌伤”。顾衡在旧呈报旁补注阵停时辰、背行路线与死者姓名，旧字没有擦掉。她说自己也怕山灾，却不肯让别家的孩子替孙子受伤。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.corrected",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g05.father"
+    },
+    {
+      "id": "g05.father",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村民家",
+      "speaker": "旁白",
+      "text": "失踪弟子的父亲白天把护符摘了，夜里又挂到小女儿床边：“我儿子在炉里，我不想靠他挡。可这张符能让她安稳睡一晚。”桌上有一张空白撤离表。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g05.answer"
+    },
+    {
+      "id": "g05.answer",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村民家",
+      "speaker": "旁白",
+      "text": "你要他离家，得知道药、老人和孩子怎样过山路。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "listen",
+          "text": "坐下听他需要什么，再填撤离表",
+          "target": "g05.listen",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "form",
+          "text": "直接递表，请他先签愿意撤离",
+          "target": "g05.form",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g05.form",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村民家",
+      "speaker": "旁白",
+      "text": "他把空表推回：“你写愿意，能替我背母亲？小女儿的药放哪辆车？”你把表收起，先问路上的事。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g05.listen"
+    },
+    {
+      "id": "g05.listen",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村民家",
+      "speaker": "旁白",
+      "text": "他要一辆能平放伤者的车，要人在缓坡接老人，还得带女儿的药。你逐项写进表，没替他说已同意开谷口。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.fatherHeard",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g06.walk"
+    },
+    {
+      "id": "g06.walk",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "顾衡旧簿写三户半炷香可撤。你请老妇孙子照真实负重背她走，工匠带药箱、一个孩子跟后面。香烧尽时，他们只到第一道缓坡。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g06.order"
+    },
+    {
+      "id": "g06.order",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "路中有一处狭岔，快者先走会堵住背老妇的人。你安排哪户先出发？",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "slow",
+          "text": "老妇先走，药箱与孩子随后，快者最后",
+          "target": "g06.slow",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "fast",
+          "text": "让脚快的先走，争取尽早清路",
+          "target": "g06.fast",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g06.fast",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "快者在狭岔折返搬药，迎面堵住老妇。顾衡带人重走一次，耽误补符时辰；你把“半炷香”划掉，按最慢一户重排。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g06.slow"
+    },
+    {
+      "id": "g06.slow",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "老妇先过狭岔，药箱和孩子分开走，最后一户能追上。顾衡在旧簿旁亲手改时辰：“别让这几个字把人留在路上。”",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.walked",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g07.pillar"
+    },
+    {
+      "id": "g07.pillar",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "谷口旧泄流石道仍在，图上的第三根柱却被洪水挪离原位。你和工匠在村口、炉门各贴一张感应符；顾衡握预警钟。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g07.test"
+    },
+    {
+      "id": "g07.test",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "旧图说第三柱会先亮。你是照图送一缕灵力，还是先量柱位再试？",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "old",
+          "text": "照旧图轻试；若村符先亮立刻撤力",
+          "target": "g07.old",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "g.extraCharm",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "measure",
+          "text": "先辨移位石柱，再按新位置轻试",
+          "target": "g07.measure",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g07.old",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "村口符先亮，工匠敲钟。你照约撤力，仍裂了一张符；孩子被带离符下，没有受伤。你向村人说明自己照旧图试错，工匠当场补符。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g07.result"
+    },
+    {
+      "id": "g07.measure",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你沿石道逐根辨余息，第三柱脚下是洪水留下的新泥。先在纸上改位，再送极小一缕；村口符仍比炉门早亮，但第一下被石柱挡住，没有裂符。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g07.result"
+    },
+    {
+      "id": "g07.result",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "两端感应符显示村口先受冲，炉门迟一瞬才热。旧图的位置不可靠；小试只量出局部先后，不能许诺明夜的灵潮一定同样轻。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.thirdPillar",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "story.survey",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g08.council"
+    },
+    {
+      "id": "g08.council",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "村议上，顾衡把更正的呈报交给守钟人，工匠接过钟槌。老妇指着新图问：“这回图上有我家门没有？”你把三户、药田和那道缓坡标给她看。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g08.question"
+    },
+    {
+      "id": "g08.question",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "炉房内图还不完整。下一次小试若做，村民要能自行敲停，家属也要在炉门守铃。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "share",
+          "text": "说明未知处，请村民自己决定是否参加小试",
+          "target": "g08.share",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "g.hammer",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "declare",
+          "text": "替整村宣布“已经同意开谷口”",
+          "target": "g08.reject",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g08.reject",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "年轻木匠愿借房，老妇却不肯你代她答应开谷口：“借屋是一件事，受冲是另一件。”你收回那句总括，逐户问愿意做什么。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g08.share"
+    },
+    {
+      "id": "g08.share",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "村民选工匠守钟；炉门由家属守铃，陶叔守关支路。任何一端喊停，两端都撤力。老妇同意再看一次有人叫停的小试，没签“永远开谷口”。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.hammer",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g09.list"
+    },
+    {
+      "id": "g09.list",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "年轻木匠听东坡当年没同时受冲，主张明日就拆榻。老妇把南沟裂符压给他：“别拿顾衡的假话证明我儿子没死。”许澄姐姐带床号纸来，只问家属能否站在炉门。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.record"
+    },
+    {
+      "id": "g09.record",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你要写给议事堂的是一份分开的名单：愿试走、愿借屋、暂不愿开谷口。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "separate",
+          "text": "分列三类，保留反对者姓名与理由",
+          "target": "g09.separate",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "g.villageRecord",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "unanimous",
+          "text": "写“全村一致同意改道”",
+          "target": "g09.correct",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g09.correct",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "木匠第一个说自己只答应借屋，老妇也没答应立即开闸。你划掉“一致”，把三类决定分栏；村民选出的工匠仍握钟槌。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.separate"
+    },
+    {
+      "id": "g09.separate",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "父亲愿带女儿试走，木匠借屋但要公开冬药账，老妇仍反对明日直接开谷口。你带着这些不同的答复与实走时辰进堂；谁也没被写成你手里的一票。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.villageRecord",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g.hall"
+    },
+    {
+      "id": "g.hall",
+      "chapter": "卷二 · 山下那份账",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "议事堂里，老妇自己报缓坡脚程，顾衡呈上更正，工匠把停钟条件念给祁元肃。沈砚带旧图而来，也看见洪水后第三柱的新位置。宗门这回能讨论有条件的小试，却不能把村民的分歧涂掉。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "story.five.00.0"
     },
     {
       "id": "l01.intro",
@@ -2457,129 +3293,6 @@
       "effects": [],
       "choices": [],
       "next": "ending.oldPublic"
-    },
-    {
-      "id": "story.three.00.0",
-      "chapter": "卷二 · 村里的另一份账",
-      "location": "南沟村",
-      "speaker": "旁白",
-      "text": "顾衡领你们去南沟。白天看着安静的村路，每户门前都有护符。最靠山的老妇人讲起十年前那夜：阵停后她儿子背她逃，倒在半路，没再起来。东坡的工匠却说自家那晚只遇一场大雨，符是被浸坏的。顾衡当年的呈报写的是“全村同时遇险”。",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [
-        {
-          "variable": "story.village",
-          "operation": "set",
-          "value": 1
-        }
-      ],
-      "choices": [],
-      "next": "story.three.01.0"
-    },
-    {
-      "id": "story.three.01.0",
-      "chapter": "卷二 · 村里的另一份账",
-      "location": "南沟村",
-      "speaker": "旁白",
-      "text": "你没有请老妇人证明自己儿子怎样死。你借来两张旧符，一张是东坡保存的雨损符，一张是昨日南沟裂开的护符。辨气已经读不出十年前谁碰过东坡那张；你改查符上灵纹断开的方向。雨损符从纸边慢慢烂开，南沟的新符由中心向外炸裂。两种痕迹不一样，却也不能据此断定十年前东坡绝无灵潮。",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.three.01.1"
-    },
-    {
-      "id": "story.three.01.1",
-      "chapter": "卷二 · 村里的另一份账",
-      "location": "南沟村",
-      "speaker": "旁白",
-      "text": "你又向守钟人借到原簿：南沟先告急，东坡隔了将近半个时辰才换符。顾衡把两次事合写成了一次，危险是真的，“同时”是假的。",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.three.02.0"
-    },
-    {
-      "id": "story.three.02.0",
-      "chapter": "卷二 · 村里的另一份账",
-      "location": "南沟村",
-      "speaker": "旁白",
-      "text": "老妇人在原簿背面看见儿子的名字。死因被记成山路跌伤，没有进停阵伤亡册。她问顾衡：“你背过他最后一段。为什么写成他自己跌的？”",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.three.03.0"
-    },
-    {
-      "id": "story.three.03.0",
-      "chapter": "卷二 · 村里的另一份账",
-      "location": "南沟村",
-      "speaker": "旁白",
-      "text": "顾衡说那时有人主张拆掉所有坐人的石榻。宗门若看到东坡并未受冲，便会说整座村子都不需要阵。他不敢让下一次灵潮先撞到南沟，于是写重了灾情，也写轻了死者。他说完等老妇人骂。老妇人把簿合上：“我想村里孩子活，也想炉里孩子活。你替我选其中一个，我一样会骂你。”",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.three.04.0"
-    },
-    {
-      "id": "story.three.04.0",
-      "chapter": "卷二 · 村里的另一份账",
-      "location": "南沟村",
-      "speaker": "旁白",
-      "text": "顾衡原估计谷口三户只要半炷香便能撤到高处。你请老妇的孙子背她照路线走一遍。香烧尽时，他们还在第一道缓坡。顾衡盯着残香，亲手把自己的估时划掉。他没再说“村民会撤”，而是挨家去问谁能走、谁需人背、家中还有多少药。",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.three.05.0"
-    },
-    {
-      "id": "story.three.05.0",
-      "chapter": "卷二 · 村里的另一份账",
-      "location": "南沟村",
-      "speaker": "旁白",
-      "text": "修符的工匠发现山谷有一条旧的泄流石道，入口被宗门封了多年。如果灵潮能改道，炉里的人也许能下来；谷口三户得先搬，药田会毁。顾衡不许你现在去开。他把守钟人的原簿交给村里几位长者，又给你一块限时查炉牌：“去看可以。动阵之前，村民要知道，钟也要握在他们手里。”",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.three.06.0"
-    },
-    {
-      "id": "story.three.06.0",
-      "chapter": "卷二 · 村里的另一份账",
-      "location": "南沟村",
-      "speaker": "旁白",
-      "text": "林月将阿澈的伤签交给他，请他看清楚榻上那一端。两人仍说不到一起，却开始在同一张纸上记时辰。许澄的姐姐坐在旁边，一笔笔抄下知晓姓名的炉中人；写到许澄，她停了很久，最后仍写了“未见，闻敲门”。",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.three.07.0"
-    },
-    {
-      "id": "story.three.07.0",
-      "chapter": "卷二 · 村里的另一份账",
-      "location": "南沟村",
-      "speaker": "旁白",
-      "text": "阿澈康复后坚持跟你去村口。他摸着家家门上的护符，说自己躺在石榻上时只想着逃，听见裂符又想回去。顾衡说：“想回去可以是你自己的决定。你昨夜发着烧，没人问过你，就不算。”",
-      "background": "ridge",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [],
-      "next": "story.four.00.0"
     },
     {
       "id": "story.four.00.0",

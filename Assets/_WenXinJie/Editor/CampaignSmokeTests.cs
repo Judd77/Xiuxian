@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 17 && demo.Definition.revision == 17,
+            Require(full.Definition.revision == 18 && demo.Definition.revision == 18,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -33,6 +33,7 @@ namespace WenXinJie.Editor
             VerifyPaths(full, demo);
             VerifyOpeningRecovery(full);
             VerifyLinRoute(full);
+            VerifyGuRoute(full);
             VerifyAssets(full);
             Debug.Log("Campaign smoke tests PASS: new story graph, endings, Demo handoff and assets.");
         }
@@ -59,7 +60,7 @@ namespace WenXinJie.Editor
             AdvanceTo(demoSession, "case.boundary");
             var fullSession = StorySession.Restore(full, demoSession.Snapshot());
             Require(fullSession.Current.id == "case.boundary", "Demo save did not import.");
-            Require(fullSession.Choose("village") && fullSession.Current.id == "story.three.00.0",
+            Require(fullSession.Choose("village") && fullSession.Current.id == "g01.intro",
                 "Full campaign did not continue after Demo.");
         }
 
@@ -113,6 +114,39 @@ namespace WenXinJie.Editor
             Require(run.Current.id == "ending.leave" && run.GetValue("l.danqi") == 1
                     && run.GetValue("l.protocol") == 1,
                 "Lin Yue rescue did not carry its outcomes to the ending.");
+        }
+
+        private static void VerifyGuRoute(StoryGraph full)
+        {
+            var run = new StorySession(full, 42);
+            AdvanceTo(run, "case.boundary");
+            Require(run.Choose("village"), "Gu Heng route is unavailable.");
+            for (var step = 0; step < 150 && run.Current.id != "story.five.00.0"; step++)
+            {
+                var id = run.Current.id;
+                var choiceId = id switch
+                {
+                    "g01.table" when run.GetValue("g.oldCharm") == 0 => "charm",
+                    "g01.table" when run.GetValue("g.bellBook") == 0 => "book",
+                    "g01.table" => "compare",
+                    "g02.marks" => "compare",
+                    "g03.keep" => "give",
+                    "g04.ask" => "time",
+                    "g05.answer" => "listen",
+                    "g06.order" => "slow",
+                    "g07.test" => "measure",
+                    "g08.question" => "share",
+                    "g09.record" => "separate",
+                    _ => string.Empty
+                };
+                Require(string.IsNullOrEmpty(choiceId) ? run.Advance() : run.Choose(choiceId),
+                    "Gu Heng route stopped at " + id);
+            }
+
+            Require(run.Current.id == "story.five.00.0" && run.GetValue("g.corrected") == 1
+                    && run.GetValue("g.walked") == 1 && run.GetValue("g.thirdPillar") == 1
+                    && run.GetValue("g.villageRecord") == 1,
+                "Gu Heng route did not carry its evidence to the council.");
         }
 
         private static void AdvanceTo(StorySession session, string target)
