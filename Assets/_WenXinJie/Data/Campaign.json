@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 28,
+  "revision": 29,
   "start": "case.intro",
   "variables": [
     {
@@ -4968,7 +4968,28 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "terminal": true
+      "terminal": true,
+      "variants": [
+        {
+          "text": "谷口小试你听见停钟仍等了一息；今夜第三声你又没按，陶叔替你关了支路。两次迟疑和加重的伤情都写在公开轮换簿上。石台钥匙交到家属与村民手中，迁村和重测石柱仍须有人去做；你先得养好受伤的经脉。",
+          "conditions": [
+            { "variable": "s.stopped", "minimum": 0, "maximum": 0 },
+            { "variable": "e.extraInjury", "minimum": 1, "maximum": 1 }
+          ]
+        },
+        {
+          "text": "谷口小试你晚了一息，今夜第三声终于按下停铃。周望和村民都看见你按了，也看见你下台时手在发抖。石台钥匙交到家属与村民手中；迁村和重测石柱，仍要在你养伤时继续。",
+          "conditions": [
+            { "variable": "s.stopped", "minimum": 0, "maximum": 0 }
+          ]
+        },
+        {
+          "text": "第三声后你仍硬撑，陶叔照约定关了支路。今夜多受的伤写进公开簿里，谁也不能拿你撑过这一息要求下个人照做。石台钥匙交到家属与村民手中，迁村和重测石柱仍须继续。",
+          "conditions": [
+            { "variable": "e.extraInjury", "minimum": 1, "maximum": 1 }
+          ]
+        }
+      ]
     },
     {
       "id": "ending.seizeForce",
@@ -6371,7 +6392,7 @@
       "chapter": "结局 · 夺下石台",
       "location": "山腹石台",
       "speaker": "旁白",
-      "text": "祁元肃不肯坐，你和守卫把他强按上榻。旧阵撑住这一夜，许澄等人得以离炉；祁元肃活着下来，手却抖得握不住钥匙。",
+      "text": "祁元肃不肯坐，你将他推上石榻，合上榻锁。旧阵撑住这一夜，许澄等人得以离炉；祁元肃活着下来，手却抖得握不住钥匙。",
       "background": "mountainHeart",
       "portrait": "",
       "rain": false,
@@ -6390,7 +6411,15 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e21.key"
+      "next": "e21.key",
+      "variants": [
+        {
+          "text": "许澄问：“谷口那回有人喊停，你迟了一息；今晚他喊不愿意，你还是替他定了。下次谁能叫停你？”祁元肃改账和加压须受追究；把他锁上石榻这件事，也得由你当众交代。",
+          "conditions": [
+            { "variable": "s.stopped", "minimum": 0, "maximum": 0 }
+          ]
+        }
+      ]
     },
     {
       "id": "e21.key",

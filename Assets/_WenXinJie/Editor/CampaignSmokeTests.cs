@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 28 && demo.Definition.revision == 28,
+            Require(full.Definition.revision == 29 && demo.Definition.revision == 29,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -338,7 +338,15 @@ namespace WenXinJie.Editor
                     && run.GetValue("s.zhouWords") == 1 && run.GetValue("s.newMap") == 1
                     && run.GetValue("e.seizeRecord") == 1,
                 "Shen Yan route did not carry its evidence through self-sacrifice.");
+            Require(!run.CurrentText.Contains("谷口小试你晚了一息"),
+                "An on-time stop was narrated as a late stop in the ending.");
             Require(hallSnapshot != null, "Shen Yan council snapshot is missing.");
+            var forced = StorySession.Restore(full, hallSnapshot);
+            Require(forced.Choose("seize"), "The seizure route was unavailable.");
+            AdvanceTo(forced, "e20.choose");
+            Require(forced.Choose("force") && forced.CurrentText.Contains("合上榻锁")
+                    && forced.Advance() && forced.Current.id == "e21.question",
+                "The forced seat had no visible action or answer from Xu Cheng.");
             Require(councilEvidence != null, "Shen Yan evidence inference was not reached.");
             var overclaim = StorySession.Restore(full, councilEvidence);
             Require(overclaim.Choose("tear") && overclaim.CurrentText.Contains("剩下的记录没写是谁撕的")
@@ -386,9 +394,20 @@ namespace WenXinJie.Editor
             AdvanceTo(lateStop, "s.hall");
             Require(lateStop.CurrentText.Contains("你在谷口迟停"),
                 "The late stop disappeared from the council record.");
+            var lateForce = StorySession.Restore(full, lateStop.Snapshot());
+            AdvanceTo(lateForce, "e20.choose");
+            Require(lateForce.Choose("force") && lateForce.Advance()
+                    && lateForce.CurrentText.Contains("谷口那回有人喊停"),
+                "Xu Cheng did not connect the forced seat to the earlier ignored stop call.");
             AdvanceTo(lateStop, "e20.self");
             Require(lateStop.CurrentText.Contains("谷口那次你晚了一息"),
                 "The late stop did not inform the later seat decision.");
+            AdvanceTo(lateStop, "e20.bell");
+            Require(lateStop.Choose("endure") && lateStop.GetValue("e.extraInjury") == 1,
+                "Overriding the third stop call did not cause extra injury.");
+            AdvanceTo(lateStop, "ending.seizeSelf");
+            Require(lateStop.CurrentText.Contains("两次迟疑和加重的伤情"),
+                "The final record forgot both ignored stop calls and the added injury.");
         }
 
         private static void AdvanceTo(StorySession session, string target)
