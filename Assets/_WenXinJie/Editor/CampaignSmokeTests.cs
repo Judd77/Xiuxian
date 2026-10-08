@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 26 && demo.Definition.revision == 26,
+            Require(full.Definition.revision == 27 && demo.Definition.revision == 27,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -263,12 +263,14 @@ namespace WenXinJie.Editor
             AdvanceTo(run, "case.boundary");
             Require(run.Choose("shen"), "Shen Yan route is unavailable.");
             StorySnapshot hallSnapshot = null;
+            StorySnapshot councilEvidence = null;
             StorySnapshot beforeZhou = null;
             StorySnapshot beforeStop = null;
             for (var step = 0; step < 200 && run.Current.id != "ending.seizeSelf"; step++)
             {
                 var id = run.Current.id;
                 if (id == "s.hall.choice") hallSnapshot = run.Snapshot();
+                if (id == "s.hall.infer") councilEvidence = run.Snapshot();
                 if (id == "s05.reply") beforeZhou = run.Snapshot();
                 if (id == "s07.stop") beforeStop = run.Snapshot();
                 var choiceId = id switch
@@ -281,6 +283,7 @@ namespace WenXinJie.Editor
                     "s07.stop" => "now",
                     "s08.choice" => "split",
                     "s09.map" => "include",
+                    "s.hall.infer" => "source",
                     "s.hall.choice" => "seize",
                     "e20.symbol" => "side",
                     "e20.choose" => "self",
@@ -297,6 +300,21 @@ namespace WenXinJie.Editor
                     && run.GetValue("e.seizeRecord") == 1,
                 "Shen Yan route did not carry its evidence through self-sacrifice.");
             Require(hallSnapshot != null, "Shen Yan council snapshot is missing.");
+            Require(councilEvidence != null, "Shen Yan evidence inference was not reached.");
+            var overclaim = StorySession.Restore(full, councilEvidence);
+            Require(overclaim.Choose("tear") && overclaim.CurrentText.Contains("剩下的记录没写是谁撕的")
+                    && overclaim.GetValue("s.councilOverclaim") == 1
+                    && overclaim.Advance() && overclaim.Current.id == "s.hall.infer"
+                    && overclaim.Choose("source") && overclaim.Advance()
+                    && overclaim.Current.id == "s.hall.choice",
+                "The Shen Yan council did not separate the missing page from signed orders.");
+            var publicAfterOverclaim = StorySession.Restore(full, overclaim.Snapshot());
+            Require(publicAfterOverclaim.Choose("hold") && publicAfterOverclaim.Advance()
+                    && publicAfterOverclaim.Choose("tell")
+                    && publicAfterOverclaim.CurrentText.Contains("周望自己拿着初试原簿"),
+                "The unsupported accusation did not change who presented the original book.");
+            Require(overclaim.Choose("seize") && overclaim.CurrentText.Contains("周望不借初试原簿"),
+                "The unsupported accusation was still treated as warrant for seizure.");
             var hiddenRun = StorySession.Restore(full, hallSnapshot);
             Require(hiddenRun.Choose("hold") && hiddenRun.Advance()
                     && hiddenRun.Choose("hide") && hiddenRun.Advance()

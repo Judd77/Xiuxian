@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 26,
+  "revision": 27,
   "start": "case.intro",
   "variables": [
     {
@@ -335,6 +335,12 @@
     },
     {
       "id": "s.newMap",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.councilOverclaim",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -2460,7 +2466,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "s.hall.choice",
+      "next": "s.hall.infer",
       "variants": [
         {
           "text": "祁元肃摊开冬药账与南沟死者名册。顾衡也把你在谷口迟停的一息和裂符放在堂上；你已经当众承认并交出钟槌，不能因此说村民同意改道。你有初试证据、新柱位置，却没有三户实走时辰，也未让许澄亲自同意小试。",
@@ -2473,6 +2479,69 @@
           ]
         }
       ]
+    },
+    {
+      "id": "s.hall.infer",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "沈砚第一版图旁有祁元肃的批注：“仅作急用，三次后复议。”复议页已缺；后来的加重承压令仍盖着祁元肃的印。沈砚那时已逃到山外。你要如何向周望和在场的人说明这几张纸？",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "source",
+          "text": "分清旧约、后来的命令和缺页仍待查的事",
+          "target": "s.hall.source",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "tear",
+          "text": "据缺页指控祁元肃亲手撕毁复议记录",
+          "target": "s.hall.overclaim",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "s.councilOverclaim",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "s.hall.overclaim",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "陈闻翻看初试簿：“复议那页确实不见了，剩下的记录没写是谁撕的。祁元肃签过后来的加压令，你就问他的令，别替缺页编签名。”周望把写有自己求停的原簿拿回手中：“我的话我会自己说。你先把知道和猜的分开。”",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s.hall.infer"
+    },
+    {
+      "id": "s.hall.source",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你请祁元肃按自己的批注解释：三次后为何没有复议，却签了加重承压的令？他承认命令出自自己，冬药账也是真的。至于复议页是谁撕的，原纸不能指认；沈砚初试未停和后来离山，同样不能借这张缺页抵消。周望听你逐件说完，才让众人看他改回的求停记录。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "s.hall.choice"
     },
     {
       "id": "s.hall.choice",
@@ -5920,7 +5989,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e20.symbol"
+      "next": "e20.symbol",
+      "variants": [
+        {
+          "text": "周望不借初试原簿给你当夺台凭据：你在堂上曾把缺页说成祁元肃亲手撕，后来才更正。你仍有旧阵图、谷口小试和林月的遮铃符；若决定夺台救近门人，不能让旁人替你的猜测背书。三户未撤，冲击也不能改送谷口。",
+          "conditions": [
+            {
+              "variable": "s.councilOverclaim",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "e20.symbol",
@@ -6329,7 +6410,19 @@
         }
       ],
       "choices": [],
-      "next": "e30.plan"
+      "next": "e30.plan",
+      "variants": [
+        {
+          "text": "你把获救、仍在炉内、未见到三栏分开抄给家属，村民拿旧图与谷口未测处，林月留今日伤情。周望自己拿着初试原簿，向众人念求停那行；你在抄页边写明复议页缺失、撕页者未证。没人再用单份纸替别人宣布无事。",
+          "conditions": [
+            {
+              "variable": "s.councilOverclaim",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "e30.plan",

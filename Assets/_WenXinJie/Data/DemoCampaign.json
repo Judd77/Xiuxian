@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 26,
+  "revision": 27,
   "start": "case.intro",
   "variables": [
     {
@@ -335,6 +335,12 @@
     },
     {
       "id": "s.newMap",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.councilOverclaim",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
