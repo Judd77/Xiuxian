@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 25 && demo.Definition.revision == 25,
+            Require(full.Definition.revision == 26 && demo.Definition.revision == 26,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -88,11 +88,13 @@ namespace WenXinJie.Editor
             Require(run.Choose("rescue"), "Lin Yue route is unavailable.");
             StorySnapshot beforeLetters = null;
             StorySnapshot beforeTestimony = null;
+            StorySnapshot councilEvidence = null;
             for (var step = 0; step < 150 && run.Current.id != "ending.leave"; step++)
             {
                 var id = run.Current.id;
                 if (id == "l03.plan") beforeLetters = run.Snapshot();
                 if (id == "l09.record") beforeTestimony = run.Snapshot();
+                if (id == "l.hall.infer") councilEvidence = run.Snapshot();
                 if (id == "l05.cart")
                     Require(run.CurrentText.Contains("桂花糕"), "Borrowed letter was not used at the door.");
                 if (id == "l08.road")
@@ -112,6 +114,7 @@ namespace WenXinJie.Editor
                     "l09.record" => "full",
                     "l10.reply" => "joint",
                     "l.hall.ask" => "read",
+                    "l.hall.infer" => "separate",
                     "l.hall.choice" => "leave",
                     "l.depart.choice" => "injured",
                     _ => string.Empty
@@ -123,8 +126,21 @@ namespace WenXinJie.Editor
             Require(run.Current.id == "ending.leave" && run.GetValue("l.danqi") == 1
                     && run.GetValue("l.protocol") == 1,
                 "Lin Yue rescue did not carry its outcomes to the ending.");
-            Require(beforeLetters != null && beforeTestimony != null,
+            Require(beforeLetters != null && beforeTestimony != null && councilEvidence != null,
                 "Lin Yue branch snapshots were not reached.");
+
+            var overreach = StorySession.Restore(full, councilEvidence);
+            Require(overreach.Choose("overreach") && overreach.CurrentText.Contains("没证明谷口能接住冲力")
+                    && overreach.GetValue("l.councilDelay") == 1
+                    && overreach.Advance() && overreach.Current.id == "l.hall.infer"
+                    && overreach.Choose("separate") && overreach.Advance()
+                    && overreach.Current.id == "l.hall.choice",
+                "Lin Yue council did not distinguish the witness from the village warning.");
+            var delayedHold = StorySession.Restore(full, overreach.Snapshot());
+            Require(delayedHold.Choose("hold") && delayedHold.CurrentText.Contains("顾衡当众保管钟槌"),
+                "Council overreach did not change village control of the bell.");
+            Require(overreach.Choose("leave") && overreach.CurrentText.Contains("药车等到守卫换班"),
+                "Council overreach did not delay the departure convoy.");
 
             var otherApproach = StorySession.Restore(full, beforeLetters);
             Require(otherApproach.Choose("nickname"), "The family could not keep its letter.");
@@ -144,7 +160,8 @@ namespace WenXinJie.Editor
                     && correctedTestimony.GetValue("l.protocol") == 0
                     && !correctedTestimony.IsAvailable(correctedTestimony.Current.choices.First(choice => choice.id == "read")),
                 "A corrected draft must not become permission to speak for Xu Cheng.");
-            Require(correctedTestimony.Choose("ask") && correctedTestimony.Advance(),
+            Require(correctedTestimony.Choose("ask") && correctedTestimony.Advance()
+                    && correctedTestimony.Choose("separate") && correctedTestimony.Advance(),
                 "Xu Cheng could not testify in her own words.");
             Require(correctedTestimony.Choose("holdLate") && correctedTestimony.Current.id == "l.hold.plan"
                     && correctedTestimony.Advance() && correctedTestimony.GetValue("l.protocol") == 1,

@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 25,
+  "revision": 26,
   "start": "case.intro",
   "variables": [
     {
@@ -203,6 +203,12 @@
     },
     {
       "id": "l.protocol",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "l.councilDelay",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -4472,7 +4478,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "l.hall.choice"
+      "next": "l.hall.infer"
     },
     {
       "id": "l.hall.read",
@@ -4480,6 +4486,69 @@
       "location": "议事堂",
       "speaker": "旁白",
       "text": "许澄点头，你照她签过的纸念：第一夜她答应坐榻，第二夜要走却被拒，去向还被提前写成“离山”。她进堂确认每一句，祁元肃不能用“她自愿过”盖掉后半段。问到旧道与迁村时，你仍承认未实走、未征得村民同意。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.hall.infer"
+    },
+    {
+      "id": "l.hall.infer",
+      "chapter": "卷二 · 一张张真名",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "许澄说明自己第二夜求离，名册却早已写她离山；顾衡带来昨夜裂开的村符。祁元肃问：既然你们要改记录、谈救人，这两份证据各能证明什么？",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "overreach",
+          "text": "村符已裂，证明今晚可直接向谷口引流",
+          "target": "l.hall.overreach",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "l.councilDelay",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "separate",
+          "text": "先改许澄去向；村符示警，改道还缺实走",
+          "target": "l.hall.separate",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l.hall.overreach",
+      "chapter": "卷二 · 一张张真名",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "顾衡把裂符转给你看：“它只报旧阵吃不住了，没证明谷口能接住冲力，更没量老妇走完撤路要多久。”祁元肃抓住空处，堂上又争了一轮；陈闻来报药车得等守卫换班。许澄说：“先别把我写成已经下山。”你把证词与村符重新分开放。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.hall.infer"
+    },
+    {
+      "id": "l.hall.separate",
+      "chapter": "卷二 · 一张张真名",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你请许澄核对去向册：她第二夜要走时还在炉里，宗门须当堂更正“离山”并给她一份盖印的抄页。昨夜村符裂了，证明旧阵风险加重，却不能替三户走山路，也不能证明谷口能安全承流。祁元肃在陈闻面前改栏盖印，许澄自己收下抄页；接下来才谈今晚能做的事。",
       "background": "stele",
       "portrait": "",
       "rain": false,
@@ -4564,7 +4633,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "l.depart.choice"
+      "next": "l.depart.choice",
+      "variants": [
+        {
+          "text": "堂上争论耽搁了时辰，药车等到守卫换班才放行。许澄攥着宗门盖印的更正抄页；山门前仍只有一辆车，重伤者得平躺，能走的人互扶。你先安排谁占车位。",
+          "conditions": [
+            {
+              "variable": "l.councilDelay",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "l.depart.choice",
@@ -4653,7 +4734,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "l.hold.ending"
+      "next": "l.hold.ending",
+      "variants": [
+        {
+          "text": "堂上那轮误判让村人担心你会把示警当作开闸许可。顾衡当众保管钟槌，你把真名册、药账和裂符各留一份给家属与村民，说明今晚只守旧阵、不开谷口。祁元肃答应暂不改写新病人的去向；许澄要停铃仍在自己够得到的地方。",
+          "conditions": [
+            {
+              "variable": "l.councilDelay",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "l.hold.ending",
