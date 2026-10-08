@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 23 && demo.Definition.revision == 23,
+            Require(full.Definition.revision == 24 && demo.Definition.revision == 24,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -236,10 +236,14 @@ namespace WenXinJie.Editor
             AdvanceTo(run, "case.boundary");
             Require(run.Choose("shen"), "Shen Yan route is unavailable.");
             StorySnapshot hallSnapshot = null;
+            StorySnapshot beforeZhou = null;
+            StorySnapshot beforeStop = null;
             for (var step = 0; step < 200 && run.Current.id != "ending.seizeSelf"; step++)
             {
                 var id = run.Current.id;
                 if (id == "s.hall.choice") hallSnapshot = run.Snapshot();
+                if (id == "s05.reply") beforeZhou = run.Snapshot();
+                if (id == "s07.stop") beforeStop = run.Snapshot();
                 var choiceId = id switch
                 {
                     "s02.first" => "left",
@@ -273,6 +277,34 @@ namespace WenXinJie.Editor
                     && hiddenRun.Current.id == "ending.oldHidden"
                     && hiddenRun.GetValue("e.hiddenName") == 1,
                 "The concealment ending was not an explicit player action.");
+
+            Require(beforeZhou != null && beforeStop != null, "Shen Yan branch snapshots are missing.");
+            var speakingForZhou = StorySession.Restore(full, beforeZhou);
+            Require(speakingForZhou.Choose("apologise") && speakingForZhou.Advance()
+                    && speakingForZhou.Current.id == "s05.reply"
+                    && speakingForZhou.Choose("ask") && speakingForZhou.Current.id == "s05.words",
+                "Zhou Wang's words must be requested from him, not supplied by the player.");
+
+            var lateStop = StorySession.Restore(full, beforeStop);
+            Require(lateStop.Choose("wait"), "Waiting past the stop call was unavailable.");
+            AdvanceTo(lateStop, "s08.choice");
+            Require(lateStop.GetValue("s.bellTrusted") == 0
+                    && !lateStop.IsAvailable(lateStop.Current.choices.First(choice => choice.id == "split")),
+                "Ignoring the stop call did not remove control of the next test.");
+            var publicHoldAfterStop = StorySession.Restore(full, lateStop.Snapshot());
+            Require(publicHoldAfterStop.Choose("hold") && publicHoldAfterStop.Advance()
+                    && publicHoldAfterStop.Current.id == "ending.oldPublic",
+                "The player could not stop further testing after a late bell.");
+            Require(lateStop.Choose("account") && lateStop.CurrentText.Contains("钟响后你仍等了一息")
+                    && lateStop.Advance() && lateStop.GetValue("s.bellTrusted") == 1
+                    && lateStop.Choose("split"),
+                "Publicly recording the late stop did not return the bell to shared control.");
+            AdvanceTo(lateStop, "s.hall");
+            Require(lateStop.CurrentText.Contains("你在谷口迟停"),
+                "The late stop disappeared from the council record.");
+            AdvanceTo(lateStop, "e20.self");
+            Require(lateStop.CurrentText.Contains("谷口那次你晚了一息"),
+                "The late stop did not inform the later seat decision.");
         }
 
         private static void AdvanceTo(StorySession session, string target)

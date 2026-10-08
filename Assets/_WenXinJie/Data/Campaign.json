@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 23,
+  "revision": 24,
   "start": "case.intro",
   "variables": [
     {
@@ -461,6 +461,12 @@
     },
     {
       "id": "g.repairOwed",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "s.bellTrusted",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -1957,13 +1963,13 @@
       "chapter": "卷二 · 旧阵的第一声铃",
       "location": "周望屋前",
       "speaker": "旁白",
-      "text": "周望把钉子敲到底：“你没在那张榻上，歉也不是你的。”你收住话，请他说自己希望宗门留下什么记录。",
+      "text": "周望把钉子敲到底：“你没在那张榻上，歉也不是你的。”你收住话，不替沈砚求他体谅。要留什么记录，得请周望自己说。",
       "background": "quartersNight",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "s05.words"
+      "next": "s05.reply"
     },
     {
       "id": "s05.words",
@@ -2101,6 +2107,11 @@
               "variable": "s.stopped",
               "operation": "set",
               "value": 1
+            },
+            {
+              "variable": "s.bellTrusted",
+              "operation": "set",
+              "value": 1
             }
           ],
           "outcomes": []
@@ -2177,7 +2188,51 @@
       "rain": false,
       "effects": [],
       "choices": [],
+      "next": "s08.choice",
+      "variants": [
+        {
+          "text": "许澄姐姐带来谷口那张裂符。顾衡喊停时你仍等了一息，最后是他敲钟、工匠抱开孩子。她问沈砚为何还独握石台钥匙，也问你肯不肯把自己迟停写进钟簿；这事不交代清楚，村里不会再让你们自己定谁握铃。",
+          "conditions": [
+            {
+              "variable": "s.bellTrusted",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s08.account",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "你当着姐姐、顾衡和工匠说清：钟响后你仍等了一息，孩子由工匠抱开，村符裂了一张。你把这笔写进钟簿，将钟槌放回村人面前；顾衡说下次由村里选守钟者，陶叔执钥，沈砚只读图。姐姐这才继续听你们安排。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "s.bellTrusted",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
       "next": "s08.choice"
+    },
+    {
+      "id": "s08.publicHold",
+      "chapter": "卷二 · 旧阵的第一声铃",
+      "location": "废观测台",
+      "speaker": "旁白",
+      "text": "你没有借旧图再试。周望的求停、沈砚当年未停、你刚才迟停的一息，都写在原簿旁。顾衡带人补村符，姐姐把仍在炉里的名字交给家属；今晚先守旧阵，明日再让村人实走谷口，不能用另一张图替他们答应。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "ending.oldPublic"
     },
     {
       "id": "s08.choice",
@@ -2195,16 +2250,29 @@
           "text": "让沈砚因熟悉阵图而独握钥匙",
           "target": "s08.refuse",
           "lockedReason": "",
-          "conditions": [],
+          "conditions": [
+            {
+              "variable": "s.bellTrusted",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
           "effects": [],
-          "outcomes": []
+          "outcomes": [],
+          "hidden": true
         },
         {
           "id": "split",
           "text": "沈砚读图，陶叔执钥，家属与村民守钟",
           "target": "s08.split",
           "lockedReason": "",
-          "conditions": [],
+          "conditions": [
+            {
+              "variable": "s.bellTrusted",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
           "effects": [
             {
               "variable": "s.sharedKey",
@@ -2212,7 +2280,52 @@
               "value": 1
             }
           ],
-          "outcomes": []
+          "outcomes": [],
+          "hidden": true
+        },
+        {
+          "id": "account",
+          "text": "公开记下自己迟停的一息，交出钟槌再定人手",
+          "target": "s08.account",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "s.bellTrusted",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        },
+        {
+          "id": "hold",
+          "text": "今晚不再小试，公开旧案与村符风险",
+          "target": "s08.publicHold",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "s.bellTrusted",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        }
+      ],
+      "variants": [
+        {
+          "text": "钟槌还在村人手里。你可以当众写下自己迟停的一息，再谈由谁读图、执钥和叫停；也可以今晚不再小试，公开旧阵与这次裂符，先守住村口。",
+          "conditions": [
+            {
+              "variable": "s.bellTrusted",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
         }
       ]
     },
@@ -2309,7 +2422,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "s09.full"
+      "next": "s09.map"
     },
     {
       "id": "s09.full",
@@ -2341,7 +2454,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "s.hall.choice"
+      "next": "s.hall.choice",
+      "variants": [
+        {
+          "text": "祁元肃摊开冬药账与南沟死者名册。顾衡也把你在谷口迟停的一息和裂符放在堂上；你已经当众承认并交出钟槌，不能因此说村民同意改道。你有初试证据、新柱位置，却没有三户实走时辰，也未让许澄亲自同意小试。",
+          "conditions": [
+            {
+              "variable": "s.stopped",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "s.hall.choice",
@@ -5742,7 +5867,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e20.bell"
+      "next": "e20.bell",
+      "variants": [
+        {
+          "text": "你坐进原先伤人的位置。阵流像冷水逆着经脉冲上来。林月把停铃按在你抬手可及处：“谷口那次你晚了一息，这回听见第三声就按。你愿意坐，不等于下一人也愿意。”陶叔在旁准备接支路。",
+          "conditions": [
+            {
+              "variable": "s.stopped",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "e20.bell",
