@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 29,
+  "revision": 30,
   "start": "case.intro",
   "variables": [
     {
@@ -455,6 +455,12 @@
     },
     {
       "id": "e.publicCopies",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.sourceOverreach",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -5009,20 +5015,32 @@
       "chapter": "结局 · 守住旧阵",
       "location": "南沟村",
       "speaker": "旁白",
-      "text": "今晚没有改路。村民与家属拿到了真相，开始筹备下一次迁离。",
+      "text": "今晚没有改路。顾衡把裂符和未测的第三柱当众写清，村民拿到更正的旧呈报，家属拿到待核的真名；三日后先量三户撤路与药车位置，再谈下一次试阵。炉房仍有人守着旧阵，名字留在待救栏。",
       "background": "ridge",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "terminal": true
+      "terminal": true,
+      "variants": [
+        {
+          "text": "今晚没有改路，炉房里仍有人守着旧阵。周望亲口读了求停那行，家属、村民和医舍各留下能互相核对的记录。三日后先逐户实走撤路，再谈下一次试阵；今晚没救出的人仍写在待救栏。",
+          "conditions": [
+            {
+              "variable": "s.smallFlow",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "ending.oldHidden",
       "chapter": "结局 · 守住旧阵",
       "location": "青云山 · 司籍房",
       "speaker": "旁白",
-      "text": "村庄平安过夜。你亲手写下了下一名弟子的假去向，阿澈始终没等到回答。",
+      "text": "村庄平安过夜，宗门公簿却把下一名坐榻者写成“离山”。周望留着十年前的求停记录，许澄姐姐记得妹妹的真名；他们能追问旧账，却还不知道今晚新坐榻的人是谁。你亲手盖了假印，阿澈等到灯灭仍没听见回答。",
       "background": "stele",
       "portrait": "",
       "rain": false,
@@ -6506,7 +6524,7 @@
       "chapter": "结局 · 守住旧阵",
       "location": "司籍房",
       "speaker": "旁白",
-      "text": "你手里有病人真名、旧阵图与今日伤情。",
+      "text": "你能抄出病人真名、旧阵图上的未测处与今日伤情。初试原簿仍由周望保管；要公开求停那行，得让他自己决定如何说。",
       "background": "stele",
       "portrait": "",
       "rain": false,
@@ -6514,8 +6532,8 @@
       "choices": [
         {
           "id": "tell",
-          "text": "分别交给家属与村民，公开今晚仍守旧阵",
-          "target": "e30.share",
+          "text": "请周望带原簿来，再分别交出名单与伤情",
+          "target": "e30.source",
           "effects": [
             {
               "variable": "story.public",
@@ -6528,7 +6546,7 @@
         },
         {
           "id": "hide",
-          "text": "把纸锁起，继续誊写“离山”",
+          "text": "锁起宗门公簿，继续誊写“离山”",
           "target": "e31.book",
           "effects": [],
           "conditions": [],
@@ -6537,11 +6555,59 @@
       ]
     },
     {
+      "id": "e30.source",
+      "chapter": "结局 · 守住旧阵",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "周望带着初试原簿来到门口，手指按住写有求停时辰的那一行。他愿意让村人与家属听见，但那页始终在他手里。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "ask",
+          "text": "请周望亲口读原簿，我读真名与今日伤情",
+          "target": "e30.share",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "claim",
+          "text": "写成周望已交原簿，由我代他宣读",
+          "target": "e30.correct",
+          "effects": [
+            {
+              "variable": "e.sourceOverreach",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e30.correct",
+      "chapter": "结局 · 守住旧阵",
+      "location": "司籍房",
+      "speaker": "周望",
+      "text": "“我没把原簿交给你。你若连谁拿着纸都写错，村里人凭什么信下一栏？”他收回压在桌边的书角，等你把那句改掉。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e30.source"
+    },
+    {
       "id": "e30.share",
       "chapter": "结局 · 守住旧阵",
       "location": "司籍房",
       "speaker": "旁白",
-      "text": "你把获救、仍在炉内、未见到三栏分开抄，家属拿一份；村民拿旧图与谷口未测处，林月留今日伤情。谁都不能凭单份纸替别人宣布无事。",
+      "text": "周望握着原簿，亲口念出求停时辰。你把获救、仍在炉内、未见到三栏分开抄给家属；村民拿旧图与谷口未测处，林月留今日伤情。谁都不能凭单份纸替别人宣布无事。",
       "background": "stele",
       "portrait": "",
       "rain": false,
@@ -6555,6 +6621,16 @@
       "choices": [],
       "next": "e30.plan",
       "variants": [
+        {
+          "text": "周望坚持自己读初试原簿，也不让你代他分发抄页。许澄姐姐接过你核好的三栏真名，交给家属；村民拿旧图与未测处，林月留伤情。你当众更正刚才写错的原簿归属，这一回没有人再替别人说话。",
+          "conditions": [
+            {
+              "variable": "e.sourceOverreach",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
         {
           "text": "你把获救、仍在炉内、未见到三栏分开抄给家属，村民拿旧图与谷口未测处，林月留今日伤情。周望自己拿着初试原簿，向众人念求停那行；你在抄页边写明复议页缺失、撕页者未证。没人再用单份纸替别人宣布无事。",
           "conditions": [
@@ -6572,7 +6648,7 @@
       "chapter": "结局 · 守住旧阵",
       "location": "村议",
       "speaker": "旁白",
-      "text": "老妇听完先给孙子系紧护符，再同许澄姐姐约下次灵潮前哪三户先迁。祁元肃再不能悄悄点人，林月能要求换药与轮换。今晚仍有人在榻上，下一次行动有公开的起点。",
+      "text": "老妇听完先给孙子系紧护符，再同许澄姐姐定下三日后的村议：先逐户实走撤路，算清慢行者与药车的位置，再谈下一次试阵。祁元肃不能悄悄点人，林月能要求换药与轮换。今晚仍有人在榻上，名字留在待救栏。",
       "background": "stele",
       "portrait": "",
       "rain": false,
@@ -6585,7 +6661,7 @@
       "chapter": "结局 · 守住旧阵",
       "location": "司籍房",
       "speaker": "旁白",
-      "text": "祁元肃把新印放到你桌边，管事送来下一名坐榻弟子的去向栏，空格后预印着“离山”。你知道它会使家属以为人已走。",
+      "text": "祁元肃把新印放到你桌边，管事送来宗门公簿上下一名坐榻弟子的去向栏，空格后预印着“离山”。周望的初试原簿仍在他手中；你锁不住那份证据，却能让宗门今晚继续对家属说谎。",
       "background": "stele",
       "portrait": "",
       "rain": false,
@@ -6598,7 +6674,7 @@
       "chapter": "结局 · 守住旧阵",
       "location": "司籍房",
       "speaker": "旁白",
-      "text": "这页仍由你誊清。",
+      "text": "纸上空着弟子的真名。你可以照印誊假去向，也可以停笔请周望把原簿带给等消息的人。",
       "background": "stele",
       "portrait": "",
       "rain": false,
@@ -6606,7 +6682,7 @@
       "choices": [
         {
           "id": "sign",
-          "text": "签下假去向，把真名册锁回柜里",
+          "text": "签下公簿假去向，明知周望仍握原簿",
           "target": "e31.sign",
           "effects": [
             {
@@ -6620,8 +6696,8 @@
         },
         {
           "id": "rethink",
-          "text": "停笔，公开记录，改走可追问的守阵路",
-          "target": "e30.share",
+          "text": "停笔，请周望亲口读原簿，再公开记录",
+          "target": "e30.source",
           "effects": [
             {
               "variable": "story.public",
@@ -6639,7 +6715,7 @@
       "chapter": "结局 · 守住旧阵",
       "location": "司籍房",
       "speaker": "旁白",
-      "text": "你把“离山”誊得端正，原簿锁上。山下今晚没再裂符，下一名弟子却仍在炉中；阿澈来问许澄怎样了，你没法拿出一页真账给他看。",
+      "text": "你把“离山”誊得端正，在宗门公簿上盖印锁柜。山下今晚没再裂符，写在这栏的弟子却仍在炉中。周望的旧簿和许澄姐姐的证词都还在，却报不出这名新弟子的名字；阿澈来问许澄怎样，你仍让他在门外等到灯灭。",
       "background": "stele",
       "portrait": "",
       "rain": false,

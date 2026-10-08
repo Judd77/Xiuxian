@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 29 && demo.Definition.revision == 29,
+            Require(full.Definition.revision == 30 && demo.Definition.revision == 30,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -358,7 +358,7 @@ namespace WenXinJie.Editor
             var publicAfterOverclaim = StorySession.Restore(full, overclaim.Snapshot());
             Require(publicAfterOverclaim.Choose("hold") && publicAfterOverclaim.Advance()
                     && publicAfterOverclaim.Choose("tell")
-                    && publicAfterOverclaim.CurrentText.Contains("周望自己拿着初试原簿"),
+                    && publicAfterOverclaim.CurrentText.Contains("周望带着初试原簿"),
                 "The unsupported accusation did not change who presented the original book.");
             Require(overclaim.Choose("seize") && overclaim.CurrentText.Contains("周望不借初试原簿"),
                 "The unsupported accusation was still treated as warrant for seizure.");
