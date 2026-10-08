@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 24 && demo.Definition.revision == 24,
+            Require(full.Definition.revision == 25 && demo.Definition.revision == 25,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -158,11 +158,13 @@ namespace WenXinJie.Editor
             Require(run.Choose("village"), "Gu Heng route is unavailable.");
             StorySnapshot beforeArchive = null;
             StorySnapshot beforeTest = null;
+            StorySnapshot councilInference = null;
             for (var step = 0; step < 250 && run.Current.id != "ending.newRoad"; step++)
             {
                 var id = run.Current.id;
                 if (id == "g03.keep") beforeArchive = run.Snapshot();
                 if (id == "g07.test") beforeTest = run.Snapshot();
+                if (id == "h04.infer") councilInference = run.Snapshot();
                 var choiceId = id switch
                 {
                     "g01.table" when run.GetValue("g.oldCharm") == 0 => "charm",
@@ -182,6 +184,7 @@ namespace WenXinJie.Editor
                     "h04.table" when run.GetValue("h.qi") == 0 => "qi",
                     "h04.table" when run.GetValue("h.gu") == 0 => "gu",
                     "h04.table" => "joint",
+                    "h04.infer" => "separate",
                     "h05.assign" => "split",
                     "h05.stop" => "stop",
                     "h06.table" when run.GetValue("h.house1") == 0 => "elder",
@@ -203,7 +206,14 @@ namespace WenXinJie.Editor
                     && run.GetValue("g.villageRecord") == 1 && run.GetValue("h.roles") == 1
                     && run.GetValue("e.flowMeasured") == 1,
                 "Gu Heng route did not carry its evidence through the diversion.");
-            Require(beforeArchive != null && beforeTest != null, "Gu Heng branch snapshots are missing.");
+            Require(beforeArchive != null && beforeTest != null && councilInference != null,
+                "Gu Heng branch snapshots are missing.");
+            var wrongCouncil = StorySession.Restore(full, councilInference);
+            Require(wrongCouncil.Choose("blame") && wrongCouncil.CurrentText.Contains("周望指着初试本")
+                    && wrongCouncil.Advance() && wrongCouncil.Current.id == "h04.infer"
+                    && wrongCouncil.Choose("separate") && wrongCouncil.Advance()
+                    && wrongCouncil.Current.id == "h05.roles",
+                "The council did not correct a merged accusation before agreeing on test roles.");
 
             var custody = StorySession.Restore(full, beforeArchive);
             Require(custody.Choose("take"), "Taking the original book was unavailable.");

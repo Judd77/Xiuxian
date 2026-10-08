@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 24,
+  "revision": 25,
   "start": "case.intro",
   "variables": [
     {
@@ -4992,8 +4992,8 @@
         },
         {
           "id": "joint",
-          "text": "三项分清后，提出有人能停的小试",
-          "target": "h05.roles",
+          "text": "对照三份记录，向众人说明责任",
+          "target": "h04.infer",
           "lockedReason": "先分别核三项责任",
           "conditions": [
             {
@@ -5073,6 +5073,63 @@
       ],
       "choices": [],
       "next": "h04.table"
+    },
+    {
+      "id": "h04.infer",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "桌上摆着三份原件：初试本记周望求停而沈砚未停；加重承压令和改写的离山册由祁元肃签发；南沟与东坡同刻的旧呈报是顾衡写的。冬药确实紧缺，南沟也确实有人遇难。你要怎样向在场的人说明这些记录？",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "blame",
+          "text": "把三笔都算作祁元肃一人的罪",
+          "target": "h04.blame",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "separate",
+          "text": "逐笔说明签发者、亲历者与受伤的人",
+          "target": "h04.separate",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h04.blame",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "周望指着初试本：“那一声是我敲给沈砚听的。”顾衡把自己签过的旧呈报摊平，也不肯让祁元肃替他认下错字。你停下指责，重新对照三份记录；祁元肃须交代他的令，另外两人也不能藏在他身后。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.infer"
+    },
+    {
+      "id": "h04.separate",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你把三笔分别记在原件旁：沈砚当年未应周望的停铃；祁元肃后来加重承压、把求离写成离山；顾衡合写灾情、写轻死者。许澄姐姐把真名册压在旁边：“这回试，谁能叫停？谁来关支路？”没人再能用另一人的错替自己答话。",
+      "background": "stele",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.roles"
     },
     {
       "id": "h05.roles",
