@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 27 && demo.Definition.revision == 27,
+            Require(full.Definition.revision == 28 && demo.Definition.revision == 28,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -89,12 +89,18 @@ namespace WenXinJie.Editor
             StorySnapshot beforeLetters = null;
             StorySnapshot beforeTestimony = null;
             StorySnapshot councilEvidence = null;
+            StorySnapshot beforeRescue = null;
             for (var step = 0; step < 150 && run.Current.id != "ending.leave"; step++)
             {
                 var id = run.Current.id;
                 if (id == "l03.plan") beforeLetters = run.Snapshot();
                 if (id == "l09.record") beforeTestimony = run.Snapshot();
                 if (id == "l.hall.infer") councilEvidence = run.Snapshot();
+                if (id == "l07.warning") beforeRescue = run.Snapshot();
+                if (id == "l.depart.choice")
+                    Require(run.IsAvailable(run.Current.choices.First(choice => choice.id == "injured"))
+                            && !run.IsAvailable(run.Current.choices.First(choice => choice.id == "ache")),
+                        "The saved Dan Qi did not receive a place on the wagon.");
                 if (id == "l05.cart")
                     Require(run.CurrentText.Contains("桂花糕"), "Borrowed letter was not used at the door.");
                 if (id == "l08.road")
@@ -126,8 +132,41 @@ namespace WenXinJie.Editor
             Require(run.Current.id == "ending.leave" && run.GetValue("l.danqi") == 1
                     && run.GetValue("l.protocol") == 1,
                 "Lin Yue rescue did not carry its outcomes to the ending.");
-            Require(beforeLetters != null && beforeTestimony != null && councilEvidence != null,
+            Require(run.CurrentText.Contains("段七与阿澈都下了山"),
+                "The saved Dan Qi disappeared from the departure ending.");
+            Require(beforeLetters != null && beforeTestimony != null && councilEvidence != null
+                    && beforeRescue != null,
                 "Lin Yue branch snapshots were not reached.");
+
+            var retreat = StorySession.Restore(full, beforeRescue);
+            Require(retreat.Choose("retreat"), "The agreed retreat was unavailable.");
+            for (var step = 0; step < 130 && retreat.Current.id != "l.depart.choice"; step++)
+            {
+                var id = retreat.Current.id;
+                var choiceId = id switch
+                {
+                    "l08.answer" => "inside",
+                    "l09.record" => "full",
+                    "l10.reply" => "joint",
+                    "l.hall.ask" => "read",
+                    "l.hall.infer" => "separate",
+                    "l.hall.choice" => "leave",
+                    _ => string.Empty
+                };
+                Require(!string.IsNullOrEmpty(choiceId) ? retreat.Choose(choiceId)
+                    : retreat.Current.choices.Length > 0
+                        ? retreat.Choose(retreat.Current.choices.First(retreat.IsAvailable).id)
+                        : retreat.Advance(), "Retreat route stopped at " + id);
+            }
+            Require(retreat.Current.id == "l.depart.choice" && retreat.GetValue("l.danqi") == 0
+                    && retreat.CurrentText.Contains("段七被留在内榻")
+                    && retreat.IsAvailable(retreat.Current.choices.First(choice => choice.id == "ache"))
+                    && !retreat.IsAvailable(retreat.Current.choices.First(choice => choice.id == "injured")),
+                "The wagon still counted Dan Qi after leaving him inside.");
+            Require(retreat.Choose("boyFirst") && retreat.CurrentText.Contains("段七仍在里榻")
+                    && retreat.Advance() && retreat.CurrentText.Contains("仍在炉内")
+                    && retreat.Advance() && retreat.CurrentText.Contains("段七仍在里榻"),
+                "The retreat ending did not preserve Dan Qi's actual whereabouts.");
 
             var overreach = StorySession.Restore(full, councilEvidence);
             Require(overreach.Choose("overreach") && overreach.CurrentText.Contains("没证明谷口能接住冲力")

@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 27,
+  "revision": 28,
   "start": "case.intro",
   "variables": [
     {
@@ -4721,7 +4721,7 @@
       "chapter": "卷二 · 一张张真名",
       "location": "山门",
       "speaker": "旁白",
-      "text": "路窄，车上的位置够两名卧伤者。",
+      "text": "路窄，车上只有两处能让伤者平躺的位置。你要按眼前真正出门的人安排。",
       "background": "gate",
       "portrait": "",
       "rain": false,
@@ -4729,21 +4729,79 @@
       "choices": [
         {
           "id": "injured",
-          "text": "先让卧伤者上车，再安排能走者互扶",
+          "text": "让段七和阿澈平躺，许澄与少年互扶",
           "target": "l.depart.good",
           "lockedReason": "",
-          "conditions": [],
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
           "effects": [],
-          "outcomes": []
+          "outcomes": [],
+          "hidden": true
         },
         {
           "id": "firstCome",
           "text": "先让离车最近的人上，路上再换",
           "target": "l.depart.correct",
           "lockedReason": "",
-          "conditions": [],
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
           "effects": [],
-          "outcomes": []
+          "outcomes": [],
+          "hidden": true
+        },
+        {
+          "id": "ache",
+          "text": "让阿澈与许澄平躺，少年随车步行",
+          "target": "l.depart.good",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        },
+        {
+          "id": "boyFirst",
+          "text": "先让外榻少年占卧位，阿澈路上再换",
+          "target": "l.depart.correct",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        }
+      ],
+      "variants": [
+        {
+          "text": "段七被留在内榻，不能把他算作车上伤者。阿澈旧伤未愈，许澄刚出炉门；车上两处卧位该给谁？",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
         }
       ]
     },
@@ -4758,7 +4816,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "l.depart.good"
+      "next": "l.depart.good",
+      "variants": [
+        {
+          "text": "外榻少年听见阿澈喘得越来越急，自己从卧位下来，扶住车沿。林月让阿澈躺下，也让刚出炉门的许澄平躺；耽搁的这一段只能从慢行的旧山路补。段七仍在里榻，名单没有把他写成已获救。",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "l.depart.good",
@@ -4771,7 +4841,29 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "ending.leave"
+      "next": "ending.leave",
+      "variants": [
+        {
+          "text": "林月照伤势给段七与阿澈换药，许澄和外榻少年互扶下坡。姐姐将获救、仍在炉内、未见到的人分成三栏；顾衡带愿走的村人撤向高处。救出段七让阿澈旧伤复发，宗门仍用剩下的石柱与人榻撑过这一夜。",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "林月照伤势给阿澈与许澄换药，外榻少年扶着车沿下坡。姐姐把段七写在“仍在炉内”，没有写成已死或已获救；顾衡带愿走的村人撤向高处。宗门仍用石柱和里榻撑过这一夜，你们须带着名单回来。",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "l.hold.plan",
@@ -4841,7 +4933,29 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "terminal": true
+      "terminal": true,
+      "variants": [
+        {
+          "text": "段七与阿澈都下了山，两人还要养伤；许澄握着盖印的更正抄页。名单上仍有炉里人的名字，下一次回山，不能让任何一个空格被写成已经离山。",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "许澄和阿澈下了山，段七仍在里榻。许澄握着盖印的更正抄页，在待救栏写他的名字；下一次回山，你们要问出他被移到哪里，不能让宗门替他写成离山。",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "ending.seizeSelf",
