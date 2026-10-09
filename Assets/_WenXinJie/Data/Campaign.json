@@ -1,6 +1,9 @@
 {
   "id": "wenxinjie",
   "revision": 34,
+  "compatibleSaveRevisions": [
+    33
+  ],
   "start": "case.intro",
   "variables": [
     {

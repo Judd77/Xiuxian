@@ -8,6 +8,7 @@ namespace WenXinJie.Narrative
     {
         public string id;
         public int revision;
+        public int[] compatibleSaveRevisions = Array.Empty<int>();
         public string start;
         public VariableDefinition[] variables;
         public StoryNode[] nodes;

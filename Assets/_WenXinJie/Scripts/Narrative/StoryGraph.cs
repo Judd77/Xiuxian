@@ -17,6 +17,12 @@ namespace WenXinJie.Narrative
             Definition = definition ?? throw new ArgumentNullException(nameof(definition));
             Require(!string.IsNullOrWhiteSpace(definition.id) && definition.revision > 0, "Invalid campaign identity.");
             Require(definition.variables != null && definition.nodes != null, "Missing campaign arrays.");
+            var saveRevisions = new HashSet<int>();
+            foreach (var revision in definition.compatibleSaveRevisions ?? Array.Empty<int>())
+            {
+                Require(revision > 0 && revision < definition.revision && saveRevisions.Add(revision),
+                    "Invalid compatible save revision.");
+            }
 
             foreach (VariableDefinition variable in definition.variables)
             {

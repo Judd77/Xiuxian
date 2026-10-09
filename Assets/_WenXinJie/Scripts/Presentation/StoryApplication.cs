@@ -129,8 +129,7 @@ namespace WenXinJie.Presentation
             {
                 _reader.ResetHistory();
                 Render();
-                _view.ShowNotice(recovered ? "已从备份恢复进度" :
-                    string.IsNullOrEmpty(message) ? "进度已读取" : message);
+                _view.ShowNotice(LoadNotice(recovered, message));
             }
             else
             {
@@ -170,8 +169,7 @@ namespace WenXinJie.Presentation
             _reader.ResetHistory();
             _view.HideMainMenu();
             Render();
-            _view.ShowNotice(recovered ? "已从备份恢复进度" :
-                string.IsNullOrEmpty(message) ? "进度已读取" : message);
+            _view.ShowNotice(LoadNotice(recovered, message));
         }
 
         public void ReturnToMainMenu()
@@ -197,15 +195,26 @@ namespace WenXinJie.Presentation
             message = string.Empty;
             try
             {
-                var importDemo = !isDemo && !_saves.Exists(SavePath) && _saves.Exists(DemoSavePath);
-                Session = _saves.Load(importDemo ? DemoSavePath : SavePath, _graph, out recovered);
-                if (importDemo)
+                var hadFullSave = _saves.Exists(SavePath);
+                var loaded = ReadPreferredSave(out recovered, out var importDemo);
+                Session = loaded;
+                message = importDemo
+                    ? hadFullSave ? "已接续试玩进度，原正式版存档保留；请手动存档" : "试玩进度已继承"
+                    : string.Empty;
+                if (importDemo && !hadFullSave)
                 {
-                    _saves.Save(SavePath, Session);
+                    try
+                    {
+                        _saves.Save(SavePath, Session);
+                    }
+                    catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException)
+                    {
+                        message = "试玩进度已接续，请稍后手动存档";
+                        Debug.LogWarning("Could not save imported demo progress: " + exception.Message);
+                    }
                 }
 
                 _lastJournal = null;
-                message = importDemo ? "试玩进度已继承" : string.Empty;
                 return true;
             }
             catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
@@ -214,6 +223,36 @@ namespace WenXinJie.Presentation
                 message = "未找到匹配当前剧情版本的有效存档";
                 return false;
             }
+        }
+
+        private StorySession ReadPreferredSave(out bool recovered, out bool importDemo)
+        {
+            importDemo = false;
+            if (_saves.Exists(SavePath))
+            {
+                try
+                {
+                    return _saves.Load(SavePath, _graph, out recovered);
+                }
+                catch (Exception exception) when ((exception is IOException || exception is ArgumentException)
+                                                 && !isDemo && _saves.Exists(DemoSavePath))
+                {
+                    // A rejected full save must not block a valid Demo handoff or be overwritten by it.
+                }
+            }
+
+            importDemo = !isDemo && _saves.Exists(DemoSavePath);
+            return _saves.Load(importDemo ? DemoSavePath : SavePath, _graph, out recovered);
+        }
+
+        private static string LoadNotice(bool recovered, string message)
+        {
+            if (!string.IsNullOrEmpty(message))
+            {
+                return recovered ? message + "（从备份恢复）" : message;
+            }
+
+            return recovered ? "已从备份恢复进度" : "进度已读取";
         }
 
         private void ShowMainMenu(string notice)

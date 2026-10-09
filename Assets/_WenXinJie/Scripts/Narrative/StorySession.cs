@@ -115,7 +115,9 @@ namespace WenXinJie.Narrative
         public static StorySession Restore(StoryGraph graph, StorySnapshot snapshot)
         {
             StoryGraph.Require(snapshot != null && snapshot.version == 3, "Unsupported save schema.");
-            StoryGraph.Require(snapshot.campaign == graph.Definition.id && snapshot.revision == graph.Definition.revision, "Save needs a content migration.");
+            var compatibleRevision = snapshot != null && (snapshot.revision == graph.Definition.revision
+                || (graph.Definition.compatibleSaveRevisions ?? Array.Empty<int>()).Contains(snapshot.revision));
+            StoryGraph.Require(snapshot.campaign == graph.Definition.id && compatibleRevision, "Save needs a content migration.");
             StoryGraph.Require(snapshot.values != null && snapshot.randomState != 0, "Missing saved state.");
             var values = new Dictionary<string, int>();
             foreach (var value in snapshot.values)
