@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 30 && demo.Definition.revision == 30,
+            Require(full.Definition.revision == 31 && demo.Definition.revision == 31,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -287,7 +287,7 @@ namespace WenXinJie.Editor
                     && !oldMap.IsAvailable(oldMap.Current.choices.First(choice => choice.id == "share")),
                 "Cracking the village charm did not delay another test.");
             var publicHold = StorySession.Restore(full, oldMap.Snapshot());
-            Require(publicHold.Choose("hold") && publicHold.Advance()
+            Require(publicHold.Choose("hold") && publicHold.Choose("warnFirst") && publicHold.Advance()
                     && publicHold.Current.id == "ending.oldPublic",
                 "The village could not decline another test and keep the old array public.");
             Require(oldMap.Choose("repair") && oldMap.CurrentText.Contains("小试裂开的村符")

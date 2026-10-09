@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 30,
+  "revision": 31,
   "start": "case.intro",
   "variables": [
     {
@@ -473,6 +473,12 @@
     },
     {
       "id": "g.repairOwed",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.holdWarned",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
