@@ -49,6 +49,22 @@ MonoBehaviour:
     texture: {fileID: 2800000, guid: 789e29bb89dc6514dbe1c51ddf2e9a49, type: 3}
   - id: valleyAftermath
     texture: {fileID: 2800000, guid: 567c56e5196992348900de0852174503, type: 3}
+  - id: craftsmanHome
+    texture: {fileID: 2800000, guid: 860545b46ecb4c54e91b45acec6323a4, type: 3}
+  - id: villagerHome
+    texture: {fileID: 2800000, guid: 49cedf1766675c0429e8f5cdd7e4e968, type: 3}
+  - id: xuFamilyHome
+    texture: {fileID: 2800000, guid: d6f9b78119632ed4c8445f532c2c1454, type: 3}
+  - id: oldBellTower
+    texture: {fileID: 2800000, guid: 122b120be6dd4ce40ad9fbf5d2aa7545, type: 3}
+  - id: registryOffice
+    texture: {fileID: 2800000, guid: ddbb31659354e7340b6cea42d33aff13, type: 3}
+  - id: storehouse
+    texture: {fileID: 2800000, guid: dab717df426de2c4280a6358dcd9726d, type: 3}
+  - id: transferDesk
+    texture: {fileID: 2800000, guid: 6dbc51c88d7bfb14e8dd9bc8040a8030, type: 3}
+  - id: examinationCourt
+    texture: {fileID: 2800000, guid: 78306994972110e44859631d0113c5ca, type: 3}
   portraits:
   - id: linYue
     texture: {fileID: 2800000, guid: 3cec69eb081d5844285329280e8c5132, type: 3}

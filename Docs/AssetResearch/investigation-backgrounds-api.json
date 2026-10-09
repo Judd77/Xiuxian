@@ -1,0 +1,304 @@
+[
+  {
+    "generated_on": "2026-10-09",
+    "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+    "requested_model": "gpt-image-2.5-sunburst",
+    "upstream_model_identity": "Not independently verified; identifier is supplied by proxy.",
+    "operation": "images.edit; project-owned style reference",
+    "requested_parameters": {
+      "size": "1536x1024",
+      "quality": "high",
+      "output_format": "png"
+    },
+    "returned_size": [
+      1672,
+      941
+    ],
+    "reference": "AssetSources/Art/Generated/NangouVillage_Premium_v1.png",
+    "background_id": "craftsmanHome",
+    "location": "工匠家",
+    "source_path": "AssetSources/Art/Generated/CraftsmanHome_Premium_v1.png",
+    "source_sha256": "e044831150415705b52150812ba888acf917f50bdb70770d0827291674ee80d1",
+    "prompt_path": "AssetSources/Art/Generated/CraftsmanHome_Premium_v1.prompt.txt",
+    "full_prompt": "Use case: stylized-concept.\nAsset type: production background for the original Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE REFERENCE ONLY, not an edit target. Create a different original location. Match its refined realistic painterly Chinese architecture, restrained teal and jade greens, weathered timber, pale stone, soft warm-gold lighting, and natural lived-in details.\nComposition: wide 16:9 eye-level shot. Keep important story objects above the bottom dialogue area and within a centered 16:9 safe crop; right side has calm standing space for a separate character portrait. No people baked into the background.\nConstraints: coherent practical premodern Chinese architecture, human scale, legible object silhouettes. No readable writing, invented labels, UI, border, watermark, neon, modern objects, floating islands, giant magic circles, ornate imperial palace, or new plot clues.\nPrimary request: the interior of the East Slope village craftsman's modest working home, late-afternoon daylight. Worn timber beams, a plain workbench at left-midground carrying two flat paper protection talismans on separate blank cloth mats: one old browned paper with damp worn edges, the other fresher paper with a split from its center. Abstract faded cinnabar strokes only. Simple repair brushes, paper rolls, wooden tools and a small clay glue pot placed naturally along the back of the bench. A low window opens toward green mountain slopes, woven baskets and patched shelves show everyday labor. Neither a magical laboratory nor a temple. Reserve the lower quarter for uncluttered floor and foreground bench edge. The paper damage is a visual support for the written comparison; do not add names, explanatory arrows, light effects or solutions.\n",
+    "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/CraftsmanHome_Premium_1080.jpg",
+    "runtime_sha256": "9f3dd553f3bc0fc29cf53fe9e6d1d64629907abab7972ce69852b5b95ddabf48",
+    "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+    "commercial_review": "Provider terms and release clearance pending.",
+    "campaign_nodes": [
+      "g02.old",
+      "g02.marks",
+      "g02.force",
+      "g02.sound"
+    ],
+    "democampaign_nodes": []
+  },
+  {
+    "generated_on": "2026-10-09",
+    "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+    "requested_model": "gpt-image-2.5-sunburst",
+    "upstream_model_identity": "Not independently verified; identifier is supplied by proxy.",
+    "operation": "images.edit; project-owned style reference",
+    "requested_parameters": {
+      "size": "1536x1024",
+      "quality": "high",
+      "output_format": "png"
+    },
+    "returned_size": [
+      1672,
+      941
+    ],
+    "reference": "AssetSources/Art/Generated/NangouVillage_Premium_v1.png",
+    "background_id": "villagerHome",
+    "location": "村民家",
+    "source_path": "AssetSources/Art/Generated/VillagerHome_Premium_v1.png",
+    "source_sha256": "e305225be09d38c875b2e90691241ce454f8ae04740950e61dd3e17c14f60980",
+    "prompt_path": "AssetSources/Art/Generated/VillagerHome_Premium_v1.prompt.txt",
+    "full_prompt": "Use case: stylized-concept.\nAsset type: production background for the original Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE REFERENCE ONLY, not an edit target. Create a different original location. Match its refined realistic painterly Chinese architecture, restrained teal and jade greens, weathered timber, pale stone, soft warm-gold lighting, and natural lived-in details.\nComposition: wide 16:9 eye-level shot. Keep important story objects above the bottom dialogue area and within a centered 16:9 safe crop; right side has calm standing space for a separate character portrait. No people baked into the background.\nConstraints: coherent practical premodern Chinese architecture, human scale, legible object silhouettes. No readable writing, invented labels, UI, border, watermark, neon, modern objects, floating islands, giant magic circles, ornate imperial palace, or new plot clues.\nPrimary request: a vulnerable farming family's small home in Nangou village, late afternoon with dim warm interior. A simple low wooden bed at left-midground has folded bedding and a small abstract cinnabar paper protection talisman hanging beside it. Nearby a modest side table holds a covered ceramic medicine bowl, herb packets and one blank sheet for evacuation notes. Ordinary stools, a packed cloth bundle and worn baskets, patchy plaster over stone base, plain wooden walls. Through an open door or window see only a little green village hillside. It should feel cared for, poor and inhabited, distinct from a workshop and sect dormitory. No sick person, no portraits or paintings of people; do not show a modern hospital or wealthy residence.\n",
+    "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/VillagerHome_Premium_1080.jpg",
+    "runtime_sha256": "f40bc9a6b1b5f3a916872389c614e188af0439777fd7157785393fcc01dd77a6",
+    "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+    "commercial_review": "Provider terms and release clearance pending.",
+    "campaign_nodes": [
+      "g05.father",
+      "g05.answer",
+      "g05.form",
+      "g05.listen"
+    ],
+    "democampaign_nodes": []
+  },
+  {
+    "generated_on": "2026-10-09",
+    "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+    "requested_model": "gpt-image-2.5-sunburst",
+    "upstream_model_identity": "Not independently verified; identifier is supplied by proxy.",
+    "operation": "images.edit; project-owned style reference",
+    "requested_parameters": {
+      "size": "1536x1024",
+      "quality": "high",
+      "output_format": "png"
+    },
+    "returned_size": [
+      1672,
+      941
+    ],
+    "reference": "AssetSources/Art/Generated/MedicineHouse_Premium_v1.png",
+    "background_id": "xuFamilyHome",
+    "location": "许家",
+    "source_path": "AssetSources/Art/Generated/XuFamilyHome_Premium_v1.png",
+    "source_sha256": "dfa6c944126033b311191978363037cfbec194412e1fd2a0a4bfed88d675ed80",
+    "prompt_path": "AssetSources/Art/Generated/XuFamilyHome_Premium_v1.prompt.txt",
+    "full_prompt": "Use case: stylized-concept.\nAsset type: production background for the original Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE REFERENCE ONLY, not an edit target. Create a different original location. Match its refined realistic painterly Chinese architecture, restrained teal and jade greens, weathered timber, pale stone, soft warm-gold lighting, and natural lived-in details.\nComposition: wide 16:9 eye-level shot. Keep important story objects above the bottom dialogue area and within a centered 16:9 safe crop; right side has calm standing space for a separate character portrait. No people baked into the background.\nConstraints: coherent practical premodern Chinese architecture, human scale, legible object silhouettes. No readable writing, invented labels, UI, border, watermark, neon, modern objects, floating islands, giant magic circles, ornate imperial palace, or new plot clues.\nPrimary request: the quiet modest home of Xu Cheng's family, in daylight. Intimate timber-and-plaster domestic room, a worn square tea table at left-midground holds a shallow pale ceramic dish with two small halves of a pale jade cloud-pattern clasp placed side-by-side, a neatly folded plain cloth and a spare simple old iron key. These are small natural props, no enlarged diagram and no glow. Simple sewing basket, repaired robe folded over a chair, tiny shelf of clay cups, latticed window casting soft sunlight. Ordinary household, no medical beds or medical tools, no ornate aristocratic jewelry display. The room is distinct from a workshop or archive. Foreground and right remain calm for the AVG overlay.\n",
+    "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/XuFamilyHome_Premium_1080.jpg",
+    "runtime_sha256": "cacbffefce5c6611465eb9b883b18b544c73d6cd47dd0803d441861247b5c614",
+    "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+    "commercial_review": "Provider terms and release clearance pending.",
+    "campaign_nodes": [
+      "c13.jade",
+      "c13.answer",
+      "c13.truth",
+      "c13.promise"
+    ],
+    "democampaign_nodes": [
+      "c13.jade",
+      "c13.answer",
+      "c13.truth",
+      "c13.promise"
+    ]
+  },
+  {
+    "generated_on": "2026-10-09",
+    "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+    "requested_model": "gpt-image-2.5-sunburst",
+    "upstream_model_identity": "Not independently verified; identifier is supplied by proxy.",
+    "operation": "images.edit; project-owned style reference",
+    "requested_parameters": {
+      "size": "1536x1024",
+      "quality": "high",
+      "output_format": "png"
+    },
+    "returned_size": [
+      1672,
+      941
+    ],
+    "reference": "AssetSources/Art/Generated/NangouVillage_Premium_v1.png",
+    "background_id": "oldBellTower",
+    "location": "旧钟楼",
+    "source_path": "AssetSources/Art/Generated/OldBellTower_Premium_v1.png",
+    "source_sha256": "502a7ec430a8ad12eb9181052d9b1ff1ddc3f156406a49e755dad0630bbe4dfa",
+    "prompt_path": "AssetSources/Art/Generated/OldBellTower_Premium_v1.prompt.txt",
+    "full_prompt": "Use case: stylized-concept.\nAsset type: production background for the original Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE REFERENCE ONLY, not an edit target. Create a different original location. Match its refined realistic painterly Chinese architecture, restrained teal and jade greens, weathered timber, pale stone, soft warm-gold lighting, and natural lived-in details.\nComposition: wide 16:9 eye-level shot. Keep important story objects above the bottom dialogue area and within a centered 16:9 safe crop; right side has calm standing space for a separate character portrait. No people baked into the background.\nConstraints: coherent practical premodern Chinese architecture, human scale, legible object silhouettes. No readable writing, invented labels, UI, border, watermark, neon, modern objects, floating islands, giant magic circles, ornate imperial palace, or new plot clues.\nPrimary request: inside the old village warning bell tower, late-afternoon daylight. Weathered timber beams and stone base, a practical modest bronze warning bell suspended in the left upper-midground with its plain wooden striker near it. Below and slightly forward is a worn keeper's desk bearing a thick open cloth-bound ledger with blank ruled pages, an inkstone and a few folded copies, no readable characters. A narrow wood railing and open side overlook the familiar jade-green mountain village roofs. Age and water stains in wood, believable mechanism and human-scale proportions. This is a villagers' working warning station and record room, not a monumental sacred temple or palace; no huge temple drum. Keep the ledger and bell recognizable in a wide shot, no glowing evidence highlights.\n",
+    "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/OldBellTower_Premium_1080.jpg",
+    "runtime_sha256": "bf16e12781a02be67e82b68ccba45e2181f1c58da90a62b704276238b36bd7ca",
+    "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+    "commercial_review": "Provider terms and release clearance pending.",
+    "campaign_nodes": [
+      "g03.book",
+      "g03.keep",
+      "g03.give",
+      "g03.take"
+    ],
+    "democampaign_nodes": []
+  },
+  {
+    "generated_on": "2026-10-09",
+    "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+    "requested_model": "gpt-image-2.5-sunburst",
+    "upstream_model_identity": "Not independently verified; identifier is supplied by proxy.",
+    "operation": "images.edit; project-owned style reference",
+    "requested_parameters": {
+      "size": "1536x1024",
+      "quality": "high",
+      "output_format": "png"
+    },
+    "returned_size": [
+      1672,
+      941
+    ],
+    "reference": "AssetSources/Art/Generated/CouncilHall_Premium_v1.png",
+    "background_id": "registryOffice",
+    "location": "司籍房",
+    "source_path": "AssetSources/Art/Generated/RegistryOffice_Premium_v1.png",
+    "source_sha256": "8a4358bc85ff3f5e0ca0bf81a294a65942ab3d275deac1a68c7aea43b947a8e3",
+    "prompt_path": "AssetSources/Art/Generated/RegistryOffice_Premium_v1.prompt.txt",
+    "full_prompt": "Use case: stylized-concept.\nAsset type: production background for the original Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE REFERENCE ONLY, not an edit target. Create a different original location. Match its refined realistic painterly Chinese architecture, restrained teal and jade greens, weathered timber, pale stone, soft warm-gold lighting, and natural lived-in details.\nComposition: wide 16:9 eye-level shot. Keep important story objects above the bottom dialogue area and within a centered 16:9 safe crop; right side has calm standing space for a separate character portrait. No people baked into the background.\nConstraints: coherent practical premodern Chinese architecture, human scale, legible object silhouettes. No readable writing, invented labels, UI, border, watermark, neon, modern objects, floating islands, giant magic circles, ornate imperial palace, or new plot clues.\nPrimary request: a small working registry office of a mountain cultivation sect, morning daylight. A plain long clerk's desk in left-midground has two off-white paper registers, a narrow reusable registration slip, folded blank copies, a dark inkstone, brushes and a restrained cinnabar seal set. Behind it simple wooden pigeonhole shelves contain tied paper bundles and slim ledgers; a modest lattice window looks toward pale blue-green cloud mountains. Soft morning light and one small warm lamp illuminate the paper, natural dark timber and quiet atmosphere. This is a practical administrative study, far smaller and less ceremonial than the reference council hall. No throne, no large conference table, no archive steles or inscriptions, no readable text. Do not draw a specific character on the registration slip or reveal an inference visually.\n",
+    "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/RegistryOffice_Premium_1080.jpg",
+    "runtime_sha256": "e0d81185bcba38ca7f11c397923ceda81ad332489af6470fc498419dc0ff3094",
+    "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+    "commercial_review": "Provider terms and release clearance pending.",
+    "campaign_nodes": [
+      "c03.post",
+      "c03.rubbing",
+      "c03.ask",
+      "h02.post",
+      "h02.choice",
+      "h02.preserved",
+      "h02.ledger",
+      "e05.account",
+      "e05.paper",
+      "ending.newRoad"
+    ],
+    "democampaign_nodes": [
+      "c03.post",
+      "c03.rubbing",
+      "c03.ask"
+    ]
+  },
+  {
+    "generated_on": "2026-10-09",
+    "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+    "requested_model": "gpt-image-2.5-sunburst",
+    "upstream_model_identity": "Not independently verified; identifier is supplied by proxy.",
+    "operation": "images.edit; project-owned style reference",
+    "requested_parameters": {
+      "size": "1536x1024",
+      "quality": "high",
+      "output_format": "png"
+    },
+    "returned_size": [
+      1672,
+      941
+    ],
+    "reference": "AssetSources/Art/Generated/RegistryOffice_Premium_v1.png",
+    "background_id": "storehouse",
+    "location": "仓房",
+    "source_path": "AssetSources/Art/Generated/Storehouse_Premium_v1.png",
+    "source_sha256": "5afc38ca14395345315f2afe75862fd73f9976f7d24386d193909ef38bf8b665",
+    "prompt_path": "AssetSources/Art/Generated/Storehouse_Premium_v1.prompt.txt",
+    "full_prompt": "Use case: stylized-concept.\nAsset type: original production background for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE REFERENCE ONLY. Create a new location, preserving the polished realistic painterly architecture, restrained jade green, teal, weathered wood, pale stone and warm-gold light. No copying the reference room layout.\nComposition: wide eye-level 16:9 shot. Important story props within centered 16:9 safe crop, above the lower dialogue zone. Calm open right side for separate character portrait. No people baked into the background.\nConstraints: practical coherent premodern Chinese architecture, no readable characters, labels, explanatory arrows, neon, modern objects, floating islands, huge magic circles, UI, border, logo or watermark. Background props support the written scene and never replace evidence verification.\nPrimary request: an ordinary supply storehouse within the mountain cultivation sect, soft late-afternoon daylight. Worn low wooden shelving holds tied paper talisman bundles, plain sealed pottery jars and cloth sacks, no library books or stone steles. A practical sorting bench at left-midground has two separate small heaps of gray ash on two pale blank paper mats beside a pair of matching blank package seals, an empty clay ash jar and rolled paper supplies. These samples are inert with no colored aura or glowing clues. A partly open timber shutter lights the work area. Supply inventory, not a laboratory, treasure vault or archive office. Lower foreground and right space calm for the AVG overlay. Do not depict a person or body.\n",
+    "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/Storehouse_Premium_1080.jpg",
+    "runtime_sha256": "7c09cdf34faeac9a278934034d0c02bfef0efc263390679ae297d567619ea915",
+    "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+    "commercial_review": "Provider terms and release clearance pending.",
+    "campaign_nodes": [
+      "c06.ash",
+      "c06.infer",
+      "c06.person",
+      "c06.batch",
+      "c06.revise",
+      "c06.sound"
+    ],
+    "democampaign_nodes": [
+      "c06.ash",
+      "c06.infer",
+      "c06.person",
+      "c06.batch",
+      "c06.revise",
+      "c06.sound"
+    ]
+  },
+  {
+    "generated_on": "2026-10-09",
+    "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+    "requested_model": "gpt-image-2.5-sunburst",
+    "upstream_model_identity": "Not independently verified; identifier is supplied by proxy.",
+    "operation": "images.edit; project-owned style reference",
+    "requested_parameters": {
+      "size": "1536x1024",
+      "quality": "high",
+      "output_format": "png"
+    },
+    "returned_size": [
+      1672,
+      941
+    ],
+    "reference": "AssetSources/Art/Generated/FurnaceChamber_Premium_v1.png",
+    "background_id": "transferDesk",
+    "location": "交接台",
+    "source_path": "AssetSources/Art/Generated/TransferDesk_Premium_v1.png",
+    "source_sha256": "90190cacce17f4a62b1b7c0127a8731972b95059a3cf1ff032f3ca299b77cc63",
+    "prompt_path": "AssetSources/Art/Generated/TransferDesk_Premium_v1.prompt.txt",
+    "full_prompt": "Use case: stylized-concept.\nAsset type: original production background for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE REFERENCE ONLY. Create a new location, preserving the polished realistic painterly architecture, restrained jade green, teal, weathered wood, pale stone and warm-gold light. No copying the reference room layout.\nComposition: wide eye-level 16:9 shot. Important story props within centered 16:9 safe crop, above the lower dialogue zone. Calm open right side for separate character portrait. No people baked into the background.\nConstraints: practical coherent premodern Chinese architecture, no readable characters, labels, explanatory arrows, neon, modern objects, floating islands, huge magic circles, UI, border, logo or watermark. Background props support the written scene and never replace evidence verification.\nPrimary request: the covered delivery handover bay outside the mountain-heart furnace corridor, early evening. A practical small timber delivery desk at left-midground carries two narrow off-white receipt sheets with abstract non-readable strokes, an inkstone and a closed plain ledger. Beside the desk stands an empty timber handcart, its shallow loading bed fully visible, with tied paper bundles and sealed clay supply containers stored on a rear shelf. Natural gray rock corridor and modest timber canopy, soft warm lamps contrasting muted blue-green dusk from the open bay. Same materials as the reference but no furnace, stone patient bed or giant magic apparatus; this is a mundane place where staff sign deliveries. No bodies, hidden person, visible heavy cargo or clues identifying a missing person. Human scale; clear standing space at right, no writing readable as names or numbers.\n",
+    "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/TransferDesk_Premium_1080.jpg",
+    "runtime_sha256": "a8044d8da9dc2c40f6a4abef6aab1fec523473110b581154734d7c09e100115f",
+    "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+    "commercial_review": "Provider terms and release clearance pending.",
+    "campaign_nodes": [
+      "c08.chen",
+      "c08.alive",
+      "c08.number"
+    ],
+    "democampaign_nodes": [
+      "c08.chen",
+      "c08.alive",
+      "c08.number"
+    ]
+  },
+  {
+    "generated_on": "2026-10-09",
+    "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+    "requested_model": "gpt-image-2.5-sunburst",
+    "upstream_model_identity": "Not independently verified; identifier is supplied by proxy.",
+    "operation": "images.edit; project-owned style reference",
+    "requested_parameters": {
+      "size": "1536x1024",
+      "quality": "high",
+      "output_format": "png"
+    },
+    "returned_size": [
+      1672,
+      941
+    ],
+    "reference": "AssetSources/Art/Generated/CloudGate_Premium.png",
+    "background_id": "examinationCourt",
+    "location": "考校台",
+    "source_path": "AssetSources/Art/Generated/ExaminationCourt_Premium_v1.png",
+    "source_sha256": "8a2ed501e2ea24cf8d7a78124bbd2922b593da979328bc66be89424ad762d392",
+    "prompt_path": "AssetSources/Art/Generated/ExaminationCourt_Premium_v1.prompt.txt",
+    "full_prompt": "Use case: stylized-concept.\nAsset type: original production background for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE REFERENCE ONLY. Create a new location, preserving the polished realistic painterly architecture, restrained jade green, teal, weathered wood, pale stone and warm-gold light. No copying the reference room layout.\nComposition: wide eye-level 16:9 shot. Important story props within centered 16:9 safe crop, above the lower dialogue zone. Calm open right side for separate character portrait. No people baked into the background.\nConstraints: practical coherent premodern Chinese architecture, no readable characters, labels, explanatory arrows, neon, modern objects, floating islands, huge magic circles, UI, border, logo or watermark. Background props support the written scene and never replace evidence verification.\nPrimary request: the small open-air examination court for novice talisman-writing in the same mountain cultivation sect as the reference, morning. Weathered pale stone courtyard under a simple timber awning, a plain examiner's desk with a thin open blank ruled roll book, and one close student writing bench at left-midground carrying a blank cream talisman sheet, brush, inkstone and a small tray of used paper. Rows of modest empty benches farther back. Low wood railing overlooks restrained jade-green mountains and distant tiled sect roofs; clear morning light, human scale. It is a working teaching and examination area, distinct from the grand entrance gate, no monumental staircase, throne or altar. No people, no floating spells, no burnt paper or smoke frozen into every scene, no readable names or instructions. Right side calm for portraits and bottom quarter uncluttered.\n",
+    "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/ExaminationCourt_Premium_1080.jpg",
+    "runtime_sha256": "13ab5010aafe31a13c6355aa617c588fd20d2ee072f404d2e937342e2e96a8df",
+    "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+    "commercial_review": "Provider terms and release clearance pending.",
+    "campaign_nodes": [
+      "c07.exam",
+      "c07.copy",
+      "c07.question"
+    ],
+    "democampaign_nodes": [
+      "c07.exam",
+      "c07.copy",
+      "c07.question"
+    ]
+  }
+]

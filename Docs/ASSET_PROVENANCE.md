@@ -66,8 +66,15 @@ UI 纹理。
 - 谷口两张源图返回 1672×941，裁切／缩放至 1920×1080，运行资源在 `Assets/_WenXinJie/Art/Backgrounds/`。谷口夜景由日景调色衍生，参数与村口夜景一致；改道后的药田损毁图为单独生成。三种状态接入正式版 19 节点。
 - 参数、源图／运行图路径、完整提示词及哈希见 `Docs/AssetResearch/characters-valley-api.json`。加工可由 `Tools/prepare-premium-art.py` 重现；后端模型身份与代理许可核实状态沿用前述 API 记录。
 
+## 2026-10-09 API 调查地点背景
+
+- 沿用已授权 Image API 与 imagegen 原装 CLI，模型标识 `gpt-image-2.5-sunburst`；只以项目自有南沟村、医舍、议事堂、司籍房、炉房与山门源图作为风格参考。模型与代理许可核实状态沿用前述 API 记录。
+- 八张源图与完整提示词位于 `AssetSources/Art/Generated/`：`CraftsmanHome_Premium_v1`、`VillagerHome_Premium_v1`、`XuFamilyHome_Premium_v1`、`OldBellTower_Premium_v1`、`RegistryOffice_Premium_v1`、`Storehouse_Premium_v1`、`TransferDesk_Premium_v1`、`ExaminationCourt_Premium_v1`（`.png` 与 `.prompt.txt`）。分别对应工匠家、村民家、许家、旧钟楼、司籍房、仓房、交接台、考校台。
+- 返回尺寸均为 1672×941；居中裁切并以 Lanczos 缩放为 1920×1080，JPEG 质量 94。运行资源位于 `Assets/_WenXinJie/Art/Backgrounds/`，同名前缀加 `_Premium_1080.jpg`。正式版 38 节点、Demo 19 节点接入；没有改变证据条件、变量或分支效果。
+- 提示词、参考、请求参数、源图与运行图哈希及节点清单见 `Docs/AssetResearch/investigation-backgrounds-api.json`。加工已纳入 `Tools/prepare-premium-art.py`；凭据不写入工程。
+
 ## 未采用与待办
 
 - Liyan / elerya：https://opengameart.org/content/liyan ，页面标注 CC-BY 3.0。仅研究，未下载或接入。
-- 五名角色表情差分、家庭／钟楼／司籍房等调查地点和额外 UI 音效仍待制作。既有内置生成美术与新增 API 美术分别留档。
+- 五名角色表情差分和额外 UI 音效仍待制作。既有内置生成美术与新增 API 美术分别留档。
 - 当前只接入 CC0 与 OFL 资源。禁止把仅限非商业、禁止改编、来源不明、游戏拆包或无法保留授权证据的资源导入 `Assets/_WenXinJie`。

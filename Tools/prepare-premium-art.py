@@ -33,6 +33,9 @@ fit(GENERATED / 'CouncilHall_Premium_v1.png', backgrounds / 'CouncilHall_Premium
 fit(GENERATED / 'FurnaceChamber_Premium_v1.png', backgrounds / 'FurnaceChamber_Premium_1080.jpg')
 fit(GENERATED / 'DiversionValley_Premium_v1.png', backgrounds / 'DiversionValley_Premium_1080.jpg')
 fit(GENERATED / 'DiversionValley_Aftermath_v1.png', backgrounds / 'DiversionValley_Aftermath_1080.jpg')
+for location in ('CraftsmanHome', 'VillagerHome', 'XuFamilyHome', 'OldBellTower', 'RegistryOffice',
+                 'Storehouse', 'TransferDesk', 'ExaminationCourt'):
+    fit(GENERATED / f'{location}_Premium_v1.png', backgrounds / f'{location}_Premium_1080.jpg')
 
 valley_night = Image.open(backgrounds / 'DiversionValley_Premium_1080.jpg').convert('RGB')
 valley_night = ImageEnhance.Brightness(valley_night).enhance(0.40)
@@ -162,6 +165,14 @@ campaign_asset_paths = [
     'Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Premium_Night_1080.jpg',
     'Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Aftermath_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/CraftsmanHome_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/VillagerHome_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/XuFamilyHome_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/OldBellTower_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/RegistryOffice_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/Storehouse_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/TransferDesk_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/ExaminationCourt_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Generated/GuHeng_Premium_Cutout.png',
     'Assets/_WenXinJie/Art/Generated/AChe_Premium_Cutout.png',
     'Assets/_WenXinJie/Art/Generated/XuCheng_Premium_Cutout.png',

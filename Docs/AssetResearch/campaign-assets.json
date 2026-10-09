@@ -143,5 +143,45 @@
     "path": "Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Premium_Night_1080.jpg",
     "bytes": 537725,
     "sha256": "9cdd2b4c05ac59da2f8f6e210bca02f028eaab5c7744797e18f2280d610067eb"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/CraftsmanHome_Premium_1080.jpg",
+    "bytes": 744558,
+    "sha256": "9f3dd553f3bc0fc29cf53fe9e6d1d64629907abab7972ce69852b5b95ddabf48"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/VillagerHome_Premium_1080.jpg",
+    "bytes": 747316,
+    "sha256": "f40bc9a6b1b5f3a916872389c614e188af0439777fd7157785393fcc01dd77a6"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/XuFamilyHome_Premium_1080.jpg",
+    "bytes": 693648,
+    "sha256": "cacbffefce5c6611465eb9b883b18b544c73d6cd47dd0803d441861247b5c614"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/OldBellTower_Premium_1080.jpg",
+    "bytes": 906474,
+    "sha256": "bf16e12781a02be67e82b68ccba45e2181f1c58da90a62b704276238b36bd7ca"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/RegistryOffice_Premium_1080.jpg",
+    "bytes": 726134,
+    "sha256": "e0d81185bcba38ca7f11c397923ceda81ad332489af6470fc498419dc0ff3094"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/Storehouse_Premium_1080.jpg",
+    "bytes": 763430,
+    "sha256": "7c09cdf34faeac9a278934034d0c02bfef0efc263390679ae297d567619ea915"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/TransferDesk_Premium_1080.jpg",
+    "bytes": 756868,
+    "sha256": "a8044d8da9dc2c40f6a4abef6aab1fec523473110b581154734d7c09e100115f"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/ExaminationCourt_Premium_1080.jpg",
+    "bytes": 805164,
+    "sha256": "13ab5010aafe31a13c6355aa617c588fd20d2ee072f404d2e937342e2e96a8df"
   }
 ]
