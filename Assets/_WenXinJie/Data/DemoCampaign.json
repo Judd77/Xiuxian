@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 32,
+  "revision": 33,
   "start": "case.intro",
   "variables": [
     {
@@ -461,6 +461,12 @@
     },
     {
       "id": "e.publicCopies",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "e.sourceOverreach",
       "initial": 0,
       "minimum": 0,
       "maximum": 1

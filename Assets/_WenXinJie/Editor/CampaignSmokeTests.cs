@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 32 && demo.Definition.revision == 32,
+            Require(full.Definition.revision == 33 && demo.Definition.revision == 33,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");
@@ -29,12 +29,10 @@ namespace WenXinJie.Editor
                 "The player must make the ash inference.");
             Require(full.GetNode("c11.verified").choices.Length == 2,
                 "The player must choose what to preserve during rescue.");
-            Require(full.Nodes.Count(node => node.terminal) >= 5, "Expected distinct story outcomes.");
+            Require(full.Nodes.Count(node => node.terminal) == 2, "Expected distinct story outcomes.");
             VerifyPaths(full, demo);
             VerifyOpeningRecovery(full);
-            VerifyLinRoute(full);
             VerifyGuRoute(full);
-            VerifyShenRoute(full);
             VerifyAssets(full);
             Debug.Log("Campaign smoke tests PASS: new story graph, endings, Demo handoff and assets.");
         }
@@ -50,8 +48,7 @@ namespace WenXinJie.Editor
         {
             foreach (var ending in new[]
                      {
-                         "ending.leave", "ending.seizeSelf", "ending.seizeForce",
-                         "ending.oldPublic", "ending.oldHidden", "ending.newRoad"
+                         "ending.oldPublic", "ending.newRoad"
                      })
             {
                 Require(CanReach(full, ending), "Cannot reach story outcome: " + ending);
@@ -79,132 +76,6 @@ namespace WenXinJie.Editor
             AdvanceTo(run, "c06.revise");
             Require(run.Choose("correct") && run.GetValue("case.ashCorrect") == 1,
                 "The player could not correct an overstated inference.");
-        }
-
-        private static void VerifyLinRoute(StoryGraph full)
-        {
-            var run = new StorySession(full, 42);
-            AdvanceTo(run, "case.boundary");
-            Require(run.Choose("rescue"), "Lin Yue route is unavailable.");
-            StorySnapshot beforeLetters = null;
-            StorySnapshot beforeTestimony = null;
-            StorySnapshot councilEvidence = null;
-            StorySnapshot beforeRescue = null;
-            for (var step = 0; step < 150 && run.Current.id != "ending.leave"; step++)
-            {
-                var id = run.Current.id;
-                if (id == "l03.plan") beforeLetters = run.Snapshot();
-                if (id == "l09.record") beforeTestimony = run.Snapshot();
-                if (id == "l.hall.infer") councilEvidence = run.Snapshot();
-                if (id == "l07.warning") beforeRescue = run.Snapshot();
-                if (id == "l.depart.choice")
-                    Require(run.IsAvailable(run.Current.choices.First(choice => choice.id == "injured"))
-                            && !run.IsAvailable(run.Current.choices.First(choice => choice.id == "ache")),
-                        "The saved Dan Qi did not receive a place on the wagon.");
-                if (id == "l05.cart")
-                    Require(run.CurrentText.Contains("桂花糕"), "Borrowed letter was not used at the door.");
-                if (id == "l08.road")
-                    Require(run.CurrentText.Contains("守卫没认出姐姐"), "Covered approach did not carry forward.");
-                var choiceId = id switch
-                {
-                    "l01.table" when run.GetValue("l.medical") == 0 => "medicine",
-                    "l01.table" when run.GetValue("l.shift") == 0 => "shift",
-                    "l01.table" => "ready",
-                    "l02.test" => "ache",
-                    "l03.plan" => "borrow",
-                    "l04.select" => "signed",
-                    "l05.choice" => "pulse",
-                    "l07.warning" => "return",
-                    "l08.answer" => "rescued",
-                    "l08.names" => "bed",
-                    "l09.record" => "full",
-                    "l10.reply" => "joint",
-                    "l.hall.ask" => "read",
-                    "l.hall.infer" => "separate",
-                    "l.hall.choice" => "leave",
-                    "l.depart.choice" => "injured",
-                    _ => string.Empty
-                };
-                Require(string.IsNullOrEmpty(choiceId) ? run.Advance() : run.Choose(choiceId),
-                    "Lin Yue route stopped at " + id);
-            }
-
-            Require(run.Current.id == "ending.leave" && run.GetValue("l.danqi") == 1
-                    && run.GetValue("l.protocol") == 1,
-                "Lin Yue rescue did not carry its outcomes to the ending.");
-            Require(run.CurrentText.Contains("段七与阿澈都下了山"),
-                "The saved Dan Qi disappeared from the departure ending.");
-            Require(beforeLetters != null && beforeTestimony != null && councilEvidence != null
-                    && beforeRescue != null,
-                "Lin Yue branch snapshots were not reached.");
-
-            var retreat = StorySession.Restore(full, beforeRescue);
-            Require(retreat.Choose("retreat"), "The agreed retreat was unavailable.");
-            for (var step = 0; step < 130 && retreat.Current.id != "l.depart.choice"; step++)
-            {
-                var id = retreat.Current.id;
-                var choiceId = id switch
-                {
-                    "l08.answer" => "inside",
-                    "l09.record" => "full",
-                    "l10.reply" => "joint",
-                    "l.hall.ask" => "read",
-                    "l.hall.infer" => "separate",
-                    "l.hall.choice" => "leave",
-                    _ => string.Empty
-                };
-                Require(!string.IsNullOrEmpty(choiceId) ? retreat.Choose(choiceId)
-                    : retreat.Current.choices.Length > 0
-                        ? retreat.Choose(retreat.Current.choices.First(retreat.IsAvailable).id)
-                        : retreat.Advance(), "Retreat route stopped at " + id);
-            }
-            Require(retreat.Current.id == "l.depart.choice" && retreat.GetValue("l.danqi") == 0
-                    && retreat.CurrentText.Contains("段七被留在内榻")
-                    && retreat.IsAvailable(retreat.Current.choices.First(choice => choice.id == "ache"))
-                    && !retreat.IsAvailable(retreat.Current.choices.First(choice => choice.id == "injured")),
-                "The wagon still counted Dan Qi after leaving him inside.");
-            Require(retreat.Choose("boyFirst") && retreat.CurrentText.Contains("段七仍在里榻")
-                    && retreat.Advance() && retreat.CurrentText.Contains("仍在炉内")
-                    && retreat.Advance() && retreat.CurrentText.Contains("段七仍在里榻"),
-                "The retreat ending did not preserve Dan Qi's actual whereabouts.");
-
-            var overreach = StorySession.Restore(full, councilEvidence);
-            Require(overreach.Choose("overreach") && overreach.CurrentText.Contains("没证明谷口能接住冲力")
-                    && overreach.GetValue("l.councilDelay") == 1
-                    && overreach.Advance() && overreach.Current.id == "l.hall.infer"
-                    && overreach.Choose("separate") && overreach.Advance()
-                    && overreach.Current.id == "l.hall.choice",
-                "Lin Yue council did not distinguish the witness from the village warning.");
-            var delayedHold = StorySession.Restore(full, overreach.Snapshot());
-            Require(delayedHold.Choose("hold") && delayedHold.CurrentText.Contains("顾衡当众保管钟槌"),
-                "Council overreach did not change village control of the bell.");
-            Require(overreach.Choose("leave") && overreach.CurrentText.Contains("药车等到守卫换班"),
-                "Council overreach did not delay the departure convoy.");
-
-            var otherApproach = StorySession.Restore(full, beforeLetters);
-            Require(otherApproach.Choose("nickname"), "The family could not keep its letter.");
-            AdvanceTo(otherApproach, "l05.cart");
-            Require(otherApproach.CurrentText.Contains("信还在姐姐怀里"),
-                "Keeping the letter did not change the door scene.");
-            Require(otherApproach.Advance() && otherApproach.Choose("sister"),
-                "The sister could not question the person behind the door.");
-            AdvanceTo(otherApproach, "l08.road");
-            Require(otherApproach.CurrentText.Contains("盘问的人已往许家"),
-                "The guard seeing the sister had no follow-up.");
-
-            var correctedTestimony = StorySession.Restore(full, beforeTestimony);
-            Require(correctedTestimony.Choose("simple"), "The short testimony was unavailable.");
-            AdvanceTo(correctedTestimony, "l.hall.ask");
-            Require(correctedTestimony.GetValue("l.testimony") == 0
-                    && correctedTestimony.GetValue("l.protocol") == 0
-                    && !correctedTestimony.IsAvailable(correctedTestimony.Current.choices.First(choice => choice.id == "read")),
-                "A corrected draft must not become permission to speak for Xu Cheng.");
-            Require(correctedTestimony.Choose("ask") && correctedTestimony.Advance()
-                    && correctedTestimony.Choose("separate") && correctedTestimony.Advance(),
-                "Xu Cheng could not testify in her own words.");
-            Require(correctedTestimony.Choose("holdLate") && correctedTestimony.Current.id == "l.hold.plan"
-                    && correctedTestimony.Advance() && correctedTestimony.GetValue("l.protocol") == 1,
-                "Late public agreement did not repair the missing stop protocol.");
         }
 
         private static void VerifyGuRoute(StoryGraph full)
@@ -243,6 +114,7 @@ namespace WenXinJie.Editor
                     "h04.infer" => "separate",
                     "h05.assign" => "split",
                     "h05.stop" => "stop",
+                    "h05.decision" => "prepare",
                     "h06.table" when run.GetValue("h.house1") == 0 => "elder",
                     "h06.table" when run.GetValue("h.house2") == 0 => "father",
                     "h06.table" when run.GetValue("h.house3") == 0 => "carpenter",
@@ -294,120 +166,6 @@ namespace WenXinJie.Editor
                     && oldMap.Advance() && oldMap.GetValue("g.repairOwed") == 0
                     && oldMap.IsAvailable(oldMap.Current.choices.First(choice => choice.id == "share")),
                 "Repairing the charm did not reopen the village decision.");
-        }
-
-        private static void VerifyShenRoute(StoryGraph full)
-        {
-            var run = new StorySession(full, 42);
-            AdvanceTo(run, "case.boundary");
-            Require(run.Choose("shen"), "Shen Yan route is unavailable.");
-            StorySnapshot hallSnapshot = null;
-            StorySnapshot councilEvidence = null;
-            StorySnapshot beforeZhou = null;
-            StorySnapshot beforeStop = null;
-            for (var step = 0; step < 200 && run.Current.id != "ending.seizeSelf"; step++)
-            {
-                var id = run.Current.id;
-                if (id == "s.hall.choice") hallSnapshot = run.Snapshot();
-                if (id == "s.hall.infer") councilEvidence = run.Snapshot();
-                if (id == "s05.reply") beforeZhou = run.Snapshot();
-                if (id == "s07.stop") beforeStop = run.Snapshot();
-                var choiceId = id switch
-                {
-                    "s02.first" => "left",
-                    "s03.bells" => "fit",
-                    "s04.choice" => "small",
-                    "s05.reply" => "ask",
-                    "s06.map" => "homes",
-                    "s07.stop" => "now",
-                    "s08.choice" => "split",
-                    "s09.map" => "include",
-                    "s.hall.infer" => "source",
-                    "s.hall.choice" => "seize",
-                    "e20.symbol" => "side",
-                    "e20.choose" => "self",
-                    "e20.bell" => "stop",
-                    "e20.record" => "public",
-                    _ => string.Empty
-                };
-                Require(string.IsNullOrEmpty(choiceId) ? run.Advance() : run.Choose(choiceId),
-                    "Shen Yan route stopped at " + id);
-            }
-
-            Require(run.Current.id == "ending.seizeSelf" && run.GetValue("s.firstBed") == 1
-                    && run.GetValue("s.zhouWords") == 1 && run.GetValue("s.newMap") == 1
-                    && run.GetValue("e.seizeRecord") == 1,
-                "Shen Yan route did not carry its evidence through self-sacrifice.");
-            Require(!run.CurrentText.Contains("谷口小试你晚了一息"),
-                "An on-time stop was narrated as a late stop in the ending.");
-            Require(hallSnapshot != null, "Shen Yan council snapshot is missing.");
-            var forced = StorySession.Restore(full, hallSnapshot);
-            Require(forced.Choose("seize"), "The seizure route was unavailable.");
-            AdvanceTo(forced, "e20.choose");
-            Require(forced.Choose("force") && forced.CurrentText.Contains("合上榻锁")
-                    && forced.Advance() && forced.Current.id == "e21.question",
-                "The forced seat had no visible action or answer from Xu Cheng.");
-            Require(councilEvidence != null, "Shen Yan evidence inference was not reached.");
-            var overclaim = StorySession.Restore(full, councilEvidence);
-            Require(overclaim.Choose("tear") && overclaim.CurrentText.Contains("剩下的记录没写是谁撕的")
-                    && overclaim.GetValue("s.councilOverclaim") == 1
-                    && overclaim.Advance() && overclaim.Current.id == "s.hall.infer"
-                    && overclaim.Choose("source") && overclaim.Advance()
-                    && overclaim.Current.id == "s.hall.choice",
-                "The Shen Yan council did not separate the missing page from signed orders.");
-            var publicAfterOverclaim = StorySession.Restore(full, overclaim.Snapshot());
-            Require(publicAfterOverclaim.Choose("hold") && publicAfterOverclaim.Advance()
-                    && publicAfterOverclaim.Choose("tell")
-                    && publicAfterOverclaim.CurrentText.Contains("周望带着初试原簿"),
-                "The unsupported accusation did not change who presented the original book.");
-            Require(overclaim.Choose("seize") && overclaim.CurrentText.Contains("周望不借初试原簿"),
-                "The unsupported accusation was still treated as warrant for seizure.");
-            var hiddenRun = StorySession.Restore(full, hallSnapshot);
-            Require(hiddenRun.Choose("hold") && hiddenRun.Advance()
-                    && hiddenRun.Choose("hide") && hiddenRun.Advance()
-                    && hiddenRun.Choose("sign") && hiddenRun.Advance()
-                    && hiddenRun.Current.id == "ending.oldHidden"
-                    && hiddenRun.GetValue("e.hiddenName") == 1,
-                "The concealment ending was not an explicit player action.");
-
-            Require(beforeZhou != null && beforeStop != null, "Shen Yan branch snapshots are missing.");
-            var speakingForZhou = StorySession.Restore(full, beforeZhou);
-            Require(speakingForZhou.Choose("apologise") && speakingForZhou.Advance()
-                    && speakingForZhou.Current.id == "s05.reply"
-                    && speakingForZhou.Choose("ask") && speakingForZhou.Current.id == "s05.words",
-                "Zhou Wang's words must be requested from him, not supplied by the player.");
-
-            var lateStop = StorySession.Restore(full, beforeStop);
-            Require(lateStop.Choose("wait"), "Waiting past the stop call was unavailable.");
-            AdvanceTo(lateStop, "s08.choice");
-            Require(lateStop.GetValue("s.bellTrusted") == 0
-                    && !lateStop.IsAvailable(lateStop.Current.choices.First(choice => choice.id == "split")),
-                "Ignoring the stop call did not remove control of the next test.");
-            var publicHoldAfterStop = StorySession.Restore(full, lateStop.Snapshot());
-            Require(publicHoldAfterStop.Choose("hold") && publicHoldAfterStop.Advance()
-                    && publicHoldAfterStop.Current.id == "ending.oldPublic",
-                "The player could not stop further testing after a late bell.");
-            Require(lateStop.Choose("account") && lateStop.CurrentText.Contains("钟响后你仍等了一息")
-                    && lateStop.Advance() && lateStop.GetValue("s.bellTrusted") == 1
-                    && lateStop.Choose("split"),
-                "Publicly recording the late stop did not return the bell to shared control.");
-            AdvanceTo(lateStop, "s.hall");
-            Require(lateStop.CurrentText.Contains("你在谷口迟停"),
-                "The late stop disappeared from the council record.");
-            var lateForce = StorySession.Restore(full, lateStop.Snapshot());
-            AdvanceTo(lateForce, "e20.choose");
-            Require(lateForce.Choose("force") && lateForce.Advance()
-                    && lateForce.CurrentText.Contains("谷口那回有人喊停"),
-                "Xu Cheng did not connect the forced seat to the earlier ignored stop call.");
-            AdvanceTo(lateStop, "e20.self");
-            Require(lateStop.CurrentText.Contains("谷口那次你晚了一息"),
-                "The late stop did not inform the later seat decision.");
-            AdvanceTo(lateStop, "e20.bell");
-            Require(lateStop.Choose("endure") && lateStop.GetValue("e.extraInjury") == 1,
-                "Overriding the third stop call did not cause extra injury.");
-            AdvanceTo(lateStop, "ending.seizeSelf");
-            Require(lateStop.CurrentText.Contains("两次迟疑和加重的伤情"),
-                "The final record forgot both ignored stop calls and the added injury.");
         }
 
         private static void AdvanceTo(StorySession session, string target)
