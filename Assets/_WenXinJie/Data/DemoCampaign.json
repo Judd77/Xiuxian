@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 31,
+  "revision": 32,
   "start": "case.intro",
   "variables": [
     {
@@ -218,6 +218,12 @@
       "initial": 0,
       "minimum": 0,
       "maximum": 1
+    },
+    {
+      "id": "l.nightRole",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
     },
     {
       "id": "g.oldCharm",

@@ -18,7 +18,7 @@ namespace WenXinJie.Editor
         {
             var full = Load("Campaign.json");
             var demo = Load("DemoCampaign.json");
-            Require(full.Definition.revision == 31 && demo.Definition.revision == 31,
+            Require(full.Definition.revision == 32 && demo.Definition.revision == 32,
                 "Full and Demo revisions differ.");
             Require(full.Definition.id == demo.Definition.id, "Campaign identities differ.");
             Require(full.Nodes.Count() > demo.Nodes.Count(), "Demo is not shorter than Full.");

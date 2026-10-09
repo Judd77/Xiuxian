@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 31,
+  "revision": 32,
   "start": "case.intro",
   "variables": [
     {
@@ -218,6 +218,12 @@
       "initial": 0,
       "minimum": 0,
       "maximum": 1
+    },
+    {
+      "id": "l.nightRole",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
     },
     {
       "id": "g.oldCharm",
@@ -4993,7 +4999,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "ending.oldPublic",
+      "next": "l.night.arrive",
       "variants": [
         {
           "text": "姐姐把获救名单交给村民，林月在医舍给段七的新伤和阿澈复发的旧伤各留一页药账。她当面告诉两人今晚仍需换药；炉里其余人的名字留在待救栏。下一次进门前，还得请村人实走山路。",
@@ -5002,6 +5008,202 @@
               "variable": "l.danqi",
               "minimum": 1,
               "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l.night.arrive",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "医舍的炭火只剩一点红，药炉盖不时轻响。许澄把盖印抄页压在药碗下面，躺下以后仍伸手摸纸角。姐姐想替她收好，她摇头：“醒来就能看见，我才睡得着。”林月端水进门，袖口沾着未洗净的血。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.night.choice"
+    },
+    {
+      "id": "l.night.choice",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "第三份真账还得送给村民，林月换药也缺一个帮手。姐姐将纸折进衣襟，看了看妹妹，又看看你。你把刚烧开的水提到床边，决定今晚先照看哪一头。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "bedside",
+          "text": "留下用听脉帮林月换药，请姐姐送真账",
+          "target": "l.night.bedside",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "l.nightRole",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "village",
+          "text": "自己送真账、核村符；请姐姐帮林月换药",
+          "target": "l.night.village",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [
+            {
+              "variable": "l.nightRole",
+              "operation": "set",
+              "value": 2
+            }
+          ],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "l.night.bedside",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "姐姐带纸下山。林月将干净布条递给你，让你先听自己的脉，认清哪一阵急促是你自己手抖。你依着她教过的办法，把一点灵力贴在阿澈腕上。山腹传来钟声，他猛地抓住被沿，指节都白了。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.night.listen"
+    },
+    {
+      "id": "l.night.listen",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈的呼吸在钟后乱了，窗边护符却没有亮。你将听见的次数报给林月，她摸过他的伤口，让你留下等这一阵过去。听脉能隔着布听见呼吸，不能替她断所有伤情。你收回灵力，阿澈终于松开被角。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.night.bellHistory",
+      "variants": [
+        {
+          "text": "段七钟前便呼吸浅，阿澈却是在钟后才乱，窗边护符没有亮。你把两人的次数分开报给林月；她先换段七的新伤，让你留下照看阿澈。听脉省得掀动疼痛的衣布，却不能替她诊断所有伤。你收回灵力，等阿澈自己开口。",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l.night.bellHistory",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "阿澈",
+      "text": "“钟响以后，有人进来喊乙七。有时是换药，有时是换人。”阿澈盯着药碗里的灯影，“前一个被推走，那两个字还挂在床头。我常不知道他在叫谁。明天你给我换药的时候，叫阿澈，好不好？”",
+      "background": "quartersNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.night.name"
+    },
+    {
+      "id": "l.night.name",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你叫了一声阿澈，他应了。林月在床头新纸上写真名，旧床号只留在对账页。许澄把段七那一行推过来：“他还在里榻。听不到他，别就写成死了。”你在去向栏保留这句话，没替他填一个省事的答案。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.night.after",
+      "variants": [
+        {
+          "text": "你叫了一声阿澈，他应了。林月给另一张床写段七的真名，他睁开眼，问轮到自己换药没有。许澄将两人的药碗挪开一点，免得放错。旧床号只留在对账页；在这间医舍，喊名字终于有人能应。",
+          "conditions": [
+            {
+              "variable": "l.danqi",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l.night.village",
+      "chapter": "卷二 · 一张张真名",
+      "location": "南沟村",
+      "speaker": "旁白",
+      "text": "老妇把真账摊在灯下，没有先看宗门的印。“药车能躺几个？最慢那户，谁背？”你握着刚抄好的纸，一时答不上来。这一路查了炉里的姓名，却没有实走山下的撤路。她没赶你，只将这些空处另记在纸背。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.night.charm"
+    },
+    {
+      "id": "l.night.charm",
+      "chapter": "卷二 · 一张张真名",
+      "location": "南沟村",
+      "speaker": "旁白",
+      "text": "窗外村符忽然亮了。你辨过新息，从朱线中央传来，手指微微发热：这张符此刻确在挡山里的冲力。它还亮着，却不能凭这一点保证能撑几夜。老妇等钟声过去，把时辰写在真账背面，问下次谁来同她走那段坡。",
+      "background": "ridge",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.night.return"
+    },
+    {
+      "id": "l.night.return",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "回到医舍，姐姐正把血水倒出门。她已帮林月换过药，说阿澈醒来问过你去哪。“我告诉他，你去让山下的人知道炉里还有谁。”你把老妇纸背的问题交给顾衡，请他下一次按真实负重量路，不替她报一个时辰。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "l.night.after"
+    },
+    {
+      "id": "l.night.after",
+      "chapter": "卷二 · 一张张真名",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "姐姐回来时带着一碗粥，说老妇已留下真账，邻人明日会来核名，也会来问撤路。你亲耳听了阿澈的怕，却没替山下的人答话。林月收好听脉的记录，将床头真名翻向灯光；炉里其余人的去向仍等人追问。",
+      "background": "quartersNight",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "ending.oldPublic",
+      "variants": [
+        {
+          "text": "灯还亮着，阿澈与许澄的药碗并排放在桌上。你亲自送过真账，知道村民还等卧位与撤路的回答；床边这一夜，是姐姐与林月照料的。林月把药账留在医舍，家属、村民各握一份去向，谁也不能再用一个旧床号把名字换走。",
+          "conditions": [
+            {
+              "variable": "l.nightRole",
+              "minimum": 2,
+              "maximum": 2
             }
           ]
         }
