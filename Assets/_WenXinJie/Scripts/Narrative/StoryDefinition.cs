@@ -34,10 +34,27 @@ namespace WenXinJie.Narrative
         public string background;
         public string portrait;
         public bool rain;
+        public StoryObservation observation;
         public string next;
         public bool terminal;
         public StoryEffect[] effects = Array.Empty<StoryEffect>();
         public StoryChoice[] choices = Array.Empty<StoryChoice>();
+    }
+
+    [Serializable]
+    public sealed class StoryObservation
+    {
+        public string kind;
+        public string sample;
+        public string title;
+        public string caption;
+        public string leftLabel;
+        public string rightLabel;
+        public string leftNote;
+        public string rightNote;
+        public float leftStrength;
+        public float rightStrength;
+        public string flow;
     }
 
     [Serializable]

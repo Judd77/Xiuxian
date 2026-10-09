@@ -1,6 +1,6 @@
 # 代码结构与 C# 约定
 
-更新：2026-09-30。本文记录当前实现的职责与持续适用的约束；正式剧情与交互见 `STORY.md`、`GAME_SCRIPT.md`，工程实况见 `DEVELOPMENT_STATUS.md`。
+更新：2026-10-09。本文记录当前实现的职责与持续适用的约束；正式剧情与交互见 `STORY.md`、`GAME_SCRIPT.md`，工程实况见 `DEVELOPMENT_STATUS.md`。
 
 ## 格式
 
@@ -51,3 +51,7 @@ PlayerPrefs。音乐和背景通过场景序列化引用接入，不在 Update �
 - MCP：`node Tools/unity-mcp.cjs Unity_RunCommand Tools/InspectUnity.cs`。脚本固定项目并筛选活跃 Unity 实例；域重载期间连接会短暂消失，等待编译完成再调用。
 
 UI 测试须等待渲染后再检查按钮实际中心的射线，不能仅按设计分辨率猜点击位置。按钮事件、合成 Input System 输入与实体鼠标操作须分别记录。当前已验证与未验证的事实见 `DEVELOPMENT_STATUS.md`。
+
+## 术法观测演出
+
+StoryNode.observation 是可选的演出资料，包含双样本名称、已观测现象、余息强度及阵流阶段。StoryGraph 校验模式与范围，并将 JsonUtility 为缺失字段实例化的空资料归一为 null。StoryViewStateFactory 传递资料；StoryObservationView 负责布局，ObservationInk 用 UGUI 绘制旧纸、灰样、符纹及先后点亮。它们不修改剧情变量或解锁选项，也不加入等待门槛。离开观测节点与主界面时随玩法层隐藏，读档由当前节点恢复。

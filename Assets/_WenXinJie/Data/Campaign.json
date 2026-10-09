@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 33,
+  "revision": 34,
   "start": "case.intro",
   "variables": [
     {
@@ -865,7 +865,19 @@
           "conditions": [],
           "outcomes": []
         }
-      ]
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "辨气 · 先认对照",
+        "caption": "两张符的使用时辰已知。先摸新符，记住指尖的暖意，再摸旧符。",
+        "leftLabel": "刚画废的符",
+        "rightLabel": "搁了三日的符",
+        "leftNote": "还未完成比较",
+        "rightNote": "还未完成比较",
+        "leftStrength": 0,
+        "rightStrength": 0
+      }
     },
     {
       "id": "c05.retry",
@@ -878,7 +890,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c05.test"
+      "next": "c05.test",
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "辨气 · 先认对照",
+        "caption": "两张符的使用时辰已知。先摸新符，记住指尖的暖意，再摸旧符。",
+        "leftLabel": "刚画废的符",
+        "rightLabel": "搁了三日的符",
+        "leftNote": "还未完成比较",
+        "rightNote": "还未完成比较",
+        "leftStrength": 0,
+        "rightStrength": 0
+      }
     },
     {
       "id": "c05.learn",
@@ -891,7 +915,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c06.ash"
+      "next": "c06.ash",
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "辨气 · 余息有新旧",
+        "caption": "你亲手试出的差别：灵气像余温会散去，没有人的姓名。",
+        "leftLabel": "刚画废的符",
+        "rightLabel": "搁了三日的符",
+        "leftNote": "余息尚在，轻轻晃动",
+        "rightNote": "几乎摸不到余息",
+        "leftStrength": 1,
+        "rightStrength": 0.07
+      }
     },
     {
       "id": "c06.ash",
@@ -904,7 +940,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c06.infer"
+      "next": "c06.infer",
+      "observation": {
+        "kind": "residue",
+        "sample": "ash",
+        "title": "辨气 · 同批灰样",
+        "caption": "封签相同，两份灰来自同一炉。辨气只显示后来留下的余息。",
+        "leftLabel": "仓房未运灰",
+        "rightLabel": "车沿灰样",
+        "leftNote": "没有近期余息",
+        "rightNote": "多了一点今日新息",
+        "leftStrength": 0,
+        "rightStrength": 0.8
+      }
     },
     {
       "id": "c06.infer",
@@ -953,7 +1001,19 @@
           "conditions": [],
           "outcomes": []
         }
-      ]
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "ash",
+        "title": "辨气 · 同批灰样",
+        "caption": "封签相同，两份灰来自同一炉。辨气只显示后来留下的余息。",
+        "leftLabel": "仓房未运灰",
+        "rightLabel": "车沿灰样",
+        "leftNote": "没有近期余息",
+        "rightNote": "多了一点今日新息",
+        "leftStrength": 0,
+        "rightStrength": 0.8
+      }
     },
     {
       "id": "c06.person",
@@ -1006,7 +1066,19 @@
           "conditions": [],
           "outcomes": []
         }
-      ]
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "ash",
+        "title": "辨气 · 同批灰样",
+        "caption": "封签相同，两份灰来自同一炉。辨气只显示后来留下的余息。",
+        "leftLabel": "仓房未运灰",
+        "rightLabel": "车沿灰样",
+        "leftNote": "没有近期余息",
+        "rightNote": "多了一点今日新息",
+        "leftStrength": 0,
+        "rightStrength": 0.8
+      }
     },
     {
       "id": "c06.sound",
@@ -1025,7 +1097,19 @@
         }
       ],
       "choices": [],
-      "next": "c07.exam"
+      "next": "c07.exam",
+      "observation": {
+        "kind": "residue",
+        "sample": "ash",
+        "title": "辨气 · 同批灰样",
+        "caption": "封签相同，两份灰来自同一炉。辨气只显示后来留下的余息。",
+        "leftLabel": "仓房未运灰",
+        "rightLabel": "车沿灰样",
+        "leftNote": "没有近期余息",
+        "rightNote": "多了一点今日新息",
+        "leftStrength": 0,
+        "rightStrength": 0.8
+      }
     },
     {
       "id": "c07.exam",
@@ -1744,7 +1828,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "g02.marks"
+      "next": "g02.marks",
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "辨气 · 十年以后",
+        "caption": "旧符的余息已经散尽。术法没有回应，不能据此判定当年平安。",
+        "leftLabel": "十年前东坡符",
+        "rightLabel": "昨日南沟裂符",
+        "leftNote": "已经读不出当年余息",
+        "rightNote": "尚须比较裂纹与原簿",
+        "leftStrength": 0,
+        "rightStrength": 0
+      }
     },
     {
       "id": "g02.marks",
@@ -1794,7 +1890,19 @@
         }
       ],
       "choices": [],
-      "next": "g02.sound"
+      "next": "g02.sound",
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "辨气 · 十年以后",
+        "caption": "旧符的余息已经散尽。术法没有回应，不能据此判定当年平安。",
+        "leftLabel": "十年前东坡符",
+        "rightLabel": "昨日南沟裂符",
+        "leftNote": "已经读不出当年余息",
+        "rightNote": "尚须比较裂纹与原簿",
+        "leftStrength": 0,
+        "rightStrength": 0
+      }
     },
     {
       "id": "g02.sound",
@@ -2230,7 +2338,17 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "g07.test"
+      "next": "g07.test",
+      "observation": {
+        "kind": "flow",
+        "title": "阵流小试 · 两处观测",
+        "caption": "感应符已贴好，顾衡握钟。送入灵力以后，才能看见哪边先受冲。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "等待试验",
+        "rightNote": "等待试验",
+        "flow": "pending"
+      }
     },
     {
       "id": "g07.test",
@@ -2272,7 +2390,17 @@
           "effects": [],
           "outcomes": []
         }
-      ]
+      ],
+      "observation": {
+        "kind": "flow",
+        "title": "阵流小试 · 两处观测",
+        "caption": "感应符已贴好，顾衡握钟。送入灵力以后，才能看见哪边先受冲。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "等待试验",
+        "rightNote": "等待试验",
+        "flow": "pending"
+      }
     },
     {
       "id": "g07.old",
@@ -2285,7 +2413,17 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "g07.result"
+      "next": "g07.result",
+      "observation": {
+        "kind": "flow",
+        "title": "阵流小试 · 旧图失准",
+        "caption": "照旧图送入一缕灵力，村口先亮。你已经撤力，仍裂了一张村符。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "先亮，裂了一张村符",
+        "rightNote": "迟一瞬才热",
+        "flow": "villageFirst"
+      }
     },
     {
       "id": "g07.measure",
@@ -2298,7 +2436,17 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "g07.result"
+      "next": "g07.result",
+      "observation": {
+        "kind": "flow",
+        "title": "阵流小试 · 先后分明",
+        "caption": "村口先受冲，炉门迟一瞬才热。这是本次小试所见，不能预言明夜。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "先亮",
+        "rightNote": "后热",
+        "flow": "villageFirst"
+      }
     },
     {
       "id": "g07.result",
@@ -2322,7 +2470,17 @@
         }
       ],
       "choices": [],
-      "next": "g08.council"
+      "next": "g08.council",
+      "observation": {
+        "kind": "flow",
+        "title": "阵流小试 · 先后分明",
+        "caption": "村口先受冲，炉门迟一瞬才热。这是本次小试所见，不能预言明夜。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "先亮",
+        "rightNote": "后热",
+        "flow": "villageFirst"
+      }
     },
     {
       "id": "g08.council",
@@ -3188,7 +3346,17 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h05.stop"
+      "next": "h05.stop",
+      "observation": {
+        "kind": "flow",
+        "title": "联合小试 · 停钟已响",
+        "caption": "村口先亮，炉门后热。工匠与许澄都已发出信号，按约应撤力。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "先亮，第二符开始变色",
+        "rightNote": "后热，炉门已有回应",
+        "flow": "villageFirst"
+      }
     },
     {
       "id": "h05.stop",
@@ -3231,7 +3399,17 @@
           ],
           "outcomes": []
         }
-      ]
+      ],
+      "observation": {
+        "kind": "flow",
+        "title": "联合小试 · 停钟已响",
+        "caption": "村口先亮，炉门后热。工匠与许澄都已发出信号，按约应撤力。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "先亮，第二符开始变色",
+        "rightNote": "后热，炉门已有回应",
+        "flow": "villageFirst"
+      }
     },
     {
       "id": "h05.wait",
@@ -3244,7 +3422,17 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h05.stopped"
+      "next": "h05.stopped",
+      "observation": {
+        "kind": "flow",
+        "title": "联合小试 · 停钟已响",
+        "caption": "村口先亮，炉门后热。工匠与许澄都已发出信号，按约应撤力。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "先亮，第二符开始变色",
+        "rightNote": "后热，炉门已有回应",
+        "flow": "villageFirst"
+      }
     },
     {
       "id": "h05.stopped",
@@ -3263,7 +3451,17 @@
         }
       ],
       "choices": [],
-      "next": "h05.decision"
+      "next": "h05.decision",
+      "observation": {
+        "kind": "flow",
+        "title": "联合小试 · 支路闭合",
+        "caption": "支路已经关上，石柱暂接余力。新路还未正式开闸。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "停止送入灵力",
+        "rightNote": "停止送入灵力",
+        "flow": "closed"
+      }
     },
     {
       "id": "h06.homes",
@@ -3654,7 +3852,17 @@
           ],
           "outcomes": []
         }
-      ]
+      ],
+      "observation": {
+        "kind": "flow",
+        "title": "引流 · 现场与旧图",
+        "caption": "旧图第三柱已经错位。接下来该按哪一处引流，由你决定。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "村口仍有人守钟",
+        "rightNote": "炉门仍有人守铃",
+        "flow": "pending"
+      }
     },
     {
       "id": "e03.old",
@@ -3667,7 +3875,17 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e03.new"
+      "next": "e03.new",
+      "observation": {
+        "kind": "flow",
+        "title": "引流 · 错位的旧刻度",
+        "caption": "村口符抢先亮。你按约撤力，修补裂符后须按新的测点接线。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "先亮，村符受损",
+        "rightNote": "林月处理轻伤",
+        "flow": "villageFirst"
+      }
     },
     {
       "id": "e03.new",
@@ -3686,7 +3904,17 @@
         }
       ],
       "choices": [],
-      "next": "e04.second"
+      "next": "e04.second",
+      "observation": {
+        "kind": "flow",
+        "title": "引流 · 新息入谷",
+        "caption": "你将石柱转来的新息送向无人谷底。药田受损，停铃仍需听清。",
+        "leftLabel": "谷底泄流道",
+        "rightLabel": "村口与炉门",
+        "leftNote": "新息已转入谷底",
+        "rightNote": "继续观测，随时叫停",
+        "flow": "diverted"
+      }
     },
     {
       "id": "e04.second",

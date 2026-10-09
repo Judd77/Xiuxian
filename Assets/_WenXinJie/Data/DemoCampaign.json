@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 33,
+  "revision": 34,
   "start": "case.intro",
   "variables": [
     {
@@ -865,7 +865,19 @@
           "conditions": [],
           "outcomes": []
         }
-      ]
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "辨气 · 先认对照",
+        "caption": "两张符的使用时辰已知。先摸新符，记住指尖的暖意，再摸旧符。",
+        "leftLabel": "刚画废的符",
+        "rightLabel": "搁了三日的符",
+        "leftNote": "还未完成比较",
+        "rightNote": "还未完成比较",
+        "leftStrength": 0,
+        "rightStrength": 0
+      }
     },
     {
       "id": "c05.retry",
@@ -878,7 +890,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c05.test"
+      "next": "c05.test",
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "辨气 · 先认对照",
+        "caption": "两张符的使用时辰已知。先摸新符，记住指尖的暖意，再摸旧符。",
+        "leftLabel": "刚画废的符",
+        "rightLabel": "搁了三日的符",
+        "leftNote": "还未完成比较",
+        "rightNote": "还未完成比较",
+        "leftStrength": 0,
+        "rightStrength": 0
+      }
     },
     {
       "id": "c05.learn",
@@ -891,7 +915,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c06.ash"
+      "next": "c06.ash",
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "辨气 · 余息有新旧",
+        "caption": "你亲手试出的差别：灵气像余温会散去，没有人的姓名。",
+        "leftLabel": "刚画废的符",
+        "rightLabel": "搁了三日的符",
+        "leftNote": "余息尚在，轻轻晃动",
+        "rightNote": "几乎摸不到余息",
+        "leftStrength": 1,
+        "rightStrength": 0.07
+      }
     },
     {
       "id": "c06.ash",
@@ -904,7 +940,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c06.infer"
+      "next": "c06.infer",
+      "observation": {
+        "kind": "residue",
+        "sample": "ash",
+        "title": "辨气 · 同批灰样",
+        "caption": "封签相同，两份灰来自同一炉。辨气只显示后来留下的余息。",
+        "leftLabel": "仓房未运灰",
+        "rightLabel": "车沿灰样",
+        "leftNote": "没有近期余息",
+        "rightNote": "多了一点今日新息",
+        "leftStrength": 0,
+        "rightStrength": 0.8
+      }
     },
     {
       "id": "c06.infer",
@@ -953,7 +1001,19 @@
           "conditions": [],
           "outcomes": []
         }
-      ]
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "ash",
+        "title": "辨气 · 同批灰样",
+        "caption": "封签相同，两份灰来自同一炉。辨气只显示后来留下的余息。",
+        "leftLabel": "仓房未运灰",
+        "rightLabel": "车沿灰样",
+        "leftNote": "没有近期余息",
+        "rightNote": "多了一点今日新息",
+        "leftStrength": 0,
+        "rightStrength": 0.8
+      }
     },
     {
       "id": "c06.person",
@@ -1006,7 +1066,19 @@
           "conditions": [],
           "outcomes": []
         }
-      ]
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "ash",
+        "title": "辨气 · 同批灰样",
+        "caption": "封签相同，两份灰来自同一炉。辨气只显示后来留下的余息。",
+        "leftLabel": "仓房未运灰",
+        "rightLabel": "车沿灰样",
+        "leftNote": "没有近期余息",
+        "rightNote": "多了一点今日新息",
+        "leftStrength": 0,
+        "rightStrength": 0.8
+      }
     },
     {
       "id": "c06.sound",
@@ -1025,7 +1097,19 @@
         }
       ],
       "choices": [],
-      "next": "c07.exam"
+      "next": "c07.exam",
+      "observation": {
+        "kind": "residue",
+        "sample": "ash",
+        "title": "辨气 · 同批灰样",
+        "caption": "封签相同，两份灰来自同一炉。辨气只显示后来留下的余息。",
+        "leftLabel": "仓房未运灰",
+        "rightLabel": "车沿灰样",
+        "leftNote": "没有近期余息",
+        "rightNote": "多了一点今日新息",
+        "leftStrength": 0,
+        "rightStrength": 0.8
+      }
     },
     {
       "id": "c07.exam",

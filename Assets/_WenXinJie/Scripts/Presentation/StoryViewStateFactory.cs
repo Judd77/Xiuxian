@@ -28,7 +28,7 @@ namespace WenXinJie.Presentation
                 _assets.GetPortrait(node.portrait),
                 journal,
                 node.choices.Where(choice => !choice.hidden || session.IsAvailable(choice))
-                    .Select(choice => CreateChoice(session, choice)).ToArray());
+                    .Select(choice => CreateChoice(session, choice)).ToArray(), node.observation);
         }
 
         private static ChoiceViewState CreateChoice(StorySession session, StoryChoice choice)

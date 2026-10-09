@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using WenXinJie.Narrative;
 
 namespace WenXinJie.Presentation
 {
@@ -7,7 +8,7 @@ namespace WenXinJie.Presentation
     {
         public StoryViewState(string chapter, string location, string speaker, string text, string status,
             string nextLabel, bool terminal, Texture2D background, PortraitAssetEntry portrait,
-            ClueJournalState journal, ChoiceViewState[] choices)
+            ClueJournalState journal, ChoiceViewState[] choices, StoryObservation observation)
         {
             Chapter = chapter;
             Location = location;
@@ -20,6 +21,7 @@ namespace WenXinJie.Presentation
             Portrait = portrait;
             Journal = journal;
             Choices = choices ?? Array.Empty<ChoiceViewState>();
+            Observation = observation;
         }
 
         public string Chapter { get; }
@@ -33,6 +35,7 @@ namespace WenXinJie.Presentation
         public PortraitAssetEntry Portrait { get; }
         public ClueJournalState Journal { get; }
         public ChoiceViewState[] Choices { get; }
+        public StoryObservation Observation { get; }
     }
 
     internal sealed class ClueJournalState

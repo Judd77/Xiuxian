@@ -86,7 +86,7 @@ namespace WenXinJie.Presentation
         {
             _overlays.SetBackdrop(state.Background);
             _overlays.RenderJournal(state.Journal);
-            _scene.ShowPortrait(state.Portrait);
+            _scene.ShowPortrait(state.Observation == null ? state.Portrait : null);
             _scene.ShowBackground(state.Background);
             _reader.Present(state.Text, true);
             _gameplay.Render(state);

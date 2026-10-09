@@ -19,6 +19,7 @@ namespace WenXinJie.Presentation
         private readonly GameObject _root;
         private readonly TMP_Text _speaker;
         private readonly TMP_Text _status;
+        private readonly StoryObservationView _observation;
 
         public StoryGameplayView(RectTransform root, StoryUiFactory ui, StoryAssetCatalog assets,
             DialogueReader reader, IStoryCommands commands, Action openJournal, Func<bool> inputBlocked)
@@ -47,6 +48,7 @@ namespace WenXinJie.Presentation
             _location.alignment = TextAlignmentOptions.Left;
 
             CreateChoices(root, ui, commands, assets.Font);
+            _observation = new(root, ui);
 
             ui.Picture(root, "DialoguePanel", assets.PanelTexture, 80f, 748f, 1760f, 246f);
             ui.Frame(root, "SpeakerPanel", 112f, 724f, 330f, 62f);
@@ -94,6 +96,7 @@ namespace WenXinJie.Presentation
 
         public void Render(StoryViewState state)
         {
+            _observation.Render(state.Observation);
             _chapter.text = state.Chapter;
             _location.text = state.Location;
             _speaker.text = state.Speaker;
