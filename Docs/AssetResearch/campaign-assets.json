@@ -88,5 +88,25 @@
     "path": "Assets/_WenXinJie/Art/Backgrounds/MedicineHouse_Premium_1080.jpg",
     "bytes": 616439,
     "sha256": "cc4135749f7b19948afdf9b7d718fe5d45caa9585258d14d1987822f86970e1a"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/NangouVillage_Premium_1080.jpg",
+    "bytes": 942078,
+    "sha256": "97b0569b9a511988d37235bef3499d68437d8429a0c1406d7d4dead72e951d2c"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/CouncilHall_Premium_1080.jpg",
+    "bytes": 685181,
+    "sha256": "a122696ee545f78c3acaa6ac246eb9d03037fef2d5eac2660e6dfb312fb637a5"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/FurnaceChamber_Premium_1080.jpg",
+    "bytes": 724796,
+    "sha256": "78d933fd371b20b88a55b8759dc24f3da07797e629b48b0074c4955e80847d12"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/NangouVillage_Premium_Night_1080.jpg",
+    "bytes": 487470,
+    "sha256": "df526c82f9bed97742e788fbd3279c1a469042f3a715e90bf407be96637f8870"
   }
 ]

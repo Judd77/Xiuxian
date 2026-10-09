@@ -1,0 +1,82 @@
+[
+  {
+    "generated_on": "2026-10-09",
+    "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+    "requested_model": "gpt-image-2.5-sunburst",
+    "upstream_model_identity": "Not independently verified; identifier is provided by proxy.",
+    "operation": "images.edit; project-owned style reference",
+    "requested_parameters": {
+      "size": "1536x1024",
+      "quality": "high",
+      "output_format": "png"
+    },
+    "returned_size": [
+      1672,
+      941
+    ],
+    "reference": "AssetSources/Art/Generated/CloudGate_Premium.png",
+    "prompt_path": "AssetSources/Art/Generated/NangouVillage_Premium_v1.prompt.txt",
+    "source_path": "AssetSources/Art/Generated/NangouVillage_Premium_v1.png",
+    "source_sha256": "b9de00758b2edd77f061e920302e41537a58a083fffe409f0d06fdee1150bbf3",
+    "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/NangouVillage_Premium_1080.jpg",
+    "runtime_sha256": "97b0569b9a511988d37235bef3499d68437d8429a0c1406d7d4dead72e951d2c",
+    "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+    "commercial_review": "Provider terms and release clearance remain pending.",
+    "night_derivative": {
+      "path": "Assets/_WenXinJie/Art/Backgrounds/NangouVillage_Premium_Night_1080.jpg",
+      "sha256": "df526c82f9bed97742e788fbd3279c1a469042f3a715e90bf407be96637f8870",
+      "processing": "Brightness 0.40, saturation 0.40, blend 32% #10263d; JPEG quality 94."
+    },
+    "full_prompt": "Use case: stylized-concept\nAsset type: production 16:9 background for a Chinese cultivation mystery visual novel.\nInput image 1: project-owned STYLE REFERENCE only. Match the refined realistic painterly Chinese architecture, cool blue-green mist and warm sunlight. Create a different location and composition.\nPrimary request: the entrance square of Nangou, a small lived-in farming village below a cultivation sect, in clear late-afternoon light. Low weathered timber houses with tiled roofs surround a modest paved communal courtyard. A narrow dirt track leads between houses toward the foothills. A small covered village warning bell and its wooden striker are visible at left midground. Modest paper protection talismans hang beneath the house lintels; use abstract cinnabar strokes, no readable text. A practical timber table under a shallow awning has three plain papers and a broken paper talisman laid out for villagers to compare. Woven bamboo trays of drying medicinal herbs, a plain handcart and a couple of clay pots communicate everyday life, not a wealthy city.\nComposition: wide eye-level shot with coherent architecture, bell and talisman-bearing doorways visible above the lower dialogue zone. Clear open standing space at right for a separate character portrait. Lower quarter uncluttered paving. Keep important objects in the central 16:9 safe crop. No people baked into the background.\nStyle and palette: polished realistic Chinese fantasy environment illustration, restrained jade green, dark teal, weathered warm timber, pale stone and soft gold light, a peaceful home with signs of unease. Misty mountains belong to the same world as the reference, but village houses are human-scale, without giant sect gates or monumental stairs.\nAvoid: floating islands, giant magic circles, neon, science fiction, modern street furniture, any readable characters, signs, captions, interface, frame, logo or watermark."
+  },
+  {
+    "generated_on": "2026-10-09",
+    "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+    "requested_model": "gpt-image-2.5-sunburst",
+    "upstream_model_identity": "Not independently verified; identifier is provided by proxy.",
+    "operation": "images.edit; project-owned style reference",
+    "requested_parameters": {
+      "size": "1536x1024",
+      "quality": "high",
+      "output_format": "png"
+    },
+    "returned_size": [
+      1672,
+      941
+    ],
+    "reference": "AssetSources/Art/Generated/MedicineHouse_Premium_v1.png",
+    "prompt_path": "AssetSources/Art/Generated/CouncilHall_Premium_v1.prompt.txt",
+    "source_path": "AssetSources/Art/Generated/CouncilHall_Premium_v1.png",
+    "source_sha256": "4d72f3ffa812948043a6b1bbdd4faded29796b6b498df9ad52803123850f58bb",
+    "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/CouncilHall_Premium_1080.jpg",
+    "runtime_sha256": "a122696ee545f78c3acaa6ac246eb9d03037fef2d5eac2660e6dfb312fb637a5",
+    "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+    "commercial_review": "Provider terms and release clearance remain pending.",
+    "full_prompt": "Use case: stylized-concept\nAsset type: production 16:9 background for a Chinese cultivation mystery visual novel.\nInput image 1: project-owned STYLE AND MATERIAL REFERENCE only. Match its realistic painterly timber, blue-green dusk shadows, warm gold practical lamps and architectural craftsmanship. Create a new sect council chamber, not a medicine room.\nPrimary request: the cultivation sect's deliberation hall, a restrained place where family representatives, village witnesses and sect elders compare original records. A broad rectangular timber meeting table sits left of center, with three separate modest bundles of unlettered papers, a rolled diagram with abstract lines and a cracked paper talisman placed apart so their different sources can be understood. Simple chairs line its sides. At the back, a low raised elder's seat, carved wooden screens and tall latticed windows reveal misty blue-green peaks. No throne, extravagant palace or religious idol. Small brass lamps light the table; the room has sober everyday use, not ceremonial grandeur.\nComposition: wide three-quarter interior view, solid coherent perspective and ordinary human scale. Table surface and record bundles stay in the middle band above the bottom dialogue panel. Clear standing area at right for separate portraits, uncluttered floor in the lower quarter, central 16:9 safe crop. Empty room with no baked-in characters.\nLighting and style: polished realistic Chinese fantasy environment illustration matching the reference. Pale cool daylight through windows plus warm practical lamps, legible shadow detail, quiet tension, jade/teal and muted gold. No enormous luminous formation or fireworks.\nAvoid: medicine drawers, hospital beds, palace throne, courtroom benches, modern objects, any readable calligraphy or letters, signboards, UI, frame, logo or watermark."
+  },
+  {
+    "generated_on": "2026-10-09",
+    "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+    "requested_model": "gpt-image-2.5-sunburst",
+    "upstream_model_identity": "Not independently verified; identifier is provided by proxy.",
+    "operation": "images.edit; project-owned style reference",
+    "requested_parameters": {
+      "size": "1536x1024",
+      "quality": "high",
+      "output_format": "png"
+    },
+    "returned_size": [
+      1672,
+      941
+    ],
+    "reference": "AssetSources/Art/Generated/MountainHeartGate_Premium.png",
+    "prompt_path": "AssetSources/Art/Generated/FurnaceChamber_Premium_v1.prompt.txt",
+    "source_path": "AssetSources/Art/Generated/FurnaceChamber_Premium_v1.png",
+    "source_sha256": "afcfd8f342b00bc098e708c3522bf5a33f04695ce4d49ae3b00699f15e72cfad",
+    "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/FurnaceChamber_Premium_1080.jpg",
+    "runtime_sha256": "78d933fd371b20b88a55b8759dc24f3da07797e629b48b0074c4955e80847d12",
+    "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+    "commercial_review": "Provider terms and release clearance remain pending.",
+    "full_prompt": "Use case: stylized-concept\nAsset type: production 16:9 background for a Chinese cultivation mystery visual novel.\nInput image 1: project-owned STYLE AND MATERIAL REFERENCE only. Preserve the mountain-heart location's slate stone, old bronze details, restrained jade channels and warm furnace glow. Create a new interior instead of repeating its enormous sealed exterior gate.\nPrimary request: the outer working chamber of a cultivation furnace built inside the mountain. View from just inside the open stone doorway. A modest bronze furnace for burning medicine and paper talismans stands in the left-rear recess, gently glowing amber, not a giant molten industrial machine. Beside it stand two substantial stone pillars. Narrow shallow grooves run visibly from the furnace past those pillars toward a small row of three low stone treatment couches along the left wall, with plain folded linen and loosened cloth talisman straps. This physical connection must be readable: furnace -> pillars -> grooves -> couches. Near the front couch, a simple small brass stop bell hangs from a short stand close enough for a reclining patient to reach. A waist-high stone control table with a few old bronze handles and a restrained jade inlay sits near the entrance at left-center. No people: characters will be added separately by the game.\nComposition: wide three-quarter view with understandable architecture and ordinary human scale. Furnace, pillar bases, bell and at least two couches clearly visible in the middle band, above the lower dialogue zone. Clear standing space at right for portraits. Low-detail foreground stone paving; keep key objects in the central 16:9 safe crop.\nMood and style: polished realistic Chinese fantasy environment illustration matching the reference, slate and cool teal shadows, small warm-gold lamps and furnace light, faint incense haze. A troubling hidden working place, not a torture dungeon. The spiritual channels have only a restrained dim jade line, not active fireworks.\nAvoid: gore, skeletons, bloody chains, industrial pipes, electronic machinery, giant magic circles, unreadable geometry, glowing text, any readable symbols or letters, captions, interface, frame, logo or watermark."
+  }
+]

@@ -27,6 +27,15 @@ fit(GENERATED / 'SteleCorridor_Premium.png', backgrounds / 'SteleCorridor_Premiu
 fit(GENERATED / 'DiscipleQuartersNight_Premium.png', backgrounds / 'DiscipleQuartersNight_Premium_1080.jpg')
 fit(GENERATED / 'MountainHeartGate_Premium.png', backgrounds / 'MountainHeartGate_Premium_1080.jpg')
 fit(GENERATED / 'MedicineHouse_Premium_v1.png', backgrounds / 'MedicineHouse_Premium_1080.jpg')
+fit(GENERATED / 'NangouVillage_Premium_v1.png', backgrounds / 'NangouVillage_Premium_1080.jpg')
+fit(GENERATED / 'CouncilHall_Premium_v1.png', backgrounds / 'CouncilHall_Premium_1080.jpg')
+fit(GENERATED / 'FurnaceChamber_Premium_v1.png', backgrounds / 'FurnaceChamber_Premium_1080.jpg')
+
+village_night = Image.open(backgrounds / 'NangouVillage_Premium_1080.jpg').convert('RGB')
+village_night = ImageEnhance.Brightness(village_night).enhance(0.40)
+village_night = ImageEnhance.Color(village_night).enhance(0.40)
+village_night = Image.blend(village_night, Image.new('RGB', village_night.size, '#10263d'), 0.32)
+village_night.save(backgrounds / 'NangouVillage_Premium_Night_1080.jpg', quality=94)
 
 night = Image.open(backgrounds / 'PineRidge_Premium_1080.jpg').convert('RGB')
 night = ImageEnhance.Brightness(night).enhance(0.58)
@@ -132,6 +141,10 @@ campaign_asset_paths = [
     'Assets/_WenXinJie/Art/Backgrounds/DiscipleQuartersNight_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Backgrounds/MountainHeartGate_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Backgrounds/MedicineHouse_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/NangouVillage_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/NangouVillage_Premium_Night_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/CouncilHall_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/FurnaceChamber_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png',
     'Assets/_WenXinJie/Art/UI/ImmortalGlassPanel.png',
     'Assets/_WenXinJie/Art/UI/ImmortalGlassChoice.png',

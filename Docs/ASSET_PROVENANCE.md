@@ -51,8 +51,15 @@ UI 纹理。
 - 运行资源：`Assets/_WenXinJie/Art/Backgrounds/MedicineHouse_Premium_1080.jpg`。居中裁切并以 Lanczos 缩放为 1920×1080，JPEG 质量 94；正式版与 Demo 各 10 个医舍节点使用。
 - 请求参数、返回尺寸与源图／衍生图 SHA-256：`Docs/AssetResearch/medicine-house-api.json`。来源记录已保存；代理服务商商用条款与发行许可复核仍待完成，不能仅凭生成成功认定许可已核验。
 
+## 2026-10-09 API 主线背景
+
+- 经 imagegen 原装 CLI 通过当前代理 Image API 调用 `gpt-image-2.5-sunburst`，生成南沟村、议事堂与炉房。以项目自有山门、医舍、山腹石门源图为风格参考，未输入第三方游戏图；后端模型身份与代理许可核实状态沿用医舍记录。
+- 源图与完整提示词：`AssetSources/Art/Generated/` 下的 `NangouVillage_Premium_v1`、`CouncilHall_Premium_v1`、`FurnaceChamber_Premium_v1`（`.png` 与 `.prompt.txt`）。运行图为 `Assets/_WenXinJie/Art/Backgrounds/` 下同名 `*_Premium_1080.jpg`。
+- 三张源图均返回 1672×941，居中裁切／缩放到 1920×1080。村口另以亮度 0.40、饱和度 0.40、32% 青黛色混合制作 `NangouVillage_Premium_Night_1080.jpg`；是日景调色衍生，不宣称独立生成。
+- 正式版使用村景 21 节点（其中夜景 4）、议事堂 25、炉房 17；Demo 使用炉房 7。逐图参考来源、完整参数及哈希见 `Docs/AssetResearch/mainline-backgrounds-api.json`，裁切和夜景处理可由 `Tools/prepare-premium-art.py` 重现。
+
 ## 未采用与待办
 
 - Liyan / elerya：https://opengameart.org/content/liyan ，页面标注 CC-BY 3.0。仅研究，未下载或接入。
-- 林月表情差分、另外两名主要角色、药炉与藏经阁等后续场景和额外 UI 音效仍待制作。Unity 自带生成服务模型列表为空，本轮正式图像由 Codex 内置生成工具完成并留档。
+- 林月表情差分、顾衡／阿澈／许澄／沈砚立绘、谷口及家庭／钟楼等调查地点和额外 UI 音效仍待制作。既有内置生成美术与新增 API 美术分别留档。
 - 当前只接入 CC0 与 OFL 资源。禁止把仅限非商业、禁止改编、来源不明、游戏拆包或无法保留授权证据的资源导入 `Assets/_WenXinJie`。

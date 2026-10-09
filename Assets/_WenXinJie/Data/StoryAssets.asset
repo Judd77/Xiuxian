@@ -35,6 +35,14 @@ MonoBehaviour:
     texture: {fileID: 2800000, guid: fab6b34ae06f4301a01a9b94769aed76, type: 3}
   - id: medicineHouse
     texture: {fileID: 2800000, guid: 7a1aed34dd54e2e4db1a4c3df88c554c, type: 3}
+  - id: villageSquare
+    texture: {fileID: 2800000, guid: 43147de08a142814faea13eb9b20e3a0, type: 3}
+  - id: villageSquareNight
+    texture: {fileID: 2800000, guid: f93d40f887ba45e4a9eb2e338e304696, type: 3}
+  - id: councilHall
+    texture: {fileID: 2800000, guid: e67402f92856dd1469a0e9e209c2a116, type: 3}
+  - id: furnaceChamber
+    texture: {fileID: 2800000, guid: b0e480e9386caac4a8e6c5969edda751, type: 3}
   portraits:
   - id: linYue
     texture: {fileID: 2800000, guid: 3cec69eb081d5844285329280e8c5132, type: 3}

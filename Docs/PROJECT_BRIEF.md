@@ -20,7 +20,7 @@ Windows / Steam 单机互动式修仙悬疑小说。世界是古风宗门与山�
 
 Unity 6000.6.2f1，URP、C#、UGUI/TMP 与 Input System。剧情数据与运行状态分离，Windows 离线可玩优先。用户委托助手负责设计、代码、美术资源和构建；账号、付款、协议及最终发布由用户处理。
 
-美术保留清透云海、青绿山水、旧纸与朱砂的现有方向。已接入山门、居所、山腹及新医舍背景；接着补村口、议事堂、炉门画面与顾衡、阿澈、许澄、沈砚立绘。用户授权改用 API 出图，指定模型保持 gpt-image-2.5-sunburst。商用素材许可与生成记录见 `ASSET_PROVENANCE.md`、`AssetResearch/`；具体画面规范见 `ART_DIRECTION.md`。
+美术保留清透云海、青绿山水、旧纸与朱砂的现有方向。已接入山门、居所、山腹、医舍、南沟村、议事堂与炉房背景；接着补谷口等调查地点与顾衡、阿澈、许澄、沈砚立绘。用户授权改用 API 出图，指定模型保持 gpt-image-2.5-sunburst。商用素材许可与生成记录见 `ASSET_PROVENANCE.md`、`AssetResearch/`；具体画面规范见 `ART_DIRECTION.md`。
 
 ## 文档入口
 
