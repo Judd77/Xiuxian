@@ -1,0 +1,24 @@
+{
+  "generated_on": "2026-10-09",
+  "generator": "imagegen bundled CLI via the configured OpenAI-compatible proxy Image API",
+  "requested_model": "gpt-image-2.5-sunburst",
+  "upstream_model_identity": "Not independently verified; model identifier is provided by the proxy.",
+  "operation": "images.edit; project-owned reference used only for style",
+  "requested_parameters": {
+    "size": "1536x1024",
+    "quality": "high",
+    "output_format": "png"
+  },
+  "returned_size": [
+    1672,
+    941
+  ],
+  "reference": "AssetSources/Art/Generated/DiscipleQuartersNight_Premium.png",
+  "prompt_path": "AssetSources/Art/Generated/MedicineHouse_Premium_v1.prompt.txt",
+  "source_path": "AssetSources/Art/Generated/MedicineHouse_Premium_v1.png",
+  "source_sha256": "2d16a9d0119ad07ae640daa4637f2817de2f04773ccd8ac5afaba80def820cd2",
+  "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/MedicineHouse_Premium_1080.jpg",
+  "runtime_sha256": "cc4135749f7b19948afdf9b7d718fe5d45caa9585258d14d1987822f86970e1a",
+  "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+  "commercial_review": "Generation provenance recorded; proxy provider terms and release clearance remain pending."
+}

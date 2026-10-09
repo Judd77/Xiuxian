@@ -33,6 +33,8 @@ MonoBehaviour:
     texture: {fileID: 2800000, guid: a6e87093e0194e5cbf8a519bcef42c6b, type: 3}
   - id: mountainHeart
     texture: {fileID: 2800000, guid: fab6b34ae06f4301a01a9b94769aed76, type: 3}
+  - id: medicineHouse
+    texture: {fileID: 2800000, guid: 7a1aed34dd54e2e4db1a4c3df88c554c, type: 3}
   portraits:
   - id: linYue
     texture: {fileID: 2800000, guid: 3cec69eb081d5844285329280e8c5132, type: 3}

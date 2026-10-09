@@ -44,6 +44,13 @@ UI 纹理。
 
 虽然 CC0 无强制署名要求，游戏仍提供鸣谢面板列出作者和来源。修改不是取得授权的手段；许可依据是原作者/馆方的明确声明，不保证所有第三方权利不存在争议。
 
+## 2026-10-09 API 医舍背景
+
+- 用户授权由内置出图改用 API。调用本机已配置代理的 Image API，使用其列出的模型标识 `gpt-image-2.5-sunburst`；后端真实模型身份尚未独立核实。凭据只用于本次进程，没有保存到工程。
+- 原图：`AssetSources/Art/Generated/MedicineHouse_Premium_v1.png`；完整提示词：同目录 `MedicineHouse_Premium_v1.prompt.txt`。风格参考是项目既有 `DiscipleQuartersNight_Premium.png`，未输入第三方游戏素材。
+- 运行资源：`Assets/_WenXinJie/Art/Backgrounds/MedicineHouse_Premium_1080.jpg`。居中裁切并以 Lanczos 缩放为 1920×1080，JPEG 质量 94；正式版与 Demo 各 10 个医舍节点使用。
+- 请求参数、返回尺寸与源图／衍生图 SHA-256：`Docs/AssetResearch/medicine-house-api.json`。来源记录已保存；代理服务商商用条款与发行许可复核仍待完成，不能仅凭生成成功认定许可已核验。
+
 ## 未采用与待办
 
 - Liyan / elerya：https://opengameart.org/content/liyan ，页面标注 CC-BY 3.0。仅研究，未下载或接入。

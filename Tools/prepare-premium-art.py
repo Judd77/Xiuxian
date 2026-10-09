@@ -26,6 +26,7 @@ fit(GENERATED / 'PineRidge_Premium.png', backgrounds / 'PineRidge_Premium_1080.j
 fit(GENERATED / 'SteleCorridor_Premium.png', backgrounds / 'SteleCorridor_Premium_1080.jpg')
 fit(GENERATED / 'DiscipleQuartersNight_Premium.png', backgrounds / 'DiscipleQuartersNight_Premium_1080.jpg')
 fit(GENERATED / 'MountainHeartGate_Premium.png', backgrounds / 'MountainHeartGate_Premium_1080.jpg')
+fit(GENERATED / 'MedicineHouse_Premium_v1.png', backgrounds / 'MedicineHouse_Premium_1080.jpg')
 
 night = Image.open(backgrounds / 'PineRidge_Premium_1080.jpg').convert('RGB')
 night = ImageEnhance.Brightness(night).enhance(0.58)
@@ -130,6 +131,7 @@ campaign_asset_paths = [
     'Assets/_WenXinJie/Art/Backgrounds/SteleCorridor_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Backgrounds/DiscipleQuartersNight_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Backgrounds/MountainHeartGate_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/MedicineHouse_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png',
     'Assets/_WenXinJie/Art/UI/ImmortalGlassPanel.png',
     'Assets/_WenXinJie/Art/UI/ImmortalGlassChoice.png',

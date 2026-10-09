@@ -83,5 +83,10 @@
     "path": "Assets/_WenXinJie/Fonts/ZCOOLXiaoWei-OFL.txt",
     "bytes": 4400,
     "sha256": "a094514ca57cf8f9c5e8d8d1adab5d8cd3a377297ff016f9df2c05b3ecd77f0a"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/MedicineHouse_Premium_1080.jpg",
+    "bytes": 616439,
+    "sha256": "cc4135749f7b19948afdf9b7d718fe5d45caa9585258d14d1987822f86970e1a"
   }
 ]
