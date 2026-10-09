@@ -1,0 +1,152 @@
+{
+  "assets": [
+    {
+      "name": "GuHeng",
+      "portrait_id": "guHeng",
+      "reference": "Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png",
+      "source_path": "AssetSources/Art/Generated/GuHeng_Premium_v1.png",
+      "runtime_path": "Assets/_WenXinJie/Art/Generated/GuHeng_Premium_Cutout.png",
+      "returned_size": [
+        1024,
+        1536
+      ],
+      "postprocessing": "Native generated alpha retained byte-for-byte; no chroma key or crop.",
+      "generated_on": "2026-10-09",
+      "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+      "requested_model": "gpt-image-2.5-sunburst",
+      "upstream_model_identity": "Not independently verified; identifier is supplied by the proxy.",
+      "operation": "images.edit",
+      "quality": "high",
+      "prompt_path": "AssetSources/Art/Generated/GuHeng_Premium_v1.prompt.txt",
+      "full_prompt": "Use case: stylized-concept.\nAsset type: an original production character cutout for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE AND RENDERING REFERENCE ONLY. Match the reference's refined semi-realistic Chinese fantasy portrait finish, natural face anatomy, detailed silk and worn linen, subtle teal and warm-gold accents. Create a different original person, not a recoloring or a face copy of the referenced woman. Do not copy her umbrella, hair ornaments or jewelry.\nComposition: one complete character on a portrait canvas. Head near the upper edge with a small safe margin. Entire hair, hands, garments and footwear visible and contained. Centered, slight three-quarter turn toward the viewer's left, looking gently toward the viewer, no dramatic gesture or combat stance. Character should occupy 86-92% of canvas height. Soft consistent neutral lighting that can work in medicine-house, village or furnace scenes.\nBackground: absolutely uniform solid saturated magenta #FF00FF from edge to edge, behind the character and in all gaps between arms, garments and legs. No gradient, haze, rim glow, shadow, landscape, floor, border, UI or text. This magenta will be removed locally to yield true alpha. Do not put magenta in the character's clothing, skin, accessories or lighting.\nConstraints: only one person; original character; no readable writing, captions, signature or watermark. No oversized sword, armor, exaggerated floating fabric, angel wings or magical fireworks. Realistic separated fingers and readable silhouette; crisp edges and fine hair strands without a colored halo.\nSubject: Gu Heng, a Chinese male cultivation-sect village liaison, about forty, sturdy shoulders and a weathered broad face, short tidy moustache and subtle beard stubble, serious observant eyes, restrained remorse rather than villainous swagger. Black hair with a few gray strands tied in a practical compact topknot using a plain wooden pin. Dark charcoal inner robe, worn muted warm-gray outer hanfu coat and modest bronze belt buckle, simple cloth boots. A small rolled blank village register tucked under one forearm, other hand relaxed. Standing upright but tired, no ornate aristocratic jewelry. Clearly older and more rugged than a youthful sect scholar.",
+      "source_sha256": "8d3d7fe1b72cb40f4f9027daf3ea785e285ac3b421d7c4b2f455cb762cafe020",
+      "runtime_sha256": "8d3d7fe1b72cb40f4f9027daf3ea785e285ac3b421d7c4b2f455cb762cafe020",
+      "commercial_review": "Provider terms and release clearance pending.",
+      "requested_size": "1024x1536"
+    },
+    {
+      "name": "AChe",
+      "portrait_id": "aChe",
+      "reference": "Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png",
+      "source_path": "AssetSources/Art/Generated/AChe_Premium_v1.png",
+      "runtime_path": "Assets/_WenXinJie/Art/Generated/AChe_Premium_Cutout.png",
+      "returned_size": [
+        1024,
+        1536
+      ],
+      "postprocessing": "Native generated alpha retained byte-for-byte; no chroma key or crop.",
+      "generated_on": "2026-10-09",
+      "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+      "requested_model": "gpt-image-2.5-sunburst",
+      "upstream_model_identity": "Not independently verified; identifier is supplied by the proxy.",
+      "operation": "images.edit",
+      "quality": "high",
+      "prompt_path": "AssetSources/Art/Generated/AChe_Premium_v1.prompt.txt",
+      "full_prompt": "Use case: stylized-concept.\nAsset type: an original production character cutout for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE AND RENDERING REFERENCE ONLY. Match the reference's refined semi-realistic Chinese fantasy portrait finish, natural face anatomy, detailed silk and worn linen, subtle teal and warm-gold accents. Create a different original person, not a recoloring or a face copy of the referenced woman. Do not copy her umbrella, hair ornaments or jewelry.\nComposition: one complete character on a portrait canvas. Head near the upper edge with a small safe margin. Entire hair, hands, garments and footwear visible and contained. Centered, slight three-quarter turn toward the viewer's left, looking gently toward the viewer, no dramatic gesture or combat stance. Character should occupy 86-92% of canvas height. Soft consistent neutral lighting that can work in medicine-house, village or furnace scenes.\nBackground: absolutely uniform solid saturated magenta #FF00FF from edge to edge, behind the character and in all gaps between arms, garments and legs. No gradient, haze, rim glow, shadow, landscape, floor, border, UI or text. This magenta will be removed locally to yield true alpha. Do not put magenta in the character's clothing, skin, accessories or lighting.\nConstraints: only one person; original character; no readable writing, captions, signature or watermark. No oversized sword, armor, exaggerated floating fabric, angel wings or magical fireworks. Realistic separated fingers and readable silhouette; crisp edges and fine hair strands without a colored halo.\nSubject: A Che, a Chinese young adult male outer disciple, about twenty, slim, slightly pale from fever, short loose black hair gathered into a simple cloth tie with a few strands across the forehead, expressive youthful face with a tentative tired half-smile. Plain pale-gray and washed blue linen disciple robes, a loose sleeve exposing a neatly wrapped wrist bandage. He is recovering from a forced furnace treatment; no gore or open wound. Seated in a natural slightly slumped pose on one low plain wooden stool included as part of the isolated cutout, hands resting near his lap, both shoes visible. Calm and weak, not standing heroically or brandishing a weapon. Both person and stool isolated on the uniform magenta background, no room or floor.",
+      "source_sha256": "874199f7057551e06c0613c87942d4eb19c573f9df6388a945da85f1638e7852",
+      "runtime_sha256": "874199f7057551e06c0613c87942d4eb19c573f9df6388a945da85f1638e7852",
+      "commercial_review": "Provider terms and release clearance pending.",
+      "requested_size": "1024x1536"
+    },
+    {
+      "name": "XuCheng",
+      "portrait_id": "xuCheng",
+      "reference": "Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png",
+      "source_path": "AssetSources/Art/Generated/XuCheng_Premium_v1.png",
+      "runtime_path": "Assets/_WenXinJie/Art/Generated/XuCheng_Premium_Cutout.png",
+      "returned_size": [
+        1024,
+        1536
+      ],
+      "postprocessing": "Native generated alpha retained byte-for-byte; no chroma key or crop.",
+      "generated_on": "2026-10-09",
+      "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+      "requested_model": "gpt-image-2.5-sunburst",
+      "upstream_model_identity": "Not independently verified; identifier is supplied by the proxy.",
+      "operation": "images.edit",
+      "quality": "high",
+      "prompt_path": "AssetSources/Art/Generated/XuCheng_Premium_v1.prompt.txt",
+      "full_prompt": "Use case: stylized-concept.\nAsset type: an original production character cutout for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE AND RENDERING REFERENCE ONLY. Match the reference's refined semi-realistic Chinese fantasy portrait finish, natural face anatomy, detailed silk and worn linen, subtle teal and warm-gold accents. Create a different original person, not a recoloring or a face copy of the referenced woman. Do not copy her umbrella, hair ornaments or jewelry.\nComposition: one complete character on a portrait canvas. Head near the upper edge with a small safe margin. Entire hair, hands, garments and footwear visible and contained. Centered, slight three-quarter turn toward the viewer's left, looking gently toward the viewer, no dramatic gesture or combat stance. Character should occupy 86-92% of canvas height. Soft consistent neutral lighting that can work in medicine-house, village or furnace scenes.\nBackground: absolutely uniform solid saturated magenta #FF00FF from edge to edge, behind the character and in all gaps between arms, garments and legs. No gradient, haze, rim glow, shadow, landscape, floor, border, UI or text. This magenta will be removed locally to yield true alpha. Do not put magenta in the character's clothing, skin, accessories or lighting.\nConstraints: only one person; original character; no readable writing, captions, signature or watermark. No oversized sword, armor, exaggerated floating fabric, angel wings or magical fireworks. Realistic separated fingers and readable silhouette; crisp edges and fine hair strands without a colored halo.\nSubject: Xu Cheng, a Chinese young adult female disciple, about twenty-two, a narrower heart-shaped face distinct from the reference, dark expressive brows and tired but determined eyes. Plain black hair in a low braided bun with only a simple cloth tie, no elaborate silver hairpiece. Worn ivory-gray linen hanfu, desaturated slate-blue sash, sleeves simply tied back; a small visibly broken half of a cloud-pattern jade fastening on a cord at her waist, not an intact round jade pendant. A neat cloth wrist bandage. Seated on one low plain wooden stool included in the isolated cutout; shoulders slightly tired, one hand close to her knee and the other gently holding her bandaged wrist. She is alive, able to choose and call for a stop, not a corpse, prisoner stereotype or seductive heroine. Full person and stool on the uniform magenta key background, no bed or room.",
+      "source_sha256": "29f48bec68fc161c30983c7fc48a5de85d69c82c9c0a4ea36f1db3eeab485d00",
+      "runtime_sha256": "29f48bec68fc161c30983c7fc48a5de85d69c82c9c0a4ea36f1db3eeab485d00",
+      "commercial_review": "Provider terms and release clearance pending.",
+      "requested_size": "1024x1536"
+    },
+    {
+      "name": "ShenYan",
+      "portrait_id": "shenYan",
+      "reference": "Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png",
+      "source_path": "AssetSources/Art/Generated/ShenYan_Premium_v1.png",
+      "runtime_path": "Assets/_WenXinJie/Art/Generated/ShenYan_Premium_Cutout.png",
+      "returned_size": [
+        1024,
+        1536
+      ],
+      "postprocessing": "Native generated alpha retained byte-for-byte; no chroma key or crop.",
+      "generated_on": "2026-10-09",
+      "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+      "requested_model": "gpt-image-2.5-sunburst",
+      "upstream_model_identity": "Not independently verified; identifier is supplied by the proxy.",
+      "operation": "images.edit",
+      "quality": "high",
+      "prompt_path": "AssetSources/Art/Generated/ShenYan_Premium_v1.prompt.txt",
+      "full_prompt": "Use case: stylized-concept.\nAsset type: an original production character cutout for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE AND RENDERING REFERENCE ONLY. Match the reference's refined semi-realistic Chinese fantasy portrait finish, natural face anatomy, detailed silk and worn linen, subtle teal and warm-gold accents. Create a different original person, not a recoloring or a face copy of the referenced woman. Do not copy her umbrella, hair ornaments or jewelry.\nComposition: one complete character on a portrait canvas. Head near the upper edge with a small safe margin. Entire hair, hands, garments and footwear visible and contained. Centered, slight three-quarter turn toward the viewer's left, looking gently toward the viewer, no dramatic gesture or combat stance. Character should occupy 86-92% of canvas height. Soft consistent neutral lighting that can work in medicine-house, village or furnace scenes.\nBackground: absolutely uniform solid saturated magenta #FF00FF from edge to edge, behind the character and in all gaps between arms, garments and legs. No gradient, haze, rim glow, shadow, landscape, floor, border, UI or text. This magenta will be removed locally to yield true alpha. Do not put magenta in the character's clothing, skin, accessories or lighting.\nConstraints: only one person; original character; no readable writing, captions, signature or watermark. No oversized sword, armor, exaggerated floating fabric, angel wings or magical fireworks. Realistic separated fingers and readable silhouette; crisp edges and fine hair strands without a colored halo.\nSubject: Shen Yan, a Chinese male formation scholar in his mid-thirties, tall and slender with a long angular face, thin straight eyebrows, sober analytical eyes and a visible air of sleeplessness. No beard or moustache; distinct from the older rugged village liaison. Black hair half tied back with a plain dark bronze pin, remaining hair falls naturally behind the shoulders. Dark ink-blue and pale stone-gray layered hanfu with narrow muted teal piping, modest cloth belt and ordinary boots. A slim closed drawing folio with blank cover held close to his torso; one hand lightly gripping its edge. Standing in a reserved, slightly withdrawn posture, no swagger, sword or glowing diagram. The character's regret is subtle in the face, not melodramatic tears.",
+      "source_sha256": "5355ad29f91ad6f921bd66f2014bcef559ff8cb2e8d9c8d21d1245c7a99ee6ff",
+      "runtime_sha256": "5355ad29f91ad6f921bd66f2014bcef559ff8cb2e8d9c8d21d1245c7a99ee6ff",
+      "commercial_review": "Provider terms and release clearance pending.",
+      "requested_size": "1024x1536"
+    },
+    {
+      "name": "DiversionValley_Premium",
+      "reference": "AssetSources/Art/Generated/NangouVillage_Premium_v1.png",
+      "source_path": "AssetSources/Art/Generated/DiversionValley_Premium_v1.png",
+      "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Premium_1080.jpg",
+      "returned_size": [
+        1672,
+        941
+      ],
+      "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+      "generated_on": "2026-10-09",
+      "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+      "requested_model": "gpt-image-2.5-sunburst",
+      "upstream_model_identity": "Not independently verified; identifier is supplied by the proxy.",
+      "operation": "images.edit",
+      "quality": "high",
+      "prompt_path": "AssetSources/Art/Generated/DiversionValley_Premium_v1.prompt.txt",
+      "full_prompt": "Use case: stylized-concept.\nAsset type: production 16:9 landscape background for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: project-owned STYLE AND WORLD REFERENCE only. Match the realistic painterly Nangou village's natural timber, stone textures, blue-green foothills and warm late-afternoon light. Create a new location beyond the village, not a duplicate village square.\nPrimary request: the mouth of the old diversion valley behind Nangou. The foreground holds a narrow fork in a rough rising footpath: one steep lane climbs to safety, while the other follows an old shallow stone channel into an uninhabited misty valley. Three small lived-in timber cottages stand along the far left slope and a modest rectangular medicinal herb plot lies beside the channel, showing precisely what will need evacuation and may be sacrificed. Three old stone posts mark the channel, with the third visibly tilted and displaced amid fresh mud. A simple paper sensing talisman with abstract red strokes is attached to one post; no readable text. The valley itself opens deep into the center distance, empty of homes.\nComposition: eye-level wide three-quarter establishing view. The narrowing fork, cottages, herb plot and tilted post must be understandable at ordinary human scale and visible in the central middle band above the lower dialogue panel. Clear standing space at right for separate character portraits. Low-detail foreground path at the bottom. Keep important objects in the central 16:9 safe crop. Empty scene without characters.\nLighting and style: polished realistic Chinese fantasy environment illustration, restrained jade/teal mountains, muted warm timber and pale weathered stone, subtle mist and soft gold sunlight. Practical terrain with real distances and a narrow passage, not a huge decorative magic arena.\nAvoid: giant sect gateways, floating islands, colossal stairs, modern pipes or electric devices, active flood, destroyed cottages, glowing magic circles, readable characters, text, captions, UI, frame, logo or watermark.",
+      "source_sha256": "9fb9ee3bb254959c33e43597b766d614a239d5fd5fee49ab4e0e87c6634662bd",
+      "runtime_sha256": "6f832a9422c5c7c7bedf170ef31d79a30845afd5fa90fa1eb60b712a9c3ad027",
+      "commercial_review": "Provider terms and release clearance pending.",
+      "requested_size": "1536x1024"
+    },
+    {
+      "name": "DiversionValley_Aftermath",
+      "reference": "AssetSources/Art/Generated/DiversionValley_Premium_v1.png",
+      "source_path": "AssetSources/Art/Generated/DiversionValley_Aftermath_v1.png",
+      "runtime_path": "Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Aftermath_1080.jpg",
+      "returned_size": [
+        1672,
+        941
+      ],
+      "postprocessing": "Centered 16:9 crop and Lanczos resize to 1920x1080; JPEG quality 94.",
+      "generated_on": "2026-10-09",
+      "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+      "requested_model": "gpt-image-2.5-sunburst",
+      "upstream_model_identity": "Not independently verified; identifier is supplied by the proxy.",
+      "operation": "images.edit",
+      "quality": "high",
+      "prompt_path": "AssetSources/Art/Generated/DiversionValley_Aftermath_v1.prompt.txt",
+      "full_prompt": "Use case: lighting-weather and precise-object-edit.\nAsset type: aftermath state of the same production valley background for a Chinese cultivation mystery visual novel.\nInput image 1: exact project-owned location and composition to preserve. Keep its camera, three cottages, forked escape path, stone posts, distant mountains, channel and tree silhouettes in the same positions.\nChange only the time of day and the herb plot/channel state: it is now night after a controlled diversion. Pale cool moonlight and very restrained warm cottage lamps keep the terrain legible. The herb plot at left-center is flattened and muddied by a passed surge; the channel has wet dark silt and a few small broken branches, while the homes remain standing and the upper escape path remains passable. Water has already run down into the empty valley; no active giant wave, no destroyed homes, no people, no casualties, no fire.\nPreserve the original polished realistic painterly Chinese mountain-world rendering. Quiet exhausted aftermath, not horror. Lower quarter remains low-detail for dialogue and right-side standing area stays clear.\nAvoid: changing the camera or layout, adding a huge moon or new props, glowing magic circles, giant flood, readable writing, caption, frame, UI, logo or watermark.",
+      "source_sha256": "ff3d089dbc0c54e0fd54585b502f955524f3437a98e644f2d7db008edfd3ba7f",
+      "runtime_sha256": "09b8e5d467b57e7a42725a89228c26db8f416cbf48626145192d08fbc3aa463a",
+      "commercial_review": "Provider terms and release clearance pending.",
+      "requested_size": "1536x1024"
+    }
+  ],
+  "night_derivative": {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Premium_Night_1080.jpg",
+    "sha256": "9cdd2b4c05ac59da2f8f6e210bca02f028eaab5c7744797e18f2280d610067eb",
+    "processing": "Brightness 0.40, saturation 0.40, blend 32% #10263d; JPEG quality 94."
+  }
+}
+

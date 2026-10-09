@@ -1,0 +1,6 @@
+Use case: lighting-weather and precise-object-edit.
+Asset type: aftermath state of the same production valley background for a Chinese cultivation mystery visual novel.
+Input image 1: exact project-owned location and composition to preserve. Keep its camera, three cottages, forked escape path, stone posts, distant mountains, channel and tree silhouettes in the same positions.
+Change only the time of day and the herb plot/channel state: it is now night after a controlled diversion. Pale cool moonlight and very restrained warm cottage lamps keep the terrain legible. The herb plot at left-center is flattened and muddied by a passed surge; the channel has wet dark silt and a few small broken branches, while the homes remain standing and the upper escape path remains passable. Water has already run down into the empty valley; no active giant wave, no destroyed homes, no people, no casualties, no fire.
+Preserve the original polished realistic painterly Chinese mountain-world rendering. Quiet exhausted aftermath, not horror. Lower quarter remains low-detail for dialogue and right-side standing area stays clear.
+Avoid: changing the camera or layout, adding a huge moon or new props, glowing magic circles, giant flood, readable writing, caption, frame, UI, logo or watermark.

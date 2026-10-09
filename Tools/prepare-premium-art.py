@@ -1,6 +1,7 @@
 """Prepare project-ready derivatives from this project's generated xianxia artwork."""
 import hashlib
 import json
+import shutil
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 
@@ -30,6 +31,19 @@ fit(GENERATED / 'MedicineHouse_Premium_v1.png', backgrounds / 'MedicineHouse_Pre
 fit(GENERATED / 'NangouVillage_Premium_v1.png', backgrounds / 'NangouVillage_Premium_1080.jpg')
 fit(GENERATED / 'CouncilHall_Premium_v1.png', backgrounds / 'CouncilHall_Premium_1080.jpg')
 fit(GENERATED / 'FurnaceChamber_Premium_v1.png', backgrounds / 'FurnaceChamber_Premium_1080.jpg')
+fit(GENERATED / 'DiversionValley_Premium_v1.png', backgrounds / 'DiversionValley_Premium_1080.jpg')
+fit(GENERATED / 'DiversionValley_Aftermath_v1.png', backgrounds / 'DiversionValley_Aftermath_1080.jpg')
+
+valley_night = Image.open(backgrounds / 'DiversionValley_Premium_1080.jpg').convert('RGB')
+valley_night = ImageEnhance.Brightness(valley_night).enhance(0.40)
+valley_night = ImageEnhance.Color(valley_night).enhance(0.40)
+valley_night = Image.blend(valley_night, Image.new('RGB', valley_night.size, '#10263d'), 0.32)
+valley_night.save(backgrounds / 'DiversionValley_Premium_Night_1080.jpg', quality=94)
+
+for character in ('GuHeng', 'AChe', 'XuCheng', 'ShenYan'):
+    # These API outputs already contain alpha; retain it without keying or cropping.
+    shutil.copyfile(GENERATED / f'{character}_Premium_v1.png',
+                    ART / 'Generated' / f'{character}_Premium_Cutout.png')
 
 village_night = Image.open(backgrounds / 'NangouVillage_Premium_1080.jpg').convert('RGB')
 village_night = ImageEnhance.Brightness(village_night).enhance(0.40)
@@ -145,6 +159,13 @@ campaign_asset_paths = [
     'Assets/_WenXinJie/Art/Backgrounds/NangouVillage_Premium_Night_1080.jpg',
     'Assets/_WenXinJie/Art/Backgrounds/CouncilHall_Premium_1080.jpg',
     'Assets/_WenXinJie/Art/Backgrounds/FurnaceChamber_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Premium_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Premium_Night_1080.jpg',
+    'Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Aftermath_1080.jpg',
+    'Assets/_WenXinJie/Art/Generated/GuHeng_Premium_Cutout.png',
+    'Assets/_WenXinJie/Art/Generated/AChe_Premium_Cutout.png',
+    'Assets/_WenXinJie/Art/Generated/XuCheng_Premium_Cutout.png',
+    'Assets/_WenXinJie/Art/Generated/ShenYan_Premium_Cutout.png',
     'Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png',
     'Assets/_WenXinJie/Art/UI/ImmortalGlassPanel.png',
     'Assets/_WenXinJie/Art/UI/ImmortalGlassChoice.png',

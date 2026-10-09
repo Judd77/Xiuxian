@@ -43,9 +43,35 @@ MonoBehaviour:
     texture: {fileID: 2800000, guid: e67402f92856dd1469a0e9e209c2a116, type: 3}
   - id: furnaceChamber
     texture: {fileID: 2800000, guid: b0e480e9386caac4a8e6c5969edda751, type: 3}
+  - id: valley
+    texture: {fileID: 2800000, guid: eee7e6c9184dc9c46ad1ccede25a883b, type: 3}
+  - id: valleyNight
+    texture: {fileID: 2800000, guid: 789e29bb89dc6514dbe1c51ddf2e9a49, type: 3}
+  - id: valleyAftermath
+    texture: {fileID: 2800000, guid: 567c56e5196992348900de0852174503, type: 3}
   portraits:
   - id: linYue
     texture: {fileID: 2800000, guid: 3cec69eb081d5844285329280e8c5132, type: 3}
+    width: 1050
+    top: 140
+    right: 30
+  - id: guHeng
+    texture: {fileID: 2800000, guid: a1ffb76ec6de7fa44a8c994d20627735, type: 3}
+    width: 1050
+    top: 140
+    right: 30
+  - id: aChe
+    texture: {fileID: 2800000, guid: c0d300a50bae6f74196592c8068791c6, type: 3}
+    width: 1050
+    top: 140
+    right: 30
+  - id: xuCheng
+    texture: {fileID: 2800000, guid: a926fbf2f8828374aa5fa07c0bd7c354, type: 3}
+    width: 1050
+    top: 140
+    right: 30
+  - id: shenYan
+    texture: {fileID: 2800000, guid: fcf20f5a215de404cb4bc4216b2f01c4, type: 3}
     width: 1050
     top: 140
     right: 30

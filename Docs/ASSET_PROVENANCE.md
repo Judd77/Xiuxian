@@ -58,8 +58,16 @@ UI 纹理。
 - 三张源图均返回 1672×941，居中裁切／缩放到 1920×1080。村口另以亮度 0.40、饱和度 0.40、32% 青黛色混合制作 `NangouVillage_Premium_Night_1080.jpg`；是日景调色衍生，不宣称独立生成。
 - 正式版使用村景 21 节点（其中夜景 4）、议事堂 25、炉房 17；Demo 使用炉房 7。逐图参考来源、完整参数及哈希见 `Docs/AssetResearch/mainline-backgrounds-api.json`，裁切和夜景处理可由 `Tools/prepare-premium-art.py` 重现。
 
+## 2026-10-09 API 角色与谷口
+
+- 沿用已授权的 imagegen 原装 CLI、代理 Image API 与模型标识 `gpt-image-2.5-sunburst`。四人以项目自有林月透明立绘为风格参考；谷口以南沟村为参考，改道后以谷口原图为参考。凭据不写入工程。
+- 源图与完整提示词位于 `AssetSources/Art/Generated/`：`GuHeng_Premium_v1`、`AChe_Premium_v1`、`XuCheng_Premium_v1`、`ShenYan_Premium_v1`、`DiversionValley_Premium_v1`、`DiversionValley_Aftermath_v1`（`.png` 与 `.prompt.txt`）。
+- 四人返回 1024×1536，已自带透明通道，逐字节复制为 `Assets/_WenXinJie/Art/Generated/*_Premium_Cutout.png`，不再抠色或裁切。正式版接入 27 节点，Demo 阿澈同步 3 节点。
+- 谷口两张源图返回 1672×941，裁切／缩放至 1920×1080，运行资源在 `Assets/_WenXinJie/Art/Backgrounds/`。谷口夜景由日景调色衍生，参数与村口夜景一致；改道后的药田损毁图为单独生成。三种状态接入正式版 19 节点。
+- 参数、源图／运行图路径、完整提示词及哈希见 `Docs/AssetResearch/characters-valley-api.json`。加工可由 `Tools/prepare-premium-art.py` 重现；后端模型身份与代理许可核实状态沿用前述 API 记录。
+
 ## 未采用与待办
 
 - Liyan / elerya：https://opengameart.org/content/liyan ，页面标注 CC-BY 3.0。仅研究，未下载或接入。
-- 林月表情差分、顾衡／阿澈／许澄／沈砚立绘、谷口及家庭／钟楼等调查地点和额外 UI 音效仍待制作。既有内置生成美术与新增 API 美术分别留档。
+- 五名角色表情差分、家庭／钟楼／司籍房等调查地点和额外 UI 音效仍待制作。既有内置生成美术与新增 API 美术分别留档。
 - 当前只接入 CC0 与 OFL 资源。禁止把仅限非商业、禁止改编、来源不明、游戏拆包或无法保留授权证据的资源导入 `Assets/_WenXinJie`。

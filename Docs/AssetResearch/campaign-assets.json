@@ -108,5 +108,40 @@
     "path": "Assets/_WenXinJie/Art/Backgrounds/NangouVillage_Premium_Night_1080.jpg",
     "bytes": 487470,
     "sha256": "df526c82f9bed97742e788fbd3279c1a469042f3a715e90bf407be96637f8870"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Generated/GuHeng_Premium_Cutout.png",
+    "bytes": 2080104,
+    "sha256": "8d3d7fe1b72cb40f4f9027daf3ea785e285ac3b421d7c4b2f455cb762cafe020"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Generated/AChe_Premium_Cutout.png",
+    "bytes": 2330471,
+    "sha256": "874199f7057551e06c0613c87942d4eb19c573f9df6388a945da85f1638e7852"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Generated/XuCheng_Premium_Cutout.png",
+    "bytes": 2186892,
+    "sha256": "29f48bec68fc161c30983c7fc48a5de85d69c82c9c0a4ea36f1db3eeab485d00"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Generated/ShenYan_Premium_Cutout.png",
+    "bytes": 2021610,
+    "sha256": "5355ad29f91ad6f921bd66f2014bcef559ff8cb2e8d9c8d21d1245c7a99ee6ff"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Premium_1080.jpg",
+    "bytes": 1038014,
+    "sha256": "6f832a9422c5c7c7bedf170ef31d79a30845afd5fa90fa1eb60b712a9c3ad027"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Aftermath_1080.jpg",
+    "bytes": 837602,
+    "sha256": "09b8e5d467b57e7a42725a89228c26db8f416cbf48626145192d08fbc3aa463a"
+  },
+  {
+    "path": "Assets/_WenXinJie/Art/Backgrounds/DiversionValley_Premium_Night_1080.jpg",
+    "bytes": 537725,
+    "sha256": "9cdd2b4c05ac59da2f8f6e210bca02f028eaab5c7744797e18f2280d610067eb"
   }
 ]
