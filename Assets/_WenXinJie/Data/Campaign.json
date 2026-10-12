@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 41,
+  "revision": 42,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -9,7 +9,8 @@
     37,
     38,
     39,
-    40
+    40,
+    41
   ],
   "start": "case.intro",
   "variables": [
@@ -1775,13 +1776,7 @@
               "maximum": 0
             }
           ],
-          "effects": [
-            {
-              "variable": "g.oldCharm",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         },
         {
@@ -1796,13 +1791,7 @@
               "maximum": 0
             }
           ],
-          "effects": [
-            {
-              "variable": "g.bellBook",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         },
         {
@@ -1824,6 +1813,43 @@
           ],
           "effects": [],
           "outcomes": []
+        }
+      ],
+      "variants": [
+        {
+          "text": "两份抄页都在桌上：旧符的损坏方式不同，守钟原簿的两条时辰也没有合在一起。老妇等着问儿子的死因，顾衡已到村议。你可以带着这些来源，当众请他解释呈报。",
+          "conditions": [
+            {
+              "variable": "g.oldCharm",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "g.bellBook",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "你记好了东坡旧符与昨日南沟裂符的不同坏法。这还说不出十年前哪一刻出了事。顾衡的呈报仍摊在桌上；去旧钟楼查守钟原簿，才有当夜的时辰可以核对。",
+          "conditions": [
+            {
+              "variable": "g.oldCharm",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "守钟原簿的两条时辰已经抄好，原件由守钟人与家属带去村议。东坡换符是不是同一种冲击造成，还须去工匠家看留下的旧符，和昨日南沟裂符比较。",
+          "conditions": [
+            {
+              "variable": "g.bellBook",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
         }
       ]
     },
@@ -1938,7 +1964,7 @@
       "chapter": "卷二 · 山下那份账",
       "location": "旧钟楼",
       "speaker": "旁白",
-      "text": "旧钟楼原簿记亥初南沟三户先报符裂，近半个时辰后东坡才换符。老妇在背页找到儿子的名字，呈报却把死因写成山路跌伤。",
+      "text": "守钟人翻开当夜原簿：亥初，南沟三户报符裂、求援；近半个时辰后，东坡才记换符。两条各占一行。老妇翻到背页找到儿子的名字，又看你带来的呈报——上面将两地写成同时遇险，她儿子却只算山路跌伤。",
       "background": "oldBellTower",
       "portrait": "",
       "rain": false,
@@ -2045,7 +2071,7 @@
           ]
         },
         {
-          "text": "村议上，守钟人带来了原簿，却还记着你擅拿的事。老妇站在门边，没有把质问儿子死因的权利交给你。你有抄页与符，却得先把原件交回她手里。",
+          "text": "守钟人抱着原簿来到村议，没有忘记你擅拿它的事。原件早已被他收回，你手里只有抄页。老妇站到桌旁，要亲自问儿子的死因。你得先当众说明擅拿经过，再请守钟人将原簿交给她。",
           "conditions": [
             {
               "variable": "g.archiveHeld",
@@ -2080,7 +2106,7 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村议",
       "speaker": "旁白",
-      "text": "顾衡的呈报将两处写成同刻。要他改记，先问哪一处与原簿直接冲突。",
+      "text": "老妇翻开原簿，顾衡将呈报摊在旁边。两地“同时遇险”几个字，是他亲笔写的。你先问他为什么把南沟求援与东坡换符合成同一刻；要让村人也看明白，接下来得拿出具体出处。",
       "background": "villageSquare",
       "portrait": "guHeng",
       "rain": false,
@@ -2088,8 +2114,8 @@
       "choices": [
         {
           "id": "time",
-          "text": "问：南沟与东坡真的同时坏符吗？",
-          "target": "g04.time",
+          "text": "问清“同时遇险”的出处，出示依据",
+          "target": "g04.evidence",
           "lockedReason": "原簿还没有交回守钟人与家属手中",
           "conditions": [
             {
@@ -2145,13 +2171,82 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村议",
       "speaker": "旁白",
-      "text": "顾衡没有躲开：“我写错了。但你若只喊我说谎，他们仍不知道先裂的是哪家。”老妇把原簿推到你前面，让你按时辰问。",
+      "text": "顾衡的手停在呈报上：“我写了什么，你拿出来问。”老妇将原簿翻到两处时辰：“我儿子倒在哪一夜，你也得说清。”你收回那句总括，把具体记载放到顾衡面前。",
       "background": "villageSquare",
       "portrait": "guHengRemorseful",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "g04.ask"
+      "next": "g04.ask",
+      "variants": [
+        {
+          "text": "顾衡的手停在呈报上：“你说我骗了谁，就把哪一行拿出来问。”守钟人仍抱着原簿。老妇看向你：“我的事我自己问。你先说清为什么拿走他的册子。”你收回那句总括，不能把质问绕过原件归属。",
+          "conditions": [
+            {
+              "variable": "g.archiveHeld",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g04.evidence",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "原簿记的是十年前，工匠给你的两张符却分属十年前与昨日。顾衡没有接你递出的抄页，只问：“你用什么说我写错了时辰？”老妇按着儿子那一页，等你把证据念给在场的人听。",
+      "background": "villageSquare",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "book",
+          "text": "出示守钟原簿：两条记载为何合成同刻？",
+          "target": "g04.reading",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "charms",
+          "text": "拿两张符的不同裂纹，证明当夜先后",
+          "target": "g04.mixedYears",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g04.mixedYears",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你把两张符并排，工匠却按住昨天那张：“这张是昨夜裂的。坏法不同，能帮你分雨损与阵流，不能替十年前排时辰。”你将它挪到一边，向村人更正刚才的说法。老妇把原簿推到桌心：“念这一页。那一夜留在这里。”",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g04.reading"
+    },
+    {
+      "id": "g04.reading",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你先念亥初南沟三户求援，再念近半个时辰后东坡换符。顾衡的呈报却没有保留这段间隔，将两条都写成全村同时受冲。工匠说那夜自家是雨坏了纸。你没有据此说南沟也无灾，只问顾衡：“两处不同的事，为什么写成一起？”",
+      "background": "villageSquare",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g04.time"
     },
     {
       "id": "g04.time",
