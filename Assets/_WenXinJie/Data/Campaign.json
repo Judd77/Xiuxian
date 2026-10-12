@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 40,
+  "revision": 41,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -8,7 +8,8 @@
     36,
     37,
     38,
-    39
+    39,
+    40
   ],
   "start": "case.intro",
   "variables": [
@@ -4527,20 +4528,79 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹石台",
       "speaker": "旁白",
-      "text": "陶叔开旧闸，谷口药苗倒向一边。新测两根石柱一明一暗，村口与炉门感应符轮流亮。你要先辨哪股余息是刚从石柱转来的，才好把它引向无人谷底。",
+      "text": "陶叔把旧闸开了一线，蓄在石槽里的乱灵气涌了出来。村口报药苗倒向一边，炉门两人仍握着停铃。石台前分出两道槽：左边宽，沿十年前的刻线；右边窄，接着白日量过的现柱脚。要把来气牵入深谷，先得找出它此刻走的是哪一道。",
       "background": "furnaceChamber",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e03.choice"
+      "next": "e03.samples"
+    },
+    {
+      "id": "e03.samples",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你取两张同批探流符，同时贴在左右槽口。左槽深，石面磨得光滑；右槽边缘还留着新清出的泥。沈砚把旧图翻到背面，让出石台：“宽窄能看见，气走哪儿，要你自己辨。”你并拢两指，像初学时比较新旧废符那样，先让自己的灵力慢下来。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "compare",
+          "text": "施展辨气，比较两张符刚留下的余息",
+          "target": "e03.compare",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "charms",
+        "title": "辨气 · 两条石槽",
+        "caption": "两张符同批、同时贴下；尚未施展辨气，不能把看不见当作没有来气。",
+        "leftLabel": "左槽探流符",
+        "rightLabel": "右槽探流符",
+        "leftNote": "等待辨气",
+        "rightNote": "等待辨气",
+        "leftStrength": 0,
+        "rightStrength": 0
+      }
+    },
+    {
+      "id": "e03.compare",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你用一缕灵力依次拂过两张符。左符没有新息，朱线仍暗；右符忽然发暖，指尖能辨到刚留下的气，亮纹沿纸边走了一小段。你收回手，两张纸并排放好。辨气只让你认出哪边刚有气经过，并不能保证把整股乱流牵走以后，谷底便撑得住。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e03.choice",
+      "observation": {
+        "kind": "residue",
+        "sample": "charms",
+        "title": "辨气 · 两条石槽",
+        "caption": "两张符同批、同时贴下。只比较刚留下的余息，不以石槽宽窄判来气。",
+        "leftLabel": "左槽探流符",
+        "rightLabel": "右槽探流符",
+        "leftNote": "没有辨到新息，朱线未亮",
+        "rightNote": "刚沾新息，朱线明亮",
+        "leftStrength": 0,
+        "rightStrength": 0.9
+      }
     },
     {
       "id": "e03.choice",
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹石台",
       "speaker": "旁白",
-      "text": "旧图第三柱的位置仍印在纸上，但现场已量过新位置。",
+      "text": "左槽宽阔，沿着旧图刻线；右槽较窄，连着现柱脚。你刚比过的两张符还在手边：左符没有新息，右符新息清楚。工匠从村口传话，护符还撑着。你把手移到石台上，要将自己的灵力送进哪道槽？",
       "background": "furnaceChamber",
       "portrait": "",
       "rain": false,
@@ -4548,44 +4608,34 @@
       "choices": [
         {
           "id": "new",
-          "text": "循新测石柱的余息，把灵力引向空谷",
+          "text": "循右符的新息，沿现柱脚接向谷底",
           "target": "e03.new",
           "lockedReason": "",
           "conditions": [],
-          "effects": [
-            {
-              "variable": "e.flowMeasured",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         },
         {
           "id": "old",
-          "text": "照十年前第三柱的刻度送力",
+          "text": "左槽更宽，先沿旧刻线送力",
           "target": "e03.old",
           "lockedReason": "",
           "conditions": [],
-          "effects": [
-            {
-              "variable": "e.extraCharm",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         }
       ],
       "observation": {
-        "kind": "flow",
-        "title": "引流 · 现场与旧图",
-        "caption": "旧图第三柱已经错位。接下来该按哪一处引流，由你决定。",
-        "leftLabel": "村口感应符",
-        "rightLabel": "炉门感应符",
-        "leftNote": "村口仍有人守钟",
-        "rightNote": "炉门仍有人守铃",
-        "flow": "pending"
+        "kind": "residue",
+        "sample": "charms",
+        "title": "辨气 · 两条石槽",
+        "caption": "两张符同批、同时贴下。只比较刚留下的余息，不以石槽宽窄判来气。",
+        "leftLabel": "左槽探流符",
+        "rightLabel": "右槽探流符",
+        "leftNote": "没有辨到新息，朱线未亮",
+        "rightNote": "刚沾新息，朱线明亮",
+        "leftStrength": 0,
+        "rightStrength": 0.9
       }
     },
     {
@@ -4593,22 +4643,62 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹石台",
       "speaker": "旁白",
-      "text": "村口符抢先亮，顾衡敲预警；你按约撤力，工匠补一张裂符，林月处理炉里轻伤。旧刻度果然错位，你照白日小试标下的新测点，重新把支路接向谷底。",
+      "text": "你将灵力送进左槽，石纹亮到旧石础便折了回来。村口符猛地发亮，顾衡敲预警钟。你立即收息，陶叔合上支路；工匠报裂了一张村符，林月报炉里添了轻伤。那条槽虽宽，来气却没有走它。你按住还在发麻的指尖，等两端处理完，没急着再试。",
       "background": "furnaceChamber",
       "portrait": "",
       "rain": false,
-      "effects": [],
+      "effects": [
+        {
+          "variable": "e.extraCharm",
+          "operation": "set",
+          "value": 1
+        }
+      ],
       "choices": [],
-      "next": "e03.new",
+      "next": "e03.reconnect",
       "observation": {
         "kind": "flow",
         "title": "引流 · 错位的旧刻度",
-        "caption": "村口符抢先亮。你按约撤力，修补裂符后须按新的测点接线。",
+        "caption": "左槽在旧石础处折回。已收息、关试验支路，村符与伤情待处理。",
         "leftLabel": "村口感应符",
         "rightLabel": "炉门感应符",
         "leftNote": "先亮，村符受损",
         "rightNote": "林月处理轻伤",
-        "flow": "villageFirst"
+        "flow": "closed"
+      }
+    },
+    {
+      "id": "e03.reconnect",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "工匠补牢裂符，陶叔把接线移到现柱脚。林月查看许澄和段七的伤，重新问两人愿不愿继续；两人都答应了，停铃也仍握得到。你将多用的符料记下，再看那张有新息的右符。陶叔等你动手：“这次从这里接。开支路以后，炉门的三声重新数。”",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "resume",
+          "text": "确认两端回应，循右槽重新引流",
+          "target": "e03.new",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "charms",
+        "title": "辨气 · 两条石槽",
+        "caption": "两张符同批、同时贴下。只比较刚留下的余息，不以石槽宽窄判来气。",
+        "leftLabel": "左槽探流符",
+        "rightLabel": "右槽探流符",
+        "leftNote": "没有辨到新息，朱线未亮",
+        "rightNote": "刚沾新息，朱线明亮",
+        "leftStrength": 0,
+        "rightStrength": 0.9
       }
     },
     {
@@ -4616,7 +4706,7 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹石台",
       "speaker": "旁白",
-      "text": "你辨出石柱转来的新息，用自身灵力沿新测支路将它牵向谷底。指尖先凉了，腹中积蓄的灵力也一点点空下去。药田被泥水压倒，炉门第一声铃轻响；许澄说她还能等。顾衡守着村口，回钟报那边暂时平安。",
+      "text": "你沿右符的新息，将自身灵力送入现柱脚相连的支路。那股乱流顺着符纹转向深谷，指尖先凉了，腹中积蓄的灵力也一点点空下去。药田被泥水压倒，炉门第一声铃轻响；许澄说她还能等。顾衡守着村口，回钟报那边暂时平安。",
       "background": "furnaceChamber",
       "portrait": "",
       "rain": false,
