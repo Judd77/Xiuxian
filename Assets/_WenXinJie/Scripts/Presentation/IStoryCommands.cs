@@ -18,6 +18,8 @@ namespace WenXinJie.Presentation
 
         void ReturnToMainMenu();
 
+        void ShowDemoCompletion();
+
         void QuitGame();
     }
 }

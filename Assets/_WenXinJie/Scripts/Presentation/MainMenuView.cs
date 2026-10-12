@@ -11,6 +11,7 @@ namespace WenXinJie.Presentation
         private readonly Button _load;
         private readonly TMP_Text _notice;
         private readonly GameObject _root;
+        private readonly TMP_Text _progress;
 
         public MainMenuView(Transform parent, StoryUiFactory ui, TMP_FontAsset titleFont, TMP_FontAsset menuFont,
             IStoryCommands commands, Action openSettings, Action openCredits, bool isDemo, Shader menuParticleShader)
@@ -46,18 +47,27 @@ namespace WenXinJie.Presentation
             CreateButton(ui, root, menuFont, "MainMenuCredits", "鸣谢", 760f, openCredits);
             CreateButton(ui, root, menuFont, "QuitGame", "退出游戏", 850f, commands.QuitGame);
 
-            _notice = ui.Label(root, "MainMenuNotice", string.Empty, 150f, 950f, 760f, 54f, 21);
+            ui.Frame(root, "MainMenuNoticeFrame", 148f, 940f, 850f, 66f);
+            _notice = ui.Label(root, "MainMenuNotice", string.Empty, 174f, 950f, 798f, 46f, 21);
             _notice.font = menuFont;
             _notice.color = new(0.86f, 0.88f, 0.82f);
+
+            var progressFrame = ui.Frame(root, "MenuProgressFrame", 640f, 488f, 1040f, 312f);
+            progressFrame.color = new(0.86f, 0.94f, 0.89f);
+            _progress = ui.Label(root, "MenuProgress", string.Empty, 684f, 516f, 952f, 256f, 24);
+            _progress.font = menuFont;
+            _progress.lineSpacing = 8f;
+            _progress.color = new(0.96f, 0.95f, 0.85f);
         }
 
         public bool IsOpen => _root.activeSelf;
 
-        public void Show(bool canContinue, bool canLoad, string notice)
+        public void Show(bool canContinue, bool canLoad, string notice, string progress)
         {
             _continue.interactable = canContinue;
             _load.interactable = canLoad;
             _notice.text = notice;
+            _progress.text = progress;
             _root.SetActive(true);
         }
 

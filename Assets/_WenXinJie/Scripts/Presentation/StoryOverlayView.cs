@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,12 @@ namespace WenXinJie.Presentation
         private readonly DialogueReader _reader;
         private readonly GameObject _settings;
         private readonly RawImage _historyBackdrop;
+        private readonly GameObject _prompt;
+        private readonly TMP_Text _promptTitle;
+        private readonly TMP_Text _promptBody;
+        private readonly Button _promptPrimary;
+        private readonly Button _promptSecondary;
+        private readonly TMP_Text _promptClose;
 
         public StoryOverlayView(Transform parent, StoryUiFactory ui, TMP_FontAsset menuFont,
             DialogueReader reader,
@@ -114,9 +121,50 @@ namespace WenXinJie.Presentation
             creditsBody.alignment = TextAlignmentOptions.TopLeft;
             ui.Button(credits.Content, "CreditsClose", "关闭", 980f, 620f, 180f, 58f, CloseAll);
             _credits.SetActive(false);
+
+            var prompt = CreateModal(parent, ui, menuFont, "ProgressPrompt", "进度", 1200f, 650f);
+            _prompt = prompt.Root;
+            _promptTitle = prompt.Content.Find("Heading").GetComponent<TMP_Text>();
+            _promptBody = ui.Label(prompt.Content, "ProgressPromptBody", string.Empty,
+                70f, 145f, 1060f, 330f, 27);
+            _promptBody.lineSpacing = 10f;
+            _promptPrimary = ui.Button(prompt.Content, "ProgressPromptPrimary", string.Empty,
+                730f, 530f, 400f, 64f, () => { });
+            _promptSecondary = ui.Button(prompt.Content, "ProgressPromptSecondary", string.Empty,
+                300f, 530f, 400f, 64f, () => { });
+            var promptClose = ui.Button(prompt.Content, "ProgressPromptClose", "取消",
+                70f, 530f, 200f, 64f, CloseAll);
+            _promptClose = promptClose.GetComponentInChildren<TMP_Text>();
+            _prompt.SetActive(false);
         }
 
-        public bool IsModalOpen => _settings.activeSelf || _credits.activeSelf || _journal.IsOpen;
+        public bool IsModalOpen => _settings.activeSelf || _credits.activeSelf || _journal.IsOpen
+                                   || _prompt.activeSelf;
+
+        public void ShowPrompt(string title, string body, string primaryLabel, Action primary,
+            string secondaryLabel, Action secondary, string closeLabel)
+        {
+            CloseAll();
+            _reader.CloseHistory();
+            _promptTitle.text = title;
+            _promptBody.text = body;
+            ConfigurePromptButton(_promptPrimary, primaryLabel, primary);
+            ConfigurePromptButton(_promptSecondary, secondaryLabel, secondary);
+            _promptClose.text = closeLabel;
+            Open(_prompt);
+        }
+
+        private void ConfigurePromptButton(Button button, string label, Action action)
+        {
+            button.gameObject.SetActive(action != null);
+            button.GetComponentInChildren<TMP_Text>().text = label;
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(() =>
+            {
+                CloseAll();
+                action?.Invoke();
+            });
+        }
 
         public void OpenSettings()
         {
@@ -149,6 +197,7 @@ namespace WenXinJie.Presentation
         {
             _settings.SetActive(false);
             _credits.SetActive(false);
+            _prompt.SetActive(false);
             _journal.Hide();
             PlayerPrefs.Save();
         }

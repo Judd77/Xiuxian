@@ -24,6 +24,8 @@ namespace WenXinJie.Presentation
         private readonly Button _automatic;
         private readonly TMP_Text _automaticLabel;
         private readonly TMP_Text _textSpeedLabel;
+        private readonly TMP_Text _saveStatus;
+        private readonly Button _demoCompletion;
 
         public StoryGameplayView(RectTransform root, StoryUiFactory ui, StoryAssetCatalog assets,
             DialogueReader reader, IStoryCommands commands, Action openJournal, Func<bool> inputBlocked)
@@ -43,9 +45,13 @@ namespace WenXinJie.Presentation
             _chapter = ui.Label(root, "Chapter", string.Empty, 1110f, 43f, 710f, 46f, 27);
             _chapter.font = assets.MenuFont;
             _chapter.alignment = TextAlignmentOptions.Right;
-            _status = ui.Label(root, "Status", string.Empty, 86f, 102f, 1734f, 30f, 19);
+            _status = ui.Label(root, "Status", string.Empty, 86f, 102f, 1290f, 30f, 19);
             _status.font = assets.Font;
             _status.color = new(0.84f, 0.88f, 0.85f);
+            _saveStatus = ui.Label(root, "SaveStatus", string.Empty, 1390f, 102f, 430f, 30f, 19);
+            _saveStatus.font = assets.MenuFont;
+            _saveStatus.color = new(0.94f, 0.89f, 0.67f);
+            _saveStatus.alignment = TextAlignmentOptions.Right;
 
             ui.Frame(root, "LocationPanel", 80f, 166f, 620f, 74f);
             _location = ui.Label(root, "Location", string.Empty, 110f, 178f, 560f, 50f, 28);
@@ -53,6 +59,9 @@ namespace WenXinJie.Presentation
             _location.alignment = TextAlignmentOptions.Left;
 
             CreateChoices(root, ui, commands, assets.Font);
+            _demoCompletion = ui.Button(root, "DemoCompletion", "试玩结束 · 进度与接续方式",
+                96f, 286f, 700f, 78f, commands.ShowDemoCompletion);
+            _demoCompletion.gameObject.SetActive(false);
             _observation = new(root, ui);
 
             ui.Picture(root, "DialoguePanel", assets.PanelTexture, 80f, 748f, 1760f, 246f);
@@ -116,6 +125,12 @@ namespace WenXinJie.Presentation
         public void ShowNotice(string message)
         {
             _notice.text = message;
+        }
+
+        public void ShowProgress(string message, bool demoBoundary)
+        {
+            _saveStatus.text = message;
+            _demoCompletion.gameObject.SetActive(demoBoundary);
         }
 
         public void Render(StoryViewState state)

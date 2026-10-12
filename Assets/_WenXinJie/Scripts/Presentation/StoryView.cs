@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -62,13 +63,14 @@ namespace WenXinJie.Presentation
             EnsureEventSystem();
         }
 
-        public void ShowMainMenu(Texture2D background, bool canContinue, bool canLoad, string notice)
+        public void ShowMainMenu(Texture2D background, bool canContinue, bool canLoad, string notice,
+            string progress)
         {
             _scene.ShowBackground(background);
             _scene.ShowPortrait(null);
             _overlays.CloseAll();
             _gameplay.SetVisible(false);
-            _mainMenu.Show(canContinue, canLoad, notice);
+            _mainMenu.Show(canContinue, canLoad, notice, progress);
         }
 
         public void HideMainMenu()
@@ -95,6 +97,17 @@ namespace WenXinJie.Presentation
         public void ShowNotice(string message)
         {
             _gameplay.ShowNotice(message);
+        }
+
+        public void ShowProgress(string message, bool demoBoundary)
+        {
+            _gameplay.ShowProgress(message, demoBoundary);
+        }
+
+        public void ShowPrompt(string title, string body, string primaryLabel, Action primary,
+            string secondaryLabel = null, Action secondary = null, string closeLabel = "取消")
+        {
+            _overlays.ShowPrompt(title, body, primaryLabel, primary, secondaryLabel, secondary, closeLabel);
         }
 
         private RectTransform CreateCanvas()
