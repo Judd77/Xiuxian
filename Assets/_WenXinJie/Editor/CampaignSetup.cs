@@ -259,10 +259,9 @@ namespace WenXinJie.Editor
 
         private static void Images(SerializedProperty array, string[] ids, string[] paths)
         {
-            array.arraySize = ids.Length;
             for (var index = 0; index < ids.Length; index++)
             {
-                var entry = array.GetArrayElementAtIndex(index);
+                var entry = FindOrAppend(array, ids[index]);
                 entry.FindPropertyRelative("id").stringValue = ids[index];
                 entry.FindPropertyRelative("texture").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Texture2D>(Root + paths[index]);
             }
@@ -270,10 +269,9 @@ namespace WenXinJie.Editor
 
         private static void Portraits(SerializedProperty array, string[] ids, string[] paths)
         {
-            array.arraySize = ids.Length;
             for (var index = 0; index < ids.Length; index++)
             {
-                var entry = array.GetArrayElementAtIndex(index);
+                var entry = FindOrAppend(array, ids[index]);
                 entry.FindPropertyRelative("id").stringValue = ids[index];
                 entry.FindPropertyRelative("texture").objectReferenceValue =
                     AssetDatabase.LoadAssetAtPath<Texture2D>(Root + paths[index]);
@@ -281,6 +279,22 @@ namespace WenXinJie.Editor
                 entry.FindPropertyRelative("top").floatValue = 140f;
                 entry.FindPropertyRelative("right").floatValue = 30f;
             }
+        }
+
+        private static SerializedProperty FindOrAppend(SerializedProperty array, string id)
+        {
+            for (var index = 0; index < array.arraySize; index++)
+            {
+                var entry = array.GetArrayElementAtIndex(index);
+                if (entry.FindPropertyRelative("id").stringValue == id)
+                {
+                    return entry;
+                }
+            }
+
+            var newIndex = array.arraySize;
+            array.InsertArrayElementAtIndex(newIndex);
+            return array.GetArrayElementAtIndex(newIndex);
         }
     }
 }

@@ -5,6 +5,13 @@
 AI生成不自动等于无版权风险；不要模仿具体在世画师或复刻现有游戏素材。
 Steam AI披露要求应在提交时核查官方当前政策，尚未完成此项核查。
 
+## 2026-10-12 API人物表情
+
+- 沿用用户授权的API方式与指定模型`gpt-image-2.5-sunburst`，通过imagegen原装CLI的images.edit接口，以五名角色各自的项目自有立绘为编辑目标，制作林月担忧、阿澈不安、顾衡愧疚、沈砚愧疚与许澄坚定差分。
+- API返回图、面部蒙版、合成权重、完整提示词和最终源图位于`AssetSources/Art/Generated/Expressions/`；运行资源位于`Assets/_WenXinJie/Art/Generated/Expressions/`。正式版21节点、Demo 10节点接入，剧情revision仍为35；无新增文字、条件、效果或存档变量。
+- 五张返回图均为1024×1536。以椭圆面部区域及7像素高斯羽化合成，只采用该区域的生成RGB，复制基础立绘整张Alpha；区域外人物、服饰及透明轮廓保持。`python Tools/prepare-character-expressions.py`可重现，输入、输出哈希及完整请求提示词见`AssetResearch/character-expressions-api.json`。
+- 未输入第三方人物素材或指定画师；凭据没有写入项目。后端模型身份、代理商用条款与发行许可复核状态沿用现有记录，尚未独立核实。
+
 ## 已接入资源
 
 | 工程文件                                                    | 作者与来源                                                                                                           | 许可与修改                                                                                                                                                         |

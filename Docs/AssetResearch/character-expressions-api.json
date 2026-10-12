@@ -1,0 +1,206 @@
+{
+  "generated_on": "2026-10-12",
+  "generator": "imagegen bundled CLI via configured OpenAI-compatible proxy Image API",
+  "requested_model": "gpt-image-2.5-sunburst",
+  "operation": "images.edit",
+  "requested_size": "1024x1536",
+  "quality": "high",
+  "upstream_model_identity": "Not independently verified; identifier is supplied by the proxy.",
+  "commercial_review": "Provider terms and release clearance pending.",
+  "processing": "Only the feathered face region is composited onto the original; all other RGB pixels and the entire original alpha channel are retained.",
+  "assets": [
+    {
+      "name": "LinYue",
+      "portrait_id": "linYueConcerned",
+      "expression": "Concerned",
+      "reference": "Assets/_WenXinJie/Art/Generated/LinYue_Premium_Cutout.png",
+      "raw_path": "AssetSources/Art/Generated/Expressions/LinYue_Concerned_v1.api.png",
+      "mask_path": "AssetSources/Art/Generated/Expressions/LinYue_Concerned_v1.mask.png",
+      "blend_path": "AssetSources/Art/Generated/Expressions/LinYue_Concerned_v1.blend.png",
+      "source_path": "AssetSources/Art/Generated/Expressions/LinYue_Concerned_v1.png",
+      "runtime_path": "Assets/_WenXinJie/Art/Generated/Expressions/LinYue_Concerned_Cutout.png",
+      "prompt_path": "AssetSources/Art/Generated/Expressions/LinYue_Concerned_v1.prompt.txt",
+      "full_prompt": "Use case: identity-preserve.\nAsset type: facial-expression variant of a project-owned character sprite for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: exact edit target. Keep this same person and the same 1024x1536 pixel canvas.\nPrimary request: change only the eyes, eyebrows and mouth within the masked facial region to express quiet urgent concern for an injured patient: brows draw together slightly, eyes focused and worried, lips pressed softly together. No smile, no theatrical anger or crying.\nInvariants: preserve the person's identity, facial proportions, age, head angle, nose, jaw, hairline, hairstyle, ornaments, ears, body pose, hands, clothes, props, lighting, palette and precise silhouette placement. Do not move or enlarge the character. All pixels outside the mask should remain unchanged. Preserve the existing transparent background and fine hair edges.\nStyle: retain the exact detailed semi-realistic Chinese fantasy painterly rendering in the source image.\nConstraints: one person; no writing, no captions, no frame, no watermark; no new props, scenery, light effects or background. Subtle expression readable in a visual novel, not exaggerated anime comedy.\n",
+      "face_region": [
+        350,
+        115,
+        515,
+        300
+      ],
+      "full_nodes": [
+        "c10.door",
+        "c10.now",
+        "c10.wait",
+        "c11.flow",
+        "c11.pulled",
+        "c11.verified",
+        "c11.cost",
+        "c13.door"
+      ],
+      "demo_nodes": [
+        "c10.door",
+        "c10.now",
+        "c10.wait",
+        "c11.flow",
+        "c11.pulled",
+        "c11.verified",
+        "c11.cost",
+        "c13.door"
+      ],
+      "returned_size": [
+        1024,
+        1536
+      ],
+      "reference_sha256": "ab3fdc92cbe7285f1ce1ce2b876baf479421dae813b9acd62a6f208787598d63",
+      "raw_path_sha256": "b25a610868aa83dfb25ee20e4175fdc224369a724e37f4a72ecef8f9b56e4f8f",
+      "mask_path_sha256": "0694befb0349beaf73cbee505336f643d06e0a12c02987fc8ec76b33f9fd0571",
+      "blend_path_sha256": "4cc9984d8a63615f84ab720794200abf0139803c24080058bca85347ddf528b2",
+      "source_path_sha256": "51ca1a772d210ed64e820a12b8e982f2c127fc3756efcc306a6cb6ab26a09529",
+      "runtime_path_sha256": "51ca1a772d210ed64e820a12b8e982f2c127fc3756efcc306a6cb6ab26a09529"
+    },
+    {
+      "name": "AChe",
+      "portrait_id": "aCheDistressed",
+      "expression": "Distressed",
+      "reference": "Assets/_WenXinJie/Art/Generated/AChe_Premium_Cutout.png",
+      "raw_path": "AssetSources/Art/Generated/Expressions/AChe_Distressed_v1.api.png",
+      "mask_path": "AssetSources/Art/Generated/Expressions/AChe_Distressed_v1.mask.png",
+      "blend_path": "AssetSources/Art/Generated/Expressions/AChe_Distressed_v1.blend.png",
+      "source_path": "AssetSources/Art/Generated/Expressions/AChe_Distressed_v1.png",
+      "runtime_path": "Assets/_WenXinJie/Art/Generated/Expressions/AChe_Distressed_Cutout.png",
+      "prompt_path": "AssetSources/Art/Generated/Expressions/AChe_Distressed_v1.prompt.txt",
+      "full_prompt": "Use case: identity-preserve.\nAsset type: facial-expression variant of a project-owned character sprite for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: exact edit target. Keep this same person and the same 1024x1536 pixel canvas.\nPrimary request: change only the eyes, eyebrows and mouth within the masked facial region to express remembering a frightening confinement while still feverish: inner brows lift slightly, eyes anxious and tired, mouth tight and trembling but closed. His face is pale and vulnerable, with no smile. No horror grimace, tears or new injury.\nInvariants: preserve the person's identity, facial proportions, age, head angle, nose, jaw, hairline, hairstyle, ornaments, ears, body pose, hands, clothes, props, lighting, palette and precise silhouette placement. Do not move or enlarge the character. All pixels outside the mask should remain unchanged. Preserve the existing transparent background and fine hair edges.\nStyle: retain the exact detailed semi-realistic Chinese fantasy painterly rendering in the source image.\nConstraints: one person; no writing, no captions, no frame, no watermark; no new props, scenery, light effects or background. Subtle expression readable in a visual novel, not exaggerated anime comedy.\n",
+      "face_region": [
+        335,
+        140,
+        525,
+        345
+      ],
+      "full_nodes": [
+        "c12.shoe",
+        "c12.name"
+      ],
+      "demo_nodes": [
+        "c12.shoe",
+        "c12.name"
+      ],
+      "returned_size": [
+        1024,
+        1536
+      ],
+      "reference_sha256": "874199f7057551e06c0613c87942d4eb19c573f9df6388a945da85f1638e7852",
+      "raw_path_sha256": "46fb2fd50edbf3a76a9d9a27057e9b6af6a6d5d50e3aa6c871aae55d1143191f",
+      "mask_path_sha256": "93923a50ed517fdb2e2bc118ba1e5f6e3091c81ec90613f6e956f3e410d68b38",
+      "blend_path_sha256": "1754d519f13ba906a614440fe627e4e290b3c94c0ea9f38d33577574c083499a",
+      "source_path_sha256": "8d4ce72e79fd32e6edc2ee68cdc3756049c8470e57b5334080ecafc1e75d720c",
+      "runtime_path_sha256": "8d4ce72e79fd32e6edc2ee68cdc3756049c8470e57b5334080ecafc1e75d720c"
+    },
+    {
+      "name": "GuHeng",
+      "portrait_id": "guHengRemorseful",
+      "expression": "Remorseful",
+      "reference": "Assets/_WenXinJie/Art/Generated/GuHeng_Premium_Cutout.png",
+      "raw_path": "AssetSources/Art/Generated/Expressions/GuHeng_Remorseful_v1.api.png",
+      "mask_path": "AssetSources/Art/Generated/Expressions/GuHeng_Remorseful_v1.mask.png",
+      "blend_path": "AssetSources/Art/Generated/Expressions/GuHeng_Remorseful_v1.blend.png",
+      "source_path": "AssetSources/Art/Generated/Expressions/GuHeng_Remorseful_v1.png",
+      "runtime_path": "Assets/_WenXinJie/Art/Generated/Expressions/GuHeng_Remorseful_Cutout.png",
+      "prompt_path": "AssetSources/Art/Generated/Expressions/GuHeng_Remorseful_v1.prompt.txt",
+      "full_prompt": "Use case: identity-preserve.\nAsset type: facial-expression variant of a project-owned character sprite for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: exact edit target. Keep this same person and the same 1024x1536 pixel canvas.\nPrimary request: change only the eyes, eyebrows and mouth within the masked facial region to express restrained shame when admitting his false disaster report to the villagers: eyes look slightly downward, brows tense with regret, lips close in a sober expression. Preserve the exact moustache and facial stubble. No crying or cartoon sadness.\nInvariants: preserve the person's identity, facial proportions, age, head angle, nose, jaw, hairline, hairstyle, ornaments, ears, body pose, hands, clothes, props, lighting, palette and precise silhouette placement. Do not move or enlarge the character. All pixels outside the mask should remain unchanged. Preserve the existing transparent background and fine hair edges.\nStyle: retain the exact detailed semi-realistic Chinese fantasy painterly rendering in the source image.\nConstraints: one person; no writing, no captions, no frame, no watermark; no new props, scenery, light effects or background. Subtle expression readable in a visual novel, not exaggerated anime comedy.\n",
+      "face_region": [
+        350,
+        100,
+        545,
+        325
+      ],
+      "full_nodes": [
+        "g04.liar",
+        "g04.time",
+        "g06.fast",
+        "g08.holdRepairedFirst",
+        "h04.gu"
+      ],
+      "demo_nodes": [],
+      "returned_size": [
+        1024,
+        1536
+      ],
+      "reference_sha256": "8d3d7fe1b72cb40f4f9027daf3ea785e285ac3b421d7c4b2f455cb762cafe020",
+      "raw_path_sha256": "8b615d78ca88527ed02477f32b3653116908e4288e49187a9126d8a635036c79",
+      "mask_path_sha256": "a79720b648dc4e65046be4c2caad53486a649ba2ac55fda1868c037276f4bc3c",
+      "blend_path_sha256": "4caedb5870bd56ed2c5ba82ca0b7e759c9df0553a5f6425094df62b729f2eb4c",
+      "source_path_sha256": "5c727d9200b305d44e570cb430e9fbb52b144d933ca44a54011ec00ab4bfea3a",
+      "runtime_path_sha256": "5c727d9200b305d44e570cb430e9fbb52b144d933ca44a54011ec00ab4bfea3a"
+    },
+    {
+      "name": "ShenYan",
+      "portrait_id": "shenYanRemorseful",
+      "expression": "Remorseful",
+      "reference": "Assets/_WenXinJie/Art/Generated/ShenYan_Premium_Cutout.png",
+      "raw_path": "AssetSources/Art/Generated/Expressions/ShenYan_Remorseful_v1.api.png",
+      "mask_path": "AssetSources/Art/Generated/Expressions/ShenYan_Remorseful_v1.mask.png",
+      "blend_path": "AssetSources/Art/Generated/Expressions/ShenYan_Remorseful_v1.blend.png",
+      "source_path": "AssetSources/Art/Generated/Expressions/ShenYan_Remorseful_v1.png",
+      "runtime_path": "Assets/_WenXinJie/Art/Generated/Expressions/ShenYan_Remorseful_Cutout.png",
+      "prompt_path": "AssetSources/Art/Generated/Expressions/ShenYan_Remorseful_v1.prompt.txt",
+      "full_prompt": "Use case: identity-preserve.\nAsset type: facial-expression variant of a project-owned character sprite for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: exact edit target. Keep this same person and the same 1024x1536 pixel canvas.\nPrimary request: change only the eyes, eyebrows and mouth within the masked facial region to express quiet guilt while admitting he ignored the patient's stop bell years ago: gaze lowers slightly, inner brows show remorse, lips pressed with hesitation. Still unmistakably the same angular-faced man. No tears or melodramatic grimace.\nInvariants: preserve the person's identity, facial proportions, age, head angle, nose, jaw, hairline, hairstyle, ornaments, ears, body pose, hands, clothes, props, lighting, palette and precise silhouette placement. Do not move or enlarge the character. All pixels outside the mask should remain unchanged. Preserve the existing transparent background and fine hair edges.\nStyle: retain the exact detailed semi-realistic Chinese fantasy painterly rendering in the source image.\nConstraints: one person; no writing, no captions, no frame, no watermark; no new props, scenery, light effects or background. Subtle expression readable in a visual novel, not exaggerated anime comedy.\n",
+      "face_region": [
+        350,
+        95,
+        545,
+        300
+      ],
+      "full_nodes": [
+        "h03.name",
+        "h04.shen",
+        "e04.second"
+      ],
+      "demo_nodes": [],
+      "returned_size": [
+        1024,
+        1536
+      ],
+      "reference_sha256": "5355ad29f91ad6f921bd66f2014bcef559ff8cb2e8d9c8d21d1245c7a99ee6ff",
+      "raw_path_sha256": "698d6f2f22b9e7681ad58d3cd8d8727c14e8ce29fbee0925ea7f91a7981c2988",
+      "mask_path_sha256": "e899181dece4e620f5af2af959b6a076e5f41ecccbe560b7e3380cb7c13120ad",
+      "blend_path_sha256": "1fc6eddff4e1ade8ef74de460b26cbce5e10e44ef25a3085c987f7cda31e6b7c",
+      "source_path_sha256": "c387e3707c1ec86d5fb639edebbdf14f3120596520ffd9ab2f72bfe75951a92b",
+      "runtime_path_sha256": "c387e3707c1ec86d5fb639edebbdf14f3120596520ffd9ab2f72bfe75951a92b"
+    },
+    {
+      "name": "XuCheng",
+      "portrait_id": "xuChengResolute",
+      "expression": "Resolute",
+      "reference": "Assets/_WenXinJie/Art/Generated/XuCheng_Premium_Cutout.png",
+      "raw_path": "AssetSources/Art/Generated/Expressions/XuCheng_Resolute_v1.api.png",
+      "mask_path": "AssetSources/Art/Generated/Expressions/XuCheng_Resolute_v1.mask.png",
+      "blend_path": "AssetSources/Art/Generated/Expressions/XuCheng_Resolute_v1.blend.png",
+      "source_path": "AssetSources/Art/Generated/Expressions/XuCheng_Resolute_v1.png",
+      "runtime_path": "Assets/_WenXinJie/Art/Generated/Expressions/XuCheng_Resolute_Cutout.png",
+      "prompt_path": "AssetSources/Art/Generated/Expressions/XuCheng_Resolute_v1.prompt.txt",
+      "full_prompt": "Use case: identity-preserve.\nAsset type: facial-expression variant of a project-owned character sprite for the Chinese cultivation mystery visual novel Wen Xin Jie.\nInput image 1: exact edit target. Keep this same person and the same 1024x1536 pixel canvas.\nPrimary request: change only the eyes, eyebrows and mouth within the masked facial region to express weary but firm resolve while asking that her stop bell be placed within reach: brows gently knit, eyes alert and determined, mouth closed and serious without a smile. Preserve her fatigue and youth. No anger, makeup change or tears.\nInvariants: preserve the person's identity, facial proportions, age, head angle, nose, jaw, hairline, hairstyle, ornaments, ears, body pose, hands, clothes, props, lighting, palette and precise silhouette placement. Do not move or enlarge the character. All pixels outside the mask should remain unchanged. Preserve the existing transparent background and fine hair edges.\nStyle: retain the exact detailed semi-realistic Chinese fantasy painterly rendering in the source image.\nConstraints: one person; no writing, no captions, no frame, no watermark; no new props, scenery, light effects or background. Subtle expression readable in a visual novel, not exaggerated anime comedy.\n",
+      "face_region": [
+        340,
+        150,
+        535,
+        355
+      ],
+      "full_nodes": [
+        "e02.bell",
+        "e02.remind",
+        "e02.ready"
+      ],
+      "demo_nodes": [],
+      "returned_size": [
+        1024,
+        1536
+      ],
+      "reference_sha256": "29f48bec68fc161c30983c7fc48a5de85d69c82c9c0a4ea36f1db3eeab485d00",
+      "raw_path_sha256": "fdac036c99af1ce174c75b60f05715c5c2b875ed76754a35f5cbdd2bc3fabd48",
+      "mask_path_sha256": "c6406bf6f55881a413db825d065cf2c8298b425cbe86945788d389313656e4a7",
+      "blend_path_sha256": "57cd6d2bd109d74f3aa783aa889d3d45a1cb63bc12a04db1029c351f6e56cea3",
+      "source_path_sha256": "cd92063c7687c55c94bbf7817e8d35bc658ff912557a12bd1dc771f5b3aef18a",
+      "runtime_path_sha256": "cd92063c7687c55c94bbf7817e8d35bc658ff912557a12bd1dc771f5b3aef18a"
+    }
+  ]
+}

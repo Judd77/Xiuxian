@@ -1,0 +1,7 @@
+Use case: identity-preserve.
+Asset type: facial-expression variant of a project-owned character sprite for the Chinese cultivation mystery visual novel Wen Xin Jie.
+Input image 1: exact edit target. Keep this same person and the same 1024x1536 pixel canvas.
+Primary request: change only the eyes, eyebrows and mouth within the masked facial region to express weary but firm resolve while asking that her stop bell be placed within reach: brows gently knit, eyes alert and determined, mouth closed and serious without a smile. Preserve her fatigue and youth. No anger, makeup change or tears.
+Invariants: preserve the person's identity, facial proportions, age, head angle, nose, jaw, hairline, hairstyle, ornaments, ears, body pose, hands, clothes, props, lighting, palette and precise silhouette placement. Do not move or enlarge the character. All pixels outside the mask should remain unchanged. Preserve the existing transparent background and fine hair edges.
+Style: retain the exact detailed semi-realistic Chinese fantasy painterly rendering in the source image.
+Constraints: one person; no writing, no captions, no frame, no watermark; no new props, scenery, light effects or background. Subtle expression readable in a visual novel, not exaggerated anime comedy.

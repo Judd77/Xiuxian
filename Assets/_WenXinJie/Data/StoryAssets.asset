@@ -91,3 +91,28 @@ MonoBehaviour:
     width: 1050
     top: 140
     right: 30
+  - id: linYueConcerned
+    texture: {fileID: 2800000, guid: f1862f86338cf4f468430ab74b8d05f7, type: 3}
+    width: 1050
+    top: 140
+    right: 30
+  - id: aCheDistressed
+    texture: {fileID: 2800000, guid: 90f420652afab144fb94484b1c3243f5, type: 3}
+    width: 1050
+    top: 140
+    right: 30
+  - id: guHengRemorseful
+    texture: {fileID: 2800000, guid: d0f85d9ffafec624d80229ab0211799d, type: 3}
+    width: 1050
+    top: 140
+    right: 30
+  - id: shenYanRemorseful
+    texture: {fileID: 2800000, guid: 660311927f9b5dd46b9c6050df4b3f8e, type: 3}
+    width: 1050
+    top: 140
+    right: 30
+  - id: xuChengResolute
+    texture: {fileID: 2800000, guid: 389ca9d5aed6998418c4fa551c257532, type: 3}
+    width: 1050
+    top: 140
+    right: 30
