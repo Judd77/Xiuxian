@@ -1,11 +1,12 @@
 {
   "id": "wenxinjie",
-  "revision": 37,
+  "revision": 38,
   "compatibleSaveRevisions": [
     33,
     34,
     35,
-    36
+    36,
+    37
   ],
   "start": "case.intro",
   "variables": [
@@ -3704,7 +3705,7 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "祁元肃只借一次试验钥匙。许澄姐姐要守炉门铃，村民推工匠握村口钟，陶叔能关支路；沈砚懂图，却不能独握钥匙与停铃。",
+      "text": "祁元肃把石台钥匙放在案上，只准试一次。你展开谷口复测图：第三柱挪了位置，村口比炉门先受冲。工匠把钟槌压在图上：“我家就在那儿。看着不对，我便敲。”姐姐问谁能关闸。陶叔伸出手，沈砚却还望着图上的连线。",
       "background": "councilHall",
       "portrait": "",
       "rain": false,
@@ -3717,7 +3718,7 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "你分派读图、执钥、观测和叫停。",
+      "text": "试阵须有人读图、有人关闸。村口工匠看护符，炉门林月看伤者；他们的停令要能直接传到石台。钥匙留给谁，你怎么安排？",
       "background": "councilHall",
       "portrait": "",
       "rain": false,
@@ -3725,7 +3726,7 @@
       "choices": [
         {
           "id": "shenAll",
-          "text": "让最懂阵图的沈砚统一发令",
+          "text": "让沈砚执钥读图，两端先报给他判断",
           "target": "h05.reject",
           "lockedReason": "",
           "conditions": [],
@@ -3734,17 +3735,11 @@
         },
         {
           "id": "split",
-          "text": "沈砚读图，陶叔执钥，两端当事人各握钟",
+          "text": "沈砚读图，陶叔执钥；任一端叫停就关闸",
           "target": "h05.split",
           "lockedReason": "",
           "conditions": [],
-          "effects": [
-            {
-              "variable": "h.roles",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         }
       ]
@@ -3754,7 +3749,7 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "姐姐把钥匙按住：“他当年也说再等一息。不是不让他讲图，是铃不能再只听他的。”你重新把读图与叫停分给不同的人。",
+      "text": "姐姐按住钥匙：“她疼得敲铃，还得等懂图的人说疼够了没有？”沈砚没有伸手。他把自己补写的“闻铃未停”推到钥匙旁：“我读图。停不停，别再只问我。”你把钥匙交给陶叔，重说两端的停令。",
       "background": "councilHall",
       "portrait": "",
       "rain": false,
@@ -3765,11 +3760,68 @@
     {
       "id": "h05.split",
       "chapter": "卷三 · 谁有权说停",
-      "location": "议事堂",
+      "location": "山腹炉门",
       "speaker": "旁白",
-      "text": "姐姐向许澄说清三声急敲即停；工匠在村口约定连裂两符即停；陶叔复述任一端停，两端同时撤力。许澄自己答应这一次小试，没答应无限次坐榻。",
-      "background": "councilHall",
-      "portrait": "",
+      "text": "林月带你们进炉房，先把那页约定读给许澄听。姐姐握住妹妹的手，没替她答应。许澄看向你：“第三下我就要起来。可若谷底还没亮，你们会不会又叫我等？”",
+      "background": "furnaceChamber",
+      "portrait": "xuChengResolute",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.boundary"
+    },
+    {
+      "id": "h05.boundary",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "石榻边的铃绳垂在许澄手外。陶叔拿着钥匙站在门口；灵力尚未送入新支路，现在仍能先试停令。你如何回答她？",
+      "background": "furnaceChamber",
+      "portrait": "xuChengResolute",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "promise",
+          "text": "说清第三声必停，村口也可提前叫停",
+          "target": "h05.consent",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "rehearse",
+          "text": "先请陶叔演示关闸，让她试一次停铃",
+          "target": "h05.rehearse",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h05.rehearse",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "你把铃绳移近，许澄屈指勾住，敲了三下。陶叔不用问沈砚，转钥将试验支路合上。林月摸过管灵气的石槽，确认新路仍闭着，旧炉的轮换没有中断。姐姐退开半步，让妹妹自己再试一回。",
+      "background": "furnaceChamber",
+      "portrait": "xuChengResolute",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.consent"
+    },
+    {
+      "id": "h05.consent",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "你说：“第三声便撤，不等谷符。村口觉得撑不住，也能先停。”陶叔将钥匙举给她看：“你喊，我就关。”许澄伸手试过铃绳，才点头：“就这一次。停下来以后，你们再来问我。”林月将她的原话写在纸上。",
+      "background": "furnaceChamber",
+      "portrait": "xuChengResolute",
       "rain": false,
       "effects": [
         {
@@ -3784,15 +3836,38 @@
         }
       ],
       "choices": [],
+      "next": "h05.mark"
+    },
+    {
+      "id": "h05.mark",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你把谷口的新柱位标记带到石台，照两处感应符的抄样贴好观测符。顾衡留在村口，将工匠的钟声传回山腹；林月守炉门，沈砚只核图。陶叔将钥匙转到试验支路那一格，等你送入小小一缕灵力。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "observation": {
+        "kind": "flow",
+        "title": "联合小试 · 依谷口记录接线",
+        "caption": "已按现场柱位接好试验支路，尚未送入灵力。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "工匠守钟，可提前停",
+        "rightNote": "许澄握铃，林月守门",
+        "flow": "pending"
+      },
       "next": "h05.test"
     },
     {
       "id": "h05.test",
       "chapter": "卷三 · 谁有权说停",
-      "location": "议事堂",
+      "location": "山腹石台",
       "speaker": "旁白",
-      "text": "小试开始，村口感应符先亮，炉门后热；第二张村符边缘也在变色。工匠敲钟，许澄从炉门回一声。",
-      "background": "councilHall",
+      "text": "你沿新标记送入一缕灵力。村口的观测符先亮，炉门那张随后发暖，正与谷口的记录相合。第二张村符的朱线开始焦黑，工匠不等它裂便敲钟。林月从炉门喊来：“许澄手臂发紧，停！”谷底的阵纹仍暗着。",
+      "background": "furnaceChamber",
       "portrait": "",
       "rain": false,
       "effects": [],
@@ -3800,22 +3875,22 @@
       "next": "h05.stop",
       "observation": {
         "kind": "flow",
-        "title": "联合小试 · 停钟已响",
-        "caption": "村口先亮，炉门后热。工匠与许澄都已发出信号，按约应撤力。",
+        "title": "联合小试 · 两端叫停",
+        "caption": "村口朱线变黑、炉内手臂发紧。两端均已叫停，尚未撤力。",
         "leftLabel": "村口感应符",
         "rightLabel": "炉门感应符",
-        "leftNote": "先亮，第二符开始变色",
-        "rightNote": "后热，炉门已有回应",
+        "leftNote": "先亮，工匠敲停钟",
+        "rightNote": "后热，林月传停令",
         "flow": "villageFirst"
       }
     },
     {
       "id": "h05.stop",
       "chapter": "卷三 · 谁有权说停",
-      "location": "议事堂",
+      "location": "山腹石台",
       "speaker": "旁白",
-      "text": "工匠敲了约好的停钟，谷底却还没传来回应。你贴着石台的手能感觉到灵力仍在往里走。陶叔握住关闸的钥匙，等你撤力；沈砚盯着那条迟迟不亮的阵纹，没有开口。",
-      "background": "councilHall",
+      "text": "停钟传到石台，你的手还贴着石面。那缕灵力仍往新支路里走，谷底的阵纹却没有回应。陶叔已将钥匙握紧：“现在收，我就合这边。”沈砚看了一眼暗纹，退开半步，让出你的手。",
+      "background": "furnaceChamber",
       "portrait": "",
       "rain": false,
       "effects": [],
@@ -3823,16 +3898,10 @@
         {
           "id": "stop",
           "text": "按钟撤力，请陶叔关支路",
-          "target": "h05.stopped",
+          "target": "h05.onTime",
           "lockedReason": "",
           "conditions": [],
-          "effects": [
-            {
-              "variable": "h.test",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         },
         {
@@ -3841,57 +3910,137 @@
           "target": "h05.wait",
           "lockedReason": "",
           "conditions": [],
-          "effects": [
-            {
-              "variable": "e.extraCharm",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         }
       ],
       "observation": {
         "kind": "flow",
-        "title": "联合小试 · 停钟已响",
-        "caption": "村口先亮，炉门后热。工匠与许澄都已发出信号，按约应撤力。",
+        "title": "联合小试 · 两端叫停",
+        "caption": "村口朱线变黑、炉内手臂发紧。两端均已叫停，尚未撤力。",
         "leftLabel": "村口感应符",
         "rightLabel": "炉门感应符",
-        "leftNote": "先亮，第二符开始变色",
-        "rightNote": "后热，炉门已有回应",
+        "leftNote": "先亮，工匠敲停钟",
+        "rightNote": "后热，林月传停令",
         "flow": "villageFirst"
       }
     },
     {
-      "id": "h05.wait",
+      "id": "h05.onTime",
       "chapter": "卷三 · 谁有权说停",
-      "location": "议事堂",
+      "location": "山腹石台",
       "speaker": "旁白",
-      "text": "工匠第三下钟抢在你前面，陶叔关了支路。村符裂一张，林月给炉里轻伤者换药。你把这次迟疑记进试验记录，下一回不能由你独握停令。",
-      "background": "councilHall",
+      "text": "你将那缕灵力缓缓收回。陶叔合上试验支路，石柱接住余冲。工匠报来村符朱线虽焦，却还连着；林月扶许澄松开僵住的手指，问她能不能动。许澄转了转手腕：“能。刚才那声，你们听见了。”",
+      "background": "furnaceChamber",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h05.stopped",
       "observation": {
         "kind": "flow",
-        "title": "联合小试 · 停钟已响",
-        "caption": "村口先亮，炉门后热。工匠与许澄都已发出信号，按约应撤力。",
+        "title": "联合小试 · 按钟撤力",
+        "caption": "已收回灵力并关试验支路，本轮没有新裂符。",
         "leftLabel": "村口感应符",
         "rightLabel": "炉门感应符",
-        "leftNote": "先亮，第二符开始变色",
-        "rightNote": "后热，炉门已有回应",
-        "flow": "villageFirst"
+        "leftNote": "朱线焦黑，未断",
+        "rightNote": "手指已能松开",
+        "flow": "closed"
+      },
+      "next": "h05.stopped"
+    },
+    {
+      "id": "h05.wait",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你多送了一点，想看谷底能否亮起。工匠再敲停钟，陶叔当即合住支路，催你收息。石台震得掌根发麻，村口报来一张符裂了。林月的声音随即传来：“许澄的腕上添了裂伤，我在止血。先别再试。”你终于松开手。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.extraCharm",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h05.lateAccount",
+      "observation": {
+        "kind": "flow",
+        "title": "联合小试 · 已被叫停",
+        "caption": "陶叔关闸后你才撤力。村符开裂，炉门在处理腕伤。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "一张村符裂开",
+        "rightNote": "林月止血，暂停试验",
+        "flow": "closed"
       }
+    },
+    {
+      "id": "h05.lateAccount",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "许澄姐姐把药布放在石台旁。她没问谷底亮没亮，只问：“钟响以后，你为什么还送？”记录纸上，工匠先敲钟、陶叔关闸、你最后撤力，三行的先后都有人看着。你怎么说明？",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "admit",
+          "text": "记下自己迟撤、裂符和许澄腕伤",
+          "target": "h05.lateReply",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "excuse",
+          "text": "解释想把谷底试通，才多等了一瞬",
+          "target": "h05.lateExcuse",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h05.lateExcuse",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你指向那条暗着的阵纹，说还差一点就能知道新路是否通。姐姐望了一眼：“她答应的是停钟后能停，不是替你把图看完。”陶叔把钥匙收进掌心：“下一回听到停令，我仍会先关。”你把那一瞬补进记录。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.lateReply"
+    },
+    {
+      "id": "h05.lateReply",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你请工匠把裂符和多用的纸记进村账，向炉门报去自己迟撤的时刻。林月答，许澄腕上的伤已经包好，开正式闸前还要重新问她。沈砚拿起笔，又放下：“这行由你自己写。我当年欠了周望这一行。”",
+      "background": "furnaceChamber",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.stopped"
     },
     {
       "id": "h05.stopped",
       "chapter": "卷三 · 谁有权说停",
-      "location": "议事堂",
+      "location": "山腹石台",
       "speaker": "旁白",
-      "text": "支路闭合，石柱接住余力。你们量到第三柱的现位与回冲先后，没证明新阵绝对安全；这些记录足够让三户决定是否暂迁。",
-      "background": "councilHall",
+      "text": "陶叔确认试验支路已闭，旧炉仍按原来的轮次维持。你们核对钟声与两处符的先后：新柱位能接住撤力后的余冲，两端停令也能传到石台；谷底仍未接通。小试给出了下一步的依据，还不能让任何一户搬回原处。",
+      "background": "furnaceChamber",
       "portrait": "",
       "rain": false,
       "effects": [
@@ -3902,17 +4051,42 @@
         }
       ],
       "choices": [],
-      "next": "h05.decision",
+      "next": "h05.record",
       "observation": {
         "kind": "flow",
         "title": "联合小试 · 支路闭合",
-        "caption": "支路已经关上，石柱暂接余力。新路还未正式开闸。",
+        "caption": "只确认本轮流向与停试过程，正式引流尚未开始。",
         "leftLabel": "村口感应符",
         "rightLabel": "炉门感应符",
-        "leftNote": "停止送入灵力",
-        "rightNote": "停止送入灵力",
+        "leftNote": "已停止送入灵力",
+        "rightNote": "伤者由林月查看",
         "flow": "closed"
       }
+    },
+    {
+      "id": "h05.record",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你把记录分成三栏：村口先受冲；炉门随后发热；停钟后已撤力，谷底未通。工匠添上“朱线焦，未断”，林月添上许澄能活动手腕。顾衡拿着这张纸去问三户愿不愿暂迁，不再拿一张改过的图替他们答应。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "variants": [
+        {
+          "text": "你把记录分成三栏：村口先受冲；炉门随后发热；停钟后迟撤，陶叔先关闸。工匠添上裂符与用料，林月添上许澄腕伤。顾衡拿着这张纸去问三户愿不愿暂迁，试验的损耗也一并带去，不拿一张改过的图替他们答应。",
+          "conditions": [
+            {
+              "variable": "e.extraCharm",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ],
+      "next": "h05.decision"
     },
     {
       "id": "h06.homes",
@@ -4153,7 +4327,7 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "谷口",
       "speaker": "旁白",
-      "text": "第二声钟响，老妇先过岔口，另外两户按实走时辰离谷。最后一个孩子踏上高处，工匠才向炉门回钟：路已清，准许开始那次有停铃的小试。",
+      "text": "第二声钟响，老妇先过岔口，另外两户按实走时辰离谷。最后一个孩子踏上高处，工匠才向炉门回钟：路已清，可以按停铃约定正式引流。",
       "background": "valleyNight",
       "portrait": "",
       "rain": false,
@@ -4172,7 +4346,7 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹炉门",
       "speaker": "旁白",
-      "text": "林月按真名点人，叫到许澄，门外姐姐也应了一声。许澄笑她：“又不是叫你。”另一个靠门的伤者报出名字，段七。林月给他也备了一只停铃，放到伸手能碰到的地方。",
+      "text": "林月按真名点人。叫到许澄，门外姐姐也应了一声，许澄笑她：“又不是叫你。”靠门的段七慢慢抬起头，报自己的名字。阿澈认出了他的声音，去门边等着扶人。林月把两只停铃放到各自榻边，没急着催陶叔开闸。",
       "background": "furnaceChamber",
       "portrait": "xuCheng",
       "rain": false,
@@ -4185,7 +4359,7 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹炉门",
       "speaker": "旁白",
-      "text": "许澄要你检查停铃是否在她伸手可及处，陶叔还要复述第三声之后如何关支路。",
+      "text": "许澄试着伸手，指尖离铃绳还差两寸。段七的铃挂在另一侧，受伤的胳膊抬不过去。陶叔已到石台，林月等你报准备妥当。谷口的人过了岔口，炉内的人怎样把停令传出去，还须在开闸前试过。",
       "background": "furnaceChamber",
       "portrait": "xuChengResolute",
       "rain": false,
@@ -4193,17 +4367,11 @@
       "choices": [
         {
           "id": "place",
-          "text": "把铃放到许澄手边，请陶叔复述动作",
-          "target": "e02.ready",
+          "text": "让两人亲手试铃，再核对石台的回钟",
+          "target": "e02.reach",
           "lockedReason": "",
           "conditions": [],
-          "effects": [
-            {
-              "variable": "e.bellPlaced",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         },
         {
@@ -4222,7 +4390,64 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹炉门",
       "speaker": "旁白",
-      "text": "许澄自己指向够不到的铃：“第三声若敲不到，纸上的权利给谁看？”你把铃移到她手边，陶叔再说一遍：一端停，两端撤力。",
+      "text": "你正要向石台报开闸，许澄勾了两次手指，都没碰到绳：“先把它放近。我坐在这里，不能跟你跑去找陶叔。”林月示意你看看段七抬不起来的胳膊。你收住话，回到两张榻边。",
+      "background": "furnaceChamber",
+      "portrait": "xuChengResolute",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e02.reach"
+    },
+    {
+      "id": "e02.reach",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "你让许澄自己选铃绳落在哪里，移到她屈指便能勾住的位置；段七那只移到未伤的手边。两人各敲一声，林月在门外听清，姐姐也点头。现在还没有开闸，这两声只算试铃。",
+      "background": "furnaceChamber",
+      "portrait": "xuChengResolute",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e02.relay"
+    },
+    {
+      "id": "e02.relay",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "炉门能听见，石台未必听得清。林月对着通往石台的石道喊了停令，陶叔举起钥匙示意。你还要核哪一步？",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "echo",
+          "text": "试一次回钟，确认炉内听见关闸回应",
+          "target": "e02.ready",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "written",
+          "text": "约定已写好，直接请陶叔开闸",
+          "target": "e02.echoReminder",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e02.echoReminder",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "许澄指指纸，又指指厚石门：“我听不到纸。第三声以后，你们关了没有，怎么让我知道？”你请陶叔先试回钟。钟声沿石道传进炉内，段七抬起未伤的手，示意听见了。",
       "background": "furnaceChamber",
       "portrait": "xuChengResolute",
       "rain": false,
@@ -4235,7 +4460,7 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹炉门",
       "speaker": "旁白",
-      "text": "许澄试敲一声，炉门外姐姐听得见；工匠的回钟也能到石台。她说自己愿坐到第三声前，没把之后的伤交给任何人替她答应。",
+      "text": "陶叔敲过回钟，许澄与段七都能听见。林月重说：开闸后重新计铃，第三声必停，任何人喊停也立即传到石台。她问还愿不愿试这一回。许澄点头，段七将铃绳握在未伤的手里。你这才向石台报妥当。",
       "background": "furnaceChamber",
       "portrait": "xuChengResolute",
       "rain": false,
@@ -4247,7 +4472,19 @@
         }
       ],
       "choices": [],
-      "next": "e03.flow"
+      "next": "e03.flow",
+      "variants": [
+        {
+          "text": "回钟传进炉房。林月重新查看许澄包好的腕伤，问还愿不愿试；她把铃绳勾在能动的指间：“愿。第三声，照刚才试的来。”段七也握住铃。林月重说开闸后重新计数，任何人喊停也立刻传令。你将先前多用的符料记在这一页，才向石台报妥当。",
+          "conditions": [
+            {
+              "variable": "e.extraCharm",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "e03.flow",
@@ -4405,11 +4642,49 @@
     {
       "id": "e04.stop",
       "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你松手收息，向炉门回敲停钟。陶叔按白日试过的次序合支路，石柱震得掌下发麻。谷底最后一张符亮了一瞬，又暗下去；余流仍从前两处泄进无人深谷。林月报来炉榻已经卸下这股承压，可以扶人起身。你扶住石台，没有再将灵力送回去。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e04.outside"
+    },
+    {
+      "id": "e04.outside",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "许澄姐姐在门口扶住妹妹，先摸她握铃的手，再看那圈新红印。段七下榻时膝盖一软，阿澈忙伸肩去接。林月让他们坐上平车，回头扶你；你想运气站稳，腹中却提不起平日那一股暖意。“用空了。别再催它。”她说。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "variants": [
+        {
+          "text": "姐姐扶住许澄，林月让伤者先坐上平车，逐一查看包扎。段七下榻时膝盖一软，阿澈忙伸肩去接。你想运气站稳，腹中却提不起平日那一股暖意。林月扶住你：“你送出去的灵力，也要慢慢养回来。”先前的裂符与伤情仍留在账上，出炉没有将它们抹去。",
+          "conditions": [
+            {
+              "variable": "e.extraCharm",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ],
+      "next": "e04.valley"
+    },
+    {
+      "id": "e04.valley",
+      "chapter": "卷四 · 开闸与第三声",
       "location": "谷口",
       "speaker": "旁白",
-      "text": "你松手回钟，陶叔关闸。石柱震得坡道发抖，余力冲向已经撤空的谷底；最后一张谷符亮了一瞬，又暗下去。南沟的护符还在，许澄也离了榻，姐姐在门外扶住她。药田没保住，新路只够暂用，还得重新修稳。",
+      "text": "顾衡从谷口报来，三户都在高处，南沟的护符还连着。天色将亮，坡下的药苗伏在泥里，石槽仍断断续续往深谷泄流。工匠将第三处暗着的谷符圈出来：“人出来了，路还得修。”你把药田与屋舍另记一页，准备天亮后逐户核账。",
       "background": "valleyAftermath",
-      "portrait": "",
+      "portrait": "guHeng",
       "rain": false,
       "effects": [],
       "choices": [],
@@ -4459,7 +4734,7 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "你放下复测符，指尖仍在发抖。顾衡说：“路量过了，三户还没答应迁。若今晚开道，药田一定保不住。”林月从炉门送来消息：许澄只肯等最慢的人过岔口，第三声铃便要离榻。你得决定，是否带着这些风险继续。",
+      "text": "回到堂上，顾衡将试验记录摊在三户名单旁：“路还没通。他们答应暂迁，今夜才有地方让乱流出去。”林月带来许澄的话：她肯等最慢的人过岔口，但第三声铃必须离榻。改道会毁药田，暂守则仍有人留在炉里；今夜怎么做，你要拿这两笔实账去谈。",
       "background": "councilHall",
       "portrait": "",
       "rain": false,
@@ -4488,7 +4763,7 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "你把“今夜不开谷口”写在复测符背面。老妇看完，叫孙子先收药包。顾衡仍带三户撤到高处，工匠补牢小试裂开的村符。林月告诉姐姐：“你妹妹还在里面。我去换药，不把暂守写成已经救出。”",
+      "text": "你把“今夜不开谷口”写在复测符背面。老妇看完，叫孙子先收药包。顾衡仍带三户撤到高处，工匠逐张检查村符，把需要修补的地方补牢。林月告诉姐姐：“你妹妹还在里面。我去换药，不把暂守写成已经救出。”",
       "background": "councilHall",
       "portrait": "",
       "rain": false,
