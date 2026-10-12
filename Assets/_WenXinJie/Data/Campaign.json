@@ -1,12 +1,13 @@
 {
   "id": "wenxinjie",
-  "revision": 38,
+  "revision": 39,
   "compatibleSaveRevisions": [
     33,
     34,
     35,
     36,
-    37
+    37,
+    38
   ],
   "start": "case.intro",
   "variables": [
@@ -4693,11 +4694,157 @@
     {
       "id": "e05.account",
       "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "天亮，林月给许澄与段七换过药，又按住你的腕脉。你照平日的方法吐纳，腹中只聚起薄薄一缕，过不了从前那一周天。“修为退了，先养着。别替他们搬车。”她把你按回凳上，递来司籍房要补的去向册。",
+      "background": "medicineHouse",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.names"
+    },
+    {
+      "id": "e05.names",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "旧册还写着阿澈“离山养病”。许澄与段七昨夜出了炉房，今日却仍在医舍，连下榻都须有人扶。林月把领药签与去向册放到你面前。离开炉房这一笔，该怎样落到册上？",
+      "background": "medicineHouse",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "care",
+          "text": "写离炉转医舍，保留三人的伤情与领药记录",
+          "target": "e05.medicine",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "leave",
+          "text": "把离炉算作离山，先给他们销名",
+          "target": "e05.return",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e05.return",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈拉住册角：“我们还没走。”他指指床边那双鞋，段七的脚还肿着，穿不进去。林月将领药签压在“离山”那一栏上：“这字一落，明日给不给药，又得让他们来证明人在这里。”你划去写错的去向，改记转入医舍。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.medicine"
+    },
+    {
+      "id": "e05.medicine",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你按真名补好去向，离炉时辰、今日伤情各占一栏。许澄伸手接自己的抄页，不让姐姐替她收。段七问伤没养好是不是还得坐回去。林月把他的领药签递给他：“不会拿你今日这碗药，换你再答应一次。”",
+      "background": "medicineHouse",
+      "portrait": "xuChengResolute",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "variants": [
+        {
+          "text": "你将离炉时辰与今日伤情分栏，先前多用的符料仍列在损耗页，不用“已救出”三个字销掉。许澄接过自己的抄页，段七也拿到领药签。他问伤没好是不是还得回炉。林月说，今日治伤不抵下一次坐榻，愿不愿意还须重新问本人。",
+          "conditions": [
+            {
+              "variable": "e.extraCharm",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ],
+      "next": "e05.homes"
+    },
+    {
+      "id": "e05.homes",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "暂借的木匠家",
+      "speaker": "旁白",
+      "text": "顾衡领你到暂借的屋里。老妇坐在靠窗处，父亲把女儿的药包放在平车旁，木匠让出一张空床。老妇问药田何时能再种。顾衡没答来年一定有收成，只把倒伏的地块、坏掉的屋梁逐项记下，答应与他们一起去看。",
+      "background": "craftsmanHome",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "variants": [
+        {
+          "text": "药车昨夜让过岔口，临时多烧的符料也列在账上。顾衡领你到暂借的木匠家，先向三户说明延误。老妇坐在窗边，父亲把女儿的药包放在平车旁；他们都还回不了家。顾衡逐项登记田地与屋梁的损坏，答应一起去看，没有将撤离成功写成损耗已赔。",
+          "conditions": [
+            {
+              "variable": "e.delay",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ],
+      "next": "e05.winter"
+    },
+    {
+      "id": "e05.winter",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "暂借的木匠家",
+      "speaker": "旁白",
+      "text": "祁元肃把冬药账送来，药田这一季的收成划掉了。林月圈出伤者眼下不能断的几味药，请他先向别山买；木匠另开重修屋舍的木料单。少收一批新弟子省下的粮药能抵一部分，剩下的仍由宗门欠着，不能记成三户自己捐了田。",
+      "background": "craftsmanHome",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.orders"
+    },
+    {
+      "id": "e05.orders",
+      "chapter": "卷四 · 开闸与第三声",
       "location": "司籍房",
       "speaker": "旁白",
-      "text": "天亮，你修为倒退，许澄与段七都要养伤，三户一时回不了家，冬药也会少。祁元肃交出加重承压的令页，沈砚把周望求停一事写回原簿；周望收下纸，没说原谅。",
+      "text": "回司籍房，祁元肃交出历年加重承压的令页。陈闻将未核的去向留空，把阿澈的更正与医舍抄页逐一对照。你将迁居木料、冬药订买与阵路修缮另列三行；交出旧令的人仍要给这些账签名，不能在改道以后只留下弟子的伤。",
       "background": "registryOffice",
       "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.shen"
+    },
+    {
+      "id": "e05.shen",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "周望带着自己的初试本来，翻到堂上补过的“闻铃未停”。沈砚说想再把新路修稳，周望把原本收回袖中：“图你还能修。坐着的人喊停，就让他起来。”沈砚点头，将新柱位的抄图放在桌上，没有请他再坐一次证明自己。",
+      "background": "registryOffice",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.promise"
+    },
+    {
+      "id": "e05.promise",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "工匠收下新柱位抄图，问第三处暗着的谷符谁来修。沈砚答应到现场教他辨流，顾衡记村钟时辰，陶叔保管石台钥匙。若下次灵潮前还修不稳，三户便继续暂住；没有人拿今夜出炉的几个人，替未修好的阵路作保。",
+      "background": "registryOffice",
+      "portrait": "shenYan",
       "rain": false,
       "effects": [],
       "choices": [],
@@ -4708,7 +4855,7 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "司籍房",
       "speaker": "旁白",
-      "text": "村民、家属、出炉弟子各保管一份观测记录，停铃与石台钥匙分开。你给获救者补真正去向，另取新纸写自己的名字；旧帖背的“砚”字仍留着，供下一人查。",
+      "text": "你将去向和伤签抄给出炉的人，撤路与损耗交给村民，医舍保留用药原簿。阿澈拿自己的抄页读了两遍，才折好收进衣襟。你另取新纸写自己的名字，旧帖背的“砚”字仍留着；下一位若翻到它，便有原簿可查。",
       "background": "registryOffice",
       "portrait": "",
       "rain": false,
@@ -4776,7 +4923,64 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "姐姐从炉门带回许澄核过的真名，与你逐项对照阿澈的伤签和旧号领单。周望保管初试原簿，沈砚把承认迟停的那行留作抄页。你分写三份：家属留去向，村人留撤路和裂符时辰，医舍留伤情。尚未见到的人，一律注明待核。",
+      "text": "姐姐从炉门带回许澄核过的真名。你按日期对照阿澈伤签和旧号领单，周望仍保管初试原簿，沈砚的补写只留抄页。去向、撤路、伤情已分开写好，尚未见到的人仍注明待核；这些纸要放在哪里？",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.holdCopyChoice"
+    },
+    {
+      "id": "h05.holdCopyChoice",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "陈闻带来一个能装下全部抄页的册匣。姐姐站在堂门等妹妹的那一份，工匠也等着拿撤路和裂符时辰回钟楼。你怎么交？",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "split",
+          "text": "家属、村民、医舍各收一份，宗门留对照页",
+          "target": "h05.holdCopies",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "single",
+          "text": "先将全部纸装在宗门册匣，日后统一查阅",
+          "target": "h05.holdOneBook",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h05.holdOneBook",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "册匣盖到一半，姐姐伸手挡住：“明早这门若不开，我去哪儿问她在哪？”工匠把钟槌搁在匣旁，要拿走与自己敲钟时辰相对的那张纸。陈闻打开册匣，你将各自的抄页分出来，不再等一个统一查阅的日子。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.holdCopies"
+    },
+    {
+      "id": "h05.holdCopies",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "姐姐读过妹妹的去向，带回炉门；工匠核过裂符与撤离时辰，收进钟楼原簿；林月保留伤情和用药页。宗门留同样的对照本，未核人名没有添上“已救出”。三份纸真正交到各自手里，你才在送达栏签名。",
       "background": "councilHall",
       "portrait": "",
       "rain": false,
@@ -4793,11 +4997,104 @@
     {
       "id": "h05.holdWatch",
       "chapter": "卷三 · 谁有权说停",
-      "location": "议事堂",
+      "location": "山腹炉门",
       "speaker": "旁白",
-      "text": "夜里林月进炉换药，将停铃移到许澄手边。陶叔守钥匙，工匠守村钟；一端叫停，他便撤力，让石柱暂接回冲。许澄问何时能走，林月答：“三日后再试。今晚每次轮换，我都来问你。”炉灯仍亮着，阿澈在医舍等姐姐回来。",
-      "background": "councilHall",
-      "portrait": "",
+      "text": "夜里你随林月回炉房。她将停铃挪到许澄能勾住的位置，药布和轮换册放在榻边。陶叔在石台守钥匙，工匠的村钟也有人接。许澄试着松开手，轻敲一下：“腕上又紧了，我要歇。”这次没有新路开闸，仍是在旧炉轮换。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.holdBell"
+    },
+    {
+      "id": "h05.holdBell",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "林月让你把歇息的停令传到石台，准备扶许澄离开这一轮承压。她敲的是一声，已经开口说了要歇；纸上还写着第三声必停。你先做什么？",
+      "background": "furnaceChamber",
+      "portrait": "xuChengResolute",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "pause",
+          "text": "现在传停令，让林月接她下榻换药",
+          "target": "h05.holdPause",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "count",
+          "text": "先问是否还要等满三声，才传停令",
+          "target": "h05.holdDelay",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h05.holdDelay",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "林月听完，已经向石台喊了停：“三声是最迟，开口说停也算。她不是少敲两声就不疼了。”陶叔回钟，许澄松开铃绳。你将这一句补在轮换册旁，下次接班的人不必再照着数铃声等。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.holdPause"
+    },
+    {
+      "id": "h05.holdPause",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "你传到石台的停令已有回钟。陶叔暂关这张榻所接的支路，石柱接住一阵余冲，林月扶许澄下榻，松开药布检查。门外有人守着石柱的裂纹，替她争来这次换药的空隙。她能歇这一轮，旧阵却还撑不了整夜没人，修新路的事仍不能拖。",
+      "background": "furnaceChamber",
+      "portrait": "xuCheng",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "observation": {
+        "kind": "flow",
+        "title": "旧炉轮换 · 本榻暂歇",
+        "caption": "暂关本榻支路，石柱短时接冲；旧阵尚未完全停用。",
+        "leftLabel": "村口与石柱",
+        "rightLabel": "本榻支路",
+        "leftNote": "继续有人守钟、查裂纹",
+        "rightNote": "暂关，林月接人换药",
+        "flow": "closed"
+      },
+      "next": "h05.holdSchedule"
+    },
+    {
+      "id": "h05.holdSchedule",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "许澄问，三日后是不是就能走。林月把药布重新包好：“三日后先看你的伤，再试路。我不能答应到那一天就通。”你把补买符纸、复查新柱、重问三户和炉中人的名单排在同一页。今日哪项未齐，都留着，不能只抄一个新日子。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h05.holdVillage"
+    },
+    {
+      "id": "h05.holdVillage",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "南沟村高处",
+      "speaker": "旁白",
+      "text": "你带轮换时辰回到高处。三户的灯还亮着，工匠把停钟交给下一班，顾衡读过补料单才签名。阿澈在医舍等姐姐回来，听你说许澄歇了一轮，便把要问她的话留在纸上。山腹炉灯没有熄，她还没像他这样走出来。",
+      "background": "villageSquareNight",
+      "portrait": "guHeng",
       "rain": false,
       "effects": [],
       "choices": [],
