@@ -118,7 +118,10 @@
         "g04.time",
         "g06.fast",
         "g08.holdRepairedFirst",
-        "h04.gu"
+        "h04.gu",
+        "h04.guRain",
+        "h04.guRecord",
+        "h04.guAccount"
       ],
       "demo_nodes": [],
       "returned_size": [
@@ -153,6 +156,9 @@
       "full_nodes": [
         "h03.name",
         "h04.shen",
+        "h04.shenOrder",
+        "h04.shenBell",
+        "h04.shenAccount",
         "e04.second"
       ],
       "demo_nodes": [],

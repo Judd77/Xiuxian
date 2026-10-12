@@ -1,9 +1,10 @@
 {
   "id": "wenxinjie",
-  "revision": 35,
+  "revision": 36,
   "compatibleSaveRevisions": [
     33,
-    34
+    34,
+    35
   ],
   "start": "case.intro",
   "variables": [
@@ -3068,7 +3069,7 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "要请他们共同订试阵规则，先把三种责任分开说明。",
+      "text": "祁元肃把冬药账推到最前面：“明夜的药不会从纸上长出来。”周望没碰药账，只按着自己的初试本。老妇也把原簿摊开。你将几张纸按年份分开，先问一件件亲历的事。",
       "background": "councilHall",
       "portrait": "",
       "rain": false,
@@ -3076,7 +3077,7 @@
       "choices": [
         {
           "id": "shen",
-          "text": "核沈砚初案的人榻与周望求停",
+          "text": "请周望与沈砚对照第一次试阵",
           "target": "h04.shen",
           "lockedReason": "已核沈砚一项",
           "conditions": [
@@ -3086,18 +3087,12 @@
               "maximum": 0
             }
           ],
-          "effects": [
-            {
-              "variable": "h.shen",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         },
         {
           "id": "qi",
-          "text": "核祁元肃加高承压与改写去向",
+          "text": "请祁元肃解释阿澈的离山记录",
           "target": "h04.qi",
           "lockedReason": "已核祁元肃一项",
           "conditions": [
@@ -3107,18 +3102,12 @@
               "maximum": 0
             }
           ],
-          "effects": [
-            {
-              "variable": "h.qi",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         },
         {
           "id": "gu",
-          "text": "核顾衡合写灾情与死者记录",
+          "text": "问顾衡：改记之后，旧呈报还能证明什么",
           "target": "h04.gu",
           "lockedReason": "已核顾衡一项",
           "conditions": [
@@ -3128,13 +3117,7 @@
               "maximum": 0
             }
           ],
-          "effects": [
-            {
-              "variable": "h.gu",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         },
         {
@@ -3169,7 +3152,64 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "周望把初试本展开：“我当年向你敲铃，你听见没有？”沈砚低头：“听见了。我想再等一息。”第一版图上已有坐人的石榻，旁边是他自己的签名。你将这两处圈出；后来加重承压的命令，是另一张纸。",
+      "text": "沈砚将两版阵图放在一起：“后来承压加重，已不是我当初试的那一轮。”初版图旁有他的签名；祁元肃的加压令在几年后。周望翻开初试本，手指停在“求停”两字上：“我问的是这一回。”你先拿哪份记录追问？",
+      "background": "councilHall",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "firstBell",
+          "text": "按初试本，问周望敲铃后为何还在坐榻",
+          "target": "h04.shenBell",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "laterOrder",
+          "text": "用加压令，追问第一次试阵为何伤人",
+          "target": "h04.shenOrder",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h04.shenOrder",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你把加压令推过去。周望摇头：“那时这道令还没有。等命令下来了，我连握铃的手都抬不起来了。”他将令纸挪开，露出初试日期。沈砚的手停在半空，终于没有再去碰后来的图。",
+      "background": "councilHall",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.shenBell"
+    },
+    {
+      "id": "h04.shenBell",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "“听见没有？”周望问。沈砚说听见了。他当时看见石柱的光正在暗下去，以为再撑一息，乱流就能全落进石槽。“我想等它稳。”周望把袖口拉下来：“你等的是那道光。我等的是你放手。”堂上静了，沈砚低头看着自己图旁的名字。",
+      "background": "councilHall",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.shenAccount"
+    },
+    {
+      "id": "h04.shenAccount",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你将求停的时辰与沈砚的签名圈在同一页。沈砚在旁边补写“闻铃未停”，没有添“后来被人改图”。周望看完，拿回初试本：“图你可以继续修。下一回铃响，不要再替坐着的人多等一息。”",
       "background": "councilHall",
       "portrait": "shenYanRemorseful",
       "rain": false,
@@ -3188,7 +3228,64 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "祁元肃承认把救急写成常例，提高榻上承压，还把有人求离写作“离山”。他拿出的冬药账是真的；真实难处不等于可替病人答应。",
+      "text": "祁元肃承认签过加压令，却指着阿澈的去向栏：“他离山养病，也有登记。”许澄姐姐将医舍伤签放到旁边：册上写他下山以后，你还从炉房将他带了回来。陈闻也带来了旧号领灰单。你要以哪份纸追问这次“离山”？",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "departure",
+          "text": "把离山记录与后来救回的伤签按日子排开",
+          "target": "h04.qiRecord",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "oldNumber",
+          "text": "用沈砚旧号的领灰单，指认阿澈仍在炉中",
+          "target": "h04.qiNumber",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h04.qiNumber",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "陈闻按住领灰单：“我能作证这个号一直在用，不能把它念成阿澈的名字。”姐姐将伤签推到你面前，上面写着送回的人、腕伤和日期。领灰单仍留在桌上；这次要问的，是一个明明还在受伤的人为何被登记成已经下山。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.qiRecord"
+    },
+    {
+      "id": "h04.qiRecord",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你先念离山日期，再念医舍接回阿澈的日期，又指向空着的山门验帖印。祁元肃看了许久：“那一栏是我命人写的。”姐姐问阿澈答应过没有。他没作声。你想起那只被踢进床底的鞋：阿澈连求救的纸也不敢留，册上却替他写完了去处。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.qiAccount"
+    },
+    {
+      "id": "h04.qiAccount",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "祁元肃说，若每一个求停的人都立刻离榻，山下恐怕撑不过下一股乱流。姐姐指着冬药账：“这些你给他们看过吗？药田和旧道，你问过他们选哪一个吗？”他说没有。你将加压令与改写去向分记两行，请他签在自己的命令旁。",
       "background": "councilHall",
       "portrait": "",
       "rain": false,
@@ -3207,7 +3304,64 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "顾衡把南沟、东坡错写成同刻，也把死者写轻。他当众在旧呈报旁更正；南沟的危险仍在，不能用他一句假话证明整村从未受过冲。",
+      "text": "顾衡的更正还没干，祁元肃便指向呈报：“可南沟确实死过人。今日难道就能撤阵？”老妇将儿子的名字遮在掌下：“死人是真的。你们后来写在他身上的话，也得一条条算。”要说明旧呈报为何不能照用，你先对照哪两件？",
+      "background": "councilHall",
+      "portrait": "guHengRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "clockBook",
+          "text": "对照守钟原簿与“全村同刻”的呈报",
+          "target": "h04.guRecord",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "rainCharm",
+          "text": "用东坡的雨损旧符，反驳南沟受过阵冲",
+          "target": "h04.guRain",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h04.guRain",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "老妇把昨日南沟裂符放到东坡旧符旁。一张从中间裂，一张从纸边烂。“这两张不是同一个地方的东西。”她指向原簿，“我儿子在哪一夜死的，在这里。你问顾衡改了什么，别先把这件事也改掉。”",
+      "background": "councilHall",
+      "portrait": "guHengRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.guRecord"
+    },
+    {
+      "id": "h04.guRecord",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "原簿将南沟求援与东坡换符隔开，呈报却把它们压成同刻。顾衡说，当年有人要撤掉坐人的石榻，他怕东坡没有受冲会被当作南沟也能硬撑的证明。“我把话写重，他们便不撤了。”周望看着他：“然后换我在里面硬撑。”",
+      "background": "councilHall",
+      "portrait": "guHengRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.guAccount"
+    },
+    {
+      "id": "h04.guAccount",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "顾衡没有接话。他将老妇儿子的真名、两处时辰和自己改写的地方逐项念完，请老妇核对。她没有说原谅，只将原簿翻开：“照这本念。”你在村簿旁记下：南沟危险仍在，两处不会同时受冲；不能再拿错写的先后决定谁撤、谁留。",
       "background": "councilHall",
       "portrait": "guHengRemorseful",
       "rain": false,
