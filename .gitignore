@@ -9,6 +9,10 @@
 /[Mm]emoryCaptures/
 /[Rr]ecordings/
 
+# Historical Unity copy and project-local task scratch files
+/tmp/XianxiaOverlayValidation/
+/tmp/task-work/
+
 # Local IDE and assistant settings (may contain private configuration)
 /.idea/
 /.vs/
