@@ -28,7 +28,7 @@ namespace WenXinJie.Presentation
             var root = ui.ArchiveOverlay(parent, "ClueJournalOverlay", "见闻", "线索簿",
                 out _backdrop);
             _root = root.gameObject;
-            _count = ui.Label(root, "ClueJournalCount", "已核实 0 / 0",
+            _count = ui.Label(root, "ClueJournalCount", "已收录 0 / 0",
                 1320f, 178f, 390f, 52f, 28);
             _count.font = font;
             _count.alignment = TextAlignmentOptions.Right;
@@ -106,7 +106,7 @@ namespace WenXinJie.Presentation
                 }
             }
 
-            _count.text = "已核实 " + unlocked + " / " + _state.Entries.Length;
+            _count.text = "已收录 " + unlocked + " / " + _state.Entries.Length;
             if (_state.Entries.Length == 0)
             {
                 ClearDetails();
@@ -144,11 +144,11 @@ namespace WenXinJie.Presentation
                 RenderPage();
             }
             var entry = _state.Entries[index];
-            _title.text = entry.Title;
+            _title.text = entry.Unlocked ? entry.Title : "尚未发现的线索";
             _category.text = entry.Unlocked ? entry.Category + " · 已收录" : "尚未收录";
             _description.text = entry.Unlocked
                 ? entry.Description
-                : "尚未发现与此相关的确证。";
+                : "继续调查后，亲见的事、当事人的说法与术法所测会记在这里。尚未取得的内容不会提前显示。";
             RenderSelection();
         }
 
@@ -197,7 +197,7 @@ namespace WenXinJie.Presentation
 
                 var entry = _state.Entries[index];
                 var label = _entryButtons[slot].GetComponentInChildren<TMP_Text>();
-                label.text = entry.Title + "\n" + (entry.Unlocked ? "已收录" : "未发现");
+                label.text = entry.Unlocked ? entry.Title + "\n已收录" : "尚未发现\n未收录";
             }
 
             _previousPage.gameObject.SetActive(_page > 0);

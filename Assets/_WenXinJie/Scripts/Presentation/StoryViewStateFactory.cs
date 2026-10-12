@@ -46,7 +46,7 @@ namespace WenXinJie.Presentation
             if (session.Revision >= 16)
             {
                 var skill = session.GetValue("story.skill") > 0 ? "可用" : "未习得";
-                return "问心劫    /    已核线索 " + clues + "/" + journal.Entries.Length
+                return "问心劫    /    已收录线索 " + clues + "/" + journal.Entries.Length
                        + "    /    辨气 " + skill;
             }
             if (session.Revision >= 15)
@@ -182,8 +182,10 @@ namespace WenXinJie.Presentation
                     "救阿澈前抄下他与隔壁病人的榻号。床位还需与伤签核名，不能直接当作姓名。",
                     session.GetValue("case.bedNumber") > 0),
                 new ClueEntryViewState("阿澈的证词", "当事人说法 · 医舍",
-                    "床底鞋是他留下的求救痕迹；隔墙有人两下敲门。安神药影响了他对门漆和姓名的记忆。",
-                    session.GetValue("story.ache") > 0),
+                    session.Current.id == "c12.shoe"
+                        ? "阿澈说前夜已经坐过炉榻，发烧后暂送回住处，天未亮又被带走。床底的鞋是他自己留下的求救痕迹。隔墙病人的事还没问到。"
+                        : "床底鞋是他留下的求救痕迹；隔墙有人两下敲门。安神药影响了他对门漆和姓名的记忆。隔墙身份仍须另证。",
+                    session.GetValue("story.ache") > 0 && session.Current.id != "c11.cost"),
                 new ClueEntryViewState("许澄的半枚玉扣", "实物互证 · 许家",
                     "阿澈带出的半扣与许家姐姐保管的另一半吻合。扣可能被别人携带，仍需让门里的人自行回应身份。",
                     session.GetValue("story.xucheng") > 0),
@@ -206,7 +208,7 @@ namespace WenXinJie.Presentation
                     "愿试走、愿借屋、仍反对开谷口的户分栏记录。木匠要求公开冬药账，不能写成全村一致同意改道。",
                     session.GetValue("g.villageRecord") > 0),
                 new ClueEntryViewState("谷口复测", "术证 · 山谷",
-                    "旧图第三根石柱已经移位。未复测前，不能照图直接开闸。",
+                    ValleySurveyRecord(session),
                     session.GetValue("story.survey") > 0),
                 new ClueEntryViewState("共同叫停约定", "行动 · 议事堂",
                     "炉门与村口都须有人守钟；家属和村民能叫停，伤亡与迁离按真名记录。",
@@ -215,23 +217,98 @@ namespace WenXinJie.Presentation
                     "炉符耗量、石柱闷响与无雨裂符按时辰先后加快。至迟明夜须准备，无法预言灵潮准确一刻。",
                     session.GetValue("h.deadline") > 0),
                 new ClueEntryViewState("分开的三份责任", "公开对质 · 议事堂",
-                    "沈砚初案有人榻且未按周望求停；祁元肃加高承压并改去向；顾衡合写旧灾并写轻死者。不得以一人受罚抹去其余责任。",
+                    "出处：周望初试本、祁元肃签令与离山册、顾衡旧呈报。\n已核：沈砚闻铃未停；祁元肃加压并改去向；顾衡合写灾情、写轻死者。\n三人的责任分别记，不由一人代认。",
                     session.GetValue("h.shen") > 0 && session.GetValue("h.qi") > 0
                     && session.GetValue("h.gu") > 0),
-                new ClueEntryViewState("可叫停的小试", "共同实测 · 谷口",
-                    "沈砚读图、陶叔执钥、家属与村人握钟。村口先亮，炉门后热；这次小试仅量局部先后，不保证下一股同样轻。",
+                new ClueEntryViewState("可叫停的小试", "共同实测 · 谷口与炉门",
+                    JointTrialRecord(session),
                     session.GetValue("h.test") > 0),
                 new ClueEntryViewState("三户分别同意暂迁", "本人决定 · 谷口",
                     "老妇先过狭岔，父女带药与平车，木匠借屋并要求公开冬药账。谁也没有答应永久舍弃家与药田。",
                     session.GetValue("h.house1") > 0 && session.GetValue("h.house2") > 0
                     && session.GetValue("h.house3") > 0),
-                new ClueEntryViewState("第三声后的执行", "行动 · 山腹石台",
-                    "许澄够得到停铃，陶叔能接支路；按新测石柱辨流，第三声后两端撤力。药田受损，三户须暂迁，救出者仍需养伤。",
-                    session.GetValue("e.bellPlaced") > 0 && session.GetValue("e.flowMeasured") > 0),
+                new ClueEntryViewState("开闸与停铃", "行动记录 · 山腹石台",
+                    RescueRecord(session),
+                    session.GetValue("e.bellPlaced") > 0),
                 new ClueEntryViewState("公开的守阵真账", "三方留存 · 司籍房",
-                    "今晚仍守旧阵；家属持待核去向，村民持实走撤路与裂符时辰，医舍留今日伤情。许澄尚未出炉，三日后再试。",
+                    PublicHoldRecord(session),
                     session.GetValue("e.publicCopies") > 0)
             });
+        }
+
+        private static string ValleySurveyRecord(StorySession session)
+        {
+            var cost = session.GetValue("g.extraCharm") == 0
+                ? "本次村符未裂。"
+                : session.GetValue("g.repairOwed") > 0
+                    ? "本次裂了一张村符，临时压住裂口，仍欠正式修补。"
+                    : "本次裂过的村符已补牢，所用符料仍记在村账。";
+            return "出处：现柱脚、旧石础与两处感应符。\n所测：第三柱已移位，村口先亮，炉门后热。" + cost
+                + "\n未明：下一股灵潮多强；炉内伤情与正式开闸条件仍须另核。";
+        }
+
+        private static string JointTrialRecord(StorySession session)
+        {
+            // E03 can also set extraCharm; only name the wrist injury while still in H05/H06.
+            var beforeOpening = session.Current.id.StartsWith("h05.") || session.Current.id.StartsWith("h06.");
+            var cost = session.GetValue("e.extraCharm") == 0
+                ? "按钟收息，村符焦而未断，许澄能活动手腕。"
+                : beforeOpening
+                    ? "停钟后迟撤，村符裂了一张，许澄腕上添伤；重新试前须看伤、再问本人。"
+                    : "已用过额外符料，伤情须按炉门记录的时辰核对；后来的损耗不能混记成早先小试造成。";
+            return "出处：村口、炉门与石台共同记录。\n所测：村口先亮，炉门后热；试验支路已关，谷底仍未通。"
+                + "\n损耗：" + cost + "\n未明：下一股灵潮是否同样轻。";
+        }
+
+        private static string RescueRecord(StorySession session)
+        {
+            var node = session.Current.id;
+            if (node == "e04.stop")
+            {
+                return "已执行：第三声后收息，陶叔关支路，两端收到回钟。余流转向无人深谷，林月已确认炉榻卸压。\n待做：扶人出炉并查看伤情。";
+            }
+
+            if (node == "e04.outside" || node == "e04.valley" || node.StartsWith("e05.")
+                || node == "ending.newRoad")
+            {
+                var exhaustion = node.StartsWith("e05.") || node == "ending.newRoad"
+                    ? "主角修为退落"
+                    : "主角灵力耗尽";
+                return "已执行：第三声后两端撤力，林月将许澄与段七接出炉房。\n代价：" + exhaustion
+                    + "，获救者仍需养伤，三户暂迁，药田受损。\n未完成：谷底新路仍须修缮，下一轮灵潮还要有人维护。";
+            }
+
+            if (session.GetValue("e.flowMeasured") > 0)
+            {
+                return "已发生：新测支路正在引流，药田已受冲，两人能使用停铃。\n约定：第三声必停，开口求停也须传到石台。\n尚未执行：第三声后的收息与出炉，两人仍在炉内。";
+            }
+
+            if (node.StartsWith("e03."))
+            {
+                return "已发生：旧闸已开，药田开始受冲。两人能使用停铃，石台能回钟。\n待做：循新测柱位辨流，将灵力引向无人深谷；人还没有离榻。\n约定：第三声必停，任何人求停也立即传令。";
+            }
+
+            return "已准备：许澄与段七亲手试铃，能听见陶叔的回钟，并答应本次行动。\n约定：开闸后重新计铃，第三声必停，任何人求停也要立即传令。\n尚未发生：正式开闸与救人。";
+        }
+
+        private static string PublicHoldRecord(StorySession session)
+        {
+            var node = session.Current.id;
+            var afterPause = node == "h05.holdPause" || node == "h05.holdSchedule"
+                || node == "h05.holdVillage" || node == "ending.oldPublic";
+            var progress = afterPause
+                ? "许澄已获一轮歇息、下榻换药，仍未离开炉房。"
+                : "记录已交付，许澄仍在炉房。本榻轮换与换药尚待执行。";
+            if (node == "h05.holdSchedule" || node == "h05.holdVillage" || node == "ending.oldPublic")
+            {
+                progress += "三日后先看伤、补料、复测并重新问本人，不能保证当天救出。";
+            }
+            else
+            {
+                progress += "下次何时试阵，还须看伤情、符料和复测后再定。";
+            }
+
+            return "已交付：家属持去向，村民持撤路与损耗时辰，医舍持伤情；未核姓名仍留空。\n当前：" + progress;
         }
 
         private static ClueJournalState BuildCaseJournal(StorySession session)
