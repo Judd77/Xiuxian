@@ -20,11 +20,16 @@ namespace WenXinJie.Presentation
         private readonly TMP_Text _speaker;
         private readonly TMP_Text _status;
         private readonly StoryObservationView _observation;
+        private readonly DialogueReader _reader;
+        private readonly Button _automatic;
+        private readonly TMP_Text _automaticLabel;
+        private readonly TMP_Text _textSpeedLabel;
 
         public StoryGameplayView(RectTransform root, StoryUiFactory ui, StoryAssetCatalog assets,
             DialogueReader reader, IStoryCommands commands, Action openJournal, Func<bool> inputBlocked)
         {
             _root = root.gameObject;
+            _reader = reader;
             ui.Picture(root, "HeaderPanel", assets.PanelTexture, 48f, 24f, 1824f, 116f);
             var gameTitle = ui.Label(root, "GameTitle", "问心劫", 86f, 32f, 280f, 74f, 42);
             gameTitle.font = assets.TitleFont;
@@ -70,12 +75,26 @@ namespace WenXinJie.Presentation
             ui.Button(root, "Load", "读档", 242f, 1008f, 146f, 54f, commands.LoadGame);
             ui.Button(root, "History", "前尘", 404f, 1008f, 146f, 54f, reader.OpenHistory);
             ui.Button(root, "ClueJournal", "线索", 566f, 1008f, 146f, 54f, openJournal);
+            _automatic = ui.Button(root, "AutomaticReading", string.Empty, 736f, 1008f, 182f, 54f,
+                reader.ToggleAutomatic);
+            _automaticLabel = _automatic.GetComponentInChildren<TMP_Text>();
+            _automaticLabel.fontSize = 22;
+            var textSpeed = ui.Button(root, "TextSpeed", string.Empty, 934f, 1008f, 182f, 54f,
+                reader.CycleTextSpeed);
+            _textSpeedLabel = textSpeed.GetComponentInChildren<TMP_Text>();
+            _textSpeedLabel.fontSize = 22;
+            reader.ReadingModeChanged += RefreshReadingControls;
+            RefreshReadingControls();
             ui.Button(root, "MainMenuButton", "主界面", 1630f, 1008f, 210f, 54f,
                 commands.ReturnToMainMenu);
 
-            var noticePanel = ui.Frame(root, "NoticePanel", 736f, 1008f, 870f, 54f);
+            var noticePanel = ui.Frame(root, "NoticePanel", 1132f, 1008f, 474f, 54f);
             noticePanel.color = new(0.82f, 0.88f, 0.82f);
-            _notice = ui.Label(root, "Notice", string.Empty, 756f, 1010f, 830f, 50f, 22);
+            _notice = ui.Label(root, "Notice", string.Empty, 1152f, 1010f, 434f, 50f, 22);
+            _notice.enableAutoSizing = true;
+            _notice.fontSizeMin = 16;
+            _notice.fontSizeMax = 22;
+            _notice.overflowMode = TextOverflowModes.Truncate;
             _notice.font = assets.MenuFont;
             _notice.color = new(0.94f, 0.91f, 0.78f);
             _notice.alignment = TextAlignmentOptions.Center;
@@ -86,6 +105,11 @@ namespace WenXinJie.Presentation
 
         public void SetVisible(bool visible)
         {
+            if (!visible)
+            {
+                _reader.StopAutomatic();
+            }
+
             _root.SetActive(visible);
         }
 
@@ -96,6 +120,8 @@ namespace WenXinJie.Presentation
 
         public void Render(StoryViewState state)
         {
+            _reader.ConfigurePage(state.Choices.Length == 0, state.Terminal);
+            _automatic.interactable = !state.Terminal;
             _observation.Render(state.Observation);
             _chapter.text = state.Chapter;
             _location.text = state.Location;
@@ -109,6 +135,15 @@ namespace WenXinJie.Presentation
             {
                 RenderChoice(index, state.Choices);
             }
+        }
+
+        private void RefreshReadingControls()
+        {
+            _automaticLabel.text = _reader.AutomaticLabel;
+            _automaticLabel.color = _reader.IsAutomatic
+                ? new(1f, 0.85f, 0.55f)
+                : new(0.96f, 0.94f, 0.82f);
+            _textSpeedLabel.text = _reader.TextSpeedLabel;
         }
 
         private void CreateChoices(Transform parent, StoryUiFactory ui, IStoryCommands commands,

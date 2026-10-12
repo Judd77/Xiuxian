@@ -13,7 +13,9 @@ namespace WenXinJie.UI
     public sealed class DialogueReader : MonoBehaviour
     {
         private const int MaximumHistoryEntries = 200;
-        private const float DefaultCharactersPerSecond = 32f;
+        private const string TextSpeedPreference = "WenXinJie.TextSpeed";
+        private static readonly float[] TextSpeeds = { 16f, 32f, 64f, 0f };
+        private static readonly string[] TextSpeedNames = { "慢", "常", "快", "即时" };
 
         private readonly List<string> _history = new();
         private Action _advanceStory;
@@ -31,11 +33,19 @@ namespace WenXinJie.UI
         private GameObject _panel;
         private int _revealed;
         private TMP_Text _target;
+        private bool _automatic;
+        private bool _canAutoAdvance;
+        private float _autoElapsed;
+        private int _textSpeed;
 
+        public event Action ReadingModeChanged;
         public bool IsRevealing => _revealed < _boundaries.Length;
         public bool IsHistoryOpen => _panel != null && _panel.activeSelf;
         public int HistoryCount => _history.Count;
         public string FullText { get; private set; } = string.Empty;
+        public string TextSpeedLabel => "文字：" + TextSpeedNames[_textSpeed];
+        public bool IsAutomatic => _automatic;
+        public string AutomaticLabel => !_automatic ? "自动：关" : _canAutoAdvance ? "自动：开" : "自动：待选";
 
         private void Update()
         {
@@ -46,25 +56,26 @@ namespace WenXinJie.UI
 
             if (_inputBlocked())
             {
+                _autoElapsed = 0f;
                 return;
+            }
+
+            if (IsHistoryOpen)
+            {
+                _autoElapsed = 0f;
             }
 
             if (IsRevealing && !IsHistoryOpen)
             {
                 _elapsed += Time.unscaledDeltaTime;
-                _revealed = Math.Min(_boundaries.Length, (int)(_elapsed * DefaultCharactersPerSecond));
+                _revealed = Math.Min(_boundaries.Length, (int)(_elapsed * TextSpeeds[_textSpeed]));
                 _target.text = _revealed == _boundaries.Length
                     ? FullText
                     : FullText.Substring(0, _boundaries[_revealed]);
             }
 
             var keyboard = Keyboard.current;
-            if (keyboard == null)
-            {
-                return;
-            }
-
-            if (keyboard.escapeKey.wasPressedThisFrame && IsHistoryOpen)
+            if (keyboard?.escapeKey.wasPressedThisFrame == true && IsHistoryOpen)
             {
                 CloseHistory();
                 return;
@@ -72,14 +83,32 @@ namespace WenXinJie.UI
 
             // Focused buttons submit through the UI module, preventing a double advance.
             var events = EventSystem.current;
-            if (events != null && events.currentSelectedGameObject != null)
+            if (keyboard != null && !IsHistoryOpen
+                && (keyboard.spaceKey.wasPressedThisFrame || keyboard.enterKey.wasPressedThisFrame))
             {
+                if (events == null || events.currentSelectedGameObject == null)
+                {
+                    _advanceStory();
+                }
+
                 return;
             }
 
-            if (!IsHistoryOpen && (keyboard.spaceKey.wasPressedThisFrame || keyboard.enterKey.wasPressedThisFrame))
+            if (Mouse.current?.leftButton.wasPressedThisFrame == true)
             {
-                _advanceStory();
+                _autoElapsed = 0f;
+                return;
+            }
+
+            if (_automatic && _canAutoAdvance && !IsRevealing && !IsHistoryOpen)
+            {
+                _autoElapsed += Time.unscaledDeltaTime;
+                var readingPause = Mathf.Clamp(1.5f + _boundaries.Length * 0.06f, 2.5f, 15f);
+                if (_autoElapsed >= readingPause)
+                {
+                    _autoElapsed = 0f;
+                    _advanceStory();
+                }
             }
         }
 
@@ -88,6 +117,53 @@ namespace WenXinJie.UI
             _target = target ?? throw new ArgumentNullException(nameof(target));
             _advanceStory = advanceStory ?? throw new ArgumentNullException(nameof(advanceStory));
             _inputBlocked = inputBlocked ?? throw new ArgumentNullException(nameof(inputBlocked));
+            _textSpeed = Mathf.Clamp(PlayerPrefs.GetInt(TextSpeedPreference, 1), 0, TextSpeeds.Length - 1);
+        }
+
+        public void CycleTextSpeed()
+        {
+            _textSpeed = (_textSpeed + 1) % TextSpeeds.Length;
+            PlayerPrefs.SetInt(TextSpeedPreference, _textSpeed);
+            PlayerPrefs.Save();
+            if (TextSpeeds[_textSpeed] == 0f)
+            {
+                Complete();
+            }
+            else
+            {
+                _elapsed = _revealed / TextSpeeds[_textSpeed];
+            }
+
+            ReadingModeChanged?.Invoke();
+        }
+
+        public void ToggleAutomatic()
+        {
+            SetAutomatic(!_automatic);
+        }
+
+        public void StopAutomatic()
+        {
+            SetAutomatic(false);
+        }
+
+        public void ConfigurePage(bool canAdvance, bool terminal)
+        {
+            _canAutoAdvance = canAdvance && !terminal;
+            _autoElapsed = 0f;
+            if (terminal)
+            {
+                SetAutomatic(false);
+            }
+
+            ReadingModeChanged?.Invoke();
+        }
+
+        private void SetAutomatic(bool enabled)
+        {
+            _automatic = enabled;
+            _autoElapsed = 0f;
+            ReadingModeChanged?.Invoke();
         }
 
         public void ConfigureHistory(GameObject window, TMP_Text text, TMP_Text count,
@@ -109,14 +185,10 @@ namespace WenXinJie.UI
             _boundaries = StringInfo.ParseCombiningCharacters(FullText);
             _elapsed = 0f;
             _revealed = 0;
+            _autoElapsed = 0f;
 
-            if (!animate || string.IsNullOrWhiteSpace(FullText))
-            {
-                Complete();
-                return;
-            }
-
-            if (_history.Count == 0 || _history[_history.Count - 1] != FullText)
+            if (animate && !string.IsNullOrWhiteSpace(FullText)
+                && (_history.Count == 0 || _history[_history.Count - 1] != FullText))
             {
                 _history.Add(FullText);
             }
@@ -126,18 +198,27 @@ namespace WenXinJie.UI
                 _history.RemoveAt(0);
             }
 
-            _target.text = string.Empty;
+            if (!animate || TextSpeeds[_textSpeed] == 0f || string.IsNullOrWhiteSpace(FullText))
+            {
+                Complete();
+            }
+            else
+            {
+                _target.text = string.Empty;
+            }
         }
 
         public void Complete()
         {
             _revealed = _boundaries.Length;
+            _autoElapsed = 0f;
             _target.text = FullText;
         }
 
         public void ResetHistory()
         {
             _history.Clear();
+            StopAutomatic();
             CloseHistory();
         }
 

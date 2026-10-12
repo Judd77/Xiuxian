@@ -1,6 +1,6 @@
 # 代码结构与 C# 约定
 
-更新：2026-10-09。本文记录当前实现的职责与持续适用的约束；正式剧情与交互见 `STORY.md`、`GAME_SCRIPT.md`，工程实况见 `DEVELOPMENT_STATUS.md`。
+更新：2026-10-12。本文记录当前实现的职责与持续适用的约束；正式剧情与交互见 `STORY.md`、`GAME_SCRIPT.md`，工程实况见 `DEVELOPMENT_STATUS.md`。
 
 ## 格式
 
@@ -29,7 +29,7 @@ PascalCase。不要把方法体或多个语句压成一行。公开 JSON 字段�
 | `StoryViewStateFactory`               | 把会话与媒体目录映射为只读展示状态                                                     | 创建控件、修改会话                       |
 | `StoryViewState`                      | 从运行时到界面的不可持久、只读展示数据                                                 | 规则计算和资源查找策略                   |
 | `StoryAssetCatalog`                   | 稳定剧情资源 ID 到已授权 Unity 资产的映射与完整性校验                                  | 决定剧情分支                             |
-| `DialogueReader`                      | 逐字阅读、补全、会话历史、阅读快捷键                                                   | 日程和奖励                               |
+| `DialogueReader`                      | 逐字阅读、速度偏好、自动翻页、补全、会话历史与阅读快捷键                               | 剧情判断、日程和奖励                     |
 | `CampaignSaveStore`                   | 版本 3 JSON、临时文件替换、备份恢复                                                    | 修改 Session 和 UI                       |
 | `GameAudio`                           | BGM/环境声、音量与淡入淡出                                                             | 剧情判定、游戏存档                       |
 
@@ -37,7 +37,7 @@ PascalCase。不要把方法体或多个语句压成一行。公开 JSON 字段�
 持有会话生命周期：启动时仅显示首页，开始游戏创建新会话，继续游戏优先恢复内存会话，读取存档显式恢复磁盘快照。读取存档先完整验证，再提交到当前周目。设置可使用 PlayerPrefs，游戏进度不可使用
 PlayerPrefs。音乐和背景通过场景序列化引用接入，不在 Update 中查找或加载资源。
 
-旧 `FirstDay*` 原型、`Prototype.unity` 及对应测试工具已经移除。正式版使用 `GameFull.unity` 与 `Campaign.json`；试玩版使用 `GameDemo.unity` 与 `DemoCampaign.json`。两个场景共用运行代码和资产目录，构建命令分别只打入对应场景。试玩与正式版使用独立存档文件，正式版可继承当前修订号及明确声明兼容修订号的试玩进度。现有 JSON 为 revision 34 的单主线版，节点按正式游戏剧本制作。
+旧 `FirstDay*` 原型、`Prototype.unity` 及对应测试工具已经移除。正式版使用 `GameFull.unity` 与 `Campaign.json`；试玩版使用 `GameDemo.unity` 与 `DemoCampaign.json`。两个场景共用运行代码和资产目录，构建命令分别只打入对应场景。试玩与正式版使用独立存档文件，正式版可继承当前修订号及明确声明兼容修订号的试玩进度。现有 JSON 为 revision 35 的单主线版，节点按正式游戏剧本制作。
 
 `StorySession` 已有可存档复现的随机状态基础，但当前正式剧情尚未使用随机结果；不能把随机事件池描述成已接入或新设计的必做功能。
 
@@ -52,12 +52,18 @@ PlayerPrefs。音乐和背景通过场景序列化引用接入，不在 Update �
 
 UI 测试须等待渲染后再检查按钮实际中心的射线，不能仅按设计分辨率猜点击位置。按钮事件、合成 Input System 输入与实体鼠标操作须分别记录。当前已验证与未验证的事实见 `DEVELOPMENT_STATUS.md`。
 
+## 阅读控制
+
+底栏提供慢（16字/秒）、常（32字/秒）、快（64字/秒）与即时显示，速度偏好独立保存到PlayerPrefs的WenXinJie.TextSpeed，不写入剧情存档。换速度保留当前已显示进度，即时显示仍录入前尘历史。
+
+StoryGameplayView依据展示状态向DialogueReader传入是否可继续、是否结局；自动模式只有在无选项、非结局、文字显示完后才调用既有AdvanceStory命令。停留按文本长度计算为2.5至15秒，可随时手动继续；选项页显示待选，玩家选择后继续自动阅读，不代选。打开前尘或其他弹窗时暂停并重置等待；新开局、读档及返回主界面关闭自动模式，结局也关闭。自动状态不持久化。键盘提交与鼠标按下的帧不同时自动推进，避免一次操作翻两页。
+
 ## 术法观测演出
 
 StoryNode.observation 是可选的演出资料，包含双样本名称、已观测现象、余息强度及阵流阶段。StoryGraph 校验模式与范围，并将 JsonUtility 为缺失字段实例化的空资料归一为 null。StoryViewStateFactory 传递资料；StoryObservationView 负责布局，ObservationInk 用 UGUI 绘制旧纸、灰样、符纹及先后点亮。它们不修改剧情变量或解锁选项，也不加入等待门槛。离开观测节点与主界面时随玩法层隐藏，读档由当前节点恢复。
 
 ## 存档兼容与试玩接续
 
-StoryDefinition.compatibleSaveRevisions 明确列出可直接恢复的旧剧情修订号。当前 revision 34 仅开放 revision 33，两版的节点、条件、效果与变量定义一致，仅增加观测演出；不开放三路线版 revision 32。恢复仍校验版本 3 schema、campaign、节点和完整变量，不重放入口效果；再次保存写当前剧情修订号。后续纯画面改动不必递增剧情 revision。
+StoryDefinition.compatibleSaveRevisions 明确列出可直接恢复的旧剧情修订号。当前revision 35兼容revision 33、34，旧节点、条件、效果与变量定义保持；新版新增人物出场与叙事衔接，不开放三路线版revision 32。恢复仍校验版本 3 schema、campaign、节点和完整变量，不重放入口效果；再次保存写当前剧情修订号。后续纯画面改动不必递增剧情 revision。
 
 正式版优先读取可用正式档或其备份。只有正式档无法读取时，才尝试有效 Demo 档；已经存在的正式档不会因试玩继承被自动覆盖。首次继承且尚无正式档时尝试写入正式档，写入失败保留已载入会话并提示手动保存。原档来自不兼容版本而 Demo 有效时，界面明确提示已接续试玩、原正式档保留。
