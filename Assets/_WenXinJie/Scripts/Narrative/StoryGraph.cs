@@ -81,7 +81,8 @@ namespace WenXinJie.Narrative
                         && observation.rightStrength >= 0f && observation.rightStrength <= 1f,
                     "Invalid residue strength: " + node.id);
                 Require(observation.kind != "flow" || observation.flow == "pending"
-                        || observation.flow == "villageFirst" || observation.flow == "closed"
+                        || observation.flow == "villageFirst" || observation.flow == "villageWarning"
+                        || observation.flow == "closed"
                         || observation.flow == "diverted", "Unknown flow stage: " + node.id);
             }
             foreach (var variant in node.variants ?? Array.Empty<StoryTextVariant>())

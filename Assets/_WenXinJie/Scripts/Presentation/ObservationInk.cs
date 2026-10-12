@@ -53,7 +53,7 @@ namespace WenXinJie.Presentation
             Path(mesh, source, right, new(0.42f, 0.65f, 0.58f, 0.32f));
             Ring(mesh, source, 30f, 2f, new(0.67f, 0.76f, 0.70f, 0.8f));
             Rune(mesh, source, 0.5f, Ink);
-            var first = flow == "villageFirst" || flow == "diverted";
+            var first = flow == "villageFirst" || flow == "villageWarning" || flow == "diverted";
             var leftPower = first ? Mathf.Clamp01((_elapsed - 0.25f) / 0.5f) : 0f;
             var rightPower = flow == "villageFirst" ? Mathf.Clamp01((_elapsed - 0.9f) / 0.5f) : 0f;
             Glow(mesh, left, leftPower, Gold);

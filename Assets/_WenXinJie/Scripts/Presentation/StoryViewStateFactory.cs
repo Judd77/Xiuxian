@@ -197,7 +197,7 @@ namespace WenXinJie.Presentation
                     "背老妇过第一坡已用完旧簿所写的半炷香；按慢者先行、药箱与孩子分开过狭路重排。",
                     session.GetValue("g.walked") > 0),
                 new ClueEntryViewState("移位的第三柱", "局部术证 · 谷口",
-                    "洪水后第三柱不在旧图原位；小试显示村口先亮、炉门后热。只量出局部先后，不能预言下一次灵潮强度。",
+                    "旧石础与现柱脚错开，今日余息经过现柱脚；小试村口先亮、炉门后热。只量出局部先后，不能预言下一次灵潮强度。",
                     session.GetValue("g.thirdPillar") > 0),
                 new ClueEntryViewState("村民握停钟", "行动约定 · 村议",
                     "工匠由村民选出守钟，家属守炉门铃，陶叔关支路；任何一端喊停，两端撤力。不是整村同意永远开谷口。",

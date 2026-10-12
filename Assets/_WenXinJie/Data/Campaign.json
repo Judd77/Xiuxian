@@ -1,10 +1,11 @@
 {
   "id": "wenxinjie",
-  "revision": 36,
+  "revision": 37,
   "compatibleSaveRevisions": [
     33,
     34,
-    35
+    35,
+    36
   ],
   "start": "case.intro",
   "variables": [
@@ -2337,7 +2338,7 @@
       "chapter": "卷二 · 山下那份账",
       "location": "谷口",
       "speaker": "旁白",
-      "text": "顾衡带你看谷口废弃的泄流石道：沿它开一条支路，或许能把山中乱流引向无人深谷。但谷口三户和药田就在路旁，贸然开道会先冲到这里。旧图上的第三根石柱已被洪水挪位。你和工匠分别贴好两端感应符，约定村符先亮就撤力。",
+      "text": "谷口的石道荒了多年，尽头通向无人深谷。顾衡摊开旧图，指着第三根石柱：“它原该把第一下乱流挡住，再让水一样的灵气流进石槽。”道旁就是三户人家和药田。工匠将孩子领到坡上，在村口与炉门各贴感应符，约定村符先亮便敲钟，你须立即撤力。",
       "background": "valley",
       "portrait": "",
       "rain": false,
@@ -2360,7 +2361,7 @@
       "chapter": "卷二 · 山下那份账",
       "location": "谷口",
       "speaker": "旁白",
-      "text": "旧图说第三柱会先亮。你是照图送一缕灵力，还是先量柱位再试？",
+      "text": "图上的石槽画得笔直，眼前却埋着洪水留下的泥。顾衡握着钟槌等你。可以先送极小一缕，看看旧图是否还能用；也可以先查柱位和今日灵气的流向，再做小试。你怎么动手？",
       "background": "valley",
       "portrait": "",
       "rain": false,
@@ -2368,27 +2369,16 @@
       "choices": [
         {
           "id": "old",
-          "text": "照旧图轻试；若村符先亮立刻撤力",
+          "text": "先照旧图送一缕灵力，以停钟为撤力信号",
           "target": "g07.old",
           "lockedReason": "",
           "conditions": [],
-          "effects": [
-            {
-              "variable": "g.extraCharm",
-              "operation": "set",
-              "value": 1
-            },
-            {
-              "variable": "g.repairOwed",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": []
         },
         {
           "id": "measure",
-          "text": "先辨移位石柱，再按新位置轻试",
+          "text": "先查现场柱位与今日余息，再做小试",
           "target": "g07.measure",
           "lockedReason": "",
           "conditions": [],
@@ -2412,22 +2402,108 @@
       "chapter": "卷二 · 山下那份账",
       "location": "谷口",
       "speaker": "旁白",
-      "text": "村口符先亮，工匠敲钟。你照约撤力，仍裂了一张符；孩子被带离符下，没有受伤。工匠先用符纸压住裂口，提醒你今夜还欠一次正式补符。你向村人说明自己照旧图试错。",
+      "text": "你按旧图送入一缕灵力，村口的符却先亮，石槽边传来一声闷响。顾衡敲下停钟，工匠抬头望向三户的门梁。你的手仍按着石面，炉门感应符尚未发热。是现在撤，还是再看一瞬？",
       "background": "valley",
       "portrait": "",
       "rain": false,
       "effects": [],
+      "choices": [
+        {
+          "id": "withdraw",
+          "text": "听见停钟，立即收回送入阵中的灵力",
+          "target": "g07.oldStop",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "wait",
+          "text": "再等一瞬，看炉门那张符会不会亮",
+          "target": "g07.delayed",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
+      "observation": {
+        "kind": "flow",
+        "title": "阵流小试 · 停钟已响",
+        "caption": "村口先亮，炉门尚未回应。钟已敲响，是否继续由你决定。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "先亮，已敲停钟",
+        "rightNote": "尚未发热",
+        "flow": "villageWarning"
+      }
+    },
+    {
+      "id": "g07.oldStop",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你照约收回灵力，仍听见村符裂开的脆响。孩子已在坡上，工匠先压住裂口，嘱你今夜补牢。回头沿石槽查，第三柱已偏出旧石础，今日余息留在现柱脚下。你把位置改进草图，也将这张裂符记在自己刚才的小试旁。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.extraCharm",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "g.repairOwed",
+          "operation": "set",
+          "value": 1
+        }
+      ],
       "choices": [],
       "next": "g07.result",
       "observation": {
         "kind": "flow",
-        "title": "阵流小试 · 旧图失准",
-        "caption": "照旧图送入一缕灵力，村口先亮。你已经撤力，仍裂了一张村符。",
+        "title": "阵流小试 · 旧图试错",
+        "caption": "已经撤力，旧图失准仍使一张村符开裂；今晚须补。",
         "leftLabel": "村口感应符",
         "rightLabel": "炉门感应符",
-        "leftNote": "先亮，裂了一张村符",
-        "rightNote": "迟一瞬才热",
-        "flow": "villageFirst"
+        "leftNote": "已停，一张村符裂开",
+        "rightNote": "迟一瞬发热",
+        "flow": "closed"
+      }
+    },
+    {
+      "id": "g07.delayed",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你想等炉门那张符亮了再撤。钟响第二声时，村符的朱线先崩开。工匠拍下你的手，顾衡喊你收息；指尖一麻，石槽这才暗去。“那张符替你多挡了一下。”工匠说。你记下炉门后热，也把迟撤和补符欠账写进记录，随后按现柱脚重核旧图位置。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.extraCharm",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "g.repairOwed",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g07.result",
+      "observation": {
+        "kind": "flow",
+        "title": "阵流小试 · 迟撤的代价",
+        "caption": "继续追测使村符多接一股，裂口已临时压住。没有再次送入灵力。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "一张村符裂开，须补",
+        "rightNote": "迟一瞬发热",
+        "flow": "closed"
       }
     },
     {
@@ -2435,7 +2511,154 @@
       "chapter": "卷二 · 山下那份账",
       "location": "谷口",
       "speaker": "旁白",
-      "text": "你沿石道逐根辨余息，第三柱脚下是洪水留下的新泥。先在纸上改位，再送极小一缕；村口符仍比炉门早亮，但第一下被石柱挡住，没有裂符。",
+      "text": "你拨开第三柱旁的草。旧石础露在柱身外侧，柱脚另一边却压着新泥；照图量去，两处对不上。洪水可能推过它，也可能只冲走了泥。你没有急着改图，在旧图所指的位置与现柱脚各贴一张同批探路符。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g07.trace"
+    },
+    {
+      "id": "g07.trace",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "辨气只能找近日留下的灵气，查不出十年前谁搬过石柱。你把指尖分别按向两张探路符。若一张有回应、一张没有，差别究竟来自位置，还是符纸本身？你准备怎样核对？",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "compare",
+          "text": "先辨两处余息，对照旧图与现柱脚",
+          "target": "g07.position",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "swap",
+          "text": "先交换两张符的位置，再分别辨气",
+          "target": "g07.swapped",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "辨气复测 · 第三柱在哪里",
+        "caption": "两张同批探路符放在不同位置。尚未施术，先决定如何核对。",
+        "leftLabel": "旧图柱位的探路符",
+        "rightLabel": "现柱脚的探路符",
+        "leftNote": "待辨气",
+        "rightNote": "待辨气",
+        "leftStrength": 0,
+        "rightStrength": 0
+      }
+    },
+    {
+      "id": "g07.swapped",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你将两张符对调。原先贴在旧位的符，挪到现柱脚后有了细微暖意；另一张挪去旧位，便不再留下新息。工匠按住纸角给你看：“不是这张纸偏灵，是这个地方还有气在走。”",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g07.position",
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "辨气复测 · 第三柱在哪里",
+        "caption": "旧图位置没有新息；现柱脚的符留下今日灵气。只能辨流向，不能辨认谁动过柱。",
+        "leftLabel": "旧图柱位的探路符",
+        "rightLabel": "现柱脚的探路符",
+        "leftNote": "无近期余息",
+        "rightNote": "留有今日余息",
+        "leftStrength": 0,
+        "rightStrength": 1
+      }
+    },
+    {
+      "id": "g07.position",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "亮的是现柱脚那张探路符，旧图位置的符仍冷着。今日灵气绕着现柱流走，没经过图上那一点；旧石础与新泥又对上了这处偏差。你在草图上圈出现柱，把石槽的连线改过去。顾衡提醒：查出位置，还不等于知道送入灵力后哪边先受冲。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g07.aligned",
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "辨气复测 · 第三柱在哪里",
+        "caption": "旧图位置没有新息；现柱脚的符留下今日灵气。只能辨流向，不能辨认谁动过柱。",
+        "leftLabel": "旧图柱位的探路符",
+        "rightLabel": "现柱脚的探路符",
+        "leftNote": "无近期余息",
+        "rightNote": "留有今日余息",
+        "leftStrength": 0,
+        "rightStrength": 1
+      }
+    },
+    {
+      "id": "g07.aligned",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你依现柱的位置将灵力送入石槽，细得像捻进针眼的一线。村口的符忽然亮了，炉门那张仍暗。顾衡立刻敲钟。你的手还贴在石面上；炉里的人是否也会受冲，要等到下一瞬才看得见。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "withdraw",
+          "text": "听见停钟，立即收回送入阵中的灵力",
+          "target": "g07.measuredStop",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "wait",
+          "text": "再等一瞬，看炉门那张符会不会亮",
+          "target": "g07.delayed",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
+      "observation": {
+        "kind": "flow",
+        "title": "阵流小试 · 停钟已响",
+        "caption": "村口先亮，炉门尚未回应。钟已敲响，是否继续由你决定。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "先亮，已敲停钟",
+        "rightNote": "尚未发热",
+        "flow": "villageWarning"
+      }
+    },
+    {
+      "id": "g07.measuredStop",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你松开指尖，把送出去的灵力一丝丝收回。第三柱接住余冲，石槽渐渐暗了。工匠摸过村符的朱线，没有断口。炉门那张符迟一瞬才有暖意；你将两处先后记下，没有再放第二股去追它。",
       "background": "valley",
       "portrait": "",
       "rain": false,
@@ -2444,13 +2667,13 @@
       "next": "g07.result",
       "observation": {
         "kind": "flow",
-        "title": "阵流小试 · 先后分明",
-        "caption": "村口先受冲，炉门迟一瞬才热。这是本次小试所见，不能预言明夜。",
+        "title": "阵流小试 · 已撤力",
+        "caption": "依新柱位撤力，第一下由石柱挡住。本轮村符未裂。",
         "leftLabel": "村口感应符",
         "rightLabel": "炉门感应符",
-        "leftNote": "先亮",
-        "rightNote": "后热",
-        "flow": "villageFirst"
+        "leftNote": "已停，无裂口",
+        "rightNote": "曾迟一瞬发热",
+        "flow": "closed"
       }
     },
     {
@@ -2458,7 +2681,61 @@
       "chapter": "卷二 · 山下那份账",
       "location": "谷口",
       "speaker": "旁白",
-      "text": "两端感应符显示村口先受冲，炉门迟一瞬才热。旧图的位置不可靠；小试只量出局部先后，不能许诺明夜的灵潮一定同样轻。",
+      "text": "草图上已标出现柱和三户门口。小试记录写着村口先亮、炉门后热；送入的只有细小一缕，明夜会来多强的一股，仍不知道。顾衡问你，这份记录拿回村议后，要请众人做什么？",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "prepare",
+          "text": "带复测记录回村议，筹备两端都能叫停的小试",
+          "target": "g07.report",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "openNow",
+          "text": "趁新柱位已经查清，直接开道去接炉里的人",
+          "target": "g07.openNow",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
+      "observation": {
+        "kind": "flow",
+        "title": "本次试流记录 · 两处先后",
+        "caption": "回看本次小试：村口先亮，炉门迟一瞬发热。不是第二次送入灵力。",
+        "leftLabel": "村口感应符",
+        "rightLabel": "炉门感应符",
+        "leftNote": "本次先亮",
+        "rightNote": "本次后热",
+        "flow": "villageFirst"
+      }
+    },
+    {
+      "id": "g07.openNow",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你指向石闸，想趁柱位已经查清把人接出来。顾衡横过钟槌：“这一下只用了你的一缕气。炉里还有几张榻在承压，你问清了吗？”工匠看向三户的门：“连明夜谁守钟，他们都还没答应。”你将开闸的手收回来，带图去把未做完的准备说清。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g07.report"
+    },
+    {
+      "id": "g07.report",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你将能确认的分开写：第三柱与旧图不合，今日灵气经过现柱脚；小试村口先亮，炉门后热。炉内还有多少人、正式引流要谁先撤，须上山再核。顾衡拿起撤离簿，工匠收好感应符，和你一同回村议。",
       "background": "valley",
       "portrait": "",
       "rain": false,
@@ -2475,17 +2752,7 @@
         }
       ],
       "choices": [],
-      "next": "g08.council",
-      "observation": {
-        "kind": "flow",
-        "title": "阵流小试 · 先后分明",
-        "caption": "村口先受冲，炉门迟一瞬才热。这是本次小试所见，不能预言明夜。",
-        "leftLabel": "村口感应符",
-        "rightLabel": "炉门感应符",
-        "leftNote": "先亮",
-        "rightNote": "后热",
-        "flow": "villageFirst"
-      }
+      "next": "g08.council"
     },
     {
       "id": "g08.council",
@@ -2621,7 +2888,7 @@
       "next": "g08.question",
       "variants": [
         {
-          "text": "你把小试裂开的村符拿给工匠，当着村人说自己照旧图送灵力时没先量石柱。你递符纸、按住边角，和他补好裂口；耽搁的符料与时辰都记进村账。他拿起钟槌：“再试一次，我来喊停。”",
+          "text": "你把小试裂开的村符拿给工匠，当着村人说明送入灵力、停钟和撤力的先后。你递符纸、按住边角，和他补好裂口；损耗的符料与时辰都记进村账。他拿起钟槌：“再试一次，我来喊停。”",
           "conditions": [
             {
               "variable": "g.extraCharm",
