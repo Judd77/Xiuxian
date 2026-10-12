@@ -33,10 +33,11 @@ namespace WenXinJie.Presentation
 
         public StoryOverlayView(Transform parent, StoryUiFactory ui, TMP_FontAsset menuFont,
             DialogueReader reader,
-            GameAudio audio, DisplayModeService displayModes)
+            GameAudio audio, DisplayModeService displayModes, Action<int> unreadCluesChanged)
         {
             _reader = reader;
             _journal = new(parent, ui, menuFont);
+            _journal.UnreadCountChanged += unreadCluesChanged;
 
             var history = ui.ArchiveOverlay(parent, "HistoryOverlay", "前尘", "已读记事",
                 out _historyBackdrop);
@@ -185,6 +186,11 @@ namespace WenXinJie.Presentation
         public void RenderJournal(ClueJournalState state)
         {
             _journal.Render(state);
+        }
+
+        public void ResetJournal()
+        {
+            _journal.Reset();
         }
 
         public void SetBackdrop(Texture2D texture)

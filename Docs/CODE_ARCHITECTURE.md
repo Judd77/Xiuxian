@@ -45,6 +45,8 @@ PlayerPrefs。音乐和背景通过场景序列化引用接入，不在 Update �
 
 线索簿的解锁判断在 `StoryViewStateFactory` 中从会话变量映射为 `ClueJournalState`。`ClueJournalView` 不持有 `StorySession`，线索的标题、分类和说明也不写入存档；存档仍只保存稳定剧情变量与当前节点。
 
+线索未读状态只存在ClueJournalView本次会话内：比较相邻展示状态的解锁及已收录内容变化，按最近变化顺序定位未读条目；隐藏面板的Render不算阅读，只有打开时Select才清除。UnreadCountChanged经StoryOverlayView／StoryView传至底栏，下一条未读可跨页定位。StoryApplication仅在新会话或成功读档时ResetJournal；首页继续不重置，失败读档保留。首次状态作为基准，不把读档已有资料全部报作新线索。不写入PlayerPrefs或剧情快照。
+
 正式线索簿显示“已收录”；未解锁条目的标题及说明不向玩家展示。复测、小试、救援与公开暂守的描述在StoryViewStateFactory中依既有变量及稳定节点ID映射，区分已准备与已执行，不修改会话。e.extraCharm同时用于H05迟撤与E03损耗，进入正式引流以后不单凭它判定腕伤来源。开闸记录从e.bellPlaced收录，在e04.stop才显示第三声撤力完成，出炉须到e04.outside及其后继节点；没有新增持久字段或递增剧情revision。
 
 ## 验证入口

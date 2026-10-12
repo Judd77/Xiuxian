@@ -26,6 +26,7 @@ namespace WenXinJie.Presentation
         private readonly TMP_Text _textSpeedLabel;
         private readonly TMP_Text _saveStatus;
         private readonly Button _demoCompletion;
+        private readonly TMP_Text _journalLabel;
 
         public StoryGameplayView(RectTransform root, StoryUiFactory ui, StoryAssetCatalog assets,
             DialogueReader reader, IStoryCommands commands, Action openJournal, Func<bool> inputBlocked)
@@ -83,7 +84,11 @@ namespace WenXinJie.Presentation
             ui.Button(root, "Save", "存档", 80f, 1008f, 146f, 54f, commands.SaveGame);
             ui.Button(root, "Load", "读档", 242f, 1008f, 146f, 54f, commands.LoadGame);
             ui.Button(root, "History", "前尘", 404f, 1008f, 146f, 54f, reader.OpenHistory);
-            ui.Button(root, "ClueJournal", "线索", 566f, 1008f, 146f, 54f, openJournal);
+            var journal = ui.Button(root, "ClueJournal", "线索", 566f, 1008f, 146f, 54f, openJournal);
+            _journalLabel = journal.GetComponentInChildren<TMP_Text>();
+            _journalLabel.enableAutoSizing = true;
+            _journalLabel.fontSizeMin = 18;
+            _journalLabel.fontSizeMax = 26;
             _automatic = ui.Button(root, "AutomaticReading", string.Empty, 736f, 1008f, 182f, 54f,
                 reader.ToggleAutomatic);
             _automaticLabel = _automatic.GetComponentInChildren<TMP_Text>();
@@ -125,6 +130,12 @@ namespace WenXinJie.Presentation
         public void ShowNotice(string message)
         {
             _notice.text = message;
+        }
+
+        public void ShowUnreadClues(int count)
+        {
+            _journalLabel.text = count > 0 ? "线索 · " + count : "线索";
+            _journalLabel.color = count > 0 ? new(1f, 0.85f, 0.55f) : new(0.96f, 0.94f, 0.82f);
         }
 
         public void ShowProgress(string message, bool demoBoundary)

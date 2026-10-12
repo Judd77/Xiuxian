@@ -40,7 +40,8 @@ namespace WenXinJie.Presentation
             var gameplayRoot = StoryUiFactory.Box(frame, "Gameplay", 0f, 0f, 1920f, 1080f);
 
             _scene = new(frame.parent, gameplayRoot, ui, this);
-            _overlays = new(frame, ui, assets.MenuFont, reader, audio, displayModes);
+            _overlays = new(frame, ui, assets.MenuFont, reader, audio, displayModes,
+                count => _gameplay?.ShowUnreadClues(count));
             _gameplay = new(
                 gameplayRoot,
                 ui,
@@ -97,6 +98,11 @@ namespace WenXinJie.Presentation
         public void ShowNotice(string message)
         {
             _gameplay.ShowNotice(message);
+        }
+
+        public void ResetJournal()
+        {
+            _overlays.ResetJournal();
         }
 
         public void ShowProgress(string message, bool demoBoundary)

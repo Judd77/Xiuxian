@@ -149,6 +149,7 @@ namespace WenXinJie.Presentation
             _savedTime = null;
             _lastJournal = null;
             _reader.ResetHistory();
+            _view.ResetJournal();
             _view.HideMainMenu();
             Render();
         }
@@ -356,6 +357,7 @@ namespace WenXinJie.Presentation
                 }
 
                 _lastJournal = null;
+                _view.ResetJournal();
                 return true;
             }
             catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException

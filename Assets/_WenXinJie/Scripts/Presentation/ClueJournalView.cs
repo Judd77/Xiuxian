@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +17,8 @@ namespace WenXinJie.Presentation
         private readonly Button _previousPage;
         private readonly Button _nextPage;
         private readonly TMP_Text _pageCount;
+        private readonly Button _nextUnread;
+        private readonly TMP_Text _nextUnreadLabel;
         private readonly RawImage _backdrop;
 
         private readonly GameObject _root;
@@ -22,6 +26,10 @@ namespace WenXinJie.Presentation
         private int _selectedIndex;
         private int _page;
         private ClueJournalState _state = new();
+        private readonly List<int> _unread = new();
+        private bool _hasState;
+
+        public event Action<int> UnreadCountChanged;
 
         public ClueJournalView(Transform parent, StoryUiFactory ui, TMP_FontAsset font)
         {
@@ -33,6 +41,9 @@ namespace WenXinJie.Presentation
             _count.font = font;
             _count.alignment = TextAlignmentOptions.Right;
             _count.color = new(0.86f, 0.78f, 0.55f);
+            _count.enableAutoSizing = true;
+            _count.fontSizeMin = 20;
+            _count.fontSizeMax = 28;
 
             var listFrame = ui.Frame(root, "ClueListFrame", 192f, 290f, 500f, 532f);
             listFrame.color = new(0.86f, 0.94f, 0.89f);
@@ -65,6 +76,11 @@ namespace WenXinJie.Presentation
             _pageCount.font = font;
             _pageCount.color = new(0.71f, 0.80f, 0.75f);
 
+            _nextUnread = ui.Button(root, "ClueNextUnread", "暂无未读",
+                984f, 880f, 310f, 64f, ShowNextUnread);
+            _nextUnreadLabel = _nextUnread.GetComponentInChildren<TMP_Text>();
+            _nextUnreadLabel.fontSize = 24;
+
             _title = ui.Label(root, "ClueDetailTitle", string.Empty,
                 780f, 334f, 900f, 70f, 40);
             _title.font = font;
@@ -96,20 +112,28 @@ namespace WenXinJie.Presentation
 
         public void Render(ClueJournalState state)
         {
-            _state = state ?? new();
-            var unlocked = 0;
-            foreach (var entry in _state.Entries)
+            var current = state ?? new();
+            _unread.RemoveAll(index => index >= current.Entries.Length || !current.Entries[index].Unlocked);
+            for (var index = 0; _hasState && index < current.Entries.Length; index++)
             {
-                if (entry.Unlocked)
+                var entry = current.Entries[index];
+                var previous = index < _state.Entries.Length ? _state.Entries[index] : null;
+                if (entry.Unlocked && (previous == null || !previous.Unlocked
+                    || entry.Description != previous.Description || entry.Category != previous.Category
+                    || entry.Title != previous.Title))
                 {
-                    unlocked++;
+                    _unread.Remove(index);
+                    _unread.Add(index);
                 }
             }
 
-            _count.text = "已收录 " + unlocked + " / " + _state.Entries.Length;
+            _state = current;
+            _hasState = true;
+            RefreshUnreadCount();
             if (_state.Entries.Length == 0)
             {
                 ClearDetails();
+                RenderPage();
                 return;
             }
 
@@ -122,7 +146,41 @@ namespace WenXinJie.Presentation
         public void Show()
         {
             _root.SetActive(true);
-            Select(_selectedIndex);
+            Select(_unread.Count > 0 ? _unread[_unread.Count - 1] : _selectedIndex);
+        }
+
+        public void Reset()
+        {
+            Hide();
+            _state = new();
+            _hasState = false;
+            _selectedIndex = 0;
+            _page = 0;
+            _unread.Clear();
+            RefreshUnreadCount();
+        }
+
+        private void ShowNextUnread()
+        {
+            if (_unread.Count > 0)
+            {
+                Select(_unread[_unread.Count - 1]);
+            }
+        }
+
+        private void RefreshUnreadCount()
+        {
+            var unlocked = 0;
+            foreach (var entry in _state.Entries)
+            {
+                if (entry.Unlocked) unlocked++;
+            }
+
+            _count.text = "已收录 " + unlocked + " / " + _state.Entries.Length
+                + (_unread.Count > 0 ? " · 未读 " + _unread.Count : string.Empty);
+            _nextUnread.interactable = _unread.Count > 0;
+            _nextUnreadLabel.text = _unread.Count > 0 ? "下一条未读（" + _unread.Count + "）" : "暂无未读";
+            UnreadCountChanged?.Invoke(_unread.Count);
         }
 
         public void Hide()
@@ -149,6 +207,12 @@ namespace WenXinJie.Presentation
             _description.text = entry.Unlocked
                 ? entry.Description
                 : "继续调查后，亲见的事、当事人的说法与术法所测会记在这里。尚未取得的内容不会提前显示。";
+            // Hidden renders update the detail pane without counting it as read.
+            if (IsOpen && _unread.Remove(index))
+            {
+                RefreshUnreadCount();
+                RenderPage();
+            }
             RenderSelection();
         }
 
@@ -197,7 +261,9 @@ namespace WenXinJie.Presentation
 
                 var entry = _state.Entries[index];
                 var label = _entryButtons[slot].GetComponentInChildren<TMP_Text>();
-                label.text = entry.Unlocked ? entry.Title + "\n已收录" : "尚未发现\n未收录";
+                label.text = entry.Unlocked
+                    ? entry.Title + (_unread.Contains(index) ? "\n未读" : "\n已收录")
+                    : "尚未发现\n未收录";
             }
 
             _previousPage.gameObject.SetActive(_page > 0);
@@ -223,6 +289,7 @@ namespace WenXinJie.Presentation
                 var entry = _state.Entries[index];
                 _entryButtons[slot].GetComponentInChildren<TMP_Text>().color = selected
                     ? new(1f, 0.88f, 0.62f)
+                    : _unread.Contains(index) ? new(0.98f, 0.82f, 0.53f)
                     : entry.Unlocked ? new(0.94f, 0.94f, 0.86f) : new(0.68f, 0.74f, 0.70f);
             }
         }
