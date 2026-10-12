@@ -5,7 +5,20 @@ const os = require('node:os');
 const readline = require('node:readline');
 
 const root = path.resolve(__dirname, '..');
-const relay = path.join(root, 'Library/PackageCache/com.unity.ai.assistant@8d1e3e89e3a7/RelayApp~/relay_win.exe');
+const packageCache = path.join(root, 'Library/PackageCache');
+const assistantVersion = JSON.parse(fs.readFileSync(path.join(root, 'Packages/manifest.json'), 'utf8'))
+  .dependencies['com.unity.ai.assistant'];
+const assistantPackage = fs.readdirSync(packageCache, { withFileTypes: true })
+  .filter(entry => entry.isDirectory() && entry.name.startsWith('com.unity.ai.assistant@'))
+  .map(entry => path.join(packageCache, entry.name))
+  .find(directory => fs.existsSync(path.join(directory, 'package.json'))
+    && JSON.parse(fs.readFileSync(path.join(directory, 'package.json'), 'utf8')).version === assistantVersion
+    && fs.existsSync(path.join(directory, 'RelayApp~/relay_win.exe')));
+if (!assistantPackage) {
+  console.error('Unity AI relay for the configured package version is unavailable. Wait for package import to finish.');
+  process.exit(1);
+}
+const relay = path.join(assistantPackage, 'RelayApp~/relay_win.exe');
 const connections = path.join(os.homedir(), '.unity/mcp/connections');
 const bridges = fs.readdirSync(connections).filter(name => name.endsWith('.json')).map(name => {
   const file = path.join(connections, name);

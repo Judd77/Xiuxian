@@ -224,7 +224,7 @@ namespace WenXinJie.Presentation
                     JointTrialRecord(session),
                     session.GetValue("h.test") > 0),
                 new ClueEntryViewState("三户分别同意暂迁", "本人决定 · 谷口",
-                    "老妇先过狭岔，父女带药与平车，木匠借屋并要求公开冬药账。谁也没有答应永久舍弃家与药田。",
+                    "老妇要求由孙子背行、先过狭岔；父女带药，平车留好卧伤者的位置；木匠借高处旧屋，宗门签认冬药与木料欠账。三户已答应暂迁，实际撤离仍待放行；无人答应永久舍弃家与药田。",
                     session.GetValue("h.house1") > 0 && session.GetValue("h.house2") > 0
                     && session.GetValue("h.house3") > 0),
                 new ClueEntryViewState("开闸与停铃", "行动记录 · 山腹石台",
