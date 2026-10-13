@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 49,
+  "revision": 50,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -17,7 +17,8 @@
     45,
     46,
     47,
-    48
+    48,
+    49
   ],
   "start": "case.intro",
   "variables": [
@@ -277,13 +278,13 @@
       "id": "g.fatherHeard",
       "initial": 0,
       "minimum": 0,
-      "maximum": 1
+      "maximum": 2
     },
     {
       "id": "g.walked",
       "initial": 0,
       "minimum": 0,
-      "maximum": 1
+      "maximum": 2
     },
     {
       "id": "g.thirdPillar",
@@ -3402,7 +3403,7 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村民家",
       "speaker": "旁白",
-      "text": "父亲解开药包，逐样给你看。女儿的药得随车走；平车还要留地方接炉里出来的伤者，不能塞满行李。缓坡上得有人接应背老人的孙子。你一项项记下，他才指向门外：“白天先陪你们走一趟。真要搬，等你把住处和药说准。”",
+      "text": "父亲解开药包，逐样给你看。女儿的药有今夜要用的一剂，余下还要留到明早；平车也须留地方接炉里出来的伤者，不能塞满行李。缓坡上得有人接应背老人的孙子。你把这些先记下，他才肯说白天陪你们试走，正式搬家还要看住处和药。",
       "background": "villagerHome",
       "portrait": "",
       "rain": false,
@@ -3414,7 +3415,7 @@
         }
       ],
       "choices": [],
-      "next": "g06.walk"
+      "next": "g05.count"
     },
     {
       "id": "g06.walk",
@@ -3427,7 +3428,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "g06.order"
+      "next": "g06.step"
     },
     {
       "id": "g06.order",
@@ -3457,6 +3458,15 @@
           "conditions": [],
           "effects": [],
           "outcomes": []
+        },
+        {
+          "id": "family",
+          "text": "先让父女过岔口，老人稍后走",
+          "target": "g06.familyFirst",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
         }
       ]
     },
@@ -3471,16 +3481,280 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "g06.slow"
+      "next": "g06.unjam"
     },
     {
       "id": "g06.slow",
       "chapter": "卷二 · 山下那份账",
       "location": "谷口",
       "speaker": "旁白",
-      "text": "这回孙子先背老妇过岔口，药箱随后送上，父亲牵女儿走在箱后；搬行李的人等他们通过才推车。到了高处，顾衡按最后一人抵达的时辰重记脚程，划掉“半炷香”。老妇歇足才让孙子背她回家。试走的路有了数，今夜搬不搬还得逐家再问。",
+      "text": "孙子先背老妇过岔口，药箱随后送上，父亲牵女儿走在箱后；搬行李的人等他们通过才推车。到了高处，顾衡按最后一人抵达的时辰重记脚程，划掉“半炷香”。老妇歇足才让孙子背她回家。试走的路有了数，今夜搬不搬还得逐家再问。",
       "background": "valley",
       "portrait": "guHeng",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.walked",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "g06.recap"
+    },
+    {
+      "id": "g05.count",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村民家",
+      "speaker": "旁白",
+      "text": "父亲把药包摊开，三只小纸袋上各写着时辰。林月昨晚留的签上说，女儿今夜还要服一剂，次日清早再服一剂，第三袋备用。药不能靠“到了高处再分”一句话打发：狭岔若让车堵住，孩子和药会分在两边。你把时辰抄到撤离表背面，又问他哪一袋必须伸手就能摸到。",
+      "background": "villagerHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g05.hands"
+    },
+    {
+      "id": "g05.hands",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村民家",
+      "speaker": "旁白",
+      "text": "父亲把女儿从被里抱起，用另一只手提整包药，想绕过矮凳。女儿醒来咳了两声，他立刻腾手扶她，药包便撞在门框上。他没抱怨，只问：“她若半路走不动，我总得抱。可这包散了，谁知道该先喂哪一剂？”你将药袋按时辰重新扎好，不能再把三个时辰混作一包行李。",
+      "background": "villagerHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g05.route"
+    },
+    {
+      "id": "g05.route",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村民家",
+      "speaker": "旁白",
+      "text": "一袋是今晚要用的，余下两袋可以随工匠的药箱走；也可以三袋都交给有名字的押车人，到高处立即交还。前一种让父亲带着眼前一剂，后一种让他专心抱孩子，却须保证车不会先去搬别家的行李。父亲说白天愿意照你选的办法走一遍，若不通就当场改。",
+      "background": "villagerHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "near",
+          "text": "让父亲随身留今晚一剂，余药随车",
+          "target": "g05.near",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "cart",
+          "text": "三袋交押车的工匠，先核交还处",
+          "target": "g05.cart",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g05.near",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村民家",
+      "speaker": "旁白",
+      "text": "你把今夜那袋系在父亲腰侧，他抱起女儿试着取药，仍能用另一只手稳住她。余下两袋封进工匠的药箱，纸角写上女儿姓名和交还时辰。父亲抬眼确认：“这样她走不动，我也不用把她放在路边找药。”你仍提醒他，正式迁居前须让林月核过药量与高处接应人。",
+      "background": "villagerHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.fatherHeard",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "g05.verify"
+    },
+    {
+      "id": "g05.cart",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村民家",
+      "speaker": "旁白",
+      "text": "工匠答应在白天试走时亲自押药箱，不让车先去搬行李。他把三袋放在最上层，用红线隔开别人的药，给父亲看封口；到高处由他亲手交还。父亲试抱孩子走到门口，手确实空了，却问：“若车先过狭岔，我什么时候才能拿到今晚那袋？”你把交还处和押车人写进试走单，不能只写“随车”。",
+      "background": "villagerHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g05.verify"
+    },
+    {
+      "id": "g05.verify",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村民家",
+      "speaker": "旁白",
+      "text": "药袋有了明确去处，父亲却仍没在“今晚迁居”那栏按印。他把白天试走圈出来：“我试路，也让女儿看看高处的屋。真要连夜走，屋是谁家的、药还有几日、炉里伤者的平车在哪里，这三样要再摆在我面前。”你照他的原话分开记，承诺的是一次试走，不是替全家签下改道。",
+      "background": "villagerHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g05.day",
+      "variants": [
+        {
+          "text": "父亲摸了摸腰侧今晚那剂，才在白天试走旁按印：“我能抱她，也能伸手拿到这袋。余药谁送、屋是谁家的，等正式搬时再对。”你将他答应的试走与尚未答应的迁居分成两行，没把药袋系好当作全家同意开谷口。",
+          "conditions": [
+            {
+              "variable": "g.fatherHeard",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g05.day",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村民家",
+      "speaker": "旁白",
+      "text": "女儿听见“去高处走走”，问是不是要离开自己的床。父亲说天亮去看路，夜里仍回来睡；他说这句时先看了你一眼，怕你在表上另写一回事。你把“白天试走后返回”念给他听，他才把床头那张护符留在原处，没有提前撕下，也没有让儿子继续替她承压的话变得轻巧。",
+      "background": "villagerHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g06.walk"
+    },
+    {
+      "id": "g06.step",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "香灰落尽后，父亲还牵着女儿在第一坡下等。老妇的孙子背人上坡，不可能像空身那样跨大步；工匠提药箱走在旁边，时时回头看村口。香烧尽，先到的人并没有到高处，老人只到第一道缓坡。顾衡翻旧簿，上面却仍写“半炷香可撤”。你要把哪个到达时刻写在新的试走栏？",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g06.clock"
+    },
+    {
+      "id": "g06.clock",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "又走了一阵，又走了一阵，木匠先摸到高处的旧屋门，回身喊已经有人到了；父亲和孙子还在坡上。若拿第一个人的脚程作整村撤离时长，最慢的两户会被写成已经安全。顾衡把香灰留在纸边，让你选实际要记的终点。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "first",
+          "text": "先记木匠到屋的时刻，作为全体脚程",
+          "target": "g06.firstOnly",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "last",
+          "text": "等最后一户到齐，再记可用的脚程",
+          "target": "g06.last",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g06.firstOnly",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你写下木匠到屋的时刻，老妇在坡上听见了：“我还没过那道弯，你纸上便写我到家？”你看见父亲抱起走累的女儿，孙子也在换肩，便在那一行后加上“首户”，没有让它替最慢的人作保证。顾衡把纸往后翻一页，留给最后到达的时刻。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g06.last"
+    },
+    {
+      "id": "g06.last",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你在“首户到屋”旁留下另一格，等末户真正到齐再填，不许先拿木匠的脚程安排开闸。老妇仍在狭岔前，木匠的空车若此时折回，便会迎上背人的孙子。父亲也停在宽处，免得女儿与车并排挤过石壁。你沿岔口走一趟，确认一次只过一人或一车，才请顾衡放行。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g06.order"
+    },
+    {
+      "id": "g06.familyFirst",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "父亲看女儿累得扶着石壁，提议先带她过岔口。你让他们先走，孙子背着老妇在宽处等。父女刚过，木匠推车上来；他还要折回搬药箱余下的东西。顾衡拦住车，提醒你这趟是试路：要记父女与老妇各自到高处的时刻，不能因为先送了孩子，就把还在等的老人写成已撤。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g06.familyWait"
+    },
+    {
+      "id": "g06.familyWait",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "父亲把女儿安在高处旧屋门边，回望狭岔。药箱还在木匠手中，孙子背着老妇仍在下方等歇肩。顾衡让车停在宽处，先留出背人过岔的路，再把药袋交到父亲手里。你把父女先到、老人后到分写；前一笔时辰不能算全体撤完。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g06.familyFinish",
+      "variants": [
+        {
+          "text": "父亲把女儿安在高处旧屋门边，回望岔口。她今晚那剂仍在他腰侧，不必挤回车后找；老妇却还在下方等孙子歇肩。顾衡让车停在宽处，留出背人过岔的路，才准木匠再动。你把父女先到、老妇后到分写，不能拿前者的时辰当全部完成。",
+          "conditions": [
+            {
+              "variable": "g.fatherHeard",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "text": "父亲把女儿安在高处旧屋门边，药箱还在木匠的车上，她今晚那袋也在里面。工匠停在宽处，先把药交还，才让孙子背老妇过岔；纸上的“父女先到”仍不能盖住老人尚在坡下。你补记药箱交还与末户过岔的时辰，正式撤离若照这路走，还须先问两家愿不愿这样等。",
+          "conditions": [
+            {
+              "variable": "g.fatherHeard",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g06.familyFinish",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "孙子等肩膀缓过来，背老妇穿过狭岔。父亲在高处照看女儿，木匠回头数人，顾衡记的是最后一户到齐的时辰，比旧簿的半炷香长得多。老妇没说这次错了，只说：“真到晚上，别叫我在坡下听见你们先报全员到了。”你把她这句写进正式撤离的注意栏。",
+      "background": "valley",
+      "portrait": "",
       "rain": false,
       "effects": [
         {
@@ -3490,7 +3764,51 @@
         }
       ],
       "choices": [],
-      "next": "g07.pillar"
+      "next": "g06.recap"
+    },
+    {
+      "id": "g06.unjam",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "木匠把空车退回宽处，孙子才背老妇先过。父亲牵女儿、药箱随后，车等人走净再折返。顾衡没有把刚才堵在岔口的时辰抹掉：那不是整村撤离速度突然变慢，而是你让搬行李的车先占了唯一的路。你按最后一人到高处的时辰重写脚程，让各户都看见这次重排。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.walked",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g06.recap"
+    },
+    {
+      "id": "g06.recap",
+      "chapter": "卷二 · 山下那份账",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "试走结束，老妇歇足才让孙子背她回家。父亲把女儿领回原来的床，药袋按原数交还；木匠锁好高处旧屋。顾衡留下两行脚程和狭岔一次只容一人的提醒，不把白天试走写成今晚已经迁走。接下来还要核石柱和阵流，才能知道搬人时谁先受冲。",
+      "background": "valley",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g07.pillar",
+      "variants": [
+        {
+          "text": "试走结束，老妇歇足才由孙子背回家。父亲带女儿回原来的床，木匠锁好高处旧屋。你选的老人先过、药箱和父女随后，让顾衡量到不被回程车堵住的末户时辰；他将它写在旧簿的“半炷香”旁，注明只有这个顺序实测过。今晚真搬仍须三户本人再答应。",
+          "conditions": [
+            {
+              "variable": "g.walked",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "g07.pillar",
@@ -5709,7 +6027,19 @@
         }
       ],
       "choices": [],
-      "next": "h06.table"
+      "next": "h06.table",
+      "variants": [
+        {
+          "text": "孙子蹲下试背，老妇攥着门框：“白天我先过那道窄路，今晚也能吗？田毁了，明年拿什么吃饭？”顾衡将试走末户脚程压在木匠的借屋抄页上，又把木料与重种欠账交宗门签，不许诺明年必能回家。她读完才松开门框：“先背我过岔口，别催他跑。”你将这句和白天核过的顺序一并写进今夜撤离单。",
+          "conditions": [
+            {
+              "variable": "g.walked",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h06.father",
@@ -5728,7 +6058,19 @@
         }
       ],
       "choices": [],
-      "next": "h06.table"
+      "next": "h06.table",
+      "variants": [
+        {
+          "text": "父亲将女儿今夜这一剂从腰侧取出，让她看见，余下的两袋才放到药车前格。他记得白天试走时自己能抱着她取药，也记得车上还要留卧伤者的位置。你把林月清点的村口药份与高处医舍接应人念给他，他才牵女儿往门外走：“这次是真的搬。药车别先折回搬行李。”",
+          "conditions": [
+            {
+              "variable": "g.fatherHeard",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h06.carpenter",
@@ -5760,7 +6102,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e01.order"
+      "next": "e01.order",
+      "variants": [
+        {
+          "text": "工匠敲响村口出门钟，炉门的停铃还没有开始计数。孙子背起老妇，父亲牵女儿站在药车旁，腰侧留着今夜那一剂，余药在车前格；木匠扶好药箱，答应过岔后先交药、再搬行李。三户等你放行，陶叔仍在石台等撤离完毕的回报。田里的药叶还绿着，老妇望了一眼，没有问出声。",
+          "conditions": [
+            {
+              "variable": "g.fatherHeard",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "e01.order",
