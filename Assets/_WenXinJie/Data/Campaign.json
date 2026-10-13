@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 51,
+  "revision": 52,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -19,7 +19,8 @@
     47,
     48,
     49,
-    50
+    50,
+    51
   ],
   "start": "case.intro",
   "variables": [
@@ -529,6 +530,24 @@
     },
     {
       "id": "s.bellTrusted",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.transferWeight",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.transferSign",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "case.transferRecord",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -1386,26 +1405,28 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "交接台",
       "speaker": "旁白",
-      "text": "考校散了，你去交接台找陈闻。几张运料单上都写着沈砚的旧编号，签收人的笔迹却不同。陈闻用指节敲了敲纸：“车进去时重，出来时轻。我只见过车。旧号今天谁拿笔都能写，你先别替它填上人名。”",
+      "text": "考校散了，你去交接台找陈闻。他管夜间运料，二更那趟车由他签过交接。车进山腹时比出来时重；另有几张领料单沿用沈砚的旧号，签名却出自不同人的手。陈闻将两册推到你面前：“重了什么、谁用了旧号，是两件事。别在看清纸以前，就把阿澈或沈砚填进车里。”",
       "background": "transferDesk",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [
         {
-          "id": "alive",
-          "text": "先找阿澈，旧号身份另证",
+          "id": "weight",
+          "text": "先核二更运车的进出记录",
           "target": "c08.alive",
-          "effects": [],
+          "lockedReason": "",
           "conditions": [],
+          "effects": [],
           "outcomes": []
         },
         {
-          "id": "oldNumber",
-          "text": "先问旧号是谁在用",
+          "id": "sign",
+          "text": "先核旧号领单与签收笔迹",
           "target": "c08.number",
-          "effects": [],
+          "lockedReason": "",
           "conditions": [],
+          "effects": [],
           "outcomes": []
         }
       ],
@@ -1423,30 +1444,321 @@
       ]
     },
     {
-      "id": "c08.alive",
+      "id": "c08.table",
       "chapter": "卷一 · 没有下山的人",
       "location": "交接台",
       "speaker": "旁白",
-      "text": "陈闻把二更运车的岔口画给你：“这事我能说清。我签过的单子也在那儿。你若进去，先认人，再认账。”",
+      "text": "陈闻把出入车簿与旧号领单摊在同一张交接台上。你可以先核车次，也可以先核签收。两份都查过，才知道该把哪一行抄给日后作证的人。",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "weight",
+          "text": "核二更那趟车的进出页",
+          "target": "c08.weight",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "case.transferWeight",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "sign",
+          "text": "核同号领单的两处签名",
+          "target": "c08.sign",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "case.transferSign",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "infer",
+          "text": "两份都核过，整理可带走的记录",
+          "target": "c08.infer",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "case.transferWeight",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "case.transferSign",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c08.weight",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "你按二更车牌找到入门和出门两页，车牌、交接时辰都能对上。入门页记了药料与车身合重，出门页较轻；中间没有称过卸下的每一包。你问陈闻，他亲眼见过车里的人吗？",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "witness",
+          "text": "请陈闻按亲眼所见核出入车次",
+          "target": "c08.weightWitness",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "body",
+          "text": "把车重差直接写成阿澈被运入",
+          "target": "c08.weightPushback",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c08.weightWitness",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "陈闻说他守的是外侧交接台，只看见满车进去、轻车出来。药料进炉后也会让车变轻，账上没有人的重量。他将两个时辰和车牌抄在同一页，签上自己的名字：“这几行我能当面认。”",
       "background": "transferDesk",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
+      "next": "c08.weightNote"
+    },
+    {
+      "id": "c08.weightPushback",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "陈闻把入门页的药料栏指给你看：“这些进炉以后，空车当然轻。你若写车里一定是阿澈，我签过的真账也会被人当成假话。”你划去人名，只留同一车牌二更入、空车出的记录；要找人，还得去侧门和炉房。",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c08.weightNote"
+    },
+    {
+      "id": "c08.weightNote",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "陈闻让你看纸角上的车牌，它与你留在簿里的药车牌号一致；这能把仓房灰样、坡道纸角和二更车次接起来，仍不能说阿澈就在车上。你把出入页的抄本压好，转去核旧号签收。",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.transferWeight",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c08.table"
+    },
+    {
+      "id": "c08.sign",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "旧号领单上的两处签名不一样，一张是早些年的修阵材料，一张是近日领炉灰。陈闻拿来自己的交接签字作对照：三处落笔都不同，编号却同一串。你要查谁亲笔签了哪张，而不是把号当作姓名。",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "source",
+          "text": "逐张核日期、用途与签收人",
+          "target": "c08.signWitness",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "shen",
+          "text": "认为同号说明沈砚本人一直在领料",
+          "target": "c08.signPushback",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c08.signWitness",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "陈闻将两张领单按日期分开，近日那张只写“炉灰”与旧号，没有榻号；早年那张写修阵木料。两位签收者的名字都在各自页上，陈闻认得近日交接的人，却没见沈砚来领。他只愿为自己经手的一页作证。",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c08.signNote"
+    },
+    {
+      "id": "c08.signPushback",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "陈闻让你照着“沈砚旧号”再看签收栏：早年的字和近日的字不是一个人写的。“人要是凭号码就能活回来，我也不用天天对签字了。”你把沈砚的名字从结论里划去，逐页记日期与用途，近日一页没有写榻号。",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c08.signNote"
+    },
+    {
+      "id": "c08.signNote",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "你抄下两张领单各自的日期和签收者；旧号仍在用，是事实。谁改了名册、如今由谁掌号，还得去司籍房查。陈闻在他经手的领灰页旁落签，注明自己未见过这张单所对应的炉中人。",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.transferSign",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c08.table"
+    },
+    {
+      "id": "c08.infer",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "两份抄页摆在一起：同牌车二更进出、车重差和领料消耗可以相容；同一旧号又有不同签名。它们能帮你追车、追领单，但没有一项写着阿澈坐在车里，或沈砚仍活着。陈闻问：“你准备在带走的那页上写哪一句？”",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "limited",
+          "text": "分写车次与旧号，身份留待本人或原册核",
+          "target": "c08.limited",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "combined",
+          "text": "写“阿澈在车上，沈砚在炉里”",
+          "target": "c08.overreach",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c08.overreach",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "陈闻不肯在那一句下签名。他将两张纸推开：“车重是药料和车的数，旧号是领料的号。把两件未证的事并排，不能凑出两个人。”你当着他的面划掉姓名，把车次、签收者、见证范围各留一栏。他才肯继续看。",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c08.limited"
+    },
+    {
+      "id": "c08.limited",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "你念给陈闻听：二更同牌车重进轻出；近日炉灰领单沿用旧号，签收处不是沈砚旧笔。陈闻签认自己亲见与经手的部分，另外写“未见车内人”；你也不替他扩大证词。他把侧门岔口画在抄页背面，留给你今夜找阿澈。",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c08.receipt"
+    },
+    {
+      "id": "c08.receipt",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "陈闻将原簿锁回交接台，给你一份有车牌、时辰、两位签收者和自己签名的抄页。日后堂上可以请他对原簿，不能拿这页直接给炉中人报名。你收好纸，去医舍找林月确认昨夜的药车与侧门换班。",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.transferRecord",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
       "next": "c09.box"
+    },
+    {
+      "id": "c08.alive",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "交接台",
+      "speaker": "旁白",
+      "text": "陈闻把二更运车的岔口画给你：“要找阿澈，先记牢车次与侧门。账上的重量只能告诉你那趟车运过东西，不能告诉你是谁坐过。”他把签过名的交接页留在灯下，让你核完再带走。",
+      "background": "transferDesk",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c08.weight"
     },
     {
       "id": "c08.number",
       "chapter": "卷一 · 没有下山的人",
       "location": "交接台",
       "speaker": "旁白",
-      "text": "陈闻翻出同号的两张领单，笔迹不同：“你看，编号能借，签名却得有人写。”你留下笔迹线索，没有把沈砚圈成活人。",
+      "text": "陈闻翻出同号的两张领单，笔迹不同：“这个旧号能借，签名却得有人写。你把两张纸分开，别让一个号码替两个人报名。”",
       "background": "transferDesk",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c09.box"
+      "next": "c08.sign"
     },
     {
       "id": "c09.box",
@@ -4950,7 +5262,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h02.choice"
+      "next": "h02.choice",
+      "variants": [
+        {
+          "text": "等众人到齐前，你带着陈闻在交接台亲签的抄页回司籍房。二更同牌车的时辰、重量与旧号领灰单都留着来源，却没有一行能给炉中人报名。新考校名单上又有你的名字；陈闻说这回要选能引气补阵的人。阿澈去之前也列在上面。你翻开更名册，查旧号如今给谁用。",
+          "conditions": [
+            {
+              "variable": "case.transferRecord",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h02.choice",
@@ -5433,7 +5757,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h04.qiRecord"
+      "next": "h04.qiRecord",
+      "variants": [
+        {
+          "text": "陈闻把交接台原簿与当时签给你的抄页摊开：同牌车二更进出，近日炉灰单沿用旧号，却没有榻号，也没有阿澈的名字。他能证明车次和签收，不能替车里的人报名。你留下这份有来源的记录，再拿起姐姐带来的医舍伤签；这份才写着阿澈的名字、腕伤和日期。",
+          "conditions": [
+            {
+              "variable": "case.transferRecord",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h04.qiRecord",

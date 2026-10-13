@@ -147,6 +147,19 @@ namespace WenXinJie.Narrative
                 values.Add("case.familyDisclosure", graph.GetVariable("case.familyDisclosure").initial);
             }
 
+            // Revision 52 adds the two source checks and Chen Wen's signed copy.
+            // Older saves have not performed this investigation, so retain zero.
+            if (snapshot.revision <= 51 && graph.Definition.revision >= 52)
+            {
+                foreach (var id in new[] { "case.transferWeight", "case.transferSign", "case.transferRecord" })
+                {
+                    if (!values.ContainsKey(id) && graph.Variables.Any(variable => variable.id == id))
+                    {
+                        values.Add(id, graph.GetVariable(id).initial);
+                    }
+                }
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
