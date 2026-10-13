@@ -28,7 +28,44 @@ namespace WenXinJie.Presentation
                 _assets.GetPortrait(node.portrait),
                 journal,
                 node.choices.Where(choice => !choice.hidden || session.IsAvailable(choice))
-                    .Select(choice => CreateChoice(session, choice)).ToArray(), node.observation);
+                    .Select(choice => CreateChoice(session, choice)).ToArray(), node.observation,
+                BuildEnding(session));
+        }
+
+        private static EndingViewState BuildEnding(StorySession session)
+        {
+            if (!session.Current.terminal) return null;
+            if (session.Current.id == "ending.newRoad")
+            {
+                return new("改道", new[]
+                {
+                    "许澄与段七离开炉榻，转入医舍；你耗尽灵力，修为退损，需要休养。",
+                    "三户撤到高处。药田与屋舍受损，宗门仍欠迁居、购药和修阵的账。",
+                    session.GetValue("case.post") > 0
+                        ? "旧帖、刮痕拓片与更名页留作对照；出炉的人各自拿到了去向抄页。"
+                        : "原帖没有保住。旧号领单与更名页留下对照，出炉的人各自拿到了去向抄页。"
+                });
+            }
+            if (session.Current.id != "ending.oldPublic") return null;
+
+            if (session.GetValue("e.publicCopies") > 0)
+            {
+                return new("公开暂守", new[]
+                {
+                    "今夜暂守旧阵。许澄仍在炉内，轮换歇息；没有将尚未救出的人写成离山。",
+                    "家属、村人和医舍各留真账，去向、伤情与损耗分开记录。",
+                    "三日后先补料、复查柱位，再由当事人决定是否试阵。开门仍未完成。"
+                });
+            }
+
+            return new("公开暂守", new[]
+            {
+                "今夜暂守旧阵，许澄仍未出炉。顾衡公开更正的旧呈报，家属留下待核去向页。",
+                session.GetValue("g.holdWarned") > 0
+                    ? "先撤三户，孙子没有添伤；药车让路、重画村符多耗的符纸记在村账上。"
+                    : "先补村符，三户迟撤；落瓦划伤了孙子的手臂，医舍接应者为他包扎。",
+                "三日后先看伤、补料和复测，再问当事人。暂守留下的风险仍须处理。"
+            });
         }
 
         private static ChoiceViewState CreateChoice(StorySession session, StoryChoice choice)

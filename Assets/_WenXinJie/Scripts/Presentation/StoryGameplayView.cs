@@ -27,6 +27,9 @@ namespace WenXinJie.Presentation
         private readonly TMP_Text _saveStatus;
         private readonly Button _demoCompletion;
         private readonly TMP_Text _journalLabel;
+        private readonly GameObject _endingPanel;
+        private readonly TMP_Text _endingTitle;
+        private readonly TMP_Text[] _endingConsequences = new TMP_Text[3];
 
         public StoryGameplayView(RectTransform root, StoryUiFactory ui, StoryAssetCatalog assets,
             DialogueReader reader, IStoryCommands commands, Action openJournal, Func<bool> inputBlocked)
@@ -67,6 +70,29 @@ namespace WenXinJie.Presentation
                 96f, 286f, 700f, 78f, commands.ShowDemoCompletion);
             _demoCompletion.gameObject.SetActive(false);
             _observation = new(root, ui);
+
+            var ending = StoryUiFactory.Box(root, "EndingPanel", 80f, 252f, 1040f, 460f);
+            _endingPanel = ending.gameObject;
+            ui.Panel(ending, "EndingFrame", 0f, 0f, 1040f, 460f);
+            var endingOverline = ui.Label(ending, "EndingOverline", "问心劫  /  本次故事已结束",
+                44f, 24f, 952f, 32f, 21);
+            endingOverline.font = assets.MenuFont;
+            endingOverline.color = new(0.72f, 0.82f, 0.78f);
+            _endingTitle = ui.Label(ending, "EndingTitle", string.Empty, 42f, 60f, 952f, 62f, 44);
+            _endingTitle.font = assets.TitleFont;
+            _endingTitle.color = new(0.96f, 0.86f, 0.60f);
+            StoryUiFactory.Rule(ending, "EndingRule", 44f, 132f, 952f, 2f,
+                new(0.74f, 0.64f, 0.40f, 0.76f));
+            for (var index = 0; index < _endingConsequences.Length; index++)
+            {
+                _endingConsequences[index] = ui.Label(ending, "EndingConsequence" + index,
+                    string.Empty, 44f, 146f + index * 70f, 952f, 68f, 25);
+            }
+            ui.Button(ending, "EndingMainMenu", "返回主界面", 44f, 370f, 300f, 60f,
+                commands.ReturnToMainMenu);
+            ui.Button(ending, "EndingRestart", "重新开始", 364f, 370f, 300f, 60f,
+                commands.StartNewGame);
+            _endingPanel.SetActive(false);
 
             ui.Picture(root, "DialoguePanel", assets.PanelTexture, 80f, 748f, 1760f, 246f);
             ui.Frame(root, "SpeakerPanel", 112f, 724f, 330f, 62f);
@@ -156,7 +182,16 @@ namespace WenXinJie.Presentation
             _location.text = state.Location;
             _speaker.text = state.Speaker;
             _status.text = state.Status;
-            _next.gameObject.SetActive(state.Choices.Length == 0);
+            _endingPanel.SetActive(state.Ending != null);
+            if (state.Ending != null)
+            {
+                _endingTitle.text = state.Ending.Title;
+                for (var index = 0; index < _endingConsequences.Length; index++)
+                {
+                    _endingConsequences[index].text = state.Ending.Consequences[index];
+                }
+            }
+            _next.gameObject.SetActive(state.Choices.Length == 0 && state.Ending == null);
             _next.interactable = !state.Terminal;
             _next.GetComponentInChildren<TMP_Text>().text = state.NextLabel;
 

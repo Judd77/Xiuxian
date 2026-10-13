@@ -8,7 +8,8 @@ namespace WenXinJie.Presentation
     {
         public StoryViewState(string chapter, string location, string speaker, string text, string status,
             string nextLabel, bool terminal, Texture2D background, PortraitAssetEntry portrait,
-            ClueJournalState journal, ChoiceViewState[] choices, StoryObservation observation)
+            ClueJournalState journal, ChoiceViewState[] choices, StoryObservation observation,
+            EndingViewState ending = null)
         {
             Chapter = chapter;
             Location = location;
@@ -22,6 +23,7 @@ namespace WenXinJie.Presentation
             Journal = journal;
             Choices = choices ?? Array.Empty<ChoiceViewState>();
             Observation = observation;
+            Ending = ending;
         }
 
         public string Chapter { get; }
@@ -36,6 +38,19 @@ namespace WenXinJie.Presentation
         public ClueJournalState Journal { get; }
         public ChoiceViewState[] Choices { get; }
         public StoryObservation Observation { get; }
+        public EndingViewState Ending { get; }
+    }
+
+    internal sealed class EndingViewState
+    {
+        public EndingViewState(string title, string[] consequences)
+        {
+            Title = title;
+            Consequences = consequences;
+        }
+
+        public string Title { get; }
+        public string[] Consequences { get; }
     }
 
     internal sealed class ClueJournalState
