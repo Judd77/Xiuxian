@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,12 +31,17 @@ namespace WenXinJie.Presentation
         private readonly GameObject _endingPanel;
         private readonly TMP_Text _endingTitle;
         private readonly TMP_Text[] _endingConsequences = new TMP_Text[3];
+        private readonly CanvasGroup _endingGroup;
+        private readonly MonoBehaviour _coroutineRunner;
+        private Coroutine _endingTransition;
 
         public StoryGameplayView(RectTransform root, StoryUiFactory ui, StoryAssetCatalog assets,
-            DialogueReader reader, IStoryCommands commands, Action openJournal, Func<bool> inputBlocked)
+            DialogueReader reader, IStoryCommands commands, MonoBehaviour coroutineRunner,
+            Action openJournal, Func<bool> inputBlocked)
         {
             _root = root.gameObject;
             _reader = reader;
+            _coroutineRunner = coroutineRunner;
             ui.Picture(root, "HeaderPanel", assets.PanelTexture, 48f, 24f, 1824f, 116f);
             var gameTitle = ui.Label(root, "GameTitle", "问心劫", 86f, 32f, 280f, 74f, 42);
             gameTitle.font = assets.TitleFont;
@@ -73,6 +79,7 @@ namespace WenXinJie.Presentation
 
             var ending = StoryUiFactory.Box(root, "EndingPanel", 80f, 252f, 1040f, 460f);
             _endingPanel = ending.gameObject;
+            _endingGroup = ending.gameObject.AddComponent<CanvasGroup>();
             ui.Panel(ending, "EndingFrame", 0f, 0f, 1040f, 460f);
             var endingOverline = ui.Label(ending, "EndingOverline", "问心劫  /  本次故事已结束",
                 44f, 24f, 952f, 32f, 21);
@@ -151,6 +158,7 @@ namespace WenXinJie.Presentation
             if (!visible)
             {
                 _reader.StopAutomatic();
+                FinishEndingTransition();
             }
 
             _root.SetActive(visible);
@@ -182,6 +190,8 @@ namespace WenXinJie.Presentation
             _location.text = state.Location;
             _speaker.text = state.Speaker;
             _status.text = state.Status;
+            var enteringEnding = state.Ending != null && !_endingPanel.activeSelf;
+            if (state.Ending == null) FinishEndingTransition();
             _endingPanel.SetActive(state.Ending != null);
             if (state.Ending != null)
             {
@@ -189,6 +199,11 @@ namespace WenXinJie.Presentation
                 for (var index = 0; index < _endingConsequences.Length; index++)
                 {
                     _endingConsequences[index].text = state.Ending.Consequences[index];
+                }
+                if (enteringEnding)
+                {
+                    _endingGroup.alpha = 0f;
+                    _endingTransition = _coroutineRunner.StartCoroutine(FadeEnding());
                 }
             }
             _next.gameObject.SetActive(state.Choices.Length == 0 && state.Ending == null);
@@ -199,6 +214,26 @@ namespace WenXinJie.Presentation
             {
                 RenderChoice(index, state.Choices);
             }
+        }
+
+        private IEnumerator FadeEnding()
+        {
+            var elapsed = 0f;
+            while (elapsed < 0.45f)
+            {
+                _endingGroup.alpha = Mathf.SmoothStep(0f, 1f, elapsed / 0.45f);
+                elapsed += Time.unscaledDeltaTime;
+                yield return null;
+            }
+            _endingGroup.alpha = 1f;
+            _endingTransition = null;
+        }
+
+        private void FinishEndingTransition()
+        {
+            if (_endingTransition != null) _coroutineRunner.StopCoroutine(_endingTransition);
+            _endingTransition = null;
+            _endingGroup.alpha = 1f;
         }
 
         private void RefreshReadingControls()

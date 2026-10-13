@@ -48,6 +48,7 @@ namespace WenXinJie.Presentation
                 assets,
                 reader,
                 commands,
+                this,
                 _overlays.OpenJournal,
                 IsReaderInputBlocked);
             _mainMenu = new(
@@ -68,7 +69,8 @@ namespace WenXinJie.Presentation
             string progress)
         {
             _scene.ShowBackground(background);
-            _scene.ShowPortrait(null);
+            _scene.ShowPortrait(null, immediate: true);
+            _scene.HideChapter();
             _overlays.CloseAll();
             _gameplay.SetVisible(false);
             _mainMenu.Show(canContinue, canLoad, canLoadAutomatic, notice, progress);
@@ -91,6 +93,7 @@ namespace WenXinJie.Presentation
             _overlays.RenderJournal(state.Journal);
             _scene.ShowPortrait(state.Observation == null ? state.Portrait : null);
             _scene.ShowBackground(state.Background);
+            _scene.ShowChapter(state.Chapter, state.Ending != null);
             _reader.Present(state.Text, true);
             _gameplay.Render(state);
         }
