@@ -190,6 +190,28 @@ namespace WenXinJie.Presentation
             });
         }
 
+        private static string AcheTestimonyClue(StorySession session)
+        {
+            var id = session.Current.id;
+            var wallKnown = !id.StartsWith("c12.") || id == "c12.name"
+                || id == "c12.challenge" || id == "c12.unknown";
+            if (session.Revision < 48)
+            {
+                return wallKnown
+                    ? "床底鞋是他留下的求救痕迹；隔墙有人两下敲门。安神药影响了他对门漆和姓名的记忆。隔墙身份仍须另证。"
+                    : "阿澈说前夜已经坐过炉榻，发烧后暂送回住处，天未亮又被带走。床底的鞋是他自己留下的求救痕迹。隔墙病人的事还没问到。";
+            }
+            var record = session.GetValue("case.acheTestimony") switch
+            {
+                1 => "阿澈本人已核过医舍证词：领药不等于同意继续留榻；背灯人的姓名他没看清。",
+                2 => "医舍暂记阿澈领药后仍被留榻，页首注明本人未核；不能当作他签过的证词。",
+                _ => "阿澈说前夜已坐过炉榻，发烧后回住处，天未亮又被带走；床底鞋是他留下的求救痕迹。"
+            };
+            return wallKnown
+                ? record + "隔墙有人两下敲门；安神药影响了他对门漆和姓名的记忆，身份仍须另证。"
+                : record + "隔墙病人的事还没问到。";
+        }
+
         private static ClueJournalState BuildFormalJournal(StorySession session)
         {
             return new(new[]
@@ -221,9 +243,7 @@ namespace WenXinJie.Presentation
                     "救阿澈前抄下他与隔壁病人的榻号。床位还需与伤签核名，不能直接当作姓名。",
                     session.GetValue("case.bedNumber") > 0),
                 new ClueEntryViewState("阿澈的证词", "当事人说法 · 医舍",
-                    session.Current.id == "c12.shoe"
-                        ? "阿澈说前夜已经坐过炉榻，发烧后暂送回住处，天未亮又被带走。床底的鞋是他自己留下的求救痕迹。隔墙病人的事还没问到。"
-                        : "床底鞋是他留下的求救痕迹；隔墙有人两下敲门。安神药影响了他对门漆和姓名的记忆。隔墙身份仍须另证。",
+                    AcheTestimonyClue(session),
                     session.GetValue("story.ache") > 0 && session.Current.id != "c11.cost"),
                 new ClueEntryViewState("许澄的半枚玉扣", "实物互证 · 许家",
                     "阿澈带出的半扣与许家姐姐保管的另一半吻合。扣可能被别人携带，仍需让门里的人自行回应身份。",

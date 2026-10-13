@@ -129,6 +129,15 @@ namespace WenXinJie.Narrative
                 values.Add(value.id, value.value);
             }
 
+            // Revision 48 added one witness-record state. Earlier compatible saves
+            // can start with the same unrecorded state without replaying a node.
+            if (snapshot.revision <= 47 && graph.Definition.revision >= 48
+                && !values.ContainsKey("case.acheTestimony")
+                && graph.Variables.Any(variable => variable.id == "case.acheTestimony"))
+            {
+                values.Add("case.acheTestimony", graph.GetVariable("case.acheTestimony").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

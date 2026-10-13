@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 47,
+  "revision": 48,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -15,7 +15,8 @@
     43,
     44,
     45,
-    46
+    46,
+    47
   ],
   "start": "case.intro",
   "variables": [
@@ -129,6 +130,12 @@
     },
     {
       "id": "case.deputy",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "case.acheTestimony",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -1775,7 +1782,329 @@
       "rain": false,
       "effects": [],
       "choices": [],
+      "next": "c12.after"
+    },
+    {
+      "id": "c12.after",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈说完那只鞋，林月给他腕上的伤换药。药签上写着昨夜领过安神药，他的手指却总在被角里蜷着，像还抓着炉榻的符带。你本想立刻问隔墙那个人，他抬眼先问：“你会不会也把我写成自己愿意留下？”林月示意你慢些：疼痛与发烧都在，先让他从确实记得的事说起。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "wrist",
+          "text": "先问腕上的伤：那一夜灵力怎样过身",
+          "target": "c12.wrist",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "slip",
+          "text": "先核药签与留榻记录：他到底签过什么",
+          "target": "c12.slip",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c12.wrist",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "他把伤腕翻给你看，旧符带压过的地方泛着紫。炉里每次来气，石柱先亮，他按平日吐纳把剩下的乱流导进槽；有一回药劲上来，眼前字都重影了，他仍得跟着铃声呼吸。林月不让他再运气示范，只从药车上取回刚解下的旧带，另放一条新换的干净布。你可以比今天留下的余息，不必再让他疼一次。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.band"
+    },
+    {
+      "id": "c12.band",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "旧带贴腕的一侧有焦黑短线，新布尚未碰过那处伤。林月先给你看清封袋日期：旧带是刚从阿澈身上解下的，新布是今夜才裁的。若要用辨气，只能问两物此刻有没有近期余息；十日前是谁系带、他说了什么，术法不替人回忆。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "read",
+          "text": "施展辨气，比较旧带与新布的近期余息",
+          "target": "c12.bandRead",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "腕符与新布 · 施术前",
+        "caption": "旧带与新布来源已核；尚未辨气。",
+        "leftLabel": "刚解下的旧带",
+        "rightLabel": "未用的新布",
+        "leftNote": "等待辨气",
+        "rightNote": "等待辨气",
+        "leftStrength": 0,
+        "rightStrength": 0
+      }
+    },
+    {
+      "id": "c12.bandRead",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你让一点灵力掠过纸袋。旧带的焦线旁仍有断续新息，新布没有；它说明这条带今天仍在承气，不能证明哪一刻由谁系上。阿澈见你没有叫他重演，肩膀才慢慢放下：“我能说的，是他们让我继续坐的时候，我已经发烧了。”林月将带子封好，把伤情与来源写在袋口。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.slipAfter",
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "腕符与新布 · 辨气后",
+        "caption": "旧带留有今日余息；新布没有。术法不能辨认系带人或旧日对话。",
+        "leftLabel": "刚解下的旧带",
+        "rightLabel": "未用的新布",
+        "leftNote": "焦线旁有今日新息",
+        "rightNote": "没有近期余息",
+        "leftStrength": 0.85,
+        "rightStrength": 0
+      }
+    },
+    {
+      "id": "c12.slip",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "药签确有阿澈的名字，旁边写“安神一剂”。另一张留榻纸上只有班次和榻号，同意栏空着。阿澈说药是他自己领的，他痛得睡不着，想止痛；第二次被领进炉房时，没人把“领药”与“继续坐榻”分开问他。他说得很慢，林月把药签压在留榻纸旁：“一张签不能替另一张签。”",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.wristAfter"
+    },
+    {
+      "id": "c12.reconcile",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "无论先看伤还是先看纸，你手里现在有两种来源：旧带今天还在承气，药签只记领药；阿澈本人说发烧后又被领回炉中。它们相互照应，却不能替他讲出每个值守者说过的话。林月问他要不要歇一会儿。阿澈握着药碗，说先把自己记得的那一段说完，再睡。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.memory"
+    },
+    {
+      "id": "c12.memory",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "他说那夜有人劝他再撑一轮，等山里这股气过去就能换人。那人背着灯，他烧得看不清脸，也不知道是谁把话传给了掌事。他只记得自己问“我能起来吗”，对方说先把药喝了。次日名册便写他离山。阿澈看着你：“我可以说我没答应一直坐，不能替你指认那个背灯的人。”",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.record"
+    },
+    {
+      "id": "c12.record",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月问阿澈，今晚愿不愿留下这段话。他点头，又把伤手缩回被里。你有两种做法：现在请他逐句说，由林月读回确认；或者先按你所听速记，让他服药睡下，等清醒时再核。后一份在本人确认前只能算临时记录，不能拿去指认人。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "dictate",
+          "text": "让阿澈逐句说，林月当面读回确认",
+          "target": "c12.dictate",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "rest",
+          "text": "先做注明未核的速记，让他按时服药歇下",
+          "target": "c12.draft",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c12.dictate",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈逐句说，你照他的原话写下“我问能不能起来，没人让我选”。他没有说当时守榻人的名字，林月也不让你替他添。林月逐句读回，阿澈用没受伤的手在末尾按了指印；你注明药签与旧带分别证明什么，把这份本人核过的话交他留一份。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.acheTestimony",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c12.confirm"
+    },
+    {
+      "id": "c12.confirm",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈把抄页压在药碗旁。他说，要是日后有人拿“领过药”说他愿意留榻，就请对方来听这一页；但别拿他没看清的背影去罚一个叫不出名字的人。林月收好旧带的封袋，答应医舍原簿不与宗门去向册并成一栏。你等他喝完药，再问隔墙那两声敲门。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
       "next": "c12.name"
+    },
+    {
+      "id": "c12.draft",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈的药快凉了。你按听到的先写下发烧、领药、再坐榻与那句求起身的话，页首标“本人未核”；没有替背灯的人填姓名。林月让他把药喝完，取走纸前又问一遍：“这页还不能在堂上当你已经签过，对吗？”你说对，等他缓过劲再请他自己读。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.acheTestimony",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "c12.later"
+    },
+    {
+      "id": "c12.later",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈睡前将纸折向没有字的一面：“先放你那里。下回拿给我看，我说错的、你听错的都划掉。”你把临时记录夹在医舍伤签后，外面另写“须阿澈本人核对”，不让交接的人误拿它代替证词。林月给他重新包好手腕，隔墙传来轻轻的两下敲门。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.name"
+    },
+    {
+      "id": "c12.slipAfter",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "药签确有阿澈的名字，旁边写“安神一剂”。另一张留榻纸上只有班次和榻号，同意栏空着。阿澈说药是他自己领的，他痛得睡不着，想止痛；第二次被领进炉房时，没人把“领药”与“继续坐榻”分开问他。他说得很慢，林月把药签压在留榻纸旁：“一张签不能替另一张签。”",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.reconcile"
+    },
+    {
+      "id": "c12.wristAfter",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "他把伤腕翻给你看，旧符带压过的地方泛着紫。炉里每次来气，石柱先亮，他按平日吐纳把剩下的乱流导进槽；有一回药劲上来，眼前字都重影了，他仍得跟着铃声呼吸。林月不让他再运气示范，只从药车上取回刚解下的旧带，另放一条新换的干净布。你可以比今天留下的余息，不必再让他疼一次。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.bandAfter"
+    },
+    {
+      "id": "c12.bandAfter",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "旧带贴腕的一侧有焦黑短线，新布尚未碰过那处伤。林月先给你看清封袋日期：旧带是刚从阿澈身上解下的，新布是今夜才裁的。若要用辨气，只能问两物此刻有没有近期余息；十日前是谁系带、他说了什么，术法不替人回忆。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "read",
+          "text": "施展辨气，比较旧带与新布的近期余息",
+          "target": "c12.bandReadAfter",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "腕符与新布 · 施术前",
+        "caption": "旧带与新布来源已核；尚未辨气。",
+        "leftLabel": "刚解下的旧带",
+        "rightLabel": "未用的新布",
+        "leftNote": "等待辨气",
+        "rightNote": "等待辨气",
+        "leftStrength": 0,
+        "rightStrength": 0
+      }
+    },
+    {
+      "id": "c12.bandReadAfter",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你让一点灵力掠过纸袋。旧带的焦线旁仍有断续新息，新布没有；它说明这条带今天仍在承气，不能证明哪一刻由谁系上。阿澈见你没有叫他重演，肩膀才慢慢放下：“我能说的，是他们让我继续坐的时候，我已经发烧了。”林月将带子封好，把伤情与来源写在袋口。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.reconcile",
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "腕符与新布 · 辨气后",
+        "caption": "旧带留有今日余息；新布没有。术法不能辨认系带人或旧日对话。",
+        "leftLabel": "刚解下的旧带",
+        "rightLabel": "未用的新布",
+        "leftNote": "焦线旁有今日新息",
+        "rightNote": "没有近期余息",
+        "leftStrength": 0.85,
+        "rightStrength": 0
+      }
     },
     {
       "id": "c12.name",
@@ -4263,6 +4592,56 @@
       "next": "h04.qiAccount",
       "variants": [
         {
+          "text": "你先念去向册、考校台晚到的销名通知和医舍伤签的日期，再指向空着的山门验帖印。值日抄手当堂核过送达时辰，祁元肃承认去向栏是他命人写的。阿澈本人核过的医舍证词也摆在桌上：他领过安神药，却没答应一直坐榻；背灯人的姓名他没看清。姐姐将证词与药签分开放：“领药只为止痛。阿澈还在炉里时，您为何写他离山？”",
+          "conditions": [
+            {
+              "variable": "case.deputy",
+              "minimum": 2,
+              "maximum": 2
+            },
+            {
+              "variable": "case.acheTestimony",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "你先念去向册、考校台晚到的销名通知和医舍伤签的日期，再指向空着的山门验帖印。值日抄手当堂核过送达时辰，祁元肃承认去向栏是他命人写的。你拿出那份标着“本人未核”的速记，先不让任何人念作阿澈签过。阿澈从医舍赶来，在“领药后再坐榻”旁亲口补上“我问能不能起来，没人让我选”；姐姐当面读回，阿澈核过更正，才把抄页放到堂上。",
+          "conditions": [
+            {
+              "variable": "case.deputy",
+              "minimum": 2,
+              "maximum": 2
+            },
+            {
+              "variable": "case.acheTestimony",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "text": "你先念去向册上的离山日期、医舍接回阿澈的日期，又指向空着的山门验帖印。祁元肃盯着那处空白：“去向栏是我命人写的。”阿澈本人核过的医舍证词也摆在桌上：他领过安神药，却没答应一直坐榻；背灯人的姓名他没看清。姐姐将证词与药签分开放：“领药只为止痛。阿澈还在炉里时，您为何写他离山？”",
+          "conditions": [
+            {
+              "variable": "case.acheTestimony",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "你先念去向册上的离山日期、医舍接回阿澈的日期，又指向空着的山门验帖印。祁元肃盯着那处空白：“去向栏是我命人写的。”你拿出那份标着“本人未核”的速记，先不让任何人念作阿澈签过。阿澈从医舍赶来，在“领药后再坐榻”旁亲口补上“我问能不能起来，没人让我选”；姐姐当面读回，阿澈核过更正，才把抄页放到堂上。",
+          "conditions": [
+            {
+              "variable": "case.acheTestimony",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
           "text": "你先念去向册上的离山日期，再念考校台晚到的销名通知，以及医舍接回阿澈的日期；最后指向空着的山门验帖印。值日抄手当堂核过自己签收的时辰：“今早点名时，我手里没有这张通知。”祁元肃盯着那处空白：“去向栏是我命人写的。”姐姐问阿澈答应过没有，他没有作声。晚到的通知没有替阿澈报名，却让改写去向的先后留在三份原件上。",
           "conditions": [
             {
@@ -5806,7 +6185,29 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "terminal": true
+      "terminal": true,
+      "variants": [
+        {
+          "text": "阿澈将那只开线的左鞋放在医舍窗下，这回没有藏进床底。他自己核过的那份话连同药签留在枕边；他不必再靠一只鞋，提醒旁人自己没答应一直坐榻。你替他记换鞋的领单，运笔的手仍有些发抖。远处工匠敲过交班钟，沈砚正沿新石槽查看暗下去的第三张符。谷口的家和药田还得慢慢重建。",
+          "conditions": [
+            {
+              "variable": "case.acheTestimony",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "阿澈将那只开线的左鞋放在医舍窗下，这回没有藏进床底。先前的速记在堂上由他亲口改过，漏下的“我问能不能起来”补进原话，药签与伤签仍各有原处。你替他记换鞋的领单，运笔的手仍有些发抖。远处工匠敲过交班钟；人已离榻，谷口的家和药田还得慢慢重建。",
+          "conditions": [
+            {
+              "variable": "case.acheTestimony",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h05.decision",
