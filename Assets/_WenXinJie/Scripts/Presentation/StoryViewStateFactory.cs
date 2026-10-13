@@ -227,7 +227,9 @@ namespace WenXinJie.Presentation
                     "阿澈带出的半扣与许家姐姐保管的另一半吻合。扣可能被别人携带，仍需让门里的人自行回应身份。",
                     session.GetValue("story.xucheng") > 0),
                 new ClueEntryViewState("南沟旧灾", "文书 · 山下",
-                    "南沟先报符裂，东坡近半个时辰后换符；旧符损坏方式也不同。十年前的余息已散，辨气不能补报当夜详情。",
+                    session.GetValue("g.bellBook") >= 2
+                        ? "南沟先报符裂，东坡近半个时辰后换符；旧符坏法也不同。原簿记钟楼三响，却没有炉门回签。今日试传村口有回签、炉门没有；辨气不能据今日反推十年前收钟与否。"
+                        : "南沟先报符裂，东坡近半个时辰后换符；旧符损坏方式也不同。十年前的余息已散，辨气不能补报当夜详情。",
                     session.GetValue("g.oldCharm") > 0 && session.GetValue("g.bellBook") > 0),
                 new ClueEntryViewState("顾衡的改记", "本人更正 · 村议",
                     "顾衡当众承认把两处灾情合写同刻，也把南沟死者写轻；更正写在旧呈报旁，原字未擦。",

@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 45,
+  "revision": 46,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -13,7 +13,8 @@
     41,
     42,
     43,
-    44
+    44,
+    45
   ],
   "start": "case.intro",
   "variables": [
@@ -249,7 +250,7 @@
       "id": "g.bellBook",
       "initial": 0,
       "minimum": 0,
-      "maximum": 1
+      "maximum": 2
     },
     {
       "id": "g.corrected",
@@ -1857,7 +1858,7 @@
             {
               "variable": "g.bellBook",
               "minimum": 1,
-              "maximum": 1
+              "maximum": 2
             }
           ],
           "effects": [],
@@ -1876,7 +1877,7 @@
             {
               "variable": "g.bellBook",
               "minimum": 1,
-              "maximum": 1
+              "maximum": 2
             }
           ]
         },
@@ -1896,7 +1897,7 @@
             {
               "variable": "g.bellBook",
               "minimum": 1,
-              "maximum": 1
+              "maximum": 2
             }
           ]
         }
@@ -2075,7 +2076,7 @@
         }
       ],
       "choices": [],
-      "next": "g01.table"
+      "next": "g03.signalQuestion"
     },
     {
       "id": "g03.take",
@@ -2091,6 +2092,207 @@
           "variable": "g.bellBook",
           "operation": "set",
           "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g03.signalQuestion"
+    },
+    {
+      "id": "g03.signalQuestion",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "原簿的正面记南沟求援与东坡换符，背页另有一行“钟楼三响”。你刚才只用它核了两处时辰。守钟人把本子转过来：“我祖父写的这行，是钟楼敲出去的声；炉门那边收没收到，他没有替人签字。”老妇问，你带这份记录回村议，是否还要查停钟怎样传过去？",
+      "background": "oldBellTower",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "trace",
+          "text": "去钟楼查发钟与回钟，再试今日能否传到炉门",
+          "target": "g03.tower",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "go",
+          "text": "先带原簿和符回村议；旧日收钟仍注明未核",
+          "target": "g01.table",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g03.tower",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "旧钟楼在坡上，钟口朝着村道，后面却被山腹石壁挡住。守钟人拿出当年的发钟页，上面写“三响”，旁边没有炉门接令人的名字。楼外的路能将人带到炉门，但走完要一段工夫；若钟响时已经有人坐在榻上，事后补一张接令纸，救不了那一刻的手。你把“发出”与“收到”分写在两栏。",
+      "background": "oldBellTower",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g03.paper"
+    },
+    {
+      "id": "g03.paper",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "楼里还夹着一张后来的交班纸：有人在村口听见钟便拍亮手边的感应符，炉门接令的人也该留下自己的回应，再由跑腿的人把两张纸送回。可十年前那一夜只存发钟页，这张交班纸没有替那晚补上炉门回签。守钟人说：“我能让你试今天的路，不能把今天的回声塞回旧本子。”",
+      "background": "oldBellTower",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "practice",
+          "text": "请村口和炉门各留一张回签，试今日的钟路",
+          "target": "g03.prepare",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "record",
+          "text": "先把缺的回签记清楚，带原簿回村议",
+          "target": "g01.table",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g03.prepare",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "你请工匠站在村口，林月在炉门外候着。两人各拿一张同批空白回签纸：确实听见钟，才用一点灵力在纸角留一道新息；听不见便原样带回。辨气只能分辨这次有没有留下新息，不能认出是谁落笔，所以两人还须亲口报时。你在钟楼旁写下试传的时辰，先看两张未用的纸。",
+      "background": "oldBellTower",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g03.send",
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "钟路试传 · 未回签",
+        "caption": "同批空纸刚交到两端。尚未试传，不能替任何一端填“听见”。",
+        "leftLabel": "村口 · 空回签",
+        "rightLabel": "炉门 · 空回签",
+        "leftNote": "尚无本次新息",
+        "rightNote": "尚无本次新息",
+        "leftStrength": 0,
+        "rightStrength": 0
+      }
+    },
+    {
+      "id": "g03.send",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "守钟人先向路上喊明是试传，才以掌心一缕灵力催动旧钟，敲出约好的三声。钟声越过村道，在山腹石壁前散开。你没站在炉门，不能凭钟楼这一端听着响，就替里面的人写“已收”。等工匠与林月各自带回原纸，你把它们并排放到原簿的发钟页旁。",
+      "background": "oldBellTower",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g03.read"
+    },
+    {
+      "id": "g03.read",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "你以辨气拂过两张纸。村口回签多了一点今日新息，炉门那张仍是空的。工匠说三声他都听到，照约落了印；林月说炉门外只听见山壁回过来的一声闷响，分不出是不是停钟，便没有落印。她把手放在空纸上：“里面的人若喊停，不能等这边猜钟声。”",
+      "background": "oldBellTower",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "oldProof",
+          "text": "把今日炉门听不清，列作旧夜也可能漏收的旁证",
+          "target": "g03.overreach",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "limit",
+          "text": "只记今日试传的两端结果；旧夜仍注明无接令凭据",
+          "target": "g03.limit",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "钟路试传 · 两端回签",
+        "caption": "两张纸同时发出；今天只有村口留下新息。旧日收钟不能由这次辨气追认。",
+        "leftLabel": "村口 · 回签",
+        "rightLabel": "炉门 · 空回签",
+        "leftNote": "本次留有新息",
+        "rightNote": "未留本次新息",
+        "leftStrength": 0.9,
+        "rightStrength": 0
+      }
+    },
+    {
+      "id": "g03.overreach",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "你想把“十年前炉门未收钟”也写进结论。守钟人指着纸套上的日期：“这两张是今天才交出去的。山路、值守的人、钟绳都换过。旧本子少一张回签，只能说我们拿不出那晚收令的凭据，不能靠今天替他补上‘没听见’。”你把旧夜和今日分开写，没再把空白填成证词。",
+      "background": "oldBellTower",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g03.limit"
+    },
+    {
+      "id": "g03.limit",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "你念给老妇核对：“十年前有南沟求援、钟楼发钟的原记，炉门是否收令无凭据；今日试传，村口有回签，炉门没有。”她把儿子的名字留在旧页，没有让一场今日试验替他说当年如何死。工匠担心下一次再靠钟楼三声，炉门又会听不清。林月说她能守炉门，却要有人在石台接她亲口发出的停令。",
+      "background": "oldBellTower",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g03.protocol"
+    },
+    {
+      "id": "g03.protocol",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "你把两端叫停的办法另写一页：村口由工匠看符、敲钟并派人报石台；炉门由林月看伤者和手边铃，停令直接送到握钥匙的人。石台必须回一句“已关”，两端才知道不是只把话喊出去了。守钟人收好试传的原纸，让你只带抄页去村议；旧本仍由他与老妇保管。",
+      "background": "oldBellTower",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.bellBook",
+          "operation": "set",
+          "value": 2
         }
       ],
       "choices": [],
@@ -4052,6 +4254,18 @@
           "effects": [],
           "outcomes": []
         }
+      ],
+      "variants": [
+        {
+          "text": "你把钟楼试传的两张回签带到堂上：村口确实听见，炉门那张仍空着。工匠今晚看村符，林月守炉门和许澄；任一端喊停都不能再被写成“另一端应该听见”。沈砚能读图，陶叔握得住石台钥匙。谁接停令、谁决定关闸、谁回报已关？",
+          "conditions": [
+            {
+              "variable": "g.bellBook",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
       ]
     },
     {
@@ -4383,7 +4597,19 @@
         "leftNote": "已停止送入灵力",
         "rightNote": "伤者由林月查看",
         "flow": "closed"
-      }
+      },
+      "variants": [
+        {
+          "text": "陶叔合上试验支路，旧炉仍按原来的轮次维持。工匠带回村口的停钟时辰，林月写下炉门那一声，陶叔在两份记录旁分别签了“已关”。你想起钟楼那两张一明一暗的回签：今天确实两端都报到了石台，但这次小试仍没让谷底通路，不能据此保证下一股来气安全。",
+          "conditions": [
+            {
+              "variable": "g.bellBook",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h05.record",
@@ -5316,7 +5542,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.paper"
+      "next": "e05.paper",
+      "variants": [
+        {
+          "text": "工匠收下新柱位抄图，也收好钟楼试传留下的两张回签。沈砚答应到现场教他辨流，顾衡记村钟时辰，林月守炉门，陶叔保管石台钥匙。两端每次喊停都要等到石台回报“已关”，不能再拿钟楼敲过三声当作炉门收到。若下次灵潮前新路还不稳，三户便继续暂住；没有人拿今夜出炉的人替未修好的阵路作保。",
+          "conditions": [
+            {
+              "variable": "g.bellBook",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "e05.paper",
