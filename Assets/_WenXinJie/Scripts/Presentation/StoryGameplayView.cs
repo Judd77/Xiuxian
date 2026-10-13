@@ -122,6 +122,7 @@ namespace WenXinJie.Presentation
             ui.Button(root, "History", "前尘", 404f, 1008f, 146f, 54f, reader.OpenHistory);
             var journal = ui.Button(root, "ClueJournal", "线索", 566f, 1008f, 146f, 54f, openJournal);
             _journalLabel = journal.GetComponentInChildren<TMP_Text>();
+            _journalLabel.textWrappingMode = TextWrappingModes.NoWrap;
             _journalLabel.enableAutoSizing = true;
             _journalLabel.fontSizeMin = 18;
             _journalLabel.fontSizeMax = 26;
