@@ -210,7 +210,9 @@ namespace WenXinJie.Presentation
                     "同批未运灰无新息，运车灰有今日余息。车接近过施术的人；守卫也可能留下余息，不能认作阿澈。",
                     session.GetValue("case.ashCorrect") > 0),
                 new ClueEntryViewState("考校副册", "文书 · 考校台",
-                    "正册已写阿澈离山，副册仍等他应试。归档时辰已抄下，可与山门记录核对。",
+                    session.GetValue("case.deputy") >= 2
+                        ? "正册写阿澈离山，晨间副册仍等他应试；考校台在点名后才收到销名签。值日抄手核签时辰，实际去向仍须验山门印和本人。"
+                        : "正册已写阿澈离山，副册仍等他应试。归档时辰已抄下，可与山门记录核对。",
                     session.GetValue("case.deputy") > 0),
                 new ClueEntryViewState("炉房外榻的流向", "亲见与术证 · 山腹",
                     "石柱先承力，隔壁榻随后加重。解开一人会转移冲击；阿澈获救当夜，村口护符裂了一张。",

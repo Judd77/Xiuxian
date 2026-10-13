@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 46,
+  "revision": 47,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -14,7 +14,8 @@
     42,
     43,
     44,
-    45
+    45,
+    46
   ],
   "start": "case.intro",
   "variables": [
@@ -130,7 +131,7 @@
       "id": "case.deputy",
       "initial": 0,
       "minimum": 0,
-      "maximum": 1
+      "maximum": 2
     },
     {
       "id": "case.chenJob",
@@ -1172,7 +1173,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c08.chen"
+      "next": "c07.margin"
     },
     {
       "id": "c07.question",
@@ -1180,6 +1181,183 @@
       "location": "考校台",
       "speaker": "旁白",
       "text": "执事说“管事口头告知”，还记下你的名字。你没有拿到原册，但知道改名并非抄手自作主张；往后再查副册，会有人先看着你。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c07.margin"
+    },
+    {
+      "id": "c07.margin",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "考校散了，执事命人把副册搬回案房。你在正册见过阿澈“离山养病”，眼前副册却仍等他应试；两本册子归不同的人保管。你抄到归档时辰也好，只听到“管事口头告知”也好，都还缺考校台何时收到销名通知的那一环。案房门没关，值日抄手正将今日更改的纸分进两只匣。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "ask",
+          "text": "去问值日抄手，核销名通知何时到台",
+          "target": "c07.scribe",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "chen",
+          "text": "先找陈闻查运料单，把通知时辰留待堂上核",
+          "target": "c08.chen",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c07.scribe",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "值日抄手先看你手里有没有副册抄页，又往执事离开的方向望了一眼。“名字是我划的，可今早点名时，我手里没有销名签。”他把废纸箱推过来，里面有半张誊错的通知：阿澈的名字写对了，验帖印一栏却空着。你问是哪位管事命他写，他说口头来的，他不敢把名字补在纸上。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c07.dispatch"
+    },
+    {
+      "id": "c07.dispatch",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "案房按收件时辰排匣。副册在晨点名前就摆上了考校台；销名通知的送达签却压在点名记录后面，纸套上还有尚未撕下的午后封条。抄手不愿只凭一张被撕坏的纸受罚，示意你对照原册、送达签和今天当众划名的墨迹，再写能证明的事。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "time",
+          "text": "先按送达时辰排三份纸，再问抄手如何划名",
+          "target": "c07.order",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "ink",
+          "text": "先辨今日划名墨迹与旧通知纸上的余息",
+          "target": "c07.ink",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c07.ink",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "你将一缕灵力掠过当众划名处，墨里留着今天握笔人的新息；半张通知纸上的旧墨已经干透，辨不出是谁写的。辨气只答得出这两处新旧不同，不能给口头命令签名，更不能证明阿澈真的走过山门。你把术证写在纸边，仍回到送达簿核时辰。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c07.order"
+    },
+    {
+      "id": "c07.order",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "送达签在点名结束后才到考校台。抄手承认自己是在执事说“管事已告知”之后，才当众把阿澈从副册划去；晨间点名时他手里根本没有这张签收。副册仍列阿澈，不足以证明他当时在哪里，却说明“今早早已通知抄手”的解释站不住。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c07.claim"
+    },
+    {
+      "id": "c07.claim",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "你将三份纸并排：正册早写离山，副册今日仍要点名，考校台却在点名后才收到销名签。抄手等你落笔，尤其盯着“阿澈已离山”那一栏。你怎么写这条新查到的时序？",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "notice",
+          "text": "记通知晚到、身份与实际去向待核，请抄手核签",
+          "target": "c07.receipt",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "departure",
+          "text": "先把晚到的通知当成阿澈仍在宗门的旁证",
+          "target": "c07.limit",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c07.limit",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "抄手摇头：“我没有见他上山，也没见他下山。我只能作证这张签什么时候到我手里。”正册也可能先写了假去向，但要核离山验帖印和阿澈本人，不能让一张晚到的通知替他答。你将“人在宗门”改成“考校台午后才收到销名签”，把尚未问到的留白。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c07.receipt"
+    },
+    {
+      "id": "c07.receipt",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "抄手对着原件复读时辰，在你的抄页边落了自己的签名。他让你把誊错的半张纸留在案房，不带走没有出处的字；能带走的是副册归档时辰、送达签时辰和当众划名的日期。你按这三处写：“考校台点名后才收销名通知，阿澈是否离山另待验帖。”",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.deputy",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "c07.account"
+    },
+    {
+      "id": "c07.account",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "执事从廊口走回，看到抄手替你签了时辰。他没准你取原册，却也没法再说是抄手今晨忘了改名。你把三份纸各自的保管人记在抄页背面；阿澈的下落还要有人亲眼或以山门验帖印作证。值日抄手收起案房钥匙：“你若上堂问，别只拿我的名字挡在前头。”你答应让他自己读这一行。",
       "background": "examinationCourt",
       "portrait": "",
       "rain": false,
@@ -1213,6 +1391,18 @@
           "effects": [],
           "conditions": [],
           "outcomes": []
+        }
+      ],
+      "variants": [
+        {
+          "text": "考校台的值日抄手替你签了送达时辰：阿澈在晨点名时仍列副册，销名通知却在点名后才到。你带着这份抄页去交接台找陈闻。几张运料单沿用沈砚旧编号，签收人的笔迹却不同。陈闻听完案房时辰，敲了敲纸：“考校台晚收通知，不能替山门补验帖印；旧号也不能替车里的人填姓名。车进去重，出来轻，我只见过车。”",
+          "conditions": [
+            {
+              "variable": "case.deputy",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
         }
       ]
     },
@@ -4032,6 +4222,18 @@
           "effects": [],
           "outcomes": []
         }
+      ],
+      "variants": [
+        {
+          "text": "祁元肃承认签过加压令，又指着阿澈的去向栏：“他离山养病，也有登记。”你带来考校台值日抄手签过的时辰：晨间副册仍列阿澈，销名通知点名后才送到；这能核登记的传达过程，仍不能独自证明人去了哪里。许澄姐姐将后来救回的医舍伤签摆在旁边，陈闻也带来了旧号领灰单。你先以哪份纸追问“离山”？",
+          "conditions": [
+            {
+              "variable": "case.deputy",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
       ]
     },
     {
@@ -4058,7 +4260,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h04.qiAccount"
+      "next": "h04.qiAccount",
+      "variants": [
+        {
+          "text": "你先念去向册上的离山日期，再念考校台晚到的销名通知，以及医舍接回阿澈的日期；最后指向空着的山门验帖印。值日抄手当堂核过自己签收的时辰：“今早点名时，我手里没有这张通知。”祁元肃盯着那处空白：“去向栏是我命人写的。”姐姐问阿澈答应过没有，他没有作声。晚到的通知没有替阿澈报名，却让改写去向的先后留在三份原件上。",
+          "conditions": [
+            {
+              "variable": "case.deputy",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h04.qiAccount",
