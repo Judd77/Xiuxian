@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 50,
+  "revision": 51,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -18,7 +18,8 @@
     46,
     47,
     48,
-    49
+    49,
+    50
   ],
   "start": "case.intro",
   "variables": [
@@ -302,7 +303,7 @@
       "id": "g.villageRecord",
       "initial": 0,
       "minimum": 0,
-      "maximum": 1
+      "maximum": 2
     },
     {
       "id": "g.extraCharm",
@@ -4495,7 +4496,243 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村议",
       "speaker": "旁白",
-      "text": "年轻木匠指着改过的呈报：“东坡没同时受冲，明天还不拆榻？”老妇将南沟裂符压在他手边：“我儿子倒在坡上。你别拿顾衡的假话证明他没死。”木匠收回手。许澄姐姐带着床号纸赶来：“下次试阵，家属能不能站到炉门？我得听见妹妹说话。”",
+      "text": "顾衡把改过的旧呈报带回村议。原句“全村同时遇险”没有擦掉，更正写在旁边，钟楼原簿仍由守钟人与老妇保管。年轻木匠、老妇、抱女儿的父亲都来了；许澄姐姐也带着床号纸。你要带上山的不是一张投票表，每个人手里都有自己答应过、还没答应的事。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.keepOriginal"
+    },
+    {
+      "id": "g09.keepOriginal",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "顾衡把改过的呈报送回钟楼，让村人看见原字和更正并排。年轻木匠说既然东坡那夜没同时受冲，明天便可拆榻；老妇将儿子的名字压在他手前：“我儿子死的那夜，不会因为你们改过纸就没了。”木匠收回手，问炉中人是不是还得替村里坐。钟槌放在两人之间，谁都没有伸手替整村答。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.elderAsk"
+    },
+    {
+      "id": "g09.elderAsk",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "老妇已经走过那条缓坡，知道孙子背她到高处比旧簿的半炷香久。你要把她的话带上山，先问她肯答应什么：是白天实走后愿意再谈今夜暂迁，还是已同意明日打开谷口？她望着你，手指仍按着旧簿上儿子的名字。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "limit",
+          "text": "请她说清试走、暂迁和开谷口各是哪件事",
+          "target": "g09.elderLimit",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "agree",
+          "text": "把“愿试走”先写成“同意开谷口”",
+          "target": "g09.elderPushback",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g09.elderLimit",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "老妇说，白天愿让孙子背她过岔，是为知道真要避险时能不能走得动；今晚若暂迁，她要先知道住哪、药田毁了谁来补。明日立刻开谷口，她没有答应。她用指节轻点纸边：“我不反对把炉里人救出来。我怕你们一句‘救人’，便把我家那道门写没了。”",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.elderNote"
+    },
+    {
+      "id": "g09.elderPushback",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你写到“同意开谷口”，老妇把旧簿合上：“我白天走路，是试脚程。你方才听见的是我答应让你毁田吗？”她没有骂你，却让你将那四字划去，再按她所说分写试走、可谈暂迁与仍反对明日开谷口。木匠也停下催促，第一次问高处旧屋到底能不能住。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.elderNote"
+    },
+    {
+      "id": "g09.elderNote",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你把老妇的原话念回。她确认白天试走已完成，今夜住处和药田欠账仍要谈；顾衡把末户到齐的脚程夹在她的答复后，不再用旧簿的半炷香催她。她留下自己的抄页：“议事堂要问，叫我自己说。别只递你那张表。”你将她的纸交还，再转向父亲。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.fatherAsk"
+    },
+    {
+      "id": "g09.fatherAsk",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "父亲让女儿坐在廊下听，不让她挤进人群。白天那趟试走后，她还记得高处的屋门是锁着的。父亲问，宗门若今夜真开闸，高处谁给药、车给谁躺、屋子谁来开。你可以把他对白天试走的同意原样记录，也可以请他现在就在正式迁居栏按印。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "trial",
+          "text": "记录“白天已试走，正式搬迁待住处和药”",
+          "target": "g09.fatherLimit",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "sign",
+          "text": "请他先签今夜迁居，再补药和住处",
+          "target": "g09.fatherPushback",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g09.fatherLimit",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "父亲点头，让你把随身的一剂或押车药袋按白天实际安排写明。他看着女儿：“我愿意走，可她的药不能因为一声钟先去别处。”他答应在今夜住处和高处医舍接应确定后再谈正式迁居，没让你写成自己乐于让儿子继续坐榻。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.fatherNote"
+    },
+    {
+      "id": "g09.fatherPushback",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你把笔递到“今夜迁居”下，父亲没接。他提起女儿的药袋：“白天试走时，我说的是试路、试带药。真搬那一回，屋门和接药的人还没说准。”你收回笔，把“已试走”与“正式迁居待核”拆成两行。他没有因此退出议事，仍要自己去问炉里儿子的下落。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.fatherNote"
+    },
+    {
+      "id": "g09.fatherNote",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "女儿问父亲，高处是不是没有她的床。父亲蹲下说只是借住一阵，不能答应何时回家。你没把他这句安慰写成村议承诺，而在表上留“暂住处待确认”。许澄姐姐在旁听着，将自己带来的床号纸压在那行下：炉门也有一个人，不能凭家属愿意便写成已经安全出来。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.carpenterAsk"
+    },
+    {
+      "id": "g09.carpenterAsk",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "木匠把高处两把旧屋钥匙放在桌边，说今晚能借，却把一只手按在冬药账上。屋子借出去，坏瓦、被褥和明年药田要由谁补？如果你只写“借屋”而不写条件，宗门到了议事堂就可能把这两间屋算成村里已经自行安置完毕。你准备怎样记？",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "terms",
+          "text": "逐项问借屋、冬药和修屋欠账",
+          "target": "g09.carpenterTerms",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "house",
+          "text": "先写“已安置”，以后再谈缺口",
+          "target": "g09.carpenterPushback",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g09.carpenterTerms",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "木匠将钥匙摊开：“屋可以今晚用，门板我也能拿来垫药车。可是药田毁后要买的药、屋顶坏瓦和木料，不要写成我家捐的。”你记下可借的两间屋、仍缺的药和材料，欠账须宗门当众签认。他说这才是他能答应的事，不要求老妇也跟着答应开谷口。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.carpenterNote"
+    },
+    {
+      "id": "g09.carpenterPushback",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你写“高处已安置”，木匠把钥匙拢回掌心：“能借屋，不等于有人出药出瓦。两间屋住得下人，过不了冬。”顾衡也看着那行，承认自己的旧呈报正是把不同的事压成一句，才使后来的选择变窄。你划去“已安置”，改列可借住与待签的药、木料。木匠才把钥匙重新放下。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.carpenterNote"
+    },
+    {
+      "id": "g09.carpenterNote",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "许澄姐姐问木匠，若药田真被冲倒，今晚谁先拿到医舍的药。木匠说村口那份应由人押到高处，不该等宗门回账以后才发；买新药和修屋的钱，明日仍要追。你将“今晚现药交付”与“往后欠账”分开，不拿一小袋现药抵销整季药田。三户各自答过的事，仍有未定条件。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.family"
+    },
+    {
+      "id": "g09.family",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "许蘅把床号纸移到三户答复旁：“下回试阵，家属能否在炉门，听人自己说停？”工匠接过钟槌，说村口由村民守；她便要求炉门也有能听见的人。老妇看了看那两张纸：“钟给你们握，我要自己拿回我家的那张。”顾衡让你把家属站位另列，不把“家属到场”写成村人同意开谷口。",
       "background": "villageSquare",
       "portrait": "",
       "rain": false,
@@ -4508,7 +4745,7 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村议",
       "speaker": "旁白",
-      "text": "父亲从人群后应声：“我愿带女儿再试走。今晚往哪里搬，得先有个准信。”木匠说高处两间屋能借，却要先看过冬的药从哪里来。老妇仍摇头：“路我走了。可田和屋都在谷口，明天就开，我不答应。”顾衡摊开新纸，等你将这些答复写给议事堂。",
+      "text": "老妇只答应白天试走，今夜暂迁还要住处和药田欠账；父亲也已试路，却要求高处现药和接应有准信；木匠肯借两间屋，冬药、木料不能算作已付。许蘅另请家属站在炉门听本人叫停。顾衡把四张纸摊开，问你要各记各的条件，还是合成一句“村里同意改道”带上山。",
       "background": "villageSquare",
       "portrait": "",
       "rain": false,
@@ -4552,7 +4789,7 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村议",
       "speaker": "旁白",
-      "text": "你念一遍抄好的答复。父亲核了试走那一行，木匠补上“先核冬药”，老妇让你留下反对明日开谷口的话。姐姐的床号纸夹在名单旁。顾衡把实走脚程也放进去，众人各拿自己的抄页；到堂上，他们还会自己开口。",
+      "text": "你将每人的答复与未定条件分开念回。老妇保管自家的抄页，父亲核带药和高处接应，木匠留借屋与欠账两栏；许蘅带走炉门听停的那张。顾衡把实走脚程、钟槌守位另夹一页，原件各在本人手里。到议事堂，他们能自己说哪一项已答应、哪一项还没有。",
       "background": "villageSquare",
       "portrait": "",
       "rain": false,
@@ -4560,7 +4797,7 @@
         {
           "variable": "g.villageRecord",
           "operation": "set",
-          "value": 1
+          "value": 2
         }
       ],
       "choices": [],
@@ -4577,7 +4814,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h01.records"
+      "next": "h01.records",
+      "variants": [
+        {
+          "text": "次日清早，你和顾衡带着实走脚程进议事堂。老妇抱原簿和自己的答复，父亲带女儿的用药页，木匠握两间旧屋钥匙；三人没有把纸交成一张“全村同意”。陶叔请早年修阵的人来对图，林月留在炉门，许蘅送来亲听许澄回应的消息。你把复测记录放上桌：“旧图第三根石柱，已经不在原位。”",
+          "conditions": [
+            {
+              "variable": "g.villageRecord",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "ending.oldPublic",
@@ -5873,7 +6122,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h06.table"
+      "next": "h06.table",
+      "variants": [
+        {
+          "text": "你和顾衡到谷口时，三户的灯还亮着。老妇拿着白天核过的试走抄页，父亲抱女儿和药袋，木匠把高处两间旧屋钥匙放在门板上。他们在村议各自答应过的事都记着，也记着还没谈妥的药田、住处和冬药。你将今晚小试记录摊开，先请他们逐家决定这一次暂迁；白天的抄页不能替今晚按印。",
+          "conditions": [
+            {
+              "variable": "g.villageRecord",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h06.table",
