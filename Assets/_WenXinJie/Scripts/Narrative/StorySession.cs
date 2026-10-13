@@ -138,6 +138,15 @@ namespace WenXinJie.Narrative
                 values.Add("case.acheTestimony", graph.GetVariable("case.acheTestimony").initial);
             }
 
+            // Revision 49 tracks whether the family was told about village risk.
+            // Compatible earlier saves resume without inventing that disclosure.
+            if (snapshot.revision <= 48 && graph.Definition.revision >= 49
+                && !values.ContainsKey("case.familyDisclosure")
+                && graph.Variables.Any(variable => variable.id == "case.familyDisclosure"))
+            {
+                values.Add("case.familyDisclosure", graph.GetVariable("case.familyDisclosure").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 48,
+  "revision": 49,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -16,7 +16,8 @@
     44,
     45,
     46,
-    47
+    47,
+    48
   ],
   "start": "case.intro",
   "variables": [
@@ -169,6 +170,12 @@
       "initial": 0,
       "minimum": 0,
       "maximum": 1
+    },
+    {
+      "id": "case.familyDisclosure",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
     },
     {
       "id": "case.identityClaim",
@@ -2172,19 +2179,13 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "许家",
       "speaker": "旁白",
-      "text": "阿澈从袖里拿出半枚云纹玉扣：隔墙人从缝里塞给他的。陈闻找到旧单，许澄曾领过同纹配绳。许家姐姐拿出另半枚，断口严丝合缝。",
+      "text": "阿澈从袖里拿出半枚云纹玉扣，说是隔墙人从门缝里塞来的。陈闻找到旧单：许澄多年前曾领过同纹配绳。林月安置好阿澈，同你和陈闻带着半扣、旧单去许家。阿澈只看见那只递玉的手，谁都没有看清手的主人。",
       "background": "xuFamilyHome",
       "portrait": "",
       "rain": false,
-      "effects": [
-        {
-          "variable": "story.xucheng",
-          "operation": "set",
-          "value": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
-      "next": "c13.answer"
+      "next": "c13.threshold"
     },
     {
       "id": "c13.answer",
@@ -2232,7 +2233,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c13.door"
+      "next": "c13.beforeDoor"
     },
     {
       "id": "c13.promise",
@@ -2245,7 +2246,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c13.door"
+      "next": "c13.beforeDoor"
     },
     {
       "id": "c13.door",
@@ -2258,7 +2259,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "case.boundary",
+      "next": "c13.costReveal",
       "variants": [
         {
           "text": "次日晚，姐姐将钥匙握在自己手里。你上次说确定妹妹就在里面，她还记着，先让你退到旁边；直到门内敲响两下，她才亲自问姓名。等这段回应，巡廊脚步已近。顾衡带着裂符赶到，说南沟又受了冲；姐姐仍不肯把钥匙交给旁人替她决定。",
@@ -2277,6 +2278,295 @@
               "variable": "case.secondTalisman",
               "minimum": 1,
               "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c13.threshold",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "许家门槛磨得发亮，墙边有两双旧鞋，一双鞋跟补过白线。姐姐许蘅没有先接你递来的玉扣，而是问阿澈的手腕现在能不能握碗。你说林月刚换过药，他还会疼。她才把炉上温着的水倒给你们：“我妹妹上次来信，叫我别信别人口中的‘已经好了’。今天也一样，请把你亲眼见的和听人说的分开。”",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.table"
+    },
+    {
+      "id": "c13.table",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "陈闻把领绳旧单摊在桌上，阿澈的半扣与姐姐保管的半扣隔着纸放好。旧单能说明许澄曾经领过同纹配绳，两块玉的断口能说明它们原是一块；哪一项也不能单独告诉你门后现在是谁。姐姐让你先选一处细看，不催你把名字写下。",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "receipt",
+          "text": "先核领绳旧单的日期与签收",
+          "target": "c13.receipt",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "jade",
+          "text": "先看两半玉扣的断口和磨痕",
+          "target": "c13.fracture",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c13.receipt",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "陈闻指着领用日期：许澄入门后第二年领过一条云纹配绳，签收栏有她自己的字，日期比眼前的失踪早得多。库房当年也发过同纹绳给别人。姐姐将单抬近窗光：“这能证明她有过这种绳，不能证明今日拿着绳的人就是她。”她把自己的半扣放到旧单旁，让你看那道新旧相交的缺口。",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.sources"
+    },
+    {
+      "id": "c13.fracture",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "两块玉的断面严丝合缝，一处小缺口连着旧磨痕。姐姐说许澄小时候失手摔断，自己把一半收在家里；阿澈带出的另一半是谁塞来的，仍只有阿澈隔墙所见。陈闻把领绳旧单推到两块玉旁：许澄确曾领过同纹配绳，但那是多年前的记录。",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.sources"
+    },
+    {
+      "id": "c13.sources",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "你把三件事分开记：两半玉扣原是一块；旧单记许澄领过同纹配绳；阿澈说半扣由隔墙递出。姐姐拿指甲压住最末一行：“她可能在里面，也可能有人拿了她的东西。你若把这三行合成一句‘我亲眼见她’，进门的人就会以为不必再问。”",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "story.xucheng",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c13.infer"
+    },
+    {
+      "id": "c13.infer",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "要去侧门，姐姐需要知道你准备把玉扣写成什么。你可以写它指向一条应继续追查的线索，也可以先把它当作许澄本人已经在门后的证明。林月没有替你选，只将阿澈的伤签放在桌边：他的发烧会影响记忆，不能因此把他确实见到的半扣一笔勾销。",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "limited",
+          "text": "记录“玉扣曾从隔墙递出，持扣人的身份待亲问”",
+          "target": "c13.limited",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "certain",
+          "text": "记录“配绳和断口足以认定门后是许澄”",
+          "target": "c13.correction",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c13.limited",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "姐姐读完你写的那行，点了点头：“那我去问。”她把自己的半扣重新包好，没有拿它作开门的凭据。陈闻把旧单抄一份给她，原件仍留在自己签收的案夹里。你们约定到侧门后先听回应，再决定能否转钥。",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.burden"
+    },
+    {
+      "id": "c13.correction",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "你写下许澄的名字，姐姐却把两块玉分开：“她小时候还把这半扣借给邻家孩子戴过。玉能合上，不能替今天的人说话。”你想起阿澈只从墙缝看见手，没见脸。你在她面前划掉断言，留下“隔墙递扣者待亲问”；姐姐收起玉，没有因此取消去侧门。",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.burden"
+    },
+    {
+      "id": "c13.burden",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "姐姐问下一件事：“若她真在炉里，今晚把她带出来，会不会像带阿澈那夜一样，让山下的护符裂？”屋里正好静了，炉上的水冒出细泡。你已经收到村口报信：阿澈离榻后裂了一张符，工匠补上了，没人受伤。你还不知道下一次会落在哪户。把这些说给她听，会让钥匙这晚未必开得快。",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "tell",
+          "text": "把村符裂损和未知风险一起说清",
+          "target": "c13.tell",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "withhold",
+          "text": "先不说村符，等到门前再解释",
+          "target": "c13.withhold",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c13.tell",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "你把村口报信从头说了：阿澈被救出来，另一处承了力；裂的是哪张符、谁补的、无人受伤，都照原话讲。最后你说不知道再松一张榻会冲到哪里。姐姐沉默许久，问：“那山下的人知道吗？”你说顾衡正在查。她把钥匙按在桌上：“我去听她说话，也要听村里的人说话；今晚不能只拿我妹妹的命换他们不知道的一下。”",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.familyDisclosure",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c13.reply"
+    },
+    {
+      "id": "c13.withhold",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "你只说下一次要带她到门前，阿澈已经脱险。姐姐问村符的事，你把裂损留在喉头，答说山下还在查。她看了你一眼，没有追问，却把钥匙收回袖底：“到门前若还有我该知道的，别等转了钥才说。”林月听见这句，没替你把空白补上。",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.familyDisclosure",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "c13.reply"
+    },
+    {
+      "id": "c13.reply",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "林月说她先前没把炉里情况全告诉许蘅，怕家属闯门后人被转走。许蘅问她怕的是妹妹被转走，还是自己会问得太多。林月承认两样都怕；如今药和伤都在自己手上，她愿意在门口听许澄亲自回答。许蘅没说原谅，只请她把换班时刻、探气铃的位置和开门前能停在哪一步逐项写清。",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.plan"
+    },
+    {
+      "id": "c13.plan",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "陈闻找出送药换班的时辰，林月圈出门外能听见敲门、却还不触动锁的位置。若遮铃符已经用尽，等送药交接；若还有符，也先听门内本人说话。许蘅把钥匙系在自己腕上：“我可以来，不能替她答应继续坐，也不能因为一块玉就替她说要走。”她看向你，终于问出最难的一句。",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.answer"
+    },
+    {
+      "id": "c13.beforeDoor",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "次日晚，山腹的石阶比许家冷得多。许蘅一路没有松开腕上的钥匙绳，林月提着药箱走在她身旁。你照昨日记下的换班时辰停在侧门外，阿澈也在坡口等。他不再被要求回炉示范敲门，只把药碗抱在怀里；这回需要回答的人在门里。",
+      "background": "xuFamilyHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.door"
+    },
+    {
+      "id": "c13.costReveal",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "顾衡将裂符放到石阶上，让大家看见裂纹从中心炸开。他说阿澈离榻那夜，村口有人替炉房承了力，今夜他来就是要弄清下一股落到哪里。许蘅没有把钥匙交出去：“先问山下，再问门里。两边都不能替另一边答应。”",
+      "background": "mountainHeart",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "case.boundary",
+      "variants": [
+        {
+          "text": "顾衡把南沟新裂的护符放到石阶上。许蘅认出你昨天说过的那种中心断口，问：“这次是哪户？”顾衡说工匠才补完，下一股仍无把握。她将钥匙握稳：“你让我先知道，我就能自己决定留下听她说话，也能听村里的人说停。”林月请顾衡带你去核村符，自己守门听回应。",
+          "conditions": [
+            {
+              "variable": "case.familyDisclosure",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "顾衡把中心裂开的村符递到许蘅眼前，说阿澈离榻那夜就有过一张。她转头看你：“昨天你说山下还在查。裂过符，也该告诉我。”你承认省掉了这件事；她把钥匙停在锁孔外，不让任何人先开门。林月请顾衡带你去查下一股会落在哪户，自己陪许蘅守门听回应。钥匙还在她手里，但她不会再照你的催促转动。",
+          "conditions": [
+            {
+              "variable": "case.familyDisclosure",
+              "minimum": 2,
+              "maximum": 2
             }
           ]
         }
@@ -4887,6 +5177,31 @@
       "choices": [],
       "next": "h05.boundary",
       "variants": [
+        {
+          "text": "林月领你们到许澄榻边，姐姐先请妹妹自己报姓名。她看着你：“上次你认定她在门后，又没告诉我村符已裂。今天的约定逐句念给她听，不要替她答。”你念完，许澄问：“第三下我就要起来。谷底若还暗着，你们会不会叫我再等？”",
+          "conditions": [
+            {
+              "variable": "case.familyWindow",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "case.familyDisclosure",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "text": "林月领你们到许澄榻边，姐姐先请妹妹自己报姓名。她仍记得你在许家没说村符裂损：“今日村口谁握钟，念给她听。”你把两端停令读完，许澄看向你：“第三下我就要起来。谷底若还暗着，你们会不会叫我再等？”",
+          "conditions": [
+            {
+              "variable": "case.familyDisclosure",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
         {
           "text": "林月领你们到许澄榻边，姐姐先请妹妹自己报姓名，再让你读约定。“上次你也说得很肯定。”她还记着你未亲见便认定许澄的事。你没有替里面的人应话。许澄听完问：“第三下我就要起来。谷底若还暗着，你们会不会叫我再等？”",
           "conditions": [
