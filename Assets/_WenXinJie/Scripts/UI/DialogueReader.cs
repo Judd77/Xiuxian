@@ -6,13 +6,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using WenXinJie.Persistence;
 
 namespace WenXinJie.UI
 {
-    // Session history is intentionally separate from persistent read/unlock data.
+    // Reading history records only what this saved playthrough actually saw.
     public sealed class DialogueReader : MonoBehaviour
     {
-        private const int MaximumHistoryEntries = 200;
+        private const int MaximumHistoryEntries = CampaignSaveStore.MaximumHistoryEntries;
         private const string TextSpeedPreference = "WenXinJie.TextSpeed";
         private static readonly float[] TextSpeeds = { 16f, 32f, 64f, 0f };
         private static readonly string[] TextSpeedNames = { "慢", "常", "快", "即时" };
@@ -190,12 +191,7 @@ namespace WenXinJie.UI
             if (animate && !string.IsNullOrWhiteSpace(FullText)
                 && (_history.Count == 0 || _history[_history.Count - 1] != FullText))
             {
-                _history.Add(FullText);
-            }
-
-            if (_history.Count > MaximumHistoryEntries)
-            {
-                _history.RemoveAt(0);
+                AddHistory(FullText);
             }
 
             if (!animate || TextSpeeds[_textSpeed] == 0f || string.IsNullOrWhiteSpace(FullText))
@@ -220,6 +216,29 @@ namespace WenXinJie.UI
             _history.Clear();
             StopAutomatic();
             CloseHistory();
+        }
+
+        public string[] CaptureHistory() => _history.ToArray();
+
+        public void RestoreHistory(string[] entries)
+        {
+            ResetHistory();
+            if (entries == null) return;
+            foreach (var entry in entries)
+            {
+                if (!string.IsNullOrWhiteSpace(entry)) AddHistory(entry);
+            }
+        }
+
+        public void RecordChoice(string text)
+        {
+            AddHistory("你选择：" + text);
+        }
+
+        private void AddHistory(string text)
+        {
+            _history.Add(text);
+            if (_history.Count > MaximumHistoryEntries) _history.RemoveAt(0);
         }
 
         public void OpenHistory()

@@ -43,7 +43,7 @@ PlayerPrefs。音乐和背景通过场景序列化引用接入，不在 Update �
 
 `StorySession` 已有可存档复现的随机状态基础，但当前正式剧情尚未使用随机结果；不能把随机事件池描述成已接入或新设计的必做功能。
 
-线索簿的解锁判断在 `StoryViewStateFactory` 中从会话变量映射为 `ClueJournalState`。`ClueJournalView` 不持有 `StorySession`，线索的标题、分类和说明也不写入存档；存档仍只保存稳定剧情变量与当前节点。
+线索簿的解锁判断在 `StoryViewStateFactory` 中从会话变量映射为 `ClueJournalState`。`ClueJournalView` 不持有 `StorySession`，线索的标题、分类和说明也不写入存档；剧情进度仍由稳定变量与当前节点恢复，前尘阅读历史另作为可选显示元数据保存。
 
 线索未读状态只存在ClueJournalView本次会话内：比较相邻展示状态的解锁及已收录内容变化，按最近变化顺序定位未读条目；隐藏面板的Render不算阅读，只有打开时Select才清除。UnreadCountChanged经StoryOverlayView／StoryView传至底栏，下一条未读可跨页定位。StoryApplication仅在新会话或成功读档时ResetJournal；首页继续不重置，失败读档保留。首次状态作为基准，不把读档已有资料全部报作新线索。不写入PlayerPrefs或剧情快照。
 
@@ -59,6 +59,8 @@ PlayerPrefs。音乐和背景通过场景序列化引用接入，不在 Update �
 UI 测试须等待渲染后再检查按钮实际中心的射线，不能仅按设计分辨率猜点击位置。按钮事件、合成 Input System 输入与实体鼠标操作须分别记录。当前已验证与未验证的事实见 `DEVELOPMENT_STATUS.md`。
 
 ## 阅读控制
+
+前尘记录本次实际显示的正文及成功执行的选择（“你选择：…”）。DialogueReader提供CaptureHistory／RestoreHistory，读取存档时恢复而非清空，Present对最后一条相同正文去重；新开局重置，失败／取消读取保留原记录。CampaignSaveStore在独立传输类中保存可选readingHistory，StorySnapshot与StorySession不持有阅读数据，历史不能解锁证据或修改剧情。旧version 3快照缺字段时历史为空，恢复当前正文后从此续记；不依据当前路线回填此前文本。自动存档在Render追加当前正文之后写入，手动、自动与有效备份分别恢复自己的记录。历史最多400条、单条4096字符、合计100000字符，持久层保留最近有效条目；损坏的可选历史不能使原本有效的剧情状态失效。剧情revision与兼容范围不变。
 
 底栏提供慢（16字/秒）、常（32字/秒）、快（64字/秒）与即时显示，速度偏好独立保存到PlayerPrefs的WenXinJie.TextSpeed，不写入剧情存档。换速度保留当前已显示进度，即时显示仍录入前尘历史。
 

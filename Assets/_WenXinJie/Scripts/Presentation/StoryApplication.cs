@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -83,8 +84,9 @@ namespace WenXinJie.Presentation
 
             if (Session.Advance())
             {
-                SaveAutomaticProgress();
                 Render();
+                SaveAutomaticProgress();
+                UpdateProgress();
             }
         }
 
@@ -101,10 +103,13 @@ namespace WenXinJie.Presentation
                 return;
             }
 
+            var choice = Session.Current.choices.FirstOrDefault(item => item.id == choiceId);
             if (Session.Choose(choiceId))
             {
-                SaveAutomaticProgress();
+                _reader.RecordChoice(choice.text);
                 Render();
+                SaveAutomaticProgress();
+                UpdateProgress();
             }
         }
 
@@ -135,7 +140,6 @@ namespace WenXinJie.Presentation
         {
             if (TryLoad(out var recovered, out var message))
             {
-                _reader.ResetHistory();
                 Render();
                 _view.ShowNotice(LoadNotice(recovered, message));
             }
@@ -167,8 +171,9 @@ namespace WenXinJie.Presentation
             _reader.ResetHistory();
             _view.ResetJournal();
             _view.HideMainMenu();
-            SaveAutomaticProgress();
             Render();
+            SaveAutomaticProgress();
+            UpdateProgress();
         }
 
         public void ContinueGame()
@@ -202,7 +207,6 @@ namespace WenXinJie.Presentation
                 return;
             }
 
-            _reader.ResetHistory();
             _view.HideMainMenu();
             Render();
             _view.ShowNotice(LoadNotice(recovered, message));
@@ -246,7 +250,7 @@ namespace WenXinJie.Presentation
         {
             try
             {
-                _saves.Save(SavePath, Session);
+                _saves.Save(SavePath, Session, _reader.CaptureHistory());
                 MarkSaved(SavePath);
                 return true;
             }
@@ -264,7 +268,7 @@ namespace WenXinJie.Presentation
                 var snapshot = JsonUtility.ToJson(Session.Snapshot());
                 if (snapshot != _automaticState)
                 {
-                    _saves.Save(AutomaticSavePath, Session);
+                    _saves.Save(AutomaticSavePath, Session, _reader.CaptureHistory());
                     _automaticState = snapshot;
                 }
 
@@ -407,20 +411,22 @@ namespace WenXinJie.Presentation
             {
                 var hadFullSave = _saves.Exists(SavePath);
                 var importDemo = false;
+                string[] history;
                 StorySession loaded;
                 if (latest)
                 {
-                    loaded = ReadContinueSave(out recovered, out importDemo, out automatic);
+                    loaded = ReadContinueSave(out recovered, out importDemo, out automatic, out history);
                 }
                 else if (automatic)
                 {
-                    loaded = _saves.Load(AutomaticSavePath, _graph, out recovered);
+                    loaded = _saves.Load(AutomaticSavePath, _graph, out recovered, out history);
                 }
                 else
                 {
-                    loaded = ReadPreferredSave(out recovered, out importDemo);
+                    loaded = ReadPreferredSave(out recovered, out importDemo, out history);
                 }
                 Session = loaded;
+                _reader.RestoreHistory(history);
                 _savedState = null;
                 _savedTime = null;
                 _automaticState = automatic ? JsonUtility.ToJson(Session.Snapshot()) : null;
@@ -452,18 +458,21 @@ namespace WenXinJie.Presentation
             }
         }
 
-        private StorySession ReadContinueSave(out bool recovered, out bool importDemo, out bool automatic)
+        private StorySession ReadContinueSave(out bool recovered, out bool importDemo, out bool automatic,
+            out string[] history)
         {
             StorySession manual = null;
             var manualRecovered = false;
             var manualImport = false;
-            try { manual = ReadPreferredSave(out manualRecovered, out manualImport); }
+            var manualHistory = Array.Empty<string>();
+            try { manual = ReadPreferredSave(out manualRecovered, out manualImport, out manualHistory); }
             catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
                                                || exception is ArgumentException) { }
 
             StorySession auto = null;
             var autoRecovered = false;
-            try { auto = _saves.Load(AutomaticSavePath, _graph, out autoRecovered); }
+            var autoHistory = Array.Empty<string>();
+            try { auto = _saves.Load(AutomaticSavePath, _graph, out autoRecovered, out autoHistory); }
             catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
                                                || exception is ArgumentException) { }
 
@@ -473,17 +482,23 @@ namespace WenXinJie.Presentation
                 || File.GetLastWriteTimeUtc(autoPath) >= File.GetLastWriteTimeUtc(manualPath));
             recovered = automatic ? autoRecovered : manualRecovered;
             importDemo = !automatic && manualImport;
+            history = automatic ? autoHistory : manualHistory;
             return automatic ? auto : manual ?? throw new InvalidDataException("No valid progress.");
         }
 
         private StorySession ReadPreferredSave(out bool recovered, out bool importDemo)
+        {
+            return ReadPreferredSave(out recovered, out importDemo, out _);
+        }
+
+        private StorySession ReadPreferredSave(out bool recovered, out bool importDemo, out string[] history)
         {
             importDemo = false;
             if (_saves.Exists(SavePath))
             {
                 try
                 {
-                    return _saves.Load(SavePath, _graph, out recovered);
+                    return _saves.Load(SavePath, _graph, out recovered, out history);
                 }
                 catch (Exception exception) when ((exception is IOException || exception is ArgumentException)
                                                  && !isDemo && _saves.Exists(DemoSavePath))
@@ -493,7 +508,7 @@ namespace WenXinJie.Presentation
             }
 
             importDemo = !isDemo && _saves.Exists(DemoSavePath);
-            return _saves.Load(importDemo ? DemoSavePath : SavePath, _graph, out recovered);
+            return _saves.Load(importDemo ? DemoSavePath : SavePath, _graph, out recovered, out history);
         }
 
         private static string LoadNotice(bool recovered, string message)
@@ -564,15 +579,11 @@ namespace WenXinJie.Presentation
 
         private void Render()
         {
-            if (IsDemoBoundary)
-            {
-                SaveCurrentProgress();
-            }
-
             var state = _viewStateFactory.Create(Session);
             var newClue = FindNewClue(_lastJournal, state.Journal);
             _audio.SetAmbienceActive(Session.Current.rain);
             _view.Render(state);
+            if (IsDemoBoundary) SaveCurrentProgress();
             UpdateProgress();
             _view.ShowNotice(string.IsNullOrEmpty(newClue) ? string.Empty : "新线索已收录：" + newClue);
             _lastJournal = state.Journal;
