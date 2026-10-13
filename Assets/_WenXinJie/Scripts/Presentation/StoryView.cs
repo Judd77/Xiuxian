@@ -64,14 +64,14 @@ namespace WenXinJie.Presentation
             EnsureEventSystem();
         }
 
-        public void ShowMainMenu(Texture2D background, bool canContinue, bool canLoad, string notice,
+        public void ShowMainMenu(Texture2D background, bool canContinue, bool canLoad, bool canLoadAutomatic, string notice,
             string progress)
         {
             _scene.ShowBackground(background);
             _scene.ShowPortrait(null);
             _overlays.CloseAll();
             _gameplay.SetVisible(false);
-            _mainMenu.Show(canContinue, canLoad, notice, progress);
+            _mainMenu.Show(canContinue, canLoad, canLoadAutomatic, notice, progress);
         }
 
         public void HideMainMenu()

@@ -9,6 +9,7 @@ namespace WenXinJie.Presentation
     {
         private readonly Button _continue;
         private readonly Button _load;
+        private readonly Button _loadAutomatic;
         private readonly TMP_Text _notice;
         private readonly GameObject _root;
         private readonly TMP_Text _progress;
@@ -38,34 +39,37 @@ namespace WenXinJie.Presentation
             chapter.font = menuFont;
             chapter.color = new(0.09f, 0.18f, 0.16f);
 
-            CreateButton(ui, root, menuFont, "StartGame", "开始游戏", 400f, commands.StartNewGame);
-            _continue = CreateButton(ui, root, menuFont, "ContinueGame", "继续游戏", 490f,
+            CreateButton(ui, root, menuFont, "StartGame", "开始游戏", 384f, commands.StartNewGame);
+            _continue = CreateButton(ui, root, menuFont, "ContinueGame", "继续游戏", 462f,
                 commands.ContinueGame);
-            _load = CreateButton(ui, root, menuFont, "LoadGame", "读取存档", 580f,
+            _load = CreateButton(ui, root, menuFont, "LoadGame", "读取手动存档", 540f,
                 commands.LoadGameFromMenu);
-            CreateButton(ui, root, menuFont, "MainMenuSettings", "设置", 670f, openSettings);
-            CreateButton(ui, root, menuFont, "MainMenuCredits", "鸣谢", 760f, openCredits);
-            CreateButton(ui, root, menuFont, "QuitGame", "退出游戏", 850f, commands.QuitGame);
+            _loadAutomatic = CreateButton(ui, root, menuFont, "LoadAutomaticGame", "恢复自动进度", 618f,
+                commands.LoadAutomaticGameFromMenu);
+            CreateButton(ui, root, menuFont, "MainMenuSettings", "设置", 696f, openSettings);
+            CreateButton(ui, root, menuFont, "MainMenuCredits", "鸣谢", 774f, openCredits);
+            CreateButton(ui, root, menuFont, "QuitGame", "退出游戏", 852f, commands.QuitGame);
 
             ui.Frame(root, "MainMenuNoticeFrame", 148f, 940f, 850f, 66f);
             _notice = ui.Label(root, "MainMenuNotice", string.Empty, 174f, 950f, 798f, 46f, 21);
             _notice.font = menuFont;
             _notice.color = new(0.86f, 0.88f, 0.82f);
 
-            var progressFrame = ui.Frame(root, "MenuProgressFrame", 640f, 488f, 1040f, 312f);
+            var progressFrame = ui.Frame(root, "MenuProgressFrame", 640f, 400f, 1040f, 480f);
             progressFrame.color = new(0.86f, 0.94f, 0.89f);
-            _progress = ui.Label(root, "MenuProgress", string.Empty, 684f, 516f, 952f, 256f, 24);
+            _progress = ui.Label(root, "MenuProgress", string.Empty, 684f, 428f, 952f, 424f, 24);
             _progress.font = menuFont;
-            _progress.lineSpacing = 8f;
+            _progress.lineSpacing = 4f;
             _progress.color = new(0.96f, 0.95f, 0.85f);
         }
 
         public bool IsOpen => _root.activeSelf;
 
-        public void Show(bool canContinue, bool canLoad, string notice, string progress)
+        public void Show(bool canContinue, bool canLoad, bool canLoadAutomatic, string notice, string progress)
         {
             _continue.interactable = canContinue;
             _load.interactable = canLoad;
+            _loadAutomatic.interactable = canLoadAutomatic;
             _notice.text = notice;
             _progress.text = progress;
             _root.SetActive(true);

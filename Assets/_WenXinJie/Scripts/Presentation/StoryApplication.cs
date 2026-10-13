@@ -30,6 +30,8 @@ namespace WenXinJie.Presentation
         private StoryViewStateFactory _viewStateFactory;
         private string _savedState;
         private string _savedTime;
+        private string _automaticState;
+        private bool _automaticSaveFailed;
 
         public StorySession Session { get; private set; }
 
@@ -47,6 +49,9 @@ namespace WenXinJie.Presentation
                     isDemo ? "campaign-demo-run.json" : "campaign-run.json");
             }
         }
+
+        public string AutomaticSavePath => Path.Combine(Path.GetDirectoryName(SavePath),
+            isDemo ? "campaign-demo-auto.json" : "campaign-auto.json");
 
         private void Awake()
         {
@@ -78,6 +83,7 @@ namespace WenXinJie.Presentation
 
             if (Session.Advance())
             {
+                SaveAutomaticProgress();
                 Render();
             }
         }
@@ -97,6 +103,7 @@ namespace WenXinJie.Presentation
 
             if (Session.Choose(choiceId))
             {
+                SaveAutomaticProgress();
                 Render();
             }
         }
@@ -109,6 +116,7 @@ namespace WenXinJie.Presentation
             }
 
             var saved = SaveCurrentProgress();
+            if (saved) SaveAutomaticProgress();
             UpdateProgress();
             _view.ShowNotice(saved ? "进度已保存 · " + _savedTime : "存档失败，当前进度仍保留");
         }
@@ -139,7 +147,14 @@ namespace WenXinJie.Presentation
 
         public void StartNewGame()
         {
-            ConfirmProgressReplacement("重新开始", "从故事开场重新开始；原存档在手动保存前仍保留。", BeginNewGame);
+            const string destination = "从故事开场重新开始，将替换自动进度；原手动存档在手动保存前仍保留。";
+            if (!HasUnsavedProgress && _saves.Exists(AutomaticSavePath))
+            {
+                _view.ShowPrompt("重新开始", destination, "重新开始", BeginNewGame);
+                return;
+            }
+
+            ConfirmProgressReplacement("重新开始", destination, BeginNewGame);
         }
 
         private void BeginNewGame()
@@ -148,9 +163,11 @@ namespace WenXinJie.Presentation
             _savedState = null;
             _savedTime = null;
             _lastJournal = null;
+            _automaticState = null;
             _reader.ResetHistory();
             _view.ResetJournal();
             _view.HideMainMenu();
+            SaveAutomaticProgress();
             Render();
         }
 
@@ -163,17 +180,23 @@ namespace WenXinJie.Presentation
                 return;
             }
 
-            LoadGameFromMenu();
+            LoadFromMenu(latest: true);
         }
 
         public void LoadGameFromMenu()
         {
-            ConfirmProgressReplacement("读取存档", LoadDestination(), LoadFromMenu, false);
+            ConfirmProgressReplacement("读取手动存档", LoadDestination(), () => LoadFromMenu(), false);
         }
 
-        private void LoadFromMenu()
+        public void LoadAutomaticGameFromMenu()
         {
-            if (!TryLoad(out var recovered, out var message))
+            ConfirmProgressReplacement("读取自动进度", LoadAutomaticDestination(),
+                () => LoadFromMenu(automatic: true), false);
+        }
+
+        private void LoadFromMenu(bool automatic = false, bool latest = false)
+        {
+            if (!TryLoad(out var recovered, out var message, automatic, latest))
             {
                 _view.ShowMainMenuNotice(message);
                 return;
@@ -195,6 +218,13 @@ namespace WenXinJie.Presentation
 
         public void QuitGame()
         {
+            if (Session != null && !_automaticSaveFailed
+                && JsonUtility.ToJson(Session.Snapshot()) == _automaticState)
+            {
+                ExitGame();
+                return;
+            }
+
             ConfirmProgressReplacement("退出游戏", "退出后，未保存的进度将无法继续。", ExitGame);
         }
 
@@ -227,6 +257,26 @@ namespace WenXinJie.Presentation
             }
         }
 
+        private void SaveAutomaticProgress()
+        {
+            try
+            {
+                var snapshot = JsonUtility.ToJson(Session.Snapshot());
+                if (snapshot != _automaticState)
+                {
+                    _saves.Save(AutomaticSavePath, Session);
+                    _automaticState = snapshot;
+                }
+
+                _automaticSaveFailed = false;
+            }
+            catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException)
+            {
+                _automaticSaveFailed = true;
+                Debug.LogWarning("Could not save automatic progress: " + exception.Message);
+            }
+        }
+
         private void MarkSaved(string path)
         {
             _savedState = JsonUtility.ToJson(Session.Snapshot());
@@ -241,9 +291,28 @@ namespace WenXinJie.Presentation
         private void UpdateProgress()
         {
             var status = HasUnsavedProgress
-                ? IsDemoBoundary ? "试玩接续未保存" : "有新进度 · 未保存"
-                : "已保存 · " + _savedTime;
+                ? JsonUtility.ToJson(Session.Snapshot()) == _automaticState
+                    ? "自动已保存 · 未手动保存"
+                    : IsDemoBoundary ? "试玩接续未保存" : "有新进度 · 未保存"
+                : "手动已保存 · " + _savedTime;
+            if (_automaticSaveFailed) status = HasUnsavedProgress
+                ? "自动保存失败 · 请手动存档" : "手动已保存 · 自动保存失败";
             _view.ShowProgress(status, IsDemoBoundary);
+        }
+
+        private string LoadAutomaticDestination()
+        {
+            try
+            {
+                var saved = _saves.Load(AutomaticSavePath, _graph, out var recovered);
+                return "将回到自动" + (recovered ? "备份" : "进度") + "："
+                    + DescribeProgress(saved) + "\n当前页：" + PageExcerpt(saved);
+            }
+            catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
+                                               || exception is ArgumentException)
+            {
+                return "没有有效自动进度时保留当前游戏；手动存档不会被改写。";
+            }
         }
 
         private string LoadDestination()
@@ -270,12 +339,12 @@ namespace WenXinJie.Presentation
                 return;
             }
 
-            var body = "当前进度尚未保存\n" + DescribeProgress(Session) + "\n\n" + destination;
+            var body = "当前进度尚未手动保存\n" + DescribeProgress(Session) + "\n\n" + destination;
             if (!allowSave)
             {
                 // Saving here would replace the very checkpoint the player intends to load.
-                _view.ShowPrompt(title, body + "\n读取将放弃本次未保存的新进度，取消可继续当前游戏。",
-                    "读取并放弃新进度", action);
+                _view.ShowPrompt(title, body + "\n读取将替换当前游戏位置，取消可继续本次进度。",
+                    "确认读取", action);
                 return;
             }
 
@@ -330,24 +399,39 @@ namespace WenXinJie.Presentation
             return text.Length > 26 ? text.Substring(0, 26) + "…" : text;
         }
 
-        private bool TryLoad(out bool recovered, out string message)
+        private bool TryLoad(out bool recovered, out string message, bool automatic = false, bool latest = false)
         {
             recovered = false;
             message = string.Empty;
             try
             {
                 var hadFullSave = _saves.Exists(SavePath);
-                var loaded = ReadPreferredSave(out recovered, out var importDemo);
+                var importDemo = false;
+                StorySession loaded;
+                if (latest)
+                {
+                    loaded = ReadContinueSave(out recovered, out importDemo, out automatic);
+                }
+                else if (automatic)
+                {
+                    loaded = _saves.Load(AutomaticSavePath, _graph, out recovered);
+                }
+                else
+                {
+                    loaded = ReadPreferredSave(out recovered, out importDemo);
+                }
                 Session = loaded;
                 _savedState = null;
                 _savedTime = null;
-                if (!importDemo)
+                _automaticState = automatic ? JsonUtility.ToJson(Session.Snapshot()) : null;
+                _automaticSaveFailed = false;
+                if (!importDemo && !automatic)
                 {
                     MarkSaved(recovered ? SavePath + ".bak" : SavePath);
                 }
                 message = importDemo
                     ? hadFullSave ? "已接续试玩进度，原正式版存档保留；请手动存档" : "试玩进度已继承"
-                    : string.Empty;
+                    : automatic ? "已恢复自动进度" : string.Empty;
                 if (importDemo && !hadFullSave)
                 {
                     if (!SaveCurrentProgress())
@@ -366,6 +450,30 @@ namespace WenXinJie.Presentation
                 message = "未找到匹配当前剧情版本的有效存档";
                 return false;
             }
+        }
+
+        private StorySession ReadContinueSave(out bool recovered, out bool importDemo, out bool automatic)
+        {
+            StorySession manual = null;
+            var manualRecovered = false;
+            var manualImport = false;
+            try { manual = ReadPreferredSave(out manualRecovered, out manualImport); }
+            catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
+                                               || exception is ArgumentException) { }
+
+            StorySession auto = null;
+            var autoRecovered = false;
+            try { auto = _saves.Load(AutomaticSavePath, _graph, out autoRecovered); }
+            catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
+                                               || exception is ArgumentException) { }
+
+            var manualPath = (manualImport ? DemoSavePath : SavePath) + (manualRecovered ? ".bak" : string.Empty);
+            var autoPath = AutomaticSavePath + (autoRecovered ? ".bak" : string.Empty);
+            automatic = auto != null && (manual == null
+                || File.GetLastWriteTimeUtc(autoPath) >= File.GetLastWriteTimeUtc(manualPath));
+            recovered = automatic ? autoRecovered : manualRecovered;
+            importDemo = !automatic && manualImport;
+            return automatic ? auto : manual ?? throw new InvalidDataException("No valid progress.");
         }
 
         private StorySession ReadPreferredSave(out bool recovered, out bool importDemo)
@@ -401,13 +509,13 @@ namespace WenXinJie.Presentation
         private void ShowMainMenu(string notice)
         {
             var hasSave = false;
-            var diskProgress = "读档：尚无存档";
+            var diskProgress = "手动存档：尚无存档";
             try
             {
                 var saved = ReadPreferredSave(out var recovered, out var importDemo);
                 hasSave = true;
                 var source = importDemo ? "试玩进度" : recovered ? "备份存档" : "已保存进度";
-                diskProgress = "读档：" + source + "\n" + DescribeProgress(saved)
+                diskProgress = "手动存档：" + source + "\n" + DescribeProgress(saved)
                     + "\n“" + PageExcerpt(saved) + "”";
             }
             catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
@@ -415,21 +523,41 @@ namespace WenXinJie.Presentation
             {
                 if (_saves.Exists(SavePath) || !isDemo && _saves.Exists(DemoSavePath))
                 {
-                    diskProgress = "读档：没有适用于当前剧情的有效存档，原文件保留";
+                    diskProgress = "手动存档：没有适用于当前剧情的有效存档，原文件保留";
                 }
             }
 
-            var progress = Session != null
-                ? "继续：本次进度" + (HasUnsavedProgress ? "（未保存）" : "（已保存）")
-                    + "\n" + DescribeProgress(Session) + "\n“" + PageExcerpt(Session) + "”\n" + diskProgress
-                : hasSave ? diskProgress + "\n继续游戏将读取以上位置。" : diskProgress + "\n开始游戏后，请使用底栏存档。";
-            if (string.IsNullOrEmpty(notice) && HasUnsavedProgress)
+            var hasAutomatic = false;
+            var automaticProgress = "自动进度：尚无记录";
+            try
             {
-                notice = "继续会保留当前进度；退出前请存档。";
+                var saved = _saves.Load(AutomaticSavePath, _graph, out var recovered);
+                hasAutomatic = true;
+                automaticProgress = "自动进度：" + (recovered ? "备份 · " : string.Empty)
+                    + SaveTime(AutomaticSavePath + (recovered ? ".bak" : string.Empty))
+                    + "\n" + DescribeProgress(saved) + "\n“" + PageExcerpt(saved) + "”";
+            }
+            catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException
+                                               || exception is ArgumentException)
+            {
+                if (_saves.Exists(AutomaticSavePath)) automaticProgress = "自动进度：没有有效记录，原文件保留";
             }
 
-            _view.ShowMainMenu(storyAssets.GetBackground("gate"), Session != null || hasSave, hasSave, notice,
-                progress);
+            var progress = Session != null
+                ? "继续：本次进度" + (HasUnsavedProgress ? "（未手动保存）" : "（已手动保存）")
+                    + "\n" + DescribeProgress(Session) + "\n“" + PageExcerpt(Session) + "”\n\n"
+                    + diskProgress + "\n\n" + automaticProgress
+                : (hasSave || hasAutomatic ? "继续游戏会读取较新的有效进度。\n\n" : string.Empty)
+                    + diskProgress + "\n\n" + automaticProgress;
+            if (string.IsNullOrEmpty(notice) && HasUnsavedProgress)
+            {
+                notice = JsonUtility.ToJson(Session.Snapshot()) == _automaticState && !_automaticSaveFailed
+                    ? "当前进度已自动保存；手动存档可另留一个书签。"
+                    : "继续会保留当前进度；退出前请存档。";
+            }
+
+            _view.ShowMainMenu(storyAssets.GetBackground("gate"), Session != null || hasSave || hasAutomatic,
+                hasSave, hasAutomatic, notice, progress);
         }
 
         private string DemoSavePath => Path.Combine(Path.GetDirectoryName(SavePath), "campaign-demo-run.json");

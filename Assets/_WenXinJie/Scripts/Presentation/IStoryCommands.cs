@@ -15,6 +15,7 @@ namespace WenXinJie.Presentation
         void ContinueGame();
 
         void LoadGameFromMenu();
+        void LoadAutomaticGameFromMenu();
 
         void ReturnToMainMenu();
 

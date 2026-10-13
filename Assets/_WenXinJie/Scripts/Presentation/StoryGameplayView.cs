@@ -53,6 +53,9 @@ namespace WenXinJie.Presentation
             _saveStatus.font = assets.MenuFont;
             _saveStatus.color = new(0.94f, 0.89f, 0.67f);
             _saveStatus.alignment = TextAlignmentOptions.Right;
+            _saveStatus.enableAutoSizing = true;
+            _saveStatus.fontSizeMin = 15;
+            _saveStatus.fontSizeMax = 19;
 
             ui.Frame(root, "LocationPanel", 80f, 166f, 620f, 74f);
             _location = ui.Label(root, "Location", string.Empty, 110f, 178f, 560f, 50f, 28);

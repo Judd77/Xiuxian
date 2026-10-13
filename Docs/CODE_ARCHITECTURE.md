@@ -70,6 +70,8 @@ StoryNode.observation 是可选的演出资料，包含双样本名称、已观�
 
 ## 存档兼容与试玩接续
 
+自动存档与手动书签共用CampaignSaveStore和version 3快照，文件分开（正式版campaign-auto.json／campaign-run.json）。StoryApplication仅在新开局、成功Advance／Choose及手动保存成功后更新自动进度，Render、查线索和读档本身不写自动档。相同本次快照不重复写；异常只更新失败提示、保留会话。首页明确恢复自动与读取手动入口；没有Session时Continue校验两种文件（含有效备份），按实际有效文件时间选择较新者。已有Session则继续内存进度。新开局提示替换自动记录；自动已保存时退出无需再以“未保存”拦截。自动恢复仍通过原完整版本／变量校验，不新增剧情字段或revision。Demo仅共用运行代码、使用独立campaign-demo-auto.json，本轮未制作Demo内容。
+
 StoryApplication用已成功保存或读取的规范快照判断本次进度是否尚未保存，展示状态与保存时间由命令层传给视图；不在Update中访问磁盘。首页摘要通过ReadPreferredSave完整验证后生成，读取摘要不替换Session、不写入正式档。StoryOverlayView共用进度提示面板，打开时阻塞剧情和自动翻页，取消／Escape关闭。新开局与退出可先保存再执行；读取只确认放弃未保存内容，避免单存档槽中的目标被先保存动作覆盖。Demo分界页提供独立接续按钮，保留正文阅读；写入失败仍保留会话，重试成功后更新保存状态。
 
 StoryDefinition.compatibleSaveRevisions 明确列出可直接恢复的旧剧情修订号。当前正式版revision 42兼容revision 33、34、35、36、37、38、39、40、41，保留旧节点与变量定义；H04三项责任改在证词结束后置位，旧快照已核标记仍有效，新增段落不增加存档变量。G07的复测标记在报告后置位，裂符使用既有补符变量；村口亮而炉门尚未回应时使用villageWarning观测阶段，由玩家决定撤力。H05由许澄亲自答应后置h.roles与story.contract，停止小试后才置h.test；迟撤使用既有e.extraCharm，结果节点置位。E02完成试铃、回钟与重新确认后置e.bellPlaced；后续e.extraCharm同时涵盖H05迟撤与E03旧刻度损耗，结局回应不可把两者统一写成同一处伤。revision 39的公开记录由h05.holdCopies实际交付后置e.publicCopies，旧存档已交付标记保持；改道尾声沿用e.delay／e.extraCharm回应已有延误和损耗，不新增变量。revision 40的H06菜单去掉三个重复h.house置位，答复节点保留置位；未谈／部分／全部答复用既有variants呈现。E01实际撤离后才置h.migration，e.delay仍保留堵路损耗，旧快照已有标记不重放。revision 41的E03主动辨气不增加变量，左右符余息用既有residue资料呈现；新支路实际引流后才置e.flowMeasured，错误刻线由e03.old结果页置e.extraCharm，修补与重新询问不清除损耗。revision 42保留G01取证结果页置位，移除入口重复标记，菜单按资料收集状态显示variants。G04新增举证来源选择及跨年份纠错，g.corrected仍在改记结果页置位；原件未交家属时g04.liar不提前归还，不新增变量。Demo仍为35。不开放三路线版revision 32。恢复仍校验版本 3 schema、campaign、节点和完整变量，不重放入口效果；再次保存写当前剧情修订号。后续纯画面改动不必递增剧情 revision。
