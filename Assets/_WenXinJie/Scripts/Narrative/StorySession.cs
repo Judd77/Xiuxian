@@ -266,6 +266,14 @@ namespace WenXinJie.Narrative
                 values.Add("e.thirdWatch", graph.GetVariable("e.thirdWatch").initial);
             }
 
+            // Earlier saves have not rehearsed the two independent stop orders at the village council.
+            if (snapshot.revision <= 64 && graph.Definition.revision >= 65
+                && !values.ContainsKey("g.stopDrill")
+                && graph.Variables.Any(variable => variable.id == "g.stopDrill"))
+            {
+                values.Add("g.stopDrill", graph.GetVariable("g.stopDrill").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 64,
+  "revision": 65,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -32,7 +32,8 @@
     60,
     61,
     62,
-    63
+    63,
+    64
   ],
   "start": "case.intro",
   "variables": [
@@ -308,6 +309,12 @@
     },
     {
       "id": "g.hammer",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 1
+    },
+    {
+      "id": "g.stopDrill",
       "initial": 0,
       "minimum": 0,
       "maximum": 1
@@ -4880,13 +4887,7 @@
               "maximum": 0
             }
           ],
-          "effects": [
-            {
-              "variable": "g.hammer",
-              "operation": "set",
-              "value": 1
-            }
-          ],
+          "effects": [],
           "outcomes": [],
           "hidden": true
         },
@@ -5176,13 +5177,113 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村议",
       "speaker": "旁白",
-      "text": "村民选工匠握钟槌，炉门由家属守铃。修石柱的陶叔会守住分流石闸：任何一端喊停，他就关闸，你同时撤回送入阵中的灵力。老妇只答应再看一次能叫停的小试，还没答应搬离谷口。",
+      "text": "你将谷口两张符摊给村人看：只送了一缕灵力，村口先亮，炉门后热。谁也不能凭这一次断定明夜安全。工匠把钟槌按在桌上：“我可以守村口，可上回钟楼有发钟记录，炉门却没有收令的回签。若我喊停，陶叔怎么知道？”你先得把停令这条路说清。",
+      "background": "villageSquare",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g08.stopCheck"
+    },
+    {
+      "id": "g08.stopCheck",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "陶叔提出先关着试验支路，空试一次停令：村口工匠看符，炉门林月听本人叫停，两处各自报到石台；他合闸后须回报“已关”。守钟人指着旧钟绳：“也可以先查它今日究竟传到哪儿，别靠十年前缺的那张回签猜。”你先核哪一步？",
+      "background": "villageSquare",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "direct",
+          "text": "按两端各自报停的新办法，先试石台回令",
+          "target": "g08.directDrill",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "oldBell",
+          "text": "先拿同批回签，核旧钟绳今日能传到哪儿",
+          "target": "g08.oldBell",
+          "lockedReason": "钟楼今日的两张回签已核过，不必重复试传",
+          "conditions": [
+            {
+              "variable": "g.bellBook",
+              "minimum": 0,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        }
+      ],
+      "variants": [
+        {
+          "text": "你将钟楼今日的两张回签放在桌上：村口有新息，炉门仍空。它们只能证明今日旧钟绳的传声，不替十年前作证。陶叔提出关着试验支路，空试一次新的停令：村口工匠看符，炉门林月听本人叫停，两处各自报到石台；他合闸后必须回报“已关”。你请众人亲眼看这一次。",
+          "conditions": [
+            {
+              "variable": "g.bellBook",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g08.oldBell",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "你请工匠与林月各拿一张同批空回签，听见今日试钟才在纸角留下灵力。守钟人喊明“试传”，敲了三声。工匠的纸有新息，林月从炉门带回的纸却还是空的；山壁只回了一声闷响，她没敢猜。辨气能核纸上今日有无新息，不能从空纸推出十年前她也没听见。你把两张纸分开记，不再用钟楼一根旧绳代替两端停令。",
+      "background": "oldBellTower",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.bellBook",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "g08.directDrill"
+    },
+    {
+      "id": "g08.directDrill",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "陶叔把试验支路锁在关闭处。工匠从村口报“停”，林月也从炉门单独报一次；石台各收到一回，陶叔当着报信人的面转钥验闸，分别回了“已关”。没有向新路送入灵力，这回只试能不能叫停。工匠摸着钟槌说：“我肯守这一回；可敲钟后若等不到回话，试验就不能开始。”你把这句写在条件最上面。",
+      "background": "villageSquare",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g08.familyTerms"
+    },
+    {
+      "id": "g08.familyTerms",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "老妇只肯在小试时让孙子陪她上坡，不答应明日开谷口；父亲要先带女儿和药袋离开热墙，试完还回自家屋。木匠自愿留在村符旁握钟，裂了便立即敲停。许澄姐姐愿到炉门听铃，却不能替妹妹答应坐榻。你把暂避、守钟、家属站位分成三行，让他们各自核字；下一次真要改道，仍须重新问每户和炉里的人。",
       "background": "villageSquare",
       "portrait": "guHeng",
       "rain": false,
       "effects": [
         {
           "variable": "g.hammer",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "g.stopDrill",
           "operation": "set",
           "value": 1
         }
@@ -7201,7 +7302,19 @@
         "rightNote": "许澄握铃，林月守门",
         "flow": "pending"
       },
-      "next": "h05.test"
+      "next": "h05.test",
+      "variants": [
+        {
+          "text": "村议那次空闸演练只能证明停令能到石台，不能证明新路受冲时也安全。你将谷口量过的现柱位抄到石台，在村口与炉门贴好感应符。陶叔只转开试验支路，旧炉仍照原轮次承压。顾衡留在村口传钟声，林月看许澄的手，沈砚核接线。你先稳住灵力，准备送出细细一缕；这一回还不是正式引流。",
+          "conditions": [
+            {
+              "variable": "g.stopDrill",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h05.test",
