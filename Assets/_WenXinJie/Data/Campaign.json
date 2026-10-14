@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 58,
+  "revision": 59,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -26,7 +26,8 @@
     54,
     55,
     56,
-    57
+    57,
+    58
   ],
   "start": "case.intro",
   "variables": [
@@ -590,6 +591,12 @@
     },
     {
       "id": "e.patientWords",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "e.familyVisit",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -3701,7 +3708,7 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村民家",
       "speaker": "旁白",
-      "text": "父亲将护符挂在小女儿床头，退开半步，又伸手扶正。白日他还说要摘掉它。见你进门，他没有遮掩：“我儿子在炉里，我不想靠他挡。可她昨夜听见山里响，哭到天亮。”桌上摊着一张空白撤离表，药包压住了纸角。",
+      "text": "父亲将护符挂在小女儿床头，退开半步，又伸手扶正。白日他还说要摘掉它。见你进门，他没有遮掩：“我儿子段七在炉里，我不想靠他挡。可她昨夜听见山里响，哭到天亮。”桌上摊着一张空白撤离表，药包压住了纸角。",
       "background": "villagerHome",
       "portrait": "",
       "rain": false,
@@ -8073,6 +8080,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
+      "next": "e04.familyMessage"
+    },
+    {
+      "id": "e04.familyMessage",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "顾衡按医舍传来的真名写了短笺，叫高处的人先将‘段七已出炉，正在医舍治伤’交给父亲。伤有多重，等林月看过才说。父亲读完，将女儿今早的药袋系紧，等天亮带她上山。",
+      "background": "valleyAftermath",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
+      "choices": [],
       "next": "e05.account"
     },
     {
@@ -8155,6 +8175,149 @@
           ]
         }
       ],
+      "next": "e05.familyDoor"
+    },
+    {
+      "id": "e05.familyDoor",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "门边响起药袋碰木框的轻声。段七的父亲牵着小女儿，从高处走到医舍。顾衡的短笺被他折在掌心，边角磨软了。他没先问儿子能不能回家，只问林月：“我能进去看他吗？她今早的药也带着，耽误不了。”段七听见父亲的声音，想坐起来，伤臂一动便停住。",
+      "background": "medicineHouse",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "variants": [
+        {
+          "text": "门边响起药袋碰木框的轻声。段七的父亲牵着小女儿，从高处走到医舍。昨夜随身那袋已经用完，他把今早的药单独拿在手里；顾衡的短笺折在另一掌。段七听见父亲的声音，想坐起来，伤臂一动便停住。父亲问林月：“她的药没误。我能进去看他吗？”",
+          "conditions": [
+            {
+              "variable": "g.fatherHeard",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "段七的父亲牵着小女儿来到医舍，工匠押车交还的药袋按时辰扎在他腰侧，今早那剂已经服下。顾衡的短笺在他掌心折了几道。段七听见父亲的声音，想坐起来，伤臂一动便停住。父亲问林月：“她的药没误。我能进去看他吗？”",
+          "conditions": [
+            {
+              "variable": "g.fatherHeard",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ],
+      "next": "e05.familyChoice"
+    },
+    {
+      "id": "e05.familyChoice",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月让段七先把受伤的手放稳：“人就在这里，见不见、现在见还是歇过再见，先问他。”父亲停在门槛外，女儿抱着药包，轻声问哥哥是不是还要躺在那张石榻上。段七听见了，却先抬眼看你。你怎么把门外的事告诉他？",
+      "background": "medicineHouse",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "now",
+          "text": "告诉段七父女都来了，请他决定现在是否见面",
+          "target": "e05.familyNow",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "rest",
+          "text": "先说明他可以休息，请父女留下话，醒后由他决定",
+          "target": "e05.familyRest",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e05.familyNow",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你把父亲和妹妹来了的事说给段七，不替他答应。段七看着自己的伤臂，说想见，只请他们别碰左手。林月替他垫高枕头，才请父女进门。妹妹见哥哥没坐在石榻上，又不敢靠近：“那我今天也不用你替我挡山响了？”段七笑了一下，眼圈却红了：“不用。你那张护符先别摘，等山路真修好。”",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.familyVisit",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "e05.familyFather"
+    },
+    {
+      "id": "e05.familyFather",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "父亲把女儿的药放在床边，没让她爬上段七的伤臂。他问林月还要换几回药，林月只答今天该做的，不许诺几日后必好。段七把自己的领药签递给父亲看：“我的名字在上面。这回不是你猜我在哪张榻。”父亲读完，才伸手握住他没伤的那只手。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.familyReceipt"
+    },
+    {
+      "id": "e05.familyRest",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你告诉段七，他可以先睡，醒来再决定见不见。段七闭眼缓了口气：“叫他们别回山下，等我醒一醒。”父亲在门外听见，点头坐下，先给女儿核今早的药签。妹妹在笺背画了三个人，放到床边，却没有越过林月去摇哥哥的伤臂。父亲请你不要在探视簿上先写‘已见’。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.familyVisit",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "e05.familyWake"
+    },
+    {
+      "id": "e05.familyWake",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "换药后段七醒来，见笺背那三个人，叫林月请父女进来。他的声音不大，妹妹却从门外跑到床边。父亲先问伤臂能不能碰，得到“不行”，便将女儿抱到床沿，让她自己把画给哥哥看。段七说今天还得留医舍，父亲答：“我知道去哪儿找你了。你先养伤。”",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.familyReceipt"
+    },
+    {
+      "id": "e05.familyReceipt",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你在探视簿上写下实际见面的时辰，女儿的药签仍归父亲，段七的伤签仍归医舍。父亲没有把‘已见到儿子’念成‘儿子已经好了’，也不拿她的护符要求段七回炉。许澄在旁榻听见了，把自己的去向抄页压在药碗下。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
       "next": "e05.patient"
     },
     {
@@ -8345,7 +8508,42 @@
           ]
         }
       ],
-      "next": "e05.winter"
+      "next": "e05.familyAfterHome"
+    },
+    {
+      "id": "e05.familyAfterHome",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "暂借的木匠家",
+      "speaker": "旁白",
+      "text": "父亲把女儿的药包放在平车旁，又朝山上的医舍望了一眼。段七今夜仍在那里治伤，不能因为出了炉就算已经回家。",
+      "background": "craftsmanHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.winter",
+      "variants": [
+        {
+          "text": "父亲带女儿从医舍回来，腰间仍系着药袋。段七亲口告诉他们伤臂不能碰，今晚还得留在医舍。父亲说这回知道儿子在哪儿，明早先送女儿的药，再去看他。",
+          "conditions": [
+            {
+              "variable": "e.familyVisit",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "父亲带女儿从医舍回来，把笺背的小画收进衣襟。段七歇过后才见他们，今晚仍要留医舍。他答应明早给女儿送完药，再去看儿子的伤。",
+          "conditions": [
+            {
+              "variable": "e.familyVisit",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "e05.winter",

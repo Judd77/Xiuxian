@@ -210,6 +210,14 @@ namespace WenXinJie.Narrative
                 values.Add("e.patientWords", graph.GetVariable("e.patientWords").initial);
             }
 
+            // Earlier saves have no record of when Duan Qi met his family.
+            if (snapshot.revision <= 58 && graph.Definition.revision >= 59
+                && !values.ContainsKey("e.familyVisit")
+                && graph.Variables.Any(variable => variable.id == "e.familyVisit"))
+            {
+                values.Add("e.familyVisit", graph.GetVariable("e.familyVisit").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
