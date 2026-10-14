@@ -249,6 +249,14 @@ namespace WenXinJie.Narrative
                 values.Add("e.departureOrder", graph.GetVariable("e.departureOrder").initial);
             }
 
+            // Earlier saves have not chosen where to keep the extra night watch.
+            if (snapshot.revision <= 62 && graph.Definition.revision >= 63
+                && !values.ContainsKey("g.holdPatrol")
+                && graph.Variables.Any(variable => variable.id == "g.holdPatrol"))
+            {
+                values.Add("g.holdPatrol", graph.GetVariable("g.holdPatrol").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

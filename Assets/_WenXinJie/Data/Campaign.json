@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 62,
+  "revision": 63,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -30,7 +30,8 @@
     58,
     59,
     60,
-    61
+    61,
+    62
   ],
   "start": "case.intro",
   "variables": [
@@ -624,6 +625,12 @@
     },
     {
       "id": "case.doorTrace",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "g.holdPatrol",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -5028,7 +5035,7 @@
         }
       ],
       "choices": [],
-      "next": "ending.oldPublic"
+      "next": "g08.holdWatch"
     },
     {
       "id": "g08.holdRepairedFirst",
@@ -5046,6 +5053,114 @@
           "value": 0
         }
       ],
+      "choices": [],
+      "next": "g08.holdWatch"
+    },
+    {
+      "id": "g08.holdWatch",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村夜",
+      "speaker": "旁白",
+      "text": "三户已在高处，村符也补过。工匠却摸到墙根又发热；炉门同时送来一张刚换下的焦符。白天小试只量出村口先受冲，没查清整夜会怎样走。顾衡让人守着村钟，林月守炉门。你今夜先去哪里核这一股新热意？",
+      "background": "villageSquareNight",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "village",
+          "text": "留在村口辨气，帮工匠守刚补的墙根",
+          "target": "g08.holdVillageProbe",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "furnace",
+          "text": "带焦符回炉门，先帮林月核换榻时机",
+          "target": "g08.holdFurnaceProbe",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g08.holdVillageProbe",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村夜",
+      "speaker": "旁白",
+      "text": "工匠把同批未用的符纸放在石上。你依次辨气：新纸只有画符时的淡息，补过的墙根却一阵阵涌来热意。是旧石槽仍在送冲，不是朱砂全坏。你叫工匠守住新线，自己按白天试过的钟次传信炉门；这次只报眼前受压，不报灵潮何时会到。",
+      "background": "villageSquareNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.holdPatrol",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g08.holdVillageCost"
+    },
+    {
+      "id": "g08.holdVillageCost",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村夜",
+      "speaker": "旁白",
+      "text": "墙根第二次发红时，工匠已经等在旁边，立刻补住裂边，空屋没有再损。炉门收到信前，陶叔为稳住旧阵多烧了一张应急炉符；林月按时给许澄换药，没有叫她替这张纸多撑。你把符纸记在宗门守阵账，不算村民用掉。",
+      "background": "villageSquareNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g08.holdHandover"
+    },
+    {
+      "id": "g08.holdFurnaceProbe",
+      "chapter": "卷二 · 山下那份账",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "你将刚换下的焦符与未用的新符并排辨气。焦符上有这一夜新压出的热息，新符仍凉；林月据此提前查看许澄的腕伤。许澄说想歇，陶叔听令回钟，林月扶她下榻换药。你只记这次实际停下的时辰，不把她的歇息写成已同意下一次承压。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.holdPatrol",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "g08.holdFurnaceCost"
+    },
+    {
+      "id": "g08.holdFurnaceCost",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村夜",
+      "speaker": "旁白",
+      "text": "村口的钟仍有人守。你赶回去时，工匠已压住新符，墙边一间空仓的檐木却被余热烤裂。三户都在高处，无人添伤；木匠把裂木取下，说明早要换。你将木料记在宗门欠账上，不说撤空的屋子便没有损失。",
+      "background": "villageSquareNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g08.holdHandover"
+    },
+    {
+      "id": "g08.holdHandover",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村高处",
+      "speaker": "旁白",
+      "text": "天将亮，顾衡把撤离、补符和今夜新耗的账分列。家属拿到炉里尚待核名的去向，工匠接过下一班村钟，林月留有许澄的换药时辰。你们尚未核到旧加压令，也没有完成改道小试，不能替炉里的人写“已经救出”。先守到复查柱位、补料、重问当事人的那一天。",
+      "background": "villageSquareNight",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
       "choices": [],
       "next": "ending.oldPublic"
     },
@@ -5423,6 +5538,66 @@
           "conditions": [
             {
               "variable": "e.publicCopies",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "先补符让三户迟撤，落瓦划伤孙子的手臂；高处医舍已替他包扎。你回炉门核换药，空仓檐木在村口烤裂，宗门另欠木料。顾衡把两处损耗分别记账。许澄歇过这一轮，仍未出炉；三日后先看伤、补料、复查柱位。",
+          "conditions": [
+            {
+              "variable": "g.holdWarned",
+              "minimum": 0,
+              "maximum": 0
+            },
+            {
+              "variable": "g.holdPatrol",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "text": "先补符让三户迟撤，落瓦划伤孙子的手臂；高处医舍已替他包扎。你留村守墙，炉门为稳住旧阵另烧一张应急符。顾衡把伤情与符纸分别记账。许澄今夜换过药，仍未出炉；三日后先看伤、补料、复查柱位。",
+          "conditions": [
+            {
+              "variable": "g.holdWarned",
+              "minimum": 0,
+              "maximum": 0
+            },
+            {
+              "variable": "g.holdPatrol",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "老妇和孙子先撤到高处，断符没有伤人，却多用一张原定送炉门的纸。你回炉门核换药，空仓檐木在村口烤裂，宗门另欠一笔木料。许澄歇过这一轮，仍在旧阵里；三日后先补料、复查柱位，再问她本人。",
+          "conditions": [
+            {
+              "variable": "g.holdWarned",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "g.holdPatrol",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "text": "老妇和孙子先撤到高处，没人被断符压着。重画村符用了一张原定送炉门的纸；你留村守墙，炉门另烧一张应急符。两笔各有去处。许澄今夜换过药，仍没走出炉门；三日后先补料、复查柱位，再问她本人。",
+          "conditions": [
+            {
+              "variable": "g.holdWarned",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "g.holdPatrol",
               "minimum": 1,
               "maximum": 1
             }
