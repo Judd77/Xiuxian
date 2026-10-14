@@ -160,6 +160,15 @@ namespace WenXinJie.Narrative
                 }
             }
 
+            // Revision 53 adds tonight's shelter decision. Older saves have not
+            // made this choice; do not assign a room or a repair cost retroactively.
+            if (snapshot.revision <= 52 && graph.Definition.revision >= 53
+                && !values.ContainsKey("h.lodging")
+                && graph.Variables.Any(variable => variable.id == "h.lodging"))
+            {
+                values.Add("h.lodging", graph.GetVariable("h.lodging").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
