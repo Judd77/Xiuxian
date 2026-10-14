@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 67,
+  "revision": 68,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -35,7 +35,8 @@
     63,
     64,
     65,
-    66
+    66,
+    67
   ],
   "start": "case.intro",
   "variables": [
@@ -662,6 +663,12 @@
       "initial": 0,
       "minimum": 0,
       "maximum": 2
+    },
+    {
+      "id": "case.entryTechnique",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 3
     }
   ],
   "nodes": [
@@ -1956,7 +1963,7 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "医舍",
       "speaker": "旁白",
-      "text": "林月在换班单上点出二更。那时送药侧门会开，正门白日的求见却要先报管事。“等他肯让我们进去，人兴许又换了地方。”她取两张遮铃符：探气铃感到灵力便响，这符能让它失灵七次呼吸，遮不住守卫的眼睛。今夜只有一次换班的空隙。",
+      "text": "林月在换班单上点出二更。那时送药侧门会开，正门白日求见却要先报管事。“等他肯让我们进去，人兴许又换了地方。”她取两张遮铃符：探气铃察觉正在施术的灵力便响，早前留下的静止余息不会使它响。这符能让铃失灵七次呼吸，遮不住守卫的眼睛。今夜只有一次换班的空隙。",
       "background": "medicineHouse",
       "portrait": "linYue",
       "rain": false,
@@ -2022,14 +2029,14 @@
         }
       ],
       "choices": [],
-      "next": "c10.furnace"
+      "next": "c10.threshold"
     },
     {
       "id": "c10.wait",
       "chapter": "卷一 · 没有下山的人",
       "location": "山腹侧门",
       "speaker": "旁白",
-      "text": "守卫走过，第一张符卷黑。林月把备用符贴上，你们才推车进门。铃没响，可再遇探气铃，她手里已没有第二张。",
+      "text": "守卫走过，第一张符卷黑。林月把备用符贴上，开锁、移开门后的挡木；到第六息，车头才进门。铃没响，可再遇探气铃，她手里已没有第二张。",
       "background": "mountainHeart",
       "portrait": "linYueConcerned",
       "rain": false,
@@ -2041,7 +2048,7 @@
         }
       ],
       "choices": [],
-      "next": "c10.furnace"
+      "next": "c10.threshold"
     },
     {
       "id": "c10.furnace",
@@ -2282,8 +2289,15 @@
           "text": "多留片刻抄榻号，再带阿澈走",
           "target": "c11.number",
           "effects": [],
-          "conditions": [],
-          "outcomes": []
+          "conditions": [
+            {
+              "variable": "case.entryTechnique",
+              "minimum": 0,
+              "maximum": 2
+            }
+          ],
+          "outcomes": [],
+          "lockedReason": "侧门误响已经惊动巡卫，来不及停下抄两张榻号"
         },
         {
           "id": "rescue",
@@ -2292,6 +2306,18 @@
           "effects": [],
           "conditions": [],
           "outcomes": []
+        }
+      ],
+      "variants": [
+        {
+          "conditions": [
+            {
+              "variable": "case.entryTechnique",
+              "minimum": 3,
+              "maximum": 3
+            }
+          ],
+          "text": "阿澈已脱开符带，林月将封袋放进药箱。侧门的巡卫查完符钩，灯影正往内廊回。门边两张榻号尚未抄下，林月却已在扶阿澈上车：你方才迟收的那一息，让这次没有余裕再记牌号。人已在身边，先把他带走。"
         }
       ]
     },
@@ -2325,7 +2351,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c11.rescueAfter"
+      "next": "c11.rescueAfter",
+      "variants": [
+        {
+          "conditions": [
+            {
+              "variable": "case.entryTechnique",
+              "minimum": 3,
+              "maximum": 3
+            }
+          ],
+          "text": "门铃早已响过，巡卫正往内廊回来。你扶阿澈上空药车，林月将封袋收好，把药箱与布帘移到他身前；她持送药单带车离开，没让你再停在牌号前。两张榻号未抄，隔墙也未亲见。出了侧门，内廊随后被封；墙后那个人的姓名与原账仍须另找出处。"
+        }
+      ]
     },
     {
       "id": "c11.rescueAfter",
@@ -7245,7 +7283,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h04.qiAccount",
+      "next": "h04.entryAccount",
       "variants": [
         {
           "text": "祁元肃看向旧符带的封袋：“你也动过这条带？”你承认救人时接过灵力，辨气不能从现在的余息分出施术者。姐姐将林月记下的挪带先后和接回时辰另摆一页，阿澈的腕伤也有伤签。她指回去向册：“旧带被动过，册上那句离山就是真的了吗？”祁元肃没有收回刚才承认的命令。",
@@ -10767,6 +10805,208 @@
       ],
       "choices": [],
       "next": "g08.question"
+    },
+    {
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "background": "mountainHeart",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "id": "c10.threshold",
+      "text": "车头进了门，后轮却抵住半寸高的石槛。林月不能松开门，只好让你抬车尾。贴上的遮铃符已烧到最后一折，只剩一息。你可以用肩和手推过这半寸，也能用灵力托住车轴；若借灵力，车过去就得收回，符一烧尽，门铃便会察觉你还连在车轴上运转的灵力。她指向你的手，等你动。",
+      "effects": [],
+      "choices": [
+        {
+          "id": "hands",
+          "text": "收住灵力，和林月协力抬车过槛",
+          "target": "c10.handPush",
+          "conditions": [],
+          "effects": [],
+          "outcomes": [],
+          "lockedReason": ""
+        },
+        {
+          "id": "qi",
+          "text": "用一缕灵力托车轴，过槛后立即收回",
+          "target": "c10.qiPush",
+          "conditions": [],
+          "effects": [],
+          "outcomes": [],
+          "lockedReason": ""
+        }
+      ]
+    },
+    {
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "background": "mountainHeart",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "id": "c10.handPush",
+      "text": "你把肩抵在车后，不再运气。林月用脚抵住门，腾出一只手与你一起抬；后轮越过石槛，车把在你掌心磨得生疼。遮铃符烧尽时，你们已将车推到门后的凹处，轴上没有留下你助推的灵力。你松开咬紧的牙，才听见自己那口气。林月拍拍你的肩，没再叫你多撑。",
+      "effects": [
+        {
+          "variable": "case.entryTechnique",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c10.passClear"
+    },
+    {
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "background": "mountainHeart",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "id": "c10.qiPush",
+      "text": "你沿车轴送出一缕灵力，轮子便轻了一点。林月扶住药箱，车尾越过石槛；符角最后一道朱纹也开始发黑。手背还贴着车轴，力收得太急，轮子会晃，可门铃不会等你把药箱摆得整整齐齐。林月已经用手接住车把，让你现在撤。",
+      "effects": [],
+      "choices": [],
+      "next": "c10.qiRelease"
+    },
+    {
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "background": "mountainHeart",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "id": "c10.qiRelease",
+      "text": "后轮已经落在门内，林月能以手稳住车。最后那道朱纹正在熄下去。你的灵力仍连着车轴，撤回后再推便只靠手脚；继续托着会轻些，却会让失去遮蔽的门铃察觉你仍在施术。",
+      "effects": [],
+      "choices": [
+        {
+          "id": "release",
+          "text": "现在收回灵力，让林月稳车，我用手接着推",
+          "target": "c10.qiWithdraw",
+          "conditions": [],
+          "effects": [],
+          "outcomes": [],
+          "lockedReason": ""
+        },
+        {
+          "id": "hold",
+          "text": "再托一下，等药箱稳住再撤",
+          "target": "c10.qiLate",
+          "conditions": [],
+          "effects": [],
+          "outcomes": [],
+          "lockedReason": ""
+        }
+      ]
+    },
+    {
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "background": "mountainHeart",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "id": "c10.qiWithdraw",
+      "text": "你收回那一缕，车轮轻轻落下，林月已经接住车把。药箱碰了下木沿，没有翻。符纸烧尽，门铃仍静着。车轴还留一点施术的余息，已经不再有灵力从你体内送进去；这一次知道了什么叫撤力，不是把手挪开便算完。林月让你把车推进门后，腾出送药的路。",
+      "effects": [
+        {
+          "variable": "case.entryTechnique",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "c10.passClear"
+    },
+    {
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "background": "mountainHeart",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "id": "c10.qiLate",
+      "text": "你想让药箱再稳一点，符纸却先烧尽了。门上的铃忽然响出一声，林月立刻按住车把，催你把连着车轴的那缕灵力收回。内廊巡灯折向侧门，巡卫喊人查看符钩。林月将盖着医舍印的送药单举起来，没有装作铃从未响过；你趁他们停在门后查符，将车转进药架旁。",
+      "effects": [
+        {
+          "variable": "case.entryTechnique",
+          "operation": "set",
+          "value": 3
+        }
+      ],
+      "choices": [],
+      "next": "c10.passClear"
+    },
+    {
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "background": "mountainHeart",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "id": "c10.passClear",
+      "text": "门后药架挡住了车身。林月将药包放到架上，只留空药箱与布帘，再让你跟着她往外榻走。药车越过了门槛，遮铃符却已烧完，不能再遮住接下来的施术。你不碰廊上的灯，贴着药车跟进去。",
+      "effects": [],
+      "choices": [],
+      "next": "c10.furnace",
+      "variants": [
+        {
+          "conditions": [
+            {
+              "variable": "case.entryTechnique",
+              "minimum": 3,
+              "maximum": 3
+            }
+          ],
+          "text": "巡卫留在侧门查烧黑的符钩，内廊的人也被叫去应话。林月趁他们核送药单，将药包卸到架上，留着空箱和布帘，把你带到最近的外榻；查完便会回来，这次没有余裕再绕门记牌号。遮铃符已经烧完，你不再向车轴送气，只跟着药车走。"
+        }
+      ]
+    },
+    {
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "id": "h04.entryAccount",
+      "text": "陈闻将交接车次放在接回时辰旁。药车怎样进门、阿澈后来从哪里被带出，各有经手者能说；车牌和铃声本身不能替车里的人报姓名。祁元肃不能拿这两项，改掉医舍已经核过的人名与日期。",
+      "effects": [],
+      "choices": [],
+      "next": "h04.qiAccount",
+      "variants": [
+        {
+          "conditions": [
+            {
+              "variable": "case.entryTechnique",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "text": "陈闻核对那趟车的时辰。你说门槛是自己与林月协力抬过去的，没有以灵力助推；门铃当时没响，也不能因此说车里无人。你们亲眼见到阿澈、后来将他接回医舍，是另外能当面核的事。姐姐仍将伤签放在去向册旁，等祁元肃回答。"
+        },
+        {
+          "conditions": [
+            {
+              "variable": "case.entryTechnique",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ],
+          "text": "陈闻核对车次，你补出自己曾以灵力托过车轴、在符烧尽前收回的经过。那缕气来自你，铃没响不是阿澈已经下山的证明。姐姐把林月核过的接回时辰留在案上：有真名的伤签还在，祁元肃仍须回答去向栏。"
+        },
+        {
+          "conditions": [
+            {
+              "variable": "case.entryTechnique",
+              "minimum": 3,
+              "maximum": 3
+            }
+          ],
+          "text": "祁元肃问门铃为何响过。你没有省去自己迟收灵力的一息：铃察觉的是车轴上的气，不是把阿澈的名字敲出来了；巡卫折回，也确实让你们没能抄两张榻号。姐姐将林月的接回时辰和伤签推近：“缺了那两张号，不会让阿澈凭空走过山门。”你认下自己的失误，仍请掌事回答他改写的去向。"
+        }
+      ]
     }
   ]
 }

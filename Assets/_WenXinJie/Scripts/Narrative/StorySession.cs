@@ -290,6 +290,14 @@ namespace WenXinJie.Narrative
                 values.Add("g.repairMethod", graph.GetVariable("g.repairMethod").initial);
             }
 
+            // Earlier entry records do not claim the new threshold manoeuvre or its alarm.
+            if (snapshot.revision <= 67 && graph.Definition.revision >= 68
+                && !values.ContainsKey("case.entryTechnique")
+                && graph.Variables.Any(variable => variable.id == "case.entryTechnique"))
+            {
+                values.Add("case.entryTechnique", graph.GetVariable("case.entryTechnique").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
