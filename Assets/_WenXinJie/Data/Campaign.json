@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 65,
+  "revision": 66,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -33,7 +33,8 @@
     61,
     62,
     63,
-    64
+    64,
+    65
   ],
   "start": "case.intro",
   "variables": [
@@ -648,6 +649,12 @@
       "initial": 0,
       "minimum": 0,
       "maximum": 2
+    },
+    {
+      "id": "case.rescueMethod",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 3
     }
   ],
   "nodes": [
@@ -2102,7 +2109,162 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "炉房外榻",
       "speaker": "旁白",
-      "text": "你沿石槽辨气，林月只将符带松开半寸。石柱的新息先增，通向隔壁榻的纹路迟一瞬发暖；阿澈腕上的灼热略退，那一股力却没有消失。林月将符带暂按稳：“带他走，旁边便会多受一些。”内廊已有脚步，门边的两张榻号还没抄。",
+      "text": "你沿石槽辨气，林月只将符带松开半寸。石柱的新息先增，通向隔壁榻的纹路迟一瞬发暖；阿澈腕上的灼热略退，那一股力却没有消失。林月将符带暂按稳：“带他走，旁边便会多受一些。”阿澈盯着那两处暖意：“我已经喝过药了，为什么手还不能松？”",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c11.releaseChoice",
+      "observation": {
+        "kind": "flow",
+        "title": "松带半寸 · 冲击转向",
+        "caption": "只松动一次腕符，未将人带离炉榻；观察本次先后。",
+        "leftLabel": "石柱",
+        "rightLabel": "隔墙石槽",
+        "leftNote": "新息先增",
+        "rightNote": "迟一瞬发暖",
+        "flow": "villageFirst"
+      }
+    },
+    {
+      "id": "c11.releaseChoice",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
+      "speaker": "旁白",
+      "text": "“药能止痛，不能替你把乱气导出去。”林月摸过阿澈的腕骨，对你说，她可分两次松带，让他再吐完两口气；也可由你用自己的吐纳接两息，先让他松手。你只是初学弟子，两息便须收力，不能替旧阵一直撑；接力还会把你的新息留在旧带上，日后辨气分不出谁留下了哪一道。阿澈先说：“我要走。”林月等你选方法，再请他确认。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "staged",
+          "text": "按林月的方法逐次松带，让阿澈再吐完两口气",
+          "target": "c11.stagedRelease",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "support",
+          "text": "以自己的吐纳接两息，让阿澈先松开手",
+          "target": "c11.borrowBreath",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c11.stagedRelease",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
+      "speaker": "旁白",
+      "text": "你问阿澈还能不能按平日吐纳，再吐完两口气。他看了林月一眼：“两口。第二口吐完，我就不撑了。”林月答应，随他的呼吸松开第一折，再解第二折。你沿槽辨气，没有把自己的灵力送进去；石柱先暖，隔墙的槽随后发热。阿澈终于张开攥得发白的手。林月将旧带按原状封进纸袋，扶他坐起，没有再催他多运一轮。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.rescueMethod",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c11.exitChoice"
+    },
+    {
+      "id": "c11.borrowBreath",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
+      "speaker": "旁白",
+      "text": "你说自己只接两息，阿澈才将手放平。林月让你的掌心贴住符带末端，按住你的肩：“吐气要稳。不是把山里的气吞进肚子，是用自己的灵力给它让一条路。”你运起平日吐纳，凉意顺腕骨钻来，手臂立即沉下去；阿澈的指节却终于张开。林月拆下符带，让它从你掌下接向石槽，数出第一息。你的暖意也留进了这条旧带。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.rescueMethod",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "c11.borrowCount"
+    },
+    {
+      "id": "c11.borrowCount",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
+      "speaker": "旁白",
+      "text": "第二息，阿澈已脱开腕符，林月扶住他。你腹中的暖意却比平日吐纳时薄了许多，隔墙石槽仍在发热。你能替他接住的只是刚才这一小段，撤手后乱气仍要回到旧阵，不能因此说山下安全。林月让你现在收力，药车就在身旁。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "stop",
+          "text": "按第二息收回灵力，准备扶阿澈上车",
+          "target": "c11.borrowOnTime",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "wait",
+          "text": "再接一息，看隔墙的热意能否退去",
+          "target": "c11.borrowLate",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c11.borrowOnTime",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
+      "speaker": "旁白",
+      "text": "你将自己的灵力收回，手掌离开符带。指尖发麻，呼吸还稳；林月把旧带折进纸袋，记下你刚才接过两息。阿澈把脚挪到榻沿，伸手扶住药车：“我这只手终于不用抓着了。”隔墙的热意仍未退尽，这两息只是帮他离榻，没有替别人解除旧阵。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c11.exitChoice"
+    },
+    {
+      "id": "c11.borrowLate",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
+      "speaker": "旁白",
+      "text": "你想再等一息，吸气却忽然卡在胸口，指尖跟着一抖。林月立刻按离你的手，将末端退回石槽；阿澈在榻边攥住你袖口，没让你栽下去。隔墙的热意并没有回答那个人是谁，也没有消失。你呛了两声，林月封起旧带，在袋口补记你多接的一息：“你也是人，别把自己当一张能一直烧的符。”",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.rescueMethod",
+          "operation": "set",
+          "value": 3
+        }
+      ],
+      "choices": [],
+      "next": "c11.exitChoice"
+    },
+    {
+      "id": "c11.exitChoice",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "炉房外榻",
+      "speaker": "旁白",
+      "text": "阿澈已脱开符带，林月将封袋放进药箱。内廊巡灯在转，门边两张榻号尚未抄下；隔墙那个人也没有露脸。阿澈扶住车沿，等你决定是立即走，还是再留片刻记两张牌号。",
       "background": "furnaceChamber",
       "portrait": "linYueConcerned",
       "rain": false,
@@ -2118,7 +2280,7 @@
         },
         {
           "id": "rescue",
-          "text": "先解符带，把阿澈带出炉房",
+          "text": "立即扶阿澈上车，离开炉房",
           "target": "c11.rescue",
           "effects": [],
           "conditions": [],
@@ -2131,7 +2293,7 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "炉房外榻",
       "speaker": "旁白",
-      "text": "你抄下门边的两张榻号，没有绕过隔墙看人。林月解开符带，你扶阿澈上空药车，用药箱与布帘挡住他。多留的这片刻让内廊警铃响了，车仍赶在侧门落锁前出去。榻号留下了，姓名还得另问。",
+      "text": "你抄下门边的两张榻号，没有绕过隔墙看人。林月收好符带封袋，你扶阿澈上空药车，用药箱与布帘挡住他。多留的这片刻让内廊警铃响了，车仍赶在侧门落锁前出去。榻号留下了，姓名还得另问。",
       "background": "furnaceChamber",
       "portrait": "",
       "rain": false,
@@ -2143,20 +2305,65 @@
         }
       ],
       "choices": [],
-      "next": "c11.cost"
+      "next": "c11.rescueAfter"
     },
     {
       "id": "c11.rescue",
       "chapter": "卷一 · 没有下山的人",
       "location": "炉房外榻",
       "speaker": "旁白",
-      "text": "你扶阿澈上空药车，林月解开符带，再将药箱与布帘移到他身前。你们趁铃未响推向侧门，没有绕过隔墙看清另一张榻。内廊随后被封，墙后那个人的姓名与原账，都只能另外找出处。",
+      "text": "你扶阿澈上空药车，林月收好符带封袋，再将药箱与布帘移到他身前。你们趁铃未响推向侧门，没有绕过隔墙看清另一张榻。内廊随后被封，墙后那个人的姓名与原账，都只能另外找出处。",
       "background": "furnaceChamber",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c11.cost"
+      "next": "c11.rescueAfter"
+    },
+    {
+      "id": "c11.rescueAfter",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "回到医舍，林月先让阿澈躺稳，剪开腕上的药布。她把伤签与从炉房带回的纸袋放在不同一边，先治伤，再核取下符带的经过。",
+      "background": "medicineHouse",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c11.cost",
+      "variants": [
+        {
+          "text": "回到医舍，林月让你把发麻的手摊开，等呼吸和指尖都缓过来，才递笔给你。阿澈问你是不是也受了伤。你说自己多接了那一息，不能写成他叫你做的。林月在救援页上记下自己的制止，再给阿澈换药：腕伤是他此前的伤，你刚才呛息另记，不让一张伤签替两个人报名。",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 3,
+              "maximum": 3
+            }
+          ]
+        },
+        {
+          "text": "回到医舍，你端药时差点没托稳碗。林月让你坐下，等指尖重新回暖；那两息耗掉的是你自己的灵力。阿澈将药碗移近，问有没有替你挡一挡的办法。你摇头，不再叫他运气。林月把你接力的经过写在符带封袋上：救他时添的新息也是真事，日后不能全归给阿澈。",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "text": "回到医舍，阿澈伸开手给林月看，仍不敢相信腕上已经没有符带。林月给他换药，又读回刚才答应的两口气：第二口吐完便解带，确实没有再留他一轮。旧带按原状封着，取下时辰与你的辨气所见另记；药能止痛，离榻却是你们实际替他做成的事。",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "c11.cost",
@@ -2271,14 +2478,26 @@
         "kind": "residue",
         "sample": "rune",
         "title": "腕符与新布 · 施术前",
-        "caption": "旧带与新布来源已核；尚未辨气。",
+        "caption": "旧带与新布尚未辨气；旧带的施术经过须结合正文。",
         "leftLabel": "刚解下的旧带",
         "rightLabel": "未用的新布",
         "leftNote": "等待辨气",
         "rightNote": "等待辨气",
         "leftStrength": 0,
         "rightStrength": 0
-      }
+      },
+      "variants": [
+        {
+          "text": "林月将旧带与未用新布分开：“旧带从阿澈腕上取下，但你救他时也送过自己的灵力。辨气能看近期余息，分不出哪些来自谁。”她把救援经过放在封袋旁，提醒你先看来源，再动术法；阿澈不必为补一张证据再运气受痛。",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 2,
+              "maximum": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "c12.bandRead",
@@ -2296,14 +2515,26 @@
         "kind": "residue",
         "sample": "rune",
         "title": "腕符与新布 · 辨气后",
-        "caption": "旧带留有今日余息；新布没有。术法不能辨认系带人或旧日对话。",
+        "caption": "旧带有近期余息，新布没有；不能辨施术者，须结合取下经过。",
         "leftLabel": "刚解下的旧带",
         "rightLabel": "未用的新布",
-        "leftNote": "焦线旁有今日新息",
+        "leftNote": "有近期余息，来源见正文",
         "rightNote": "没有近期余息",
         "leftStrength": 0.85,
         "rightStrength": 0
-      }
+      },
+      "variants": [
+        {
+          "text": "你以辨气轻拂纸袋。旧带有断续新息，新布没有；结果与你们在炉房的操作并不矛盾，旧带也承过你接力时送入的气。术法不识施术者，不能从这次新息单独推出阿澈此前一直承压。林月将你的接力与她亲眼见到的挪带先后分列。阿澈说：“我可以讲我怎么坐的，你不用再让我试。”",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 2,
+              "maximum": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "c12.slip",
@@ -2329,7 +2560,19 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c12.memory"
+      "next": "c12.memory",
+      "variants": [
+        {
+          "text": "两种来源已查完。药签只记领安神药；旧带有近期余息，但你救人时也施过术，不能将它单独归给阿澈。你和林月亲眼见过他运气、松带后乱流转走，这份见闻另列；他本人说发烧后又被领回。你将三种来源分开，阿澈才放心喝了一口药：“先把我记得的说完，再睡。”",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 2,
+              "maximum": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "c12.memory",
@@ -2490,14 +2733,26 @@
         "kind": "residue",
         "sample": "rune",
         "title": "腕符与新布 · 施术前",
-        "caption": "旧带与新布来源已核；尚未辨气。",
+        "caption": "旧带与新布尚未辨气；旧带的施术经过须结合正文。",
         "leftLabel": "刚解下的旧带",
         "rightLabel": "未用的新布",
         "leftNote": "等待辨气",
         "rightNote": "等待辨气",
         "leftStrength": 0,
         "rightStrength": 0
-      }
+      },
+      "variants": [
+        {
+          "text": "林月将旧带与未用新布分开：“旧带从阿澈腕上取下，但你救他时也送过自己的灵力。辨气能看近期余息，分不出哪些来自谁。”她把救援经过放在封袋旁，提醒你先看来源，再动术法；阿澈不必为补一张证据再运气受痛。",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 2,
+              "maximum": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "c12.bandReadAfter",
@@ -2515,14 +2770,26 @@
         "kind": "residue",
         "sample": "rune",
         "title": "腕符与新布 · 辨气后",
-        "caption": "旧带留有今日余息；新布没有。术法不能辨认系带人或旧日对话。",
+        "caption": "旧带有近期余息，新布没有；不能辨施术者，须结合取下经过。",
         "leftLabel": "刚解下的旧带",
         "rightLabel": "未用的新布",
-        "leftNote": "焦线旁有今日新息",
+        "leftNote": "有近期余息，来源见正文",
         "rightNote": "没有近期余息",
         "leftStrength": 0.85,
         "rightStrength": 0
-      }
+      },
+      "variants": [
+        {
+          "text": "你以辨气轻拂纸袋。旧带有断续新息，新布没有；结果与你们在炉房的操作并不矛盾，旧带也承过你接力时送入的气。术法不识施术者，不能从这次新息单独推出阿澈此前一直承压。林月将你的接力与她亲眼见到的挪带先后分列。阿澈说：“我可以讲我怎么坐的，你不用再让我试。”",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 2,
+              "maximum": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "c12.name",
@@ -6834,7 +7101,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h04.qiAccount",
+      "next": "h04.qiRescue",
       "variants": [
         {
           "text": "你先念去向册、考校台晚到的销名通知和医舍伤签的日期，再指向空着的山门验帖印。值日抄手当堂核过送达时辰，祁元肃承认去向栏是他命人写的。阿澈本人核过的医舍证词也摆在桌上：他领过安神药，却没答应一直坐榻；背灯人的姓名他没看清。姐姐将证词与药签分开放：“领药只为止痛。阿澈还在炉里时，您为何写他离山？”",
@@ -6893,6 +7160,41 @@
               "variable": "case.deputy",
               "minimum": 2,
               "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "h04.qiRescue",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "姐姐将林月核过的医舍接回时辰放在伤签旁。你亲眼在炉房见到阿澈，去向册却已写他离山；救援、伤情和去向各有出处，不能用一张领药签把它们并成自愿留榻。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.qiAccount",
+      "variants": [
+        {
+          "text": "祁元肃看向旧符带的封袋：“你也动过这条带？”你承认救人时接过灵力，辨气不能从现在的余息分出施术者。姐姐将林月记下的挪带先后和接回时辰另摆一页，阿澈的腕伤也有伤签。她指回去向册：“旧带被动过，册上那句离山就是真的了吗？”祁元肃没有收回刚才承认的命令。",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 2,
+              "maximum": 3
+            }
+          ]
+        },
+        {
+          "text": "林月核过的救援页随伤签送来：阿澈答应再吐完两口气，第二口之后已离榻；你只辨气观察，没有把自己的灵力送入旧带。原带、亲见的挪带先后、医舍接回时辰分别列着。姐姐指向去向册：逐次松带是这次救他的办法，不能倒写成他早已自愿离山。",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 1,
+              "maximum": 1
             }
           ]
         }
@@ -8485,7 +8787,29 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e04.spare"
+      "next": "e04.spare",
+      "variants": [
+        {
+          "text": "第二声铃响，前两张谷符已亮，第三张仍暗。腹中的灵力越来越薄，你想起救阿澈时多接那一息，呼吸突然被顶住；今晚接的是整股来气，更不能靠逞强多撑。沈砚看着暗纹：“十年前，我就是想再等这一息。”他退到钥匙旁，将炉门的铃声让给你听。",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 3,
+              "maximum": 3
+            }
+          ]
+        },
+        {
+          "text": "第二声铃响，前两张谷符已亮，第三张仍暗。救阿澈时你只接过两息，指尖便曾发麻；今晚要给整股乱流让路，腹中的灵力正一缕缕耗去。沈砚看着暗纹：“十年前，我就是想再等这一息。”他退到钥匙旁，将炉门的铃声让给你听。",
+          "conditions": [
+            {
+              "variable": "case.rescueMethod",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "e04.spare",

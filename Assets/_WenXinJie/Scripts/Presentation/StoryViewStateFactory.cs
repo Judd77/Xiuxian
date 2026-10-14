@@ -233,6 +233,10 @@ namespace WenXinJie.Presentation
                 2 => "医舍暂记阿澈领药后仍被留榻，页首注明本人未核；不能当作他签过的证词。",
                 _ => "阿澈说前夜已坐过炉榻，发烧后回住处，天未亮又被带走；床底鞋是他留下的求救痕迹。"
             };
+            if (session.Revision >= 66 && session.GetValue("case.rescueMethod") >= 2)
+            {
+                record += "救援时你的灵力也进入过旧带；近期余息不能单独归给阿澈，须另看救援见闻与本人证词。";
+            }
             return wallKnown
                 ? record + "隔墙有人两下敲门；安神药影响了他对门漆和姓名的记忆，身份仍须另证。"
                 : record + "隔墙病人的事还没问到。";
