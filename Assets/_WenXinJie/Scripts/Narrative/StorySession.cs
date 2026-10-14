@@ -231,6 +231,15 @@ namespace WenXinJie.Narrative
                 }
             }
 
+            // Revision 61 adds an overnight village decision. Older saves cannot
+            // claim either warning or repair without playing that scene.
+            if (snapshot.revision <= 60 && graph.Definition.revision >= 61
+                && !values.ContainsKey("g.nightWatch")
+                && graph.Variables.Any(variable => variable.id == "g.nightWatch"))
+            {
+                values.Add("g.nightWatch", graph.GetVariable("g.nightWatch").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

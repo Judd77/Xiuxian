@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 60,
+  "revision": 61,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -28,7 +28,8 @@
     56,
     57,
     58,
-    59
+    59,
+    60
   ],
   "start": "case.intro",
   "variables": [
@@ -310,6 +311,12 @@
     },
     {
       "id": "g.villageRecord",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "g.nightWatch",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -5364,7 +5371,7 @@
         }
       ],
       "choices": [],
-      "next": "g.hall"
+      "next": "g09.night"
     },
     {
       "id": "g.hall",
@@ -5437,7 +5444,29 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h01.infer"
+      "next": "h01.infer",
+      "variants": [
+        {
+          "text": "议事堂还没坐满，工匠先把昨夜警钟后用掉的两张补符与今晨又裂的村符放在桌上；父亲报出女儿在空地服药的时辰。陶叔的巡柱簿记昨夜几乎每个时辰都响，林月送来的焦符也比前夜多。昨夜先叫人避开，今晨仍有新冲；陶叔说这些只能催人备，报不准下一股何时到。",
+          "conditions": [
+            {
+              "variable": "g.nightWatch",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "议事堂还没坐满，父亲先说昨夜村口石墙发热时他等孙子敲门才知情。工匠摆出补过又裂的村符：昨夜只用一张补符，今晨朱线仍崩。陶叔的巡柱簿记昨夜几乎每个时辰都响，林月送来的焦符也比前夜多。你把告知时辰和受压记录并排，不能用昨夜暂时补住来报今晨安全。",
+          "conditions": [
+            {
+              "variable": "g.nightWatch",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h01.infer",
@@ -7235,7 +7264,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h06.table",
+      "next": "h06.nightEcho",
       "variants": [
         {
           "text": "你和顾衡到谷口时，三户的灯还亮着。白日那份写明“可能提前、非迁居令”的通报各在本人手里；老妇的孙子已把背篓绑好，父亲将今夜与次晨药纸套分开，木匠家先查了高处屋灶。准备不等于答应今晚搬离：你把小试记录摊开，仍须逐户说明住处、药份与欠账，请他们自行决定。",
@@ -8685,7 +8714,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.homes",
+      "next": "e05.nightAccount",
       "variants": [
         {
           "text": "顾衡把你白日先签的临时备物单拿给祁元肃：医舍预留的今夜和次晨药，昨夜都按三户本人核过的份额交出。祁元肃在公账逐项补签，没让你的司籍名义永远替村人垫账。老妇指着那张早到的风险通报：“叫我们先收拾，是对的。可它从来不是我的迁居印。”",
@@ -9267,6 +9296,228 @@
       "effects": [],
       "choices": [],
       "next": "ending.oldPublic"
+    },
+    {
+      "id": "g09.night",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村夜",
+      "speaker": "旁白",
+      "text": "村议散后，孙子正替老妇收背篓，村口忽然响了一声短促的裂帛声。石墙上刚补过的村符边沿泛红，近旁父亲家的墙也跟着微微发烫。孩子在屋里喊爹。工匠按住钟槌：“现在敲警钟，三户都得摸黑出来；若先查，屋里的人还不知道。”你得先做一件事。",
+      "background": "villageSquareNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "warn",
+          "text": "先敲警钟，让三户到村口空地",
+          "target": "g09.warn",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "trace",
+          "text": "先辨气查发热处，再决定怎么护",
+          "target": "g09.trace",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g09.trace",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村夜",
+      "speaker": "旁白",
+      "text": "工匠取出同一锅朱砂画的备用纸，放在离墙两步的石上。你以辨气依次触过两纸：备用纸只有画符时留下的淡息，墙上的村符却一阵阵发热，热意从墙根的旧石槽传来。术法认不出下一股灵潮何时到，却能让你知道这不是两张纸都画坏了。",
+      "background": "villageSquareNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.decide"
+    },
+    {
+      "id": "g09.decide",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村夜",
+      "speaker": "旁白",
+      "text": "村符尚未断透，墙根的热意却又顶了一下。你可以叫三户先到空地，再由工匠封裂口；也可以让孙子逐门告知，自己和工匠先补住墙根。后一种省得整村在冷夜里奔走，但父亲要到孙子敲门才知道女儿屋里发热。",
+      "background": "villageSquareNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "warn",
+          "text": "敲警钟，先把三户带到空地",
+          "target": "g09.warn",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "repair",
+          "text": "请孙子逐门告知，我先补墙根",
+          "target": "g09.repair",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g09.warn",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村夜",
+      "speaker": "旁白",
+      "text": "工匠敲响村口警钟。父亲裹着女儿出来，腰边挂着今夜那剂药；老妇由孙子扶到空地，木匠抱来钟槌和备用纸。人齐时墙上的朱线已经崩开，工匠只得用两张补符压住裂口。你记下谁先到、谁还在路上；没人把这次出门当成同意明夜搬家。",
+      "background": "villageSquareNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.nightWatch",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g09.warnAfter"
+    },
+    {
+      "id": "g09.warnAfter",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村夜",
+      "speaker": "旁白",
+      "text": "父亲给女儿喂完药，问：“明天若又响，还是这样跑出来？”你说今晚只避这一阵，明夜要看石柱、药和高处住处能否安排，不能拿一次警钟作准。工匠把多用的一张补符记在村账，顾衡写下警钟到三户到齐的时辰。",
+      "background": "villageSquareNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.dawn"
+    },
+    {
+      "id": "g09.repair",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村夜",
+      "speaker": "旁白",
+      "text": "你请孙子逐门敲醒三户，自己和工匠俯身护住墙根。你稳住石槽里那股乱气，他将一张补符贴过旧线；热意暂退，朱砂没有再往外迸。父亲抱着女儿赶来时先问为何没敲警钟，你把查过的两张纸和暂时压住的裂口指给他看。",
+      "background": "villageSquareNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.nightWatch",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "g09.repairAfter"
+    },
+    {
+      "id": "g09.repairAfter",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村夜",
+      "speaker": "旁白",
+      "text": "父亲说：“下回先叫我。我能抱她走，怕的是在屋里等人告诉我。”你将孙子敲门、工匠补符和父亲到墙边的先后写清。今夜省下一张补符，代价是三户没能同时听见警钟；顾衡答应在堂上把这句抱怨念出来。",
+      "background": "villageSquareNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g09.dawn"
+    },
+    {
+      "id": "g09.dawn",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村晨",
+      "speaker": "旁白",
+      "text": "天亮时，昨夜压住的村符又沿旧线裂出一道细口。工匠把它连同备用纸收进纸套，指给你看断处仍有新热意：“昨夜挡住一阵，没挡住今晨这一下。”三户回各自屋里取议事堂要用的原件，昨夜的暂避和逐门告知都不替他们答应今晚迁居。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g.hall"
+    },
+    {
+      "id": "h06.nightEcho",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "昨夜村符曾发热，今晨又裂；无论如何，三户今晚是否迁离仍要逐户决定。你把这件事留在风险栏，不让昨夜的行动替任何人按印。",
+      "background": "valleyNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h06.table",
+      "variants": [
+        {
+          "text": "父亲先把女儿的药贴身放好：“昨夜听见钟，我知道往哪儿走。今晚若要上高处，药和接应也得说准。”你把昨夜多耗的一张补符列给木匠，再逐户问迁居；警钟没有替三户按印。",
+          "conditions": [
+            {
+              "variable": "g.nightWatch",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "父亲仍记得昨夜有人敲门时村口石墙已经发烫：“你们先护住符，我女儿却在屋里等消息。今晚真要动，先说清谁逐户叫人。”你把孙子的告知时辰与今夜守钟的人分开写，再逐户问迁居。",
+          "conditions": [
+            {
+              "variable": "g.nightWatch",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e05.nightAccount",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "暂借的木匠家",
+      "speaker": "旁白",
+      "text": "顾衡把昨夜村符的旧裂口与今晨新裂口并在一页，留给下一班巡看。那一夜的短暂避险和今晚正式迁居是两次决定，不能在账上合成一次。",
+      "background": "craftsmanHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.homes",
+      "variants": [
+        {
+          "text": "工匠在账上圈出昨夜警钟后多用的那张补符，父亲补记女儿在空地服药的时辰。顾衡把它们和今晚的撤离、开闸分开：昨夜先叫人避开是有用的，符料也确实多花了一张。",
+          "conditions": [
+            {
+              "variable": "g.nightWatch",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "顾衡记下昨夜补墙只用一张符，也将父亲等敲门的那段时辰照实留下。父亲没有要你倒改成全村早已知情，只说下一次墙热之前，务必有人先去叫屋里的人。",
+          "conditions": [
+            {
+              "variable": "g.nightWatch",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     }
   ]
 }
