@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 54,
+  "revision": 55,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -22,7 +22,8 @@
     50,
     51,
     52,
-    53
+    53,
+    54
   ],
   "start": "case.intro",
   "variables": [
@@ -562,6 +563,12 @@
     },
     {
       "id": "h.notice",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "h.identityNote",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -5510,7 +5517,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h03.name",
+      "next": "h03.check",
       "variants": [
         {
           "text": "陶叔领来抱旧图册的男人，他自报名叫沈砚。你翻开山灾抄页，想起自己也曾把这个名字写到隔墙那张榻旁。“我不在炉里。”他说，“灾后伤了经脉，帖被收走，名字没补回去。”你把已更正的身份记录放在桌边，听他继续说。",
@@ -5525,11 +5532,150 @@
       ]
     },
     {
+      "id": "h03.check",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "沈砚的名字在旧册上写着“失踪”，他却站在你面前。旧帖背的“砚”字只说明帖子曾属于谁；他抱来的图册上有十年前的落款，今日新补的线还未干。你能用辨气看新墨余息，却不能从余息里读出十年前落笔的人。周望暂不翻初试本，等你先核手边的东西。",
+      "background": "councilHall",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "compare",
+          "text": "请他现场补一笔，再辨两处新墨",
+          "target": "h03.compare",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "oldName",
+          "text": "先按旧帖残字和图册落款记为本人",
+          "target": "h03.oldName",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h03.compare",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你请沈砚在谷口新柱位旁补上接线。他提笔时旧伤使手指微颤，仍把线接到今日实测的柱脚。你用一缕灵力拂过两处未干的墨：刚补的线与图册今日添线都有新息，十年前的落款没有可供比对的余息。眼前的人熟悉这张图，辨气却不能替他验十年前的姓名。",
+      "background": "councilHall",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h03.witness"
+    },
+    {
+      "id": "h03.oldName",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你刚在记录上写下“旧帖与图册已证本人”，陈闻便将两张纸分开：“旧帖在你名下也用过；图册离开过旧库。残字和落款证明旧物上有这个名，不能证明眼前的人是谁。”你划去“已证”，请沈砚现场补一笔，再用辨气看新墨。",
+      "background": "councilHall",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h03.compare"
+    },
+    {
+      "id": "h03.witness",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "周望把初试本扣在桌上，先请来人说第一回试阵谁坐榻、谁敲停铃。沈砚说：“你坐着。第一声后我盯着柱光，第三声前你已经求我松手。”周望这才翻开自己保存的原页：坐榻与求停的先后相合。陶叔也认出当年一同修图的人。两名亲历者愿各签一份见证，册上的“失踪”仍须由司籍房更正。",
+      "background": "councilHall",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h03.record"
+    },
+    {
+      "id": "h03.record",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "现在可以写交堂记录：旧帖和旧图有沈砚的名字，今日新线能由辨气核为刚画；周望与陶叔认眼前的人，初试本又对上他自己说的先后。你如何把这些来源写给下一班？",
+      "background": "councilHall",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "separate",
+          "text": "分写自报、见证与术法所见",
+          "target": "h03.separate",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "certain",
+          "text": "写成“辨气验明旧图作者即沈砚”",
+          "target": "h03.overstate",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h03.overstate",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "周望不肯在“辨气验明旧图作者”下签名：“你的灵力刚才看的是新墨，不是十年前的那只手。”沈砚也按住图册：“别拿我能修图，就替我抹掉当年没停的事。”你保留划去的原句，改写“沈砚自报；周望、陶叔分别见证；新墨只核今日补线”，请两人各签自己的那一栏。",
+      "background": "councilHall",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.identityNote",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "h03.name"
+    },
+    {
+      "id": "h03.separate",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你先写“来人自报名沈砚”，再记周望与陶叔各自见过他哪一段；初试本原页仍归周望。辨气一栏只写“今日补线有新息”，旧帖与旧图列在旁边，不写“术法验明姓名”。两名见证人读过自己的话才签字。",
+      "background": "councilHall",
+      "portrait": "shenYanRemorseful",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.identityNote",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h03.name"
+    },
+    {
       "id": "h03.name",
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "“后来我一直在山顶观测台修阵。”沈砚低头摩挲图册，“一露面，就会有人问当年那声停铃。我没敢回来改册。”陶叔身旁的人放下初试本：“我是周望。第一回坐榻、敲铃求停的，就是我。”你把带来的凭据放在原簿旁，等两人当面对时辰。",
+      "text": "沈砚说：“山灾后我一直在山顶观测台修阵。怕有人问当年那声停铃，我没敢回来改册。”你把他的自报、周望的见证和两张阵图分列在记录上；哪一项能证明到哪一步，都留着出处。周望将初试本摊在旁边：“现在问那声铃吧。”",
       "background": "councilHall",
       "portrait": "shenYanRemorseful",
       "rain": false,
@@ -7824,7 +7970,29 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.promise"
+      "next": "e05.promise",
+      "variants": [
+        {
+          "text": "周望带着初试本来，翻到堂上补过的“闻铃未停”。你在交班页保留先前划去的“辨气验明旧图作者”，旁边补着周望和陶叔各自的见证；新墨只证明今日补线。沈砚说想再把新路修稳。周望收好原本：“图你还能修。坐着的人喊停，就让他起来。”",
+          "conditions": [
+            {
+              "variable": "h.identityNote",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "text": "周望带着初试本来，翻到堂上补过的“闻铃未停”。你将堂上那份身份记录交班：沈砚自报、两名亲历者见证，今日新墨只核今日补线。沈砚说想再把新路修稳。周望收好原本：“图你还能修。坐着的人喊停，就让他起来。”",
+          "conditions": [
+            {
+              "variable": "h.identityNote",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "e05.promise",

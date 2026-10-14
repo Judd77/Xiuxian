@@ -178,6 +178,14 @@ namespace WenXinJie.Narrative
                 values.Add("h.notice", graph.GetVariable("h.notice").initial);
             }
 
+            // Earlier saves have no record of the witness and ink comparison.
+            if (snapshot.revision <= 54 && graph.Definition.revision >= 55
+                && !values.ContainsKey("h.identityNote")
+                && graph.Variables.Any(variable => variable.id == "h.identityNote"))
+            {
+                values.Add("h.identityNote", graph.GetVariable("h.identityNote").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
