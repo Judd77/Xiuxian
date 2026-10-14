@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 56,
+  "revision": 57,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -24,7 +24,8 @@
     52,
     53,
     54,
-    55
+    55,
+    56
   ],
   "start": "case.intro",
   "variables": [
@@ -576,6 +577,12 @@
     },
     {
       "id": "h.roster",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "e.buffer",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -7895,6 +7902,75 @@
       "rain": false,
       "effects": [],
       "choices": [],
+      "next": "e04.spare"
+    },
+    {
+      "id": "e04.spare",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "第三声还未响，陶叔把石台边仅剩的一张补阵符举给你看。第三柱在这股乱流里露出一道细缝：停令到来时，你一松手，余冲总得有东西接住。把符贴在缝上，石柱能少受一击，旧阵却会少一张应急符；留给旧阵，石柱能撑过今晚，但那道缝会扩大，天亮须修。哪一笔先留给下一班？",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "pad",
+          "text": "先贴补阵符护住石柱，明日补旧阵符",
+          "target": "e04.pad",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "bare",
+          "text": "把符留给旧阵，准备天亮修石柱",
+          "target": "e04.bare",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e04.pad",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你按住符角，陶叔把补阵符贴在第三柱的细缝上。朱线接到石面，能替石柱吃下一次退回来的余冲；那张符烧过便不能再用。你让顾衡记下旧阵应急符少一张，明日须先补回。炉门的铃仍由许澄和段七自己握着，贴符不延长他们答应的时辰。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.buffer",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "e04.third"
+    },
+    {
+      "id": "e04.bare",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你请陶叔将最后一张补阵符留在旧阵匣里，指着第三柱细缝给他看：“这回余冲由石柱接，天亮先查裂到哪里。”他在石面旁画一道短记，免得交班的人只见谷符未亮，却不知道哪一处先要修。你们没有因此多要炉里的人承压；第三声一来，仍按约合闸。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.buffer",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
       "next": "e04.third"
     },
     {
@@ -7930,7 +8006,29 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e04.outside"
+      "next": "e04.outside",
+      "variants": [
+        {
+          "text": "第三声一响，你松手收息，向炉门回敲停钟。陶叔合住支路，贴在第三柱上的补阵符先亮后黑，石面细缝没有再张开。谷底最后一张符亮一瞬便暗；余流从前两处泄进无人深谷。林月报炉榻已卸下承压，可以扶人。你将烧黑的补符记入待补单，没有再送灵力。",
+          "conditions": [
+            {
+              "variable": "e.buffer",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "第三声一响，你松手收息，向炉门回敲停钟。陶叔合住支路，第三柱接住余冲，先前画短记的细缝又张开一点，未断。谷底最后一张符亮一瞬便暗；余流从前两处泄进无人深谷。林月报炉榻已卸下承压，可以扶人。你记下裂纹的新长度，没有再送灵力。",
+          "conditions": [
+            {
+              "variable": "e.buffer",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "e04.outside",
@@ -8278,13 +8376,48 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.paper",
+      "next": "e05.buffer",
       "variants": [
         {
           "text": "工匠收下新柱位抄图，也收好钟楼试传留下的两张回签。沈砚答应到现场教他辨流，顾衡记村钟时辰，林月守炉门，陶叔保管石台钥匙。两端每次喊停都要等到石台回报“已关”，不能再拿钟楼敲过三声当作炉门收到。若下次灵潮前新路还不稳，三户便继续暂住；没有人拿今夜出炉的人替未修好的阵路作保。",
           "conditions": [
             {
               "variable": "g.bellBook",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e05.buffer",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "陶叔把第三柱的检查页夹入交班簿：谷底最后一符仍暗，新路只够暂用，下一股灵潮前必须再查。今夜谁接了最后那股余冲，不能因为人已出炉就从账上消失。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.paper",
+      "variants": [
+        {
+          "text": "陶叔把烧黑的补阵符放在交班簿上，第三柱那道细缝没有扩大；旧阵匣少了一张应急符，祁元肃签了补买单。下一股灵潮前，须先补回旧阵这张，再复核仍暗着的谷底符。今夜的安全不是一张纸凭空换来的。",
+          "conditions": [
+            {
+              "variable": "e.buffer",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "陶叔把第三柱的新裂纹拓在交班页上，旧阵匣那张应急符还在。木匠与沈砚约好天亮量缝、补石，再核仍暗着的谷底符；下一股灵潮前修不好，三户继续暂住。今夜由石柱接了余冲，不能写成无人受损。",
+          "conditions": [
+            {
+              "variable": "e.buffer",
               "minimum": 2,
               "maximum": 2
             }

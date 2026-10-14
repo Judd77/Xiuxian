@@ -194,6 +194,14 @@ namespace WenXinJie.Narrative
                 values.Add("h.roster", graph.GetVariable("h.roster").initial);
             }
 
+            // Older saves did not choose which reserve takes the final backflow.
+            if (snapshot.revision <= 56 && graph.Definition.revision >= 57
+                && !values.ContainsKey("e.buffer")
+                && graph.Variables.Any(variable => variable.id == "e.buffer"))
+            {
+                values.Add("e.buffer", graph.GetVariable("e.buffer").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
