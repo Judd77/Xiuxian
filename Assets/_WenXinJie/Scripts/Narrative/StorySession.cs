@@ -282,6 +282,14 @@ namespace WenXinJie.Narrative
                 values.Add("case.rescueMethod", graph.GetVariable("case.rescueMethod").initial);
             }
 
+            // Earlier repairs did not record a splice or a whole-sheet replacement.
+            if (snapshot.revision <= 66 && graph.Definition.revision >= 67
+                && !values.ContainsKey("g.repairMethod")
+                && graph.Variables.Any(variable => variable.id == "g.repairMethod"))
+            {
+                values.Add("g.repairMethod", graph.GetVariable("g.repairMethod").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

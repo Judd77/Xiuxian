@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 66,
+  "revision": 67,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -34,7 +34,8 @@
     62,
     63,
     64,
-    65
+    65,
+    66
   ],
   "start": "case.intro",
   "variables": [
@@ -655,6 +656,12 @@
       "initial": 0,
       "minimum": 0,
       "maximum": 3
+    },
+    {
+      "id": "g.repairMethod",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
     }
   ],
   "nodes": [
@@ -5169,7 +5176,7 @@
         },
         {
           "id": "repair",
-          "text": "帮工匠补符并交代试错，再请村民决定",
+          "text": "和工匠核清补符欠账，再动手补护",
           "target": "g08.repair",
           "lockedReason": "",
           "conditions": [
@@ -5231,29 +5238,91 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村议",
       "speaker": "旁白",
-      "text": "你去帮工匠补村符，亲手递符纸、按住边角，等他把裂口补牢。你承认辨气不能隔十年替东坡作证，也不再把别人住的地方当图上的空白。工匠这才拿起钟槌：“再试一次，我来喊停。”",
+      "text": "工匠提起料袋，叫你先别拿新纸：“小试裂的那张，纸边还好。先随我看断口，能接便接，不能接再换。”顾衡接过钟槌，去墙根守着；三户还在村议等这笔补护有个着落。",
       "background": "villageSquare",
       "portrait": "",
       "rain": false,
-      "effects": [
+      "effects": [],
+      "choices": [
         {
-          "variable": "g.repairOwed",
-          "operation": "set",
-          "value": 0
-        }
-      ],
-      "choices": [],
-      "next": "g08.question",
-      "variants": [
-        {
-          "text": "你把小试裂开的村符拿给工匠，当着村人说明送入灵力、停钟和撤力的先后。你递符纸、按住边角，和他补好裂口；损耗的符料与时辰都记进村账。他拿起钟槌：“再试一次，我来喊停。”",
+          "id": "crack",
+          "text": "核查小试裂符，选择补护方法",
+          "target": "g08.repairInspect",
+          "lockedReason": "",
           "conditions": [
             {
               "variable": "g.extraCharm",
               "minimum": 1,
               "maximum": 1
+            },
+            {
+              "variable": "g.repairOwed",
+              "minimum": 1,
+              "maximum": 1
             }
-          ]
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        },
+        {
+          "id": "promise",
+          "text": "履行误判旧符时答应的预防性补护",
+          "target": "g08.preventiveRepair",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "g.extraCharm",
+              "minimum": 0,
+              "maximum": 0
+            },
+            {
+              "variable": "g.repairOwed",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        },
+        {
+          "id": "done",
+          "text": "补护已经完成，回村议继续",
+          "target": "g08.question",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "g.repairOwed",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        }
+      ],
+      "variants": [
+        {
+          "conditions": [
+            {
+              "variable": "g.repairOwed",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "text": "工匠把补护页上的名字念回给你，材料与补好的时辰都在。他收起笔，催你回村议：“这一笔已经做完了。下回试不试，还得听他们说。”"
+        },
+        {
+          "conditions": [
+            {
+              "variable": "g.extraCharm",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "text": "工匠拿出你先前答应补画的纸。那时你硬把两种旧符的断边合成同一件事，他没肯照你的话再做一次小试；如今得先把补护的约定做完。谷口这一回没有裂新符，不能再给村账添上一张。"
         }
       ]
     },
@@ -7363,7 +7432,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h05.assign",
+      "next": "h05.repairStatus",
       "variants": [
         {
           "text": "祁元肃把石台钥匙放在案上，只准试一次。你在阅图考校里见过今日接线，却仍将它与谷口实测图并排：第三柱移位，村口先受冲，纸上的线不能替当场的停钟。工匠把钟槌压在家门的位置，姐姐问谁能关闸。陶叔伸手接钥匙，沈砚只读图。",
@@ -10391,7 +10460,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.homes",
+      "next": "e05.repairAccount",
       "variants": [
         {
           "text": "顾衡将老妇先过、父女在檐下服药、药车最后过岔的时辰分开记。今夜没有让回程车再堵住背人的孙子，也没有为改变顺序另用村口护符。",
@@ -10424,6 +10493,280 @@
           ]
         }
       ]
+    },
+    {
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "id": "g08.repairInspect",
+      "text": "工匠领你到刚才裂符的墙边，先用备用村符护住石槽，才取下坏符。裂口横过中间的朱线，纸边却还完整。他摊开另半张旧纸：“符不是画得越红越好。灵力沿这条线走，断在这里，后半张再好也接不到。”你在考校台上烧过一张符，如今才有人肯让你贴近看清。",
+      "effects": [],
+      "choices": [
+        {
+          "id": "read",
+          "text": "沿裂口两侧辨气，先看灵力断在何处",
+          "target": "g08.repairTrace",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "id": "g08.repairTrace",
+      "text": "工匠在拆下的符首送入极小一缕灵力，你只辨气观察。裂口上侧生出暖意，下侧仍凉；他收回那一缕，纸没有再破。“纸还能用，线已经不通了。”你指向断口，终于能说清刚才村符为什么没有把冲击继续导开；这次查的是手中一张纸，没有让屋里的人再替你受试。",
+      "effects": [],
+      "choices": [],
+      "next": "g08.repairMethod",
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "拆下的村符 · 断线核查",
+        "caption": "只检查拆下的村符；没有向村墙或炉榻送入试流。",
+        "leftLabel": "裂口上侧",
+        "rightLabel": "裂口下侧",
+        "leftNote": "本次少量试息停在此处",
+        "rightNote": "没有接到本次试息",
+        "leftStrength": 0.7,
+        "rightStrength": 0
+      }
+    },
+    {
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "id": "g08.repairMethod",
+      "text": "工匠备了两种修法。原纸边角未烂，可以裁一小片符纸托住裂口，再沿原纹接线；省下一张整纸，但接缝要等朱砂干透，他得守着再查。也可整张换新，让临时护符早点撤下，旧纸收入料袋；宗门便多欠一张完整村符。两种都只能补这一处，今晚仍得守钟。墙后的孩子咳了一声，工匠停下笔，等你选。",
+      "effects": [],
+      "choices": [
+        {
+          "id": "join",
+          "text": "托住裂口接续原纹，请工匠守到干透再查",
+          "target": "g08.repairJoin",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "renew",
+          "text": "整张换新，让备用护符早些撤下，记下耗料",
+          "target": "g08.repairRenew",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "id": "g08.repairJoin",
+      "text": "你托住符背，工匠沿原纹点下朱砂。第一点落得稍粗，他用笔尖挑开，留出细细的转弯：“添厚这里，气挤过去，别处还是要裂。”你没再催他快，换手按住纸角。顾衡继续守备用村符；等接缝干透，工匠才准你松手。那张整纸留下了，这段守候却不能省。",
+      "effects": [],
+      "choices": [],
+      "next": "g08.repairJoinProof"
+    },
+    {
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "id": "g08.repairRenew",
+      "text": "工匠把完整新符展开，让你托住纸，自己照村墙原来的接线描纹。你险些把末笔连向旁边的石缝，他移正你的手：“那是墙上的裂，不是阵里的路。”新符画成，旧纸收入料袋，不再拿它抵数。备用村符可以早些撤下，宗门却确实要补回这一张整纸。",
+      "effects": [],
+      "choices": [],
+      "next": "g08.repairRenewProof"
+    },
+    {
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "id": "g08.repairJoinProof",
+      "text": "接缝干透，工匠先在手中复核。你沿两侧辨气，这次上下都有刚送入的暖意，朱线没有再断。他才将村符接回原来的墙槽，和顾衡一起看它承住眼前这一阵。接过的那道纹仍圈在背页；若今夜复热，先查这里。省下的整纸留作村口备用，不能当成已经多护了一户。",
+      "effects": [
+        {
+          "variable": "g.repairMethod",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g08.repairFinish",
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "修后复核 · 再接回墙槽",
+        "caption": "只检查拆下的村符；没有向村墙或炉榻送入试流。",
+        "leftLabel": "原先断口上侧",
+        "rightLabel": "原先断口下侧",
+        "leftNote": "少量试息已到",
+        "rightNote": "本次也接到试息",
+        "leftStrength": 0.65,
+        "rightStrength": 0.65
+      }
+    },
+    {
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "id": "g08.repairRenewProof",
+      "text": "新符尚未上墙，工匠先送一缕灵力让你复核。你辨到上下都有新暖意，朱线未断；他才换下临时护符，将整张新符接回原墙槽，和顾衡看它承住眼前这一阵。那张拆下的旧纸留在料袋里，不能因为纸边还好，便说没有用掉新符。",
+      "effects": [
+        {
+          "variable": "g.repairMethod",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "g08.repairFinish",
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "修后复核 · 再接回墙槽",
+        "caption": "只检查拆下的村符；没有向村墙或炉榻送入试流。",
+        "leftLabel": "原先断口上侧",
+        "rightLabel": "原先断口下侧",
+        "leftNote": "少量试息已到",
+        "rightNote": "本次也接到试息",
+        "leftStrength": 0.65,
+        "rightStrength": 0.65
+      }
+    },
+    {
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "id": "g08.repairFinish",
+      "text": "工匠把补过的村符交给顾衡巡看，自己回村议拿钟槌。你当着三户念清刚才怎样送息、哪一声停钟之后撤手；裂符不是别人用坏的，你不把它推给住在墙后的人。补护这一次已经做成，下一次小试仍要由村人决定。",
+      "effects": [
+        {
+          "variable": "g.repairOwed",
+          "operation": "set",
+          "value": 0
+        }
+      ],
+      "choices": [],
+      "next": "g08.question"
+    },
+    {
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "id": "h05.repairStatus",
+      "text": "工匠先核今晚带去的村符，顾衡领人巡墙。上一回小试看过的地方，今夜仍须有人守；待工匠到村口、林月到炉门，两端都有人叫停，才轮到石台分工。",
+      "effects": [],
+      "choices": [],
+      "next": "h05.assign",
+      "variants": [
+        {
+          "conditions": [
+            {
+              "variable": "g.repairMethod",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "text": "工匠指着村符背页上圈出的接缝：“昨天省下一张整纸，接过的地方却不能忘。”顾衡已再巡过那一段，整纸带在工匠身边备用；若接缝先热，他便敲停。沈砚想先看图，他将钟槌握紧，先问谁会关闸。"
+        },
+        {
+          "conditions": [
+            {
+              "variable": "g.repairMethod",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ],
+          "text": "工匠把昨日换下的旧纸摊给祁元肃看：“这一张不能再算库里完好的村符。新的已经贴在墙上，你得补回。”他带着钟槌去守新符，顾衡再巡墙；新纸接得通，仍不替今晚整股乱流作保。沈砚看图时，他先问谁会关闸。"
+        }
+      ]
+    },
+    {
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "暂借的木匠家",
+      "speaker": "旁白",
+      "background": "craftsmanHome",
+      "portrait": "",
+      "rain": false,
+      "id": "e05.repairAccount",
+      "text": "工匠把白天补护与今夜守墙用的符料分开收好。新路没有修稳，村墙上的符也还不能撤；下一班接过钟槌时，须知道哪里曾裂、哪里还要查。",
+      "effects": [],
+      "choices": [],
+      "next": "e05.homes",
+      "variants": [
+        {
+          "conditions": [
+            {
+              "variable": "g.repairMethod",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "text": "工匠将昨日接线的村符背页交给下一班，接缝的位置仍圈着。那时省下的是一张整纸，不是以后都不用补护；接线等干与再次巡墙的工钱也列进宗门账。三户暂住高处，守村符的人仍须带上备用纸。"
+        },
+        {
+          "conditions": [
+            {
+              "variable": "g.repairMethod",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ],
+          "text": "工匠从料袋取出昨日拆下的村符，放在补买单旁。一小片纸边能留作修补，一张完整村符却已换上墙，不能互相抵数。祁元肃在补回整纸的一行签名；村符仍要守，新路未稳前不能因为换过纸便请三户回家。"
+        }
+      ]
+    },
+    {
+      "id": "g08.preventiveRepair",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你按约替工匠递纸、按住边角，帮他重画一张补护符。他核过朱线，再交给守墙的人备用；谷口这回没有裂新符，不添一次试裂耗料。你承认辨气不能隔十年替东坡作证，也不再把别人住的地方当图上的空白。工匠拿起钟槌：“再试一次，我来喊停。”",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.repairOwed",
+          "operation": "set",
+          "value": 0
+        }
+      ],
+      "choices": [],
+      "next": "g08.question"
     }
   ]
 }
