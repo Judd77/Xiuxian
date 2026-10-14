@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 61,
+  "revision": 62,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -29,7 +29,8 @@
     57,
     58,
     59,
-    60
+    60,
+    61
   ],
   "start": "case.intro",
   "variables": [
@@ -488,6 +489,12 @@
       "initial": 0,
       "minimum": 0,
       "maximum": 1
+    },
+    {
+      "id": "e.departureOrder",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 3
     },
     {
       "id": "e.seizeBell",
@@ -7742,7 +7749,7 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "谷口",
       "speaker": "旁白",
-      "text": "狭岔只容一人或一辆车通过。孙子背着老妇，走得比空身的人慢；药车若先过去再回头接行李，两边就会堵在这里。顾衡把实走脚程递给你：“人齐了。先放哪一户？”",
+      "text": "狭岔只容一人或一辆车。孙子背着老妇，走得慢；父亲摸了摸女儿的额头，今夜的药也快到时辰。村口石墙近来承过冲，等在它旁边的人不能没人照看。顾衡摊开白天实走的脚程：“先送谁？车别折回来堵人。”",
       "background": "valleyNight",
       "portrait": "",
       "rain": false,
@@ -7750,7 +7757,7 @@
       "choices": [
         {
           "id": "slow",
-          "text": "让老妇先过岔口，再放药车和其余人",
+          "text": "先送老妇，父女在背风处服药等路清",
           "target": "e01.slow",
           "lockedReason": "",
           "conditions": [],
@@ -7758,8 +7765,17 @@
           "outcomes": []
         },
         {
+          "id": "father",
+          "text": "先送父女，再安排老妇安全过岔",
+          "target": "e01.fatherFirst",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
           "id": "fast",
-          "text": "先让走得快的人搬行李，老妇随后走",
+          "text": "先推药车运包，再折返接人",
           "target": "e01.fast",
           "lockedReason": "",
           "conditions": [],
@@ -7792,13 +7808,18 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "谷口",
       "speaker": "旁白",
-      "text": "孙子一步步背老妇过了岔口，在高处歇下。药车随后驶过，父亲牵女儿跟着，木匠最后清点人数。顾衡确认无人留在谷口，工匠才敲响撤离完毕的第二声钟，另向炉门报路已清。开闸仍要等林月问过许澄和段七；那边的三声停铃，从正式引流重新计起。",
+      "text": "孙子背老妇先过狭岔，在高处歇下。父亲留在背风的檐下，把标着今夜的药喂给女儿；药车等人走净才过，父女随后跟上。木匠清点三户，确认没人留在谷口，工匠才敲撤离完毕的第二声钟，另向炉门报路已清。开闸仍要等林月问过许澄和段七；炉门三声停铃从正式引流重新计起。",
       "background": "valleyNight",
       "portrait": "",
       "rain": false,
       "effects": [
         {
           "variable": "h.migration",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "e.departureOrder",
           "operation": "set",
           "value": 1
         }
@@ -9454,7 +9475,7 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "谷口",
       "speaker": "旁白",
-      "text": "昨夜村符曾发热，今晨又裂；无论如何，三户今晚是否迁离仍要逐户决定。你把这件事留在风险栏，不让昨夜的行动替任何人按印。",
+      "text": "今晨新补的村符仍有裂口，三户今晚是否迁离仍要逐户决定。你把裂口留在风险栏，不让白天的试走替任何人按印。",
       "background": "valleyNight",
       "portrait": "",
       "rain": false,
@@ -9489,13 +9510,13 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "暂借的木匠家",
       "speaker": "旁白",
-      "text": "顾衡把昨夜村符的旧裂口与今晨新裂口并在一页，留给下一班巡看。那一夜的短暂避险和今晚正式迁居是两次决定，不能在账上合成一次。",
+      "text": "顾衡把今晨的村符裂口和今晚的撤离时辰分开留给下一班。没有见证昨夜行动的旧记录，不能凭空补一场警钟或逐户告知。",
       "background": "craftsmanHome",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.homes",
+      "next": "e05.departureAccount",
       "variants": [
         {
           "text": "工匠在账上圈出昨夜警钟后多用的那张补符，父亲补记女儿在空地服药的时辰。顾衡把它们和今晚的撤离、开闸分开：昨夜先叫人避开是有用的，符料也确实多花了一张。",
@@ -9514,6 +9535,152 @@
               "variable": "g.nightWatch",
               "minimum": 2,
               "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e01.fatherFirst",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "父亲确认今夜那剂药在掌心，抱起女儿先过狭岔。孙子扶老妇留在宽处，工匠让药车原地等着，没有叫它抢在背人的路上。高处接应人开门，把父女引到暖屋；孩子喝下药，问哥哥段七会不会也来。父亲只说：“山上还在听他的铃，等那边有准信。”",
+      "background": "valleyNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e01.elderWait"
+    },
+    {
+      "id": "e01.elderWait",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "父女刚过，村口石墙的朱线又红了一下。你以辨气触到新热意沿旧石槽上来，认得这是眼前的受压，算不出会持续多久。老妇坐在背风处，孙子不肯背她贴着热墙走。可以用一张备用护符挡住这一阵，立刻送她过岔；也可以先扶她进屋等墙冷，叫陶叔继续以旧阵撑着。两种办法都要把花掉的东西记下来。",
+      "background": "valleyNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "cover",
+          "text": "用备用护符挡住热墙，送老妇过岔",
+          "target": "e01.cover",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "wait",
+          "text": "扶老妇进背风屋，等热意退去再走",
+          "target": "e01.wait",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e01.cover",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "工匠将一张备用护符压在石墙旧线外，你再辨气，确认新热意先落到这张纸上。孙子背老妇穿过狭岔，药车停在宽处，等她歇稳才跟过去。老妇回头看了那张符一眼：“先叫孩子走，我认。替我挡的纸也别写成白来的。”你把符料和她到高处的时辰记在同一页。",
+      "background": "valleyNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.departureOrder",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "e01.fatherComplete"
+    },
+    {
+      "id": "e01.wait",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你和孙子扶老妇进背风屋，木匠守着墙上的朱线。陶叔在石台继续压住旧阵，直到墙根的热意退去；他在传回的纸上写明多烧了一叠旧炉符。孙子这才背老妇过岔，药车仍在宽处等。老妇说：“等一等可以。别把等出来的符料算到我头上。”",
+      "background": "valleyNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.departureOrder",
+          "operation": "set",
+          "value": 3
+        }
+      ],
+      "choices": [],
+      "next": "e01.fatherComplete"
+    },
+    {
+      "id": "e01.fatherComplete",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "父女先到的时辰和老妇最后过岔的时辰分别落在撤离册上。药车等人走净才跟过来；木匠数过三户与药车，顾衡确认谷口无人，工匠才敲撤离完毕的第二声钟，另向炉门报路已清。炉门的三声停铃尚未开始；林月还要让许澄和段七本人亲手试铃。",
+      "background": "valleyNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.migration",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "e02.names"
+    },
+    {
+      "id": "e05.departureAccount",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "暂借的木匠家",
+      "speaker": "旁白",
+      "text": "顾衡把村口出门钟、末户过岔与炉门正式开闸分开记。撤离完成后才报石台，白天试走的时辰也没有被当成今晚实走。",
+      "background": "craftsmanHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.homes",
+      "variants": [
+        {
+          "text": "顾衡将老妇先过、父女在檐下服药、药车最后过岔的时辰分开记。今夜没有让回程车再堵住背人的孙子，也没有为改变顺序另用村口护符。",
+          "conditions": [
+            {
+              "variable": "e.departureOrder",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "顾衡圈出父女先到暖屋、老妇由备用护符挡住热墙后才过岔的时辰。工匠把那一张护符列在村账上；孩子先得到照料，老妇也没有被留下独自贴着热墙等。",
+          "conditions": [
+            {
+              "variable": "e.departureOrder",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "text": "顾衡将父女先到暖屋、老妇在背风屋等待与最后过岔的时辰各写一行。陶叔多烧的那叠旧炉符归守阵账，不推给等路的老妇；等来的安全确有代价。",
+          "conditions": [
+            {
+              "variable": "e.departureOrder",
+              "minimum": 3,
+              "maximum": 3
             }
           ]
         }

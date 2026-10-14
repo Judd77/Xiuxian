@@ -240,6 +240,15 @@ namespace WenXinJie.Narrative
                 values.Add("g.nightWatch", graph.GetVariable("g.nightWatch").initial);
             }
 
+            // Revision 62 records the real departure order and the cost of
+            // shielding or waiting at the warm village wall.
+            if (snapshot.revision <= 61 && graph.Definition.revision >= 62
+                && !values.ContainsKey("e.departureOrder")
+                && graph.Variables.Any(variable => variable.id == "e.departureOrder"))
+            {
+                values.Add("e.departureOrder", graph.GetVariable("e.departureOrder").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
