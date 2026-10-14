@@ -169,6 +169,15 @@ namespace WenXinJie.Narrative
                 values.Add("h.lodging", graph.GetVariable("h.lodging").initial);
             }
 
+            // Revision 54 records when the three households received a usable
+            // warning and preparation list. Earlier saves made no such choice.
+            if (snapshot.revision <= 53 && graph.Definition.revision >= 54
+                && !values.ContainsKey("h.notice")
+                && graph.Variables.Any(variable => variable.id == "h.notice"))
+            {
+                values.Add("h.notice", graph.GetVariable("h.notice").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

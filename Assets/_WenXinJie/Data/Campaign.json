@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 53,
+  "revision": 54,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -21,7 +21,8 @@
     49,
     50,
     51,
-    52
+    52,
+    53
   ],
   "start": "case.intro",
   "variables": [
@@ -555,6 +556,12 @@
     },
     {
       "id": "h.lodging",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "h.notice",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -5244,7 +5251,7 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "你将三份记录一并摆到堂心，请众人今日便备路、备药。陶叔点头：“照我过去守阵见过的样子，若还这么加快，至迟明夜可能来一股大的。只能往早处备，不能拿这句话许你平安。”你在期限旁留下“仍需巡看”，把最慢一户的实走脚程压在上面。",
+      "text": "你将三份记录一并摆到堂心。陶叔说：“若还这么加快，至迟明夜可能来一股大的。我不能报准时辰，只能劝你们往早处备。”你在期限旁留“仍需巡看”，压上最慢一户的实走脚程。老妇、父亲和木匠都在堂里听见了；可是备药和借屋的正式签字尚未齐，他们的家人要凭什么开始准备？",
       "background": "councilHall",
       "portrait": "",
       "rain": false,
@@ -5253,6 +5260,140 @@
           "variable": "h.deadline",
           "operation": "set",
           "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h01.notice"
+    },
+    {
+      "id": "h01.notice",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "陶叔能签下巡柱簿的时辰，不能替三户签迁居。你可以现在把“可能提前来、准备路线和今明两剂药、不等于已经同意开谷口”的风险通报交给三户，由自己先在临时备物单落名；也可以等掌事与医舍签全份额，再把书面通知送回村里。早通知会留下待认的领料账，晚通知则让家里能动手收药的时间更少。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "early",
+          "text": "现在发条件预警，我先签临时备物单",
+          "target": "h01.early",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "wait",
+          "text": "等正式备物签齐，再发书面通知",
+          "target": "h01.wait",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h01.early",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你在通报上写“风险正在加重，今夜先备路备药；未作开谷口决定，时辰仍须巡看”。老妇拿着自己的那张：“孙子会收背篓，不等于我答应搬走。”你请她将自己最慢的脚程写在边上，不用堂里的快人替她估。父亲要今夜药别和明晨药混放，木匠则说先让家里扫出一间能避风的屋。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h01.earlyGoods"
+    },
+    {
+      "id": "h01.earlyGoods",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你在司籍名下先挂一张备物单，只请医舍预留村口今夜与次晨各一份药，并标“未发、待正式签认”；木匠带走屋钥匙，叫家人检查炉灶和瓦，不能凭预警拆别人的田。顾衡派人把三份通报逐户送到，不在村口敲正式撤离钟。若堂上最后暂守，纸上的药仍须追踪去向，不会因为没开谷口就消失。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h01.earlyReply"
+    },
+    {
+      "id": "h01.earlyReply",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "父亲按白天议定的带药安排，把自己手头今夜与次晨的药套各划一道；医舍另预留的村口份额仍标“未发”。女儿认出今夜那包，才安静下来。老妇让孙子先把背篓绑结实，却不肯现在按迁居印。木匠回话：东屋能生火，南屋的瓦得再看。你得到的是他们开始准备的回音，不是三户已同意改道的签字。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h01.earlyAccount"
+    },
+    {
+      "id": "h01.earlyAccount",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "顾衡在临时单边签“已送达风险，未命搬离”。你留下自己的备物签，约好等议事堂定下正式药份和木料，再将临时领单逐项转入公账；若宗门不认，不能把那两包药记成村人自己拿走。陶叔继续守着巡柱簿，尚未向石台报可开闸。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.notice",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h02.post"
+    },
+    {
+      "id": "h01.wait",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你把通报留在桌上，等掌事和医舍签好份额再发。木匠说会让家里知道柱响加密，也愿先看钥匙，却不让人把尚未批的药算进今夜份额；老妇没有收迁居单，父亲问女儿今晚的药能否照旧拿到。你答白天已议定的带药安排不改，新增村口份额须等林月核完。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h01.waitReply"
+    },
+    {
+      "id": "h01.waitReply",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "父亲按白天议定的方式收好药包，没有把女儿次晨的药写成宗门已增发。木匠传话让家里先扫出门前的路，但不敢叫人拆瓦修屋；老妇托人告诉孙子把背篓挂在门后，仍等书面风险和具体住处。顾衡记下：“三户在堂上听到了风险，家中备药份额尚未送达。”这不是他们无故拖延，等签字也会耗去旧阵的时间。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h01.waitAccount"
+    },
+    {
+      "id": "h01.waitAccount",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你将三份时辰留在堂上，等正式备物页签齐再送各户。陶叔同意先让工匠巡看村符，提醒你夜里若还未说清药与屋，旧阵要继续烧符纸。你没有把“至迟明夜可能来”改成“明夜一定来”，也没有把未领到的药写成已交付。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.notice",
+          "operation": "set",
+          "value": 2
         }
       ],
       "choices": [],
@@ -6468,6 +6609,26 @@
       "next": "h06.table",
       "variants": [
         {
+          "text": "你和顾衡到谷口时，三户的灯还亮着。白日那份写明“可能提前、非迁居令”的通报各在本人手里；老妇的孙子已把背篓绑好，父亲将今夜与次晨药纸套分开，木匠家先查了高处屋灶。准备不等于答应今晚搬离：你把小试记录摊开，仍须逐户说明住处、药份与欠账，请他们自行决定。",
+          "conditions": [
+            {
+              "variable": "h.notice",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "你和顾衡带着正式备物页到谷口，三户在议事堂听过危险，家里却直到这时才拿到药份和住处的书面安排。老妇让孙子重新绑背篓，父亲抱女儿核今夜药，木匠家才开高处屋门。旧阵还在撑，夜里准备得晚不能算村人拖延。你摊开小试记录，先逐户问是否愿意这一次暂迁。",
+          "conditions": [
+            {
+              "variable": "h.notice",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
           "text": "你和顾衡到谷口时，三户的灯还亮着。老妇拿着白天核过的试走抄页，父亲抱女儿和药袋，木匠把高处两间旧屋钥匙放在门板上。他们在村议各自答应过的事都记着，也记着还没谈妥的药田、住处和冬药。你将今晚小试记录摊开，先请他们逐家决定这一次暂迁；白天的抄页不能替今晚按印。",
           "conditions": [
             {
@@ -6819,13 +6980,21 @@
         {
           "text": "顾衡念回三户的住处：老妇将住东屋，父女将住补过瓦的南屋。木匠把今夜拆用的木板和旧阵多耗的符纸单独夹在暂住单下，三户各核一遍。你们回谷口敲出门钟，等人真正到齐才向陶叔报可开闸；等修屋花掉的料，还须宗门认账。",
           "conditions": [
-            { "variable": "h.lodging", "minimum": 1, "maximum": 1 }
+            {
+              "variable": "h.lodging",
+              "minimum": 1,
+              "maximum": 1
+            }
           ]
         },
         {
           "text": "顾衡念回三户的住处：老妇与孙子将进东屋，父女将在木匠家共宿一晚；南屋漏瓦写着明日待修。木匠母亲也留下一份暂住单，不让人把今夜借灶写成永远够住。你们回谷口敲出门钟，等人真正到齐才向陶叔报可开闸。",
           "conditions": [
-            { "variable": "h.lodging", "minimum": 2, "maximum": 2 }
+            {
+              "variable": "h.lodging",
+              "minimum": 2,
+              "maximum": 2
+            }
           ]
         }
       ]
@@ -6841,7 +7010,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e01.order",
+      "next": "e01.notice",
       "variants": [
         {
           "text": "南屋的漏瓦补好，木匠把多用的木板和旧炉符纸记进暂住单。工匠这才敲响村口出门钟；陶叔仍在石台等三户真正到齐，炉门的停铃尚未计数。孙子背老妇，父亲牵女儿站在药车旁，木匠扶好车袋。你须按白天试走的狭岔脚程放行，不能因夜里的屋已经修好便让车先堵住人。",
@@ -6868,6 +7037,41 @@
           "conditions": [
             {
               "variable": "g.fatherHeard",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e01.notice",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "出门钟已响，顾衡把三户药包与住处再核一遍。准备时辰和领料账分开记着，没人能拿一张风险通报替这次撤离按印。狭岔仍只容一车或一人，你要按实走脚程放行。",
+      "background": "valleyNight",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e01.order",
+      "variants": [
+        {
+          "text": "出门钟已响，父女的药包和老妇的背篓按白日预警分开收好；高处屋也有人先看过。顾衡把你早先签的临时备物单夹到正式药份下，明日须请宗门逐项认账。现在三户都还在谷口，只有按狭岔实走脚程送完人，才能报陶叔开闸。",
+          "conditions": [
+            {
+              "variable": "h.notice",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "出门钟已响，三户赶在这之前把药、背篓和屋钥匙核到手。顾衡把等正式备物页送达的时辰另记一行：旧阵在等待中多换一叠符纸，不能写成村人拖延。现在三户仍在谷口，须按狭岔实走脚程送完，才能报陶叔开闸。",
+          "conditions": [
+            {
+              "variable": "h.notice",
               "minimum": 2,
               "maximum": 2
             }
@@ -7475,7 +7679,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.homes",
+      "next": "e05.notice",
       "variants": [
         {
           "text": "天亮后，木匠打开夜里补过的南屋门。老妇能在低门槛处歇脚，父女有暖过的床；他却将拆用的修车木板和旧阵为等修屋多烧的一叠符纸递给你：“房子能住了，料也得有人补。”顾衡把这笔记在今晚的选择下，不拿救出炉中人的好结果抹去延后的出门钟。",
@@ -7492,6 +7696,41 @@
           "conditions": [
             {
               "variable": "h.lodging",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e05.notice",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "暂借的木匠家",
+      "speaker": "旁白",
+      "text": "天亮后，顾衡把此前备药、送达和旧阵换符的时辰与昨夜撤离册对上。风险通报只用来催大家准备，不能代替三户按印；谁领过药、谁为等待多耗符纸，仍要分清。",
+      "background": "craftsmanHome",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.homes",
+      "variants": [
+        {
+          "text": "顾衡把你白日先签的临时备物单拿给祁元肃：医舍预留的今夜和次晨药，昨夜都按三户本人核过的份额交出。祁元肃在公账逐项补签，没让你的司籍名义永远替村人垫账。老妇指着那张早到的风险通报：“叫我们先收拾，是对的。可它从来不是我的迁居印。”",
+          "conditions": [
+            {
+              "variable": "h.notice",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "顾衡把迟送的正式备物页和旧阵换符簿并排：三户是在夜里核到药与屋以后才出门，等候时多烧的一叠符纸由宗门记账，不能归咎于村人迟走。父亲把女儿剩下的药收好：“下次再说要早备，别等我抱着她到门口才来分药。”你把这句留在交班页。",
+          "conditions": [
+            {
+              "variable": "h.notice",
               "minimum": 2,
               "maximum": 2
             }

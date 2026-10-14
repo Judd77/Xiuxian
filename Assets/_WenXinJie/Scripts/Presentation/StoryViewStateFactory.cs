@@ -40,11 +40,7 @@ namespace WenXinJie.Presentation
                 return new("改道", new[]
                 {
                     "许澄与段七离开炉榻，转入医舍；你耗尽灵力，修为退损，需要休养。",
-                    session.GetValue("h.lodging") == 1
-                        ? "三户撤到修过的旧屋；补瓦木料与等修屋多耗的旧阵符纸仍须清账。药田、购药和修阵也未结清。"
-                        : session.GetValue("h.lodging") == 2
-                            ? "三户先在东屋与木匠家共宿，南屋漏瓦仍待修。药田、购药与修阵的欠账仍在。"
-                            : "三户撤到高处。药田与屋舍受损，宗门仍欠迁居、购药和修阵的账。",
+                    BuildVillageOutcome(session),
                     session.GetValue("case.post") > 0
                         ? "旧帖、刮痕拓片与更名页留作对照；出炉的人各自拿到了去向抄页。"
                         : "原帖没有保住。旧号领单与更名页留下对照，出炉的人各自拿到了去向抄页。"
@@ -70,6 +66,21 @@ namespace WenXinJie.Presentation
                     : "先补村符，三户迟撤；落瓦划伤了孙子的手臂，医舍接应者为他包扎。",
                 "三日后先看伤、补料和复测，再问当事人。暂守留下的风险仍须处理。"
             });
+        }
+
+        private static string BuildVillageOutcome(StorySession session)
+        {
+            var housing = session.GetValue("h.lodging") == 1
+                ? "三户撤到修过的旧屋，补瓦木料与等修屋多耗的符纸待清账。"
+                : session.GetValue("h.lodging") == 2
+                    ? "三户先共宿，南屋漏瓦待修。"
+                    : "三户撤到高处，药田与屋舍受损。";
+            var notice = session.GetValue("h.notice") == 1
+                ? "提前备药的临时领单已转公账。"
+                : session.GetValue("h.notice") == 2
+                    ? "晚送备物页多耗的旧阵符纸已入账。"
+                    : string.Empty;
+            return housing + notice + "购药和修阵的欠账仍在。";
         }
 
         private static ChoiceViewState CreateChoice(StorySession session, StoryChoice choice)
