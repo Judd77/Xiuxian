@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 59,
+  "revision": 60,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -27,7 +27,8 @@
     55,
     56,
     57,
-    58
+    58,
+    59
   ],
   "start": "case.intro",
   "variables": [
@@ -597,6 +598,18 @@
     },
     {
       "id": "e.familyVisit",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "case.doorQuestion",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "case.doorTrace",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -2616,16 +2629,16 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "山腹侧门",
       "speaker": "旁白",
-      "text": "次日夜里，姐姐带钥匙到侧门，林月陪她先听门内回应。里面敲了两下，她轻声问妹妹的姓名。钥匙还没转动，顾衡已带着一袖符灰赶来：“南沟又裂了符。你们再松一张榻，下一股冲到谁家？”姐姐没有收起钥匙，望着林月等答案。",
+      "text": "石门里传来两下敲击。许蘅把钥匙握在手里，没有碰锁：“你叫什么？”门内的呼吸停了一瞬，才有人答她：“许澄。姐，你那半枚玉扣还在吗？”许蘅靠近门缝：“在。”你听见的是此刻本人答话，不是旧单上的名字。",
       "background": "mountainHeart",
       "portrait": "linYueConcerned",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c13.costReveal",
+      "next": "c13.voice",
       "variants": [
         {
-          "text": "次日晚，姐姐将钥匙握在自己手里。你上次说确定妹妹就在里面，她还记着，先让你退到旁边；直到门内敲响两下，她才亲自问姓名。等这段回应，巡廊脚步已近。顾衡带着裂符赶到，说南沟又受了冲；姐姐仍不肯把钥匙交给旁人替她决定。",
+          "text": "你上次把半枚玉扣写成许澄本人已在门后，许蘅仍记着，叫你先退开。她自己贴近石门问姓名。门里敲了两下，答：“许澄。姐，你那半枚玉扣还在吗？”许蘅说在，钥匙却仍没入锁；亲耳听见，不等于知道妹妹今日伤得怎样。",
           "conditions": [
             {
               "variable": "case.familyWindow",
@@ -2635,7 +2648,7 @@
           ]
         },
         {
-          "text": "次日晚，姐姐带钥匙到侧门。林月看了一眼又响起来的探气铃：上回为了避开守卫，备用符也烧尽了。今夜先等送药交接开门，不能再凭遮铃符抢进。门内敲了两下，顾衡这时带着南沟新裂的村符赶到，问你们再松一张榻，余冲落到哪里。",
+          "text": "探气铃又响了。上次备用遮铃符已经烧尽，今夜只能等正常送药交接，不抢开石门。许蘅隔门问姓名，里面敲了两下：“许澄。姐，你那半枚玉扣还在吗？”她答在，把钥匙握紧，先听妹妹自己说话。",
           "conditions": [
             {
               "variable": "case.secondTalisman",
@@ -2901,6 +2914,114 @@
       "next": "c13.door"
     },
     {
+      "id": "c13.voice",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "许蘅听出妹妹说话仍会在句尾轻轻吸气，手里的玉扣硌得掌心发白。她没有立即拧钥匙：隔门能确认有人回应，却看不到伤，也看不到炉里还有多少人。巡廊的脚步正从远处转来；你们只能在巡廊走到门前之前，再问清一件事。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.ask"
+    },
+    {
+      "id": "c13.ask",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "许蘅将耳朵贴近门缝。她想知道妹妹能不能亲手叫停，也想知道妹妹现在想不想离开这一轮。脚步声越来越近，你先请她问哪一件？",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "bell",
+          "text": "先问许澄能否够到停铃、自己叫停",
+          "target": "c13.bellAsk",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "leave",
+          "text": "先问许澄此刻是否想离开石榻",
+          "target": "c13.leaveAsk",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c13.bellAsk",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "许蘅隔门问：“若难受，你能自己敲铃吗？”里面响起一声布带摩擦石榻的轻响。许澄说左手还能动，铃绳却悬在指尖外；要把身子抬起来才够得着，腕上的符带又压得她不能起身。“我喊过停。”她说，“门外有没有人听见，我不知道。”",
+      "background": "mountainHeart",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.bellAnswer"
+    },
+    {
+      "id": "c13.bellAnswer",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "林月站在门边，先把“本人说铃绳够不到”记下，不凭隔门一句话猜绳子究竟差几寸。许蘅让她下次进炉时当着妹妹的面挪铃、试回钟；没试过之前，纸上的第三声不能算她真能用。你们还没来得及问伤处，坡口传来顾衡急促的脚步。",
+      "background": "mountainHeart",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.doorQuestion",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c13.costReveal"
+    },
+    {
+      "id": "c13.leaveAsk",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "许蘅问：“你现在想不想出来？”许澄回答得很快：“想。我今天不想再接下一股。”她又停了一下，“阿澈出去了，村里是不是替他挡了一下？你们先告诉我，开这扇门会落到谁家。”她在石门内等，不让姐姐代她说下一句。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.leaveAnswer"
+    },
+    {
+      "id": "c13.leaveAnswer",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "你记下许澄此刻想停、想离榻；她问起的山下风险，手里还没有今晚的答案。许蘅握着钥匙说：“我会把知道的告诉她，再问她愿不愿试下一步。”这句不能写成许澄已经同意马上开闸。坡口忽然有人叫你，顾衡带着符灰上来了。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.doorQuestion",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "c13.costReveal"
+    },
+    {
       "id": "c13.costReveal",
       "chapter": "卷一 · 没有下山的人",
       "location": "山腹侧门",
@@ -2911,7 +3032,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "case.boundary",
+      "next": "c13.risk",
       "variants": [
         {
           "text": "顾衡把南沟新裂的护符放到石阶上。许蘅认出你昨天说过的那种中心断口，问：“这次是哪户？”顾衡说工匠才补完，下一股仍无把握。她将钥匙握稳：“你让我先知道，我就能自己决定留下听她说话，也能听村里的人说停。”林月请顾衡带你去核村符，自己守门听回应。",
@@ -2936,11 +3057,80 @@
       ]
     },
     {
+      "id": "c13.risk",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "顾衡递来的村符从朱线中央崩开，断处还带着灰。断口能让人看出受力，却不能凭它推算下一股会冲到哪户。你现在可以用辨气看这张符是否刚承过灵气，也可以封好实物，到南沟和守符人对照。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "read",
+          "text": "施展辨气，核这张裂符是否留有近期余息",
+          "target": "c13.trace",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "carry",
+          "text": "先封好裂符，到南沟对照守符人的时辰",
+          "target": "c13.defer",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c13.trace",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "你只送出极细一缕灵力，裂口边有尚未散尽的暖意。辨气确认这张纸近日承过气，不会告诉你下次落点，更不能隔着山替村人说可以开门。许蘅听你把界限说完，松开锁孔旁的手。顾衡收好实物，带你去问守符的人。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.doorTrace",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "case.boundary"
+    },
+    {
+      "id": "c13.defer",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹侧门",
+      "speaker": "旁白",
+      "text": "你没有在石阶上多耗一息，将裂符的断口、顾衡到门前的时辰记在纸套上，请他带回南沟与守符人核对。许蘅没有把钥匙交出去：“那就先查清这张纸从哪户来。”门里的人还在等回答，林月留下陪她；你跟顾衡下山。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.doorTrace",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "case.boundary"
+    },
+    {
       "id": "case.boundary",
       "chapter": "卷一 · 门里有人",
       "location": "山腹侧门",
       "speaker": "旁白",
-      "text": "阿澈在坡口等着，药碗捧在手里。顾衡带来的裂符由中心崩开，与阿澈离榻那夜一样。林月接过碗：“我和姐姐留在这里，先听到她本人答话。你跟顾衡去看村符，找找有没有别的路。”门内又敲了两下，姐姐将手贴住石门，没有替里面的人答应继续等。",
+      "text": "阿澈捧着药碗在坡口等。林月接过碗：“我和姐姐守着门，许澄再开口，我们听得见。你跟顾衡去看村符，找找有没有别的路。”许蘅将手贴在石门上，告诉里面自己会回来答那句‘落到谁家’；她没有替妹妹答应继续坐。",
       "background": "mountainHeart",
       "portrait": "",
       "rain": false,
@@ -3098,7 +3288,19 @@
         "rightNote": "尚须比较裂纹与原簿",
         "leftStrength": 0,
         "rightStrength": 0
-      }
+      },
+      "variants": [
+        {
+          "text": "工匠取出东坡保存的旧符，又将昨日南沟裂符摆在一旁。你在侧门已辨过一张新裂符，断处留有近期暖意；眼前东坡这张却隔了十年，辨气再无新息。它从受潮的纸边烂进去。工匠问：“十年前那夜先后如何，还得问谁？”",
+          "conditions": [
+            {
+              "variable": "case.doorTrace",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "g02.marks",
@@ -6699,6 +6901,28 @@
           "effects": [],
           "outcomes": []
         }
+      ],
+      "variants": [
+        {
+          "text": "石榻边的铃绳果然垂在许澄手外。上次她隔门说够不到，今日看见位置，才知道手腕的伤让她连借力起身都难。陶叔握钥站在门口，灵力还未送入新支路；你们现在就能先试铃和关闸。你怎么回答她？",
+          "conditions": [
+            {
+              "variable": "case.doorQuestion",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "许澄上次隔门说想离开这一轮，却没听到今晚的风险。如今村口已有人握钟，她仍要自己决定这次小试。铃绳垂在她手外，陶叔拿着钥匙站在门口；灵力尚未送入新支路。你怎么回答她？",
+          "conditions": [
+            {
+              "variable": "case.doorQuestion",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
       ]
     },
     {
@@ -7571,7 +7795,7 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹炉门",
       "speaker": "旁白",
-      "text": "许澄试着伸手，指尖离铃绳还差两寸。段七的铃挂在另一侧，受伤的胳膊抬不过去。陶叔已到石台，林月等你报准备妥当。谷口的人过了岔口，炉内的人怎样把停令传出去，还须在开闸前试过。",
+      "text": "小试用过的临时铃绳在换班时收回了原钩。许澄再伸手，指尖仍离它两寸；段七的铃也挂在伤臂抬不过去的一侧。林月等你报准备妥当：谷口的人已经撤出，炉里两个人正式引流时能否自行叫停，还须重新摆铃、亲手试过。",
       "background": "furnaceChamber",
       "portrait": "xuChengResolute",
       "rain": false,

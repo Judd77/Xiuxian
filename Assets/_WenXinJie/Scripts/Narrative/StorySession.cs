@@ -218,6 +218,19 @@ namespace WenXinJie.Narrative
                 values.Add("e.familyVisit", graph.GetVariable("e.familyVisit").initial);
             }
 
+            // Older saves have not heard Xu Cheng's answer through the side door
+            // or examined the freshly broken village charm there.
+            if (snapshot.revision <= 59 && graph.Definition.revision >= 60)
+            {
+                foreach (var id in new[] { "case.doorQuestion", "case.doorTrace" })
+                {
+                    if (!values.ContainsKey(id) && graph.Variables.Any(variable => variable.id == id))
+                    {
+                        values.Add(id, graph.GetVariable(id).initial);
+                    }
+                }
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
