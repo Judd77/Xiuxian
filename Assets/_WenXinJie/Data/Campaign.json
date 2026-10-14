@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 57,
+  "revision": 58,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -25,7 +25,8 @@
     53,
     54,
     55,
-    56
+    56,
+    57
   ],
   "start": "case.intro",
   "variables": [
@@ -583,6 +584,12 @@
     },
     {
       "id": "e.buffer",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "e.patientWords",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -8148,6 +8155,101 @@
           ]
         }
       ],
+      "next": "e05.patient"
+    },
+    {
+      "id": "e05.patient",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "许澄把自己的去向抄页压在药碗下，腕上的红痕还没消。姐姐在榻边坐下，想替她说昨夜三声钟都听见了；许澄抬起没包伤的手：“你在门外，里面那一下，还是让我自己说。”林月看了她一眼：“她愿意，现在只问一件事；想睡，亲历栏就留空，回钟和伤签已有各自记录。”",
+      "background": "medicineHouse",
+      "portrait": "xuChengResolute",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "invite",
+          "text": "先问许澄愿不愿留下亲历的一句",
+          "target": "e05.ask",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "rest",
+          "text": "先让她睡，亲历一栏留待她醒后再问",
+          "target": "e05.rest",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e05.ask",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你将笔搁远一点，先问她愿不愿说；不说也照常领药。许澄握着温热的碗，点头：“只记我亲耳听见、亲身觉得的。别把姐姐门外听到的写进我嘴里。”林月把药签翻到背面，给她留出一行；姐姐没有接笔。",
+      "background": "medicineHouse",
+      "portrait": "xuChengResolute",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.response"
+    },
+    {
+      "id": "e05.response",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "“第三声是我敲的。”许澄看着腕上的印，“回钟从石门那边传回来以后，压在胸口的气才慢慢松。谷底那张符亮没亮，我在里面看不见。”她把“听见回钟”和“感觉卸力”两句读过，在自己的那行按了指印。姐姐只在旁页签“门外听见回钟”；林月另记伤情。你没有把她这次答话写成愿意再坐下一轮。",
+      "background": "medicineHouse",
+      "portrait": "xuChengResolute",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.patientWords",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "e05.shelter"
+    },
+    {
+      "id": "e05.rest",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你把亲历一栏空着，先请林月收好药签。许澄的手从碗边滑下，姐姐替她掖好被角，没有替她说“我当时听见了”。门外的回钟时辰归顾衡与林月各自的记录，今日伤情归医舍；纸上空白仍是许澄自己的位置。",
+      "background": "medicineHouse",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.restPlan"
+    },
+    {
+      "id": "e05.restPlan",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月在空栏边写“本人休息，醒后自愿再问”，把本页留在医舍，不让司籍房先补成“无异议”。姐姐问明日她若不想说呢。林月将药碗洗净：“那就不写她没说过的话。钟声和伤签已能留住昨夜的时辰，药照领。”你记下这句，再去看高处三户。",
+      "background": "medicineHouse",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.patientWords",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
       "next": "e05.shelter"
     },
     {
@@ -8436,7 +8538,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "ending.newRoad",
+      "next": "e05.statementReceipt",
       "variants": [
         {
           "text": "去向抄给出炉的人，撤路与损耗交村民，医舍留用药原簿。阿澈折好自己那一份。你取新纸写名字，案上没有被收走的原帖；陈闻将旧号领单和更名页留作对照。帖背那个“砚”字，你记得，但今后查谁曾用过此号，要凭留下的记录。",
@@ -8445,6 +8547,41 @@
               "variable": "case.post",
               "minimum": 0,
               "maximum": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e05.statementReceipt",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "医舍留着许澄那一栏。你把回钟、伤签与去向分开交班，不能因为通关的结局已写下，就把尚未问过的亲历填满。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "ending.newRoad",
+      "variants": [
+        {
+          "text": "许澄本人按过指印的短证词随她的去向抄页留在医舍；姐姐带走自己在门外听到回钟的那一份。你给司籍房的对照本只写“本人已核”，另列她看不见谷符的边界。下次要问她愿不愿再坐榻，仍须重新问，昨夜这句不能替她答。",
+          "conditions": [
+            {
+              "variable": "e.patientWords",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "许澄亲历一栏仍空，旁边清楚写“本人休息，醒后自愿再问”。姐姐带走门外回钟抄页，林月保留医舍伤签；这几张纸足以记住昨夜的停令，却没有谁替许澄填她未说过的话。她明日不想答，药也照领。",
+          "conditions": [
+            {
+              "variable": "e.patientWords",
+              "minimum": 2,
+              "maximum": 2
             }
           ]
         }

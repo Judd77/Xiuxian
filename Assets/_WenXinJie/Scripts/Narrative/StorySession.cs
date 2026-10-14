@@ -202,6 +202,14 @@ namespace WenXinJie.Narrative
                 values.Add("e.buffer", graph.GetVariable("e.buffer").initial);
             }
 
+            // Older endings cannot claim a statement the patient was never asked to give.
+            if (snapshot.revision <= 57 && graph.Definition.revision >= 58
+                && !values.ContainsKey("e.patientWords")
+                && graph.Variables.Any(variable => variable.id == "e.patientWords"))
+            {
+                values.Add("e.patientWords", graph.GetVariable("e.patientWords").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
