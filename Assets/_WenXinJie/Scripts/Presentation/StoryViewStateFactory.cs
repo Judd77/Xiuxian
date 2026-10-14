@@ -37,13 +37,20 @@ namespace WenXinJie.Presentation
             if (!session.Current.terminal) return null;
             if (session.Current.id == "ending.newRoad")
             {
+                var record = session.GetValue("case.post") > 0
+                    ? "旧帖与更名页留证。" : "旧号领单与更名页留证。";
+                var thirdSegment = session.GetValue("e.thirdWatch") == 1
+                    ? "第三段封口待修；" : session.GetValue("e.thirdWatch") == 2
+                        ? "第三段轮班守符待修；" : string.Empty;
                 return new("改道", new[]
                 {
                     "许澄与段七离开炉榻，转入医舍；你耗尽灵力，修为退损，需要休养。",
                     BuildVillageOutcome(session),
-                    session.GetValue("case.post") > 0
-                        ? "旧帖、刮痕拓片与更名页留作对照；出炉的人各自拿到了去向抄页。"
-                        : "原帖没有保住。旧号领单与更名页留下对照，出炉的人各自拿到了去向抄页。"
+                    session.GetValue("e.thirdWatch") > 0
+                        ? thirdSegment + record + "出炉的人各有去向抄页。"
+                        : session.GetValue("case.post") > 0
+                            ? "旧帖、刮痕拓片与更名页留作对照；出炉的人各自拿到了去向抄页。"
+                            : "原帖没有保住。旧号领单与更名页留下对照，出炉的人各自拿到了去向抄页。"
                 });
             }
             if (session.Current.id != "ending.oldPublic") return null;
@@ -75,16 +82,16 @@ namespace WenXinJie.Presentation
         private static string BuildVillageOutcome(StorySession session)
         {
             var housing = session.GetValue("h.lodging") == 1
-                ? "三户撤到修过的旧屋，补瓦木料与等修屋多耗的符纸待清账。"
+                ? "三户住修过的旧屋；补瓦耗符待清。"
                 : session.GetValue("h.lodging") == 2
-                    ? "三户先共宿，南屋漏瓦待修。"
-                    : "三户撤到高处，药田与屋舍受损。";
+                    ? "三户共宿，南屋待修。"
+                    : "三户暂住高处，田屋受损。";
             var notice = session.GetValue("h.notice") == 1
-                ? "提前备药的临时领单已转公账。"
+                ? "预药单转公账。"
                 : session.GetValue("h.notice") == 2
-                    ? "晚送备物页多耗的旧阵符纸已入账。"
+                    ? "晚备耗符入账。"
                     : string.Empty;
-            return housing + notice + "购药和修阵的欠账仍在。";
+            return housing + notice + "冬药修阵另欠。";
         }
 
         private static ChoiceViewState CreateChoice(StorySession session, StoryChoice choice)

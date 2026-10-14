@@ -257,6 +257,15 @@ namespace WenXinJie.Narrative
                 values.Add("g.holdPatrol", graph.GetVariable("g.holdPatrol").initial);
             }
 
+            // Earlier endings have not assigned a seal or a staffed watch to
+            // the unverified third valley segment.
+            if (snapshot.revision <= 63 && graph.Definition.revision >= 64
+                && !values.ContainsKey("e.thirdWatch")
+                && graph.Variables.Any(variable => variable.id == "e.thirdWatch"))
+            {
+                values.Add("e.thirdWatch", graph.GetVariable("e.thirdWatch").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 63,
+  "revision": 64,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -31,7 +31,8 @@
     59,
     60,
     61,
-    62
+    62,
+    63
   ],
   "start": "case.intro",
   "variables": [
@@ -631,6 +632,12 @@
     },
     {
       "id": "g.holdPatrol",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "e.thirdWatch",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -9150,7 +9157,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.paper",
+      "next": "e05.darkApproach",
       "variants": [
         {
           "text": "陶叔把烧黑的补阵符放在交班簿上，第三柱那道细缝没有扩大；旧阵匣少了一张应急符，祁元肃签了补买单。下一股灵潮前，须先补回旧阵这张，再复核仍暗着的谷底符。今夜的安全不是一张纸凭空换来的。",
@@ -9173,6 +9180,126 @@
           ]
         }
       ]
+    },
+    {
+      "id": "e05.darkApproach",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你随工匠和沈砚回到谷口。昨夜倒伏的药苗还裹着泥，前两张谷符有烧过的痕，第三张只亮过一瞬，如今完全暗了。工匠问是符坏了，还是气还没走到这里。你试着提气，丹田只剩一缕，林月的话还在耳边：今天不能再替他们试流。",
+      "background": "valleyAftermath",
+      "portrait": "shenYan",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.darkSample"
+    },
+    {
+      "id": "e05.darkSample",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "你请工匠取同批两张探符，分别贴在第二段石槽末端和第三张谷符旁。沈砚没有再开闸；工匠以辨气轻触两纸，前一张还留着昨夜的新暖意，末端那张却没有。两处是同批纸，能看出余息到此为止；它不能告诉你是石槽裂了，还是下一股来时才会接通。",
+      "background": "valleyAftermath",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.darkDecision",
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "谷底第三符 · 昨夜余息",
+        "caption": "同批探符只读昨夜留下的气，不重新开闸，也不能预言下一股。",
+        "leftLabel": "第二段末端",
+        "rightLabel": "第三符旁",
+        "leftNote": "留有昨夜新息",
+        "rightNote": "未读到新息",
+        "leftStrength": 0.6,
+        "rightStrength": 0.0
+      }
+    },
+    {
+      "id": "e05.darkDecision",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "第三段没有验通，下一股灵潮来前不能放三户回家，也不能让人再坐炉榻试它。陶叔守着前段石闸，仓里还有一张封槽符。你可以现在封住通向暗符的支路，耗一张符；也可以让工匠与沈砚轮班守感应纸，留着符等查清暗处为何不亮。今晚怎么安排？",
+      "background": "valleyAftermath",
+      "portrait": "shenYan",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "seal",
+          "text": "关前段石闸，贴封槽符；把耗料记入修阵账",
+          "target": "e05.darkSeal",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "watch",
+          "text": "保留封槽符，安排工匠与沈砚轮班守纸和石闸",
+          "target": "e05.darkWatch",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e05.darkSeal",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "陶叔合上通往第三段的石闸，工匠贴好封槽符。沈砚沿石缝查了一遍，封口没有新热意；这只隔开未经验证的一段，旧阵和前两段仍须有人守。符纸少了一张，祁元肃应当补买。工匠把第三张暗符留在图上，没画成已经修好。",
+      "background": "valleyAftermath",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.thirdWatch",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "e05.darkHandover"
+    },
+    {
+      "id": "e05.darkWatch",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "工匠将感应纸贴在前段石闸，和沈砚分两班守着。若纸先发热，就敲停并请陶叔关闸；看见热意不等于第三段已经能承受它。封槽符留在仓里，两人的修石工期却要后移半日。你把值守姓名和交班时辰交给顾衡，不能只写“有人会看”。",
+      "background": "valleyAftermath",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.thirdWatch",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "e05.darkHandover"
+    },
+    {
+      "id": "e05.darkHandover",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "谷口",
+      "speaker": "旁白",
+      "text": "顾衡在村钟簿旁另留一栏：第三段未验通，封口或守纸都只是今晚的办法；修石、补符、再问三户与炉中人之前，不开新的引流。工匠念过自己的那行，沈砚在未完的图旁签名。昨夜第三声救了人，不替明夜作保。",
+      "background": "valleyAftermath",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.paper"
     },
     {
       "id": "e05.paper",
