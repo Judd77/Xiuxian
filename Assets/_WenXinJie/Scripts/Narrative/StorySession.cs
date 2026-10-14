@@ -186,6 +186,14 @@ namespace WenXinJie.Narrative
                 values.Add("h.identityNote", graph.GetVariable("h.identityNote").initial);
             }
 
+            // The revised examination roster was not offered in older campaigns.
+            if (snapshot.revision <= 55 && graph.Definition.revision >= 56
+                && !values.ContainsKey("h.roster")
+                && graph.Variables.Any(variable => variable.id == "h.roster"))
+            {
+                values.Add("h.roster", graph.GetVariable("h.roster").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

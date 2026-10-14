@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 55,
+  "revision": 56,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -23,7 +23,8 @@
     51,
     52,
     53,
-    54
+    54,
+    55
   ],
   "start": "case.intro",
   "variables": [
@@ -569,6 +570,12 @@
     },
     {
       "id": "h.identityNote",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "h.roster",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -5485,7 +5492,7 @@
         }
       ],
       "choices": [],
-      "next": "h03.arrival"
+      "next": "h02.roster"
     },
     {
       "id": "h02.ledger",
@@ -5501,6 +5508,215 @@
           "variable": "h.post",
           "operation": "set",
           "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h02.roster"
+    },
+    {
+      "id": "h02.roster",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "陈闻合上旧号领单，你却在新考校名单上看到自己名字旁多了一枚红色的“备”印。外面张贴的榜只写“补阵考校”，没有写入炉接榻。你没有签过同意书。印泥还亮着，陈闻把用印簿与空白承压签单并排放下：“这印究竟记的是什么，别先替它添字。”",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "ink",
+          "text": "先辨红印与昨日榜文的墨迹",
+          "target": "h02.inkFirst",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "book",
+          "text": "先核用印簿与本人签单",
+          "target": "h02.bookFirst",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h02.inkFirst",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你用一点灵力辨两处余息：榜文是昨日贴出的，名单上的红印今天才盖。辨气只能告诉你它较新，不能告诉你盖印的人是谁，更不能把一枚印变成本人同意。陈闻推来用印簿：“查是谁经手，得看这本。”",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h02.bookAfter"
+    },
+    {
+      "id": "h02.bookAfter",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "用印簿写着今晨司籍房奉掌事口令将你列为“备考”，值日人签了经手时辰；旁边的承压签单却空着你的名字。陈闻让你摸清两处栏线：“提名让人来考校，坐上榻须本人知道代价、另行答应。两步还没走到一起。”",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h02.infer"
+    },
+    {
+      "id": "h02.bookFirst",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你先看用印簿：今晨司籍房奉掌事口令把你列为“备考”，值日人只签了经手时辰。承压签单留着你的空栏。陈闻说：“名是他们提的，不是你按的印；若有人说两张纸同日写好，再看看墨。”",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h02.inkAfter"
+    },
+    {
+      "id": "h02.inkAfter",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你以辨气比过昨日榜文和今日红印，后者余息更近；这与用印簿的时辰相合。术法不能认盖印人的手，也不能证明你已经同意接榻。你将榜文、用印簿和空签单分三处摆好，准备写下能向堂上说明的结论。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h02.infer"
+    },
+    {
+      "id": "h02.infer",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "名列“备考”是真，你没有签承压也是真。阿澈上次被销名以前同样列过副册，但这份新名单本身不能证明他们明天就要把你送进炉里。你要怎样向陈闻说明这个红印？",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "forged",
+          "text": "写“有人替我签了入炉同意”",
+          "target": "h02.overclaim",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "separate",
+          "text": "写“被提名，承压尚无本人同意”",
+          "target": "h02.record",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h02.overclaim",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "陈闻把空着的签单翻到你面前：“没人替你在这里签。红印是司籍房的提名；如果你写成伪造本人同意，掌事只要拿出这张空纸，就能驳掉真正该问的事。”你划去“代签”，另写“提名未告知承压风险，本人尚未同意”，请他在用印时辰旁签见证。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h02.action"
+    },
+    {
+      "id": "h02.record",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你将“今晨被提名”和“未告知承压风险、本人未签同意”分两行写。陈闻核对用印簿，在自己经手的时辰旁签名；他只肯证明纸上真有这两栏，不会替所有候选人说他们都被迫入炉。外面的榜仍只写“考校”，你还须决定自己的名字怎样留在上面。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h02.action"
+    },
+    {
+      "id": "h02.action",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "陈闻说可以当场改榜：你可撤去自己的备考名，免得旁人拿“你在榜上”催你接榻；也可保留阅图考校，让新阵图在堂上有人能核，但必须在承压栏明写“未同意”，考校不能替代入榻签认。两种写法都会把这一句补给其他候选人看。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "withdraw",
+          "text": "撤去我的备考名，补明承压须本人另签",
+          "target": "h02.withdraw",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "study",
+          "text": "只留阅图考校，承压栏写“未同意”",
+          "target": "h02.study",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h02.withdraw",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "陈闻当着你划去名单里的备考红印，不碰旧号领单。他在公开榜下补“入炉承压须另告风险、本人签认”，请值日抄手再盖一次送达印；旁边几名弟子停下来看，才知道原来的“考校”不是全部。你少了一个以应试者身份读新图的入口，陈闻答应将他能公开的接线抄页带到议事堂。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.roster",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h03.arrival"
+    },
+    {
+      "id": "h02.study",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "你不把阅图考校当成同意入炉。陈闻在你的承压栏明写“未同意”，请你亲手按在更正旁，又在公开榜下补“承压须另告风险、本人签认”。你获准在堂前看一次今日接线图；图上的新柱位仍须与谷口实测相核，不能只凭司籍房纸上那条线开闸。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.roster",
+          "operation": "set",
+          "value": 2
         }
       ],
       "choices": [],
@@ -6303,7 +6519,29 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "h05.assign"
+      "next": "h05.assign",
+      "variants": [
+        {
+          "text": "祁元肃把石台钥匙放在案上，只准试一次。你在阅图考校里见过今日接线，却仍将它与谷口实测图并排：第三柱移位，村口先受冲，纸上的线不能替当场的停钟。工匠把钟槌压在家门的位置，姐姐问谁能关闸。陶叔伸手接钥匙，沈砚只读图。",
+          "conditions": [
+            {
+              "variable": "h.roster",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "text": "祁元肃把石台钥匙放在案上，只准试一次。陈闻送来今日可公开的接线抄页，你与谷口实测图并排核过：第三柱移位，村口先受冲；退出考校没有抹去现场证据。工匠把钟槌压在家门的位置，姐姐问谁能关闸。陶叔伸手接钥匙，沈砚只读图。",
+          "conditions": [
+            {
+              "variable": "h.roster",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h05.assign",
@@ -7945,7 +8183,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.shen",
+      "next": "e05.roster",
       "variants": [
         {
           "text": "祁元肃交出旧加压令，给迁居、购药与修阵账签名。陈闻抱着自己留下的交接抄页来核去向，没有再戴那块交接牌。“那差事没了，纸我还留着。”他把报错车次的一页也交给你，不肯让救人的经过只写成无事发生。未核的人仍留空。",
@@ -7954,6 +8192,41 @@
               "variable": "case.chenJob",
               "minimum": 1,
               "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e05.roster",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "陈闻将那张备考名单收进案夹。旧榜上的“考校”没有写明承压风险，今日起每个候选人都须先拿到完整说明，愿意接榻再由本人签；这次开闸救出的伤者不能被写成下一轮可以照旧招人。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.shen",
+      "variants": [
+        {
+          "text": "陈闻将旧备考名单收进案夹，你名字旁的红印已当面划去。公开榜补着“入炉承压须另告风险、本人签认”，送达印留在下面。今日修阵用的接线抄页仍在堂上；你退出考校，不等于下一批弟子可以只看“考校”二字便被叫去接榻。",
+          "conditions": [
+            {
+              "variable": "h.roster",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "陈闻将旧备考名单收进案夹，你名字仍列阅图考校，承压栏却有你亲手按过的“未同意”。公开榜补着“入炉承压须另告风险、本人签认”；今夜你耗尽灵力救人，也不让谁把这件事倒填成曾答应坐榻。",
+          "conditions": [
+            {
+              "variable": "h.roster",
+              "minimum": 2,
+              "maximum": 2
             }
           ]
         }
