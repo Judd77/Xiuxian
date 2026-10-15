@@ -346,6 +346,14 @@ namespace WenXinJie.Narrative
                 values.Add("g.oldNightTalk", graph.GetVariable("g.oldNightTalk").initial);
             }
 
+            // Earlier saves have not checked the winter stock or promised a key handover.
+            if (snapshot.revision <= 74 && graph.Definition.revision >= 75
+                && !values.ContainsKey("h.winterReview")
+                && graph.Variables.Any(variable => variable.id == "h.winterReview"))
+            {
+                values.Add("h.winterReview", graph.GetVariable("h.winterReview").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

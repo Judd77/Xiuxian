@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 74,
+  "revision": 75,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -42,7 +42,8 @@
     70,
     71,
     72,
-    73
+    73,
+    74
   ],
   "start": "case.intro",
   "variables": [
@@ -708,6 +709,12 @@
     },
     {
       "id": "g.oldNightTalk",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "h.winterReview",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -7366,7 +7373,19 @@
         }
       ],
       "choices": [],
-      "next": "h04.table"
+      "next": "h04.table",
+      "variants": [
+        {
+          "text": "你将加重承压与改写去向分记两行，请祁元肃签在各自命令旁。他看了一眼冬药账，还是先在这两行落了名。许蘅收好带回炉门的抄页；药库交接和订药另有去处，不能抵掉阿澈被藏在炉里的那几日。",
+          "conditions": [
+            {
+              "variable": "h.winterReview",
+              "minimum": 1,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "h04.gu",
@@ -9623,7 +9642,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.chenAfter",
+      "next": "e05.qiHandover",
       "variants": [
         {
           "text": "祁元肃交出旧加压令，给迁居、购药与修阵账签名。陈闻抱着自己留下的交接抄页来核去向，没有再戴那块交接牌。“那差事没了，纸我还留着。”他把报错车次的一页也交给你，不肯让救人的经过只写成无事发生。未核的人仍留空。",
@@ -10204,7 +10223,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "ending.oldPublic"
+      "next": "h05.holdSupply"
     },
     {
       "id": "g09.night",
@@ -11016,7 +11035,7 @@
       "text": "陈闻将交接车次放在接回时辰旁。药车怎样进门、阿澈后来从哪里被带出，各有经手者能说；车牌和铃声本身不能替车里的人报姓名。祁元肃不能拿这两项，改掉医舍已经核过的人名与日期。",
       "effects": [],
       "choices": [],
-      "next": "h04.qiAccount",
+      "next": "h04.winterOpen",
       "variants": [
         {
           "conditions": [
@@ -12576,6 +12595,365 @@
           "conditions": [
             {
               "variable": "g.oldNightTalk",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "h04.winterOpen",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "祁元肃的手还按在冬药账上。“你们要改道，药田就留不住。冬天到了，伤者吃什么？”许蘅将林月托她带来的医舍抄页展开，旁边夹着值日人签过的封药签。你没有把阿澈的去向册收走，只给这几张纸腾出地方。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "stock",
+          "text": "先查医舍已经备下的药",
+          "target": "h04.winterStock",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "field",
+          "text": "问账上整冬的药如今在哪里",
+          "target": "h04.winterField",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h04.winterStock",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "封药签上分着今夜、次晨，炉房伤者的药与村口备用药各有一栏。许蘅指给你看医舍值日人的签名：“离开医舍时核过，药已封好，还没写成已经送到各家。”她把这一页留在桌心，请祁元肃说清账里为何还有那么大的缺口。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.winterStockList",
+      "variants": [
+        {
+          "text": "封药签上分着今夜、次晨，伤者的药与村口备用药各有一栏。你先前签的临时备物单夹在村口栏旁，值日人已经预留，不能再多算一份。许蘅说：“离开医舍时核过，药已封好，还没写成已经送到各家。”她请祁元肃说清账里为何仍有缺口。",
+          "conditions": [
+            {
+              "variable": "h.notice",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "h04.winterStockList",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "祁元肃翻到下一页，“待收”二字下面列着谷口药田。这一季还在地里的药草，也被他算进了整冬的供药。毁田要补的是后面的缺口；眼前这些封好的药用完，伤者仍不能停药。你把两页摊开，没有将其中一页压在另一页下面。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.winterCompare"
+    },
+    {
+      "id": "h04.winterField",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你请他指出整冬供药的去处。祁元肃翻到药田一栏：“还在地里。往年这一季收上来，才够往后配。”你看见栏首写着“待收”。许蘅将医舍的封药签移近：“那眼前要吃的呢？不能把田里的草和已经封好的药只报一个总数。”",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.winterFieldList"
+    },
+    {
+      "id": "h04.winterFieldList",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "许蘅念出封药签：今夜、次晨，炉房伤者与村口备用分开，值日人签过名。她离开医舍时核过，药已封好，送到哪里仍须点交。现药接得上眼前，往后却还要买；你在“待收”旁标出毁田后的缺口，将封药签放在另一边。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.winterCompare",
+      "variants": [
+        {
+          "text": "许蘅念出封药签：今夜、次晨，炉房与村口备用分开。你先前的临时备物单夹在村口栏旁，医舍已照单预留，并非另多一份。现药接得上眼前，送达仍须点交；往后却还要买。你在“待收”旁标出毁田缺口，将封药签另放一边。",
+          "conditions": [
+            {
+              "variable": "h.notice",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "h04.winterCompare",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "一边是值日人签过的现药，一边是田里尚未采的药草。许蘅等你把这两页读给堂上的人听，祁元肃也没有再将它们合起来。你要怎样说清改道对用药的影响？",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "separate",
+          "text": "现药能接上，过冬的缺口仍要补",
+          "target": "h04.winterClear",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "tonight",
+          "text": "药田一毁，今夜就会断药",
+          "target": "h04.winterError",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "h04.winterClear",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你将今夜、次晨的已封药份念完，再指向“待收”栏：“改道会失去这一季收成，整冬的药得另买。眼前有药，也只能先接这一段。”许蘅将两页分别夹好，让抄手照实留下，祁元肃认了医舍的封药签。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.winterReview",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "h04.winterNames"
+    },
+    {
+      "id": "h04.winterError",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "许蘅没有让你把“今夜断药”写定。她翻回封药签：“这些已经备好了。你若这样传出去，村口的人连今晚的药也不敢信。”你划去原句，补明现药接眼前、未采的冬药仍缺。祁元肃也认了这两处，划过的句子留在速记里。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.winterReview",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "h04.winterNames"
+    },
+    {
+      "id": "h04.winterNames",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你问祁元肃，药账里这些人，他平日见不见。他先报出许澄常用的药，又说上回她整夜睡不着，医舍曾来添领。“少一剂，她就熬一夜。”他说得很快。许蘅看着他：“那她说手疼的时候，您也知道她不是在躲差事。”",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.winterMemory"
+    },
+    {
+      "id": "h04.winterMemory",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "祁元肃将指尖从名字上移开。“我见过冬天端着空碗来等的人。药一断，别山未必肯立刻卖。”你问，药田、旧道和伤情，可曾这样摊给坐榻的人看过。他说没有。堂门外有人换下灯盏，新添的油沿铜壁缓缓落下。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.winterNext"
+    },
+    {
+      "id": "h04.winterNext",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "“若昨夜没把阿澈带出来呢？”你问。祁元肃答，先稳住这股乱流，等下一批考校过了，再换他出来。陈闻抬起头：“哪一批？”祁元肃看向他手里的册子，没有另外报出一个日子。你已经知道那册子里有什么。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.winterReplacement"
+    },
+    {
+      "id": "h04.winterReplacement",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "陈闻将你曾被提名的那一页翻开。你看着自己的名字，问：“我进去以后，伤了，再等下一批？”祁元肃没有否认。阿澈换下来了，石榻却还要有人坐。你没有把册子合上，请他接着回答。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.winterDeadline",
+      "variants": [
+        {
+          "text": "陈闻翻到你撤名的原页，红“备”印仍留着划痕。“您先前选的是我。”你说，“我若坐伤了，再等下一批？”祁元肃没有否认。陈闻没有擦去划痕，也没把你补回名单。你请掌事接着回答。",
+          "conditions": [
+            {
+              "variable": "h.roster",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "陈闻翻到你的名字，承压栏仍是你亲手按的“未同意”。你指着这几个字：“若我肯坐，伤了，再等下一批？”祁元肃没有否认。你保留的阅图资格不能替这处空缺答应什么，陈闻将原页放在桌心。",
+          "conditions": [
+            {
+              "variable": "h.roster",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "h04.winterDeadline",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你问最后一批是哪一批，哪一天以后不再添人。祁元肃翻了一页，又停住。纸上每年都有新名字，从没有那一天。他只说先撑过眼前。许蘅把妹妹的伤签放到名单上：“她也一直在过您说的眼前。”",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.winterRelease"
+    },
+    {
+      "id": "h04.winterRelease",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "祁元肃拿起封药签，想递给许蘅。她请他放在桌上：“我来拿药，不是来替妹妹答应下一回。”你将购药单挪到加压令旁，问若有人叫停，医舍还能不能照签领药。他看着这两张纸，终于答能。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.winterReceipt"
+    },
+    {
+      "id": "h04.winterReceipt",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "祁元肃在封药签旁写下照常发药，答应将药库钥匙交医舍值日人核收；向别山订药仍由他去办。许蘅收下抄页，要带回去请医舍对一遍。你只记“待交接”，没有将堂上的答应写成已经送达，旧加压令也仍留在案上。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.qiAccount"
+    },
+    {
+      "id": "e05.qiHandover",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "医舍送来当日实际发药的抄页，与你手中的购药单分别夹好。祁元肃核过已发的药，仍须追问尚未到货的部分；陈闻在旁等着交自己的领单。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.chenAfter",
+      "variants": [
+        {
+          "text": "医舍值日人带来药库钥匙的接收凭据，核过昨夜、今晨已领的药。你把堂上分开的“现药”和“待收”留在两页：现药按实际发放核，毁田缺口按购药核。祁元肃签了订药单，还须等药真正到库，不能先将这一冬写成已经够用。",
+          "conditions": [
+            {
+              "variable": "h.winterReview",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "医舍值日人带来药库钥匙的接收凭据，核过当日实际发药。你留下堂上那句划去的“今夜断药”，旁边是更正与封药签；供药并未因有人求停而取消。祁元肃仍负责订药，订下却还没收到的部分，你没有填进现药。",
+          "conditions": [
+            {
+              "variable": "h.winterReview",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "h05.holdSupply",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "南沟村高处",
+      "speaker": "旁白",
+      "text": "医舍送来下一轮换药的时辰，你照着抄给炉门与高处各一份。祁元肃还须补冬药，许澄也还在炉里；今夜的暂歇过后，仍要有人守着她能摸到的停铃。",
+      "background": "villageSquareNight",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "ending.oldPublic",
+      "variants": [
+        {
+          "text": "医舍值日人送来回执：药库钥匙已经核收，当夜仍照常换药，订药另催。你将堂上分清的现药与未采冬药各留一页，交给下一班。许澄歇了一轮，仍没离开炉房；药照领，也不能让谁替她答应下一回。",
+          "conditions": [
+            {
+              "variable": "h.winterReview",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "医舍的回执写明药库钥匙已经核收、当夜照常换药。你把“今夜断药”的更正一并交班，免得下一班只听见那句划去的话。冬药仍须补，许澄也还在炉内；停铃与轮换不能因暂时有药便收走。",
+          "conditions": [
+            {
+              "variable": "h.winterReview",
               "minimum": 2,
               "maximum": 2
             }
