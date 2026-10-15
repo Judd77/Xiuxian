@@ -359,19 +359,27 @@ namespace WenXinJie.Presentation
         private static string RescueRecord(StorySession session)
         {
             var node = session.Current.id;
-            if (node == "e04.stop")
+            if (node == "e04.stop" || node == "e04.breathAfter")
             {
-                return "已执行：第三声后收息，陶叔关支路，两端收到回钟。余流转向无人深谷，林月已确认炉榻卸压。\n待做：扶人出炉并查看伤情。";
+                return "已执行：第三声后收息，陶叔关炉榻小闸并回钟；引流闸仍开，余流沿前两段泄入深谷。\n当前：林月已确认腕符卸压，两人还未出炉，待解带、扶上平车。";
             }
 
-            if (node == "e04.outside" || node == "e04.valley" || node.StartsWith("e05.")
+            if (node == "e04.outside" || node == "e04.valley" || node == "e04.familyMessage" || node.StartsWith("e05.")
                 || node == "ending.newRoad")
             {
                 var exhaustion = node.StartsWith("e05.") || node == "ending.newRoad"
                     ? "主角修为退落"
                     : "主角灵力耗尽";
-                return "已执行：第三声后两端撤力，林月将许澄与段七接出炉房。\n代价：" + exhaustion
+                return "已执行：第三声收息、隔开炉榻，林月解下腕符带，将许澄与段七接出炉房。\n代价：" + exhaustion
                     + "，获救者仍需养伤，三户暂迁，药田受损。\n未完成：谷底新路仍须修缮，下一轮灵潮还要有人维护。";
+            }
+
+            if (node == "e03.old" || node == "e03.reconnect")
+            {
+                var care = node == "e03.old"
+                    ? "村符裂了一张，炉中添轻伤；补护、看伤和重新问本人仍待完成。"
+                    : "裂符已补、伤情已查看，两人答应继续；引流闸仍关，等待玩家确认后重开。";
+                return "已发生：左槽接错，主角收息，陶叔关回引流闸；炉榻仍接在旧阵上，两人未获救。\n当前：" + care;
             }
 
             if (session.GetValue("e.flowMeasured") > 0)
@@ -381,7 +389,7 @@ namespace WenXinJie.Presentation
 
             if (node.StartsWith("e03."))
             {
-                return "已发生：旧闸已开，药田开始受冲。两人能使用停铃，石台能回钟。\n待做：循新测柱位辨流，将灵力引向无人深谷；人还没有离榻。\n约定：第三声必停，任何人求停也立即传令。";
+                return "已发生：谷底引流闸已开，药田开始受冲；炉榻尚未隔开。两人能用停铃，石台能回钟。\n待做：循现柱脚辨流，将来气牵向深谷；人还没有离榻。\n约定：第三声必停，任何人求停也立即传令。";
             }
 
             return "已准备：许澄与段七亲手试铃，能听见陶叔的回钟，并答应本次行动。\n约定：开闸后重新计铃，第三声必停，任何人求停也要立即传令。\n尚未发生：正式开闸与救人。";
