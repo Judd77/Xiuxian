@@ -223,7 +223,7 @@ namespace WenXinJie.Presentation
                 && (id == "c12.evening" || id == "c12.fear" || id == "c12.company"
                     || id == "c12.traceStart" || id == "c12.traceFeel" || id == "c12.traceRest"
                     || id == "c12.shoeStart" || id == "c12.shoeWork" || id == "c12.shoeRest"
-                    || id == "c12.sleep");
+                    || id == "c12.sleep" || id.StartsWith("c12.chen"));
             var wallKnown = !id.StartsWith("c12.") || id == "c12.name"
                 || id == "c12.challenge" || id == "c12.unknown" || eveningKnown;
             if (session.Revision < 48)
