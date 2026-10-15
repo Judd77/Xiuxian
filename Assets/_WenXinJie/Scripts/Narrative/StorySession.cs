@@ -306,6 +306,14 @@ namespace WenXinJie.Narrative
                 values.Add("case.acheEvening", graph.GetVariable("case.acheEvening").initial);
             }
 
+            // Earlier saves do not claim a chosen breathing aid before the final channeling.
+            if (snapshot.revision <= 69 && graph.Definition.revision >= 70
+                && !values.ContainsKey("e.breathAnchor")
+                && graph.Variables.Any(variable => variable.id == "e.breathAnchor"))
+            {
+                values.Add("e.breathAnchor", graph.GetVariable("e.breathAnchor").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 69,
+  "revision": 70,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -37,7 +37,8 @@
     65,
     66,
     67,
-    68
+    68,
+    69
   ],
   "start": "case.intro",
   "variables": [
@@ -673,6 +674,12 @@
     },
     {
       "id": "case.acheEvening",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "e.breathAnchor",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -8657,7 +8664,7 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹炉门",
       "speaker": "旁白",
-      "text": "陶叔敲过回钟，许澄与段七都能听见。林月重说：开闸后重新计铃，第三声必停，任何人喊停也立即传到石台。她问还愿不愿试这一回。许澄点头，段七将铃绳握在未伤的手里。你这才向石台报妥当。",
+      "text": "陶叔敲过回钟，许澄与段七都能听见。林月重说：开闸后重新计铃，第三声必停，任何人喊停也立即传到石台。她问还愿不愿试这一回。许澄点头，段七将铃绳握在未伤的手里。两人的答复传到石台，陶叔仍扣着钥匙，等你就位。",
       "background": "furnaceChamber",
       "portrait": "xuChengResolute",
       "rain": false,
@@ -8669,10 +8676,10 @@
         }
       ],
       "choices": [],
-      "next": "e03.flow",
+      "next": "e02.ownCost",
       "variants": [
         {
-          "text": "回钟传进炉房。林月重新查看许澄包好的腕伤，问还愿不愿试；她把铃绳勾在能动的指间：“愿。第三声，照刚才试的来。”段七也握住铃。林月重说开闸后重新计数，任何人喊停也立刻传令。你将先前多用的符料记在这一页，才向石台报妥当。",
+          "text": "回钟传进炉房。林月重新查看许澄包好的腕伤，问还愿不愿试；她把铃绳勾在能动的指间：“愿。第三声，照刚才试的来。”段七也握住铃。林月重说开闸后重新计数，任何人喊停也立刻传令。你记下先前多用的符料，将两人的答复传到石台；陶叔仍等你就位。",
           "conditions": [
             {
               "variable": "e.extraCharm",
@@ -9027,7 +9034,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e04.outside",
+      "next": "e04.breathAfter",
       "variants": [
         {
           "text": "第三声一响，你松手收息，向炉门回敲停钟。陶叔合住支路，贴在第三柱上的补阵符先亮后黑，石面细缝没有再张开。谷底最后一张符亮一瞬便暗；余流从前两处泄进无人深谷。林月报炉榻已卸下承压，可以扶人。你将烧黑的补符记入待补单，没有再送灵力。",
@@ -9113,7 +9120,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.names"
+      "next": "e05.breathCare"
     },
     {
       "id": "e05.names",
@@ -11236,6 +11243,215 @@
           "conditions": [
             {
               "variable": "case.acheEvening",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e02.ownCost",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "林月陪你走到石台前，先让你把手离开石面：“白日只试了一缕。今夜要不断送出你自己的灵力，牵着乱流走。积蓄用空，伤后可能连从前的一周天也走不完。”你问多久能养回来，她摇头，说现在不能答。沈砚将图放平：“我的旧伤撑不起这一段。我能替你认线，不能保证你只累一夜。”",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e02.ownFuture"
+    },
+    {
+      "id": "e02.ownFuture",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你从袖中摸出一页考校前抄的笔记，纸上圈着几处不会的地方。那时想，下回多答两题，也许能领到更深一层的功法。你仍想学，并没有忽然觉得这些全不作数。“伤好以后，还能练吗？”林月答：“先养，能练到哪一步，等好了再看。”你将纸折回去。隔着石道，阿澈正把干布递到榻旁。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e02.ownAnchor"
+    },
+    {
+      "id": "e02.ownAnchor",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "陶叔没有催开闸，只说你若撑不住，出声便停。你知道自己临急容易屏气；平日运气越急，手指越麻。林月还要回炉门看着两人，可以沿石道报息提醒你；你也能按入门时常念的口诀自己调匀。两种办法都只能帮你稳住呼吸，耗去的灵力仍要慢慢养。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "count",
+          "text": "请林月报息，乱了就叫我",
+          "target": "e02.countedBreath",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "own",
+          "text": "自己默念口诀，乱了就求助",
+          "target": "e02.ownBreath",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e02.countedBreath",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "“你叫我的名字吧。”你对林月说，“我怕到时只看着那张没亮的符，舍不得放手。”她点头：“我在炉门，得先看着伤者。能传话时就报给你，听不清便喊我。铃响先停，哪怕我一句话还没说完。”你答应，不再把害怕藏在那句准备好了后面。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.breathAnchor",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "e02.dryBreath"
+    },
+    {
+      "id": "e02.ownBreath",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你将肩背放松，想起刚入门时总念错的几句：“沉肩，吐尽，再吸。”那时嫌它浅，急着翻后面的术法，练过几次才知道，一慌便又会屏气。“我自己来。你先看着他们。”你对林月说，想了想又补一句，“若乱了，我会喊，不硬撑。”她听完，才转身回炉门。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "e.breathAnchor",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "e02.dryBreath"
+    },
+    {
+      "id": "e02.dryBreath",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "旧闸还锁着。你先不送灵力，只在石台旁松开肩背，慢慢吐尽一口气，再吸。握紧的手指渐渐张开，掌心全是汗。沈砚将探流符放到伸手可及的位置，陶叔等你把衣袖束好。石道里传来林月查看腕伤的声音，你照常呼吸，没有试着替整夜多蓄一口。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e02.ownReady",
+      "variants": [
+        {
+          "text": "林月回到炉门，沿石道报来一呼一吸。旧闸仍锁着，你不送灵力，先跟着松肩、吐气。她去查看段七的手时，声音断了，你便按刚才的缓劲继续，没有憋着等。她再叫你的名字，你答听见了。报息只是提醒；真正的停铃，你仍须自己留神。",
+          "conditions": [
+            {
+              "variable": "e.breathAnchor",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e02.ownReady",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "你把考校笔记交给阿澈，怕待会儿手软，将纸掉进石槽。他夹进入门书，说等你下来再还。你回到石台，亲口告诉陶叔：“我准备好了。撑不住我会说，听见停铃便收。”他这才将钥匙插进锁孔，沈砚把试线递给你。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "ready",
+          "text": "接过试线，请陶叔开一线旧闸",
+          "target": "e03.flow",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "e04.breathAfter",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "回钟的余音沿石道退去。你慢慢吐气，松开紧绷的肩背，腹中空得发冷。林月叫人接住你，别再试着运气。你答了一声，等旁人扶稳，才离开石台。",
+      "background": "furnaceChamber",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e04.outside",
+      "variants": [
+        {
+          "text": "回钟的余音里，林月从炉门叫你的名字：“停了。你也收住。”你循着她的声音慢慢吐气，才发现肩背一直绷着。腹中空下去，你本能地想再运一缕，手伸到一半又放下。你答她听见了，让人扶稳自己，没有追着那点散去的暖意再送力。",
+          "conditions": [
+            {
+              "variable": "e.breathAnchor",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "回钟之后，你才发现那几句口诀已经念乱。第三声响时，你仍先照约松了手；现在腹中空得发冷，不能靠多吸一口便填回去。你不再勉强，朝石道喊林月，请人扶自己一把。有人托住你的手臂，你这才慢慢松下肩背。",
+          "conditions": [
+            {
+              "variable": "e.breathAnchor",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e05.breathCare",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月把水碗移到你没发抖的那只手边，让你先坐稳再抄。今日只能聚起这一缕，便养这一缕，别为了明日交差催得更急。你把去向册铺平，没有再试运气。",
+      "background": "medicineHouse",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.names",
+      "variants": [
+        {
+          "text": "林月又叫了你的名字，像昨夜隔着石道报息那样。你抬头，她才将水递来：“今日不用追铃声了。能聚起这一缕，就先养这一缕。”阿澈把考校笔记还到桌边。你摸过圈着的旧题，没有急着重试运气，先把该抄的去向册铺平。",
+          "conditions": [
+            {
+              "variable": "e.breathAnchor",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "“昨夜后来肯喊人扶你，这句记着。”林月将水碗推近，“今日也一样。聚不起便停，别拿更深的功法催它。”阿澈把考校笔记放回桌边。你看着自己圈过的旧题，没把不会的地方划掉；只是今日先不练，抄字时让册子平平放在膝上。",
+          "conditions": [
+            {
+              "variable": "e.breathAnchor",
               "minimum": 2,
               "maximum": 2
             }
