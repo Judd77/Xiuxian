@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 72,
+  "revision": 73,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -40,7 +40,8 @@
     68,
     69,
     70,
-    71
+    71,
+    72
   ],
   "start": "case.intro",
   "variables": [
@@ -694,6 +695,12 @@
     },
     {
       "id": "case.examPractice",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "case.chenTalk",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -6645,7 +6652,7 @@
         }
       ],
       "choices": [],
-      "next": "h03.arrival"
+      "next": "h02.chenAfter"
     },
     {
       "id": "h02.study",
@@ -6664,7 +6671,7 @@
         }
       ],
       "choices": [],
-      "next": "h03.arrival"
+      "next": "h02.chenAfter"
     },
     {
       "id": "h03.arrival",
@@ -9609,7 +9616,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.roster",
+      "next": "e05.chenAfter",
       "variants": [
         {
           "text": "祁元肃交出旧加压令，给迁居、购药与修阵账签名。陈闻抱着自己留下的交接抄页来核去向，没有再戴那块交接牌。“那差事没了，纸我还留着。”他把报错车次的一页也交给你，不肯让救人的经过只写成无事发生。未核的人仍留空。",
@@ -11192,7 +11199,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c13.jade"
+      "next": "c12.chenVisit"
     },
     {
       "id": "e02.acheReturn",
@@ -12008,6 +12015,356 @@
           "conditions": [
             {
               "variable": "case.examPractice",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c12.chenVisit",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍外间",
+      "speaker": "旁白",
+      "text": "你从里间退出来，陈闻正坐在外间长凳上，交接牌搭在膝头。他从袖里取出一个冷馒头，先问阿澈醒着没有。你说刚睡，他将声音放低：“那就别叫了。我下一轮交接前，还能坐一会儿。”你原以为他会先问药车，一时竟没接上话。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.chenQuestion",
+      "variants": [
+        {
+          "text": "你从里间退出来，看见陈闻坐在外间长凳上。他腰间少了交接牌，只剩一截绳结。他从袖里取出一个冷馒头，先问阿澈醒着没有。你说刚睡，他便将声音放低：“那就别叫了。”你原以为他会先说失差的事，一时竟没接上话。",
+          "conditions": [
+            {
+              "variable": "case.chenJob",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c12.chenQuestion",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍外间",
+      "speaker": "旁白",
+      "text": "外间小炉的火还没灭，锅沿结着一层薄薄的粥皮。陈闻看你站着，往长凳旁边让了让。今晚药车是他借出的，二更那一行也是他报的；你在侧门只顾着数呼吸，直到此刻，才有空坐下来问他一句。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "future",
+          "text": "问他接下来有什么打算",
+          "target": "c12.chenFuture",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "tonight",
+          "text": "把今晚借车时的心思说给他听",
+          "target": "c12.chenFear",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c12.chenFuture",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍外间",
+      "speaker": "旁白",
+      "text": "“先把这一轮交接做完。”陈闻摸出半张旧书目，指给你看圈住的《阵图入门》，“书钱快攒够了。天天签炉灰进出，总得知道它们送进什么阵。”他笑了笑，又将纸压平。你从前只见他核车牌，从没问过他买书做什么。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.chenBook",
+      "variants": [
+        {
+          "text": "陈闻摸出半张旧书目，指给你看圈住的《阵图入门》：“本想再攒一点，就去买这本。现在得先留着吃饭。”他将纸折小，“明早问问医舍缺不缺誊药簿的人，我字还算认得清。”你看见纸上的圈描过两遍，后面一句安慰的话便没有说出来。",
+          "conditions": [
+            {
+              "variable": "case.chenJob",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c12.chenBook",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍外间",
+      "speaker": "旁白",
+      "text": "“你想学修阵？”你问。他摇头：“先看懂吧。以前车到炉门，我认一块牌便算交完差。里面的人怎样过夜，我从来没问过。”他将书目翻来覆去折好，又说看不懂的图不会替谁签成懂。你说，下回借到入门册，带来一起看。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.chenPlan"
+    },
+    {
+      "id": "c12.chenPlan",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍外间",
+      "speaker": "旁白",
+      "text": "陈闻说好，先将书目收进干燥的里袋。交接牌碰了一下凳沿，他低头扶住，没让它响。“阿澈醒了再问，别为找单子叫他起来。”你答应，起身去小炉边拿碗。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.chenTalk",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c12.chenMeal",
+      "variants": [
+        {
+          "text": "陈闻将书目收进干燥的里袋。“你若碰见问交接牌的人，就照今晚的事说。”他没有问你何时能替他拿回差事，你也没替掌事答应。“阿澈醒了再问，别为找单子叫他起来。”你答应，起身去小炉边拿碗。",
+          "conditions": [
+            {
+              "variable": "case.chenJob",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c12.chenFear",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍外间",
+      "speaker": "旁白",
+      "text": "你看着他手里的馒头，说推车时脑子里只剩阿澈。守卫回头那一下，自己心里却盼着，只要没认出牌号，这夜便能算过去。陈闻没有接话，你也没再用“为了救人”把后半句盖住。隔着门帘，阿澈在睡梦里轻轻咳了一声。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.chenReply"
+    },
+    {
+      "id": "c12.chenReply",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍外间",
+      "speaker": "旁白",
+      "text": "“等过去了，是车牌没被看清。”陈闻说，“林月那张备用符也花了。明早问问怎么补，别让她下回到了门口才发现匣里空着。”你点头。他将馒头换了只手，又问医舍的小炉上是不是还有粥，语气这才松下来。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.chenAnswer",
+      "variants": [
+        {
+          "text": "你说，不该一直让“报错车次”四字只跟着他的名字。陈闻低头掰了一下馒头，没有掰开。“车是我点头借的，错是我自己报的。”他说，“可我丢了这份活，也不是一句一点都不后悔就过去了。往后有人问你，别说自己只是跟着看了一眼。”",
+          "conditions": [
+            {
+              "variable": "case.chenJob",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c12.chenAnswer",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍外间",
+      "speaker": "旁白",
+      "text": "“我也记着，车是你借给我的。”你说，“往后问起，我说自己做过的事，不替你答应第二回。”陈闻看了你一眼，说一声好。你没有请他就此放心，转身去小炉边拿了两只碗。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.chenTalk",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "c12.chenMeal"
+    },
+    {
+      "id": "c12.chenMeal",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍外间",
+      "speaker": "旁白",
+      "text": "锅里还留着值夜弟子的粥。你问过一声，盛来两碗，陈闻把馒头掰小，泡软了才咽下。“他明早能见人吗？”你说要先问林月，看醒后精神。他点头，从里袋摸出半张书目，将找旧货领单的事记在背面，没有进去叫阿澈。你们坐着喝完，碗底还有一点热。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.chenLeave"
+    },
+    {
+      "id": "c12.chenLeave",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍外间",
+      "speaker": "旁白",
+      "text": "陈闻将牌系回腰间，喝过水才起身，回交接台守下一轮。你把两只空碗洗净，在值夜弟子让出的地方歇下。里间的药炉还留着明早那一服药，天亮后去哪里、问谁，等人醒了再说。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.jade",
+      "variants": [
+        {
+          "text": "陈闻没有交接台可回了，便向值夜弟子借外间长凳歇一阵。你洗净两只空碗，将一件旧外衣搭在凳背，自己也在旁边坐下。里间药炉还留着明早那一服药，天亮后去哪里、问谁，等人醒了再说。",
+          "conditions": [
+            {
+              "variable": "case.chenJob",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "h02.chenAfter",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "陈闻替你将凭据装进案夹，自己带着能核签的领单。你们听见堂前叫人，便一同出去；新榜留在身后，等值日人把补写的字贴好。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h03.arrival",
+      "variants": [
+        {
+          "text": "陈闻将领单装进案夹，看见新榜上的“补阵”二字，轻声说：“我想学的就是看懂，不是看过一张图就能去修阵。”你想起医舍那半张书目，答应等眼前的事忙完，一起找人问。外面有人叫入堂，他把旧号领单另夹一层，带你出去。",
+          "conditions": [
+            {
+              "variable": "case.chenTalk",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "值日人看见陈闻，问起被收走的交接牌。你接过话：“那夜车是我用了，去炉门也是我自己决定的。”陈闻把报错的一行指给对方看，认自己写下的字。你没替他请一句救人便免了事，也没再让这行字只剩他的名字。堂前叫人，你们收好纸出去。",
+          "conditions": [
+            {
+              "variable": "case.chenJob",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "case.chenTalk",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "text": "陈闻将凭据夹好，你看见腰间那块交接牌还在，低声对他说：“今晚我怎么选，自己来答。不会拿你肯借过车，便当成往后都肯。”他应了一声，把案夹递来。你接住自己的那份，听见堂前叫人，便同他出去。",
+          "conditions": [
+            {
+              "variable": "case.chenJob",
+              "minimum": 0,
+              "maximum": 0
+            },
+            {
+              "variable": "case.chenTalk",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e05.chenAfter",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "陈闻核完自己经手的几页，收好笔，没有替尚未见过的人填名字。你将领单放回他手里，请他留着自己的那一份；后面还有考校名单要交班。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.roster",
+      "variants": [
+        {
+          "text": "陈闻说已问过林月，医舍让他先誊一段药簿，工钱另算，原来的交接差事还没恢复。他将书目放进案夹，买书的圈仍留着。“先把这几日过了。”他说。你将能公开的接线抄页留给他，约好看不懂的地方以后一起问。",
+          "conditions": [
+            {
+              "variable": "case.chenJob",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "case.chenTalk",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "陈闻核完领单，取出那半张旧书目，将一份公开接线抄页夹在后面。“下值以后慢慢看。”他说。交接台下一轮还等着他，你把自己没懂的地方也圈好，留着以后一起问。",
+          "conditions": [
+            {
+              "variable": "case.chenJob",
+              "minimum": 0,
+              "maximum": 0
+            },
+            {
+              "variable": "case.chenTalk",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "你把借车的一段按自己亲历补在报错页旁，陈闻读完，只改了他亲手报车的时辰。交接牌仍没有还给他，救回阿澈也没使这行字消失。他将自己那一份收好：“这回写全了。”你点头，让两人的原话各留在自己的名字下面。",
+          "conditions": [
+            {
+              "variable": "case.chenJob",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "variable": "case.chenTalk",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "text": "陈闻的交接牌碰了一下桌沿，你想起医舍那夜的冷馒头。他将车次按原簿核清，你补自己推车进门的一段，没将等待巡卫、耗去备用符写成未曾发生。写好的纸分开收妥；往后再要借车，仍须重新来问他。",
+          "conditions": [
+            {
+              "variable": "case.chenJob",
+              "minimum": 0,
+              "maximum": 0
+            },
+            {
+              "variable": "case.chenTalk",
               "minimum": 2,
               "maximum": 2
             }

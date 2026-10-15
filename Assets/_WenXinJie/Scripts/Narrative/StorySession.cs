@@ -330,6 +330,14 @@ namespace WenXinJie.Narrative
                 values.Add("case.examPractice", graph.GetVariable("case.examPractice").initial);
             }
 
+            // Earlier saves do not invent a private conversation with Chen Wen.
+            if (snapshot.revision <= 72 && graph.Definition.revision >= 73
+                && !values.ContainsKey("case.chenTalk")
+                && graph.Variables.Any(variable => variable.id == "case.chenTalk"))
+            {
+                values.Add("case.chenTalk", graph.GetVariable("case.chenTalk").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
