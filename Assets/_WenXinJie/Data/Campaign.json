@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 71,
+  "revision": 72,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -39,7 +39,8 @@
     67,
     68,
     69,
-    70
+    70,
+    71
   ],
   "start": "case.intro",
   "variables": [
@@ -687,6 +688,12 @@
     },
     {
       "id": "case.linConversation",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "case.examPractice",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -1385,7 +1392,7 @@
         {
           "id": "chen",
           "text": "先找陈闻查运料单，把通知时辰留待堂上核",
-          "target": "c08.chen",
+          "target": "c07.paper",
           "lockedReason": "",
           "conditions": [],
           "effects": [],
@@ -1537,7 +1544,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c08.chen"
+      "next": "c07.paper"
     },
     {
       "id": "c08.chen",
@@ -11281,7 +11288,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e02.ownAnchor"
+      "next": "e02.examMemory"
     },
     {
       "id": "e02.ownAnchor",
@@ -11442,7 +11449,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.names",
+      "next": "e05.examAfter",
       "variants": [
         {
           "text": "林月又叫了你的名字，像昨夜隔着石道报息那样。你抬头，她才将水递来：“今日不用追铃声了。能聚起这一缕，就先养这一缕。”阿澈把考校笔记还到桌边。你摸过圈着的旧题，没有急着重试运气，先把该抄的去向册铺平。",
@@ -11706,6 +11713,301 @@
           "conditions": [
             {
               "variable": "case.linConversation",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c07.paper",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "你从台后经过，陈闻正收废符。他夹起一张纸，纸角上是你的名字，中间烧了个洞。你伸手，他便递还给你，又把几张裁剩的小纸放在台沿。“我再收两本册子，稍后交接台见。”他转去另一头。人散了，你才敢仔细看那张失败的符。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c07.afterExam"
+    },
+    {
+      "id": "c07.afterExam",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "入门书里有一张小引光符，画成只能亮片刻。你一直想把这点光留久些，好在夜里抄书时省些灯油，阿澈说正好借光补鞋。现在他人还没找到，白日那张符也烧穿了。陈闻收册子尚需一会儿，你手边有几张裁剩的纸。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "practice",
+          "text": "练一张小符，再去交接台",
+          "target": "c07.loosen",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "keep",
+          "text": "收好失败的符，先查阿澈",
+          "target": "c07.keepPaper",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c07.loosen",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "你翻开随身笔记，把入门书中的小符摊在膝上。右手还攥着笔，指节白得像那张空纸。你先松手，吐尽一口气，再拿起来。台上那次起笔太急，笔还没转过弯，送进去的灵力已把薄纸烫穿。你将大张考题压在书底，换上小纸，照书中的小符起笔。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c07.firstStroke"
+    },
+    {
+      "id": "c07.firstStroke",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "朱砂沿着笔尖铺开。你送入一缕灵力，纸上的细线却只在起笔处亮了一点，前面的转弯仍暗着。笔记写着“随笔行气”，你的手正停在弯前。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "fine",
+          "text": "放慢落笔，把送入的灵力收细",
+          "target": "c07.fineStroke",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "push",
+          "text": "多送一股灵力，让前面的线也亮",
+          "target": "c07.pushStroke",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c07.pushStroke",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "你催出一股灵力。起笔处的朱线先鼓起来，还没亮到转弯，纸角便卷黑。热意刺上指尖，你立刻撤回，把纸按在空砚边。手没有烫伤，纸却不能再用；方才在台上的那股急劲，又落进了这张小纸。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c07.settle"
+    },
+    {
+      "id": "c07.settle",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "你将烫坏的小纸压进废符箱，另取一张，擦净笔尖积着的朱砂。书上那句“随笔行气”被你抄得很大，倒没写明白线窄时该怎样收。你在旁添上“慢一点，细一点”，等手指不再发紧，重新起笔。廊下传来装册子的声响，陈闻也快收完了。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c07.fineStroke"
+    },
+    {
+      "id": "c07.fineStroke",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "你放慢手，送出去的灵力也跟着收细。转弯那一段终于接上，末横轻轻一合，纸上浮起一点淡光。你依书撤力，光没有立刻消失，照见指节上的朱砂，随后才慢慢暗下去。原来画完一张这样小的符，手也会抖。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c07.readCharm"
+    },
+    {
+      "id": "c07.readCharm",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "纸上的光已暗了，末横还有一点暖。你没有再催它，拿笔记中早已干透的旧墨标记放到旁边。昨夜辨气时，你练过先用新息认住那点差别；现在这条新线是自己刚刚画下的。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "read",
+          "text": "施展辨气，比较新线与旧墨",
+          "target": "c07.charmRead",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c07.charmRead",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "末横的新息仍在，旧墨标记几乎没有回应。你把手收回，让这点余息自行散去，没有为了再亮一次重新灌气。小符总算画完了。台上那次考校早已记了结果，台下这点光却是自己练出来的。你等朱砂晾干，将它与烧破的那张夹在笔记同一页，一好一坏，都没丢。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.examPractice",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c07.leaveCourt",
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "引光符 · 撤力之后",
+        "caption": "新符撤力后仍留余息，随后渐散；旧墨标记没有本次施术的新息。",
+        "leftLabel": "刚画好的末横",
+        "rightLabel": "笔记旧墨标记",
+        "leftNote": "仍有刚留下的余息",
+        "rightNote": "几乎没有回应",
+        "leftStrength": 0.75,
+        "rightStrength": 0.04
+      }
+    },
+    {
+      "id": "c07.keepPaper",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "你将烧破的纸摊平，夹进笔记，在旁写“起笔催气太急”。洞边还留着自己的名字，没必要用墨涂掉。今日考校已经结束，阿澈却还没有下落。你把小纸留在台边，不再为一张符耽搁。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.examPractice",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "c07.shoeThread"
+    },
+    {
+      "id": "c07.shoeThread",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "翻页时，一截绕好的补鞋线掉到膝上。阿澈病前把它夹在这里，先借你当书签，说等你学会引光，晚上就不用挤在走廊补鞋。你把线绕回原样，夹好纸。下回要练的地方还在那里，今天先去找人。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c07.leaveCourt"
+    },
+    {
+      "id": "c07.leaveCourt",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "考校台",
+      "speaker": "旁白",
+      "text": "台沿的册子已经收空。陈闻抱着抄本从廊口朝你点头，先回交接台。你将笔记扎紧，带上已经取得的调查抄页跟过去。下一趟运料的车还没来，正好请他把二更那一页摊开。",
+      "background": "examinationCourt",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c08.chen"
+    },
+    {
+      "id": "e02.examMemory",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹石台",
+      "speaker": "旁白",
+      "text": "笔记上的旧题仍留着，你将圈过的那一页压回原处。林月等你把书收好，没有催你作答；石台那边，陶叔的钥匙也还没有转。",
+      "background": "furnaceChamber",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e02.ownAnchor",
+      "variants": [
+        {
+          "text": "笔记里夹着两张符，烧穿的大纸和后来画成的小纸挨在一起。你记得那点光照过自己的指节，还想学怎样让它亮得更久。你合起书，低声问林月：“我若撑不到第三声呢？”她看着你：“那就早点叫我。”你摸过烧穿的纸边，点了点头。",
+          "conditions": [
+            {
+              "variable": "case.examPractice",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "你翻到那张烧穿的符，补鞋线还夹在页里。阿澈已经站在炉门边，当初写下的“起笔催气太急”却仍是你的毛病。你问林月：“我一紧张，就总想多使些力。待会儿也是这样，怎么办？”她让你先松肩，觉得乱便喊她。你合好书，试着把攥紧的手摊开。",
+          "conditions": [
+            {
+              "variable": "case.examPractice",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e05.examAfter",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你将考校笔记挪到去向册旁，免得药汁洇到旧题。今天要记的名字还有许多。阿澈替你压平纸角，等你握稳笔才松手。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.names",
+      "variants": [
+        {
+          "text": "阿澈翻见笔记里那张小引光符：“你后来画成了？”你说只亮过片刻。他把烧破的那张也展平，没有替你藏起来。“那也先留着。”他说。你点头，今天不再催气试亮，将两张纸一同夹回去，换笔抄眼前的去向。",
+          "conditions": [
+            {
+              "variable": "case.examPractice",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "补鞋线从笔记里露出来，阿澈看见那张烧穿的符，轻轻笑了一声：“还没学会啊。”你也笑：“那天先去找你了。”他把线绕好放回原页，说等养好了再说。你没有约明日便重练，先将自己的手放稳，抄今天该抄的名字。",
+          "conditions": [
+            {
+              "variable": "case.examPractice",
               "minimum": 2,
               "maximum": 2
             }

@@ -322,6 +322,14 @@ namespace WenXinJie.Narrative
                 values.Add("case.linConversation", graph.GetVariable("case.linConversation").initial);
             }
 
+            // Earlier saves do not claim either choice after the failed examination.
+            if (snapshot.revision <= 71 && graph.Definition.revision >= 72
+                && !values.ContainsKey("case.examPractice")
+                && graph.Variables.Any(variable => variable.id == "case.examPractice"))
+            {
+                values.Add("case.examPractice", graph.GetVariable("case.examPractice").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
