@@ -264,7 +264,7 @@ namespace WenXinJie.Presentation
                     "以已知新旧的两张废符校准。辨气能比较近期余息，无法辨认施术者姓名。",
                     session.GetValue("story.skill") > 0),
                 new ClueEntryViewState("双灰对照", "术证 · 仓房",
-                    "同批未运灰无新息，运车灰有今日余息。车接近过施术的人；守卫也可能留下余息，不能认作阿澈。",
+                    "同批未运灰几乎无近期余息，车灰有新近余息。术法没有给出确切日期或人名；出入验牌的守卫也可能留下余息，仍须查交接与目击。",
                     session.GetValue("case.ashCorrect") > 0),
                 new ClueEntryViewState("考校副册", "文书 · 考校台",
                     session.GetValue("case.deputy") >= 2

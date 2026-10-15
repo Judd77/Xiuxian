@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 75,
+  "revision": 76,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -43,7 +43,8 @@
     71,
     72,
     73,
-    74
+    74,
+    75
   ],
   "start": "case.intro",
   "variables": [
@@ -975,7 +976,7 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "山腹坡道",
       "speaker": "旁白",
-      "text": "傍晚，运药车从医舍出来。车沿挂一片包药纸，折角像只瘸鸟——昨夜阿澈笑过你这个手艺。坡道守卫拦住了你；纸可能只是医舍丢上车的。",
+      "text": "傍晚，送完药的车沿山腹坡道往医舍回。车沿挂一片包药纸，折角像只瘸鸟——昨夜阿澈笑过你这个手艺。旁边粘着一层灰，仓房封签也没撕净。守卫伸手拦住你；那片药纸，也可能只是随药箱带进去的。",
       "background": "mountainHeart",
       "portrait": "",
       "rain": false,
@@ -1016,7 +1017,7 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "山腹坡道",
       "speaker": "旁白",
-      "text": "车帘放下了，你没看见里面。车沿牌号与交接木牌写着同一趟车，夜里二更还要进山腹。你记下牌号，把纸角夹进簿里。要知道车上有没有阿澈，还得找能核对交接单的人。",
+      "text": "车帘垂着，你没看见里面。坡道口的交接木牌列着同一车号，夜里二更还要进山腹。你退到路旁，趁车经过取下松挂的纸角，将车号与仓房残签上的批号记在旁边。要知道它进山时装过谁，还得找能核对交接单的人。",
       "background": "mountainHeart",
       "portrait": "",
       "rain": false,
@@ -1035,7 +1036,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c05.book"
+      "next": "c04.note"
     },
     {
       "id": "c05.book",
@@ -1127,7 +1128,7 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "弟子居所",
       "speaker": "旁白",
-      "text": "左符的余息轻轻晃，右符几乎摸不到。你把这点差别记在心里。辨气能察觉近期有人施过术，不能认出是谁；明日去仓房借一份同批炉灰，与车沿的灰比较，才知道车灰后来沾了什么。",
+      "text": "左符的余息轻轻晃，右符几乎摸不到。你把差别记在心里。车沿还粘着灰，残签上能认出仓房批号；明日按签借一份同批炉灰，与车灰比较。即使摸到新近余息，留下它的人是谁，仍得另外查。",
       "background": "quartersNight",
       "portrait": "",
       "rain": false,
@@ -1152,24 +1153,33 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "仓房",
       "speaker": "旁白",
-      "text": "次日，你从车沿刮下一点炉灰，又向仓房借来同批未运走的一份，两份的封签相同。炉灰随药料装车，可能在途中沾上灵气。你逐份辨气：仓房灰安静，车灰多了今天新沾的一点余息。",
+      "text": "次日清早，同号药车停在医舍外。你从车沿取下一点灰，按残签去仓房借来同批未运走的一份。管事核过封签，你将两份分别摊在干净纸上。灰色看不出差别；昨夜练过的辨气，这回要用在它们身上。",
       "background": "storehouse",
       "portrait": "",
       "rain": false,
       "effects": [],
-      "choices": [],
-      "next": "c06.infer",
+      "choices": [
+        {
+          "id": "observe",
+          "text": "施展辨气，比较两份灰",
+          "target": "c06.observe",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
       "observation": {
         "kind": "residue",
         "sample": "ash",
-        "title": "辨气 · 同批灰样",
-        "caption": "封签相同，两份灰来自同一炉。辨气只显示后来留下的余息。",
+        "title": "辨气 · 灰样待查",
+        "caption": "同批两份灰已摆好。施展辨气后，才能看到余息的差别。",
         "leftLabel": "仓房未运灰",
         "rightLabel": "车沿灰样",
-        "leftNote": "没有近期余息",
-        "rightNote": "多了一点今日新息",
+        "leftNote": "待施展辨气",
+        "rightNote": "待施展辨气",
         "leftStrength": 0,
-        "rightStrength": 0.8
+        "rightStrength": 0
       }
     },
     {
@@ -1177,7 +1187,7 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "仓房",
       "speaker": "旁白",
-      "text": "陈闻抱着废符进门。他管夜里的运料交接，你抄册时常向他核车次。你将纸角、车牌和两撮灰放到桌上：纸角折法认得，车灰也有新息，可车帘始终没有掀开。陈闻问：“你接下来要查哪一件？”",
+      "text": "陈闻抱着废符进门。他管夜里的运料交接，你抄册时常向他核车次。你将纸角、车号和两撮灰放到桌上：纸角折法认得，车灰也有新近余息，可它进山时装过谁，你始终没见到。陈闻问：“你接下来要查哪一件？”",
       "background": "storehouse",
       "portrait": "",
       "rain": false,
@@ -1224,11 +1234,11 @@
         "kind": "residue",
         "sample": "ash",
         "title": "辨气 · 同批灰样",
-        "caption": "封签相同，两份灰来自同一炉。辨气只显示后来留下的余息。",
+        "caption": "同批两份灰：仓房灰几乎无近期余息，车灰有新近余息；看不见人名与确切日期。",
         "leftLabel": "仓房未运灰",
         "rightLabel": "车沿灰样",
-        "leftNote": "没有近期余息",
-        "rightNote": "多了一点今日新息",
+        "leftNote": "几乎没有近期余息",
+        "rightNote": "有新近余息，来源待查",
         "leftStrength": 0,
         "rightStrength": 0.8
       }
@@ -1238,7 +1248,7 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "仓房",
       "speaker": "旁白",
-      "text": "你指着纸角与新息，说阿澈今日乘过这趟车。陈闻取出自己经手的单：“纸也可能随药箱上车。赶车的守卫今日用灵力验过牌，同样能把余息留在灰上。”两样东西都能把你带回这辆车，却还缺有人见到阿澈的那一步。你划去乘车人的姓名，留下待核。",
+      "text": "你指着纸角与余息，说阿澈乘过这趟车。陈闻取出自己经手的单：“纸也可能随药箱上车。赶车的守卫出入时用灵力验牌，也能把余息留在灰上。”两样东西把你带回这辆车，却还缺有人见到阿澈的那一步。你划去乘车人的姓名，留下待核。",
       "background": "storehouse",
       "portrait": "",
       "rain": false,
@@ -1251,13 +1261,13 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "仓房",
       "speaker": "旁白",
-      "text": "你回仓房核封签，又查两份灰的领出时辰：同一炉装好后，一份留仓，一份随药车走，期间没有换批。你把这条出处补在灰样旁，回来请陈闻核车牌与交接；灰样的差别能说明装车后有过接触，仍不能填乘车人的姓名。",
+      "text": "你请仓房再核封签，又查两份灰的领出时辰：同一炉装好后，一份留仓，一份随药车走，期间没有换批。你把这条出处补在灰样旁，请陈闻核车号与交接；灰样的差别能说明装车后有过接触，仍不能填乘车人的姓名。",
       "background": "storehouse",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c06.revise"
+      "next": "c06.sound"
     },
     {
       "id": "c06.revise",
@@ -1272,7 +1282,7 @@
       "choices": [
         {
           "id": "correct",
-          "text": "车灰今天沾过灵气；留下它的人还不知道是谁",
+          "text": "车灰有新近余息；留下它的人还不知道是谁",
           "target": "c06.sound",
           "effects": [
             {
@@ -1303,13 +1313,18 @@
       "chapter": "卷一 · 没有下山的人",
       "location": "仓房",
       "speaker": "旁白",
-      "text": "陈闻看过你留下的“身份未明”，从废符下面抽出一张交接单：“二更这趟，我签过。车进去重，出来轻，几回都这样。”他将单上的车次圈给你。你认得交接台，却是头一回拿到能与纸角、车牌核对的这一张。",
+      "text": "陈闻看过你留下的“身份未明”，从废符下面抽出一张交接单：“昨夜二更这趟，我签过。车进去重，出来轻，几回都这样。”他将单上的车次圈给你。你认得交接台，却是头一回拿到能与纸角、车牌核对的这一张。",
       "background": "storehouse",
       "portrait": "",
       "rain": false,
       "effects": [
         {
           "variable": "story.ash",
+          "operation": "set",
+          "value": 1
+        },
+        {
+          "variable": "case.ashCorrect",
           "operation": "set",
           "value": 1
         }
@@ -12960,6 +12975,50 @@
           ]
         }
       ]
+    },
+    {
+      "id": "c04.note",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "山腹坡道",
+      "speaker": "旁白",
+      "text": "守卫放下车帘，催车夫走。车轮碾过碎石，纸角从车沿抖落，你退到路旁捡起，照着残签记下仓房批号。车号与坡道交接牌上的二更车次相同，你一并抄进簿里。纸和车有了出处，守卫记下你的脸也不会就此忘掉。",
+      "background": "mountainHeart",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.cart",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c05.book"
+    },
+    {
+      "id": "c06.observe",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "仓房",
+      "speaker": "旁白",
+      "text": "你先将灵力收细，依昨夜练过的办法逐份察看。仓房灰几乎没有近期余息，车灰上却有一点暖意，轻轻晃着。两份灰出自同批，后来经过的地方不同；这点余息没有告诉你哪天、哪一人碰过车。",
+      "background": "storehouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c06.infer",
+      "observation": {
+        "kind": "residue",
+        "sample": "ash",
+        "title": "辨气 · 同批灰样",
+        "caption": "同批两份灰：仓房灰几乎无近期余息，车灰有新近余息；看不见人名与确切日期。",
+        "leftLabel": "仓房未运灰",
+        "rightLabel": "车沿灰样",
+        "leftNote": "几乎没有近期余息",
+        "rightNote": "有新近余息，来源待查",
+        "leftStrength": 0,
+        "rightStrength": 0.8
+      }
     }
   ]
 }
