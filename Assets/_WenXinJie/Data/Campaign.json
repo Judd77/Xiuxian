@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 76,
+  "revision": 77,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -44,7 +44,8 @@
     72,
     73,
     74,
-    75
+    75,
+    76
   ],
   "start": "case.intro",
   "variables": [
@@ -3681,37 +3682,43 @@
       "chapter": "卷二 · 山下那份账",
       "location": "工匠家",
       "speaker": "旁白",
-      "text": "工匠取出东坡保存的旧符，又将昨日南沟裂符放在一旁。你照新旧废符的练法，将一缕灵力拂过十年前那张纸，指尖没有辨到新息。纸角受潮发软，朱线也已褪色。工匠问：“十年过去，你还指望它替那一夜开口？”",
+      "text": "工匠从木匣里取出东坡旧符，垫在干布上，又将昨日南沟裂符放到旁边。“这张在东坡放了十年，那张是昨天才坏的。”他怕旧纸再碎，压住翘起的一角，等你看。你可以先辨两张纸上的余息，也可以直接察看裂口。",
       "background": "craftsmanHome",
       "portrait": "",
       "rain": false,
       "effects": [],
-      "choices": [],
-      "next": "g02.marks",
+      "choices": [
+        {
+          "id": "read",
+          "text": "施展辨气，比较旧符与新裂符",
+          "target": "g02.read",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "marks",
+          "text": "先不施术，细看两张符的裂口",
+          "target": "g02.marks",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
       "observation": {
         "kind": "residue",
         "sample": "charm",
-        "title": "辨气 · 十年以后",
-        "caption": "旧符的余息已经散尽。术法没有回应，不能据此判定当年平安。",
+        "title": "村符对照 · 尚未辨气",
+        "caption": "两张实物已经摆好。先辨余息，或直接察看断口，由你决定。",
         "leftLabel": "十年前东坡符",
         "rightLabel": "昨日南沟裂符",
-        "leftNote": "已经读不出当年余息",
-        "rightNote": "尚须比较裂纹与原簿",
+        "leftNote": "尚未辨气",
+        "rightNote": "尚未辨气",
         "leftStrength": 0,
         "rightStrength": 0
-      },
-      "variants": [
-        {
-          "text": "工匠取出东坡保存的旧符，又将昨日南沟裂符摆在一旁。你在侧门已辨过一张新裂符，断处留有近期暖意；眼前东坡这张却隔了十年，辨气再无新息。它从受潮的纸边烂进去。工匠问：“十年前那夜先后如何，还得问谁？”",
-          "conditions": [
-            {
-              "variable": "case.doorTrace",
-              "minimum": 1,
-              "maximum": 1
-            }
-          ]
-        }
-      ]
+      }
     },
     {
       "id": "g02.marks",
@@ -3761,19 +3768,7 @@
         }
       ],
       "choices": [],
-      "next": "g02.sound",
-      "observation": {
-        "kind": "residue",
-        "sample": "charm",
-        "title": "辨气 · 十年以后",
-        "caption": "旧符的余息已经散尽。术法没有回应，不能据此判定当年平安。",
-        "leftLabel": "十年前东坡符",
-        "rightLabel": "昨日南沟裂符",
-        "leftNote": "已经读不出当年余息",
-        "rightNote": "尚须比较裂纹与原簿",
-        "leftStrength": 0,
-        "rightStrength": 0
-      }
+      "next": "g02.sound"
     },
     {
       "id": "g02.sound",
@@ -3993,7 +3988,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "g03.read"
+      "next": "g03.samples"
     },
     {
       "id": "g03.read",
@@ -4008,7 +4003,7 @@
       "choices": [
         {
           "id": "oldProof",
-          "text": "把今日炉门听不清，列作旧夜也可能漏收的旁证",
+          "text": "据今日试传，认定十年前炉门也没收到停钟",
           "target": "g03.overreach",
           "lockedReason": "",
           "conditions": [],
@@ -13018,6 +13013,77 @@
         "rightNote": "有新近余息，来源待查",
         "leftStrength": 0,
         "rightStrength": 0.8
+      }
+    },
+    {
+      "id": "g02.read",
+      "chapter": "卷二 · 山下那份账",
+      "location": "工匠家",
+      "speaker": "旁白",
+      "text": "你收细灵力，先试东坡旧符，再试南沟裂符。旧纸没有留下能辨的新息，南沟裂口旁却还有一点暖意。你将指尖移开，望着旧符上褪色的朱线。工匠说：“十年过去，哪还留得住当年的气。来，看这道裂口。”",
+      "background": "craftsmanHome",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g02.marks",
+      "observation": {
+        "kind": "residue",
+        "sample": "charm",
+        "title": "辨气 · 十年以后",
+        "caption": "旧符无新息，新裂符有近期余息。不能据此还原十年前。",
+        "leftLabel": "十年前东坡符",
+        "rightLabel": "昨日南沟裂符",
+        "leftNote": "已经读不出当年余息",
+        "rightNote": "裂口旁留有近期余息",
+        "leftStrength": 0,
+        "rightStrength": 0.65
+      },
+      "variants": [
+        {
+          "conditions": [
+            {
+              "variable": "case.doorTrace",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "text": "你先试东坡旧符，指尖没有辨到新息；再试南沟裂符，断处仍有一点暖意，与侧门见过的相同。你把两张纸分开放好。工匠指了指旧符：“那张已过十年。想问那一夜的事，得再看别处。”"
+        }
+      ]
+    },
+    {
+      "id": "g03.samples",
+      "chapter": "卷二 · 山下那份账",
+      "location": "旧钟楼",
+      "speaker": "旁白",
+      "text": "工匠先将回签放在左边，林月将自己的放在右边，两人各报了去处和返回的时辰。纸角看来都没有异样；约定留下的灵气，要辨过才知。守钟人把灯移近，让你将这次带回的两张纸分清。",
+      "background": "oldBellTower",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "read",
+          "text": "施展辨气，核对两端带回的纸",
+          "target": "g03.read",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ],
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "钟路试传 · 回签待查",
+        "caption": "两端原纸已经带回，尚未辨气。",
+        "leftLabel": "村口 · 带回的纸",
+        "rightLabel": "炉门 · 带回的纸",
+        "leftNote": "待施展辨气",
+        "rightNote": "待施展辨气",
+        "leftStrength": 0,
+        "rightStrength": 0
       }
     }
   ]
