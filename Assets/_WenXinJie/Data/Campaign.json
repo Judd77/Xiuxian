@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 70,
+  "revision": 71,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -38,7 +38,8 @@
     66,
     67,
     68,
-    69
+    69,
+    70
   ],
   "start": "case.intro",
   "variables": [
@@ -680,6 +681,12 @@
     },
     {
       "id": "e.breathAnchor",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "case.linConversation",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -1957,7 +1964,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c09.plan"
+      "next": "c09.closedDoor"
     },
     {
       "id": "c09.trust",
@@ -1970,14 +1977,14 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c09.plan"
+      "next": "c09.closedDoor"
     },
     {
       "id": "c09.plan",
       "chapter": "卷一 · 没有下山的人",
       "location": "医舍",
       "speaker": "旁白",
-      "text": "林月在换班单上点出二更。那时送药侧门会开，正门白日求见却要先报管事。“等他肯让我们进去，人兴许又换了地方。”她取两张遮铃符：探气铃察觉正在施术的灵力便响，早前留下的静止余息不会使它响。这符能让铃失灵七次呼吸，遮不住守卫的眼睛。今夜只有一次换班的空隙。",
+      "text": "林月在换班单上点出二更。那时送药侧门会开，正门白日求见却要先报管事。“等他肯让我们进去，人兴许又换了地方。”她拿起两张遮铃符：探气铃察觉正在施术的灵力便响，早前留下的静止余息不会使它响。这符能让铃失灵七次呼吸，遮不住守卫的眼睛。今夜只有一次换班的空隙。",
       "background": "medicineHouse",
       "portrait": "linYue",
       "rain": false,
@@ -3246,7 +3253,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c13.plan"
+      "next": "c13.linReply"
     },
     {
       "id": "c13.plan",
@@ -9570,7 +9577,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.orders",
+      "next": "e05.linAfter",
       "variants": [
         {
           "text": "祁元肃送来冬药账，药田这一季的收成已划掉。林月圈出伤者不能断的药，又将自己用尽的遮铃符记入补买单：“下回不能只剩空匣。”木匠另开修屋木料单。少收弟子省下的粮药只能抵一部分，缺口仍由宗门签认。",
@@ -11452,6 +11459,253 @@
           "conditions": [
             {
               "variable": "e.breathAnchor",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c09.closedDoor",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月去合医舍的门，合到一半，里间有人咳嗽，她又留下一道缝。你夹好核过日期的抄页，摊开她刚递来的侧门单，纸角已经磨软。“我送药进过炉房，给里面的人看过伤。”她说。你抬头看她；直到这时，你才知道她亲眼见过那扇门后的人。",
+      "background": "medicineHouse",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c09.linQuestion"
+    },
+    {
+      "id": "c09.linQuestion",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "她把侧门单压在箱盖上，等你开口。你可以先问她既然见过炉里的病人，为何始终没有说全；也可以先弄清今夜带去的药究竟能救到哪一步。里间的病人咳过一阵，慢慢安静下来，林月仍没有催你走。",
+      "background": "medicineHouse",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "silence",
+          "text": "先问她为何一直沉默",
+          "target": "c09.silence",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "medicine",
+          "text": "先问药能救到哪一步",
+          "target": "c09.medicine",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c09.silence",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "“你进过炉房，看见过他们的伤。”你说。林月将湿布按在箱盖上，那滴旧血只擦开一圈。“看见过。”她答，“药送进去，人喝下去，手不再抓得那么紧。我从前总问疼轻了没有，没问他们为什么还不能起来。”她拧了一次湿布，没把那句话改成自己什么也不知道。",
+      "background": "medicineHouse",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c09.family"
+    },
+    {
+      "id": "c09.family",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "她说，有人来医舍寻亲，自己答过“在养着”。“我知道她听完，会当作人已经躺在普通病床上。”你问为何不说。她看了眼门缝：“怕她闯进去，人被转走，我连药也送不到。也怕她问我，既然看见了，怎么还只是送药。”她把湿布搁下，不再拿它反复擦那一点血。",
+      "background": "medicineHouse",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c09.decision"
+    },
+    {
+      "id": "c09.decision",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你问她现在为何肯带你去。林月说，昨夜给阿澈配过药，本以为他能在住处多养两日，后来山腹又领走一箱同样的药。她还不能断定药给了谁。“若他真在里面，我得先见到他，不能把药交出去就算了。”她将侧门单转向你，“那句‘在养着’，我自己去当面说清。你别替我转成一句她也是好心。”",
+      "background": "medicineHouse",
+      "portrait": "linYueConcerned",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.linConversation",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c09.pact"
+    },
+    {
+      "id": "c09.medicine",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你指向药箱：“若他喝了药还站不起来呢？”林月没有先答，取出止痛药，让你看纸套上的服用时辰，又把一张小符贴到温水碗外。她送入一缕灵力，符纹微亮。“先看这一点。”她说，“我收力前后，你用学过的辨气试试。不必往符里再送气。”",
+      "background": "medicineHouse",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "observe",
+          "text": "辨气觉察药符送气、撤力的变化",
+          "target": "c09.warmth",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c09.warmth",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月送气时，符上新息较明，碗边的暖意也稳下来。她收回手，纸上还留着一点余息，随后才渐渐淡去。你把所觉察的先后说给她听，她点头：“这张符只替药保温。人耗掉的气，不能从碗里这样补回来。”她撕下小符，放到废纸盘里，没有再让你试第二回。",
+      "background": "medicineHouse",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c09.limits",
+      "observation": {
+        "kind": "residue",
+        "sample": "rune",
+        "title": "同一张药符 · 先后觉察",
+        "caption": "保温符的送气与撤力；不能据此判断阿澈伤情。",
+        "leftLabel": "林月送气时",
+        "rightLabel": "林月撤力后",
+        "leftNote": "新息较明，仍在送气",
+        "rightNote": "尚有余息，随后渐散",
+        "leftStrength": 0.8,
+        "rightStrength": 0.3
+      }
+    },
+    {
+      "id": "c09.limits",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "林月收好止痛药：“药能缓痛，不能替人卸下炉阵。安神药又会叫人困，喝过不喊疼，不等于好了。”今夜先问阿澈能否自己应声、是否喘得上气，再由她看腕伤。你问若仍起不来怎么办。她扣住药箱：“先问他想不想走，再查他怎样连着炉阵。不能再用一碗药，把他的话压下去。”",
+      "background": "medicineHouse",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.linConversation",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "c09.pact"
+    },
+    {
+      "id": "c09.pact",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你收起笔，说今夜先见到阿澈。林月把两张遮铃符放到箱盖上：“我还欠来寻亲的人一句实话。人救回来，我自己当面讲。”她没请你替她答应谁会原谅，只将一卷干布、一套干净衣裳放到药箱最上面。你替她系紧箱扣，等她说侧门的时辰。",
+      "background": "medicineHouse",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c09.plan",
+      "variants": [
+        {
+          "text": "你收起笔，说今夜先见到阿澈。林月把两张遮铃符放到箱盖上，另放一卷干布、一套干净衣裳。那滴旧血仍在箱上，她没有盖住它，也没再要你先答一句信不信她。你替她系紧箱扣；剩下该向家属解释的话，仍由她自己去说。",
+          "conditions": [
+            {
+              "variable": "case.linConversation",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c13.linReply",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "许家",
+      "speaker": "旁白",
+      "text": "林月把药箱往自己脚边挪了挪，腾出桌沿给许蘅放钥匙。许蘅问送药开门时能站在哪里，她按亲眼走过的位置说，没有替门里的人保证伤已经好了。你将这处位置记在换班单旁，等她继续说明。",
+      "background": "xuFamilyHome",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.plan",
+      "variants": [
+        {
+          "text": "你认出这就是林月在医舍说起的那位家属。她先前答应当面讲，如今没有望你求援。“那时我说在养着，没告诉你她仍在炉里。”她对许蘅说，“我怕你问我，怎么还只是送药。”许蘅看了她一会儿：“那这回，别再等我问到哪儿，才说到哪儿。”林月点头，自己把换班单展开。",
+          "conditions": [
+            {
+              "variable": "case.linConversation",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "林月把药箱放在许蘅看得见的地方：“药只能缓痛。她喝过药不再喊，也不能由我说她已经好了。”你想起医舍那张保温符，纸上余息散了，炉里的接线却还在。许蘅问妹妹能不能离开这一轮，林月答这句必须到门口听本人说。许蘅把钥匙摆到桌心，请她接着说开门前能做什么。",
+          "conditions": [
+            {
+              "variable": "case.linConversation",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e05.linAfter",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "暂借的木匠家",
+      "speaker": "旁白",
+      "text": "药数核完，林月将药箱扣好，抬眼问你手还抖不抖。你说坐着能抄，她便把册子放低，让你不必悬着手。去向与伤签都还在桌边，她先把你喝剩的水添满，再去看下一人的药。",
+      "background": "craftsmanHome",
+      "portrait": "linYue",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.orders",
+      "variants": [
+        {
+          "text": "林月合药箱时，箱盖那点旧血已洗淡。你想起出发前问她为何一直沉默，她也想起来了：“以后家属来，我先说人在哪儿，能不能自己答话。没见到的，我就去看。”她没有把这句说成旧事已了，拿上药箱，去找许蘅核妹妹下一次换药的时辰。",
+          "conditions": [
+            {
+              "variable": "case.linConversation",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "林月从箱底取出一张未用的保温药符，举到你眼前：“等你养好，我教你画。比遮铃的短，别抢着翻后面。”你问漏一笔会不会烧碗，她说先拿冷水练。她收回符纸，将药碗放到你手边：“今日不练，今日只喝药。”你笑了一下，坐稳后接过碗。",
+          "conditions": [
+            {
+              "variable": "case.linConversation",
               "minimum": 2,
               "maximum": 2
             }

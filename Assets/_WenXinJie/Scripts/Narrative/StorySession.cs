@@ -314,6 +314,14 @@ namespace WenXinJie.Narrative
                 values.Add("e.breathAnchor", graph.GetVariable("e.breathAnchor").initial);
             }
 
+            // Earlier saves have not chosen a conversation with Lin Yue before the rescue.
+            if (snapshot.revision <= 70 && graph.Definition.revision >= 71
+                && !values.ContainsKey("case.linConversation")
+                && graph.Variables.Any(variable => variable.id == "case.linConversation"))
+            {
+                values.Add("case.linConversation", graph.GetVariable("case.linConversation").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
