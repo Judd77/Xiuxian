@@ -338,6 +338,14 @@ namespace WenXinJie.Narrative
                 values.Add("case.chenTalk", graph.GetVariable("case.chenTalk").initial);
             }
 
+            // Earlier saves have not heard the private account after the old report was corrected.
+            if (snapshot.revision <= 73 && graph.Definition.revision >= 74
+                && !values.ContainsKey("g.oldNightTalk")
+                && graph.Variables.Any(variable => variable.id == "g.oldNightTalk"))
+            {
+                values.Add("g.oldNightTalk", graph.GetVariable("g.oldNightTalk").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

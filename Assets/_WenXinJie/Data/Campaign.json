@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 73,
+  "revision": 74,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -41,7 +41,8 @@
     69,
     70,
     71,
-    72
+    72,
+    73
   ],
   "start": "case.intro",
   "variables": [
@@ -701,6 +702,12 @@
     },
     {
       "id": "case.chenTalk",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "g.oldNightTalk",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -4285,7 +4292,7 @@
         }
       ],
       "choices": [],
-      "next": "g05.father"
+      "next": "g04.after"
     },
     {
       "id": "g05.father",
@@ -7366,7 +7373,7 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "顾衡的更正还没干，祁元肃便指向呈报：“可南沟确实死过人。今日难道就能撤阵？”老妇将儿子的名字遮在掌下：“死人是真的。你们后来写在他身上的话，也得一条条算。”要说明旧呈报为何不能照用，你先对照哪两件？",
+      "text": "顾衡将更正页摊开，祁元肃便指向呈报：“可南沟确实死过人。今日难道就能撤阵？”老妇将儿子的名字遮在掌下：“死人是真的。你们后来写在他身上的话，也得一条条算。”要说明旧呈报为何不能照用，你先对照哪两件？",
       "background": "councilHall",
       "portrait": "guHengRemorseful",
       "rain": false,
@@ -7435,7 +7442,7 @@
         }
       ],
       "choices": [],
-      "next": "h04.table"
+      "next": "h04.oldNight"
     },
     {
       "id": "h04.infer",
@@ -9711,7 +9718,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e05.buffer",
+      "next": "e05.oldNight",
       "variants": [
         {
           "text": "工匠收下新柱位抄图，也收好钟楼试传留下的两张回签。沈砚答应到现场教他辨流，顾衡记村钟时辰，林月守炉门，陶叔保管石台钥匙。两端每次喊停都要等到石台回报“已关”，不能再拿钟楼敲过三声当作炉门收到。若下次灵潮前新路还不稳，三户便继续暂住；没有人拿今夜出炉的人替未修好的阵路作保。",
@@ -12365,6 +12372,210 @@
             },
             {
               "variable": "case.chenTalk",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g04.after",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "顾衡搁下笔，将更正抄页放到日光下晾着。老妇仍坐在桌边，手指按着原簿的纸角。旁人陆续散开，你本想收好抄页就走，见她还望着那行名字，便将案夹重新放下。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "mother",
+          "text": "陪她坐一会儿，听她讲儿子",
+          "target": "g04.motherMemory",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        },
+        {
+          "id": "gu",
+          "text": "问顾衡：背人回村之后呢",
+          "target": "g04.guMemory",
+          "lockedReason": "",
+          "conditions": [],
+          "effects": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "g04.motherMemory",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你在她旁边坐下，问她儿子从前做什么。她先说替人修屋，又说那人做活慢，刨自家门槛便刨了半日。“我腿脚不好，他怕我绊着。”她将手放低，比出半寸，“邻人笑他，好好的木头白刨掉。如今我孙子天天打那里过。”",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g04.motherSon"
+    },
+    {
+      "id": "g04.motherSon",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "那夜屋梁上的护符忽然亮起来，照得鸡笼都白了。儿子背起她，临出门还用凳子拦住笼口，说撑过这阵便回来。“我看不见路，只催他快点。他把我往背上托了一回，说，娘，抱紧些。”她停下来，手仍放在半空。后来到了第一坡，背她的人倒下了。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g04.motherEnd"
+    },
+    {
+      "id": "g04.motherEnd",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "“也许我不该催。”她说。你将凳子挪近，等她把话说完。日光照过纸边，她慢慢收回手：“他刨过的门槛，孩子会看出来么？”你说送她回去，亲眼看看。她将晾干的抄页折好，这才叫孙子来扶。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.oldNightTalk",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "g04.afterLeave"
+    },
+    {
+      "id": "g04.guMemory",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "你留在顾衡身边，问他背人回村之后的事。他看了眼桌边的老妇：“先把她托给邻人，再回第一坡。他已不应声了。我还想，自己会引气护身，怎么偏偏迟一步。”他垂下手，“回来写呈报，那条路就剩四个字，山道跌伤。”",
+      "background": "villageSquare",
+      "portrait": "guHengRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g04.guAvoid"
+    },
+    {
+      "id": "g04.guAvoid",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "“后来没进过她家的门？”你问。“送过米，也补过符。”顾衡说，“她一提孩子的爹，我便先问护符稳不稳。”你问，今天若没人拿出原簿，还要这样问多久。他没有答。老妇起身时，他绕过桌角，问能否送她回去。",
+      "background": "villageSquare",
+      "portrait": "guHengRemorseful",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g04.guAnswer"
+    },
+    {
+      "id": "g04.guAnswer",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村议",
+      "speaker": "旁白",
+      "text": "老妇叫他先把墨晾干。“到了家，你把怎么背他回来的，说给孩子听。”她看向来扶她的孙子，“他长到如今，还以为爹只是走山路没站稳。”顾衡将纸移到日光下，等最后一点墨迹干透，才交给她：“我说。”",
+      "background": "villageSquare",
+      "portrait": "guHengRemorseful",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.oldNightTalk",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "g04.afterLeave"
+    },
+    {
+      "id": "g04.afterLeave",
+      "chapter": "卷二 · 山下那份账",
+      "location": "村中巷口",
+      "speaker": "旁白",
+      "text": "你与顾衡送她到门口。孙子扶她迈过门槛，中间比两侧矮了一截，木色磨得发亮。孩子回头问为何多带了一张纸，老妇叫顾衡坐下，自己取了两只杯子。你替她带上院门，将村议借的笔送回，转往失踪弟子的父亲家。",
+      "background": "villageSquare",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "g05.father"
+    },
+    {
+      "id": "h04.oldNight",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "顾衡将更正页摊平，请在场抄手另留一份。老妇核过儿子的名字，收好自己那张。你将两处求援时辰夹在旁边，桌上还有别人的旧事等着说清。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "h04.table",
+      "variants": [
+        {
+          "text": "抄手念得快，老妇抬手叫他停住：“名字念全。”你记起她家低了半寸的门槛，看着那几个字重新写到纸上。这回她听完，自己将抄页收进衣襟，桌上的原簿仍摊着。",
+          "conditions": [
+            {
+              "variable": "g.oldNightTalk",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "顾衡告诉在场的人，已将背人回村的经过讲给孩子听。“他问我，为何从前没说。”顾衡停了一下，“这句也该我答。”老妇没有替他接话，将更正页推给抄手，让他另留一份。",
+          "conditions": [
+            {
+              "variable": "g.oldNightTalk",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e05.oldNight",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "司籍房",
+      "speaker": "旁白",
+      "text": "顾衡收好要带下山的抄页，先去问三户今日缺什么。你将各家领过的东西另列一行，等他回来再核，不把还没送到的物件填成已领。",
+      "background": "registryOffice",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e05.buffer",
+      "variants": [
+        {
+          "text": "顾衡说，老妇嫌暂住处的门槛高，孙子已去借小木坡。你想起原屋那道磨亮的低槛，请他带话：回去那日，自己还想看看。“她记得。”顾衡说，“今早还说，等能回村，要自己再走一遍那扇门。”",
+          "conditions": [
+            {
+              "variable": "g.oldNightTalk",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "顾衡另留一份完整抄页，要送给老妇的孙子。孩子听过那晚的事，又问第一坡究竟在哪里。“等他奶奶歇好了，我带他去。”他说。你将纸夹好递回，顾衡收进衣襟，这次没先说去看看护符。",
+          "conditions": [
+            {
+              "variable": "g.oldNightTalk",
               "minimum": 2,
               "maximum": 2
             }
