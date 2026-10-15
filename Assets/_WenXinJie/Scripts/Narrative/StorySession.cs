@@ -298,6 +298,14 @@ namespace WenXinJie.Narrative
                 values.Add("case.entryTechnique", graph.GetVariable("case.entryTechnique").initial);
             }
 
+            // Earlier saves did not choose how to keep Ache company on the rescue night.
+            if (snapshot.revision <= 68 && graph.Definition.revision >= 69
+                && !values.ContainsKey("case.acheEvening")
+                && graph.Variables.Any(variable => variable.id == "case.acheEvening"))
+            {
+                values.Add("case.acheEvening", graph.GetVariable("case.acheEvening").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
             // Restoring the cursor must never replay entry effects.
             return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);

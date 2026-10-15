@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 68,
+  "revision": 69,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -36,7 +36,8 @@
     64,
     65,
     66,
-    67
+    67,
+    68
   ],
   "start": "case.intro",
   "variables": [
@@ -669,6 +670,12 @@
       "initial": 0,
       "minimum": 0,
       "maximum": 3
+    },
+    {
+      "id": "case.acheEvening",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
     }
   ],
   "nodes": [
@@ -2882,7 +2889,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c13.jade"
+      "next": "c12.evening"
     },
     {
       "id": "c12.unknown",
@@ -2895,14 +2902,14 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "c13.jade"
+      "next": "c12.evening"
     },
     {
       "id": "c13.jade",
       "chapter": "卷一 · 没有下山的人",
       "location": "许家",
       "speaker": "旁白",
-      "text": "阿澈从袖里拿出半枚云纹玉扣，说是隔墙人从门缝里塞来的。陈闻找到旧单：许澄多年前曾领过同纹配绳。林月安置好阿澈，同你和陈闻带着半扣、旧单去许家。阿澈只看见那只递玉的手，谁都没有看清手的主人。",
+      "text": "天亮后，阿澈从袖里交出半枚云纹玉扣，说是隔墙人从门缝里塞来的。陈闻找到旧单：许澄多年前曾领过同纹配绳。林月安置好阿澈，同你和陈闻带着半扣、旧单去许家。阿澈只看见那只递玉的手，谁都没有看清手的主人。",
       "background": "xuFamilyHome",
       "portrait": "",
       "rain": false,
@@ -8536,13 +8543,13 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹炉门",
       "speaker": "旁白",
-      "text": "林月按真名点人。叫到许澄，门外姐姐也应了一声，许澄笑她：“又不是叫你。”靠门的段七慢慢抬起头，报自己的名字。阿澈认出了他的声音，去门边等着扶人。林月把两只停铃放到各自榻边，没急着催陶叔开闸。",
+      "text": "林月按真名点人。叫到许澄，门外姐姐也应了一声，许澄笑她：“又不是叫你。”靠门的段七慢慢抬起头，报自己的名字。阿澈认出了他的声音，去门边等着递布。林月把两只停铃放到各自榻边，没急着催陶叔开闸。",
       "background": "furnaceChamber",
       "portrait": "xuCheng",
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "e02.bell"
+      "next": "e02.acheReturn"
     },
     {
       "id": "e02.bell",
@@ -9881,7 +9888,7 @@
       "rain": false,
       "effects": [],
       "choices": [],
-      "next": "ending.newRoad",
+      "next": "e05.acheTomorrow",
       "variants": [
         {
           "text": "许澄本人按过指印的短证词随她的去向抄页留在医舍；姐姐带走自己在门外听到回钟的那一份。你给司籍房的对照本只写“本人已核”，另列她看不见谷符的边界。下次要问她愿不愿再坐榻，仍须重新问，昨夜这句不能替她答。",
@@ -9910,7 +9917,7 @@
       "chapter": "结局 · 改道",
       "location": "医舍",
       "speaker": "旁白",
-      "text": "阿澈将那只开线的左鞋放在医舍窗下，这回没有藏进床底。你替他记了换鞋的领单，运笔的手仍有些发抖。远处工匠敲过交班钟，沈砚正沿新石槽查看暗下去的第三张符。人已离榻，谷口的家和药田还得慢慢重建。",
+      "text": "阿澈将那只旧左鞋放在医舍窗下，这回没有藏进床底。你替他记下明日的药量，运笔的手仍有些发抖。远处工匠敲过交班钟，沈砚正沿新石槽查看暗下去的第三张符。人已离榻，谷口的家和药田还得慢慢重建。",
       "background": "medicineHouse",
       "portrait": "",
       "rain": false,
@@ -9919,7 +9926,7 @@
       "terminal": true,
       "variants": [
         {
-          "text": "阿澈将那只开线的左鞋放在医舍窗下，这回没有藏进床底。他自己核过的那份话连同药签留在枕边；他不必再靠一只鞋，提醒旁人自己没答应一直坐榻。你替他记换鞋的领单，运笔的手仍有些发抖。远处工匠敲过交班钟，沈砚正沿新石槽查看暗下去的第三张符。谷口的家和药田还得慢慢重建。",
+          "text": "阿澈将那只旧左鞋放在医舍窗下，这回没有藏进床底。他自己核过的那份话连同药签留在枕边；他不必再靠一只鞋，提醒旁人自己没答应一直坐榻。你替他记明日的药量，运笔的手仍有些发抖。远处工匠敲过交班钟，沈砚正沿新石槽查看暗下去的第三张符。谷口的家和药田还得慢慢重建。",
           "conditions": [
             {
               "variable": "case.acheTestimony",
@@ -9929,7 +9936,7 @@
           ]
         },
         {
-          "text": "阿澈将那只开线的左鞋放在医舍窗下，这回没有藏进床底。先前的速记在堂上由他亲口改过，漏下的“我问能不能起来”补进原话，药签与伤签仍各有原处。你替他记换鞋的领单，运笔的手仍有些发抖。远处工匠敲过交班钟；人已离榻，谷口的家和药田还得慢慢重建。",
+          "text": "阿澈将那只旧左鞋放在医舍窗下，这回没有藏进床底。先前的速记在堂上由他亲口改过，漏下的“我问能不能起来”补进原话，药签与伤签仍各有原处。你替他记明日的药量，运笔的手仍有些发抖。远处工匠敲过交班钟；人已离榻，谷口的家和药田还得慢慢重建。",
           "conditions": [
             {
               "variable": "case.acheTestimony",
@@ -11005,6 +11012,234 @@
             }
           ],
           "text": "祁元肃问门铃为何响过。你没有省去自己迟收灵力的一息：铃察觉的是车轴上的气，不是把阿澈的名字敲出来了；巡卫折回，也确实让你们没能抄两张榻号。姐姐将林月的接回时辰和伤签推近：“缺了那两张号，不会让阿澈凭空走过山门。”你认下自己的失误，仍请掌事回答他改写的去向。"
+        }
+      ]
+    },
+    {
+      "id": "c12.evening",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "药后睡了一阵，阿澈醒时已过三更。你回住处替他取换洗衣裳，把床底那只左鞋也带了来。鞋底翻开一道口，缝线还挂在边上。他捏了捏鞋尖：“入门那日，我特意挑大了半寸。想着万一修到长高了，宗门又不给换呢。”说完他自己先笑了一声。",
+      "background": "medicineHouse",
+      "portrait": "aChe",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.fear"
+    },
+    {
+      "id": "c12.fear",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "那声笑很快停了。他把鞋搁在膝上，没看你：“我现在一闭眼，还是那张榻。往后是不是一运气，就会回到那儿？”你平日也曾嫌吐纳枯燥，从没想过有人连那几口呼吸都怕。林月看过他的腕伤，交代今晚不练吐纳，伤手也不碰灵力，便去照看里间的病人。",
+      "background": "medicineHouse",
+      "portrait": "aCheDistressed",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.company"
+    },
+    {
+      "id": "c12.company",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈用没伤的手翻着床头的入门书，翻到一半，又把那只破鞋拉回来。“书先别替我收走。”他说。窗外的夜虫又叫起来。你可以陪他用未伤的手试一次辨气，只觉察纸上的余息；也可以先替他补鞋，今晚不再练。",
+      "background": "medicineHouse",
+      "portrait": "aChe",
+      "rain": false,
+      "effects": [],
+      "choices": [
+        {
+          "id": "trace",
+          "text": "陪他试一次辨气",
+          "target": "c12.traceStart",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        },
+        {
+          "id": "shoe",
+          "text": "替他补鞋，今晚不练",
+          "target": "c12.shoeStart",
+          "effects": [],
+          "conditions": [],
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "id": "c12.traceStart",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你撕下一角废纸，送入一点灵力，随即收回手。“这里只剩我刚留下的一点气，不连炉阵。你不必往里送力。”阿澈把未伤的手伸到一半，忽然缩回去。你将纸推远些：“不试也行。”过了一会儿，他自己又把那只手伸了过来。",
+      "background": "medicineHouse",
+      "portrait": "aChe",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.traceFeel"
+    },
+    {
+      "id": "c12.traceFeel",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "他闭了闭眼，指尖停在纸边。“像隔着衣裳捧了一下热碗。”他说，“没有榻上那么烫。”那一点暖意渐渐散了，他抬头问，是不是自己把气弄没了。你摇头：“没人往里续，它本来就会散。”他仍坐在床上，伤腕好好搁在被面，没有再送出一缕灵力。",
+      "background": "medicineHouse",
+      "portrait": "aChe",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.traceRest"
+    },
+    {
+      "id": "c12.traceRest",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈的肩膀松下来，盯着纸角忽然笑了：“你考校那张符，会不会也是漏光了？”你想起烧成青烟的考校纸，没法反驳。“等你的手好了，一起找是哪一笔漏的。”他把纸角夹进入门书，合上书时还特意避开书脊。你替他收好鞋，没让他接着试第二回。",
+      "background": "medicineHouse",
+      "portrait": "aChe",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.acheEvening",
+          "operation": "set",
+          "value": 1
+        }
+      ],
+      "choices": [],
+      "next": "c12.sleep"
+    },
+    {
+      "id": "c12.shoeStart",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "你把书合好，仍放在他伸手够得到的床头，向值夜弟子借来针线。阿澈用未伤的手扶住鞋，想帮你抽线，牵得伤腕一颤。你接过鞋，让他只管挑颜色。他挑了根白线，跟旧鞋底很不相配：“就它吧，以后认得出来，别拿错了。”",
+      "background": "medicineHouse",
+      "portrait": "aChe",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.shoeWork"
+    },
+    {
+      "id": "c12.shoeWork",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "针穿到鞋尖，你摸出一粒硌手的小砂。阿澈认出来，说入门那天爬山阶时便钻进去了，后来总忘记倒。“我那时还以为进了仙门，就不用再缝鞋。”他看着你笨手笨脚地收针，笑得往枕上缩。你问要不要报换新的，他想了一会儿：“先把这双穿完吧。”",
+      "background": "medicineHouse",
+      "portrait": "aChe",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c12.shoeRest"
+    },
+    {
+      "id": "c12.shoeRest",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "白线收牢，鞋底合上了。你把鞋放在床边，顺手将小砂丢进窗外草丛。阿澈没再问自己该不该练，摸了摸床头的书：“等手不疼了，从最短那道符开始吧。长的我总记混。”你应了一声，收起针线。灯芯轻轻爆了一下，屋里又静下来。",
+      "background": "medicineHouse",
+      "portrait": "aChe",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "case.acheEvening",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "c12.sleep"
+    },
+    {
+      "id": "c12.sleep",
+      "chapter": "卷一 · 没有下山的人",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "阿澈侧过身，把伤手稳稳放好。你将水碗挪近，守着他睡熟才起身。入门书留在枕旁，半枚玉扣还收在他贴身的衣袖里。你去门外告诉林月，他已经睡下；她把明早那服药放在小炉边，叫你也歇一会儿。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "c13.jade"
+    },
+    {
+      "id": "e02.acheReturn",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "阿澈站到门边，林月提醒他别让伤手吃力。他点点头，只用没伤的手取布，把搬人的位置让给旁人。你扶住药箱，等他在身边站稳，才一同往里走。",
+      "background": "furnaceChamber",
+      "portrait": "aChe",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e02.bell",
+      "variants": [
+        {
+          "text": "走到门边，阿澈忽然停住，像那夜伸向纸角时一样。你也停下，没有催。他慢慢吐出一直憋着的那口气，用没伤的手扶稳药箱：“这回我来递布。”林月让人替他接住箱底，伤腕仍留在胸前。他先看清榻边空出来的位置，才迈过门槛。",
+          "conditions": [
+            {
+              "variable": "case.acheEvening",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "阿澈在门边踩了踩鞋底，白线没有崩开。你问要不要在外面等，他摇摇头：“我进去递布。搬人可别叫我，线刚补好，手还疼呢。”林月替他接住药箱，只让他用未伤的手取布。他低头又踩了一下，这才跟着你跨进门。",
+          "conditions": [
+            {
+              "variable": "case.acheEvening",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e05.acheTomorrow",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "医舍",
+      "speaker": "旁白",
+      "text": "交过抄页，你回医舍。阿澈替你在窗边挪出一张凳子，让你也把发抖的手放下来。林月在药炉边叫你们早点歇，明日再看伤。你坐了一会儿，听见外头交班的人正沿廊下走过。",
+      "background": "medicineHouse",
+      "portrait": "",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "ending.newRoad",
+      "variants": [
+        {
+          "text": "回医舍后，阿澈从入门书里取出那角废纸，放到你发抖的手边。“那天你说等我好了，一起找漏气的那一笔。”他把书推到两人中间，“你现在也别急着画长的。我们从最短那道开始。”你摸了摸纸边，没有运气，先答应明日一起读。",
+          "conditions": [
+            {
+              "variable": "case.acheEvening",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "回医舍后，阿澈指着你裂开的袖口，找出那晚剩下的白线。他用没伤的手捏针，让你把袖口撑平，一针一针补上。“别乱动，你补我的鞋也这么慢。”线结系好，他将两人的入门书并排搁在床头。你伸手抚平书角，说今天先睡，明日再读。",
+          "conditions": [
+            {
+              "variable": "case.acheEvening",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
         }
       ]
     }

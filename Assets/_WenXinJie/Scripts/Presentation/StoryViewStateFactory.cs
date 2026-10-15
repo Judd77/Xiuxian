@@ -219,8 +219,13 @@ namespace WenXinJie.Presentation
         private static string AcheTestimonyClue(StorySession session)
         {
             var id = session.Current.id;
+            var eveningKnown = session.Revision >= 69
+                && (id == "c12.evening" || id == "c12.fear" || id == "c12.company"
+                    || id == "c12.traceStart" || id == "c12.traceFeel" || id == "c12.traceRest"
+                    || id == "c12.shoeStart" || id == "c12.shoeWork" || id == "c12.shoeRest"
+                    || id == "c12.sleep");
             var wallKnown = !id.StartsWith("c12.") || id == "c12.name"
-                || id == "c12.challenge" || id == "c12.unknown";
+                || id == "c12.challenge" || id == "c12.unknown" || eveningKnown;
             if (session.Revision < 48)
             {
                 return wallKnown
