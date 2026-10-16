@@ -65,12 +65,14 @@ namespace WenXinJie.Presentation
                 });
             }
 
-            return new("公开暂守", new[]
+            return new("提前暂守", new[]
             {
-                "今夜暂守旧阵，许澄仍未出炉。顾衡公开更正的旧呈报，家属留下待核去向页。",
-                session.GetValue("g.holdWarned") > 0
-                    ? "先撤三户，孙子没有添伤；药车让路、重画村符多耗的符纸记在村账上。"
-                    : "先补村符，三户迟撤；落瓦划伤了孙子的手臂，医舍接应者为他包扎。",
+                "许澄仍未出炉，旧加压令尚未查清。本次调查止于村议，家属留下待核去向页。",
+                session.GetValue("g.holdWarned") == 2
+                    ? "村符已补妥，三户按实走路线撤到高处；没有新增断符或轻伤。"
+                    : session.GetValue("g.holdWarned") == 1
+                        ? "先撤三户，孙子没有添伤；药车让路、重画村符多耗的符纸记在村账上。"
+                        : "先补村符，三户迟撤；落瓦划伤了孙子的手臂，医舍接应者为他包扎。",
                 session.GetValue("g.holdPatrol") == 1
                     ? "守村墙挡住复热；炉门多耗一张应急符。三日后补料复测，再问本人。"
                     : session.GetValue("g.holdPatrol") == 2

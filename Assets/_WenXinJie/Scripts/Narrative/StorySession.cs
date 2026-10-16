@@ -354,9 +354,30 @@ namespace WenXinJie.Narrative
                 values.Add("h.winterReview", graph.GetVariable("h.winterReview").initial);
             }
 
+            // Earlier saves did not contain the player's final causal reading in the hall.
+            if (snapshot.revision <= 87 && graph.Definition.revision >= 88
+                && !values.ContainsKey("h.caseInference")
+                && graph.Variables.Any(variable => variable.id == "h.caseInference"))
+            {
+                values.Add("h.caseInference", graph.GetVariable("h.caseInference").initial);
+            }
+
             StoryGraph.Require(values.Count == graph.Variables.Count(), "Incomplete save.");
+            var nodeId = snapshot.node;
+            if (snapshot.revision <= 87 && graph.Definition.revision >= 88)
+            {
+                // These correction-only detours were removed. Resume before any
+                // still-required entry effect, without rewriting the saved choices.
+                nodeId = nodeId switch
+                {
+                    "g09.correct" => "g09.record",
+                    "h04.blame" => "h04.separate",
+                    "e05.return" => "e05.medicine",
+                    _ => nodeId
+                };
+            }
             // Restoring the cursor must never replay entry effects.
-            return new(graph, values, graph.GetNode(snapshot.node), snapshot.randomState);
+            return new(graph, values, graph.GetNode(nodeId), snapshot.randomState);
         }
 
         private void Enter(string nodeId, IEnumerable<StoryEffect> choiceEffects)

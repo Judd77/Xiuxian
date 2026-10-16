@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 87,
+  "revision": 88,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -55,7 +55,8 @@
     83,
     84,
     85,
-    86
+    86,
+    87
   ],
   "start": "case.intro",
   "variables": [
@@ -579,7 +580,7 @@
       "id": "g.holdWarned",
       "initial": 0,
       "minimum": 0,
-      "maximum": 1
+      "maximum": 2
     },
     {
       "id": "s.bellTrusted",
@@ -727,6 +728,12 @@
     },
     {
       "id": "h.winterReview",
+      "initial": 0,
+      "minimum": 0,
+      "maximum": 2
+    },
+    {
+      "id": "h.caseInference",
       "initial": 0,
       "minimum": 0,
       "maximum": 2
@@ -5299,19 +5306,13 @@
         },
         {
           "id": "hold",
-          "text": "今晚不再试阵，公开旧阵与村庄风险",
+          "text": "今晚暂守，结束本次调查（提前结局）",
           "target": "g08.publicHold",
           "lockedReason": "",
-          "conditions": [
-            {
-              "variable": "g.repairOwed",
-              "minimum": 1,
-              "maximum": 1
-            }
-          ],
+          "conditions": [],
           "effects": [],
           "outcomes": [],
-          "hidden": true
+          "hidden": false
         }
       ],
       "variants": [
@@ -5449,20 +5450,81 @@
           "text": "先请三户按实走路线撤到高处，再补村符",
           "target": "g08.holdWarned",
           "lockedReason": "",
-          "conditions": [],
+          "conditions": [
+            {
+              "variable": "g.repairOwed",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
           "effects": [],
-          "outcomes": []
+          "outcomes": [],
+          "hidden": true
         },
         {
           "id": "repairFirst",
           "text": "先与工匠补村符，让三户暂留屋内",
           "target": "g08.holdRepairedFirst",
           "lockedReason": "",
-          "conditions": [],
+          "conditions": [
+            {
+              "variable": "g.repairOwed",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
           "effects": [],
-          "outcomes": []
+          "outcomes": [],
+          "hidden": true
+        },
+        {
+          "id": "prepared",
+          "text": "复核已补的村符，先送三户到高处守一夜",
+          "target": "g08.holdPrepared",
+          "lockedReason": "",
+          "conditions": [
+            {
+              "variable": "g.repairOwed",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ],
+          "effects": [],
+          "outcomes": [],
+          "hidden": true
+        }
+      ],
+      "variants": [
+        {
+          "text": "你决定今晚不再小试。旧呈报已交还守钟人，家属也拿到炉内待核的去向；这仍救不出许澄。工匠复核已补的村符，三户愿先按白天实走的路线撤到高处过夜。你们约好村墙和炉门各留人守，不把暂守写成旧阵安全。",
+          "conditions": [
+            {
+              "variable": "g.repairOwed",
+              "minimum": 0,
+              "maximum": 0
+            }
+          ]
         }
       ]
+    },
+    {
+      "id": "g08.holdPrepared",
+      "chapter": "卷二 · 山下那份账",
+      "location": "南沟村",
+      "speaker": "旁白",
+      "text": "工匠沿村符逐张查过，旧裂处仍牢，没有把未破的纸算作损耗。老妇由孙子背过狭岔，父亲带女儿和药袋同行，三户先到高处过夜；这只是暂避，明夜是否迁居仍须另谈。顾衡记下各户到高处的时辰，带你返回村口。",
+      "background": "villageSquareNight",
+      "portrait": "guHeng",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "g.holdWarned",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "g08.holdWatch"
     },
     {
       "id": "g08.holdWarned",
@@ -6012,38 +6074,7 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村议",
       "speaker": "旁白",
-      "text": "暮色里，顾衡将四张纸摊开，请你念一遍上山要说的话。老妇等着带走自己的抄页，父亲仍问接药的人是谁；木匠的钥匙压在借屋那栏，许蘅的床号纸另放一边。你要怎样把这场村议带到堂上？",
-      "background": "villageSquare",
-      "portrait": "",
-      "rain": false,
-      "effects": [],
-      "choices": [
-        {
-          "id": "separate",
-          "text": "逐项记答复，留下未谈妥的条件",
-          "target": "g09.separate",
-          "lockedReason": "",
-          "conditions": [],
-          "effects": [],
-          "outcomes": []
-        },
-        {
-          "id": "unanimous",
-          "text": "把试走、借屋的答复合记为同意改道",
-          "target": "g09.correct",
-          "lockedReason": "",
-          "conditions": [],
-          "effects": [],
-          "outcomes": []
-        }
-      ]
-    },
-    {
-      "id": "g09.correct",
-      "chapter": "卷二 · 山下那份账",
-      "location": "村议",
-      "speaker": "旁白",
-      "text": "你刚写下“同意改道”，木匠便按住纸角：“我说的是借屋。冬药还没着落。”父亲也说只答应试走，老妇用指节敲了敲那行字。你划去总括，重新抄下每个人答应的事，以及还没答应的事。工匠将钟槌搁在纸边，等着一同上山。",
+      "text": "暮色里，顾衡摊开四张纸。木匠的钥匙压着借屋那栏，父亲等着药与接应，许蘅把床号纸留在自己面前。你逐项读回刚才的答复，让各人核字；明日上堂，谁也不用只靠你复述自己答过什么。",
       "background": "villageSquare",
       "portrait": "",
       "rain": false,
@@ -6056,7 +6087,7 @@
       "chapter": "卷二 · 山下那份账",
       "location": "村议",
       "speaker": "旁白",
-      "text": "你逐张念回，各人核过才收起自己的抄页。顾衡另夹好实走脚程和守钟位置，约他们次晨一同上堂。许蘅将炉门听停的那张折进床号纸：“我带回去给林月，也念给妹妹听。”她提灯回山腹，父亲牵女儿回屋。孙子还在廊下替老妇收背篓。",
+      "text": "各人收好核过的抄页，顾衡夹好实走脚程，约他们次晨同上议事堂。许蘅将炉门听停的那张折进床号纸：“我带回去给林月，也念给妹妹听。”她提灯回山腹，父亲牵女儿回屋，孙子仍在廊下替老妇收背篓。",
       "background": "villageSquare",
       "portrait": "",
       "rain": false,
@@ -6185,6 +6216,36 @@
               "variable": "g.holdWarned",
               "minimum": 1,
               "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "已补的村符守住今夜，三户按实走路线在高处歇下，孙子没有添伤。你留村辨出热意仍从旧石槽来，报信弟子把话送到炉门；路上旧阵多烧一张应急符。家属拿着待核去向，许澄仍在炉中。三日后先查柱位和炉伤，再由当事人决定是否试。",
+          "conditions": [
+            {
+              "variable": "g.holdWarned",
+              "minimum": 2,
+              "maximum": 2
+            },
+            {
+              "variable": "g.holdPatrol",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "text": "已补的村符让三户平安撤到高处。你先回炉门，林月得以及时让许澄歇下换药；村口空仓檐木在工匠独守时烤裂，木料由宗门赔。家属仍只拿到待核去向，旧加压令尚未查清。许澄还在炉中；三日后先看伤、查柱位，再问她是否愿试。",
+          "conditions": [
+            {
+              "variable": "g.holdWarned",
+              "minimum": 2,
+              "maximum": 2
+            },
+            {
+              "variable": "g.holdPatrol",
+              "minimum": 2,
+              "maximum": 2
             }
           ]
         }
@@ -7524,25 +7585,25 @@
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "各人读过自己的补写，桌上留下初试、去向与旧灾三份抄页。祁元肃将冬药账推近：“今夜改路，药还是要补。”姐姐等着拿真名册，周望没有交出原本。你要怎样将堂上核过的事留下，才不会到了下一次交班，又只剩宗门一句话？",
+      "text": "祁元肃将旧图推到三份案卷前：“阵路不稳，总得有人接住。只追人的错，山就不再动了？”山险确实还在，今日又测出了柱位不合。可这些能解释伤者为何一批批被留下吗？你要先拿一份材料，分清阵本身的危险与人后来作的决定。",
       "background": "councilHall",
       "portrait": "",
       "rain": false,
       "effects": [],
       "choices": [
         {
-          "id": "blame",
-          "text": "先由掌事统签一份总更正，其余签名以后再补",
-          "target": "h04.blame",
+          "id": "singleCause",
+          "text": "用今日的现柱图，倒查十年前伤人的原因",
+          "target": "h04.singleCause",
           "lockedReason": "",
           "conditions": [],
           "effects": [],
           "outcomes": []
         },
         {
-          "id": "separate",
-          "text": "三份更正各留当事人签名，冬药缺口另列账",
-          "target": "h04.separate",
+          "id": "chain",
+          "text": "翻周望初试本，追问第一声铃后做了什么",
+          "target": "h04.chain",
           "lockedReason": "",
           "conditions": [],
           "effects": [],
@@ -7551,15 +7612,40 @@
       ]
     },
     {
-      "id": "h04.blame",
+      "id": "h04.singleCause",
       "chapter": "卷三 · 谁有权说停",
       "location": "议事堂",
       "speaker": "旁白",
-      "text": "你想先请祁元肃统签总更正。周望将初试本收回：“下一回只见他的名字，谁还知道那声铃是敲给沈砚的？”顾衡也把自己的更正留下，不肯让总签遮住原来的字。姐姐等着妹妹的去向抄页。你拆开总栏，保留每份凭据与当事人的签名，冬药另开一页。",
+      "text": "你先将现柱图贴到初试页旁，想从错位处倒查。可今日测到的柱脚，不能还原十年前那一夜；辨气也读不回早已散尽的灵力。周望按住“求停”：“这句不用猜旧柱。那时他听见了。”你才将图移开，依初试、加压令与改名页分别核时辰，记下三次没有被山险逼定的选择。老妇仍握着原簿，要求今夜的停令由各处亲自回报，不再只听你的总括。",
       "background": "councilHall",
       "portrait": "",
       "rain": false,
-      "effects": [],
+      "effects": [
+        {
+          "variable": "h.caseInference",
+          "operation": "set",
+          "value": 2
+        }
+      ],
+      "choices": [],
+      "next": "h04.separate"
+    },
+    {
+      "id": "h04.chain",
+      "chapter": "卷三 · 谁有权说停",
+      "location": "议事堂",
+      "speaker": "旁白",
+      "text": "你不拿今日的柱脚还原十年前，先指着初试本问：“当时若听铃撤力，周望还会受后面那一阵吗？”沈砚摇头。你再将加压令、阿澈假去向与合写的灾报按日子排开：后来的加压、藏人和夸大险情，各有人另作决定。山险是真事，却没有逼谁把求停当作没听见，也没有替谁改名。周望将初试本留在自己手里，许蘅等你把各人的名字分别写下。",
+      "background": "councilHall",
+      "portrait": "",
+      "rain": false,
+      "effects": [
+        {
+          "variable": "h.caseInference",
+          "operation": "set",
+          "value": 1
+        }
+      ],
       "choices": [],
       "next": "h04.separate"
     },
@@ -7589,6 +7675,16 @@
       "choices": [],
       "next": "h05.repairStatus",
       "variants": [
+        {
+          "text": "你方才曾用今日的现柱图倒查旧案，周望记得那次越过证据的总括。他将初试本留在自己手里，要求村口、炉门的停令各自回话，不再由一人代说收到。祁元肃只准试一次；沈砚读图，陶叔伸手接钥匙。工匠握村钟，姐姐守炉门，谁能直接令石台关闸，须当面说清。",
+          "conditions": [
+            {
+              "variable": "h.caseInference",
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
         {
           "text": "祁元肃把石台钥匙放在案上，只准试一次。你在阅图考校里见过今日接线，却仍将它与谷口实测图并排：第三柱移位，村口先受冲，纸上的线不能替当场的停钟。工匠把钟槌压在家门的位置，姐姐问谁能关闸。陶叔伸手接钥匙，沈砚只读图。",
           "conditions": [
@@ -9276,40 +9372,9 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "医舍",
       "speaker": "旁白",
-      "text": "旧册还写着阿澈“离山养病”。许澄与段七昨夜出了炉房，今日却仍在医舍，连下榻都须有人扶。林月把领药签与去向册放到你面前。离开炉房这一笔，该怎样落到册上？",
+      "text": "旧册还写着阿澈“离山养病”。许澄与段七昨夜出了炉房，今日仍在医舍，连下榻都须有人扶。林月把领药签与去向册放到你面前。你先划去阿澈那行假去向，再按真名写三人离炉转医舍；伤情和次日领药各留一栏。",
       "background": "medicineHouse",
       "portrait": "linYueConcerned",
-      "rain": false,
-      "effects": [],
-      "choices": [
-        {
-          "id": "care",
-          "text": "写离炉转医舍，保留三人的伤情与领药记录",
-          "target": "e05.medicine",
-          "lockedReason": "",
-          "conditions": [],
-          "effects": [],
-          "outcomes": []
-        },
-        {
-          "id": "leave",
-          "text": "把离炉算作离山，先给他们销名",
-          "target": "e05.return",
-          "lockedReason": "",
-          "conditions": [],
-          "effects": [],
-          "outcomes": []
-        }
-      ]
-    },
-    {
-      "id": "e05.return",
-      "chapter": "卷四 · 开闸与第三声",
-      "location": "医舍",
-      "speaker": "旁白",
-      "text": "阿澈拉住册角：“我们还没走。”他指指床边那双鞋，段七的脚还肿着，穿不进去。林月将领药签压在“离山”那一栏上：“这字一落，明日给不给药，又得让他们来证明人在这里。”你划去写错的去向，改记转入医舍。",
-      "background": "medicineHouse",
-      "portrait": "aCheDistressed",
       "rain": false,
       "effects": [],
       "choices": [],
@@ -9320,7 +9385,7 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "医舍",
       "speaker": "旁白",
-      "text": "你按真名补好去向，离炉时辰、今日伤情各占一栏。许澄伸手接自己的抄页，不让姐姐替她收。段七问伤没养好是不是还得坐回去。林月把他的领药签递给他：“不会拿你今日这碗药，换你再答应一次。”",
+      "text": "许澄伸手接自己的抄页，不让姐姐替她收。段七看着领药签，迟迟没接：“伤没养好，是不是还得坐回去？”林月把签放进他手里：“不会拿你今日这碗药，换你再答应一次。”",
       "background": "medicineHouse",
       "portrait": "xuChengResolute",
       "rain": false,
