@@ -2,6 +2,12 @@
 
 更新：2026-10-16。本页只记录已实现的工程事实。目标见 `PROJECT_BRIEF.md`，正式故事与游戏剧本分别见 `STORY.md`、`GAME_SCRIPT.md`。
 
+## 正式版 Web 部署
+
+用户另行要求正式版网页试玩。现有导出已整理到 `Builds/WebFull`。公网最初三个 Brotli 资源缺少 `Content-Encoding: br`，引发 framework 解析错误；用户设置后已直接核实三个响应头正确。全新 Chrome、Edge 155 会话均从同一公网地址进入开场选项；用户原 Edge 和手机仍报告解析错误，尚未取得其会话的实际网络响应，不能将缓存判断写成已确证根因。
+
+新增 `WebBuildCacheVersion` 构建后处理，为 loader、data、framework、wasm 的 URL 添加按内容计算的版本参数，避免复用修改响应头前的资源缓存；已在 Unity 编辑器编译并对现有输出执行，无需重新构建。新版 `Builds/WebFull/index.html` 搭配真实 COS 资源，在全新 Edge 会话中抵达开场选项。该验证只在浏览器中替换入口 HTML，未上传或修改云端。待用户覆盖上传新版入口，再复核其原 Edge 和手机；手机真机与完整网页通关未验证。
+
 当前完成条件已按用户决定调整：目标受众试玩与三小时计时不再是交付关卡；按首发GameFull范围，游戏本体已完成。Demo、Windows交付包、素材许可与Steam属于当前范围外。下列旧记录中的计时状态保留为当时事实，不代表现行待办。
 
 ## 内容状态
