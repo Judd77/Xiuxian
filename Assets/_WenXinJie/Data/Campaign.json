@@ -1,6 +1,6 @@
 {
   "id": "wenxinjie",
-  "revision": 84,
+  "revision": 85,
   "compatibleSaveRevisions": [
     33,
     34,
@@ -52,7 +52,8 @@
     80,
     81,
     82,
-    83
+    83,
+    84
   ],
   "start": "case.intro",
   "variables": [
@@ -8720,7 +8721,7 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹炉门",
       "speaker": "旁白",
-      "text": "炉门能听见，石台未必听得清。林月对着通往石台的石道喊了停令，陶叔举起钥匙示意。你还要核哪一步？",
+      "text": "炉门能听见两只试铃；石台是否收到停令、炉里的人能否听见关闸回钟，还没当场走完。林月指向通往石台的石道，陶叔在另一头扣着钥匙等候。你还要核哪一步？",
       "background": "furnaceChamber",
       "portrait": "linYueConcerned",
       "rain": false,
@@ -8728,8 +8729,8 @@
       "choices": [
         {
           "id": "echo",
-          "text": "试一次回钟，确认炉内听见关闸回应",
-          "target": "e02.ready",
+          "text": "演练试停与回钟，请两人亲耳确认",
+          "target": "e02.echoTrial",
           "lockedReason": "",
           "conditions": [],
           "effects": [],
@@ -8751,7 +8752,20 @@
       "chapter": "卷四 · 开闸与第三声",
       "location": "山腹炉门",
       "speaker": "旁白",
-      "text": "许澄指指纸，又指指厚石门：“我听不到纸。第三声以后，你们关了没有，怎么让我知道？”你请陶叔先试回钟。钟声沿石道传进炉内，段七抬起未伤的手，示意听见了。",
+      "text": "许澄指指纸，又指指厚石门：“我听不到纸。第三声以后，你们关了没有，怎么让我知道？”你收回请陶叔开闸的话，先沿石道请他做一次未送气的试停和回钟。",
+      "background": "furnaceChamber",
+      "portrait": "xuChengResolute",
+      "rain": false,
+      "effects": [],
+      "choices": [],
+      "next": "e02.echoTrial"
+    },
+    {
+      "id": "e02.echoTrial",
+      "chapter": "卷四 · 开闸与第三声",
+      "location": "山腹炉门",
+      "speaker": "旁白",
+      "text": "林月先向炉内说清：这次只核传令，闸内没有送灵力，不算正式三声。许澄和段七各试敲一下能碰到的铃，林月沿石道报“试停”。陶叔在石台把空着的试验支路合回停位，再敲回钟。钟声穿过厚门，许澄说听见了，段七也用没伤的手敲一下床沿作答。你把两人的确认传回石台；陶叔仍扣着正式引流闸的钥匙。",
       "background": "furnaceChamber",
       "portrait": "xuChengResolute",
       "rain": false,
