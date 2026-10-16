@@ -216,7 +216,6 @@ namespace WenXinJie.Presentation
         {
             _reader.Complete();
             _reader.CloseHistory();
-            _audio.SetAmbienceActive(false);
             ShowMainMenu(string.Empty);
         }
 
@@ -523,6 +522,7 @@ namespace WenXinJie.Presentation
 
         private void ShowMainMenu(string notice)
         {
+            _audio.SetAmbienceActive(true);
             var hasSave = false;
             var diskProgress = "手动存档：尚无存档";
             try
