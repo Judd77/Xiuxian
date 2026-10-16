@@ -232,9 +232,13 @@ namespace WenXinJie.Presentation
                     ? "床底鞋是他留下的求救痕迹；隔墙有人两下敲门。安神药影响了他对门漆和姓名的记忆。隔墙身份仍须另证。"
                     : "阿澈说前夜已经坐过炉榻，发烧后暂送回住处，天未亮又被带走。床底的鞋是他自己留下的求救痕迹。隔墙病人的事还没问到。";
             }
+            var confirmedInHall = session.GetValue("h.qi") > 0
+                || id == "h04.qiRecord" || id == "h04.qiRescue" || id == "h04.entryAccount"
+                || id.StartsWith("h04.winter") || id == "h04.qiAccount";
             var record = session.GetValue("case.acheTestimony") switch
             {
                 1 => "阿澈本人已核过医舍证词：领药不等于同意继续留榻；背灯人的姓名他没看清。",
+                2 when confirmedInHall => "医舍原留未核速记，现已由阿澈在议事堂亲口补正、许蘅读回并按印：领药不等于同意留榻，背灯人的姓名仍未看清。",
                 2 => "医舍暂记阿澈领药后仍被留榻，页首注明本人未核；不能当作他签过的证词。",
                 _ => "阿澈说前夜已坐过炉榻，发烧后回住处，天未亮又被带走；床底鞋是他留下的求救痕迹。"
             };
